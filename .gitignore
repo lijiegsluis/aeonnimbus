@@ -1,0 +1,17 @@
+# Temp base64 files used during logo embedding
+*_b64.txt
+
+# Dev/build scripts (not part of the published site)
+apply_design_overhaul.py
+build_site.py
+check_results.txt
+
+# SVG source files (logos are base64-embedded in index.html)
+*.svg
+
+# GitHub tool repos (separate repos)
+github/
+
+# OS
+.DS_Store
+Thumbs.db

@@ -3017,6 +3017,19 @@ table.tr tbody tr:hover{
   <table class="tr">
     <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th></tr></thead>
     <tbody>
+      <tr>
+        <td>08 Apr 2026</td>
+        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market" target="_blank" style="color:var(--gold);text-decoration:none">$ORCL</a></td>
+        <td><span class="pchip ce" style="margin:0">Equity</span></td>
+        <td class="tdl">Long</td>
+        <td>$146.38</td>
+        <td>$242.00</td>
+        <td>$118.00</td>
+        <td>2%</td>
+        <td>12–18m</td>
+        <td><span class="bdg bo">Open</span></td>
+        <td>—</td>
+      </tr>
       </tbody>
   </table>
 </div>
@@ -3876,7 +3889,7 @@ table.tr tbody tr:hover{
 <script>
 // ═══ NAVIGATION ══════════════════════════════════════
 // ═══ SUBSTACK CONFIG ══════════════════════════════════════
-const SUBSTACK_URL = 'https://lijieguo.substack.com'; // Substack publication
+const SUBSTACK_URL = 'https://aeonnimbus.substack.com'; // Substack publication
 const GITHUB_URL    = 'https://github.com/lijiegsluis?tab=repositories'; // ← Your repositories
 // e.g. 'https://aeonimbusresearch.substack.com'
 
@@ -6463,7 +6476,7 @@ function exportPortExcel(){
     wireFilters();
 
     /* ── Fetch from Substack RSS ────────────────── */
-    const RSS = 'https://lijieguo.substack.com/feed';
+    const RSS = 'https://aeonnimbus.substack.com/feed';
     const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS)}&api_key=&count=30`;
     const plist = document.querySelector('#pg-research .plist');
     if(!plist) return;

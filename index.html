@@ -6301,13 +6301,14 @@ function exportPortExcel(){
 
     /* ── Category detection ─────────────────────── */
     function detectCat(item){
-      const raw = ((item.categories||[]).join(' ')+' '+(item.title||'')+' '+(item.description||'')).toLowerCase();
-      // CB first — more specific than Macro (both share fed/ecb/rate keywords)
+      // Use full content for classification, not just description
+      const raw = ((item.categories||[]).join(' ')+' '+(item.title||'')+' '+(item.description||'')+' '+(item.content||'')).toLowerCase();
+      // CB first — more specific than Macro
       if(/central.?bank|rate.?decision|hike.?cycle|cut.?cycle|dot.?plot|fomc.?minute|powell|lagarde|boe\b/.test(raw))
         return {cls:'cb', label:'Central Bank', filter:'central bank'};
-      if(/\bmacro\b|yield.?curve|inflation|monetary.?policy|\bfomc\b|\bcpi\b|\bppi\b|\bgdp\b|recession|taper|credit.?spread/.test(raw))
+      if(/\bmacro\b|yield.?curve|inflation|monetary.?policy|\bfomc\b|\bcpi\b|\bppi\b|\bgdp\b|recession|taper|credit.?spread|regime.?change|tariff|cross.?asset/.test(raw))
         return {cls:'cm', label:'Macro Brief', filter:'macro'};
-      if(/\bgeo\b|iran|china|russia|ukraine|geopolit|\bopec\b|energy.?complex|war|sanction|taiwan|middle.?east|tension|conflict/.test(raw))
+      if(/\bgeo\b|iran|china|russia|ukraine|geopolit|\bopec\b|energy.?complex|war|sanction|taiwan|middle.?east|tension|conflict|hormuz/.test(raw))
         return {cls:'cg', label:'Geo / Markets', filter:'geo / markets'};
       return {cls:'ce', label:'Equity Deep Dive', filter:'equity'};
     }
@@ -6315,13 +6316,18 @@ function exportPortExcel(){
     /* ── Meta extraction (ticker, direction, target, return) ── */
     function parseMeta(content){
       const txt = (content||'').replace(/<[^>]+>/g,'');
-      const tickerM = txt.match(/\$([A-Z]{1,5})\b/);
-      const dirM    = txt.match(/\b(Long|Short|Neutral)\b/i);
+      // Require ticker to be 2-5 caps and NOT followed by a digit (avoids $553B, $413B etc.)
+      const tickerM = txt.match(/\$([A-Z]{2,5})\b(?!\d)/);
+      // Require direction word to directly follow or precede a $ ticker (not standalone in bear case prose)
+      const dirM = tickerM
+        ? txt.match(new RegExp('\\$' + tickerM[1] + '[^.\\n]{0,80}\\b(Long|Short|Neutral)\\b|\\b(Long|Short|Neutral)\\b[^.\\n]{0,80}\\$' + tickerM[1], 'i'))
+        : null;
+      const dir = dirM ? (dirM[1]||dirM[2]) : null;
       const targetM = txt.match(/[Tt]arget[:\s]*\$?([\d,]+(?:\.\d+)?)/)||txt.match(/implies?\s+\$?([\d,]+(?:\.\d+)?)/);
       const retM    = txt.match(/([+\-]\d+\.?\d*%)/);
       return {
         ticker : tickerM  ? tickerM[1]  : null,
-        dir    : dirM     ? dirM[1]     : null,
+        dir    : dir,
         target : targetM  ? targetM[1]  : null,
         ret    : retM     ? retM[0]     : null
       };

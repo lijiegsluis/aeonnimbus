@@ -6301,15 +6301,19 @@ function exportPortExcel(){
 
     /* ── Category detection ─────────────────────── */
     function detectCat(item){
-      // Use full content for classification, not just description
-      const raw = ((item.categories||[]).join(' ')+' '+(item.title||'')+' '+(item.description||'')+' '+(item.content||'')).toLowerCase();
-      // CB first — more specific than Macro
-      if(/central.?bank|rate.?decision|hike.?cycle|cut.?cycle|dot.?plot|fomc.?minute|powell|lagarde|boe\b/.test(raw))
+      // Use title + deck description only — NOT full content (full content triggers false positives
+      // because equity deep dives include a macro context section with CB/macro keywords)
+      const titleAndDeck = ((item.categories||[]).join(' ')+' '+(item.title||'')+' '+(item.description||'')).toLowerCase();
+      // CB: explicit CB event posts only (rate decision, FOMC minutes, named governor)
+      if(/\bfomc\s+minute|\brate\s+decision|central\s+bank\s+(?:analysis|rapid)|dot\s+plot|powell\s+speech|lagarde\s+speech/.test(titleAndDeck))
         return {cls:'cb', label:'Central Bank', filter:'central bank'};
-      if(/\bmacro\b|yield.?curve|inflation|monetary.?policy|\bfomc\b|\bcpi\b|\bppi\b|\bgdp\b|recession|taper|credit.?spread|regime.?change|tariff|cross.?asset/.test(raw))
+      // Macro: macro briefs, regime posts, cross-asset
+      if(/\bmacro\b|yield\s+curve|regime\s+change|not\s+(?:a\s+)?correction|cross.asset|rate\s+path|monetary\s+regime|inflation\s+regime/.test(titleAndDeck))
         return {cls:'cm', label:'Macro Brief', filter:'macro'};
-      if(/\bgeo\b|iran|china|russia|ukraine|geopolit|\bopec\b|energy.?complex|war|sanction|taiwan|middle.?east|tension|conflict|hormuz/.test(raw))
+      // Geo: geopolitical wraps
+      if(/\bgeo\b|geopolit|weekly.*wrap|wrap.*weekly|markets?\s+wrap|iran|hormuz|ukraine|taiwan|opec/.test(titleAndDeck))
         return {cls:'cg', label:'Geo / Markets', filter:'geo / markets'};
+      // Default: equity deep dive (company name + backlog/valuation/earnings language)
       return {cls:'ce', label:'Equity Deep Dive', filter:'equity'};
     }
 

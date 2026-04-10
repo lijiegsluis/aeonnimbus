@@ -6477,7 +6477,8 @@ function exportPortExcel(){
 
     /* ── Fetch from Substack RSS ────────────────── */
     const RSS = 'https://aeonnimbus.substack.com/feed';
-    const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS)}&api_key=&count=30`;
+    // No &count or &api_key — free tier works without them
+    const API = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(RSS)}`;
     const plist = document.querySelector('#pg-research .plist');
     if(!plist) return;
 
@@ -6521,24 +6522,33 @@ function exportPortExcel(){
         activeBtn.click();
     }
 
-    /* ── Strategy 1: rss2json (JSON, no parsing) ───────── */
+    /* ── Strategy 1: rss2json free tier (no api_key, no count needed) ── */
     fetch(API)
       .then(r=>r.json())
       .then(data=>{
         if(data.status==='ok' && data.items?.length){
           renderItems(data.items);
         } else {
-          throw new Error('empty');
+          throw new Error('rss2json:' + (data.message||'empty'));
         }
       })
       .catch(()=>{
-        /* ── Strategy 2: allorigins CORS proxy — free, no key, no limits */
-        const PROXY = 'https://api.allorigins.win/get?url='
-          + encodeURIComponent(RSS);
-        fetch(PROXY)
+        /* ── Strategy 2: allorigins CORS proxy ── */
+        fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(RSS))
           .then(r=>r.json())
-          .then(d=>renderItems(parseRSSXML(d.contents||'')))
-          .catch(()=>{}); // both failed — static posts remain
+          .then(d=>{
+            const items = parseRSSXML(d.contents||'');
+            if(items.length) { renderItems(items); throw 'done'; }
+            throw new Error('allorigins:empty');
+          })
+          .catch(err=>{
+            if(err==='done') return;
+            /* ── Strategy 3: corsproxy.io ── */
+            fetch('https://corsproxy.io/?' + encodeURIComponent(RSS))
+              .then(r=>r.text())
+              .then(xml=>renderItems(parseRSSXML(xml)))
+              .catch(()=>{}); // all proxies failed — static content remains
+          });
       });
 
   })();

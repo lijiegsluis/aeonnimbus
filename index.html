@@ -6474,12 +6474,13 @@ function exportPortExcel(){
         : null;
       const dir = dirM ? (dirM[1]||dirM[2]) : null;
       const targetM = txt.match(/[Tt]arget[:\s]*\$?([\d,]+(?:\.\d+)?)/)||txt.match(/implies?\s+\$?([\d,]+(?:\.\d+)?)/);
-      const retM    = txt.match(/([+\-]\d+\.?\d*%)/);
+      // Entry: "Entry $1,774.00", "Long at $30.00", "Short at $X"
+      const entryM  = txt.match(/(?:[Ee]ntry|[Ll]ong\s+at|[Ss]hort\s+at)[:\s]*\$?([\d,]+(?:\.\d+)?)/);
       return {
-        ticker : tickerM  ? tickerM[1]  : null,
+        ticker : tickerM ? tickerM[1] : null,
         dir    : dir,
-        target : targetM  ? targetM[1]  : null,
-        ret    : retM     ? retM[0]     : null
+        target : targetM ? targetM[1] : null,
+        entry  : entryM  ? entryM[1].replace(/,/g,'') : null,
       };
     }
 
@@ -6586,9 +6587,9 @@ function exportPortExcel(){
         const dirLabel = meta.dir||'';
         metaHtml += `<div style="font-family:var(--FM);font-size:11px;font-weight:600;letter-spacing:.04em;color:${dirColor}">${meta.ticker}${dirLabel?' · '+dirLabel:''}</div>`;
       }
-      if(meta.ret){
-        const positive = meta.ret.startsWith('+');
-        metaHtml += `<div style="font-family:var(--FM);font-size:12px;font-weight:700;color:${positive?'#4ade80':'#f87171'}">${meta.ret}</div>`;
+      // Live ROI placeholder — filled after Yahoo Finance fetch
+      if(cat.cls==='ce' && meta.ticker && meta.entry){
+        metaHtml += `<div class="post-roi" style="font-family:var(--FM);font-size:12px;font-weight:700;display:none"></div>`;
       }
       if(meta.target){
         metaHtml += `<div style="font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.06em">Target $${meta.target}</div>`;
@@ -6598,6 +6599,10 @@ function exportPortExcel(){
       const post = document.createElement('div');
       post.className = 'post';
       post.dataset.cat = cat.filter;
+      if(cat.cls==='ce' && meta.ticker && meta.entry){
+        post.dataset.ticker = meta.ticker;
+        post.dataset.entry  = meta.entry;
+      }
       post.onclick = ()=>openArticleModal(item);
       post.innerHTML = `
         <div><div class="pdt">${dateStr}</div></div>
@@ -6757,6 +6762,36 @@ function exportPortExcel(){
       const activeBtn = document.querySelector('.fb.on');
       if(activeBtn && activeBtn.textContent.trim().toLowerCase()!=='all')
         activeBtn.click();
+      refreshResearchROI();
+    }
+
+    /* ── Live ROI for equity post cards ─────────────── */
+    function refreshResearchROI(){
+      const posts = [...document.querySelectorAll('#pg-research .plist .post[data-ticker]')];
+      if(!posts.length) return;
+      const entries = {};
+      posts.forEach(p=>{ entries[p.dataset.ticker]=parseFloat(p.dataset.entry||'0'); });
+      const syms = Object.keys(entries).join(',');
+      fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(syms))
+        .then(r=>r.json())
+        .then(data=>{
+          const q={};
+          ((data.quoteResponse||{}).result||[]).forEach(x=>{ q[x.symbol]=x.regularMarketPrice; });
+          posts.forEach(p=>{
+            const price=q[p.dataset.ticker];
+            const entry=parseFloat(p.dataset.entry||'0');
+            if(!price||!entry) return;
+            const pnl=(price-entry)/entry*100;
+            const sign=pnl>=0?'+':'';
+            const roiEl=p.querySelector('.post-roi');
+            if(roiEl){
+              roiEl.textContent=sign+pnl.toFixed(1)+'%';
+              roiEl.style.color=pnl>=0?'#4ade80':'#f87171';
+              roiEl.style.display='';
+            }
+          });
+        })
+        .catch(()=>{});
     }
 
     /* ── Fetch RSS — rss2json primary, allorigins fallback ── */
@@ -6883,8 +6918,8 @@ function exportPortExcel(){
 
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
-    '$VNET':'VNET', '$MELI':'MELI',
-    'GOLD':'GC=F',  '$BA':'BA', '$NVDA':'NVDA'
+    '$VNET':'VNET', '$MELI':'MELI', '$ORCL':'ORCL', '$ADEA':'ADEA', '$NU':'NU',
+    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
   };
 
   var openItems = [];

@@ -2816,6 +2816,113 @@ table.tr tbody tr:hover{
 .fx-cs-v{font-size:18px;font-weight:700;color:#B09848;font-family:monospace;line-height:1;margin-bottom:3px}
 .fx-cs-l{font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:#5A5650;font-family:monospace}
 @media(max-width:600px){.fx-combined{grid-template-columns:repeat(2,1fr)}}
+
+/* ── Article Reader Modal ─────────────────────── */
+#article-modal{
+  display:none;position:fixed;inset:0;z-index:1000;
+  background:rgba(0,0,0,.8);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  overflow:hidden;align-items:flex-start;justify-content:center;padding:48px 20px;
+}
+#article-modal.open{
+  display:flex;
+  animation:amReveal .32s cubic-bezier(.16,1,.3,1) both;
+}
+@keyframes amReveal{
+  from{opacity:0;transform:translateY(16px) scale(.98)}
+  to{opacity:1;transform:none}
+}
+.am-panel{
+  background:var(--bg1);border:1px solid rgba(200,131,10,.22);
+  max-width:780px;width:100%;max-height:calc(100vh - 96px);
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.am-hdr{
+  padding:26px 34px 18px;border-bottom:1px solid rgba(200,131,10,.12);
+  flex-shrink:0;background:var(--bg2);
+}
+.am-hdr-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.am-hdr-left{flex:1;min-width:0}
+.am-meta{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.am-date-lbl{font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.am-title{font-family:var(--FH);font-size:23px;font-weight:600;line-height:1.22;color:var(--ink);letter-spacing:-.01em;margin-bottom:7px}
+.am-deck{font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.5;font-style:italic}
+.am-close{
+  background:none;border:1px solid rgba(255,255,255,.1);color:var(--ink3);
+  font-size:15px;cursor:pointer;padding:5px 9px;flex-shrink:0;
+  transition:color .2s,border-color .2s;line-height:1;margin-top:1px;
+}
+.am-close:hover{color:var(--ink);border-color:rgba(255,255,255,.22)}
+.am-hdr-foot{display:flex;align-items:center;gap:12px;margin-top:13px;flex-wrap:wrap}
+.am-ext-link{
+  font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--g2);border:1px solid rgba(255,255,255,.1);padding:5px 12px;
+  text-decoration:none;transition:color .2s,border-color .2s;
+}
+.am-ext-link:hover{color:var(--gold);border-color:rgba(200,131,10,.4)}
+.am-call{
+  font-family:var(--FM);font-size:10px;
+  background:rgba(200,131,10,.05);border:1px solid rgba(200,131,10,.22);
+  padding:8px 13px;display:none;gap:13px;flex-wrap:wrap;align-items:center;
+}
+.am-call.has-data{display:flex}
+.am-call-item{display:flex;flex-direction:column;gap:2px}
+.am-call-lbl{font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2)}
+.am-call-val{font-weight:700;color:var(--gold)}
+.am-body{
+  flex:1;overflow-y:auto;padding:28px 34px 50px;
+  font-family:var(--FS);font-size:15px;line-height:1.78;color:var(--ink2);
+}
+.am-body img{max-width:100%;height:auto;margin:10px 0}
+.am-body h1{font-family:var(--FH);font-size:21px;font-weight:600;color:var(--ink);margin:24px 0 9px;letter-spacing:-.01em}
+.am-body h2{
+  font-family:var(--FD);font-size:9px;font-weight:600;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--gold);border-bottom:1px solid rgba(200,131,10,.18);padding-bottom:7px;
+  margin:28px 0 11px;cursor:pointer;user-select:none;
+  display:flex;align-items:center;justify-content:space-between;transition:color .15s;
+}
+.am-body h2:hover{color:var(--gold2)}
+.am-body h3{font-family:var(--FH);font-size:16px;font-weight:600;color:var(--ink);margin:18px 0 6px}
+.am-body h4{font-family:var(--FD);font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);margin:14px 0 5px}
+.am-body p{margin-bottom:12px}
+.am-body strong,.am-body b{color:var(--ink);font-weight:600}
+.am-body em,.am-body i{color:var(--ink);font-style:italic}
+.am-body a{color:var(--gold);text-decoration:underline;text-underline-offset:3px;transition:color .15s}
+.am-body a:hover{color:var(--gold2)}
+.am-body ul,.am-body ol{padding-left:22px;margin-bottom:12px}
+.am-body li{margin-bottom:5px}
+.am-body blockquote{
+  border-left:2px solid var(--gold);margin:15px 0;padding:10px 17px;
+  background:rgba(200,131,10,.04);color:var(--ink2);font-style:italic;
+}
+.am-body hr{border:none;border-top:1px solid rgba(200,131,10,.14);margin:24px 0}
+.am-body table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px;margin:14px 0}
+.am-body table th{
+  padding:7px 10px;background:rgba(200,131,10,.07);color:var(--gold);
+  font-size:8px;letter-spacing:.1em;text-transform:uppercase;text-align:left;
+  border-bottom:1px solid rgba(200,131,10,.2);
+}
+.am-body table td{padding:7px 10px;color:var(--ink2);border-bottom:1px solid rgba(255,255,255,.05)}
+.am-body table tr:hover td{background:rgba(200,131,10,.025)}
+.am-body code{font-family:var(--FM);font-size:11px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1px 5px}
+.am-body pre{font-family:var(--FM);font-size:11px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);padding:11px 14px;overflow-x:auto;margin:11px 0}
+.am-acc-body{
+  overflow:hidden;
+  transition:max-height .42s cubic-bezier(.16,1,.3,1),opacity .3s ease;
+  max-height:0;opacity:0;
+}
+.am-acc-body.open{max-height:9000px;opacity:1}
+.am-acc-icon{
+  font-size:9px;color:var(--g2);margin-left:auto;padding-left:8px;flex-shrink:0;
+  transition:transform .25s cubic-bezier(.16,1,.3,1),color .15s;display:inline-block;
+}
+.am-body h2.am-collapsed .am-acc-icon{transform:rotate(-90deg)}
+@media(max-width:700px){
+  #article-modal{padding:0}
+  .am-panel{max-height:100vh;border-left:none;border-right:none}
+  .am-hdr{padding:16px 18px 13px}
+  .am-body{padding:18px 18px 40px}
+  .am-title{font-size:18px}
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3017,6 +3124,45 @@ table.tr tbody tr:hover{
   <table class="tr">
     <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th></tr></thead>
     <tbody>
+      <tr>
+        <td>04 May 2026</td>
+        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer" target="_blank" style="color:var(--gold);text-decoration:none">$ADEA</a></td>
+        <td><span class="pchip ce" style="margin:0">Equity</span></td>
+        <td class="tdl">Long</td>
+        <td>$30.00</td>
+        <td>$42.00</td>
+        <td>$20.00</td>
+        <td>2%</td>
+        <td>12m</td>
+        <td><span class="bdg bo">Open</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>01 May 2026</td>
+        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient" target="_blank" style="color:var(--gold);text-decoration:none">$NU</a></td>
+        <td><span class="pchip ce" style="margin:0">Equity</span></td>
+        <td class="tdl">Long</td>
+        <td>$14.53</td>
+        <td>$21.00</td>
+        <td>$11.20</td>
+        <td>3%</td>
+        <td>18–24m</td>
+        <td><span class="bdg bo">Open</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td>13 Apr 2026</td>
+        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify" target="_blank" style="color:var(--gold);text-decoration:none">$MELI</a></td>
+        <td><span class="pchip ce" style="margin:0">Equity</span></td>
+        <td class="tdl">Long</td>
+        <td>$1,774.00</td>
+        <td>$2,750.00</td>
+        <td>$1,420.00</td>
+        <td>3%</td>
+        <td>18–24m</td>
+        <td><span class="bdg bo">Open</span></td>
+        <td>—</td>
+      </tr>
       <tr>
         <td>08 Apr 2026</td>
         <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market" target="_blank" style="color:var(--gold);text-decoration:none">$ORCL</a></td>
@@ -6447,12 +6593,12 @@ function exportPortExcel(){
       if(meta.target){
         metaHtml += `<div style="font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.06em">Target $${meta.target}</div>`;
       }
-      metaHtml += `<span class="pst sto" style="font-size:7.5px;margin-top:6px">Substack ↗</span>`;
+      metaHtml += `<span class="pst sto" style="font-size:7.5px;margin-top:6px">Read →</span>`;
 
       const post = document.createElement('div');
       post.className = 'post';
       post.dataset.cat = cat.filter;
-      post.onclick = ()=>window.open(item.link,'_blank');
+      post.onclick = ()=>openArticleModal(item);
       post.innerHTML = `
         <div><div class="pdt">${dateStr}</div></div>
         <div>
@@ -6464,6 +6610,87 @@ function exportPortExcel(){
           ${metaHtml}
         </div>`;
       return post;
+    }
+
+    /* ── Article Reader Modal ─────────────────────── */
+    let _modalEventsWired = false;
+    function openArticleModal(item){
+      const modal = document.getElementById('article-modal');
+      if(!modal) return;
+      if(!_modalEventsWired){
+        modal.addEventListener('click',e=>{if(e.target===modal)closeArticleModal();});
+        const cb=document.getElementById('am-close-btn');
+        if(cb) cb.addEventListener('click',closeArticleModal);
+        document.addEventListener('keydown',e=>{if(e.key==='Escape')closeArticleModal();});
+        _modalEventsWired=true;
+      }
+      const cat=detectCat(item);
+      const date=new Date(item.pubDate).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+      modal.querySelector('.am-chip').className='pchip '+cat.cls+' am-chip';
+      modal.querySelector('.am-chip').textContent=cat.label;
+      modal.querySelector('.am-date-lbl').textContent=date;
+      modal.querySelector('.am-title').textContent=item.title||'Untitled';
+      const tmp=document.createElement('div');
+      tmp.innerHTML=item.description||'';
+      const deck=(tmp.textContent||'').trim().replace(/\s+/g,' ').substring(0,200);
+      const deckEl=modal.querySelector('.am-deck');
+      if(deckEl) deckEl.textContent=deck;
+      const extLink=modal.querySelector('.am-ext-link');
+      if(extLink) extLink.href=item.link||'#';
+      const call=parseCallBlock(item.content||item.description||'');
+      const callBlock=document.getElementById('am-call-block');
+      if(callBlock){
+        if(call&&call.ticker){
+          callBlock.classList.add('has-data');
+          document.getElementById('am-ct').textContent='$'+call.ticker.replace(/\$/g,'').toUpperCase();
+          const d=call.dir||'—';
+          const dEl=document.getElementById('am-cd');
+          dEl.textContent=d;dEl.style.color=d.toLowerCase()==='short'?'#f87171':'#4ade80';
+          document.getElementById('am-ce').textContent=call.entry?'$'+call.entry:'—';
+          document.getElementById('am-cta').textContent=call.target?'$'+call.target:'—';
+          document.getElementById('am-cs').textContent=call.stop?'$'+call.stop:'—';
+          document.getElementById('am-csz').textContent=call.size||'—';
+          document.getElementById('am-ch').textContent=call.horizon||'—';
+        } else { callBlock.classList.remove('has-data'); }
+      }
+      const bodyEl=document.getElementById('am-body-content');
+      if(bodyEl){
+        bodyEl.innerHTML=item.content||item.description||'<p>No content available.</p>';
+        bodyEl.innerHTML=bodyEl.innerHTML.replace(/\[CALL[^\]]*\]/gi,'');
+        buildAccordions(bodyEl);
+        bodyEl.scrollTop=0;
+      }
+      modal.classList.add('open');
+      document.body.style.overflow='hidden';
+    }
+    function closeArticleModal(){
+      const m=document.getElementById('article-modal');
+      if(m) m.classList.remove('open');
+      document.body.style.overflow='';
+    }
+    function buildAccordions(container){
+      const h2s=[...container.querySelectorAll('h2')];
+      if(h2s.length<2) return;
+      h2s.forEach(h2=>{
+        const acc=document.createElement('div');
+        acc.className='am-acc-body open';
+        let sib=h2.nextElementSibling;
+        while(sib&&sib.tagName!=='H2'){
+          const next=sib.nextElementSibling;
+          acc.appendChild(sib);
+          sib=next;
+        }
+        const icon=document.createElement('span');
+        icon.className='am-acc-icon';
+        icon.textContent='▾';
+        h2.appendChild(icon);
+        h2.addEventListener('click',()=>{
+          const isOpen=acc.classList.toggle('open');
+          icon.textContent=isOpen?'▾':'▸';
+          h2.classList.toggle('am-collapsed',!isOpen);
+        });
+        h2.after(acc);
+      });
     }
 
     /* ── Filter button logic ────────────────────── */
@@ -6532,33 +6759,30 @@ function exportPortExcel(){
         activeBtn.click();
     }
 
-    /* ── Strategy 1: allorigins — no item cap, no API key ── */
-    fetch('https://api.allorigins.win/get?url=' + encodeURIComponent(RSS))
-      .then(r=>r.json())
-      .then(d=>{
-        const items = parseRSSXML(d.contents||'');
-        if(items.length){ renderItems(items); return; }
-        throw new Error('allorigins:empty');
-      })
-      .catch(()=>{
-        /* ── Strategy 2: rss2json free tier (cap 10 items) ── */
-        fetch(API)
-          .then(r=>r.json())
-          .then(data=>{
-            if(data.status==='ok' && data.items?.length){
-              renderItems(data.items);
-            } else {
-              throw new Error('rss2json:' + (data.message||'empty'));
-            }
-          })
-          .catch(()=>{
-            /* ── Strategy 3: corsproxy.io ── */
-            fetch('https://corsproxy.io/?' + encodeURIComponent(RSS))
-              .then(r=>r.text())
-              .then(xml=>renderItems(parseRSSXML(xml)))
-              .catch(()=>{}); // all proxies failed — static content remains
-          });
-      });
+    /* ── Fetch RSS — rss2json primary, allorigins fallback ── */
+    (async function fetchRSS(){
+      try{
+        const r=await fetch(API);
+        const data=await r.json();
+        if(data.status==='ok'&&data.items?.length){ renderItems(data.items); return; }
+        throw new Error('rss2json:'+(data.message||'empty'));
+      }catch(e1){
+        try{
+          const r2=await fetch('https://api.allorigins.win/get?url='+encodeURIComponent(RSS));
+          const d2=await r2.json();
+          const items2=parseRSSXML(d2.contents||'');
+          if(items2.length){ renderItems(items2); return; }
+          throw new Error('allorigins:empty');
+        }catch(e2){
+          try{
+            const r3=await fetch('https://corsproxy.io/?'+encodeURIComponent(RSS));
+            const xml3=await r3.text();
+            const items3=parseRSSXML(xml3);
+            if(items3.length) renderItems(items3);
+          }catch(e3){}
+        }
+      }
+    })();
 
   })();
 
@@ -6757,5 +6981,36 @@ function exportPortExcel(){
   setInterval(fetchAndRender, 60000); /* refresh every 60s */
 })();
 </script>
+<!-- ── Article Reader Modal ────────────────────── -->
+<div id="article-modal">
+  <div class="am-panel">
+    <div class="am-hdr">
+      <div class="am-hdr-top">
+        <div class="am-hdr-left">
+          <div class="am-meta">
+            <span class="pchip ce am-chip">Equity</span>
+            <span class="am-date-lbl">—</span>
+          </div>
+          <div class="am-title">—</div>
+          <div class="am-deck"></div>
+        </div>
+        <button class="am-close" id="am-close-btn" title="Close (Esc)">✕</button>
+      </div>
+      <div class="am-hdr-foot">
+        <a href="#" class="am-ext-link" target="_blank" rel="noopener">Read on Substack ↗</a>
+        <div class="am-call" id="am-call-block">
+          <div class="am-call-item"><span class="am-call-lbl">Ticker</span><span class="am-call-val" id="am-ct">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Direction</span><span class="am-call-val" id="am-cd">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Entry</span><span class="am-call-val" id="am-ce">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Target</span><span class="am-call-val" id="am-cta">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Stop</span><span class="am-call-val" id="am-cs">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Size</span><span class="am-call-val" id="am-csz">—</span></div>
+          <div class="am-call-item"><span class="am-call-lbl">Horizon</span><span class="am-call-val" id="am-ch">—</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="am-body" id="am-body-content"></div>
+  </div>
+</div>
 </body>
 </html>

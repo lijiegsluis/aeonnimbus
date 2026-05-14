@@ -6454,7 +6454,7 @@ function exportPortExcel(){
       if(/\bfomc\s+minute|\brate\s+decision|central\s+bank\s+(?:analysis|rapid)|dot\s+plot|powell\s+speech|lagarde\s+speech/.test(titleAndDeck))
         return {cls:'cb', label:'Central Bank', filter:'central bank'};
       // Macro: macro briefs, regime posts, cross-asset
-      if(/\bmacro\b|yield\s+curve|regime\s+change|not\s+(?:a\s+)?correction|cross.asset|rate\s+path|monetary\s+regime|inflation\s+regime/.test(titleAndDeck))
+      if(/\bmacro\b|yield\s+curve|regime\s+change|not\s+(?:a\s+)?correction|cross.asset|rate\s+path|monetary\s+regime|inflation\s+regime|spot.vol|\bvix\b|vol\s+anomaly|market(?:s)?\s+cannot\s+decide/.test(titleAndDeck))
         return {cls:'cm', label:'Macro Brief', filter:'macro'};
       // Geo: geopolitical wraps
       if(/\bgeo\b|geopolit|weekly.*wrap|wrap.*weekly|markets?\s+wrap|iran|hormuz|ukraine|taiwan|opec/.test(titleAndDeck))

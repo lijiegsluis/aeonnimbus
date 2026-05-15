@@ -3177,6 +3177,250 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   .pcv { font-size: 20px !important; }
   table.tr td, table.rl td { padding: 10px 10px; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   HMA-INSPIRED FEATURE LAYER
+   Market bar · Nav CTA · Timeline · Featured call ·
+   Follow block · Returns calc · Tools thumbnail grid
+═══════════════════════════════════════════════════════ */
+
+/* ── Nav CTA ────────────────────────────────────── */
+.nav-cta {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--FM); font-size: 9px; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  color: var(--bg); background: var(--gold);
+  border: 1px solid var(--gold); border-radius: 2px;
+  padding: 7px 16px; cursor: pointer;
+  transition: background .2s, box-shadow .2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--gold2); box-shadow: 0 0 16px rgba(200,131,10,.35); }
+
+/* ── Market status bar ──────────────────────────── */
+.mkt-bar {
+  display: flex; align-items: center;
+  background: var(--bg1); border-bottom: 1px solid var(--rule);
+  height: 28px; padding: 0 52px; gap: 24px;
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .09em;
+  overflow: hidden; white-space: nowrap;
+}
+.mkt-bar-label {
+  color: var(--ink3); letter-spacing: .16em; font-size: 7.5px;
+  text-transform: uppercase; margin-right: 4px;
+}
+.mkt-item { display: flex; align-items: center; gap: 6px; color: var(--ink2); }
+.mkt-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.mkt-dot.open  { background: #4ade80; box-shadow: 0 0 6px rgba(74,222,128,.6); }
+.mkt-dot.pre   { background: var(--gold); box-shadow: 0 0 6px rgba(200,131,10,.5); }
+.mkt-dot.closed{ background: var(--ink3); }
+.mkt-time { color: var(--ink3); font-size: 8px; }
+.mkt-sep { color: var(--rule); margin: 0 4px; }
+@media(max-width:700px){ .mkt-bar{ padding:0 20px; gap:14px; } }
+
+/* ── Career Timeline ────────────────────────────── */
+.timeline-wrap {
+  padding: 20px 44px 40px;
+  position: relative;
+}
+.timeline {
+  position: relative; padding-left: 22px;
+  border-left: 1px solid rgba(200,131,10,.22);
+}
+.tl-item {
+  position: relative; padding: 0 0 28px 24px; cursor: pointer;
+}
+.tl-item:last-child { padding-bottom: 0; }
+.tl-dot {
+  position: absolute; left: -6px; top: 5px;
+  width: 11px; height: 11px; border-radius: 50%;
+  border: 2px solid var(--gold); background: var(--bg);
+  transition: background .2s, box-shadow .2s;
+}
+.tl-item:hover .tl-dot, .tl-item.open .tl-dot {
+  background: var(--gold); box-shadow: 0 0 10px rgba(200,131,10,.5);
+}
+.tl-header { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.tl-year {
+  font-family: var(--FM); font-size: 7.5px; letter-spacing: .16em;
+  color: var(--gold); text-transform: uppercase;
+}
+.tl-role {
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  letter-spacing: -.01em;
+}
+.tl-org { font-size: 12px; color: var(--ink2); }
+.tl-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s cubic-bezier(.16,1,.3,1);
+  font-size: 12.5px; color: var(--ink2); line-height: 1.72;
+}
+.tl-item.open .tl-body { max-height: 200px; }
+.tl-body p { margin-top: 8px; }
+.tl-toggle { font-size: 8px; letter-spacing: .1em; color: var(--gold); margin-top: 2px; }
+
+/* ── Featured Call Module ───────────────────────── */
+.fc-section {
+  margin: 0 44px 0; padding: 0 0 32px;
+  border-bottom: 1px solid var(--rule);
+}
+.fc-label {
+  font-family: var(--FM); font-size: 7.5px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.fc-label::before {
+  content: ''; display: inline-block;
+  width: 18px; height: 1px; background: var(--gold);
+}
+.fc-card {
+  display: grid; grid-template-columns: 1fr auto auto;
+  align-items: center; gap: 16px 24px;
+  border: 1px solid var(--rule); background: var(--bg1);
+  padding: 18px 22px; border-radius: 2px;
+  transition: border-color .2s, background .2s;
+  cursor: pointer;
+}
+.fc-card:hover { border-color: rgba(200,131,10,.35); background: var(--bg2); }
+.fc-ticker {
+  font-family: var(--FM); font-size: 18px; font-weight: 700;
+  letter-spacing: -.01em; color: var(--ink);
+}
+.fc-name { font-size: 11px; color: var(--ink3); margin-top: 2px; }
+.fc-pl {
+  text-align: right; font-family: var(--FM);
+  font-size: 22px; font-weight: 700; letter-spacing: -.02em;
+}
+.fc-pl.pos { color: #4ade80; }
+.fc-pl.neg { color: #f87171; }
+.fc-pl.neu { color: var(--ink2); }
+.fc-meta {
+  text-align: right; font-size: 10px; color: var(--ink3);
+}
+.fc-entry-badge {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .09em;
+  color: var(--ink3); margin-top: 3px;
+}
+.fc-empty { font-size: 12px; color: var(--ink3); font-style: italic; padding: 18px 0; }
+@media(max-width:700px){ .fc-section{ margin: 0 20px; } .fc-card{ grid-template-columns:1fr auto; } }
+
+/* ── Follow the Research block ──────────────────── */
+.ftr-block {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 0; border: 1px solid var(--rule); margin: 0 44px 0;
+}
+.ftr-col {
+  padding: 28px 28px; border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; gap: 8px;
+  transition: background .2s;
+}
+.ftr-col:last-child { border-right: none; }
+.ftr-col:hover { background: var(--bg1); }
+.ftr-icon { font-size: 18px; line-height: 1; margin-bottom: 2px; }
+.ftr-title {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink); font-weight: 600;
+}
+.ftr-desc { font-size: 11.5px; color: var(--ink3); line-height: 1.58; flex: 1; }
+.ftr-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-family: var(--FM); font-size: 8px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gold);
+  text-decoration: none; border-bottom: 1px solid rgba(200,131,10,.28);
+  padding-bottom: 1px; transition: color .2s, border-color .2s;
+  width: fit-content; margin-top: 4px;
+}
+.ftr-link:hover { color: var(--gold2); border-color: var(--gold2); }
+@media(max-width:700px){
+  .ftr-block { grid-template-columns:1fr; margin:0 20px; }
+  .ftr-col { border-right:none; border-bottom:1px solid var(--rule); }
+  .ftr-col:last-child { border-bottom:none; }
+}
+
+/* ── Returns Calculator ─────────────────────────── */
+.rc-section {
+  margin: 32px 44px; border: 1px solid var(--rule);
+  background: var(--bg1); padding: 28px 28px 24px;
+}
+.rc-title {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .2em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.rc-title::before { content:''; width:18px; height:1px; background:var(--gold); }
+.rc-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 1px;
+  background: var(--rule); margin-bottom: 14px;
+}
+.rc-cell {
+  background: var(--bg2); padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.rc-cell-label { font-size: 8px; letter-spacing: .1em; color: var(--ink3); text-transform: uppercase; }
+.rc-cell-val { font-size: 16px; font-weight: 700; color: var(--ink); font-family: var(--FM); }
+.rc-cell-sub { font-size: 10px; color: var(--ink3); }
+.rc-result {
+  display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+  padding-top: 12px; border-top: 1px solid var(--rule);
+}
+.rc-result-val { font-size: 28px; font-weight: 700; font-family: var(--FM); letter-spacing: -.02em; }
+.rc-result-val.pos { color: #4ade80; }
+.rc-result-val.neg { color: #f87171; }
+.rc-result-label { font-size: 11px; color: var(--ink3); }
+.rc-note { font-size: 10px; color: var(--ink3); margin-top: 8px; font-style: italic; }
+@media(max-width:700px){ .rc-section{margin:24px 20px;} .rc-grid{grid-template-columns:repeat(2,1fr);} }
+
+/* ── Tools thumbnail grid ───────────────────────── */
+.tool-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 12px; padding: 0 52px 32px;
+}
+.tg-thumb {
+  border: 1px solid var(--rule); background: var(--bg1);
+  padding: 22px 20px 18px; cursor: pointer; border-radius: 2px;
+  display: flex; flex-direction: column; gap: 10px;
+  transition: border-color .2s, background .2s, transform .18s, box-shadow .18s;
+  position: relative; user-select: none;
+}
+.tg-thumb:hover {
+  border-color: rgba(200,131,10,.38); background: var(--bg2);
+  transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.28);
+}
+.tg-thumb.active {
+  border-color: var(--gold); background: var(--bg2);
+  box-shadow: 0 0 0 1px rgba(200,131,10,.2);
+}
+.tgt-icon { font-size: 22px; line-height: 1; }
+.tgt-badge {
+  position: absolute; top: 12px; right: 12px;
+  font-family: var(--FM); font-size: 7px; letter-spacing: .1em;
+  text-transform: uppercase; padding: 3px 8px; border-radius: 2px;
+  background: rgba(200,131,10,.12); color: var(--gold);
+  border: 1px solid rgba(200,131,10,.22);
+}
+.tgt-name {
+  font-size: 13px; font-weight: 600; color: var(--ink);
+  letter-spacing: -.01em; line-height: 1.25;
+}
+.tgt-desc { font-size: 11px; color: var(--ink3); line-height: 1.55; flex: 1; }
+.tgt-open {
+  font-family: var(--FM); font-size: 7.5px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 5px; margin-top: 4px;
+}
+.tgt-open::after { content: '→'; }
+#tgrid-panels .tchd { display: none !important; }
+#tgrid-panels .tbody { border-top: 1px solid var(--rule) !important; }
+.tool-panel-wrap {
+  border: 1px solid var(--rule); border-top: none;
+  margin: -10px 52px 16px; display: none;
+}
+.tool-panel-wrap.active { display: block; }
+@media(max-width:900px){
+  .tool-grid { grid-template-columns: repeat(2,1fr); padding: 0 20px 24px; }
+  .tool-panel-wrap { margin: -10px 20px 16px; }
+}
+@media(max-width:550px){ .tool-grid { grid-template-columns: 1fr; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3210,12 +3454,24 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('tools')">Tools</button>
     
-    <a class="nsub-stack" id="nav-substack" href="#" target="_blank" onclick="openSubstack(event)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> Subscribe</a>
+    <button class="nav-cta" onclick="sp('research')">Open Research</button>
     <a id="nav-github" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" title="GitHub" class="nav-ext-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     <a class="nav-ext-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
   </div>
   <button class="hamburger" id="ham-btn" aria-label="Toggle menu"><span></span><span></span><span></span></button>
 </nav>
+
+<!-- ── Market Status Bar ──────────────────────────── -->
+<div class="mkt-bar" id="mkt-bar">
+  <span class="mkt-bar-label">Markets</span>
+  <span class="mkt-item" id="mkt-nyse"><span class="mkt-dot closed" id="mkt-nyse-dot"></span>NYSE <span class="mkt-time" id="mkt-nyse-t">—</span></span>
+  <span class="mkt-sep">·</span>
+  <span class="mkt-item" id="mkt-lse"><span class="mkt-dot closed" id="mkt-lse-dot"></span>LSE <span class="mkt-time" id="mkt-lse-t">—</span></span>
+  <span class="mkt-sep">·</span>
+  <span class="mkt-item" id="mkt-tyo"><span class="mkt-dot closed" id="mkt-tyo-dot"></span>Tokyo <span class="mkt-time" id="mkt-tyo-t">—</span></span>
+  <span class="mkt-sep">·</span>
+  <span class="mkt-item" id="mkt-fra"><span class="mkt-dot closed" id="mkt-fra-dot"></span>Frankfurt <span class="mkt-time" id="mkt-fra-t">—</span></span>
+</div>
 
 <!-- ═══════════════ HOME ═══════════════════════════ -->
 <div class="pg on" id="pg-home">
@@ -3229,8 +3485,8 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
     <div class="mv2-tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
   </div>
   <div class="mv2-right">
-    <div class="mv2-bio-label reveal">About</div>
-<div class="mv2-bio reveal d1">
+    <div class="mv2-bio-label reveal" style="margin-bottom:18px">Career</div>
+<div class="timeline" id="career-timeline">
   <em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> for USDJPY and XAUUSD, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.
   <br><br>
   His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.
@@ -3239,9 +3495,51 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   <br><br>
   Spanish-born and ethnically Chinese, he was shaped by two cultures — and drawn, from his first market investment at 18, to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.
   <br><br>
-  <em>Not investment advice.</em>
-</div>
-<div class="edu-logos">
+  <!-- timeline items will close below -->
+  <div class="tl-item" id="tl-0">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2024 — Present</span></div>
+    <div class="tl-role">Founder &amp; Lead Analyst</div>
+    <div class="tl-org">Aeon Nimbus Research · London</div>
+    <div class="tl-body"><p>Independent macro and equity research. Formal investment calls published with full thesis before outcome is known. Proprietary algorithmic strategies for USDJPY &amp; XAUUSD. Every position on the record.</p></div>
+  </div>
+  <div class="tl-item" id="tl-1">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2023 — 2024</span></div>
+    <div class="tl-role">Analyst — L/S Equity &amp; Macro</div>
+    <div class="tl-org">Independent Fund Platform · Spain</div>
+    <div class="tl-body"><p>Long/short equity and global macro at a leading independent multi-PM fund platform. Covered consumer, tech, and EM discretionary. Combined fundamental conviction with quantitative signal generation.</p></div>
+  </div>
+  <div class="tl-item" id="tl-2">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2022 — 2023</span></div>
+    <div class="tl-role">Analyst — Private Credit &amp; Real Estate</div>
+    <div class="tl-org">Crandon</div>
+    <div class="tl-body"><p>Credit analysis and deal execution across private credit and commercial real estate. Underwriting, structuring, and portfolio monitoring across the capital structure.</p></div>
+  </div>
+  <div class="tl-item" id="tl-3">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2021 — 2022</span></div>
+    <div class="tl-role">Private Equity PM &amp; Strategy</div>
+    <div class="tl-org">Santomera Bay · Barcelona</div>
+    <div class="tl-body"><p>Portfolio management and strategy &amp; operations within a single-family private office. Direct PE exposure alongside operational involvement in portfolio companies.</p></div>
+  </div>
+  <div class="tl-item" id="tl-4">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2020 — 2021</span></div>
+    <div class="tl-role">M&amp;A Financial Due Diligence</div>
+    <div class="tl-org">PwC</div>
+    <div class="tl-body"><p>Financial due diligence on M&amp;A transactions across industrials and consumer sectors. Quality of earnings, normalised EBITDA, working capital, and net debt analysis.</p></div>
+  </div>
+  <div class="tl-item" id="tl-5">
+    <div class="tl-dot"></div>
+    <div class="tl-header"><span class="tl-year">2018 — 2020</span></div>
+    <div class="tl-role">Venture — Early Exposure</div>
+    <div class="tl-org">SpinLab (HHL) &amp; Antler · Berlin</div>
+    <div class="tl-body"><p>Early-stage venture through SpinLab, the HHL Accelerator, and Antler — the world's most active early-stage VC. Sourcing, evaluation, and founder support across European startups.</p></div>
+  </div>
+</div><!-- /timeline -->
+<div class="edu-logos" style="display:none">
   <div class="edu-logo-label">Education</div>
   <div class="edu-logo-row">
 
@@ -3267,7 +3565,7 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 
   </div>
 </div></div>
-    <div class="mv2-links">
+    <div class="mv2-links" style="display:none">
       <a class="mv2-link ul-draw" onclick="sp('research')">→ Latest research</a>
       <a class="mv2-link ul-draw" onclick="sp('track')">→ Full track record</a>
       <a class="mv2-link ul-draw" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">→ LinkedIn ↗</a>
@@ -3311,11 +3609,34 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 
 
 
-<!-- Substack subscribe nudge -->
-<div class="sub-nudge">
-  <span class="sub-free-badge">Free</span>
-  <span class="sub-nudge-txt"><strong>Aeon Nimbus Research</strong> — Every note published with full thesis, before the outcome.</span>
-  <a class="sub-nudge-btn ripple-btn" href="#" onclick="openSubstack(event)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> Subscribe on Substack</a>
+<!-- Featured Call Module -->
+<div class="fc-section" id="fc-section">
+  <div class="fc-label">Featured Call</div>
+  <div id="fc-card-wrap">
+    <div class="fc-empty">Loading live data…</div>
+  </div>
+</div>
+
+<!-- Follow the Research block -->
+<div class="ftr-block">
+  <div class="ftr-col">
+    <div class="ftr-icon">📬</div>
+    <div class="ftr-title">Research Notes</div>
+    <div class="ftr-desc">Macro briefs, equity deep dives, and geo/market wraps — published with full thesis before the outcome is known.</div>
+    <a class="ftr-link" href="#" onclick="openSubstack(event)">Subscribe on Substack →</a>
+  </div>
+  <div class="ftr-col">
+    <div class="ftr-icon">⚗</div>
+    <div class="ftr-title">Quantitative Models</div>
+    <div class="ftr-desc">Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.</div>
+    <a class="ftr-link" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">View on GitHub →</a>
+  </div>
+  <div class="ftr-col">
+    <div class="ftr-icon">🔗</div>
+    <div class="ftr-title">Connect</div>
+    <div class="ftr-desc">Institutional background in L/S equity, private credit, M&amp;A, and venture. Available for collaborations and conversations.</div>
+    <a class="ftr-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn →</a>
+  </div>
 </div>
 
 
@@ -3354,17 +3675,25 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   </div>
 </div>
 
-<!-- Substack subscribe banner -->
-<div class="sub-banner">
-  <div class="sub-b-left">
-    <div class="sub-b-eye">Free Research · 3x/week</div>
-    <div class="sub-b-title">Get every note as it’s published</div>
-    <div class="sub-b-desc">Equity deep dives, macro briefs, geo/market wraps, and central bank analysis — sent directly to your inbox via Substack. Formal investment calls include entry, target, and full thesis, published before the outcome is known.</div>
+<!-- Follow the Research block — research page -->
+<div class="ftr-block" style="margin-top:48px">
+  <div class="ftr-col">
+    <div class="ftr-icon">📬</div>
+    <div class="ftr-title">Subscribe Free</div>
+    <div class="ftr-desc">Every note lands in your inbox as published. No spam. Research is always free.</div>
+    <a class="ftr-link" href="#" onclick="openSubstack(event)">Subscribe on Substack →</a>
   </div>
-  <div class="sub-b-right">
-    <div style="font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:#aaa;font-family:monospace;margin-bottom:4px">Subscribe on Substack</div>
-    <a class="sub-b-btn ripple-btn" href="#" onclick="openSubstack(event)"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg> Subscribe — Free</a>
-    <div class="sub-b-note">No spam. Unsubscribe any time. Research is always free.</div>
+  <div class="ftr-col">
+    <div class="ftr-icon">📊</div>
+    <div class="ftr-title">Track Record</div>
+    <div class="ftr-desc">Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.</div>
+    <a class="ftr-link" href="#" onclick="sp(‘track’)">View full record →</a>
+  </div>
+  <div class="ftr-col">
+    <div class="ftr-icon">⚗</div>
+    <div class="ftr-title">Interactive Tools</div>
+    <div class="ftr-desc">Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.</div>
+    <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
   </div>
 </div>
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
@@ -3444,6 +3773,22 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
       </tr>
       </tbody>
   </table>
+</div>
+
+<!-- ══ EQUAL-WEIGHT RETURNS CALCULATOR ════════════════ -->
+<div class="rc-section" id="rc-section">
+  <div class="rc-title">Live Portfolio Returns</div>
+  <div class="rc-grid" id="rc-grid">
+    <div class="rc-cell"><div class="rc-cell-label">Active Calls</div><div class="rc-cell-val" id="rc-n">—</div><div class="rc-cell-sub">Open positions</div></div>
+    <div class="rc-cell"><div class="rc-cell-label">Avg Entry</div><div class="rc-cell-val" id="rc-avg-entry">—</div><div class="rc-cell-sub">Equal weight</div></div>
+    <div class="rc-cell"><div class="rc-cell-label">Avg Return</div><div class="rc-cell-val" id="rc-avg-ret">—</div><div class="rc-cell-sub">Per position</div></div>
+    <div class="rc-cell"><div class="rc-cell-label">Portfolio P&amp;L</div><div class="rc-cell-val" id="rc-port-pl">—</div><div class="rc-cell-sub">Equal-weight sim</div></div>
+  </div>
+  <div class="rc-result">
+    <div class="rc-result-val" id="rc-total-ret">—</div>
+    <div class="rc-result-label">equal-weight return across active calls<span id="rc-since" style="display:none"> · since <span id="rc-since-date"></span></span></div>
+  </div>
+  <div class="rc-note" id="rc-note">Loading live prices…</div>
 </div>
 
 <!-- ══ PROPRIETARY FX RESEARCH ══════════════════════════ -->
@@ -3570,7 +3915,53 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 <div class="pg" id="pg-tools">
 <div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Tools <em>&amp; Models</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
 
-<div class="tgrid">
+<!-- Tool thumbnail grid -->
+<div class="tool-grid">
+  <div class="tg-thumb" id="tgt-quant" onclick="openToolThumb('quant')">
+    <span class="tgt-badge">Quant</span>
+    <div class="tgt-icon">⚗</div>
+    <div class="tgt-name">Quantitative Models</div>
+    <div class="tgt-desc">Black-Scholes · Monte Carlo · Bond Analytics · Volatility Engine</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+  <div class="tg-thumb" id="tgt-dcf" onclick="openToolThumb('dcf')">
+    <span class="tgt-badge">Core</span>
+    <div class="tgt-icon">📊</div>
+    <div class="tgt-name">Complete Valuation Engine</div>
+    <div class="tgt-desc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+  <div class="tg-thumb" id="tgt-port" onclick="openToolThumb('port')">
+    <span class="tgt-badge">PM Skill</span>
+    <div class="tgt-icon">🏗️</div>
+    <div class="tgt-name">Portfolio Construction</div>
+    <div class="tgt-desc">Efficient frontier · Sharpe optimisation · Correlation matrix · Risk attribution</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+  <div class="tg-thumb" id="tgt-size" onclick="openToolThumb('size')">
+    <span class="tgt-badge">PM Skill</span>
+    <div class="tgt-icon">⚖️</div>
+    <div class="tgt-name">Position Sizing Calculator</div>
+    <div class="tgt-desc">Kelly criterion · Fixed fractional · Max drawdown simulation · R-multiple</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+  <div class="tg-thumb" id="tgt-corr" onclick="openToolThumb('corr')">
+    <span class="tgt-badge">PM Skill</span>
+    <div class="tgt-icon">🔗</div>
+    <div class="tgt-name">Cross-Asset Correlation</div>
+    <div class="tgt-desc">Macro regime detection · Correlation heatmap · Risk-on / risk-off scoring</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+  <div class="tg-thumb" id="tgt-idea" onclick="openToolThumb('idea')">
+    <span class="tgt-badge">Analyst Skill</span>
+    <div class="tgt-icon">💡</div>
+    <div class="tgt-name">Investment Idea Screener</div>
+    <div class="tgt-desc">Catalyst scoring · Sentiment overlay · EV/EBITDA · FCF yield · Momentum rank</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
+</div>
+
+<div class="tgrid" id="tgrid-panels">
 <!-- ───── QUANT MODELS TOOL ───────────────────────────── -->
 <div class="tc" id="tc-quant">
 <div class="tchd" onclick="tog('quant')">
@@ -3583,7 +3974,7 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   </div>
   <span class="tbadge">Quant</span><a href="https://github.com/lijiegsluis/aeon-black-scholes" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
-<div class="tbody on" id="tb-quant">
+<div class="tbody" id="tb-quant">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0 4px">
     <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2)"><span class="q-cursor">AEON NIMBUS</span> · ORIGINAL IMPLEMENTATIONS · ALL COMPUTATIONS IN-BROWSER · MATHEMATICALLY VERIFIED</div>
     
@@ -3771,7 +4162,7 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   <div class="tcleft"><div class="tico">📊</div><div><div class="tname">Complete Valuation Engine</div><div class="tdesc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div></div></div>
   <span class="tbadge">Core</span><a href="https://github.com/lijiegsluis/aeon-dcf-engine" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
-<div class="tbody on" id="tb-dcf">
+<div class="tbody" id="tb-dcf">
 <div class="tvtabs">
   <button class="tvtab on" onclick="vt('dcf','i')">Inputs</button>
   <button class="tvtab" onclick="vt('dcf','w')">WACC</button>
@@ -4304,6 +4695,220 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 const SUBSTACK_URL = 'https://aeonnimbus.substack.com'; // Substack publication
 const GITHUB_URL    = 'https://github.com/lijiegsluis?tab=repositories'; // ← Your repositories
 // e.g. 'https://aeonimbusresearch.substack.com'
+
+/* ═══════════════════════════════════════════════════
+   HMA-INSPIRED FEATURE JS
+   Market bar · Timeline · Featured call ·
+   Returns calculator · Tool thumbnails
+═══════════════════════════════════════════════════ */
+
+/* ── Market status bar ──────────────────────────── */
+(function updateMarketBar(){
+  function setItem(id, dotId, timeId, isOpen, label){
+    const dot  = document.getElementById(dotId);
+    const time = document.getElementById(timeId);
+    if(!dot||!time) return;
+    dot.className = 'mkt-dot ' + (isOpen ? 'open' : 'closed');
+    time.textContent = label;
+  }
+  function run(){
+    const now = new Date();
+    const utcH = now.getUTCHours(), utcM = now.getUTCMinutes();
+    const utcMin = utcH * 60 + utcM;
+    const day = now.getUTCDay(); // 0=Sun,6=Sat
+    const wd = day >= 1 && day <= 5;
+    // NYSE: 14:30–21:00 UTC
+    const nyseOpen = wd && utcMin >= 870 && utcMin < 1260;
+    const nyseLabel = nyseOpen ? 'Open' : (wd && utcMin < 870 ? 'Pre-market' : 'Closed');
+    const nyseDot   = nyseLabel === 'Open' ? 'open' : (nyseLabel === 'Pre-market' ? 'pre' : 'closed');
+    const d1=document.getElementById('mkt-nyse-dot'), t1=document.getElementById('mkt-nyse-t');
+    if(d1){ d1.className='mkt-dot '+nyseDot; } if(t1){ t1.textContent=nyseLabel; }
+    // LSE: 08:00–16:30 UTC
+    const lseOpen = wd && utcMin >= 480 && utcMin < 990;
+    const lseLabel = lseOpen ? 'Open' : (wd && utcMin >= 450 && utcMin < 480 ? 'Pre-market' : 'Closed');
+    const lseDot   = lseLabel === 'Open' ? 'open' : (lseLabel === 'Pre-market' ? 'pre' : 'closed');
+    const d2=document.getElementById('mkt-lse-dot'), t2=document.getElementById('mkt-lse-t');
+    if(d2){ d2.className='mkt-dot '+lseDot; } if(t2){ t2.textContent=lseLabel; }
+    // Tokyo: 00:00–06:00 UTC (JST=UTC+9, 09:00–15:30 JST)
+    const tyoOpen = wd && (utcMin < 360 || (utcMin >= 1380)); // wraps midnight
+    const tyoLabel = tyoOpen ? 'Open' : (wd && utcMin >= 330 && utcMin < 360 ? 'Pre-market' : 'Closed');
+    const tyoDot   = tyoLabel === 'Open' ? 'open' : (tyoLabel === 'Pre-market' ? 'pre' : 'closed');
+    const d3=document.getElementById('mkt-tyo-dot'), t3=document.getElementById('mkt-tyo-t');
+    if(d3){ d3.className='mkt-dot '+tyoDot; } if(t3){ t3.textContent=tyoLabel; }
+    // Frankfurt XETRA: 08:00–16:30 UTC
+    const fraOpen = wd && utcMin >= 480 && utcMin < 990;
+    const fraLabel = fraOpen ? 'Open' : (wd && utcMin >= 450 && utcMin < 480 ? 'Pre-market' : 'Closed');
+    const fraDot   = fraLabel === 'Open' ? 'open' : (fraLabel === 'Pre-market' ? 'pre' : 'closed');
+    const d4=document.getElementById('mkt-fra-dot'), t4=document.getElementById('mkt-fra-t');
+    if(d4){ d4.className='mkt-dot '+fraDot; } if(t4){ t4.textContent=fraLabel; }
+  }
+  run();
+  setInterval(run, 60000);
+})();
+
+/* ── Career timeline toggle ─────────────────────── */
+function tlToggle(idx){
+  const item = document.getElementById('tl-' + idx);
+  if(!item) return;
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.tl-item.open').forEach(el => el.classList.remove('open'));
+  if(!wasOpen) item.classList.add('open');
+}
+// Wire up timeline items after DOM ready
+(function(){
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelectorAll('.tl-item').forEach(function(el, i){
+      el.addEventListener('click', function(){ tlToggle(i); });
+    });
+    // Open first item by default
+    tlToggle(0);
+  });
+})();
+
+/* ── Featured call module ───────────────────────── */
+function populateFeaturedCall(items){
+  const wrap = document.getElementById('fc-card-wrap');
+  if(!wrap) return;
+  // Find the most recent item that has a parsed call (ticker + entry)
+  let bestItem = null, bestCall = null;
+  for(let i = 0; i < Math.min(items.length, 20); i++){
+    const call = parseCallBlock(items[i].content || items[i].description || '');
+    if(call && call.ticker){
+      bestItem = items[i]; bestCall = call; break;
+    }
+  }
+  if(!bestItem || !bestCall){
+    wrap.innerHTML = '<div class="fc-empty">No active calls found in feed.</div>';
+    return;
+  }
+  const ticker = (bestCall.ticker || '').toUpperCase();
+  const entry  = parseFloat(bestCall.entry || '0') || 0;
+  const dir    = (bestCall.direction || 'long').toLowerCase();
+  // Fetch live price
+  if(!ticker){ wrap.innerHTML = '<div class="fc-empty">—</div>'; return; }
+  fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(ticker))
+    .then(r => r.json())
+    .then(data => {
+      const q = (data.quoteResponse && data.quoteResponse.result && data.quoteResponse.result[0]) || null;
+      const price = q ? (q.regularMarketPrice || 0) : 0;
+      const name  = q ? (q.shortName || q.longName || ticker) : ticker;
+      let plPct = 0;
+      if(entry && price){
+        plPct = dir === 'short'
+          ? ((entry - price) / entry) * 100
+          : ((price - entry) / entry) * 100;
+      }
+      const plSign  = plPct >= 0 ? '+' : '';
+      const plClass = plPct > 0.5 ? 'pos' : plPct < -0.5 ? 'neg' : 'neu';
+      const pubDate = new Date(bestItem.pubDate);
+      const dateStr = pubDate.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+      wrap.innerHTML = `
+        <div class="fc-card" onclick="openArticleModal(window._fcItem)">
+          <div>
+            <div class="fc-ticker">${ticker}</div>
+            <div class="fc-name">${name}</div>
+            <div class="fc-entry-badge">Entry ${entry ? '$'+entry.toFixed(2) : '—'} · ${dir.toUpperCase()} · ${dateStr}</div>
+          </div>
+          <div>
+            <div class="fc-pl ${plClass}">${plSign}${plPct.toFixed(1)}%</div>
+            <div class="fc-meta">vs entry</div>
+          </div>
+          <div>
+            <div class="fc-pl ${plClass}" style="font-size:16px">${price ? '$'+price.toFixed(2) : '—'}</div>
+            <div class="fc-meta">live price</div>
+          </div>
+        </div>`;
+      window._fcItem = bestItem;
+    })
+    .catch(() => {
+      wrap.innerHTML = `<div class="fc-card" onclick="openArticleModal(window._fcItem)">
+        <div><div class="fc-ticker">${ticker}</div><div class="fc-name">${bestItem.title || ticker}</div></div>
+        <div class="fc-pl neu">—</div><div></div></div>`;
+      window._fcItem = bestItem;
+    });
+}
+
+/* ── Equal-weight returns calculator ────────────── */
+(function runReturnsCalc(){
+  // Reads the KNOWN_CALLS or active calls from the track record
+  // Using the same KNOWN_CALLS object defined above in the file
+  const calls = Object.values(typeof KNOWN_CALLS !== 'undefined' ? KNOWN_CALLS : {});
+  if(!calls.length) return;
+  const tickers = calls.map(c => c.ticker).join(',');
+  fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols=' + encodeURIComponent(tickers))
+    .then(r => r.json())
+    .then(data => {
+      const results = (data.quoteResponse && data.quoteResponse.result) || [];
+      const priceMap = {};
+      results.forEach(q => { priceMap[q.symbol] = q.regularMarketPrice; });
+      let totalRet = 0, count = 0;
+      calls.forEach(c => {
+        const entry = parseFloat(c.entry || '0');
+        const price = priceMap[c.ticker];
+        if(entry && price){
+          const ret = ((price - entry) / entry) * 100;
+          totalRet += ret; count++;
+        }
+      });
+      const avgRet = count ? totalRet / count : 0;
+      const nEl = document.getElementById('rc-n');
+      const avgRetEl = document.getElementById('rc-avg-ret');
+      const portPlEl = document.getElementById('rc-port-pl');
+      const totalEl  = document.getElementById('rc-total-ret');
+      const noteEl   = document.getElementById('rc-note');
+      if(nEl)      nEl.textContent = count;
+      if(avgRetEl){
+        const sign = avgRet >= 0 ? '+' : '';
+        avgRetEl.textContent = sign + avgRet.toFixed(1) + '%';
+        avgRetEl.style.color = avgRet >= 0 ? '#4ade80' : '#f87171';
+      }
+      if(portPlEl){
+        const sign = totalRet >= 0 ? '+' : '';
+        portPlEl.textContent = sign + totalRet.toFixed(1) + '%';
+        portPlEl.style.color = totalRet >= 0 ? '#4ade80' : '#f87171';
+      }
+      if(totalEl){
+        const sign = avgRet >= 0 ? '+' : '';
+        totalEl.textContent = sign + avgRet.toFixed(1) + '%';
+        totalEl.className = 'rc-result-val ' + (avgRet >= 0.5 ? 'pos' : avgRet < -0.5 ? 'neg' : '');
+      }
+      if(noteEl) noteEl.textContent = 'Live prices · Equal-weight · ' + count + ' active call' + (count !== 1 ? 's' : '') + ' · Not investment advice';
+    })
+    .catch(() => {
+      const noteEl = document.getElementById('rc-note');
+      if(noteEl) noteEl.textContent = 'Live prices unavailable — check again later.';
+    });
+})();
+
+/* ── Tool thumbnail grid ────────────────────────── */
+var _activeToolThumb = null;
+function openToolThumb(id){
+  // Toggle active thumbnail
+  const thumb = document.getElementById('tgt-' + id);
+  const allThumbs = document.querySelectorAll('.tg-thumb');
+  allThumbs.forEach(t => t.classList.remove('active'));
+  if(_activeToolThumb === id){
+    // Closing — collapse panel
+    _activeToolThumb = null;
+    const body = document.getElementById('tb-' + id);
+    if(body) body.classList.remove('on');
+    return;
+  }
+  // Close all other panels first
+  ['quant','dcf','port','size','corr','idea'].forEach(function(tid){
+    const b = document.getElementById('tb-' + tid);
+    if(b && tid !== id) b.classList.remove('on');
+  });
+  _activeToolThumb = id;
+  if(thumb) thumb.classList.add('active');
+  const body = document.getElementById('tb-' + id);
+  if(body){
+    body.classList.add('on');
+    setTimeout(function(){
+      body.scrollIntoView({behavior:'smooth', block:'start', inline:'nearest'});
+    }, 80);
+  }
+}
 
 function openSubstack(e){
   if(e) e.preventDefault();
@@ -7025,6 +7630,8 @@ function exportPortExcel(){
       const activeBtn = document.querySelector('.fb.on');
       if(activeBtn && activeBtn.textContent.trim().toLowerCase()!=='all')
         activeBtn.click();
+      // Populate featured call on home page
+      populateFeaturedCall(items);
     }
 
     /* ── Fetch RSS — rss2json primary, allorigins fallback ── */

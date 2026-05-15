@@ -2924,6 +2924,24 @@ table.tr tbody tr:hover{
   .am-title{font-size:18px}
 }
 
+/* ── Research List Table ───────────────────────────── */
+.rlwrap{padding:0 44px 60px;overflow-x:auto}
+table.rl{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
+table.rl thead tr{background:rgba(196,154,42,.1);border-bottom:1px solid var(--line)}
+table.rl th{padding:11px 14px;text-align:left;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;white-space:nowrap}
+table.rl tbody tr{border-bottom:1px solid var(--line2);transition:background .15s;cursor:pointer}
+table.rl tbody tr:hover{background:rgba(196,154,42,.04)}
+table.rl td{padding:11px 14px;color:var(--white2);vertical-align:middle}
+.rl-date{font-family:var(--FM);font-size:9px;color:var(--g2);white-space:nowrap;letter-spacing:.04em}
+.rl-title{color:var(--ink);font-family:var(--FS);font-size:13px;font-weight:500;font-style:normal;max-width:540px}
+table.rl tbody tr:hover .rl-title{color:var(--gold)}
+.rl-ret{font-family:var(--FM);font-size:11px;font-weight:700;text-align:right;white-space:nowrap}
+@media(max-width:900px){.rlwrap{padding:0 20px 48px}}
+@media(max-width:640px){
+  table.rl th:nth-child(4),table.rl td:nth-child(4){display:none}
+  .rl-title{font-size:12px}
+}
+
 /* ── CV Button ─────────────────────────────────────── */
 .mv2-cv-btn {
   display: inline-flex;
@@ -3115,6 +3133,18 @@ table.tr tbody tr:hover{
   <button class="fb on">All</button><button class="fb">Equity</button><button class="fb">Macro</button><button class="fb">Geo / Markets</button><button class="fb">Central Bank</button>
 </div>
 <div class="plist">
+  <div class="rlwrap">
+    <table class="rl">
+      <thead><tr>
+        <th>Date</th>
+        <th>Category</th>
+        <th>Title</th>
+        <th>Ticker</th>
+        <th style="text-align:right">Return</th>
+      </tr></thead>
+      <tbody id="rl-body"></tbody>
+    </table>
+  </div>
 </div>
 
 <!-- Substack subscribe banner -->
@@ -6597,53 +6627,57 @@ function exportPortExcel(){
       if(window._trRecalc) window._trRecalc();
     }
 
-    /* ── Build one post element ─────────────────── */
+    /* ── KNOWN_CALLS fallback — title keyword → {ticker,entry} ── */
+    const KNOWN_CALLS = {
+      'oracle'      : {ticker:'ORCL', entry:'143.36'},
+      'mercadolibre': {ticker:'MELI', entry:'1774.00'},
+      'nu holdings' : {ticker:'NU',   entry:'14.53'},
+      'adeia'       : {ticker:'ADEA', entry:'30.00'},
+    };
+    function knownCallFromTitle(title){
+      const t=(title||'').toLowerCase();
+      for(const [k,v] of Object.entries(KNOWN_CALLS)) if(t.includes(k)) return v;
+      return null;
+    }
+
+    /* ── Build one research list row ────────────── */
     function buildPost(item){
       const date    = new Date(item.pubDate);
       const dateStr = date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
       const cat     = detectCat(item);
       const meta    = parseMeta(item.content||item.description||'');
 
-      // clean excerpt
-      const tmp = document.createElement('div');
-      tmp.innerHTML = item.description||item.content||'';
-      const excerpt = (tmp.textContent||'').trim().replace(/\s+/g,' ').substring(0,230)+'…';
+      // Merge parsed meta with KNOWN_CALLS fallback
+      const known = (cat.cls==='ce') ? knownCallFromTitle(item.title) : null;
+      const tk    = meta.ticker || (known&&known.ticker) || null;
+      const en    = meta.entry  || (known&&known.entry)  || null;
 
-      // right-column meta chips
-      let metaHtml = '';
-      if(meta.ticker){
-        const dirColor = meta.dir&&meta.dir.toLowerCase()==='short'?'#f87171':'#4ade80';
-        const dirLabel = meta.dir||'';
-        metaHtml += `<div style="font-family:var(--FM);font-size:11px;font-weight:600;letter-spacing:.04em;color:${dirColor}">${meta.ticker}${dirLabel?' · '+dirLabel:''}</div>`;
+      const row = document.createElement('tr');
+      row.dataset.cat = cat.filter;
+      if(cat.cls==='ce' && tk && en){
+        row.dataset.ticker = tk;
+        row.dataset.entry  = en;
       }
-      // Live ROI placeholder — filled after Yahoo Finance fetch
-      if(cat.cls==='ce' && meta.ticker && meta.entry){
-        metaHtml += `<div class="post-roi" style="font-family:var(--FM);font-size:12px;font-weight:700;display:none"></div>`;
-      }
-      if(meta.target){
-        metaHtml += `<div style="font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.06em">Target $${meta.target}</div>`;
-      }
-      metaHtml += `<span class="pst sto" style="font-size:7.5px;margin-top:6px">Read →</span>`;
+      row.onclick = ()=>openArticleModal(item);
 
-      const post = document.createElement('div');
-      post.className = 'post';
-      post.dataset.cat = cat.filter;
-      if(cat.cls==='ce' && meta.ticker && meta.entry){
-        post.dataset.ticker = meta.ticker;
-        post.dataset.entry  = meta.entry;
-      }
-      post.onclick = ()=>openArticleModal(item);
-      post.innerHTML = `
-        <div><div class="pdt">${dateStr}</div></div>
-        <div>
-          <span class="pchip ${cat.cls}">${cat.label}</span>
-          <div class="ptt">${item.title||'Untitled'}</div>
-          <p class="pex">${excerpt}</p>
-        </div>
-        <div class="pm" style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding-top:2px">
-          ${metaHtml}
-        </div>`;
-      return post;
+      // Ticker + direction cell
+      const dirColor = meta.dir&&meta.dir.toLowerCase()==='short' ? '#f87171' : '#4ade80';
+      const tickerHtml = tk
+        ? `<span style="font-family:var(--FM);font-size:10px;font-weight:600;color:${dirColor}">${tk}${meta.dir?' <span style="color:var(--g2);font-weight:400">'+meta.dir+'</span>':''}</span>`
+        : '<span style="color:var(--g3)">—</span>';
+
+      // Return cell — placeholder filled by refreshResearchROI()
+      const retHtml = (cat.cls==='ce' && tk && en)
+        ? `<span class="rl-roi" style="display:none"></span><span class="rl-roi-dash" style="color:var(--g3)">—</span>`
+        : '<span style="color:var(--g3)">—</span>';
+
+      row.innerHTML = `
+        <td class="rl-date">${dateStr}</td>
+        <td><span class="pchip ${cat.cls}" style="margin:0;white-space:nowrap">${cat.label}</span></td>
+        <td class="rl-title">${item.title||'Untitled'}</td>
+        <td>${tickerHtml}</td>
+        <td class="rl-ret">${retHtml}</td>`;
+      return row;
     }
 
     /* ── Article Reader Modal ─────────────────────── */
@@ -6734,7 +6768,7 @@ function exportPortExcel(){
           document.querySelectorAll('.fb').forEach(x=>x.classList.remove('on'));
           this.classList.add('on');
           const label = this.textContent.trim().toLowerCase();
-          document.querySelectorAll('#pg-research .plist .post').forEach(p=>{
+          document.querySelectorAll('#rl-body tr').forEach(p=>{
             if(label==='all'){
               p.style.display='';
             } else {
@@ -6782,9 +6816,11 @@ function exportPortExcel(){
     /* ── Render items list into the page ─────────────── */
     function renderItems(items){
       if(!items||!items.length) return;
-      plist.innerHTML='';
+      const tbody = document.querySelector('#rl-body');
+      if(!tbody) return;
+      tbody.innerHTML='';
       items.forEach(item=>{
-        plist.appendChild(buildPost(item));
+        tbody.appendChild(buildPost(item));
         const call = parseCallBlock(item.content||item.description||'');
         if(call && call.ticker) injectCallRow(item, call);
       });
@@ -6794,30 +6830,35 @@ function exportPortExcel(){
       refreshResearchROI();
     }
 
-    /* ── Live ROI for equity post cards ─────────────── */
+    /* ── Live ROI for equity research rows ──────────── */
     function refreshResearchROI(){
-      const posts = [...document.querySelectorAll('#pg-research .plist .post[data-ticker]')];
-      if(!posts.length) return;
+      const rows = [...document.querySelectorAll('#rl-body tr[data-ticker]')];
+      if(!rows.length) return;
       const entries = {};
-      posts.forEach(p=>{ entries[p.dataset.ticker]=parseFloat(p.dataset.entry||'0'); });
+      rows.forEach(r=>{ entries[r.dataset.ticker]=parseFloat(r.dataset.entry||'0'); });
       const syms = Object.keys(entries).join(',');
       fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(syms))
         .then(r=>r.json())
         .then(data=>{
           const q={};
           ((data.quoteResponse||{}).result||[]).forEach(x=>{ q[x.symbol]=x.regularMarketPrice; });
-          posts.forEach(p=>{
-            const price=q[p.dataset.ticker];
-            const entry=parseFloat(p.dataset.entry||'0');
+          rows.forEach(r=>{
+            const price=q[r.dataset.ticker];
+            const entry=parseFloat(r.dataset.entry||'0');
             if(!price||!entry) return;
             const pnl=(price-entry)/entry*100;
             const sign=pnl>=0?'+':'';
-            const roiEl=p.querySelector('.post-roi');
+            const roiEl=r.querySelector('.rl-roi');
+            const dashEl=r.querySelector('.rl-roi-dash');
             if(roiEl){
               roiEl.textContent=sign+pnl.toFixed(1)+'%';
               roiEl.style.color=pnl>=0?'#4ade80':'#f87171';
+              roiEl.style.fontFamily='var(--FM)';
+              roiEl.style.fontSize='11px';
+              roiEl.style.fontWeight='700';
               roiEl.style.display='';
             }
+            if(dashEl) dashEl.style.display='none';
           });
         })
         .catch(()=>{});

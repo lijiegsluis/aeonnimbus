@@ -2923,6 +2923,34 @@ table.tr tbody tr:hover{
   .am-body{padding:18px 18px 40px}
   .am-title{font-size:18px}
 }
+
+/* ── CV Button ─────────────────────────────────────── */
+.mv2-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 18px;
+  font-family: var(--FM);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(200,131,10,.32);
+  padding: 6px 13px 5px;
+  text-decoration: none;
+  border-radius: 2px;
+  transition: background .2s, border-color .2s, color .2s, box-shadow .2s;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: fadeUp .6s var(--ease-out-expo, cubic-bezier(.16,1,.3,1)) .55s forwards;
+}
+.mv2-cv-btn:hover {
+  background: rgba(200,131,10,.1);
+  border-color: var(--gold);
+  color: var(--gold2);
+  box-shadow: 0 0 14px rgba(200,131,10,.18);
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -2970,6 +2998,7 @@ table.tr tbody tr:hover{
   <div class="mv2-left">
     <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
     <div class="mv2-name">LiJie<br><em>Guo.</em></div>
+    <a class="mv2-cv-btn" href="LJGS_CV_2026_FinalCV.pdf" target="_blank">CV &nbsp;↗</a>
     <div class="mv2-rule line-draw"></div>
     <div class="mv2-tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
   </div>

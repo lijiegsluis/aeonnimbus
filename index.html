@@ -2969,6 +2969,214 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
   color: var(--gold2);
   box-shadow: 0 0 14px rgba(200,131,10,.18);
 }
+
+/* ═══════════════════════════════════════════════════════
+   READABILITY & AESTHETIC ENHANCEMENT
+   Institutional research site best-practices
+═══════════════════════════════════════════════════════ */
+
+/* ── Global body text ───────────────────────────── */
+body { font-size: 15.5px; line-height: 1.78; }
+
+/* ── Section headers ────────────────────────────── */
+.pgtag {
+  font-size: 8px;
+  letter-spacing: .26em;
+  color: var(--gold);
+  margin-bottom: 14px;
+}
+.pgtag::before {
+  width: 24px;
+  height: 1px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, var(--gold), rgba(200,131,10,.25));
+}
+/* Two-tone titles — em word in gold italic */
+.pgtitle em {
+  color: var(--gold);
+  font-style: italic;
+  font-weight: inherit;
+}
+.pgtitle {
+  font-weight: 600;
+}
+.pghd {
+  padding-bottom: 36px;
+}
+.pgsub {
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--ink3);
+  margin-top: 9px;
+  font-style: italic;
+}
+
+/* ── Filter bar buttons ─────────────────────────── */
+.fbar { gap: 6px; padding-top: 14px; padding-bottom: 14px; }
+.fb {
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  padding: 6px 15px;
+  border-radius: 2px;
+  border: 1px solid rgba(200,131,10,.14);
+  color: var(--ink3);
+  transition: all .2s cubic-bezier(.16,1,.3,1);
+}
+.fb:hover {
+  background: rgba(200,131,10,.07);
+  border-color: rgba(200,131,10,.3);
+  color: var(--ink2);
+  transform: translateY(-1px);
+}
+.fb.on {
+  background: rgba(200,131,10,.12);
+  border-color: rgba(200,131,10,.38);
+  color: var(--ink);
+  box-shadow: 0 2px 10px rgba(200,131,10,.07);
+  transform: none;
+}
+
+/* ── Category chips — filled pill style ─────────── */
+.pchip {
+  padding: 3px 9px;
+  border-radius: 2px;
+  font-size: 7.5px;
+  letter-spacing: .11em;
+  border: 1px solid transparent;
+}
+.pchip.ce { background: rgba(200,164,74,.12); color: #C4A44A; border-color: rgba(200,164,74,.22); }
+.pchip.cm { background: rgba(59,130,246,.12); color: #7BAFF8; border-color: rgba(59,130,246,.22); }
+.pchip.cg { background: rgba(16,185,129,.1);  color: #34D399; border-color: rgba(16,185,129,.2);  }
+.pchip.cb { background: rgba(139,92,246,.1);  color: #A78BFA; border-color: rgba(139,92,246,.2);  }
+
+/* ── Research list — semantic column colors ─────── */
+table.rl th { padding: 12px 14px; font-size: 8px; letter-spacing: .12em; }
+table.rl th:nth-child(1) { color: var(--ink3); }
+table.rl th:nth-child(2) { color: var(--gold); }
+table.rl th:nth-child(3) { color: var(--ink2); }
+table.rl th:nth-child(4) { color: #4ade80;     }
+table.rl th:nth-child(5) { color: #4ade80;     }
+table.rl tbody tr:hover {
+  background: rgba(196,154,42,.05) !important;
+  box-shadow: inset 3px 0 0 rgba(200,131,10,.5);
+}
+.rl-title {
+  font-size: 13.5px;
+  letter-spacing: -.01em;
+  max-width: 600px;
+  font-style: normal;
+}
+table.rl td { padding: 13px 14px; font-size: 12px; }
+
+/* ── Track record — semantic column colors ──────── */
+table.tr th { font-size: 8px; letter-spacing: .12em; padding: 12px 14px; }
+table.tr th:nth-child(1)  { color: var(--ink3); }
+table.tr th:nth-child(2)  { color: var(--gold); }
+table.tr th:nth-child(3)  { color: var(--ink3); }
+table.tr th:nth-child(4)  { color: #4ade80;     }
+table.tr th:nth-child(5)  { color: var(--ink2); }
+table.tr th:nth-child(6)  { color: #4ade80;     }
+table.tr th:nth-child(7)  { color: #f87171;     }
+table.tr th:nth-child(8)  { color: var(--ink3); }
+table.tr th:nth-child(9)  { color: var(--ink3); }
+table.tr th:nth-child(10) { color: var(--ink2); }
+table.tr th:nth-child(11) { color: #4ade80;     }
+table.tr tbody tr { transition: background .15s, box-shadow .15s; }
+table.tr tbody tr:hover {
+  background: rgba(196,154,42,.05) !important;
+  box-shadow: inset 3px 0 0 rgba(200,131,10,.5);
+}
+table.tr td:nth-child(6)  { color: rgba(74,222,128,.75);  }
+table.tr td:nth-child(7)  { color: rgba(248,113,113,.7);  }
+table.tr td { font-size: 12px; padding: 12px 14px; }
+
+/* ── Performance stat cards ─────────────────────── */
+.perfrow {
+  gap: 0 !important;
+  background: transparent !important;
+  border: 1px solid var(--rule) !important;
+}
+.pc {
+  padding: 22px 18px !important;
+  background: var(--bg1) !important;
+  border-right: 1px solid var(--rule) !important;
+  transition: background .2s;
+  position: relative;
+}
+.pc:last-child { border-right: none !important; }
+.pc:hover { background: var(--bg2) !important; }
+.pcv {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.02em !important;
+  line-height: 1.1 !important;
+  margin: 4px 0 !important;
+}
+.pcl {
+  font-size: 8px !important;
+  letter-spacing: .15em !important;
+  color: var(--ink3) !important;
+  margin-bottom: 6px !important;
+}
+.pcs {
+  font-size: 8px !important;
+  letter-spacing: .06em !important;
+  color: var(--ink3) !important;
+  margin-top: 5px !important;
+}
+
+/* ── Status badges ──────────────────────────────── */
+.bdg {
+  padding: 3px 9px !important;
+  font-size: 7.5px !important;
+  letter-spacing: .09em !important;
+  border-radius: 2px !important;
+  border: 1px solid transparent !important;
+  font-family: var(--FM) !important;
+}
+.bdg.bo { background: rgba(196,154,42,.12) !important; color: var(--gold) !important;  border-color: rgba(196,154,42,.28) !important; }
+.bdg.bw { background: rgba(74,222,128,.1)  !important; color: #4ade80 !important;       border-color: rgba(74,222,128,.28)  !important; }
+.bdg.bl { background: rgba(248,113,113,.1) !important; color: #f87171 !important;       border-color: rgba(248,113,113,.2)  !important; }
+
+/* ── Track record note callout ──────────────────── */
+.trnote {
+  border-left: 2px solid rgba(200,131,10,.4) !important;
+  background: rgba(200,131,10,.035) !important;
+  padding: 16px 20px !important;
+  font-size: 13px !important;
+  line-height: 1.72 !important;
+  color: var(--ink2) !important;
+  border-radius: 0 2px 2px 0;
+}
+.trnote strong { color: var(--ink) !important; }
+.trnote p { margin: 0; }
+
+/* ── Home — bio text refinement ─────────────────── */
+.mv2-bio { font-size: 13.5px !important; line-height: 1.88 !important; color: var(--ink2) !important; }
+.mv2-tagline { font-size: 14px !important; line-height: 1.82 !important; }
+.mv2-bio-label {
+  font-size: 7.5px !important;
+  letter-spacing: .22em !important;
+  color: var(--ink3) !important;
+}
+
+/* ── Tools grid spacing ──────────────────────────── */
+.tgrid { gap: 6px !important; }
+
+/* ── Trwrap / rlwrap spacing ─────────────────────── */
+.trwrap, .rlwrap { margin-top: 8px; }
+
+/* ── Footer refinement ───────────────────────────── */
+.flogo { font-size: 10px; letter-spacing: .1em; }
+.flnk { font-size: 9px; letter-spacing: .08em; }
+
+/* ── Mobile ──────────────────────────────────────── */
+@media(max-width:900px){
+  .perfrow { grid-template-columns: repeat(3,1fr) !important; }
+  .pc { padding: 16px 12px !important; }
+  .pcv { font-size: 20px !important; }
+  table.tr td, table.rl td { padding: 10px 10px; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3128,7 +3336,7 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
 </div><!-- /pg-home -->
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
 <div class="pg" id="pg-research">
-<div class="pghd reveal" data-num="02"><div class="pgtag">Published research</div><h2 class="pgtitle">Research Notes</h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
+<div class="pghd reveal" data-num="02"><div class="pgtag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
 <div class="fbar">
   <button class="fb on">All</button><button class="fb">Equity</button><button class="fb">Macro</button><button class="fb">Geo / Markets</button><button class="fb">Central Bank</button>
 </div>
@@ -3165,7 +3373,7 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
 <div class="pg" id="pg-track">
-<div class="pghd reveal"><div class="pgtag">Audited performance</div><h2 class="pgtitle">Track Record</h2><p class="pgsub">Every call published publicly before outcome is known. Losses included. Never deleted.</p></div>
+<div class="pghd reveal"><div class="pgtag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub">Every call published publicly before outcome is known. Losses included. Never deleted.</p></div>
 <div class="trnote" style="margin:24px 44px 0">
   <p><strong>Why this matters:</strong> Any analyst can show you winners. The credibility is in publishing every call with position size, stop, and entry — before knowing the outcome — and recording losses with the same transparency as wins. This is what a fund will ask for. Every row here is timestamped on Substack the day it was published.</p>
 </div>
@@ -3361,7 +3569,7 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
 <div class="pg" id="pg-tools">
-<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Tools</h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
+<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Tools <em>&amp; Models</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
 
 <div class="tgrid">
 <!-- ───── QUANT MODELS TOOL ───────────────────────────── -->

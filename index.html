@@ -2935,11 +2935,12 @@ table.rl td{padding:11px 14px;color:var(--white2);vertical-align:middle}
 .rl-date{font-family:var(--FM);font-size:9px;color:var(--g2);white-space:nowrap;letter-spacing:.04em}
 .rl-title{color:var(--ink);font-family:var(--FS);font-size:13px;font-weight:500;font-style:normal;max-width:540px}
 table.rl tbody tr:hover .rl-title{color:var(--gold)}
-.rl-ret{font-family:var(--FM);font-size:11px;font-weight:700;text-align:right;white-space:nowrap}
+.rl-read{font-family:var(--FM);font-size:10px;color:var(--ink3);text-align:right;white-space:nowrap;letter-spacing:.04em}
 @media(max-width:900px){.rlwrap{padding:0 20px 48px}}
 @media(max-width:640px){
-  table.rl th:nth-child(4),table.rl td:nth-child(4){display:none}
   .rl-title{font-size:12px}
+  .rl-date{display:none}
+  table.rl th:nth-child(1){display:none}
 }
 
 /* ── CV Button ─────────────────────────────────────── */
@@ -3054,8 +3055,7 @@ table.rl th { padding: 12px 14px; font-size: 8px; letter-spacing: .12em; }
 table.rl th:nth-child(1) { color: var(--ink3); }
 table.rl th:nth-child(2) { color: var(--gold); }
 table.rl th:nth-child(3) { color: var(--ink2); }
-table.rl th:nth-child(4) { color: #4ade80;     }
-table.rl th:nth-child(5) { color: #4ade80;     }
+table.rl th:nth-child(4) { color: var(--ink3); }
 table.rl tbody tr:hover {
   background: rgba(196,154,42,.05) !important;
   box-shadow: inset 3px 0 0 rgba(200,131,10,.5);
@@ -3347,8 +3347,7 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
         <th>Date</th>
         <th>Category</th>
         <th>Title</th>
-        <th>Ticker</th>
-        <th style="text-align:right">Return</th>
+        <th style="text-align:right">Read</th>
       </tr></thead>
       <tbody id="rl-body"></tbody>
     </table>
@@ -6860,31 +6859,22 @@ function exportPortExcel(){
       const tk    = meta.ticker || (known&&known.ticker) || null;
       const en    = meta.entry  || (known&&known.entry)  || null;
 
+      // Estimated read time from content word count
+      const tmpEl = document.createElement('div');
+      tmpEl.innerHTML = item.content || item.description || '';
+      const wordCount = (tmpEl.textContent||'').trim().split(/\s+/).filter(Boolean).length;
+      const mins = Math.max(1, Math.round(wordCount / 220));
+      const readLabel = mins + ' min';
+
       const row = document.createElement('tr');
       row.dataset.cat = cat.filter;
-      if(cat.cls==='ce' && tk && en){
-        row.dataset.ticker = tk;
-        row.dataset.entry  = en;
-      }
       row.onclick = ()=>openArticleModal(item);
-
-      // Ticker + direction cell
-      const dirColor = meta.dir&&meta.dir.toLowerCase()==='short' ? '#f87171' : '#4ade80';
-      const tickerHtml = tk
-        ? `<span style="font-family:var(--FM);font-size:10px;font-weight:600;color:${dirColor}">${tk}${meta.dir?' <span style="color:var(--g2);font-weight:400">'+meta.dir+'</span>':''}</span>`
-        : '<span style="color:var(--g3)">—</span>';
-
-      // Return cell — placeholder filled by refreshResearchROI()
-      const retHtml = (cat.cls==='ce' && tk && en)
-        ? `<span class="rl-roi" style="display:none"></span><span class="rl-roi-dash" style="color:var(--g3)">—</span>`
-        : '<span style="color:var(--g3)">—</span>';
 
       row.innerHTML = `
         <td class="rl-date">${dateStr}</td>
         <td><span class="pchip ${cat.cls}" style="margin:0;white-space:nowrap">${cat.label}</span></td>
         <td class="rl-title">${item.title||'Untitled'}</td>
-        <td>${tickerHtml}</td>
-        <td class="rl-ret">${retHtml}</td>`;
+        <td class="rl-read">${readLabel}</td>`;
       return row;
     }
 
@@ -7035,41 +7025,6 @@ function exportPortExcel(){
       const activeBtn = document.querySelector('.fb.on');
       if(activeBtn && activeBtn.textContent.trim().toLowerCase()!=='all')
         activeBtn.click();
-      refreshResearchROI();
-    }
-
-    /* ── Live ROI for equity research rows ──────────── */
-    function refreshResearchROI(){
-      const rows = [...document.querySelectorAll('#rl-body tr[data-ticker]')];
-      if(!rows.length) return;
-      const entries = {};
-      rows.forEach(r=>{ entries[r.dataset.ticker]=parseFloat(r.dataset.entry||'0'); });
-      const syms = Object.keys(entries).join(',');
-      fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(syms))
-        .then(r=>r.json())
-        .then(data=>{
-          const q={};
-          ((data.quoteResponse||{}).result||[]).forEach(x=>{ q[x.symbol]=x.regularMarketPrice; });
-          rows.forEach(r=>{
-            const price=q[r.dataset.ticker];
-            const entry=parseFloat(r.dataset.entry||'0');
-            if(!price||!entry) return;
-            const pnl=(price-entry)/entry*100;
-            const sign=pnl>=0?'+':'';
-            const roiEl=r.querySelector('.rl-roi');
-            const dashEl=r.querySelector('.rl-roi-dash');
-            if(roiEl){
-              roiEl.textContent=sign+pnl.toFixed(1)+'%';
-              roiEl.style.color=pnl>=0?'#4ade80':'#f87171';
-              roiEl.style.fontFamily='var(--FM)';
-              roiEl.style.fontSize='11px';
-              roiEl.style.fontWeight='700';
-              roiEl.style.display='';
-            }
-            if(dashEl) dashEl.style.display='none';
-          });
-        })
-        .catch(()=>{});
     }
 
     /* ── Fetch RSS — rss2json primary, allorigins fallback ── */

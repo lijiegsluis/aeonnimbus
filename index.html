@@ -3446,6 +3446,29 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 .cg-dim  { font-size: 11px;   color: var(--ink3); }
 .cg-stat { font-family: var(--FM); font-size: 11px; color: #4ade80; }
 @media(max-width:700px){ .cred-grid{ grid-template-columns:1fr; } }
+/* ── qp-section: restyled to match site design tokens ── */
+.qp-section { margin-top:0!important; padding:40px 52px 56px!important; border-top:1px solid var(--rule)!important; background:transparent!important; }
+.qp-eyebrow { font-family:var(--FM)!important; font-size:7.5px!important; letter-spacing:.2em!important; text-transform:uppercase!important; color:var(--gold)!important; margin-bottom:10px!important; display:flex!important; align-items:center!important; gap:8px!important; }
+.qp-eyebrow::before { content:''!important; display:inline-block!important; width:18px!important; height:1px!important; background:var(--gold)!important; flex-shrink:0!important; }
+.qp-title { font-family:var(--FS)!important; font-size:26px!important; font-weight:600!important; letter-spacing:-.02em!important; color:var(--ink)!important; margin-bottom:10px!important; line-height:1.15!important; }
+.qp-sub { font-family:var(--FS)!important; font-size:13px!important; color:var(--ink2)!important; line-height:1.72!important; max-width:580px!important; margin-bottom:8px!important; font-style:italic!important; }
+.qp-attr { font-family:var(--FM)!important; font-size:8px!important; letter-spacing:.12em!important; color:var(--ink3)!important; margin-bottom:28px!important; text-transform:uppercase!important; }
+.qp-attr a { color:var(--gold)!important; text-decoration:none!important; }
+.qp-grid { display:grid!important; grid-template-columns:repeat(auto-fill,minmax(220px,1fr))!important; gap:10px!important; margin-bottom:20px!important; background:transparent!important; }
+.qp-card { border:1px solid var(--rule)!important; background:var(--bg1)!important; padding:22px 20px 18px!important; cursor:pointer!important; border-radius:2px!important; position:relative!important; transition:border-color .18s,background .18s,transform .18s,box-shadow .18s!important; }
+html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!important; }
+.qp-card:hover { border-color:rgba(200,131,10,.38)!important; background:var(--bg2)!important; transform:translateY(-2px)!important; box-shadow:0 6px 24px rgba(0,0,0,.28)!important; }
+.qp-card.active { border-color:var(--gold)!important; background:var(--bg2)!important; box-shadow:0 0 0 1px rgba(200,131,10,.2)!important; }
+.qp-ico { font-size:22px!important; line-height:1!important; margin-bottom:12px!important; }
+.qp-cn { font-family:var(--FS)!important; font-size:13px!important; font-weight:600!important; color:var(--ink)!important; letter-spacing:-.01em!important; line-height:1.25!important; margin-bottom:7px!important; }
+.qp-cd { font-family:var(--FS)!important; font-size:11.5px!important; color:var(--ink2)!important; line-height:1.58!important; margin-bottom:12px!important; }
+.qp-tags { display:flex!important; flex-wrap:wrap!important; gap:4px!important; }
+.qp-tag { font-family:var(--FM)!important; font-size:7px!important; letter-spacing:.1em!important; text-transform:uppercase!important; padding:2px 7px!important; border-radius:2px!important; background:rgba(200,131,10,.08)!important; color:var(--gold)!important; border:1px solid rgba(200,131,10,.18)!important; }
+.qp-launch { position:absolute!important; top:14px!important; right:14px!important; font-family:var(--FM)!important; font-size:7.5px!important; letter-spacing:.12em!important; text-transform:uppercase!important; color:var(--gold)!important; opacity:0!important; transition:opacity .15s!important; }
+.qp-card:hover .qp-launch { opacity:1!important; }
+.qp-panel { border:1px solid var(--rule)!important; background:var(--bg1)!important; padding:28px!important; margin-bottom:18px!important; }
+@media(max-width:700px){ .qp-section{ padding:32px 20px 48px!important; } .qp-grid{ grid-template-columns:1fr 1fr!important; } }
+@media(max-width:480px){ .qp-grid{ grid-template-columns:1fr!important; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect

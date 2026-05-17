@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -3421,6 +3421,31 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   .tool-panel-wrap { margin: -10px 20px 16px; }
 }
 @media(max-width:550px){ .tool-grid { grid-template-columns: 1fr; } }
+
+/* ── Credential grid (masthead right column) ──── */
+.cred-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px; background: var(--rule);
+}
+.cg-block {
+  background: var(--bg1); padding: 20px 22px;
+  display: flex; flex-direction: column; gap: 5px;
+  transition: background .18s;
+}
+.cg-block:hover { background: var(--bg2); }
+.cg-label {
+  font-family: var(--FM); font-size: 7px;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 7px;
+}
+.cg-main {
+  font-size: 12.5px; color: var(--ink); font-weight: 500;
+  line-height: 1.35; letter-spacing: -.01em;
+}
+.cg-line { font-size: 11.5px; color: var(--ink2); line-height: 1.45; }
+.cg-dim  { font-size: 11px;   color: var(--ink3); }
+.cg-stat { font-family: var(--FM); font-size: 11px; color: #4ade80; }
+@media(max-width:700px){ .cred-grid{ grid-template-columns:1fr; } }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3485,60 +3510,33 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
     <div class="mv2-tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
   </div>
   <div class="mv2-right">
-    <div class="mv2-bio-label reveal" style="margin-bottom:18px">Career</div>
-<div class="timeline" id="career-timeline">
-  <em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> for USDJPY and XAUUSD, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.
-  <br><br>
-  His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.
-  <br><br>
-  He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.
-  <br><br>
-  Spanish-born and ethnically Chinese, he was shaped by two cultures — and drawn, from his first market investment at 18, to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.
-  <br><br>
-  <!-- timeline items will close below -->
-  <div class="tl-item" id="tl-0">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2024 — Present</span></div>
-    <div class="tl-role">Founder &amp; Lead Analyst</div>
-    <div class="tl-org">Aeon Nimbus Research · London</div>
-    <div class="tl-body"><p>Independent macro and equity research. Formal investment calls published with full thesis before outcome is known. Proprietary algorithmic strategies for USDJPY &amp; XAUUSD. Every position on the record.</p></div>
+    <div class="mv2-bio-label reveal" style="margin-bottom:20px">Credentials</div>
+<div class="cred-grid" id="cred-grid">
+  <div class="cg-block">
+    <div class="cg-label">Research</div>
+    <div class="cg-main">10+ equity theses published</div>
+    <div class="cg-line">ORCL · MELI · NU · ADEA active</div>
+    <div class="cg-stat">USDJPY EA · Sharpe 2.13 · live</div>
   </div>
-  <div class="tl-item" id="tl-1">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2023 — 2024</span></div>
-    <div class="tl-role">Analyst — L/S Equity &amp; Macro</div>
-    <div class="tl-org">Independent Fund Platform · Spain</div>
-    <div class="tl-body"><p>Long/short equity and global macro at a leading independent multi-PM fund platform. Covered consumer, tech, and EM discretionary. Combined fundamental conviction with quantitative signal generation.</p></div>
+  <div class="cg-block">
+    <div class="cg-label">Experience</div>
+    <div class="cg-main">Jupiter AM · £51bn AUM</div>
+    <div class="cg-line">Santomera Bay · €250M PE/Credit</div>
+    <div class="cg-dim">PwC · QuadrigaFunds · SpinLab</div>
   </div>
-  <div class="tl-item" id="tl-2">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2022 — 2023</span></div>
-    <div class="tl-role">Analyst — Private Credit &amp; Real Estate</div>
-    <div class="tl-org">Crandon</div>
-    <div class="tl-body"><p>Credit analysis and deal execution across private credit and commercial real estate. Underwriting, structuring, and portfolio monitoring across the capital structure.</p></div>
+  <div class="cg-block">
+    <div class="cg-label">Education</div>
+    <div class="cg-main">Triple MSc · GPA 4.0/4.0</div>
+    <div class="cg-line">emlyon · PoliMi · Bayes</div>
+    <div class="cg-dim">CFA Level I Candidate</div>
   </div>
-  <div class="tl-item" id="tl-3">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2021 — 2022</span></div>
-    <div class="tl-role">Private Equity PM &amp; Strategy</div>
-    <div class="tl-org">Santomera Bay · Barcelona</div>
-    <div class="tl-body"><p>Portfolio management and strategy &amp; operations within a single-family private office. Direct PE exposure alongside operational involvement in portfolio companies.</p></div>
+  <div class="cg-block">
+    <div class="cg-label">Edge</div>
+    <div class="cg-main">4 native languages</div>
+    <div class="cg-line">Python · DCF · LBO · MT5</div>
+    <div class="cg-dim">EU National · UK PSW · London</div>
   </div>
-  <div class="tl-item" id="tl-4">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2020 — 2021</span></div>
-    <div class="tl-role">M&amp;A Financial Due Diligence</div>
-    <div class="tl-org">PwC</div>
-    <div class="tl-body"><p>Financial due diligence on M&amp;A transactions across industrials and consumer sectors. Quality of earnings, normalised EBITDA, working capital, and net debt analysis.</p></div>
-  </div>
-  <div class="tl-item" id="tl-5">
-    <div class="tl-dot"></div>
-    <div class="tl-header"><span class="tl-year">2018 — 2020</span></div>
-    <div class="tl-role">Venture — Early Exposure</div>
-    <div class="tl-org">SpinLab (HHL) &amp; Antler · Berlin</div>
-    <div class="tl-body"><p>Early-stage venture through SpinLab, the HHL Accelerator, and Antler — the world's most active early-stage VC. Sourcing, evaluation, and founder support across European startups.</p></div>
-  </div>
-</div><!-- /timeline -->
+</div>
 <div class="edu-logos" style="display:none">
   <div class="edu-logo-label">Education</div>
   <div class="edu-logo-row">

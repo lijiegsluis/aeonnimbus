@@ -3469,6 +3469,111 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
 .qp-panel { border:1px solid var(--rule)!important; background:var(--bg1)!important; padding:28px!important; margin-bottom:18px!important; }
 @media(max-width:700px){ .qp-section{ padding:32px 20px 48px!important; } .qp-grid{ grid-template-columns:1fr 1fr!important; } }
 @media(max-width:480px){ .qp-grid{ grid-template-columns:1fr!important; } }
+
+/* ══════════════════════════════════════════════════════
+   STRATEGIES TAB — Proprietary Systematic Research
+   ══════════════════════════════════════════════════════ */
+.strats-tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);padding:0 52px;margin-bottom:40px}
+.stab{font-family:var(--FM);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink3);background:none;border:none;border-bottom:2px solid transparent;padding:14px 20px 12px;cursor:pointer;transition:color .15s,border-color .15s;margin-bottom:-1px}
+.stab:hover{color:var(--ink2)}
+.stab.on{color:var(--gold);border-bottom-color:var(--gold)}
+.stab-panel{display:none}
+.stab-panel.on{display:block}
+/* Strategy comparison table */
+.st-wrap{padding:0 52px 48px;overflow-x:auto}
+.st-eyebrow{font-family:var(--FM);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:8px}
+.st-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold);flex-shrink:0}
+table.st{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
+table.st thead tr{background:rgba(196,154,42,.08);border-bottom:1px solid var(--rule)}
+table.st th{padding:11px 14px;text-align:left;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;white-space:nowrap}
+table.st tbody tr{border-bottom:1px solid var(--rule2);transition:background .15s;cursor:pointer}
+table.st tbody tr:hover{background:rgba(196,154,42,.04)}
+table.st td{padding:12px 14px;color:var(--ink2);vertical-align:middle}
+table.st td:first-child{color:var(--ink);font-weight:700;letter-spacing:.06em}
+table.st td:nth-child(2){color:var(--ink3);font-size:10px}
+.str-cagr{color:#4ade80!important;font-weight:700!important}
+.str-sharpe{color:var(--gold)!important}
+.str-dd{color:#f87171!important}
+.str-risk{display:inline-block;font-family:var(--FM);font-size:7px;letter-spacing:.1em;text-transform:uppercase;padding:3px 8px;border-radius:2px}
+.str-risk.low{color:#4ade80;border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.06)}
+.str-risk.mod{color:#fbbf24;border:1px solid rgba(251,191,36,.25);background:rgba(251,191,36,.06)}
+.str-risk.high{color:#f97316;border:1px solid rgba(249,115,22,.25);background:rgba(249,115,22,.06)}
+.str-risk.vhigh{color:#f87171;border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.06)}
+/* Strategy cards */
+.strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px;padding:28px 52px 0}
+.strat-card{border:1px solid var(--rule);background:var(--bg1);padding:22px 20px 18px;border-radius:2px;transition:border-color .18s,transform .18s,box-shadow .18s}
+.strat-card:hover{border-color:rgba(200,131,10,.35);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+.strat-card-name{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink);margin-bottom:4px}
+.strat-card-type{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;margin-bottom:14px}
+.strat-card-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.strat-stat-v{font-family:var(--FM);font-size:15px;font-weight:700;line-height:1}
+.strat-stat-l{font-family:var(--FM);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:3px}
+/* Portfolio Builder */
+.pb-wrap{padding:40px 52px 56px}
+.pb-intro{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.72;max-width:600px;margin-bottom:32px;font-style:italic}
+.pb-layout{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start}
+.pb-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;border:1px solid var(--rule);padding:11px 14px;background:var(--bg1);border-radius:2px}
+.pb-row:hover{border-color:rgba(200,131,10,.2)}
+.pb-row-name{font-family:var(--FM);font-size:9.5px;font-weight:700;letter-spacing:.08em;color:var(--ink);flex:0 0 80px}
+.pb-row-type{font-family:var(--FS);font-size:10px;color:var(--ink3);flex:1 1 auto;font-style:italic}
+.pb-row-inp{font-family:var(--FM);font-size:13px;width:54px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:5px 8px;text-align:right;border-radius:2px;-moz-appearance:textfield}
+.pb-row-inp::-webkit-inner-spin-button,.pb-row-inp::-webkit-outer-spin-button{-webkit-appearance:none}
+.pb-row-inp:focus{outline:none;border-color:var(--gold)}
+.pb-row-pct{font-family:var(--FM);font-size:11px;color:var(--ink3);flex:0 0 14px}
+.pb-total-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--rule);margin-top:10px;font-family:var(--FM);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.pb-total-v{font-size:18px;font-weight:700;letter-spacing:0;text-transform:none}
+.pb-total-v.ok{color:#4ade80}
+.pb-total-v.bad{color:#f87171}
+.pb-actions{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.pb-btn{font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#000;border:none;padding:10px 22px;cursor:pointer;border-radius:2px;transition:background .15s;font-weight:600}
+.pb-btn:hover{background:var(--gold2)}
+.pb-btn-sec{font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;background:transparent;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:10px 18px;cursor:pointer;border-radius:2px;transition:all .15s}
+.pb-btn-sec:hover{background:rgba(200,131,10,.07)}
+.pb-results{background:var(--bg1);border:1px solid var(--rule);padding:26px;border-radius:2px}
+.pb-res-eyebrow{font-family:var(--FM);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.pb-res-eyebrow::before{content:'';width:16px;height:1px;background:var(--gold)}
+.pb-res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.pb-res-v{font-family:var(--FM);font-size:22px;font-weight:700;line-height:1}
+.pb-res-l{font-family:var(--FM);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
+.pb-res-note{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;line-height:1.6;border-top:1px solid var(--rule);padding-top:14px;margin-top:4px}
+/* Weekly Reports */
+.wr-wrap{padding:40px 52px 56px}
+.wr-intro{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.72;max-width:660px;margin-bottom:24px;font-style:italic}
+.wr-ai-callout{border:1px solid rgba(200,131,10,.25);background:rgba(200,131,10,.04);padding:16px 20px;margin-bottom:32px;border-radius:2px}
+.wr-ai-callout strong{font-family:var(--FM);font-size:7.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px}
+.wr-ai-callout p{font-family:var(--FM);font-size:9px;letter-spacing:.03em;color:var(--ink2);line-height:1.7;margin:0}
+.wr-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px;margin-bottom:28px}
+.wr-card{border:1px solid var(--rule);background:var(--bg1);padding:22px 20px 18px;border-radius:2px;position:relative;transition:border-color .18s,transform .18s,box-shadow .18s}
+.wr-card:hover{border-color:rgba(200,131,10,.35);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.28)}
+.wr-card-pop{position:absolute;top:14px;right:14px;font-family:var(--FM);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:#4ade80;border:1px solid rgba(74,222,128,.25);background:rgba(74,222,128,.06);padding:2px 7px;border-radius:2px}
+.wr-card-name{font-family:var(--FM);font-size:13px;font-weight:700;letter-spacing:.1em;color:var(--ink);margin-bottom:4px}
+.wr-card-strat{font-family:var(--FS);font-size:11px;color:var(--gold);font-style:italic;margin-bottom:7px}
+.wr-card-desc{font-family:var(--FS);font-size:11.5px;color:var(--ink2);line-height:1.55;margin-bottom:10px}
+.wr-card-assets{font-family:var(--FM);font-size:7.5px;letter-spacing:.05em;color:var(--ink3);margin-bottom:14px;line-height:1.5}
+.wr-card-price{font-family:var(--FM);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.wr-card-price span{font-size:9px;color:var(--ink3);font-weight:400}
+.wr-card-subs{font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.06em;margin-bottom:14px}
+.wr-card-cta{display:inline-block;font-family:var(--FM);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:7px 14px;border-radius:2px;text-decoration:none;transition:all .15s;cursor:pointer}
+.wr-card-cta:hover{background:rgba(200,131,10,.08)}
+.wr-bundle{border:1px solid var(--gold);background:rgba(200,131,10,.03);padding:28px;border-radius:2px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.wr-bundle-left{}
+.wr-bundle-badge{font-family:var(--FM);font-size:7px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.4);padding:3px 10px;border-radius:2px;display:inline-block;margin-bottom:14px}
+.wr-bundle-title{font-family:var(--FS);font-size:22px;font-weight:600;color:var(--ink);margin-bottom:6px;letter-spacing:-.01em}
+.wr-bundle-sub{font-family:var(--FS);font-size:12px;color:var(--ink3);font-style:italic;margin-bottom:16px}
+.wr-bundle-features{list-style:none;margin:0;padding:0}
+.wr-bundle-features li{font-family:var(--FM);font-size:8.5px;letter-spacing:.03em;color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--rule)}
+.wr-bundle-features li:last-child{border-bottom:none}
+.wr-bundle-features li::before{content:'✓  ';color:#4ade80}
+.wr-bundle-right{text-align:center;flex-shrink:0}
+.wr-bundle-price{font-family:var(--FM);font-size:36px;font-weight:700;color:var(--gold);line-height:1}
+.wr-bundle-price span{font-size:12px;color:var(--ink3);font-weight:400}
+.wr-bundle-save{font-family:var(--FM);font-size:8px;letter-spacing:.08em;color:#4ade80;margin:6px 0 20px}
+.wr-cta-big{display:inline-block;font-family:var(--FM);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#000;padding:12px 28px;border-radius:2px;text-decoration:none;font-weight:700;transition:background .15s;white-space:nowrap}
+.wr-cta-big:hover{background:var(--gold2)}
+.wr-disc{font-family:var(--FM);font-size:8px;color:var(--ink3);line-height:1.7;border-top:1px solid var(--rule);padding-top:20px;margin-top:28px}
+@media(max-width:900px){.pb-layout{grid-template-columns:1fr}.wr-bundle{grid-template-columns:1fr}.wr-bundle-right{text-align:left}}
+@media(max-width:700px){.strats-tabs{padding:0 20px}.st-wrap{padding:0 20px 40px}.strat-grid{grid-template-columns:1fr 1fr;padding:20px 20px 0}.pb-wrap,.wr-wrap{padding:32px 20px 48px}.wr-grid{grid-template-columns:1fr}}
+@media(max-width:480px){.strat-grid{grid-template-columns:1fr}.wr-grid{grid-template-columns:1fr}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3501,7 +3606,8 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
     <button class="nbtn" onclick="sp('research')">Research</button>
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('tools')">Tools</button>
-    
+    <button class="nbtn" onclick="sp('strats')">Strategies</button>
+
     <button class="nav-cta" onclick="sp('research')">Open Research</button>
     <a id="nav-github" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" title="GitHub" class="nav-ext-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     <a class="nav-ext-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
@@ -3702,7 +3808,7 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
     <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
   </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
@@ -3914,7 +4020,7 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
   <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
 </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
@@ -4691,9 +4797,371 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
 
 </div><!-- /qp-section -->
 <!-- tgrid -->
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">All tools are for educational and informational purposes only. Not financial advice. Results are model-based estimates only.</div>
 </div>
+
+<!-- ══════════════════════════════════════════════════════════
+     STRATEGIES PAGE — Proprietary Systematic Research
+     ══════════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-strats">
+
+<div class="pghd reveal">
+  <div class="pgtag">Proprietary Systematic Research</div>
+  <h2 class="pgtitle">Quantitative <em>Strategies</em></h2>
+  <p class="pgsub">Seven fully systematic strategies across market timing, trend following, market-neutral, and dual-momentum rotation — institutional-grade algorithmic systems with 10+ years of rigorous backtesting.</p>
+</div>
+
+<!-- Sub-tab navigation -->
+<div class="strats-tabs">
+  <button class="stab on" onclick="showStab('stab-overview')">Strategies</button>
+  <button class="stab" onclick="showStab('stab-builder')">Portfolio Builder</button>
+  <button class="stab" onclick="showStab('stab-reports')">Weekly Reports</button>
+</div>
+
+<!-- ─────────────────────────────────────────────────────────
+     SUB-TAB 1: STRATEGIES OVERVIEW
+     ───────────────────────────────────────────────────────── -->
+<div class="stab-panel on" id="stab-overview">
+
+  <!-- Performance table -->
+  <div class="st-wrap">
+    <div class="st-eyebrow">Strategy Comparison — General Metrics · Track record: 10+ years</div>
+    <table class="st">
+      <thead>
+        <tr>
+          <th>Strategy</th>
+          <th>Type</th>
+          <th>CAGR</th>
+          <th>Sharpe</th>
+          <th>Max DD</th>
+          <th>Vol</th>
+          <th>Risk</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr onclick="showStab('stab-reports')">
+          <td>JANUS</td>
+          <td>Market neutral L/S</td>
+          <td class="str-cagr">13.10%</td>
+          <td class="str-sharpe">1.18</td>
+          <td class="str-dd">15.02%</td>
+          <td>11.09%</td>
+          <td><span class="str-risk low">Low</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>TYR</td>
+          <td>Dual-momentum rotation</td>
+          <td class="str-cagr">20.54%</td>
+          <td class="str-sharpe">1.00</td>
+          <td class="str-dd">25.43%</td>
+          <td>20.57%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>ARES</td>
+          <td>Market timing</td>
+          <td class="str-cagr">14.01%</td>
+          <td class="str-sharpe">1.08</td>
+          <td class="str-dd">15.61%</td>
+          <td>12.81%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>BES</td>
+          <td>Trend following</td>
+          <td class="str-cagr">18.17%</td>
+          <td class="str-sharpe">1.04</td>
+          <td class="str-dd">23.55%</td>
+          <td>17.55%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>ASCÁLAFO</td>
+          <td>Double layer</td>
+          <td class="str-cagr">16.83%</td>
+          <td class="str-sharpe">1.07</td>
+          <td class="str-dd">18.23%</td>
+          <td>15.74%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>DEIMOS</td>
+          <td>Market timing + risk</td>
+          <td class="str-cagr">44.79%</td>
+          <td class="str-sharpe">1.12</td>
+          <td class="str-dd">42.10%</td>
+          <td>39.32%</td>
+          <td><span class="str-risk high">High</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>FOBOS</td>
+          <td>Double layer + risk</td>
+          <td class="str-cagr">54.38%</td>
+          <td class="str-sharpe">1.14</td>
+          <td class="str-dd">48.30%</td>
+          <td>48.40%</td>
+          <td><span class="str-risk vhigh">Very High</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- /st-wrap -->
+
+  <!-- Strategy cards -->
+  <div class="strat-grid">
+    <div class="strat-card">
+      <div class="strat-card-name">JANUS</div>
+      <div class="strat-card-type">Market Neutral Long/Short · Low risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">13.10%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.18</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">15.02%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">TYR</div>
+      <div class="strat-card-type">Dual-Momentum Rotation · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">20.54%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.00</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">25.43%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">ARES</div>
+      <div class="strat-card-type">Market Timing · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">14.01%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.08</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">15.61%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">BES</div>
+      <div class="strat-card-type">Trend Following · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">18.17%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.04</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">23.55%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">ASCÁLAFO</div>
+      <div class="strat-card-type">Double Layer · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">16.83%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.07</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">18.23%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">DEIMOS</div>
+      <div class="strat-card-type">Market Timing + Risk · High risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">44.79%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.12</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">42.10%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">FOBOS</div>
+      <div class="strat-card-type">Double Layer + Risk · Very High risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">54.38%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.14</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">48.30%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+  </div><!-- /strat-grid -->
+
+  <div style="padding:12px 52px 48px;margin-top:8px">
+    <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">* Annualised figures. Historical backtested performance 2006–2026. Past performance does not guarantee future returns. These are quantitative research models, not investment advice or financial recommendations.</p>
+  </div>
+
+</div><!-- /stab-overview -->
+
+<!-- ─────────────────────────────────────────────────────────
+     SUB-TAB 2: PORTFOLIO BUILDER
+     ───────────────────────────────────────────────────────── -->
+<div class="stab-panel" id="stab-builder">
+  <div class="pb-wrap">
+    <div class="st-eyebrow" style="margin-bottom:14px">Build Your Ideal Portfolio</div>
+    <p class="pb-intro">Simulate allocations across proprietary strategies. Assign weights to each strategy and compute the blended portfolio's risk-adjusted return profile — CAGR, Sharpe, and maximum drawdown — based on historical backtest data.</p>
+
+    <div class="pb-layout">
+      <!-- Controls -->
+      <div>
+        <div id="pb-rows">
+          <!-- rows injected by JS -->
+        </div>
+        <div class="pb-total-row">
+          <span>Total Allocation</span>
+          <span class="pb-total-v" id="pb-total-v">0%</span>
+        </div>
+        <div class="pb-actions">
+          <button class="pb-btn-sec" onclick="pbDistribute()">Distribute Equally</button>
+          <button class="pb-btn" onclick="pbCompute()">Compute Portfolio</button>
+        </div>
+        <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);margin-top:12px;line-height:1.7">Educational tool only. Simulated results based on historical backtested data. Not investment advice.</p>
+      </div>
+
+      <!-- Results panel -->
+      <div class="pb-results" id="pb-results-panel">
+        <div class="pb-res-eyebrow">Portfolio Metrics</div>
+        <div class="pb-res-grid">
+          <div>
+            <div class="pb-res-v str-cagr" id="pb-r-cagr">—</div>
+            <div class="pb-res-l">Wtd. CAGR</div>
+          </div>
+          <div>
+            <div class="pb-res-v str-sharpe" id="pb-r-sharpe">—</div>
+            <div class="pb-res-l">Wtd. Sharpe</div>
+          </div>
+          <div>
+            <div class="pb-res-v str-dd" id="pb-r-dd">—</div>
+            <div class="pb-res-l">Wtd. Max DD</div>
+          </div>
+          <div>
+            <div class="pb-res-v" id="pb-r-vol" style="color:var(--ink2)">—</div>
+            <div class="pb-res-l">Wtd. Vol</div>
+          </div>
+        </div>
+
+        <!-- Allocation bar -->
+        <div id="pb-bar-wrap" style="margin-top:4px;display:none">
+          <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Allocation</div>
+          <div id="pb-alloc-bar" style="display:flex;height:8px;border-radius:2px;overflow:hidden;gap:1px"></div>
+          <div id="pb-alloc-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
+        </div>
+
+        <div class="pb-res-note">Metrics are weighted averages of individual strategy backtests. Real portfolio performance will differ due to correlation effects and sequence risk.</div>
+        <div style="margin-top:16px">
+          <a class="wr-card-cta" href="https://hmaquant.com/portfolio-builder" target="_blank">Open Full Builder at hmaquant.com ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /stab-builder -->
+
+<!-- ─────────────────────────────────────────────────────────
+     SUB-TAB 3: WEEKLY REPORTS
+     ───────────────────────────────────────────────────────── -->
+<div class="stab-panel" id="stab-reports">
+  <div class="wr-wrap">
+    <div class="st-eyebrow" style="margin-bottom:14px">Weekly Quantitative Reports</div>
+    <p class="wr-intro">In-depth quantitative research for each strategy — weekly reports covering the mathematical framework, model developments, portfolio movements, and quantitative reasoning behind each strategy's evolution.</p>
+
+    <div class="wr-ai-callout">
+      <strong>AI Agent Compatible · Structured for Programmatic Consumption</strong>
+      <p>Reports are structured as machine-readable research briefs. Feed them directly into your AI agent pipeline, LLM workflow, or systematic monitoring system. Each report delivers consistent JSON-compatible structured data: signals, model state, portfolio moves, and quantitative rationale — designed for both human reading and agent ingestion.</p>
+    </div>
+
+    <div class="wr-grid">
+      <!-- TYR -->
+      <div class="wr-card">
+        <div class="wr-card-pop">🔥 60 subs</div>
+        <div class="wr-card-name">TYR</div>
+        <div class="wr-card-strat">Dual-Momentum Rotation</div>
+        <div class="wr-card-desc">Ray Dalio quantitative market regime detector &amp; Trend Following — weekly quantitative research report.</div>
+        <div class="wr-card-assets">ETFs &amp; Funds · Nasdaq · S&amp;P 500 · Commodities · Bonds</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- ARES -->
+      <div class="wr-card">
+        <div class="wr-card-pop">🔥 52 subs</div>
+        <div class="wr-card-name">ARES</div>
+        <div class="wr-card-strat">Market Timing · Macro Protection</div>
+        <div class="wr-card-desc">Macro strategy and protection — weekly quantitative research report.</div>
+        <div class="wr-card-assets">ETFs &amp; Funds · Sector ETFs · Index Funds · Fixed Income</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- JANUS -->
+      <div class="wr-card">
+        <div class="wr-card-pop">🔥 34 subs</div>
+        <div class="wr-card-name">JANUS</div>
+        <div class="wr-card-strat">Long-Short Momentum</div>
+        <div class="wr-card-desc">Market neutral long-short momentum — weekly quantitative research report.</div>
+        <div class="wr-card-assets">US Equities · Large &amp; Mid Cap Stocks</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- BES -->
+      <div class="wr-card">
+        <div class="wr-card-name">BES</div>
+        <div class="wr-card-strat">Multi-Factor Equity</div>
+        <div class="wr-card-desc">Multi-factor equity selection — weekly quantitative research report.</div>
+        <div class="wr-card-assets">US Equities · Multi-Factor Stock Selection</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- DEIMOS -->
+      <div class="wr-card">
+        <div class="wr-card-name">DEIMOS</div>
+        <div class="wr-card-strat">Market Timing + High Return</div>
+        <div class="wr-card-desc">Macro strategy and high returns — weekly quantitative research report.</div>
+        <div class="wr-card-assets">ETFs &amp; Funds · Cross-Asset Macro · Equities · Rates · FX</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- FOBOS -->
+      <div class="wr-card">
+        <div class="wr-card-name">FOBOS</div>
+        <div class="wr-card-strat">Macro + Volatility Trading</div>
+        <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
+        <div class="wr-card-assets">ETFs &amp; Funds · Volatility Products · Index Options</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+      <!-- ASCÁLAFO -->
+      <div class="wr-card">
+        <div class="wr-card-name">ASCÁLAFO</div>
+        <div class="wr-card-strat">Double Layer Macro + Vol</div>
+        <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
+        <div class="wr-card-assets">ETFs &amp; Funds · Options on Major Indices &amp; ETFs</div>
+        <div class="wr-card-price">€5<span>/month</span></div>
+        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+      </div>
+    </div><!-- /wr-grid -->
+
+    <!-- Bundle -->
+    <div class="wr-bundle">
+      <div class="wr-bundle-left">
+        <div class="wr-bundle-badge">Best Value</div>
+        <div class="wr-bundle-title">Complete Bundle</div>
+        <div class="wr-bundle-sub">All strategies + Market reports + Quant Macro Insights</div>
+        <ul class="wr-bundle-features">
+          <li>All 7 strategies: TYR · ARES · JANUS · BES · FOBOS · DEIMOS · ASCÁLAFO</li>
+          <li>Weekly reports with full quantitative analysis</li>
+          <li>Quantitative macroeconomic insights</li>
+          <li>Full historical archive access</li>
+          <li>Signals with transparent reasoning — AI agent ready</li>
+        </ul>
+      </div>
+      <div class="wr-bundle-right">
+        <div class="wr-bundle-price">€30<span>/month</span></div>
+        <div class="wr-bundle-save">Save €5 vs individual (€35)</div>
+        <a class="wr-cta-big" href="https://hmaquant.com/weekly-reports" target="_blank">Get Full Access ↗</a>
+      </div>
+    </div>
+
+    <div class="wr-disc">⚠ These reports are for informational and educational purposes only. They describe the quantitative methodology, mathematical models, and portfolio evolution of each strategy. They do NOT constitute trading signals, investment advice, or personalized financial recommendations. Past performance does not guarantee future results. Always conduct your own research and consult with a licensed financial advisor before making investment decisions.</div>
+
+  </div>
+</div><!-- /stab-reports -->
+
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
+</div><!-- /pg-strats -->
 
 <script>
 // ═══ NAVIGATION ══════════════════════════════════════
@@ -4963,8 +5431,17 @@ function sp(id){
     window.scrollTo({top:0,behavior:'instant'});
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    b.classList.toggle('on',['home','research','track','tools'][i]===id);
+    b.classList.toggle('on',['home','research','track','tools','strats'][i]===id);
   });
+}
+function showStab(id){
+  document.querySelectorAll('.stab-panel').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
+  const panel=document.getElementById(id);
+  if(panel)panel.classList.add('on');
+  const idx={'stab-overview':0,'stab-builder':1,'stab-reports':2}[id]??0;
+  const btns=document.querySelectorAll('.stab');
+  if(btns[idx])btns[idx].classList.add('on');
 }
 function oTool(id){
   setTimeout(()=>{
@@ -7860,6 +8337,88 @@ function exportPortExcel(){
 
   fetchAndRender();
   setInterval(fetchAndRender, 60000); /* refresh every 60s */
+})();
+</script>
+<script>
+// ══════════════════════════════════════════════════════════
+//  PORTFOLIO BUILDER — Strategies Tab
+// ══════════════════════════════════════════════════════════
+(function(){
+  const STRATS=[
+    {id:'JANUS', type:'Market Neutral L/S',    cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
+    {id:'TYR',   type:'Dual-Momentum',         cagr:20.54, sharpe:1.00, dd:25.43, vol:20.57},
+    {id:'ARES',  type:'Market Timing',         cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
+    {id:'BES',   type:'Trend Following',       cagr:18.17, sharpe:1.04, dd:23.55, vol:17.55},
+    {id:'ASCÁLAFO',type:'Double Layer',        cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
+    {id:'DEIMOS',type:'Market Timing + Risk',  cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
+    {id:'FOBOS', type:'Double Layer + Risk',   cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40}
+  ];
+  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399'];
+
+  function buildRows(){
+    const wrap=document.getElementById('pb-rows');
+    if(!wrap)return;
+    wrap.innerHTML='';
+    STRATS.forEach((s,i)=>{
+      const row=document.createElement('div');
+      row.className='pb-row';
+      row.innerHTML=`<div class="pb-row-name">${s.id}</div><div class="pb-row-type">${s.type}</div><input class="pb-row-inp" id="pb-w-${i}" type="number" min="0" max="100" value="0" oninput="pbUpdateTotal()"><div class="pb-row-pct">%</div>`;
+      wrap.appendChild(row);
+    });
+    pbUpdateTotal();
+  }
+
+  window.pbUpdateTotal=function(){
+    let tot=0;
+    STRATS.forEach((_,i)=>{const v=parseFloat(document.getElementById('pb-w-'+i)?.value)||0;tot+=v;});
+    const el=document.getElementById('pb-total-v');
+    if(!el)return;
+    el.textContent=tot.toFixed(1)+'%';
+    el.className='pb-total-v '+(Math.abs(tot-100)<0.5?'ok':'bad');
+  };
+
+  window.pbDistribute=function(){
+    const eq=(100/STRATS.length).toFixed(2);
+    STRATS.forEach((_,i)=>{const inp=document.getElementById('pb-w-'+i);if(inp)inp.value=eq;});
+    pbUpdateTotal();
+  };
+
+  window.pbCompute=function(){
+    let tot=0,wCagr=0,wSharpe=0,wDd=0,wVol=0;
+    STRATS.forEach((s,i)=>{
+      const w=(parseFloat(document.getElementById('pb-w-'+i)?.value)||0)/100;
+      tot+=w; wCagr+=w*s.cagr; wSharpe+=w*s.sharpe; wDd+=w*s.dd; wVol+=w*s.vol;
+    });
+    if(tot<0.995||tot>1.005){alert('Weights must total 100%. Currently: '+(tot*100).toFixed(1)+'%');return;}
+    document.getElementById('pb-r-cagr').textContent=wCagr.toFixed(2)+'%';
+    document.getElementById('pb-r-sharpe').textContent=wSharpe.toFixed(2);
+    document.getElementById('pb-r-dd').textContent=wDd.toFixed(2)+'%';
+    document.getElementById('pb-r-vol').textContent=wVol.toFixed(2)+'%';
+    // allocation bar
+    const bar=document.getElementById('pb-alloc-bar');
+    const legend=document.getElementById('pb-alloc-legend');
+    const wrap=document.getElementById('pb-bar-wrap');
+    if(bar&&legend&&wrap){
+      wrap.style.display='block';
+      bar.innerHTML='';legend.innerHTML='';
+      STRATS.forEach((s,i)=>{
+        const w=parseFloat(document.getElementById('pb-w-'+i)?.value)||0;
+        if(w>0){
+          const seg=document.createElement('div');
+          seg.style.cssText=`flex:0 0 ${w}%;background:${COLORS[i]};height:100%`;
+          bar.appendChild(seg);
+          const lbl=document.createElement('div');
+          lbl.style.cssText=`display:flex;align-items:center;gap:5px;font-family:var(--FM);font-size:8px;color:var(--ink3)`;
+          lbl.innerHTML=`<span style="width:8px;height:8px;border-radius:1px;background:${COLORS[i]};flex-shrink:0"></span>${s.id} ${w}%`;
+          legend.appendChild(lbl);
+        }
+      });
+    }
+  };
+
+  // init when page is ready
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',buildRows);}
+  else{buildRows();}
 })();
 </script>
 <!-- ── Article Reader Modal ────────────────────── -->

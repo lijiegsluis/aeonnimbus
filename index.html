@@ -3537,7 +3537,17 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .pb-res-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
 .pb-res-v{font-family:var(--FM);font-size:22px;font-weight:700;line-height:1}
 .pb-res-l{font-family:var(--FM);font-size:7px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:4px}
-.pb-res-note{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;line-height:1.6;border-top:1px solid var(--rule);padding-top:14px;margin-top:4px}
+.pb-res-note{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;line-height:1.6;border-top:1px solid var(--rule);padding-top:14px;margin-top:16px}
+.pb-metrics-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.pb-metric{padding:10px 8px;background:var(--bg2);border:1px solid var(--rule);border-radius:2px;text-align:center}
+.pb-metric-v{font-family:var(--FM);font-size:14px;font-weight:700;letter-spacing:-.02em;margin-bottom:3px}
+.pb-metric-l{font-family:var(--FM);font-size:7px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
+.pb-chart-section{margin-top:14px}
+.pb-chart-hdr{display:flex;justify-content:space-between;align-items:center;font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:6px}
+.pb-chart-note-sm{font-size:7px;text-transform:none;letter-spacing:0;opacity:.6}
+.pb-download-btn{font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid var(--rule);color:var(--ink3);padding:10px;border-radius:2px;cursor:pointer;transition:border-color .15s,color .15s;width:100%;-webkit-appearance:none;appearance:none}
+.pb-download-btn:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:500px){.pb-metrics-grid{grid-template-columns:repeat(2,1fr)}}
 /* Weekly Reports */
 .wr-wrap{padding:40px 52px 56px}
 .wr-intro{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.72;max-width:660px;margin-bottom:24px;font-style:italic}
@@ -5213,43 +5223,50 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
       <!-- Results panel -->
       <div class="pb-results" id="pb-results-panel">
         <div class="pb-res-eyebrow">Portfolio Metrics</div>
-        <div class="pb-res-grid">
-          <div>
-            <div class="pb-res-v str-cagr" id="pb-r-cagr">—</div>
-            <div class="pb-res-l">Eq. CAGR</div>
-          </div>
-          <div>
-            <div class="pb-res-v str-sharpe" id="pb-r-sharpe">—</div>
-            <div class="pb-res-l">Wtd. Sharpe</div>
-          </div>
-          <div>
-            <div class="pb-res-v str-dd" id="pb-r-dd">—</div>
-            <div class="pb-res-l">Wtd. Max DD</div>
-          </div>
-          <div>
-            <div class="pb-res-v" id="pb-r-vol" style="color:var(--ink2)">—</div>
-            <div class="pb-res-l">Eq. Vol</div>
-          </div>
+        <div class="pb-metrics-grid">
+          <div class="pb-metric"><div class="pb-metric-v str-cagr" id="pb-r-cagr">—</div><div class="pb-metric-l">CAGR</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-total" style="color:var(--gold)">—</div><div class="pb-metric-l">Total Return</div></div>
+          <div class="pb-metric"><div class="pb-metric-v str-sharpe" id="pb-r-sharpe">—</div><div class="pb-metric-l">Sharpe</div></div>
+          <div class="pb-metric"><div class="pb-metric-v str-sharpe" id="pb-r-sortino">—</div><div class="pb-metric-l">Sortino</div></div>
+          <div class="pb-metric"><div class="pb-metric-v str-dd" id="pb-r-dd">—</div><div class="pb-metric-l">Max DD</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-calmar" style="color:var(--ink2)">—</div><div class="pb-metric-l">Calmar</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-vol" style="color:var(--ink2)">—</div><div class="pb-metric-l">Volatility</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-wr" style="color:var(--ink2)">—</div><div class="pb-metric-l">Win Rate</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-pf" style="color:var(--ink2)">—</div><div class="pb-metric-l">Profit Factor</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-bw" style="color:#4ade80">—</div><div class="pb-metric-l">Best Week</div></div>
+          <div class="pb-metric"><div class="pb-metric-v" id="pb-r-ww" style="color:#f87171">—</div><div class="pb-metric-l">Worst Week</div></div>
         </div>
 
         <!-- Allocation bar -->
-        <div id="pb-bar-wrap" style="margin-top:4px;display:none">
+        <div id="pb-bar-wrap" style="display:none;margin-top:16px">
           <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px">Allocation</div>
           <div id="pb-alloc-bar" style="display:flex;height:8px;border-radius:2px;overflow:hidden;gap:1px"></div>
           <div id="pb-alloc-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
         </div>
 
-        <!-- Performance chart -->
-        <div id="pb-chart-wrap" style="display:none;margin-top:20px">
-          <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
-            <span>Illustrative Performance</span>
-            <span style="font-size:7px;text-transform:none;letter-spacing:0;opacity:.6">12-yr simulation · log scale</span>
+        <!-- Three charts -->
+        <div id="pb-charts-wrap" style="display:none;margin-top:20px">
+          <div class="pb-chart-section">
+            <div class="pb-chart-hdr"><span>Equity Curve</span><span class="pb-chart-note-sm">12yr simulation · log scale</span></div>
+            <canvas id="pb-chart-equity" style="width:100%;height:140px;display:block"></canvas>
           </div>
-          <canvas id="pb-chart" style="width:100%;height:140px;display:block"></canvas>
-          <div style="font-family:var(--FM);font-size:7px;color:var(--ink3);margin-top:5px;letter-spacing:.03em;opacity:.65">Simulated from summary statistics via seeded GBM · not actual trade-by-trade backtest data</div>
+          <div class="pb-chart-section">
+            <div class="pb-chart-hdr"><span>Drawdown</span></div>
+            <canvas id="pb-chart-dd" style="width:100%;height:80px;display:block"></canvas>
+          </div>
+          <div class="pb-chart-section">
+            <div class="pb-chart-hdr"><span>Annual Returns</span></div>
+            <canvas id="pb-chart-annual" style="width:100%;height:110px;display:block"></canvas>
+          </div>
+          <div style="font-family:var(--FM);font-size:7px;color:var(--ink3);margin-top:8px;opacity:.65">Simulated from strategy summary statistics via seeded GBM · illustrative only · not actual backtest data</div>
         </div>
 
-        <div class="pb-res-note">Weighted averages of individual strategy backtests. Eq. CAGR/Vol reflect equity allocation only; Wtd. Sharpe and Max DD span all 12 strategies. Real portfolio performance will differ due to correlation effects.</div>
+        <!-- Download -->
+        <div id="pb-download-wrap" style="display:none;margin-top:16px">
+          <button class="pb-download-btn" onclick="pbDownloadReport()">Download Report ↓</button>
+        </div>
+
+        <div class="pb-res-note">Metrics computed from the blended simulated equity curve. Real portfolio performance will differ due to inter-strategy correlation and sequence risk.</div>
       </div>
     </div>
   </div>
@@ -8664,20 +8681,17 @@ function exportPortExcel(){
 // ══════════════════════════════════════════════════════════
 (function(){
   const STRATS=[
-    {id:'KAIROS',    type:'Market Neutral L/S',  group:'eq', cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
-    {id:'KRONOS',      type:'Dual-Momentum',        group:'eq', cagr:20.54, sharpe:1.00, dd:25.43, vol:20.57},
-    {id:'AEGIS',     type:'Market Timing',        group:'eq', cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
-    {id:'BOREAS',   type:'Trend Following',      group:'eq', cagr:18.17, sharpe:1.04, dd:23.55, vol:17.55},
-    {id:'PROTEUS', type:'Double Layer',         group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
-    {id:'TYPHON',   type:'Market Timing + Risk', group:'eq', cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
-    {id:'EREBUS',    type:'Double Layer + Risk',  group:'eq', cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40},
-    {id:'USD/JPY',  type:'Trend Following',      group:'fx', sharpe:2.13, dd:15.83},
-    {id:'XAU/USD',  type:'Mean Reversion',       group:'fx', sharpe:1.82, dd:15.54},
-    {id:'EUR/JPY',  type:'Trend Following',      group:'fx', sharpe:2.20, dd:16.35},
-    {id:'GBP/USD',  type:'Mean Reversion',       group:'fx', sharpe:2.31, dd:23.76},
-    {id:'EUR/USD',  type:'Trend Following',      group:'fx', sharpe:1.91, dd:34.52}
+    {id:'KAIROS',  type:'Market Neutral L/S', group:'eq', cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
+    {id:'AEGIS',   type:'Market Timing',      group:'eq', cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
+    {id:'PROTEUS', type:'Double Layer',       group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
+    {id:'USD/JPY', type:'Trend Following',    group:'fx', sharpe:2.13, dd:15.83},
+    {id:'XAU/USD', type:'Mean Reversion',     group:'fx', sharpe:1.82, dd:15.54},
+    {id:'EUR/JPY', type:'Trend Following',    group:'fx', sharpe:2.20, dd:16.35},
+    {id:'GBP/USD', type:'Mean Reversion',     group:'fx', sharpe:2.31, dd:23.76},
+    {id:'EUR/USD', type:'Trend Following',    group:'fx', sharpe:1.91, dd:34.52}
   ];
-  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c','#38bdf8','#f472b6','#a3e635','#c084fc'];
+  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c'];
+  const WEEKS=624, YEARS=12, START_YEAR=2013;
 
   function seedFromId(str){
     let h=0x9e3779b9;
@@ -8688,13 +8702,13 @@ function exportPortExcel(){
     let s=seed>>>0||1;
     return function(){s^=s<<13;s^=s>>17;s^=s<<5;return(s>>>0)/4294967296;};
   }
-  function genCurve(cagr,vol,months,seed){
+  function genCurve(cagr,vol,seed){
     const rng=makeRng(seed);
-    const mu=Math.log(1+cagr/100)/12;
-    const sigma=(vol/100)/Math.sqrt(12);
+    const mu=Math.log(1+cagr/100)/52;
+    const sigma=(vol/100)/Math.sqrt(52);
     let lv=Math.log(100);
     const c=[100];
-    for(let i=0;i<months;i++){
+    for(let i=0;i<WEEKS;i++){
       const u=Math.max(rng(),1e-10);
       const z=Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*rng());
       lv+=mu+sigma*z;
@@ -8702,74 +8716,177 @@ function exportPortExcel(){
     }
     return c;
   }
-  function blendCurves(weights,months){
-    const b=new Array(months+1).fill(0);
+  function blendCurves(weights){
+    const b=new Array(WEEKS+1).fill(0);
     STRATS.forEach((s,i)=>{
       const w=weights[i];
       if(w<=0)return;
-      const cagr=s.cagr||(s.sharpe*13);
-      const vol=s.vol||13;
-      const curve=genCurve(cagr,vol,months,seedFromId(s.id));
-      for(let t=0;t<=months;t++) b[t]+=w*curve[t];
+      const cagr=s.cagr||(s.sharpe*20);
+      const vol=s.vol||20;
+      const curve=genCurve(cagr,vol,seedFromId(s.id));
+      for(let t=0;t<=WEEKS;t++) b[t]+=w*curve[t];
     });
+    if(b[0]===0)return b;
     const scale=100/b[0];
     return b.map(v=>v*scale);
   }
-  function drawPBChart(curve){
-    const canvas=document.getElementById('pb-chart');
+  function computeMetrics(curve){
+    const n=curve.length;
+    const wr=[];
+    for(let i=1;i<n;i++) wr.push((curve[i]-curve[i-1])/curve[i-1]);
+    const totalReturn=(curve[n-1]/curve[0]-1)*100;
+    const cagr=((curve[n-1]/curve[0])**(1/YEARS)-1)*100;
+    const meanR=wr.reduce((a,b)=>a+b,0)/wr.length;
+    const variance=wr.reduce((a,r)=>a+(r-meanR)**2,0)/wr.length;
+    const vol=Math.sqrt(variance*52)*100;
+    const sharpe=(meanR*52)/Math.sqrt(variance*52);
+    const downVar=wr.reduce((a,r)=>a+Math.min(r,0)**2,0)/wr.length;
+    const sortino=(meanR*52)/Math.sqrt(downVar*52);
+    let peak=curve[0],maxDD=0;
+    const ddCurve=[0];
+    for(let i=1;i<n;i++){
+      if(curve[i]>peak) peak=curve[i];
+      const dd=(curve[i]-peak)/peak*100;
+      if(dd<maxDD) maxDD=dd;
+      ddCurve.push(dd);
+    }
+    const calmar=Math.abs(maxDD)>0?cagr/Math.abs(maxDD):0;
+    const pos=wr.filter(r=>r>0), neg=wr.filter(r=>r<0);
+    const winRate=pos.length/wr.length*100;
+    const sumPos=pos.reduce((a,b)=>a+b,0);
+    const sumNeg=Math.abs(neg.reduce((a,b)=>a+b,0));
+    const profitFactor=sumNeg>0?sumPos/sumNeg:0;
+    const bestWeek=Math.max(...wr)*100;
+    const worstWeek=Math.min(...wr)*100;
+    const annualReturns=[];
+    for(let y=0;y<YEARS;y++){
+      const s2=curve[y*52],e2=curve[Math.min((y+1)*52,n-1)];
+      annualReturns.push((e2/s2-1)*100);
+    }
+    return {cagr,totalReturn,sharpe,sortino,maxDD,calmar,vol,winRate,profitFactor,bestWeek,worstWeek,ddCurve,annualReturns};
+  }
+  function canvasW(canvas){
+    const p=canvas.parentElement;
+    return (p&&p.clientWidth>0)?p.clientWidth:340;
+  }
+  function drawEquityCurve(curve){
+    const canvas=document.getElementById('pb-chart-equity');
     if(!canvas)return;
     const dpr=window.devicePixelRatio||1;
-    canvas.width=(canvas.parentElement?.clientWidth||320)*dpr;
-    canvas.height=140*dpr;
+    const cw=canvasW(canvas);
+    canvas.width=cw*dpr; canvas.height=140*dpr;
     const ctx=canvas.getContext('2d');
     const W=canvas.width,H=canvas.height;
-    const pad={t:10*dpr,r:10*dpr,b:20*dpr,l:34*dpr};
-    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+    const pad={t:10*dpr,r:12*dpr,b:22*dpr,l:38*dpr};
+    const pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;
     const n=curve.length;
-    const minV=Math.min(...curve)*0.92,maxV=Math.max(...curve)*1.06;
+    const minV=Math.min(...curve)*0.92,maxV=Math.max(...curve)*1.08;
     const logMin=Math.log(Math.max(minV,1)),logMax=Math.log(maxV);
-    const xS=i=>pad.l+(i/(n-1))*cw;
-    const yS=v=>pad.t+ch-((Math.log(Math.max(v,1))-logMin)/(logMax-logMin))*ch;
+    const xS=i=>pad.l+(i/(n-1))*pw;
+    const yS=v=>pad.t+ph-((Math.log(Math.max(v,1))-logMin)/(logMax-logMin))*ph;
     ctx.clearRect(0,0,W,H);
-    /* grid */
-    const gridVals=[100,150,200,300,500,750,1000,1500,2000,3000,5000,7500,10000,15000,20000]
-      .filter(v=>v>=minV&&v<=maxV*1.1);
-    ctx.font=`${6.5*dpr}px monospace`;
-    ctx.textAlign='right';
+    const gridVals=[100,150,200,300,500,750,1000,1500,2000,3000,5000,7500,10000,15000,20000,30000]
+      .filter(v=>v>=minV*0.9&&v<=maxV*1.15);
+    ctx.font=`${6.5*dpr}px monospace`;ctx.textAlign='right';
     gridVals.forEach(v=>{
       const y=yS(v);
-      if(y<pad.t-2||y>pad.t+ch+2)return;
-      ctx.strokeStyle='rgba(255,255,255,0.055)';ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
-      ctx.fillStyle='rgba(255,255,255,0.28)';
-      ctx.fillText(v>=1000?(v/1000).toFixed(v%1000?1:0)+'k':v,pad.l-3*dpr,y+2.5*dpr);
+      if(y<pad.t-2||y>pad.t+ph+2)return;
+      ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+pw,y);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,0.26)';
+      ctx.fillText(v>=1000?(v/1000).toFixed(v%1000?1:0)+'k':v,pad.l-4*dpr,y+2.5*dpr);
     });
-    /* x-axis labels */
-    ctx.fillStyle='rgba(255,255,255,0.25)';ctx.textAlign='center';
-    const yrs=Math.round((n-1)/12);
-    for(let y=0;y<=yrs;y+=2) ctx.fillText('Y'+y,xS(y*12),H-3*dpr);
-    /* gradient fill */
-    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
-    grad.addColorStop(0,'rgba(200,131,10,0.22)');grad.addColorStop(1,'rgba(200,131,10,0)');
+    ctx.fillStyle='rgba(255,255,255,0.22)';ctx.textAlign='center';
+    for(let y=0;y<=YEARS;y+=2) ctx.fillText(String(START_YEAR+y),xS(y*52),H-3*dpr);
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ph);
+    grad.addColorStop(0,'rgba(200,131,10,0.25)');grad.addColorStop(1,'rgba(200,131,10,0)');
     ctx.beginPath();ctx.moveTo(xS(0),yS(curve[0]));
     for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(curve[i]));
-    ctx.lineTo(xS(n-1),pad.t+ch);ctx.lineTo(xS(0),pad.t+ch);ctx.closePath();
+    ctx.lineTo(xS(n-1),pad.t+ph);ctx.lineTo(xS(0),pad.t+ph);ctx.closePath();
     ctx.fillStyle=grad;ctx.fill();
-    /* line */
     ctx.beginPath();ctx.moveTo(xS(0),yS(curve[0]));
     for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(curve[i]));
     ctx.strokeStyle='#C8830A';ctx.lineWidth=1.5*dpr;ctx.lineJoin='round';ctx.stroke();
-    /* end dot + label */
     const ev=curve[n-1],ex=xS(n-1),ey=yS(ev);
-    ctx.fillStyle='#C8830A';
-    ctx.beginPath();ctx.arc(ex,ey,2.5*dpr,0,Math.PI*2);ctx.fill();
-    ctx.fillStyle='rgba(200,131,10,0.9)';ctx.textAlign='right';
+    ctx.fillStyle='#C8830A';ctx.beginPath();ctx.arc(ex,ey,2.5*dpr,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(200,131,10,0.92)';ctx.textAlign='right';
     ctx.font=`bold ${7.5*dpr}px monospace`;
-    const evLabel=ev>=1000?(ev/1000).toFixed(1)+'k':Math.round(ev);
-    ctx.fillText(evLabel,ex-5*dpr,ey-5*dpr);
-    /* start dot */
-    ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.fillText(ev>=1000?(ev/1000).toFixed(1)+'k':Math.round(ev),ex-5*dpr,ey-5*dpr);
+    ctx.fillStyle='rgba(255,255,255,0.38)';
     ctx.beginPath();ctx.arc(xS(0),yS(100),2*dpr,0,Math.PI*2);ctx.fill();
+  }
+  function drawDrawdownChart(ddCurve){
+    const canvas=document.getElementById('pb-chart-dd');
+    if(!canvas)return;
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=canvasW(canvas)*dpr; canvas.height=80*dpr;
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    const pad={t:6*dpr,r:12*dpr,b:18*dpr,l:38*dpr};
+    const pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;
+    const n=ddCurve.length;
+    const minDD=Math.min(...ddCurve)||-.01;
+    const xS=i=>pad.l+(i/(n-1))*pw;
+    const yS=v=>pad.t+(v/minDD)*ph;
+    ctx.clearRect(0,0,W,H);
+    ctx.font=`${6*dpr}px monospace`;ctx.textAlign='right';
+    [0,-10,-20,-30,-40,-50].filter(v=>v>=minDD*1.1).forEach(v=>{
+      const y=yS(v);
+      if(y<pad.t-2||y>pad.t+ph+2)return;
+      ctx.strokeStyle='rgba(255,255,255,0.045)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+pw,y);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,0.22)';
+      ctx.fillText(v+'%',pad.l-4*dpr,y+2*dpr);
+    });
+    ctx.fillStyle='rgba(255,255,255,0.18)';ctx.textAlign='center';
+    for(let y=0;y<=YEARS;y+=2) ctx.fillText(String(START_YEAR+y),xS(y*52),H-3*dpr);
+    ctx.beginPath();ctx.moveTo(xS(0),yS(0));
+    for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(ddCurve[i]));
+    ctx.lineTo(xS(n-1),yS(0));ctx.closePath();
+    ctx.fillStyle='rgba(248,113,113,0.22)';ctx.fill();
+    ctx.beginPath();ctx.moveTo(xS(0),yS(0));
+    for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(ddCurve[i]));
+    ctx.strokeStyle='rgba(248,113,113,0.72)';ctx.lineWidth=1*dpr;ctx.lineJoin='round';ctx.stroke();
+  }
+  function drawAnnualChart(annualReturns){
+    const canvas=document.getElementById('pb-chart-annual');
+    if(!canvas)return;
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=canvasW(canvas)*dpr; canvas.height=110*dpr;
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    const pad={t:10*dpr,r:12*dpr,b:20*dpr,l:38*dpr};
+    const pw=W-pad.l-pad.r,ph=H-pad.t-pad.b;
+    const maxR=Math.max(...annualReturns,5);
+    const minR=Math.min(...annualReturns,-5);
+    const topR=maxR*1.2,botR=minR*1.2;
+    const range=topR-botR;
+    const yS=v=>pad.t+ph*(1-(v-botR)/range);
+    const zeroLine=yS(0);
+    ctx.clearRect(0,0,W,H);
+    ctx.strokeStyle='rgba(255,255,255,0.12)';ctx.lineWidth=1;
+    ctx.beginPath();ctx.moveTo(pad.l,zeroLine);ctx.lineTo(pad.l+pw,zeroLine);ctx.stroke();
+    ctx.font=`${6*dpr}px monospace`;ctx.textAlign='right';ctx.fillStyle='rgba(255,255,255,0.22)';
+    [Math.round(botR),0,Math.round(topR)].forEach(v=>{
+      ctx.fillText(v+'%',pad.l-4*dpr,yS(v)+2*dpr);
+    });
+    const nb=annualReturns.length;
+    const gap=2*dpr,barW=(pw-(nb-1)*gap)/nb;
+    ctx.font=`${5.5*dpr}px monospace`;ctx.textAlign='center';
+    annualReturns.forEach((r,i)=>{
+      const x=pad.l+i*(barW+gap);
+      const isPos=r>=0;
+      const barH=Math.abs(r)*ph/range;
+      const barY=isPos?zeroLine-barH:zeroLine;
+      ctx.fillStyle=isPos?'rgba(74,222,128,0.72)':'rgba(248,113,113,0.72)';
+      ctx.fillRect(x,barY,barW,barH);
+      ctx.fillStyle='rgba(255,255,255,0.2)';
+      ctx.fillText(String(START_YEAR+i).slice(2),x+barW/2,H-3*dpr);
+      if(barH>14*dpr){
+        ctx.fillStyle=isPos?'rgba(74,222,128,0.95)':'rgba(248,113,113,0.95)';
+        ctx.fillText((r>0?'+':'')+r.toFixed(0)+'%',x+barW/2,isPos?barY-2*dpr:barY+barH+9*dpr);
+      }
+    });
   }
 
   function buildRows(){
@@ -8808,27 +8925,35 @@ function exportPortExcel(){
     pbUpdateTotal();
   };
 
+  let _lastCurve=null;
   window.pbCompute=function(){
-    let tot=0,wSharpe=0,wDd=0,eqTot=0,wCagr=0,wVol=0;
-    STRATS.forEach((s,i)=>{
-      const w=(parseFloat(document.getElementById('pb-w-'+i)?.value)||0)/100;
-      tot+=w; wSharpe+=w*s.sharpe; wDd+=w*s.dd;
-      if(s.group==='eq'){eqTot+=w; wCagr+=w*s.cagr; wVol+=w*s.vol;}
-    });
-    if(tot<0.995||tot>1.005){alert('Weights must total 100%. Currently: '+(tot*100).toFixed(1)+'%');return;}
-    document.getElementById('pb-r-cagr').textContent=eqTot>0?wCagr.toFixed(2)+'%':'—';
-    document.getElementById('pb-r-sharpe').textContent=wSharpe.toFixed(2);
-    document.getElementById('pb-r-dd').textContent=wDd.toFixed(2)+'%';
-    document.getElementById('pb-r-vol').textContent=eqTot>0?wVol.toFixed(2)+'%':'—';
+    const weights=STRATS.map((_,i)=>parseFloat(document.getElementById('pb-w-'+i)?.value)||0);
+    const tot=weights.reduce((a,b)=>a+b,0);
+    if(Math.abs(tot-100)>0.5){alert('Weights must total 100%. Currently: '+tot.toFixed(1)+'%');return;}
+    const curve=blendCurves(weights);
+    _lastCurve=curve;
+    const m=computeMetrics(curve);
+    const set=(id,v)=>{const el=document.getElementById(id);if(el)el.textContent=v;};
+    set('pb-r-cagr',   m.cagr.toFixed(2)+'%');
+    set('pb-r-total',  m.totalReturn.toFixed(2)+'%');
+    set('pb-r-sharpe', m.sharpe.toFixed(2));
+    set('pb-r-sortino',m.sortino.toFixed(2));
+    set('pb-r-dd',     m.maxDD.toFixed(2)+'%');
+    set('pb-r-calmar', m.calmar.toFixed(2));
+    set('pb-r-vol',    m.vol.toFixed(2)+'%');
+    set('pb-r-wr',     m.winRate.toFixed(1)+'%');
+    set('pb-r-pf',     m.profitFactor.toFixed(2));
+    set('pb-r-bw',     (m.bestWeek>=0?'+':'')+m.bestWeek.toFixed(2)+'%');
+    set('pb-r-ww',     m.worstWeek.toFixed(2)+'%');
     // allocation bar
     const bar=document.getElementById('pb-alloc-bar');
     const legend=document.getElementById('pb-alloc-legend');
-    const wrap=document.getElementById('pb-bar-wrap');
-    if(bar&&legend&&wrap){
-      wrap.style.display='block';
+    const barWrap=document.getElementById('pb-bar-wrap');
+    if(bar&&legend&&barWrap){
+      barWrap.style.display='block';
       bar.innerHTML='';legend.innerHTML='';
       STRATS.forEach((s,i)=>{
-        const w=parseFloat(document.getElementById('pb-w-'+i)?.value)||0;
+        const w=weights[i];
         if(w>0){
           const seg=document.createElement('div');
           seg.style.cssText=`flex:0 0 ${w}%;background:${COLORS[i]};height:100%`;
@@ -8840,17 +8965,55 @@ function exportPortExcel(){
         }
       });
     }
-    // performance chart
-    const chartWrap=document.getElementById('pb-chart-wrap');
-    if(chartWrap){
-      chartWrap.style.display='block';
-      const weights=STRATS.map((_,i)=>parseFloat(document.getElementById('pb-w-'+i)?.value)||0);
-      const blended=blendCurves(weights,144);
-      requestAnimationFrame(function(){drawPBChart(blended);});
-    }
+    const chartsWrap=document.getElementById('pb-charts-wrap');
+    if(chartsWrap) chartsWrap.style.display='block';
+    const dlWrap=document.getElementById('pb-download-wrap');
+    if(dlWrap) dlWrap.style.display='block';
+    requestAnimationFrame(function(){
+      drawEquityCurve(curve);
+      drawDrawdownChart(m.ddCurve);
+      drawAnnualChart(m.annualReturns);
+    });
   };
 
-  // init when page is ready
+  window.pbDownloadReport=function(){
+    if(!_lastCurve)return;
+    const m=computeMetrics(_lastCurve);
+    const weights=STRATS.map((_,i)=>parseFloat(document.getElementById('pb-w-'+i)?.value)||0);
+    const lines=[
+      'AEON NIMBUS — Portfolio Backtest Report',
+      '═══════════════════════════════════════',
+      'Simulation: Seeded GBM · 12-Year Period · Weekly Steps (624)',
+      'Not actual trade-by-trade backtest data · Illustrative only',
+      '',
+      'PORTFOLIO METRICS',
+      '─────────────────',
+      'CAGR             '+m.cagr.toFixed(2)+'%',
+      'Total Return     '+m.totalReturn.toFixed(2)+'%',
+      'Sharpe           '+m.sharpe.toFixed(2),
+      'Sortino          '+m.sortino.toFixed(2),
+      'Max Drawdown     '+m.maxDD.toFixed(2)+'%',
+      'Calmar           '+m.calmar.toFixed(2),
+      'Volatility       '+m.vol.toFixed(2)+'%',
+      'Win Rate         '+m.winRate.toFixed(1)+'%',
+      'Profit Factor    '+m.profitFactor.toFixed(2),
+      'Best Week        '+(m.bestWeek>=0?'+':'')+m.bestWeek.toFixed(2)+'%',
+      'Worst Week       '+m.worstWeek.toFixed(2)+'%',
+      '',
+      'ALLOCATION',
+      '──────────',
+      ...STRATS.map((s,i)=>s.id.padEnd(12)+weights[i].toFixed(2)+'%'),
+      '',
+      'Generated by Aeon Nimbus Portfolio Builder · aeonnimbus.com',
+    ];
+    const blob=new Blob([lines.join('\n')],{type:'text/plain'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='aeon-nimbus-portfolio-report.txt';
+    a.click();
+    setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  };
+
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',buildRows);}
   else{buildRows();}
 })();

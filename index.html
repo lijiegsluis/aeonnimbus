@@ -4878,7 +4878,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
   <!-- Performance table -->
   <div class="st-wrap">
-    <div class="st-eyebrow">Institutional-Grade Equity Strategies · 3 Models · Backtested 2006–2026 · Sharpe &gt;1.0 · Max DD &lt;20%</div>
+    <div class="st-eyebrow">Systematic Equity Strategies · 7 Models · Backtested 2006–2026</div>
     <table class="st">
       <thead>
         <tr>
@@ -4904,12 +4904,32 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
           <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
         </tr>
         <tr onclick="showStab('stab-reports')">
+          <td>KRONOS</td>
+          <td>Dual-momentum rotation</td>
+          <td class="str-cagr">20.54%</td>
+          <td class="str-sharpe">1.00</td>
+          <td class="str-dd">25.43%</td>
+          <td>20.57%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
           <td>AEGIS</td>
           <td>Market timing</td>
           <td class="str-cagr">14.01%</td>
           <td class="str-sharpe">1.08</td>
           <td class="str-dd">15.61%</td>
           <td>12.81%</td>
+          <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>BOREAS</td>
+          <td>Trend following</td>
+          <td class="str-cagr">18.17%</td>
+          <td class="str-sharpe">1.04</td>
+          <td class="str-dd">23.55%</td>
+          <td>17.55%</td>
           <td><span class="str-risk mod">Moderate</span></td>
           <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
         </tr>
@@ -4921,6 +4941,26 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
           <td class="str-dd">18.23%</td>
           <td>15.74%</td>
           <td><span class="str-risk mod">Moderate</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>TYPHON</td>
+          <td>Market timing + risk</td>
+          <td class="str-cagr">44.79%</td>
+          <td class="str-sharpe">1.12</td>
+          <td class="str-dd">42.10%</td>
+          <td>39.32%</td>
+          <td><span class="str-risk high">High</span></td>
+          <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
+        </tr>
+        <tr onclick="showStab('stab-reports')">
+          <td>EREBUS</td>
+          <td>Double layer + risk</td>
+          <td class="str-cagr">54.38%</td>
+          <td class="str-sharpe">1.14</td>
+          <td class="str-dd">48.30%</td>
+          <td>48.40%</td>
+          <td><span class="str-risk high">High</span></td>
           <td style="color:var(--ink3);font-size:9px;font-family:var(--FM);letter-spacing:.08em">Reports →</td>
         </tr>
       </tbody>
@@ -4939,6 +4979,15 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
       </div>
     </div>
     <div class="strat-card">
+      <div class="strat-card-name">KRONOS</div>
+      <div class="strat-card-type">Dual-Momentum Rotation · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">20.54%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.00</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">25.43%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
       <div class="strat-card-name">AEGIS</div>
       <div class="strat-card-type">Market Timing · Moderate risk</div>
       <div class="strat-card-stats">
@@ -4948,12 +4997,39 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
       </div>
     </div>
     <div class="strat-card">
+      <div class="strat-card-name">BOREAS</div>
+      <div class="strat-card-type">Trend Following · Moderate risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">18.17%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.04</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">23.55%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
       <div class="strat-card-name">PROTEUS</div>
       <div class="strat-card-type">Double Layer · Moderate risk</div>
       <div class="strat-card-stats">
         <div><div class="strat-stat-v str-cagr">16.83%</div><div class="strat-stat-l">CAGR</div></div>
         <div><div class="strat-stat-v str-sharpe">1.07</div><div class="strat-stat-l">Sharpe</div></div>
         <div><div class="strat-stat-v str-dd">18.23%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">TYPHON</div>
+      <div class="strat-card-type">Market Timing + Risk · High risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">44.79%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.12</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">42.10%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-card-name">EREBUS</div>
+      <div class="strat-card-type">Double Layer + Risk · Very High risk</div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-cagr">54.38%</div><div class="strat-stat-l">CAGR</div></div>
+        <div><div class="strat-stat-v str-sharpe">1.14</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v str-dd">48.30%</div><div class="strat-stat-l">Max DD</div></div>
       </div>
     </div>
   </div><!-- /strat-grid -->
@@ -5325,7 +5401,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-bundle-title">Complete Bundle</div>
         <div class="wr-bundle-sub">All strategies + Market reports + Quant Macro Insights</div>
         <ul class="wr-bundle-features">
-          <li>All 3 institutional-grade equity strategies: KAIROS · AEGIS · PROTEUS</li>
+          <li>All 7 equity strategies: KAIROS · KRONOS · AEGIS · BOREAS · PROTEUS · TYPHON · EREBUS</li>
           <li>Weekly reports with full quantitative analysis</li>
           <li>Quantitative macroeconomic insights</li>
           <li>Full historical archive access</li>
@@ -8645,16 +8721,20 @@ function exportPortExcel(){
 // ══════════════════════════════════════════════════════════
 (function(){
   const STRATS=[
-    {id:'KAIROS',  type:'Market Neutral L/S', group:'eq', cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
-    {id:'AEGIS',   type:'Market Timing',      group:'eq', cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
-    {id:'PROTEUS', type:'Double Layer',       group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
-    {id:'USD/JPY', type:'Trend Following',    group:'fx', sharpe:2.13, dd:15.83},
-    {id:'XAU/USD', type:'Mean Reversion',     group:'fx', sharpe:1.82, dd:15.54},
-    {id:'EUR/JPY', type:'Trend Following',    group:'fx', sharpe:2.20, dd:16.35},
-    {id:'GBP/USD', type:'Mean Reversion',     group:'fx', sharpe:2.31, dd:23.76},
-    {id:'EUR/USD', type:'Trend Following',    group:'fx', sharpe:1.91, dd:34.52}
+    {id:'KAIROS',  type:'Market Neutral L/S',  group:'eq', cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
+    {id:'KRONOS',  type:'Dual-Momentum',        group:'eq', cagr:20.54, sharpe:1.00, dd:25.43, vol:20.57},
+    {id:'AEGIS',   type:'Market Timing',        group:'eq', cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
+    {id:'BOREAS',  type:'Trend Following',      group:'eq', cagr:18.17, sharpe:1.04, dd:23.55, vol:17.55},
+    {id:'PROTEUS', type:'Double Layer',         group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
+    {id:'TYPHON',  type:'Market Timing + Risk', group:'eq', cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
+    {id:'EREBUS',  type:'Double Layer + Risk',  group:'eq', cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40},
+    {id:'USD/JPY', type:'Trend Following',      group:'fx', sharpe:2.13, dd:15.83},
+    {id:'XAU/USD', type:'Mean Reversion',       group:'fx', sharpe:1.82, dd:15.54},
+    {id:'EUR/JPY', type:'Trend Following',      group:'fx', sharpe:2.20, dd:16.35},
+    {id:'GBP/USD', type:'Mean Reversion',       group:'fx', sharpe:2.31, dd:23.76},
+    {id:'EUR/USD', type:'Trend Following',      group:'fx', sharpe:1.91, dd:34.52}
   ];
-  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c'];
+  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c','#38bdf8','#f472b6','#a3e635','#c084fc'];
   const WEEKS=624, YEARS=12, START_YEAR=2013;
 
   function seedFromId(str){

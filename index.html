@@ -2947,29 +2947,30 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
 .mv2-cv-btn {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  margin-top: 18px;
+  gap: 8px;
+  margin-top: 20px;
   font-family: var(--FM);
-  font-size: 9px;
-  font-weight: 500;
+  font-size: 8px;
+  font-weight: 600;
   letter-spacing: .18em;
   text-transform: uppercase;
-  color: var(--gold);
-  border: 1px solid rgba(200,131,10,.32);
-  padding: 6px 13px 5px;
+  color: #000;
+  background: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 9px 18px 8px;
   text-decoration: none;
   border-radius: 2px;
-  transition: background .2s, border-color .2s, color .2s, box-shadow .2s;
+  transition: background .2s, border-color .2s, box-shadow .2s;
   opacity: 0;
   transform: translateY(8px);
   animation: fadeUp .6s var(--ease-out-expo, cubic-bezier(.16,1,.3,1)) .55s forwards;
 }
 .mv2-cv-btn:hover {
-  background: rgba(200,131,10,.1);
-  border-color: var(--gold);
-  color: var(--gold2);
-  box-shadow: 0 0 14px rgba(200,131,10,.18);
+  background: var(--gold2);
+  border-color: var(--gold2);
+  box-shadow: 0 0 20px rgba(200,131,10,.4);
 }
+.mv2-cv-btn svg { flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════════════════
    READABILITY & AESTHETIC ENHANCEMENT
@@ -3574,6 +3575,42 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 @media(max-width:900px){.pb-layout{grid-template-columns:1fr}.wr-bundle{grid-template-columns:1fr}.wr-bundle-right{text-align:left}}
 @media(max-width:700px){.strats-tabs{padding:0 20px}.st-wrap{padding:0 20px 40px}.strat-grid{grid-template-columns:1fr 1fr;padding:20px 20px 0}.pb-wrap,.wr-wrap{padding:32px 20px 48px}.wr-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.strat-grid{grid-template-columns:1fr}.wr-grid{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════════════════
+   CONTACT PAGE
+   ══════════════════════════════════════════════════════ */
+.ct-layout{display:grid;grid-template-columns:1fr 340px;gap:48px;padding:48px 52px 64px;align-items:start}
+.ct-form{display:flex;flex-direction:column;gap:20px}
+.ct-field{display:flex;flex-direction:column;gap:7px}
+.ct-label{font-family:var(--FM);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold)}
+.ct-inp{font-family:var(--FS);font-size:13px;background:var(--bg1);border:1px solid var(--rule);color:var(--ink);padding:11px 14px;border-radius:2px;outline:none;transition:border-color .15s,box-shadow .15s}
+.ct-inp:focus{border-color:rgba(200,131,10,.5);box-shadow:0 0 0 3px rgba(200,131,10,.08)}
+.ct-inp::placeholder{color:var(--ink3)}
+.ct-textarea{resize:vertical;min-height:140px;line-height:1.6}
+.ct-submit{font-family:var(--FM);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;background:var(--gold);color:#000;border:none;padding:12px 28px;cursor:pointer;border-radius:2px;transition:background .15s,box-shadow .15s;font-weight:700;align-self:flex-start}
+.ct-submit:hover{background:var(--gold2);box-shadow:0 0 20px rgba(200,131,10,.35)}
+.ct-success{display:flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.06em;color:#4ade80;border:1px solid rgba(74,222,128,.2);background:rgba(74,222,128,.05);padding:10px 14px;border-radius:2px}
+.ct-sidebar{display:flex;flex-direction:column;gap:24px}
+.ct-info-eyebrow{font-family:var(--FM);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.ct-info-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold);flex-shrink:0}
+.ct-info-desc{font-family:var(--FS);font-size:12.5px;color:var(--ink2);line-height:1.72;font-style:italic}
+.ct-links{display:flex;flex-direction:column;gap:8px}
+.ct-link{display:flex;align-items:center;gap:14px;border:1px solid var(--rule);background:var(--bg1);padding:14px 16px;border-radius:2px;text-decoration:none;transition:border-color .18s,transform .18s,box-shadow .18s}
+.ct-link:hover{border-color:rgba(200,131,10,.35);transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,0,0,.22)}
+.ct-link-icon{width:32px;height:32px;border:1px solid var(--rule);border-radius:2px;display:flex;align-items:center;justify-content:center;color:var(--gold);flex-shrink:0}
+.ct-link-name{font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:.06em;color:var(--ink)}
+.ct-link-sub{font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;margin-top:2px}
+.ct-link-arr{font-family:var(--FM);font-size:12px;color:var(--gold);margin-left:auto;flex-shrink:0}
+.ct-avail{border:1px solid var(--rule);background:var(--bg1);padding:18px 20px;border-radius:2px}
+.ct-avail-head{font-family:var(--FM);font-size:7.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink3);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.ct-avail-head::before{content:'';width:14px;height:1px;background:var(--ink3);flex-shrink:0}
+.ct-avail-item{font-family:var(--FS);font-size:12px;color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--rule);display:flex;align-items:center;gap:9px}
+.ct-avail-item:last-child{border-bottom:none}
+.ct-avail-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.ct-avail-dot.green{background:#4ade80;box-shadow:0 0 6px rgba(74,222,128,.6)}
+.ct-avail-dot.amber{background:#fbbf24;box-shadow:0 0 5px rgba(251,191,36,.5)}
+@media(max-width:900px){.ct-layout{grid-template-columns:1fr;padding:36px 28px 56px}}
+@media(max-width:700px){.ct-layout{padding:32px 20px 48px;gap:32px}}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -3607,8 +3644,9 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('tools')">Tools</button>
     <button class="nbtn" onclick="sp('strats')">Strategies</button>
+    <button class="nbtn" onclick="sp('contact')">Contact</button>
 
-    <button class="nav-cta" onclick="sp('research')">Open Research</button>
+    <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
     <a id="nav-github" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" title="GitHub" class="nav-ext-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     <a class="nav-ext-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
   </div>
@@ -3634,7 +3672,10 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <div class="mv2-left">
     <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
     <div class="mv2-name">LiJie<br><em>Guo.</em></div>
-    <a class="mv2-cv-btn" href="LJGS_CV_2026_FinalCV.pdf" target="_blank">CV &nbsp;↗</a>
+    <a class="mv2-cv-btn" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      View &amp; Download CV
+    </a>
     <div class="mv2-rule line-draw"></div>
     <div class="mv2-tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
   </div>
@@ -3808,7 +3849,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
     <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
   </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
@@ -4020,7 +4061,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
 </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
@@ -4797,7 +4838,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
 </div><!-- /qp-section -->
 <!-- tgrid -->
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">All tools are for educational and informational purposes only. Not financial advice. Results are model-based estimates only.</div>
 </div>
 
@@ -5354,9 +5395,112 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   </div>
 </div><!-- /stab-reports -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
 </div><!-- /pg-strats -->
+
+<!-- ══════════════════════════════════════════════════════════
+     CONTACT PAGE
+     ══════════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-contact">
+
+<div class="pghd reveal">
+  <div class="pgtag">Get In Touch</div>
+  <h2 class="pgtitle">Let's <em>Talk</em></h2>
+  <p class="pgsub">Interested in research, quantitative strategies, collaborations, or hiring opportunities? I typically respond within 24–48 hours.</p>
+</div>
+
+<div class="ct-layout">
+
+  <!-- ── Contact Form ───────────────────────────── -->
+  <div>
+    <form class="ct-form" id="ct-form" onsubmit="submitContact(event)">
+      <div class="ct-field">
+        <label class="ct-label" for="ct-name">Name</label>
+        <input class="ct-inp" id="ct-name" type="text" placeholder="Your name" required autocomplete="name">
+      </div>
+      <div class="ct-field">
+        <label class="ct-label" for="ct-email">Email</label>
+        <input class="ct-inp" id="ct-email" type="email" placeholder="your@email.com" required autocomplete="email">
+      </div>
+      <div class="ct-field">
+        <label class="ct-label" for="ct-subject">Subject</label>
+        <input class="ct-inp" id="ct-subject" type="text" placeholder="Research · Collaboration · Hiring · Other">
+      </div>
+      <div class="ct-field">
+        <label class="ct-label" for="ct-msg">Message</label>
+        <textarea class="ct-inp ct-textarea" id="ct-msg" placeholder="Your message…" required></textarea>
+      </div>
+      <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+        <button class="ct-submit" type="submit">Send Message →</button>
+        <span style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em">Opens your email client to send</span>
+      </div>
+      <div class="ct-success" id="ct-success" style="display:none">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Message composed — your email client is ready to send.
+      </div>
+    </form>
+  </div>
+
+  <!-- ── Sidebar ────────────────────────────────── -->
+  <div class="ct-sidebar">
+
+    <div>
+      <div class="ct-info-eyebrow">Contact Methods</div>
+      <p class="ct-info-desc">Use the form for detailed enquiries. For quick professional contact, LinkedIn is the fastest channel.</p>
+    </div>
+
+    <div class="ct-links">
+      <!-- LinkedIn -->
+      <a class="ct-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">
+        <div class="ct-link-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </div>
+        <div>
+          <div class="ct-link-name">LinkedIn</div>
+          <div class="ct-link-sub">linkedin.com/in/lijieguo-es</div>
+        </div>
+        <span class="ct-link-arr">↗</span>
+      </a>
+      <!-- Substack -->
+      <a class="ct-link" href="https://aeonnimbus.substack.com" target="_blank">
+        <div class="ct-link-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M22.539 8.242H1.46V5.406h21.08v2.836zM1.46 10.812V24L12 18.11 22.54 24V10.812H1.46zM22.54 0H1.46v2.836h21.08V0z"/></svg>
+        </div>
+        <div>
+          <div class="ct-link-name">Substack</div>
+          <div class="ct-link-sub">aeonnimbus.substack.com</div>
+        </div>
+        <span class="ct-link-arr">↗</span>
+      </a>
+      <!-- GitHub -->
+      <a class="ct-link" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">
+        <div class="ct-link-icon">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <div>
+          <div class="ct-link-name">GitHub</div>
+          <div class="ct-link-sub">github.com/lijiegsluis</div>
+        </div>
+        <span class="ct-link-arr">↗</span>
+      </a>
+    </div>
+
+    <!-- Availability -->
+    <div class="ct-avail">
+      <div class="ct-avail-head">Availability</div>
+      <div class="ct-avail-item"><span class="ct-avail-dot green"></span>Open to research collaborations</div>
+      <div class="ct-avail-item"><span class="ct-avail-dot green"></span>Open to institutional enquiries</div>
+      <div class="ct-avail-item"><span class="ct-avail-dot green"></span>Considering full-time roles</div>
+      <div class="ct-avail-item"><span class="ct-avail-dot amber"></span>Selective on advisory roles</div>
+    </div>
+
+  </div><!-- /ct-sidebar -->
+
+</div><!-- /ct-layout -->
+
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+</div><!-- /pg-contact -->
 
 <script>
 // ═══ NAVIGATION ══════════════════════════════════════
@@ -5626,7 +5770,7 @@ function sp(id){
     window.scrollTo({top:0,behavior:'instant'});
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    b.classList.toggle('on',['home','research','track','tools','strats'][i]===id);
+    b.classList.toggle('on',['home','research','track','tools','strats','contact'][i]===id);
   });
 }
 function showStab(id){
@@ -5637,6 +5781,18 @@ function showStab(id){
   const idx={'stab-overview':0,'stab-builder':1,'stab-reports':2}[id]??0;
   const btns=document.querySelectorAll('.stab');
   if(btns[idx])btns[idx].classList.add('on');
+}
+function submitContact(e){
+  e.preventDefault();
+  const name=document.getElementById('ct-name').value.trim();
+  const email=document.getElementById('ct-email').value.trim();
+  const subject=document.getElementById('ct-subject').value.trim()||'Enquiry via aeonnimbus.com';
+  const msg=document.getElementById('ct-msg').value.trim();
+  const body=`From: ${name}\nEmail: ${email}\n\n${msg}`;
+  const mailto=`mailto:?subject=${encodeURIComponent(subject+' — '+name)}&body=${encodeURIComponent(body)}`;
+  window.location.href=mailto;
+  const ok=document.getElementById('ct-success');
+  if(ok){ok.style.display='flex';setTimeout(()=>{ok.style.display='none';},6000);}
 }
 function oTool(id){
   setTimeout(()=>{

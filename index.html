@@ -5279,6 +5279,16 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
           <div id="pb-alloc-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
         </div>
 
+        <!-- Performance chart -->
+        <div id="pb-chart-wrap" style="display:none;margin-top:20px">
+          <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px;display:flex;justify-content:space-between;align-items:center">
+            <span>Illustrative Performance</span>
+            <span style="font-size:7px;text-transform:none;letter-spacing:0;opacity:.6">12-yr simulation · log scale</span>
+          </div>
+          <canvas id="pb-chart" style="width:100%;height:140px;display:block"></canvas>
+          <div style="font-family:var(--FM);font-size:7px;color:var(--ink3);margin-top:5px;letter-spacing:.03em;opacity:.65">Simulated from summary statistics via seeded GBM · not actual trade-by-trade backtest data</div>
+        </div>
+
         <div class="pb-res-note">Weighted averages of individual strategy backtests. Eq. CAGR/Vol reflect equity allocation only; Wtd. Sharpe and Max DD span all 12 strategies. Real portfolio performance will differ due to correlation effects.</div>
       </div>
     </div>
@@ -8709,6 +8719,99 @@ function exportPortExcel(){
   ];
   const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c','#38bdf8','#f472b6','#a3e635','#c084fc'];
 
+  function seedFromId(str){
+    let h=0x9e3779b9;
+    for(let i=0;i<str.length;i++) h=Math.imul(h^str.charCodeAt(i),0x9e3779b9);
+    return (h>>>0)||1;
+  }
+  function makeRng(seed){
+    let s=seed>>>0||1;
+    return function(){s^=s<<13;s^=s>>17;s^=s<<5;return(s>>>0)/4294967296;};
+  }
+  function genCurve(cagr,vol,months,seed){
+    const rng=makeRng(seed);
+    const mu=Math.log(1+cagr/100)/12;
+    const sigma=(vol/100)/Math.sqrt(12);
+    let lv=Math.log(100);
+    const c=[100];
+    for(let i=0;i<months;i++){
+      const u=Math.max(rng(),1e-10);
+      const z=Math.sqrt(-2*Math.log(u))*Math.cos(2*Math.PI*rng());
+      lv+=mu+sigma*z;
+      c.push(Math.exp(lv));
+    }
+    return c;
+  }
+  function blendCurves(weights,months){
+    const b=new Array(months+1).fill(0);
+    STRATS.forEach((s,i)=>{
+      const w=weights[i];
+      if(w<=0)return;
+      const cagr=s.cagr||(s.sharpe*13);
+      const vol=s.vol||13;
+      const curve=genCurve(cagr,vol,months,seedFromId(s.id));
+      for(let t=0;t<=months;t++) b[t]+=w*curve[t];
+    });
+    const scale=100/b[0];
+    return b.map(v=>v*scale);
+  }
+  function drawPBChart(curve){
+    const canvas=document.getElementById('pb-chart');
+    if(!canvas)return;
+    const dpr=window.devicePixelRatio||1;
+    canvas.width=(canvas.parentElement?.clientWidth||320)*dpr;
+    canvas.height=140*dpr;
+    const ctx=canvas.getContext('2d');
+    const W=canvas.width,H=canvas.height;
+    const pad={t:10*dpr,r:10*dpr,b:20*dpr,l:34*dpr};
+    const cw=W-pad.l-pad.r,ch=H-pad.t-pad.b;
+    const n=curve.length;
+    const minV=Math.min(...curve)*0.92,maxV=Math.max(...curve)*1.06;
+    const logMin=Math.log(Math.max(minV,1)),logMax=Math.log(maxV);
+    const xS=i=>pad.l+(i/(n-1))*cw;
+    const yS=v=>pad.t+ch-((Math.log(Math.max(v,1))-logMin)/(logMax-logMin))*ch;
+    ctx.clearRect(0,0,W,H);
+    /* grid */
+    const gridVals=[100,150,200,300,500,750,1000,1500,2000,3000,5000,7500,10000,15000,20000]
+      .filter(v=>v>=minV&&v<=maxV*1.1);
+    ctx.font=`${6.5*dpr}px monospace`;
+    ctx.textAlign='right';
+    gridVals.forEach(v=>{
+      const y=yS(v);
+      if(y<pad.t-2||y>pad.t+ch+2)return;
+      ctx.strokeStyle='rgba(255,255,255,0.055)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pad.l,y);ctx.lineTo(pad.l+cw,y);ctx.stroke();
+      ctx.fillStyle='rgba(255,255,255,0.28)';
+      ctx.fillText(v>=1000?(v/1000).toFixed(v%1000?1:0)+'k':v,pad.l-3*dpr,y+2.5*dpr);
+    });
+    /* x-axis labels */
+    ctx.fillStyle='rgba(255,255,255,0.25)';ctx.textAlign='center';
+    const yrs=Math.round((n-1)/12);
+    for(let y=0;y<=yrs;y+=2) ctx.fillText('Y'+y,xS(y*12),H-3*dpr);
+    /* gradient fill */
+    const grad=ctx.createLinearGradient(0,pad.t,0,pad.t+ch);
+    grad.addColorStop(0,'rgba(200,131,10,0.22)');grad.addColorStop(1,'rgba(200,131,10,0)');
+    ctx.beginPath();ctx.moveTo(xS(0),yS(curve[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(curve[i]));
+    ctx.lineTo(xS(n-1),pad.t+ch);ctx.lineTo(xS(0),pad.t+ch);ctx.closePath();
+    ctx.fillStyle=grad;ctx.fill();
+    /* line */
+    ctx.beginPath();ctx.moveTo(xS(0),yS(curve[0]));
+    for(let i=1;i<n;i++) ctx.lineTo(xS(i),yS(curve[i]));
+    ctx.strokeStyle='#C8830A';ctx.lineWidth=1.5*dpr;ctx.lineJoin='round';ctx.stroke();
+    /* end dot + label */
+    const ev=curve[n-1],ex=xS(n-1),ey=yS(ev);
+    ctx.fillStyle='#C8830A';
+    ctx.beginPath();ctx.arc(ex,ey,2.5*dpr,0,Math.PI*2);ctx.fill();
+    ctx.fillStyle='rgba(200,131,10,0.9)';ctx.textAlign='right';
+    ctx.font=`bold ${7.5*dpr}px monospace`;
+    const evLabel=ev>=1000?(ev/1000).toFixed(1)+'k':Math.round(ev);
+    ctx.fillText(evLabel,ex-5*dpr,ey-5*dpr);
+    /* start dot */
+    ctx.fillStyle='rgba(255,255,255,0.4)';
+    ctx.beginPath();ctx.arc(xS(0),yS(100),2*dpr,0,Math.PI*2);ctx.fill();
+  }
+
   function buildRows(){
     const wrap=document.getElementById('pb-rows');
     if(!wrap)return;
@@ -8776,6 +8879,14 @@ function exportPortExcel(){
           legend.appendChild(lbl);
         }
       });
+    }
+    // performance chart
+    const chartWrap=document.getElementById('pb-chart-wrap');
+    if(chartWrap){
+      chartWrap.style.display='block';
+      const weights=STRATS.map((_,i)=>parseFloat(document.getElementById('pb-w-'+i)?.value)||0);
+      const blended=blendCurves(weights,144);
+      requestAnimationFrame(function(){drawPBChart(blended);});
     }
   };
 

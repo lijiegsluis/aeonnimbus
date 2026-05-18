@@ -3521,6 +3521,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .pb-row-inp::-webkit-inner-spin-button,.pb-row-inp::-webkit-outer-spin-button{-webkit-appearance:none}
 .pb-row-inp:focus{outline:none;border-color:var(--gold)}
 .pb-row-pct{font-family:var(--FM);font-size:11px;color:var(--ink3);flex:0 0 14px}
+.pb-group-hdr{font-family:var(--FM);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:14px 0 6px;border-bottom:1px solid var(--rule);margin-bottom:8px}
 .pb-total-row{display:flex;align-items:center;justify-content:space-between;padding:10px 14px;border:1px solid var(--rule);margin-top:10px;font-family:var(--FM);font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3)}
 .pb-total-v{font-size:18px;font-weight:700;letter-spacing:0;text-transform:none}
 .pb-total-v.ok{color:#4ade80}
@@ -3554,7 +3555,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .wr-card-price{font-family:var(--FM);font-size:20px;font-weight:700;color:var(--ink);margin-bottom:12px}
 .wr-card-price span{font-size:9px;color:var(--ink3);font-weight:400}
 .wr-card-subs{font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.06em;margin-bottom:14px}
-.wr-card-cta{display:inline-block;font-family:var(--FM);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:7px 14px;border-radius:2px;text-decoration:none;transition:all .15s;cursor:pointer}
+.wr-card-cta{display:inline-block;font-family:var(--FM);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:7px 14px;border-radius:2px;text-decoration:none;transition:all .15s;cursor:pointer;background:transparent;-webkit-appearance:none;appearance:none}
 .wr-card-cta:hover{background:rgba(200,131,10,.08)}
 .wr-bundle{border:1px solid var(--gold);background:rgba(200,131,10,.03);padding:28px;border-radius:2px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
 .wr-bundle-left{}
@@ -3569,7 +3570,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .wr-bundle-price{font-family:var(--FM);font-size:36px;font-weight:700;color:var(--gold);line-height:1}
 .wr-bundle-price span{font-size:12px;color:var(--ink3);font-weight:400}
 .wr-bundle-save{font-family:var(--FM);font-size:8px;letter-spacing:.08em;color:#4ade80;margin:6px 0 20px}
-.wr-cta-big{display:inline-block;font-family:var(--FM);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#000;padding:12px 28px;border-radius:2px;text-decoration:none;font-weight:700;transition:background .15s;white-space:nowrap}
+.wr-cta-big{display:inline-block;font-family:var(--FM);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#000;padding:12px 28px;border-radius:2px;text-decoration:none;font-weight:700;transition:background .15s;white-space:nowrap;border:none;cursor:pointer;-webkit-appearance:none;appearance:none}
 .wr-cta-big:hover{background:var(--gold2)}
 .wr-disc{font-family:var(--FM);font-size:8px;color:var(--ink3);line-height:1.7;border-top:1px solid var(--rule);padding-top:20px;margin-top:28px}
 @media(max-width:900px){.pb-layout{grid-template-columns:1fr}.wr-bundle{grid-template-columns:1fr}.wr-bundle-right{text-align:left}}
@@ -3682,7 +3683,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
     <div class="mv2-right">
     <div class="mv2-bio-label reveal">About</div>
 <div class="mv2-bio reveal d1">
-  <em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> for USDJPY and XAUUSD, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.
+  <em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> across five FX and commodity pairs — USD/JPY, XAU/USD, EUR/JPY, GBP/USD, and EUR/USD — alongside seven systematic equity models, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.
   <br><br>
   His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.
   <br><br>
@@ -4850,12 +4851,12 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="pghd reveal">
   <div class="pgtag">Proprietary Systematic Research</div>
   <h2 class="pgtitle">Quantitative <em>Strategies</em></h2>
-  <p class="pgsub">Seven fully systematic strategies across market timing, trend following, market-neutral, and dual-momentum rotation — institutional-grade algorithmic systems with 10+ years of rigorous backtesting.</p>
+  <p class="pgsub">Twelve fully systematic strategies across systematic equity, FX, and commodities — institutional-grade algorithmic systems backtested on 99–100% real tick data across 12+ years of full market cycles.</p>
 </div>
 
 <!-- Sub-tab navigation -->
 <div class="strats-tabs">
-  <button class="stab on" onclick="showStab('stab-overview')">Strategies</button>
+  <button class="stab on" onclick="showStab('stab-overview')">Overview</button>
   <button class="stab" onclick="showStab('stab-builder')">Portfolio Builder</button>
   <button class="stab" onclick="showStab('stab-reports')">Weekly Reports</button>
 </div>
@@ -4867,7 +4868,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
   <!-- Performance table -->
   <div class="st-wrap">
-    <div class="st-eyebrow">Strategy Comparison — General Metrics · Track record: 10+ years</div>
+    <div class="st-eyebrow">Systematic Equity Strategies · 7 Models · Backtested 2006–2026</div>
     <table class="st">
       <thead>
         <tr>
@@ -5230,7 +5231,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="stab-panel" id="stab-builder">
   <div class="pb-wrap">
     <div class="st-eyebrow" style="margin-bottom:14px">Build Your Ideal Portfolio</div>
-    <p class="pb-intro">Simulate allocations across proprietary strategies. Assign weights to each strategy and compute the blended portfolio's risk-adjusted return profile — CAGR, Sharpe, and maximum drawdown — based on historical backtest data.</p>
+    <p class="pb-intro">Simulate allocations across all 12 proprietary strategies — 7 systematic equity models and 5 FX/commodity systems. Assign weights and compute the blended risk-adjusted profile. Wtd. Sharpe and Max DD span all strategies; Eq. CAGR and Eq. Vol are equity-weighted metrics (scaled to your equity allocation).</p>
 
     <div class="pb-layout">
       <!-- Controls -->
@@ -5255,7 +5256,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="pb-res-grid">
           <div>
             <div class="pb-res-v str-cagr" id="pb-r-cagr">—</div>
-            <div class="pb-res-l">Wtd. CAGR</div>
+            <div class="pb-res-l">Eq. CAGR</div>
           </div>
           <div>
             <div class="pb-res-v str-sharpe" id="pb-r-sharpe">—</div>
@@ -5267,7 +5268,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
           </div>
           <div>
             <div class="pb-res-v" id="pb-r-vol" style="color:var(--ink2)">—</div>
-            <div class="pb-res-l">Wtd. Vol</div>
+            <div class="pb-res-l">Eq. Vol</div>
           </div>
         </div>
 
@@ -5278,10 +5279,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
           <div id="pb-alloc-legend" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px"></div>
         </div>
 
-        <div class="pb-res-note">Metrics are weighted averages of individual strategy backtests. Real portfolio performance will differ due to correlation effects and sequence risk.</div>
-        <div style="margin-top:16px">
-          <a class="wr-card-cta" href="https://hmaquant.com/portfolio-builder" target="_blank">Open Full Builder at hmaquant.com ↗</a>
-        </div>
+        <div class="pb-res-note">Weighted averages of individual strategy backtests. Eq. CAGR/Vol reflect equity allocation only; Wtd. Sharpe and Max DD span all 12 strategies. Real portfolio performance will differ due to correlation effects.</div>
       </div>
     </div>
   </div>
@@ -5309,7 +5307,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Ray Dalio quantitative market regime detector &amp; Trend Following — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Nasdaq · S&amp;P 500 · Commodities · Bonds</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- ARES -->
       <div class="wr-card">
@@ -5319,7 +5317,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Macro strategy and protection — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Sector ETFs · Index Funds · Fixed Income</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- JANUS -->
       <div class="wr-card">
@@ -5329,7 +5327,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Market neutral long-short momentum — weekly quantitative research report.</div>
         <div class="wr-card-assets">US Equities · Large &amp; Mid Cap Stocks</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- BES -->
       <div class="wr-card">
@@ -5338,7 +5336,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Multi-factor equity selection — weekly quantitative research report.</div>
         <div class="wr-card-assets">US Equities · Multi-Factor Stock Selection</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- DEIMOS -->
       <div class="wr-card">
@@ -5347,7 +5345,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Macro strategy and high returns — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Cross-Asset Macro · Equities · Rates · FX</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- FOBOS -->
       <div class="wr-card">
@@ -5356,7 +5354,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Volatility Products · Index Options</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- ASCÁLAFO -->
       <div class="wr-card">
@@ -5365,7 +5363,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Options on Major Indices &amp; ETFs</div>
         <div class="wr-card-price">€5<span>/month</span></div>
-        <a class="wr-card-cta" href="https://hmaquant.com/weekly-reports" target="_blank">Subscribe →</a>
+        <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
     </div><!-- /wr-grid -->
 
@@ -5376,7 +5374,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-bundle-title">Complete Bundle</div>
         <div class="wr-bundle-sub">All strategies + Market reports + Quant Macro Insights</div>
         <ul class="wr-bundle-features">
-          <li>All 7 strategies: TYR · ARES · JANUS · BES · FOBOS · DEIMOS · ASCÁLAFO</li>
+          <li>All 7 equity strategies: TYR · ARES · JANUS · BES · FOBOS · DEIMOS · ASCÁLAFO</li>
           <li>Weekly reports with full quantitative analysis</li>
           <li>Quantitative macroeconomic insights</li>
           <li>Full historical archive access</li>
@@ -5386,7 +5384,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
       <div class="wr-bundle-right">
         <div class="wr-bundle-price">€30<span>/month</span></div>
         <div class="wr-bundle-save">Save €5 vs individual (€35)</div>
-        <a class="wr-cta-big" href="https://hmaquant.com/weekly-reports" target="_blank">Get Full Access ↗</a>
+        <button class="wr-cta-big" onclick="sp('contact')">Get Full Access ↗</button>
       </div>
     </div>
 
@@ -8696,21 +8694,34 @@ function exportPortExcel(){
 // ══════════════════════════════════════════════════════════
 (function(){
   const STRATS=[
-    {id:'JANUS', type:'Market Neutral L/S',    cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
-    {id:'TYR',   type:'Dual-Momentum',         cagr:20.54, sharpe:1.00, dd:25.43, vol:20.57},
-    {id:'ARES',  type:'Market Timing',         cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
-    {id:'BES',   type:'Trend Following',       cagr:18.17, sharpe:1.04, dd:23.55, vol:17.55},
-    {id:'ASCÁLAFO',type:'Double Layer',        cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
-    {id:'DEIMOS',type:'Market Timing + Risk',  cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
-    {id:'FOBOS', type:'Double Layer + Risk',   cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40}
+    {id:'JANUS',    type:'Market Neutral L/S',  group:'eq', cagr:13.10, sharpe:1.18, dd:15.02, vol:11.09},
+    {id:'TYR',      type:'Dual-Momentum',        group:'eq', cagr:20.54, sharpe:1.00, dd:25.43, vol:20.57},
+    {id:'ARES',     type:'Market Timing',        group:'eq', cagr:14.01, sharpe:1.08, dd:15.61, vol:12.81},
+    {id:'BES',      type:'Trend Following',      group:'eq', cagr:18.17, sharpe:1.04, dd:23.55, vol:17.55},
+    {id:'ASCÁLAFO', type:'Double Layer',         group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
+    {id:'DEIMOS',   type:'Market Timing + Risk', group:'eq', cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
+    {id:'FOBOS',    type:'Double Layer + Risk',  group:'eq', cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40},
+    {id:'USD/JPY',  type:'Trend Following',      group:'fx', sharpe:2.13, dd:15.83},
+    {id:'XAU/USD',  type:'Mean Reversion',       group:'fx', sharpe:1.82, dd:15.54},
+    {id:'EUR/JPY',  type:'Trend Following',      group:'fx', sharpe:2.20, dd:16.35},
+    {id:'GBP/USD',  type:'Mean Reversion',       group:'fx', sharpe:2.31, dd:23.76},
+    {id:'EUR/USD',  type:'Trend Following',      group:'fx', sharpe:1.91, dd:34.52}
   ];
-  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399'];
+  const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c','#38bdf8','#f472b6','#a3e635','#c084fc'];
 
   function buildRows(){
     const wrap=document.getElementById('pb-rows');
     if(!wrap)return;
     wrap.innerHTML='';
+    let lastGroup=null;
     STRATS.forEach((s,i)=>{
+      if(s.group!==lastGroup){
+        const hdr=document.createElement('div');
+        hdr.className='pb-group-hdr';
+        hdr.textContent=s.group==='eq'?'Systematic Equity':'FX & Commodities';
+        wrap.appendChild(hdr);
+        lastGroup=s.group;
+      }
       const row=document.createElement('div');
       row.className='pb-row';
       row.innerHTML=`<div class="pb-row-name">${s.id}</div><div class="pb-row-type">${s.type}</div><input class="pb-row-inp" id="pb-w-${i}" type="number" min="0" max="100" value="0" oninput="pbUpdateTotal()"><div class="pb-row-pct">%</div>`;
@@ -8735,16 +8746,17 @@ function exportPortExcel(){
   };
 
   window.pbCompute=function(){
-    let tot=0,wCagr=0,wSharpe=0,wDd=0,wVol=0;
+    let tot=0,wSharpe=0,wDd=0,eqTot=0,wCagr=0,wVol=0;
     STRATS.forEach((s,i)=>{
       const w=(parseFloat(document.getElementById('pb-w-'+i)?.value)||0)/100;
-      tot+=w; wCagr+=w*s.cagr; wSharpe+=w*s.sharpe; wDd+=w*s.dd; wVol+=w*s.vol;
+      tot+=w; wSharpe+=w*s.sharpe; wDd+=w*s.dd;
+      if(s.group==='eq'){eqTot+=w; wCagr+=w*s.cagr; wVol+=w*s.vol;}
     });
     if(tot<0.995||tot>1.005){alert('Weights must total 100%. Currently: '+(tot*100).toFixed(1)+'%');return;}
-    document.getElementById('pb-r-cagr').textContent=wCagr.toFixed(2)+'%';
+    document.getElementById('pb-r-cagr').textContent=eqTot>0?wCagr.toFixed(2)+'%':'—';
     document.getElementById('pb-r-sharpe').textContent=wSharpe.toFixed(2);
     document.getElementById('pb-r-dd').textContent=wDd.toFixed(2)+'%';
-    document.getElementById('pb-r-vol').textContent=wVol.toFixed(2)+'%';
+    document.getElementById('pb-r-vol').textContent=eqTot>0?wVol.toFixed(2)+'%':'—';
     // allocation bar
     const bar=document.getElementById('pb-alloc-bar');
     const legend=document.getElementById('pb-alloc-legend');

@@ -4982,8 +4982,203 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
     </div>
   </div><!-- /strat-grid -->
 
-  <div style="padding:12px 52px 48px;margin-top:8px">
+  <div style="padding:12px 52px 12px;margin-top:8px">
     <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">* Annualised figures. Historical backtested performance 2006–2026. Past performance does not guarantee future returns. These are quantitative research models, not investment advice or financial recommendations.</p>
+  </div>
+
+  <!-- ── FX & COMMODITIES DIVIDER ─────────────────────── -->
+  <div style="padding:24px 52px 0"><div style="border-top:1px solid var(--rule)"></div></div>
+
+  <!-- FX comparison table -->
+  <div class="st-wrap" style="padding-top:32px">
+    <div class="st-eyebrow">FX &amp; Commodities · Proprietary Systematic · 99–100% Real Tick Data · 2013–2025 · 12,262 Combined Trades</div>
+    <table class="st">
+      <thead>
+        <tr>
+          <th>Pair</th>
+          <th>Type</th>
+          <th>Sharpe</th>
+          <th>LR Corr</th>
+          <th>Max DD</th>
+          <th>Win Rate</th>
+          <th>Profit Factor</th>
+          <th>Recovery</th>
+          <th>Trades</th>
+          <th>Tick Quality</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>USD / JPY</td><td>Trend Following</td>
+          <td class="str-sharpe">2.13</td><td>0.90</td>
+          <td class="str-dd">15.83%</td><td>39.6%</td><td>1.29</td><td>9.68×</td><td>3,163</td>
+          <td><span class="str-risk low">99%</span></td>
+        </tr>
+        <tr>
+          <td>XAU / USD</td><td>Mean Reversion</td>
+          <td class="str-sharpe">1.82</td><td>0.96</td>
+          <td class="str-dd">15.54%</td><td>51.2%</td><td>1.22</td><td>5.86×</td><td>2,908</td>
+          <td><span class="str-risk low">99%</span></td>
+        </tr>
+        <tr>
+          <td>EUR / JPY</td><td>Trend Following</td>
+          <td class="str-sharpe">2.20</td><td>0.90</td>
+          <td class="str-dd">16.35%</td><td>48.3%</td><td>1.20</td><td>5.68×</td><td>2,174</td>
+          <td><span class="str-risk low">99%</span></td>
+        </tr>
+        <tr>
+          <td>GBP / USD</td><td>Mean Reversion</td>
+          <td class="str-sharpe">2.31</td><td>0.97</td>
+          <td class="str-dd">23.76%</td><td>49.4%</td><td>1.12</td><td>2.67×</td><td>2,037</td>
+          <td><span class="str-risk low">99%</span></td>
+        </tr>
+        <tr>
+          <td>EUR / USD</td><td>Trend Following</td>
+          <td class="str-sharpe">1.91</td><td>0.93</td>
+          <td class="str-dd">34.52%</td><td>44.6%</td><td>1.18</td><td>4.63×</td><td>1,980</td>
+          <td><span class="str-risk low">100%</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div><!-- /fx table -->
+
+  <!-- FX detail cards -->
+  <div class="strat-grid" style="padding-bottom:0">
+
+    <!-- USD/JPY -->
+    <div class="strat-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <div class="strat-card-name">USD / JPY</div>
+        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
+      </div>
+      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
+      <div style="margin-bottom:10px">
+        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
+          <defs><linearGradient id="gUJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,58 C25,57 50,56 80,54 C108,52 128,49 152,44 C174,39 194,31 216,21 C234,13 255,5 278,1 L280,0 L280,60 L0,60Z" fill="url(#gUJ)"/>
+          <path d="M0,58 C25,57 50,56 80,54 C108,52 128,49 152,44 C174,39 194,31 216,21 C234,13 255,5 278,1 L280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-sharpe">2.13</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v" style="color:var(--ink2)">0.90</div><div class="strat-stat-l">LR Corr</div></div>
+        <div><div class="strat-stat-v str-dd">15.83%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">39.6%</div><div class="strat-stat-l">Win Rate</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.29</div><div class="strat-stat-l">Prof. Factor</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">3,163</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+    </div>
+
+    <!-- XAU/USD -->
+    <div class="strat-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <div class="strat-card-name">XAU / USD</div>
+        <span class="str-risk mod" style="flex-shrink:0">Mean Reversion</span>
+      </div>
+      <div class="strat-card-type">Commodities · 99% Ticks · 2013–2025</div>
+      <div style="margin-bottom:10px">
+        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
+          <defs><linearGradient id="gXA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,57 C22,56 45,55 70,53 C95,51 118,48 144,44 C168,40 190,34 214,26 C234,18 256,8 278,1 L280,0 L280,60 L0,60Z" fill="url(#gXA)"/>
+          <path d="M0,57 C22,56 45,55 70,53 C95,51 118,48 144,44 C168,40 190,34 214,26 C234,18 256,8 278,1 L280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-sharpe">1.82</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v" style="color:var(--ink2)">0.96</div><div class="strat-stat-l">LR Corr</div></div>
+        <div><div class="strat-stat-v str-dd">15.54%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">51.2%</div><div class="strat-stat-l">Win Rate</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.22</div><div class="strat-stat-l">Prof. Factor</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,908</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+    </div>
+
+    <!-- EUR/JPY -->
+    <div class="strat-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <div class="strat-card-name">EUR / JPY</div>
+        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
+      </div>
+      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
+      <div style="margin-bottom:10px">
+        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
+          <defs><linearGradient id="gEJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,58 C30,58 60,57 90,56 C118,55 138,53 160,50 C182,46 200,40 220,31 C240,22 260,10 278,2 L280,1 L280,60 L0,60Z" fill="url(#gEJ)"/>
+          <path d="M0,58 C30,58 60,57 90,56 C118,55 138,53 160,50 C182,46 200,40 220,31 C240,22 260,10 278,2 L280,1" fill="none" stroke="#C8830A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-sharpe">2.20</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v" style="color:var(--ink2)">0.90</div><div class="strat-stat-l">LR Corr</div></div>
+        <div><div class="strat-stat-v str-dd">16.35%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">48.3%</div><div class="strat-stat-l">Win Rate</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.20</div><div class="strat-stat-l">Prof. Factor</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,174</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+    </div>
+
+    <!-- GBP/USD -->
+    <div class="strat-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <div class="strat-card-name">GBP / USD</div>
+        <span class="str-risk mod" style="flex-shrink:0">Mean Reversion</span>
+      </div>
+      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
+      <div style="margin-bottom:10px">
+        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
+          <defs><linearGradient id="gGB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,58 C25,55 50,52 78,48 C105,44 130,39 156,33 C180,27 204,19 228,11 C248,5 264,1 280,0 L280,60 L0,60Z" fill="url(#gGB)"/>
+          <path d="M0,58 C25,55 50,52 78,48 C105,44 130,39 156,33 C180,27 204,19 228,11 C248,5 264,1 280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-sharpe">2.31</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v" style="color:var(--ink2)">0.97</div><div class="strat-stat-l">LR Corr</div></div>
+        <div><div class="strat-stat-v str-dd">23.76%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">49.4%</div><div class="strat-stat-l">Win Rate</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.12</div><div class="strat-stat-l">Prof. Factor</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,037</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+    </div>
+
+    <!-- EUR/USD -->
+    <div class="strat-card">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
+        <div class="strat-card-name">EUR / USD</div>
+        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
+      </div>
+      <div class="strat-card-type">Foreign Exchange · 100% Ticks · 2013–2025</div>
+      <div style="margin-bottom:10px">
+        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
+          <defs><linearGradient id="gEU" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
+          <path d="M0,59 C30,59 60,58 90,57 C118,56 142,55 165,52 C188,49 206,44 224,36 C242,27 260,14 278,2 L280,1 L280,60 L0,60Z" fill="url(#gEU)"/>
+          <path d="M0,59 C30,59 60,58 90,57 C118,56 142,55 165,52 C188,49 206,44 224,36 C242,27 260,14 278,2 L280,1" fill="none" stroke="#C8830A" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <div class="strat-card-stats">
+        <div><div class="strat-stat-v str-sharpe">1.91</div><div class="strat-stat-l">Sharpe</div></div>
+        <div><div class="strat-stat-v" style="color:var(--ink2)">0.93</div><div class="strat-stat-l">LR Corr</div></div>
+        <div><div class="strat-stat-v str-dd">34.52%</div><div class="strat-stat-l">Max DD</div></div>
+      </div>
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">44.6%</div><div class="strat-stat-l">Win Rate</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.18</div><div class="strat-stat-l">Prof. Factor</div></div>
+        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1,980</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+    </div>
+
+  </div><!-- /FX cards -->
+
+  <div style="padding:12px 52px 48px;margin-top:8px">
+    <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">Backtested on 99–100% real tick data (MetaTrader 5) — the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade). 12,262 combined trades across a full 12-year cycle (2013–2025) spanning COVID, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Backtested results do not guarantee future performance. Full methodology and walk-forward analysis available to qualified institutional allocators upon request.</p>
   </div>
 
 </div><!-- /stab-overview -->

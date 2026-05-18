@@ -214,7 +214,7 @@ table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
 .tchd{padding:17px 22px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .15s;user-select:none}
 .tchd:hover{background:var(--bg2)}
 .tcleft{display:flex;align-items:center;gap:15px}
-.tico{width:36px;height:36px;background:var(--goldlt);border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.tico{width:36px;height:36px;background:rgba(200,131,10,.05);border:1px solid rgba(200,131,10,.25);display:flex;align-items:center;justify-content:center;font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:.08em;color:var(--gold);flex-shrink:0}
 .tname{font-family:var(--FD);font-size:15px;font-weight:600;color:var(--white)}
 .tdesc{font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.06em;margin-top:2px}
 .tbadge{font-family:var(--FM);font-size:8.5px;color:var(--gold);padding:4px 10px;border:1px solid var(--line);letter-spacing:.1em;text-transform:uppercase}
@@ -1620,7 +1620,7 @@ html.dark nav.scrolled {
   padding: var(--sp-9) var(--sp-7) var(--sp-8) 52px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
   border-right: 1px solid var(--rule);
   position: relative;
 }
@@ -1628,7 +1628,7 @@ html.dark nav.scrolled {
   padding: var(--sp-9) 52px var(--sp-8) var(--sp-7);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: center;
 }
 .mv2-eyebrow {
   font-size: 9px;
@@ -1963,10 +1963,11 @@ html.dark .post:hover { background: rgba(139,105,20,.04); }
 .tico {
   width: 36px; height: 36px;
   display: flex; align-items: center; justify-content: center;
-  border: 1px solid var(--rule);
-  font-size: 16px;
+  border: 1px solid rgba(200,131,10,.25);
+  font-family: var(--FM); font-size: 10px; font-weight: 700; letter-spacing: .08em;
   flex-shrink: 0;
   color: var(--gold);
+  background: rgba(200,131,10,.05);
 }
 .tname {
   font-family: var(--FH);
@@ -2480,6 +2481,7 @@ body { font-family: var(--FH); }
   color:var(--g2);text-decoration:none;transition:color .2s;white-space:nowrap;
 }
 .nav-ext-link:hover{color:var(--ink)}
+#nav-github{border-left:1px solid var(--rule2);padding-left:20px;margin-left:4px}
 
 /* Nav subscribe button */
 .nsub-stack{
@@ -3188,15 +3190,15 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 /* ── Nav CTA ────────────────────────────────────── */
 .nav-cta {
   display: inline-flex; align-items: center; gap: 7px;
-  font-family: var(--FM); font-size: 9px; font-weight: 600;
+  font-family: var(--FM); font-size: 9px; font-weight: 500;
   letter-spacing: .14em; text-transform: uppercase;
-  color: var(--bg); background: var(--gold);
-  border: 1px solid var(--gold); border-radius: 2px;
-  padding: 7px 16px; cursor: pointer;
-  transition: background .2s, box-shadow .2s;
+  color: var(--ink2); background: transparent;
+  border: 1px solid var(--rule2); border-radius: 2px;
+  padding: 7px 16px; cursor: pointer; text-decoration: none;
+  transition: color .2s, border-color .2s;
   white-space: nowrap;
 }
-.nav-cta:hover { background: var(--gold2); box-shadow: 0 0 16px rgba(200,131,10,.35); }
+.nav-cta:hover { color: var(--gold); border-color: rgba(200,131,10,.5); }
 
 /* ── Market status bar ──────────────────────────── */
 .mkt-bar {
@@ -3391,7 +3393,7 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   border-color: var(--gold); background: var(--bg2);
   box-shadow: 0 0 0 1px rgba(200,131,10,.2);
 }
-.tgt-icon { font-size: 22px; line-height: 1; }
+.tgt-icon { font-family: var(--FM); font-size: 10px; font-weight: 700; letter-spacing: .08em; color: var(--gold); line-height: 1; }
 .tgt-badge {
   position: absolute; top: 12px; right: 12px;
   font-family: var(--FM); font-size: 7px; letter-spacing: .1em;
@@ -3502,7 +3504,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .str-risk.vhigh{color:#f87171;border:1px solid rgba(248,113,113,.25);background:rgba(248,113,113,.06)}
 /* Strategy cards */
 .strat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:10px;padding:28px 52px 0}
-.strat-card{border:1px solid var(--rule);background:var(--bg1);padding:22px 20px 18px;border-radius:2px;transition:border-color .18s,transform .18s,box-shadow .18s}
+.strat-card{border:1px solid rgba(200,131,10,.18);background:var(--bg2);padding:22px 20px 18px;border-radius:2px;transition:border-color .18s,transform .18s,box-shadow .18s}
 .strat-card:hover{border-color:rgba(200,131,10,.35);transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.28)}
 .strat-card-name{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink);margin-bottom:4px}
 .strat-card-type{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;margin-bottom:14px}
@@ -3871,7 +3873,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 </div>
 <div style="padding:24px 44px 0">
   <div class="perfrow">
-    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs">No calls yet</div></div>
+    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs">Live · tracking</div></div>
     <div class="pc"><div class="pcl">Open</div><div class="pcv" id="tr-open">0</div><div class="pcs">Active</div></div>
     <div class="pc"><div class="pcl">Wins</div><div class="pcv g" id="tr-wins">0</div><div class="pcs">Closed profitable</div></div>
     <div class="pc"><div class="pcl">Losses</div><div class="pcv r" id="tr-losses">0</div><div class="pcs">Stopped out</div></div>
@@ -4083,42 +4085,42 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="tool-grid">
   <div class="tg-thumb" id="tgt-quant" onclick="openToolThumb('quant')">
     <span class="tgt-badge">Quant</span>
-    <div class="tgt-icon">⚗</div>
+    <div class="tgt-icon">QM</div>
     <div class="tgt-name">Quantitative Models</div>
     <div class="tgt-desc">Black-Scholes · Monte Carlo · Bond Analytics · Volatility Engine</div>
     <div class="tgt-open">Open Tool</div>
   </div>
   <div class="tg-thumb" id="tgt-dcf" onclick="openToolThumb('dcf')">
     <span class="tgt-badge">Core</span>
-    <div class="tgt-icon">📊</div>
+    <div class="tgt-icon">VE</div>
     <div class="tgt-name">Complete Valuation Engine</div>
     <div class="tgt-desc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div>
     <div class="tgt-open">Open Tool</div>
   </div>
   <div class="tg-thumb" id="tgt-port" onclick="openToolThumb('port')">
     <span class="tgt-badge">PM Skill</span>
-    <div class="tgt-icon">🏗️</div>
+    <div class="tgt-icon">PC</div>
     <div class="tgt-name">Portfolio Construction</div>
     <div class="tgt-desc">Efficient frontier · Sharpe optimisation · Correlation matrix · Risk attribution</div>
     <div class="tgt-open">Open Tool</div>
   </div>
   <div class="tg-thumb" id="tgt-size" onclick="openToolThumb('size')">
     <span class="tgt-badge">PM Skill</span>
-    <div class="tgt-icon">⚖️</div>
+    <div class="tgt-icon">PS</div>
     <div class="tgt-name">Position Sizing Calculator</div>
     <div class="tgt-desc">Kelly criterion · Fixed fractional · Max drawdown simulation · R-multiple</div>
     <div class="tgt-open">Open Tool</div>
   </div>
   <div class="tg-thumb" id="tgt-corr" onclick="openToolThumb('corr')">
     <span class="tgt-badge">PM Skill</span>
-    <div class="tgt-icon">🔗</div>
+    <div class="tgt-icon">CA</div>
     <div class="tgt-name">Cross-Asset Correlation</div>
     <div class="tgt-desc">Macro regime detection · Correlation heatmap · Risk-on / risk-off scoring</div>
     <div class="tgt-open">Open Tool</div>
   </div>
   <div class="tg-thumb" id="tgt-idea" onclick="openToolThumb('idea')">
     <span class="tgt-badge">Analyst Skill</span>
-    <div class="tgt-icon">💡</div>
+    <div class="tgt-icon">IS</div>
     <div class="tgt-name">Investment Idea Screener</div>
     <div class="tgt-desc">Catalyst scoring · Sentiment overlay · EV/EBITDA · FCF yield · Momentum rank</div>
     <div class="tgt-open">Open Tool</div>
@@ -4130,7 +4132,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="tc" id="tc-quant">
 <div class="tchd" onclick="tog('quant')">
   <div class="tcleft">
-    <div class="tico" style="font-size:18px">⚗</div>
+    <div class="tico">QM</div>
     <div>
       <div class="tname">Quantitative Models <span class="quant-badge">Original</span></div>
       <div class="tdesc">Aeon Nimbus · Black-Scholes · Monte Carlo · Bond Analytics · Volatility Engine</div>
@@ -4323,7 +4325,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <!-- ───── TOOL 1: DCF ───────────────────────────── -->
 <div class="tc" id="tc-dcf">
 <div class="tchd" onclick="tog('dcf')">
-  <div class="tcleft"><div class="tico">📊</div><div><div class="tname">Complete Valuation Engine</div><div class="tdesc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div></div></div>
+  <div class="tcleft"><div class="tico">VE</div><div><div class="tname">Complete Valuation Engine</div><div class="tdesc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div></div></div>
   <span class="tbadge">Core</span><a href="https://github.com/lijiegsluis/aeon-dcf-engine" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
 <div class="tbody" id="tb-dcf">
@@ -4449,7 +4451,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <!-- ───── TOOL 2: PORTFOLIO CONSTRUCTION ──────────── -->
 <div class="tc" id="tc-port">
 <div class="tchd" onclick="tog('port')">
-  <div class="tcleft"><div class="tico">🏗️</div><div><div class="tname">Portfolio Construction</div><div class="tdesc">Build a mock fund · P&L attribution · Long/short exposure · Risk budget discipline</div></div></div>
+  <div class="tcleft"><div class="tico">PC</div><div><div class="tname">Portfolio Construction</div><div class="tdesc">Build a mock fund · P&L attribution · Long/short exposure · Risk budget discipline</div></div></div>
   <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-portfolio-construction" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
 <div class="tbody" id="tb-port">
@@ -4522,7 +4524,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <!-- ───── TOOL 3: POSITION SIZING ─────────────────── -->
 <div class="tc" id="tc-size">
 <div class="tchd" onclick="tog('size')">
-  <div class="tcleft"><div class="tico">⚖️</div><div><div class="tname">Position Sizing Calculator</div><div class="tdesc">Kelly Criterion · Fixed-risk (1R) · Conviction-weighted — the skill that separates analysts from PMs</div></div></div>
+  <div class="tcleft"><div class="tico">PS</div><div><div class="tname">Position Sizing Calculator</div><div class="tdesc">Kelly Criterion · Fixed-risk (1R) · Conviction-weighted — the skill that separates analysts from PMs</div></div></div>
   <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-position-sizing" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
 <div class="tbody" id="tb-size">
@@ -4578,7 +4580,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <!-- ───── TOOL 4: CORRELATION & REGIME ────────────── -->
 <div class="tc" id="tc-corr">
 <div class="tchd" onclick="tog('corr')">
-  <div class="tcleft"><div class="tico">🔗</div><div><div class="tname">Cross-Asset Correlation & Macro Regime</div><div class="tdesc">Correlation matrix · Regime classifier · Regime-driven allocation framework</div></div></div>
+  <div class="tcleft"><div class="tico">CA</div><div><div class="tname">Cross-Asset Correlation & Macro Regime</div><div class="tdesc">Correlation matrix · Regime classifier · Regime-driven allocation framework</div></div></div>
   <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-correlation-matrix" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
 <div class="tbody" id="tb-corr">
@@ -4612,7 +4614,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <!-- ───── TOOL 5: INVESTMENT IDEA SCREENER ────────── -->
 <div class="tc" id="tc-idea">
 <div class="tchd" onclick="tog('idea')">
-  <div class="tcleft"><div class="tico">💡</div><div><div class="tname">Investment Idea Screener</div><div class="tdesc">Thesis quality · Non-consensus signal · Catalyst timing · Publishability score</div></div></div>
+  <div class="tcleft"><div class="tico">IS</div><div><div class="tname">Investment Idea Screener</div><div class="tdesc">Thesis quality · Non-consensus signal · Catalyst timing · Publishability score</div></div></div>
   <span class="tbadge">Analyst Skill</span><a href="https://github.com/lijiegsluis/aeon-idea-screener" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
 </div>
 <div class="tbody" id="tb-idea">
@@ -5333,7 +5335,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Dual-Momentum Rotation</div>
         <div class="wr-card-desc">Ray Dalio quantitative market regime detector &amp; Trend Following — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Nasdaq · S&amp;P 500 · Commodities · Bonds</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- AEGIS -->
@@ -5343,7 +5344,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Market Timing · Macro Protection</div>
         <div class="wr-card-desc">Macro strategy and protection — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Sector ETFs · Index Funds · Fixed Income</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- KAIROS -->
@@ -5353,7 +5353,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Long-Short Momentum</div>
         <div class="wr-card-desc">Market neutral long-short momentum — weekly quantitative research report.</div>
         <div class="wr-card-assets">US Equities · Large &amp; Mid Cap Stocks</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- BOREAS -->
@@ -5362,7 +5361,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Multi-Factor Equity</div>
         <div class="wr-card-desc">Multi-factor equity selection — weekly quantitative research report.</div>
         <div class="wr-card-assets">US Equities · Multi-Factor Stock Selection</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- TYPHON -->
@@ -5371,7 +5369,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Market Timing + High Return</div>
         <div class="wr-card-desc">Macro strategy and high returns — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Cross-Asset Macro · Equities · Rates · FX</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- EREBUS -->
@@ -5380,7 +5377,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Macro + Volatility Trading</div>
         <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Volatility Products · Index Options</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
       <!-- PROTEUS -->
@@ -5389,31 +5385,10 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
         <div class="wr-card-strat">Double Layer Macro + Vol</div>
         <div class="wr-card-desc">Macro strategy and volatility trading — weekly quantitative research report.</div>
         <div class="wr-card-assets">ETFs &amp; Funds · Options on Major Indices &amp; ETFs</div>
-        <div class="wr-card-price">€5<span>/month</span></div>
         <button class="wr-card-cta" onclick="sp('contact')">Subscribe →</button>
       </div>
     </div><!-- /wr-grid -->
 
-    <!-- Bundle -->
-    <div class="wr-bundle">
-      <div class="wr-bundle-left">
-        <div class="wr-bundle-badge">Best Value</div>
-        <div class="wr-bundle-title">Complete Bundle</div>
-        <div class="wr-bundle-sub">All strategies + Market reports + Quant Macro Insights</div>
-        <ul class="wr-bundle-features">
-          <li>All 7 equity strategies: KAIROS · KRONOS · AEGIS · BOREAS · PROTEUS · TYPHON · EREBUS</li>
-          <li>Weekly reports with full quantitative analysis</li>
-          <li>Quantitative macroeconomic insights</li>
-          <li>Full historical archive access</li>
-          <li>Signals with transparent reasoning — AI agent ready</li>
-        </ul>
-      </div>
-      <div class="wr-bundle-right">
-        <div class="wr-bundle-price">€30<span>/month</span></div>
-        <div class="wr-bundle-save">Save €5 vs individual (€35)</div>
-        <button class="wr-cta-big" onclick="sp('contact')">Get Full Access ↗</button>
-      </div>
-    </div>
 
     <div class="wr-disc">⚠ These reports are for informational and educational purposes only. They describe the quantitative methodology, mathematical models, and portfolio evolution of each strategy. They do NOT constitute trading signals, investment advice, or personalized financial recommendations. Past performance does not guarantee future results. Always conduct your own research and consult with a licensed financial advisor before making investment decisions.</div>
 

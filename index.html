@@ -148,6 +148,10 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
 .hcard{padding:36px 32px;background:var(--bg1);cursor:pointer;position:relative;overflow:hidden;transition:background .2s}
 .hcard-hero{grid-column:1/-1;border-left:2px solid var(--gold)}
+.ptab-bar{display:flex;gap:0;margin:0 44px;border-bottom:1px solid var(--line2)}
+.ptab{font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--g2);padding:11px 20px;cursor:pointer;transition:all .2s;margin-bottom:-1px}
+.ptab:hover{color:var(--gold)}
+.ptab.on{color:var(--gold);border-bottom-color:var(--gold)}
 .hcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .hcard:hover{background:var(--bg2)}.hcard:hover::after{transform:scaleX(1)}
 .hcard:hover .hct{color:var(--gold)}
@@ -3909,6 +3913,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
   <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
   <div class="fx-desc">Two proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 6,071 trades. No discretionary overlay. Methodology proprietary. Full backtest data available to qualified institutional allocators upon request.</div>
+  <button onclick="sp('strats')" style="margin-bottom:20px;font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid rgba(200,131,10,.45);color:var(--gold);padding:9px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(200,131,10,.08)'" onmouseout="this.style.borderColor='rgba(200,131,10,.45)';this.style.background='none'">View All Systematic Strategies →</button>
 
   <!-- Combined stats strip -->
   <div class="fx-combined">
@@ -4025,7 +4030,8 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
 <div class="pg" id="pg-tools">
-<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Toolkit <em>&amp; Strategies</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all. &nbsp;<span class="ul-draw" style="color:var(--gold);cursor:pointer;font-size:.85em" onclick="sp('strats')">→ Systematic Strategies</span></p></div>
+<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Toolkit <em>&amp; Strategies</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
+<div class="ptab-bar"><button class="ptab on">Tools &amp; Models</button><button class="ptab" onclick="sp('strats')">Systematic Strategies</button></div>
 
 <!-- Tool thumbnail grid -->
 <div class="tool-grid">
@@ -4811,6 +4817,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <h2 class="pgtitle">Quantitative <em>Strategies</em></h2>
   <p class="pgsub">Twelve fully systematic strategies across systematic equity, FX, and commodities — institutional-grade algorithmic systems backtested on 99–100% real tick data across 12+ years of full market cycles.</p>
 </div>
+<div class="ptab-bar"><button class="ptab" onclick="sp('tools')">Tools &amp; Models</button><button class="ptab on">Systematic Strategies</button></div>
 
 <!-- Sub-tab navigation -->
 <div class="strats-tabs">

@@ -3884,60 +3884,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="trwrap">
   <table class="tr">
     <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th></tr></thead>
-    <tbody>
-      <tr>
-        <td>04 May 2026</td>
-        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer" target="_blank" style="color:var(--gold);text-decoration:none">$ADEA</a></td>
-        <td><span class="pchip ce" style="margin:0">Equity</span></td>
-        <td class="tdl">Long</td>
-        <td>$30.00</td>
-        <td>$42.00</td>
-        <td>$20.00</td>
-        <td>2%</td>
-        <td>12m</td>
-        <td><span class="bdg bo">Open</span></td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>01 May 2026</td>
-        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient" target="_blank" style="color:var(--gold);text-decoration:none">$NU</a></td>
-        <td><span class="pchip ce" style="margin:0">Equity</span></td>
-        <td class="tdl">Long</td>
-        <td>$14.53</td>
-        <td>$21.00</td>
-        <td>$11.20</td>
-        <td>3%</td>
-        <td>18–24m</td>
-        <td><span class="bdg bo">Open</span></td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>13 Apr 2026</td>
-        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify" target="_blank" style="color:var(--gold);text-decoration:none">$MELI</a></td>
-        <td><span class="pchip ce" style="margin:0">Equity</span></td>
-        <td class="tdl">Long</td>
-        <td>$1,774.00</td>
-        <td>$2,750.00</td>
-        <td>$1,420.00</td>
-        <td>3%</td>
-        <td>18–24m</td>
-        <td><span class="bdg bo">Open</span></td>
-        <td>—</td>
-      </tr>
-      <tr>
-        <td>08 Apr 2026</td>
-        <td class="tdtk"><a href="https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market" target="_blank" style="color:var(--gold);text-decoration:none">$ORCL</a></td>
-        <td><span class="pchip ce" style="margin:0">Equity</span></td>
-        <td class="tdl">Long</td>
-        <td>$143.36</td>
-        <td>$242.00</td>
-        <td>$118.00</td>
-        <td>2%</td>
-        <td>12–18m</td>
-        <td><span class="bdg bo">Open</span></td>
-        <td>—</td>
-      </tr>
-      </tbody>
+    <tbody></tbody>
   </table>
 </div>
 
@@ -8247,17 +8194,21 @@ function exportPortExcel(){
       const typeKey = (call.type||'equity').toLowerCase();
       const chip = TYPE_MAP[typeKey]||{cls:'ce',lbl:call.type||'Equity'};
       const date = new Date(item.pubDate);
-      const dateStr = date.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+      const dateStr = date.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
       const dir = call.dir||'Long';
       const dirCls = dir.toLowerCase()==='short'?'tds':'tdl';
       // Format entry/target/stop — prefix $ only if purely numeric
       const fmt = v => !v||v==='—'?'—' : /^[\d,]+(\.\d+)?$/.test(v)?'$'+v:v;
       const displayTk = ticker.match(/^[A-Z0-9.]{1,6}$/) ? '$'+ticker : ticker;
+      const postLink = item.link || call.link;
+      const tkHtml = postLink
+        ? `<a href="${postLink}" target="_blank" style="color:var(--gold);text-decoration:none">${displayTk}</a>`
+        : displayTk;
       const row = document.createElement('tr');
       row.dataset.rssId = item.guid||item.link||ticker;
       row.innerHTML = [
         `<td>${dateStr}</td>`,
-        `<td class="tdtk">${displayTk}</td>`,
+        `<td class="tdtk">${tkHtml}</td>`,
         `<td><span class="pchip ${chip.cls}" style="margin:0">${chip.lbl}</span></td>`,
         `<td class="${dirCls}">${dir}</td>`,
         `<td>${fmt(call.entry)}</td>`,
@@ -8273,18 +8224,29 @@ function exportPortExcel(){
       if(window._trRecalc) window._trRecalc();
     }
 
-    /* ── KNOWN_CALLS fallback — title keyword → {ticker,entry} ── */
+    /* ── KNOWN_CALLS — full call registry; source of truth for track record ── */
     const KNOWN_CALLS = {
-      'oracle'      : {ticker:'ORCL', entry:'143.36'},
-      'mercadolibre': {ticker:'MELI', entry:'1774.00'},
-      'nu holdings' : {ticker:'NU',   entry:'14.53'},
-      'adeia'       : {ticker:'ADEA', entry:'30.00'},
+      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'2%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z'},
+      'mercadolibre': {ticker:'MELI', entry:'1774.00',target:'2750.00',stop:'1420.00',size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify',   pubDate:'2026-04-13T00:00:00Z'},
+      'nu holdings' : {ticker:'NU',   entry:'14.53',  target:'21.00',  stop:'11.20', size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient',    pubDate:'2026-05-01T00:00:00Z'},
+      'adeia'       : {ticker:'ADEA', entry:'30.00',  target:'42.00',  stop:'20.00', size:'2%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer',         pubDate:'2026-05-04T00:00:00Z'},
+      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z'},
     };
     function knownCallFromTitle(title){
       const t=(title||'').toLowerCase();
       for(const [k,v] of Object.entries(KNOWN_CALLS)) if(t.includes(k)) return v;
       return null;
     }
+
+    /* ── Pre-populate track record from KNOWN_CALLS on every page load ── */
+    /* Sorted oldest→newest so each prepend lands newest at top */
+    function populateKnownCalls(){
+      const sorted = Object.values(KNOWN_CALLS).slice().sort((a,b)=>new Date(a.pubDate)-new Date(b.pubDate));
+      sorted.forEach(function(call){
+        injectCallRow({pubDate:call.pubDate, guid:call.ticker, link:call.link}, call);
+      });
+    }
+    populateKnownCalls();
 
     /* ── Build one research list row ────────────── */
     function buildPost(item){
@@ -8592,7 +8554,7 @@ function exportPortExcel(){
 
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
-    '$VNET':'VNET', '$MELI':'MELI', '$ORCL':'ORCL', '$ADEA':'ADEA', '$NU':'NU',
+    '$VNET':'VNET', '$MELI':'MELI', '$ORCL':'ORCL', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
     'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
   };
 

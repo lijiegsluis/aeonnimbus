@@ -147,6 +147,7 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 /* Home grid */
 .hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
 .hcard{padding:36px 32px;background:var(--bg1);cursor:pointer;position:relative;overflow:hidden;transition:background .2s}
+.hcard-hero{grid-column:1/-1;border-left:2px solid var(--gold)}
 .hcard::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .hcard:hover{background:var(--bg2)}.hcard:hover::after{transform:scaleX(1)}
 .hcard:hover .hct{color:var(--gold)}
@@ -3653,10 +3654,9 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <div class="nlogo" onclick="sp('home')" style="font-family:var(--FM,monospace);letter-spacing:.06em;font-size:12px;font-weight:500">LIJIE GUO<span style="opacity:.35;margin:0 8px">·</span><span style="opacity:.5;letter-spacing:.12em;font-size:.82em">AEON NIMBUS</span></div>
   <div class="nlinks" style="display:flex;align-items:center;gap:24px">
     <button class="nbtn on" onclick="sp('home')">Home</button>
-    <button class="nbtn" onclick="sp('research')">Research</button>
     <button class="nbtn" onclick="sp('track')">Track Record</button>
-    <button class="nbtn" onclick="sp('tools')">Tools</button>
-    <button class="nbtn" onclick="sp('strats')">Strategies</button>
+    <button class="nbtn" onclick="sp('research')">Research</button>
+    <button class="nbtn" onclick="sp('tools')">Toolkit</button>
     <button class="nbtn" onclick="sp('contact')">Contact</button>
 
     <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
@@ -3767,10 +3767,9 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 </div></div>
 
 <div class="hgrid">
-  <div class="hcard home-grid-card" onclick="sp('research')"><div class="hcn">01</div><div class="hct">Research Notes</div><p class="hcp">Equity deep dives, macro briefs, geo/market wraps, central bank analysis.</p><div class="hca">Read latest →</div></div>
-  <div class="hcard home-grid-card" onclick="sp('track')"><div class="hcn">02</div><div class="hct">Track Record</div><p class="hcp">Every call audited publicly. Entry, target, stop, position size, and outcome — wins and losses, fully timestamped.</p><div class="hca">View record →</div></div>
-  <div class="hcard home-grid-card" onclick="sp('tools');oTool('dcf')"><div class="hcn">03</div><div class="hct">Valuation Engine</div><p class="hcp">Full DCF with WACC/CAPM, 3-way sensitivity, peer comps, football field. Pre-loaded with live examples.</p><div class="hca">Open tool →</div></div>
-  <div class="hcard home-grid-card" onclick="sp('tools');oTool('port')"><div class="hcn">04</div><div class="hct">PM Toolkit</div><p class="hcp">Portfolio construction, Kelly position sizing, cross-asset correlation matrix, macro regime classifier, investment screener.</p><div class="hca">Open tools →</div></div>
+  <div class="hcard home-grid-card hcard-hero" onclick="sp('track')"><div class="hcn">01</div><div class="hct">Track Record</div><p class="hcp">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p><div class="hca">View record →</div></div>
+  <div class="hcard home-grid-card" onclick="sp('research')"><div class="hcn">02</div><div class="hct">Research Notes</div><p class="hcp">Equity deep dives, macro briefs, geo/market wraps, central bank analysis.</p><div class="hca">Read latest →</div></div>
+  <div class="hcard home-grid-card" onclick="sp('tools')"><div class="hcn">03</div><div class="hct">Toolkit</div><p class="hcp">DCF, WACC/CAPM, Black-Scholes, portfolio construction, Kelly sizing, correlation matrix, macro regime classifier, systematic FX strategies.</p><div class="hca">Open toolkit →</div></div>
 </div>
 
 
@@ -3862,7 +3861,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
     <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
   </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
@@ -4021,12 +4020,12 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
 </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
 <div class="pg" id="pg-tools">
-<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Tools <em>&amp; Models</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
+<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Toolkit <em>&amp; Strategies</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all. &nbsp;<span class="ul-draw" style="color:var(--gold);cursor:pointer;font-size:.85em" onclick="sp('strats')">→ Systematic Strategies</span></p></div>
 
 <!-- Tool thumbnail grid -->
 <div class="tool-grid">
@@ -4798,7 +4797,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
 </div><!-- /qp-section -->
 <!-- tgrid -->
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">All tools are for educational and informational purposes only. Not financial advice. Results are model-based estimates only.</div>
 </div>
 
@@ -5342,7 +5341,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   </div>
 </div><!-- /stab-reports -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
 </div><!-- /pg-strats -->
 
@@ -5446,7 +5445,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 
 </div><!-- /ct-layout -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Tools</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div><!-- /pg-contact -->
 
 <script>
@@ -5717,7 +5716,8 @@ function sp(id){
     window.scrollTo({top:0,behavior:'instant'});
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    b.classList.toggle('on',['home','research','track','tools','strats','contact'][i]===id);
+    const map=[['home'],['track'],['research'],['tools','strats'],['contact']];
+    b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }
 function showStab(id){

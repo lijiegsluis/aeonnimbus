@@ -8613,14 +8613,32 @@ function exportPortExcel(){
 /* ── LAST PRICE & ROI COLUMNS — powered by Finnhub ──────────────── */
 (function(){
   var FH_KEY = 'd883b7hr01qmhaki18mgd883b7hr01qmhaki18n0';
+  var CACHE_KEY = '_trPriceCache';
+  var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
     '$MELI':'MELI','$ORCL':'ORCL','$NU':'NU','$ADEA':'ADEA',
     '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA'
   };
+
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }
 
-  function refresh(){
-    var allItems = [];
+  /* Read cache → {ts, prices:{SYM:price}} or null */
+  function readCache(){
+    try{
+      var raw = localStorage.getItem(CACHE_KEY);
+      if(!raw) return null;
+      return JSON.parse(raw);
+    }catch(e){ return null; }
+  }
+
+  /* Write prices map to cache with current timestamp */
+  function writeCache(prices){
+    try{ localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),prices:prices})); }catch(e){}
+  }
+
+  /* Collect all rows that have live-price cells and return item list */
+  function collectItems(){
+    var items = [];
     document.querySelectorAll('table.tr tbody tr').forEach(function(row){
       var txt = row.dataset.sym || ((row.querySelector('.tdtk')||{}).textContent||'').trim();
       if(!txt) return;
@@ -8635,42 +8653,75 @@ function exportPortExcel(){
       var lastCell = row.querySelector('.tr-last');
       var roiCell  = row.querySelector('.tr-roi');
       if(!lastCell && !roiCell) return;
-      if(lastCell) lastCell.textContent = '…';
-      allItems.push({sym:sym, entry:entry, lastCell:lastCell, roiCell:roiCell});
+      items.push({sym:sym, entry:entry, lastCell:lastCell, roiCell:roiCell});
     });
-    if(!allItems.length) return;
+    return items;
+  }
 
-    /* Deduplicate symbols then fetch each from Finnhub in parallel */
+  /* Paint prices from a {SYM:price} map onto the DOM */
+  function paint(items, prices){
+    items.forEach(function(item){
+      var price = prices[item.sym];
+      if(price == null || isNaN(+price)) return;
+      if(item.lastCell){
+        item.lastCell.textContent = '$'+Number(price).toFixed(2);
+        item.lastCell.style.color = 'var(--white2,#ccc)';
+      }
+      if(item.roiCell){
+        var roi = (price - item.entry) / item.entry * 100;
+        var sign = roi >= 0 ? '+' : '';
+        item.roiCell.textContent = sign+roi.toFixed(1)+'%';
+        item.roiCell.style.color = roi >= 0 ? '#4ade80' : '#f87171';
+        item.roiCell.style.fontWeight = '600';
+      }
+    });
+  }
+
+  /* Fetch fresh prices from Finnhub for given symbol list, return promise of {SYM:price} */
+  function fetchFresh(syms){
     var prices = {};
-    allItems.forEach(function(item){ prices[item.sym] = null; });
-
-    var fetches = Object.keys(prices).map(function(sym){
+    syms.forEach(function(s){ prices[s] = null; });
+    var fetches = syms.map(function(sym){
       return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+FH_KEY)
         .then(function(r){ return r.json(); })
-        .then(function(d){
-          /* d.c = current price; d.pc = previous close */
-          if(d && d.c && d.c !== 0) prices[sym] = d.c;
-        })
+        .then(function(d){ if(d && d.c && d.c !== 0) prices[sym] = d.c; })
         .catch(function(){});
     });
+    return Promise.all(fetches).then(function(){ return prices; });
+  }
 
-    Promise.all(fetches).then(function(){
-      allItems.forEach(function(item){
-        var price = prices[item.sym];
-        if(price == null || isNaN(+price)) return;
-        if(item.lastCell){
-          item.lastCell.textContent = '$'+Number(price).toFixed(2);
-          item.lastCell.style.color = 'var(--white2,#ccc)';
-        }
-        if(item.roiCell){
-          var roi = (price - item.entry) / item.entry * 100;
-          var sign = roi >= 0 ? '+' : '';
-          item.roiCell.textContent = sign+roi.toFixed(1)+'%';
-          item.roiCell.style.color = roi >= 0 ? '#4ade80' : '#f87171';
-          item.roiCell.style.fontWeight = '600';
-        }
+  function refresh(){
+    var items = collectItems();
+    if(!items.length) return;
+
+    /* Deduplicate symbols */
+    var symSet = {};
+    items.forEach(function(i){ symSet[i.sym] = true; });
+    var syms = Object.keys(symSet);
+
+    var cached = readCache();
+    var now = Date.now();
+
+    if(cached && (now - cached.ts) < CACHE_TTL){
+      /* Cache is fresh — paint immediately, no API call */
+      paint(items, cached.prices);
+
+      /* Silently refresh in background when cache is in last 30 seconds of TTL */
+      var age = now - cached.ts;
+      if(age > CACHE_TTL - 30000){
+        fetchFresh(syms).then(function(prices){
+          writeCache(prices);
+          paint(items, prices);
+        });
+      }
+    } else {
+      /* Cache stale or empty — show spinner dots, fetch fresh */
+      items.forEach(function(i){ if(i.lastCell) i.lastCell.textContent = '…'; });
+      fetchFresh(syms).then(function(prices){
+        writeCache(prices);
+        paint(items, prices);
       });
-    });
+    }
   }
 
   window._trRefreshPrices = refresh;

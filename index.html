@@ -206,6 +206,38 @@ table.tr th{padding:11px 12px;text-align:left;font-size:8px;letter-spacing:.1em;
 table.tr tbody tr{border-bottom:1px solid var(--line2);transition:background .15s}
 table.tr tbody tr:hover{background:rgba(196,154,42,.03)}
 table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
+
+/* ── Track Record: sticky Ticker on scroll (tablet+) ── */
+@media(min-width:621px){
+  table.tr{min-width:920px}
+  table.tr th:nth-child(2),table.tr td:nth-child(2){position:sticky;left:0;z-index:2;background:var(--bg)}
+  table.tr tbody tr:hover td:nth-child(2){background:rgba(196,154,42,.03)}
+}
+
+/* ── Track Record: card layout on mobile ──────────── */
+@media(max-width:620px){
+  .trwrap{padding:0 0 40px;overflow-x:visible}
+  table.tr,table.tr tbody{display:block}
+  table.tr thead{display:none}
+  table.tr tbody tr{
+    display:grid;grid-template-columns:1fr 1fr;gap:8px 16px;
+    padding:14px 20px;border-bottom:1px solid var(--line2);
+  }
+  table.tr td{display:flex;flex-direction:column;gap:3px;padding:0;border:none;font-size:12px;color:var(--white2)}
+  table.tr td::before{
+    content:attr(data-label);
+    font-family:var(--FM,monospace);font-size:7px;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--g2)
+  }
+  /* Ticker spans full width, larger, no label prefix */
+  table.tr td.tdtk{grid-column:1/3;font-size:15px;font-weight:700;color:var(--gold)}
+  table.tr td.tdtk::before{display:none}
+  /* Status row full-width */
+  table.tr td:nth-child(9){grid-column:1/3}
+  /* ROI prominent */
+  table.tr td.tr-roi{font-size:14px;font-weight:700}
+  table.tr td.tr-ret{font-weight:600}
+}
 .tdtk{font-weight:700;color:var(--gold)}.tdl{color:#4ade80}.tds{color:#f87171}
 .bdg{padding:3px 9px;font-size:8px;letter-spacing:.09em;text-transform:uppercase}
 .bw{background:rgba(74,222,128,.12);color:#4ade80}.bl{background:rgba(248,113,113,.1);color:#f87171}.bo{background:rgba(196,154,42,.12);color:var(--gold)}
@@ -420,9 +452,20 @@ html.dark .mv2-link{color:#C4A44A}
 .mv2-link:hover{text-decoration:underline}
 
 /* ── Masthead stats mini-row ───────────────────── */
-/* ── Bio expand toggle ─────────────────────────── */
-.bio-toggle{background:none;border:none;cursor:pointer;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);padding:10px 0 0;display:block;transition:opacity .2s}
-.bio-toggle:hover{opacity:.75}
+/* ── Bio Accordion ─────────────────────────────── */
+.bio-accord{border:1px solid rgba(196,164,74,.2);border-radius:3px;overflow:hidden;margin-top:4px}
+.bac{border-bottom:1px solid rgba(196,164,74,.1)}
+.bac:last-child{border-bottom:none}
+.bac>summary{list-style:none;cursor:pointer;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;user-select:none;transition:background .15s}
+.bac>summary::-webkit-details-marker,.bac>summary::marker{display:none;content:''}
+.bac>summary:hover{background:rgba(196,164,74,.05)}
+.bac[open]>summary{background:rgba(196,164,74,.07);border-left:2px solid var(--gold);padding-left:12px}
+.bac-label{font-family:var(--FM,monospace);font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.bac-chevron{width:10px;height:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center}
+.bac-chevron::after{content:'';display:block;width:6px;height:6px;border-right:1.5px solid var(--g2);border-bottom:1.5px solid var(--g2);transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.bac[open] .bac-chevron::after{transform:rotate(-135deg) translateY(-2px)}
+.bac-body{padding:10px 14px 14px;font-size:13.5px;line-height:1.78;color:var(--ink2);border-left:2px solid rgba(196,164,74,.18);margin-left:0}
+.bac-body em{font-style:italic;font-weight:500}
 
 /* ── Masthead stats mini-row ───────────────────── */
 .mv2-stats{display:flex;gap:24px;margin:24px 0 4px;flex-wrap:wrap}
@@ -3504,10 +3547,10 @@ html.dark .qp-card { border-color:var(--rule)!important; background:var(--bg1)!i
 .stab-panel{display:none}
 .stab-panel.on{display:block}
 /* Strategy comparison table */
-.st-wrap{padding:0 52px 48px;overflow-x:auto}
+.st-wrap{padding:0 52px 48px;overflow-x:auto;-webkit-overflow-scrolling:touch}
 .st-eyebrow{font-family:var(--FM);font-size:7.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:24px;display:flex;align-items:center;gap:8px}
 .st-eyebrow::before{content:'';width:18px;height:1px;background:var(--gold);flex-shrink:0}
-table.st{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
+table.st{width:100%;min-width:680px;border-collapse:collapse;font-family:var(--FM);font-size:11px}
 table.st thead tr{background:rgba(196,154,42,.08);border-bottom:1px solid var(--rule)}
 table.st th{padding:11px 14px;text-align:left;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;white-space:nowrap}
 table.st tbody tr{border-bottom:1px solid var(--rule2);transition:background .15s;cursor:pointer}
@@ -3515,6 +3558,9 @@ table.st tbody tr:hover{background:rgba(196,154,42,.04)}
 table.st td{padding:12px 14px;color:var(--ink2);vertical-align:middle}
 table.st td:first-child{color:var(--ink);font-weight:700;letter-spacing:.06em}
 table.st td:nth-child(2){color:var(--ink3);font-size:10px}
+/* Sticky strategy name column */
+table.st th:first-child,table.st td:first-child{position:sticky;left:0;z-index:2;background:var(--bg1)}
+table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 .str-cagr{color:#4ade80!important;font-weight:700!important}
 .str-sharpe{color:var(--gold)!important}
 .str-dd{color:#f87171!important}
@@ -3607,7 +3653,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 .wr-cta-big:hover{background:var(--gold2)}
 .wr-disc{font-family:var(--FM);font-size:8px;color:var(--ink3);line-height:1.7;border-top:1px solid var(--rule);padding-top:20px;margin-top:28px}
 @media(max-width:900px){.pb-layout{grid-template-columns:1fr}.wr-bundle{grid-template-columns:1fr}.wr-bundle-right{text-align:left}}
-@media(max-width:700px){.strats-tabs{padding:0 20px}.st-wrap{padding:0 20px 40px}.strat-grid{grid-template-columns:1fr 1fr;padding:20px 20px 0}.pb-wrap,.wr-wrap{padding:32px 20px 48px}.wr-grid{grid-template-columns:1fr}}
+@media(max-width:700px){.strats-tabs{padding:0 20px}.st-wrap{padding:0 0 40px}.strat-grid{grid-template-columns:1fr 1fr;padding:20px 20px 0}.pb-wrap,.wr-wrap{padding:32px 20px 48px}.wr-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.strat-grid{grid-template-columns:1fr}.wr-grid{grid-template-columns:1fr}}
 
 /* ══════════════════════════════════════════════════════
@@ -3719,21 +3765,33 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   </div>
     <div class="mv2-right">
     <div class="mv2-bio-label reveal">About</div>
-<div class="mv2-bio reveal d1">
-  <em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> across five FX and commodity pairs and seven systematic equity models, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.
-  <div class="bio-extra" id="bio-extra" style="display:none">
-  <br><br>
-  His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.
-  <br><br>
-  He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.
-  <br><br>
-  He is currently conducting the <em>Jupiter Asset Management Industry Research Project</em> (London) — investigating equity return predictability across Japanese, US and European markets at Jupiter AM, one of the UK's highest active-share, high-conviction managers (FTSE 250, £51bn AUM). Jointly supervised by an <em>Asset Pricing</em> professor at Bayes Business School, a <em>Systematic Equity Portfolio Manager</em> at Jupiter Asset Management, and a <em>Computational Finance</em> professor at Paris Dauphine. He leads the economic framework, hypothesis construction, and Python implementation of factor models and statistical tests on cross-market return data.
-  <br><br>
-  Spanish-born and ethnically Chinese, he was shaped by two cultures — and drawn, from his first market investment at 18, to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.
-  <br><br>
-  <em>Not investment advice.</em>
-  </div>
-  <button class="bio-toggle" id="bio-toggle" onclick="(function(){var x=document.getElementById('bio-extra'),b=document.getElementById('bio-toggle');var open=x.style.display!=='none';x.style.display=open?'none':'block';b.textContent=open?'Read full bio ↓':'Collapse ↑'})()">Read full bio ↓</button>
+<div class="bio-accord reveal d1">
+
+  <details class="bac" open>
+    <summary class="bac-head"><span class="bac-label">The Platform</span><span class="bac-chevron"></span></summary>
+    <div class="bac-body"><em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> across five FX and commodity pairs and seven systematic equity models, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.</div>
+  </details>
+
+  <details class="bac">
+    <summary class="bac-head"><span class="bac-label">Experience</span><span class="bac-chevron"></span></summary>
+    <div class="bac-body">His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.</div>
+  </details>
+
+  <details class="bac">
+    <summary class="bac-head"><span class="bac-label">Education</span><span class="bac-chevron"></span></summary>
+    <div class="bac-body">He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.</div>
+  </details>
+
+  <details class="bac">
+    <summary class="bac-head"><span class="bac-label">Current Research</span><span class="bac-chevron"></span></summary>
+    <div class="bac-body">He is currently conducting the <em>Jupiter Asset Management Industry Research Project</em> (London) — investigating equity return predictability across Japanese, US and European markets at Jupiter AM, one of the UK's highest active-share, high-conviction managers (FTSE 250, £51bn AUM). Jointly supervised by an <em>Asset Pricing</em> professor at Bayes Business School, a <em>Systematic Equity Portfolio Manager</em> at Jupiter Asset Management, and a <em>Computational Finance</em> professor at Paris Dauphine. He leads the economic framework, hypothesis construction, and Python implementation of factor models and statistical tests.</div>
+  </details>
+
+  <details class="bac">
+    <summary class="bac-head"><span class="bac-label">Background</span><span class="bac-chevron"></span></summary>
+    <div class="bac-body">Spanish-born and ethnically Chinese, drawn from his first market investment at 18 to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>. <em>Not investment advice.</em></div>
+  </details>
+
 </div>
 <div class="edu-logos">
   <div class="edu-logo-label">Education</div>
@@ -8245,18 +8303,18 @@ function exportPortExcel(){
       row.dataset.sym   = displayTk;        /* '$MELI' etc — used by price refresh */
       row.dataset.entry = call.entry||'';   /* raw numeric string */
       row.innerHTML = [
-        `<td>${dateStr}</td>`,
-        `<td class="tdtk">${tkHtml}</td>`,
-        `<td class="${dirCls}">${dir}</td>`,
-        `<td>${fmt(call.entry)}</td>`,
-        `<td>${fmt(call.target)}</td>`,
-        `<td>${fmt(call.stop)}</td>`,
-        `<td>${call.size||'—'}</td>`,
-        `<td>${call.horizon||'—'}</td>`,
-        '<td><span class="bdg bo">Open</span></td>',
-        '<td class="tr-ret">—</td>',
-        '<td class="tr-last">—</td>',
-        '<td class="tr-roi">—</td>'
+        `<td data-label="Date">${dateStr}</td>`,
+        `<td class="tdtk" data-label="Ticker">${tkHtml}</td>`,
+        `<td class="${dirCls}" data-label="Dir">${dir}</td>`,
+        `<td data-label="Entry">${fmt(call.entry)}</td>`,
+        `<td data-label="Target">${fmt(call.target)}</td>`,
+        `<td data-label="Stop">${fmt(call.stop)}</td>`,
+        `<td data-label="Size">${call.size||'—'}</td>`,
+        `<td data-label="Horizon">${call.horizon||'—'}</td>`,
+        '<td data-label="Status"><span class="bdg bo">Open</span></td>',
+        '<td class="tr-ret" data-label="Return">—</td>',
+        '<td class="tr-last" data-label="Last Price">—</td>',
+        '<td class="tr-roi" data-label="ROI">—</td>'
       ].join('');
       // Insert newest first
       tbody.insertBefore(row, tbody.firstChild);

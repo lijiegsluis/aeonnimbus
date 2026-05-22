@@ -3705,6 +3705,8 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
   <br><br>
   He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.
   <br><br>
+  He is currently conducting the <em>Jupiter Asset Management Industry Research Project</em> (London) — investigating equity return predictability across Japanese, US and European markets at Jupiter AM, one of the UK's highest active-share, high-conviction managers (FTSE 250, £51bn AUM). Jointly supervised by an <em>Asset Pricing</em> professor at Bayes Business School, a <em>Systematic Equity Portfolio Manager</em> at Jupiter Asset Management, and a <em>Computational Finance</em> professor at Paris Dauphine. He leads the economic framework, hypothesis construction, and Python implementation of factor models and statistical tests on cross-market return data.
+  <br><br>
   Spanish-born and ethnically Chinese, he was shaped by two cultures — and drawn, from his first market investment at 18, to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.
   <br><br>
   <em>Not investment advice.</em>
@@ -3886,7 +3888,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 </div>
 <div class="trwrap">
   <table class="tr">
-    <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th></tr></thead>
+    <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
     <tbody></tbody>
   </table>
 </div>
@@ -5721,6 +5723,7 @@ function sp(id){
   setTimeout(()=>{
     next.classList.add('on');
     window.scrollTo({top:0,behavior:'instant'});
+    if(id==='track' && window._trRefreshPrices) window._trRefreshPrices();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
     const map=[['home'],['track'],['research'],['tools','strats'],['contact']];
@@ -8224,7 +8227,9 @@ function exportPortExcel(){
         `<td>${call.size||'—'}</td>`,
         `<td>${call.horizon||'—'}</td>`,
         '<td><span class="bdg bo">Open</span></td>',
-        '<td>—</td>'
+        '<td>—</td>',
+        '<td class="tr-last">—</td>',
+        '<td class="tr-roi">—</td>'
       ].join('');
       // Insert newest first
       tbody.insertBefore(row, tbody.firstChild);
@@ -8601,6 +8606,57 @@ function exportPortExcel(){
       });
     })
     .catch(function(){});
+})();
+
+/* ── LAST PRICE & ROI COLUMNS (all rows, refreshed on tab open) ─── */
+(function(){
+  var TICKER_MAP = {
+    '$VNET':'VNET','$MELI':'MELI','$ORCL':'ORCL','$ADEA':'ADEA',
+    '$NU':'NU','$IREN':'IREN','GOLD':'GC=F','$BA':'BA','$NVDA':'NVDA'
+  };
+  function parseP(s){ s=String(s).replace(/[$,\s]/g,''); var v=parseFloat(s); return isNaN(v)?NaN:v; }
+  function refresh(){
+    var allItems=[];
+    document.querySelectorAll('table.tr tbody tr').forEach(function(row){
+      var tds=row.querySelectorAll('td');
+      if(tds.length<11) return;
+      var txt=(row.querySelector('.tdtk')||{}).textContent||'';
+      txt=txt.trim();
+      var sym=TICKER_MAP[txt]||txt.replace(/^\$/,'');
+      if(!sym) return;
+      var entry=parseP((tds[4]||{}).textContent||'');
+      if(isNaN(entry)) return;
+      allItems.push({sym:sym,entry:entry,lastCell:tds[11],roiCell:tds[12]});
+    });
+    if(!allItems.length) return;
+    var syms=allItems.map(function(r){return r.sym;})
+                     .filter(function(v,i,a){return a.indexOf(v)===i;}).join(',');
+    fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(syms))
+      .then(function(r){return r.json();})
+      .then(function(data){
+        var q={};
+        ((data.quoteResponse||{}).result||[]).forEach(function(x){
+          q[x.symbol]=x.regularMarketPrice;
+        });
+        allItems.forEach(function(item){
+          var price=q[item.sym];
+          if(price==null) return;
+          if(item.lastCell){
+            item.lastCell.textContent='$'+price.toFixed(2);
+            item.lastCell.style.color='var(--white2,#ccc)';
+          }
+          if(item.roiCell){
+            var roi=(price-item.entry)/item.entry*100;
+            var sign=roi>=0?'+':'';
+            item.roiCell.textContent=sign+roi.toFixed(1)+'%';
+            item.roiCell.style.color=roi>=0?'#4ade80':'#f87171';
+            item.roiCell.style.fontWeight='600';
+          }
+        });
+      })
+      .catch(function(){});
+  }
+  window._trRefreshPrices=refresh;
 })();
 
 /* ── LIVE TICKER ─────────────────────────────────────── */

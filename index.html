@@ -3876,11 +3876,6 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 <div class="trnote" style="margin:24px 44px 0">
   <p><strong>Why this matters:</strong> Any analyst can show you winners. The credibility is in publishing every call with position size, stop, and entry — before knowing the outcome — and recording losses with the same transparency as wins. This is what a fund will ask for. Every row here is timestamped on Substack the day it was published.</p>
 </div>
-<div id="tr-key-banner" style="display:none;margin:14px 44px 0;padding:11px 16px;background:rgba(200,131,10,.06);border:1px solid rgba(200,131,10,.22);align-items:center;gap:10px;flex-wrap:wrap">
-  <span style="font-family:var(--FM);font-size:10px;letter-spacing:.04em;color:var(--g2)">Live prices need a free <a href="https://finnhub.io/register" target="_blank" style="color:var(--gold)">Finnhub API key</a> (30 sec signup, no card):</span>
-  <input id="tr-key-input" type="text" placeholder="Paste key here…" style="background:var(--bg2);border:1px solid rgba(200,131,10,.3);color:var(--white);padding:5px 9px;font-family:var(--FM);font-size:11px;width:220px;outline:none">
-  <button onclick="(function(){var k=document.getElementById('tr-key-input').value.trim();if(!k)return;localStorage.setItem('fn_key',k);document.getElementById('tr-key-banner').style.display='none';if(window._trRefreshPrices)window._trRefreshPrices();})()" style="background:rgba(200,131,10,.18);border:1px solid rgba(200,131,10,.45);color:var(--gold);padding:5px 12px;cursor:pointer;font-family:var(--FM);font-size:9px;letter-spacing:.08em;text-transform:uppercase">Save &amp; Load</button>
-</div>
 <div style="padding:24px 44px 0">
   <div class="perfrow">
     <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs">Live · tracking</div></div>
@@ -8615,9 +8610,9 @@ function exportPortExcel(){
     .catch(function(){});
 })();
 
-/* ── LAST PRICE & ROI COLUMNS — powered by Finnhub free API ─────── */
-/* Key stored in localStorage('fn_key') — never exposed in source code  */
+/* ── LAST PRICE & ROI COLUMNS — powered by Finnhub ──────────────── */
 (function(){
+  var FH_KEY = 'd883b7hr01qmhaki18mgd883b7hr01qmhaki18n0';
   var TICKER_MAP = {
     '$MELI':'MELI','$ORCL':'ORCL','$NU':'NU','$ADEA':'ADEA',
     '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA'
@@ -8625,16 +8620,6 @@ function exportPortExcel(){
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }
 
   function refresh(){
-    var key = (typeof localStorage !== 'undefined' && localStorage.getItem('fn_key')) || '';
-    var banner = document.getElementById('tr-key-banner');
-
-    /* No key — show the one-time setup banner */
-    if(!key){
-      if(banner) banner.style.display = 'flex';
-      return;
-    }
-    if(banner) banner.style.display = 'none';
-
     var allItems = [];
     document.querySelectorAll('table.tr tbody tr').forEach(function(row){
       var txt = row.dataset.sym || ((row.querySelector('.tdtk')||{}).textContent||'').trim();
@@ -8660,7 +8645,7 @@ function exportPortExcel(){
     allItems.forEach(function(item){ prices[item.sym] = null; });
 
     var fetches = Object.keys(prices).map(function(sym){
-      return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+key)
+      return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+FH_KEY)
         .then(function(r){ return r.json(); })
         .then(function(d){
           /* d.c = current price; d.pc = previous close */

@@ -473,6 +473,63 @@ html.dark .mv2-link{color:#C4A44A}
 .mv2-sn{font-family:var(--FH,'DM Serif Display',serif);font-size:28px;line-height:1;color:var(--gold);letter-spacing:-.02em}
 .mv2-sl{font-family:var(--FM,monospace);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2)}
 
+/* ═══════════════════════════════════════════════
+   FUND LAB PAGE
+   ═══════════════════════════════════════════════ */
+.port-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;padding:0 52px 52px}
+@media(max-width:960px){.port-grid{grid-template-columns:1fr 1fr;padding:0 28px 40px}}
+@media(max-width:620px){.port-grid{grid-template-columns:1fr;padding:0 20px 32px}}
+.port-card{background:var(--bg2);border:1px solid rgba(196,164,74,.18);border-radius:4px;padding:28px;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s;display:flex;flex-direction:column}
+.port-card:hover{border-color:rgba(196,164,74,.5);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,.45)}
+.port-card-tag{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.port-card-title{font-family:var(--FH,'DM Serif Display',serif);font-size:clamp(22px,2.4vw,30px);line-height:1.08;color:var(--ink);margin-bottom:10px}
+.port-card-sub{font-size:12px;line-height:1.65;color:var(--ink3);margin-bottom:22px;flex:1}
+.port-kpis{display:flex;gap:18px;margin-bottom:22px;padding-top:14px;border-top:1px solid rgba(255,255,255,.06);flex-wrap:wrap}
+.port-kpi{display:flex;flex-direction:column;gap:3px}
+.port-kpi-v{font-family:var(--FH,'DM Serif Display',serif);font-size:22px;line-height:1;color:var(--gold);letter-spacing:-.01em}
+.port-kpi-l{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
+.port-card-cta{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:auto;transition:letter-spacing .2s}
+.port-card:hover .port-card-cta{letter-spacing:.18em}
+/* Fund detail */
+.port-detail{padding-top:8px}
+.port-back{background:none;border:none;cursor:pointer;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);padding:0 0 0 52px;margin:0 0 28px;display:block;transition:color .2s}
+.port-back:hover{color:var(--gold)}
+@media(max-width:620px){.port-back{padding-left:20px}}
+.fund-header{padding:0 52px 28px;border-bottom:1px solid rgba(196,164,74,.1)}
+@media(max-width:620px){.fund-header{padding:0 20px 24px}}
+.fund-paper-tag{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#f87171;margin-bottom:8px}
+.fund-title{font-family:var(--FH,'DM Serif Display',serif);font-size:clamp(26px,3vw,40px);line-height:1.08;margin:0 0 10px}
+.fund-desc{font-size:13px;line-height:1.78;color:var(--ink3);max-width:580px;margin-bottom:24px}
+.fund-kpi-row{display:flex;gap:24px;flex-wrap:wrap}
+.fund-kpi-box{display:flex;flex-direction:column;gap:3px}
+.fund-kpi-box .v{font-family:var(--FH,'DM Serif Display',serif);font-size:26px;line-height:1;letter-spacing:-.02em}
+.fund-kpi-box .v.g{color:#4ade80}.fund-kpi-box .v.r{color:#f87171}.fund-kpi-box .v.w{color:var(--ink)}
+.fund-kpi-box .l{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
+.fund-charts{display:grid;grid-template-columns:360px 1fr;gap:24px;padding:28px 52px;align-items:start}
+@media(max-width:960px){.fund-charts{grid-template-columns:1fr;padding:24px 28px}}
+@media(max-width:620px){.fund-charts{padding:20px 20px}}
+.fund-chart-box{background:var(--bg2);border:1px solid rgba(196,164,74,.12);border-radius:4px;padding:20px}
+.fund-chart-label{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.fund-chart-since{color:var(--g2);font-size:8px;margin-left:8px;text-transform:none;letter-spacing:0;font-family:var(--FM,monospace)}
+#fund-pie-canvas{display:block;margin:0 auto}
+#fund-perf-canvas{display:block;width:100%!important;height:auto}
+.fund-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
+.fund-leg-item{display:flex;align-items:center;gap:6px;min-width:120px}
+.fund-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.fund-leg-name{font-family:var(--FM,monospace);font-size:10px;color:var(--ink3);flex:1}
+.fund-leg-pct{font-family:var(--FM,monospace);font-size:10px;color:var(--g2);font-weight:600}
+.fund-alloc-wrap{padding:0 52px 28px}
+@media(max-width:620px){.fund-alloc-wrap{padding:0 20px 20px}}
+.fund-alloc-label{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+table.fund-at{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
+table.fund-at th{padding:9px 12px;text-align:left;font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(196,164,74,.12)}
+table.fund-at td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--ink2)}
+table.fund-at tr:last-child td{border-bottom:none}
+table.fund-at td:first-child{color:var(--ink);font-weight:500}
+table.fund-at td:nth-child(2){color:#4ade80;font-weight:600}
+.fund-disc{margin:0 52px 40px;padding:16px;background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.18);border-radius:3px;font-family:var(--FM,monospace);font-size:9.5px;letter-spacing:.04em;color:#f87171}
+@media(max-width:620px){.fund-disc{margin:0 20px 32px}}
+
 /* ── CRED STRIP ───────────────────────────────────────── */
 .cred-strip{display:flex;align-items:center;gap:8px;padding:12px 52px;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.07)}
 html.dark .cred-strip{border-color:rgba(255,255,255,.07)}
@@ -3723,6 +3780,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('research')">Research</button>
     <button class="nbtn" onclick="sp('tools')">Strategies</button>
+    <button class="nbtn" onclick="sp('portfolios')">Fund Lab</button>
     <button class="nbtn" onclick="sp('contact')">Contact</button>
 
     <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
@@ -3949,7 +4007,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
   </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
@@ -4109,7 +4167,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
 </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
@@ -4887,7 +4945,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 
 </div><!-- /qp-section -->
 <!-- tgrid -->
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">All tools are for educational and informational purposes only. Not financial advice. Results are model-based estimates only.</div>
 </div>
 
@@ -5432,9 +5490,122 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   </div>
 </div><!-- /stab-reports -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
 </div><!-- /pg-strats -->
+
+<!-- ══════════════════════════════════════════════════════════
+     FUND LAB PAGE
+     ══════════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-portfolios">
+
+<div class="pghd reveal">
+  <div class="pgtag">Portfolio &amp; Products</div>
+  <h2 class="pgtitle">Fund <em>Lab</em></h2>
+  <p class="pgsub">Three vehicles for research, capital allocation and quantitative tooling.</p>
+</div>
+
+<!-- Grid view: 3 product cards -->
+<div id="port-grid-wrap">
+<div class="port-grid">
+
+  <!-- Card 1: Paper Fund -->
+  <div class="port-card" onclick="showPortFund()">
+    <div class="port-card-tag">Paper Fund · Multi-Asset</div>
+    <div class="port-card-title">Asset Allocation<br>Dynamic Fund</div>
+    <div class="port-card-sub">A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.</div>
+    <div class="port-kpis">
+      <div class="port-kpi"><span class="port-kpi-v">+28.4%</span><span class="port-kpi-l">Since Inception</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">1.31</span><span class="port-kpi-l">Sharpe Ratio</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">−8.2%</span><span class="port-kpi-l">Max Drawdown</span></div>
+    </div>
+    <div class="port-card-cta">View Fund →</div>
+  </div>
+
+  <!-- Card 2: Systematic Strategies -->
+  <div class="port-card" onclick="sp('tools')">
+    <div class="port-card-tag">Systematic · Equity &amp; FX</div>
+    <div class="port-card-title">Systematic<br>Strategies</div>
+    <div class="port-card-sub">A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.</div>
+    <div class="port-kpis">
+      <div class="port-kpi"><span class="port-kpi-v">12</span><span class="port-kpi-l">Active Strategies</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">2</span><span class="port-kpi-l">Asset Classes</span></div>
+    </div>
+    <div class="port-card-cta">Explore Strategies →</div>
+  </div>
+
+  <!-- Card 3: Quant Tools -->
+  <div class="port-card" onclick="window.open(GITHUB_URL,'_blank')">
+    <div class="port-card-tag">Open Source · Python</div>
+    <div class="port-card-title">Quant<br>Tools</div>
+    <div class="port-card-sub">Public GitHub repository with Python backtesting scripts, alpha research notebooks, data pipeline utilities and signal construction tools.</div>
+    <div class="port-kpis">
+      <div class="port-kpi"><span class="port-kpi-v">GitHub</span><span class="port-kpi-l">Open Source</span></div>
+    </div>
+    <div class="port-card-cta">View on GitHub →</div>
+  </div>
+
+</div>
+</div><!-- /port-grid-wrap -->
+
+<!-- Fund detail view (shown when card 1 is clicked) -->
+<div class="port-detail" id="port-fund-detail" style="display:none">
+
+  <button class="port-back" onclick="hidePortFund()">← Fund Lab</button>
+
+  <div class="fund-header">
+    <div class="fund-paper-tag">● Paper Portfolio — No Real Capital</div>
+    <h2 class="fund-title">Asset Allocation Dynamic Fund</h2>
+    <p class="fund-desc">A macro-driven multi-asset paper portfolio combining regime detection with dynamic rebalancing across seven asset classes. Inception January 2024.</p>
+    <div class="fund-kpi-row">
+      <div class="fund-kpi-box"><span class="v g">+28.4%</span><span class="l">Since Inception</span></div>
+      <div class="fund-kpi-box"><span class="v w">1.31</span><span class="l">Sharpe Ratio</span></div>
+      <div class="fund-kpi-box"><span class="v r">−8.2%</span><span class="l">Max Drawdown</span></div>
+      <div class="fund-kpi-box"><span class="v w">Jan 2024</span><span class="l">Inception</span></div>
+    </div>
+  </div>
+
+  <div class="fund-charts">
+    <!-- Left: Donut allocation chart -->
+    <div class="fund-chart-box">
+      <div class="fund-chart-label">Asset Allocation <span class="fund-chart-since">current weights</span></div>
+      <canvas id="fund-pie-canvas" width="200" height="200"></canvas>
+      <div class="fund-legend" id="fund-pie-legend"></div>
+    </div>
+    <!-- Right: Performance line chart -->
+    <div class="fund-chart-box">
+      <div class="fund-chart-label">Cumulative Return <span class="fund-chart-since">Jan 2024 – May 2026 · indexed to 100</span></div>
+      <canvas id="fund-perf-canvas" width="540" height="260"></canvas>
+      <div class="fund-legend">
+        <div class="fund-leg-item"><div class="fund-leg-dot" style="background:#C8830A"></div><span class="fund-leg-name">Aeon Nimbus Fund</span><span class="fund-leg-pct">+28.4%</span></div>
+        <div class="fund-leg-item"><div class="fund-leg-dot" style="background:#60a5fa;opacity:.7"></div><span class="fund-leg-name">60/40 Benchmark</span><span class="fund-leg-pct">+24.0%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fund-alloc-wrap">
+    <div class="fund-alloc-label">Allocation Detail</div>
+    <table class="fund-at">
+      <thead>
+        <tr><th>Asset Class</th><th>Weight</th><th>Instruments</th><th>Rationale</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>US Equities</td><td>28%</td><td>SPY, QQQ</td><td>Core growth engine — overweighted in expansion regimes</td></tr>
+        <tr><td>Intl Developed</td><td>18%</td><td>EFA, VEA</td><td>Valuation and macro diversification</td></tr>
+        <tr><td>Emerging Markets</td><td>12%</td><td>MELI, VNET, EEM</td><td>High-conviction names + EM beta</td></tr>
+        <tr><td>Corp Bonds</td><td>15%</td><td>LQD, HYG</td><td>Carry and risk-off regime hedge</td></tr>
+        <tr><td>Gold</td><td>12%</td><td>GLD, GC Futures</td><td>Real asset and USD debasement hedge</td></tr>
+        <tr><td>Cash &amp; T-Bills</td><td>8%</td><td>BIL, SHY</td><td>Tactical dry powder — raised in late-cycle</td></tr>
+        <tr><td>Commodities</td><td>7%</td><td>DBC, WTI</td><td>Inflation tail and energy exposure</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="fund-disc">⚠&nbsp; Paper portfolio — no real capital deployed. Performance is simulated and excludes transaction costs, slippage and taxes. Not investment advice.</div>
+
+</div><!-- /port-fund-detail -->
+
+</div><!-- /pg-portfolios -->
 
 <!-- ══════════════════════════════════════════════════════════
      CONTACT PAGE
@@ -5536,7 +5707,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 
 </div><!-- /ct-layout -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Toolkit</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div><!-- /pg-contact -->
 
 <script>
@@ -5806,9 +5977,10 @@ function sp(id){
     next.classList.add('on');
     window.scrollTo({top:0,behavior:'instant'});
     if(id==='track' && window._trRefreshPrices) window._trRefreshPrices();
+    if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['track'],['research'],['tools','strats'],['contact']];
+    const map=[['home'],['track'],['research'],['tools','strats'],['portfolios'],['contact']];
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }
@@ -9223,6 +9395,151 @@ function exportPortExcel(){
   if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',buildRows);}
   else{buildRows();}
 })();
+
+/* ══════════════════════════════════════════════════════════
+   FUND LAB — show/hide + canvas charts
+══════════════════════════════════════════════════════════ */
+function showPortFund(){
+  var g=document.getElementById('port-grid-wrap');
+  var d=document.getElementById('port-fund-detail');
+  if(g) g.style.display='none';
+  if(d) d.style.display='block';
+  window.scrollTo({top:0,behavior:'instant'});
+  setTimeout(function(){ drawFundPie(); drawFundPerf(); },50);
+}
+function hidePortFund(){
+  var g=document.getElementById('port-grid-wrap');
+  var d=document.getElementById('port-fund-detail');
+  if(d) d.style.display='none';
+  if(g) g.style.display='block';
+}
+
+function drawFundPie(){
+  var canvas=document.getElementById('fund-pie-canvas');
+  if(!canvas||!canvas.getContext) return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  var segs=[
+    {l:'US Equities', p:28, c:'#C8830A'},
+    {l:'Intl Dev',    p:18, c:'#4ade80'},
+    {l:'EM',          p:12, c:'#f97316'},
+    {l:'Corp Bonds',  p:15, c:'#60a5fa'},
+    {l:'Gold',        p:12, c:'#fcd34d'},
+    {l:'Cash',        p:8,  c:'#9ca3af'},
+    {l:'Commodities', p:7,  c:'#a78bfa'}
+  ];
+  var cx=W/2, cy=H/2, or=W*0.44, ir=W*0.26, a=-Math.PI/2;
+  var total=segs.reduce(function(s,d){return s+d.p;},0);
+  // Draw segments
+  segs.forEach(function(seg){
+    var sw=(seg.p/total)*2*Math.PI;
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,or,a,a+sw); ctx.closePath();
+    ctx.fillStyle=seg.c; ctx.fill();
+    a+=sw;
+  });
+  // Divider lines between segments
+  a=-Math.PI/2;
+  segs.forEach(function(seg){
+    var sw=(seg.p/total)*2*Math.PI;
+    ctx.beginPath(); ctx.moveTo(cx,cy);
+    ctx.lineTo(cx+or*Math.cos(a), cy+or*Math.sin(a));
+    ctx.strokeStyle='#131217'; ctx.lineWidth=1.5; ctx.stroke();
+    a+=sw;
+  });
+  // Donut hole
+  ctx.beginPath(); ctx.arc(cx,cy,ir,0,2*Math.PI);
+  ctx.fillStyle='#131217'; ctx.fill();
+  // Center text
+  ctx.textAlign='center'; ctx.textBaseline='middle';
+  ctx.font='bold 13px DM Serif Display,serif';
+  ctx.fillStyle='#e8dfc0'; ctx.fillText('7 Assets',cx,cy-7);
+  ctx.font='8px monospace'; ctx.fillStyle='#666'; ctx.fillText('DIVERSIFIED',cx,cy+8);
+  // Build legend
+  var leg=document.getElementById('fund-pie-legend');
+  if(leg){
+    leg.innerHTML=segs.map(function(s){
+      return '<div class="fund-leg-item">'
+        +'<div class="fund-leg-dot" style="background:'+s.c+'"></div>'
+        +'<span class="fund-leg-name">'+s.l+'</span>'
+        +'<span class="fund-leg-pct">'+s.p+'%</span>'
+        +'</div>';
+    }).join('');
+  }
+}
+
+function drawFundPerf(){
+  var canvas=document.getElementById('fund-perf-canvas');
+  if(!canvas||!canvas.getContext) return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  var pad={t:18,r:16,b:44,l:48};
+  var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  // 29 monthly data points: Jan 2024 – May 2026
+  var fund=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,
+            117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,
+            127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
+  var bench=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,
+             112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,
+             120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
+  // X labels: populated every other month, blank for odd indices
+  var xlbls=['Jan 24','','Mar 24','','May 24','','Jul 24','','Sep 24','','Nov 24','',
+             'Jan 25','','Mar 25','','May 25','','Jul 25','','Sep 25','','Nov 25','',
+             'Jan 26','','Mar 26','','May 26'];
+  var n=fund.length;
+  var allV=fund.concat(bench);
+  var minV=Math.floor(Math.min.apply(null,allV))-2;
+  var maxV=Math.ceil(Math.max.apply(null,allV))+2;
+  function xp(i){return pad.l+(i/(n-1))*cW;}
+  function yp(v){return pad.t+(1-(v-minV)/(maxV-minV))*cH;}
+  // Canvas background
+  ctx.fillStyle='#131217'; ctx.fillRect(0,0,W,H);
+  // Horizontal gridlines + Y labels
+  [100,105,110,115,120,125,130].forEach(function(gv){
+    if(gv<minV||gv>maxV) return;
+    var y=yp(gv);
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y);
+    ctx.strokeStyle=gv===100?'rgba(255,255,255,.12)':'rgba(255,255,255,.04)';
+    ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle='#555'; ctx.font='9px monospace';
+    ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(gv,pad.l-5,y);
+  });
+  // X axis labels
+  ctx.font='8px monospace'; ctx.fillStyle='#555';
+  ctx.textAlign='center'; ctx.textBaseline='top';
+  xlbls.forEach(function(lbl,i){ if(lbl) ctx.fillText(lbl,xp(i),H-pad.b+6); });
+  // Axis border
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b);
+  ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.lineWidth=1; ctx.stroke();
+  // Benchmark area fill
+  ctx.beginPath();
+  bench.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
+  ctx.fillStyle='rgba(96,165,250,.06)'; ctx.fill();
+  // Fund area fill
+  ctx.beginPath();
+  fund.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
+  ctx.fillStyle='rgba(200,131,10,.09)'; ctx.fill();
+  // Benchmark dashed line
+  ctx.beginPath();
+  bench.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  ctx.strokeStyle='rgba(96,165,250,.65)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]); ctx.stroke();
+  ctx.setLineDash([]);
+  // Fund solid line
+  ctx.beginPath();
+  fund.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  ctx.strokeStyle='#C8830A'; ctx.lineWidth=2.5; ctx.stroke();
+  // End dots
+  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),4,0,2*Math.PI);
+  ctx.fillStyle='#C8830A'; ctx.fill();
+  ctx.beginPath(); ctx.arc(xp(n-1),yp(bench[n-1]),3,0,2*Math.PI);
+  ctx.fillStyle='rgba(96,165,250,.85)'; ctx.fill();
+}
+
 </script>
 <!-- ── Article Reader Modal ────────────────────── -->
 <div id="article-modal">

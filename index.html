@@ -3888,7 +3888,7 @@ table.st td:nth-child(2){color:var(--ink3);font-size:10px}
 </div>
 <div class="trwrap">
   <table class="tr">
-    <thead><tr><th>Date</th><th>Ticker</th><th>Post type</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
+    <thead><tr><th>Date</th><th>Ticker</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
     <tbody></tbody>
   </table>
 </div>
@@ -8185,11 +8185,13 @@ function exportPortExcel(){
       if(call.return && existing){
         const cells = existing.querySelectorAll('td');
         const isWin = String(call.return).startsWith('+');
-        if(cells[9]) cells[9].innerHTML = `<span class="bdg ${isWin?'bw':'bl'}">${call.return}</span>`;
-        if(cells[10]){
-          cells[10].textContent = call.return;
-          cells[10].style.color = isWin ? '#4ade80' : '#f87171';
-          cells[10].style.fontWeight = '700';
+        const bdgEl = existing.querySelector('.bdg');
+        if(bdgEl && bdgEl.parentElement){ bdgEl.parentElement.innerHTML = `<span class="bdg ${isWin?'bw':'bl'}">${call.return}</span>`; }
+        const retTd = existing.querySelector('.tr-ret');
+        if(retTd){
+          retTd.textContent = call.return;
+          retTd.style.color = isWin ? '#4ade80' : '#f87171';
+          retTd.style.fontWeight = '700';
         }
         const tkCell = existing.querySelector('.tdtk');
         if(tkCell) tkCell.style.color = isWin ? '#4ade80' : '#f87171';
@@ -8216,10 +8218,11 @@ function exportPortExcel(){
         : displayTk;
       const row = document.createElement('tr');
       row.dataset.rssId = item.guid||item.link||ticker;
+      row.dataset.sym   = displayTk;        /* '$MELI' etc — used by price refresh */
+      row.dataset.entry = call.entry||'';   /* raw numeric string */
       row.innerHTML = [
         `<td>${dateStr}</td>`,
         `<td class="tdtk">${tkHtml}</td>`,
-        `<td><span class="pchip ${chip.cls}" style="margin:0">${chip.lbl}</span></td>`,
         `<td class="${dirCls}">${dir}</td>`,
         `<td>${fmt(call.entry)}</td>`,
         `<td>${fmt(call.target)}</td>`,
@@ -8227,7 +8230,7 @@ function exportPortExcel(){
         `<td>${call.size||'—'}</td>`,
         `<td>${call.horizon||'—'}</td>`,
         '<td><span class="bdg bo">Open</span></td>',
-        '<td>—</td>',
+        '<td class="tr-ret">—</td>',
         '<td class="tr-last">—</td>',
         '<td class="tr-roi">—</td>'
       ].join('');
@@ -8522,8 +8525,7 @@ function exportPortExcel(){
       total++;
       var badge = row.querySelector('.bdg');
       if(!badge) return;
-      var tds = row.querySelectorAll('td');
-      var retCell = tds[10];
+      var retCell = row.querySelector('.tr-ret');
 
       if(badge.classList.contains('bo')){
         open++;
@@ -8578,9 +8580,9 @@ function exportPortExcel(){
     tickerTxt = tickerTxt.trim();
     var yfSym = TICKER_MAP[tickerTxt];
     if(!yfSym) return;
-    var entry = parsePrice((tds[4]||{}).textContent||'');
+    var entry = parsePrice(row.dataset.entry || (tds[3]||{}).textContent||'');
     if(isNaN(entry)) return;
-    openItems.push({sym:yfSym, entry:entry, retCell:tds[10]});
+    openItems.push({sym:yfSym, entry:entry, retCell:row.querySelector('.tr-ret')});
   });
 
   if(!openItems.length) return;
@@ -8614,23 +8616,30 @@ function exportPortExcel(){
     '$VNET':'VNET','$MELI':'MELI','$ORCL':'ORCL','$ADEA':'ADEA',
     '$NU':'NU','$IREN':'IREN','GOLD':'GC=F','$BA':'BA','$NVDA':'NVDA'
   };
-  function parseP(s){ s=String(s).replace(/[$,\s]/g,''); var v=parseFloat(s); return isNaN(v)?NaN:v; }
+  function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }
   function refresh(){
     var allItems=[];
     document.querySelectorAll('table.tr tbody tr').forEach(function(row){
-      var tds=row.querySelectorAll('td');
-      if(tds.length<11) return;
-      var txt=(row.querySelector('.tdtk')||{}).textContent||'';
-      txt=txt.trim();
-      var sym=TICKER_MAP[txt]||txt.replace(/^\$/,'');
+      /* Use data-sym stored on row during build; fall back to .tdtk text */
+      var txt = row.dataset.sym || ((row.querySelector('.tdtk')||{}).textContent||'').trim();
+      if(!txt) return;
+      var sym = TICKER_MAP[txt] || txt.replace(/^\$/,'');
       if(!sym) return;
-      var entry=parseP((tds[4]||{}).textContent||'');
+      /* Use data-entry stored on row during build; fall back to 4th td (index 3, post type removed) */
+      var entry = parseP(row.dataset.entry||'');
+      if(isNaN(entry)){
+        var tds = row.querySelectorAll('td');
+        entry = parseP((tds[3]||{}).textContent||'');
+      }
       if(isNaN(entry)) return;
-      allItems.push({sym:sym,entry:entry,lastCell:tds[11],roiCell:tds[12]});
+      var lastCell = row.querySelector('.tr-last');
+      var roiCell  = row.querySelector('.tr-roi');
+      if(!lastCell && !roiCell) return;
+      allItems.push({sym:sym, entry:entry, lastCell:lastCell, roiCell:roiCell});
     });
     if(!allItems.length) return;
-    var syms=allItems.map(function(r){return r.sym;})
-                     .filter(function(v,i,a){return a.indexOf(v)===i;}).join(',');
+    var syms = allItems.map(function(r){return r.sym;})
+                       .filter(function(v,i,a){return a.indexOf(v)===i;}).join(',');
     fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(syms))
       .then(function(r){return r.json();})
       .then(function(data){
@@ -8657,6 +8666,8 @@ function exportPortExcel(){
       .catch(function(){});
   }
   window._trRefreshPrices=refresh;
+  /* Run once on page load (after rows settle) so prices show without needing a tab click */
+  setTimeout(refresh, 1000);
 })();
 
 /* ── LIVE TICKER ─────────────────────────────────────── */

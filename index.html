@@ -145,8 +145,10 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 .tksep{color:var(--g3);margin:0 4px}
 
 /* Home grid */
-.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
+.hgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
 .hcard{padding:36px 32px;background:var(--bg1);cursor:pointer;position:relative;overflow:hidden;transition:background .2s}
+.hcard-half{grid-column:span 3}
+.hcard-third{grid-column:span 2}
 .hcard-hero{grid-column:1/-1;border-left:2px solid var(--gold)}
 .ptab-bar{display:flex;gap:0;margin:0 44px;border-bottom:1px solid var(--line2)}
 .ptab{font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--g2);padding:11px 20px;cursor:pointer;transition:all .2s;margin-bottom:-1px}
@@ -357,7 +359,7 @@ footer{padding:32px 44px;border-top:1px solid var(--line2);display:flex;justify-
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;padding:44px 20px}
   .spanel{display:none}
-  .hgrid{grid-template-columns:1fr 1fr 1fr}
+  .hgrid{grid-template-columns:1fr 1fr}.hcard-half,.hcard-third{grid-column:span 1}
   nav{padding:0 20px}
   .pghd,.plist,.trwrap,.tgrid,.fbar,.trnote{padding-left:20px;padding-right:20px}
   .perfrow{margin-left:20px;margin-right:20px;grid-template-columns:repeat(3,1fr)}
@@ -4065,29 +4067,35 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 </div></div>
 
 <div class="hgrid">
-  <div class="hcard home-grid-card hcard-hero" onclick="sp('track')">
+  <div class="hcard home-grid-card hcard-half" style="border-left:2px solid var(--gold)" onclick="sp('track')">
     <div class="hcn">01</div>
     <div class="hct">Track Record</div>
     <p class="hcp">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p>
     <div class="hca">View record →</div>
   </div>
-  <div class="hcard home-grid-card" onclick="sp('research')">
+  <div class="hcard home-grid-card hcard-half" onclick="sp('research')">
     <div class="hcn">02</div>
     <div class="hct">Research Notes</div>
     <p class="hcp">Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.</p>
     <div class="hca">Read latest →</div>
   </div>
-  <div class="hcard home-grid-card" onclick="sp('strats')">
+  <div class="hcard home-grid-card hcard-third" onclick="sp('strats')">
     <div class="hcn">03</div>
     <div class="hct">Systematic Strategies</div>
-    <p class="hcp">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models backtested on 12+ years of real tick data.</p>
+    <p class="hcp">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models.</p>
     <div class="hca">Explore strategies →</div>
   </div>
-  <div class="hcard home-grid-card" onclick="sp('tools')">
+  <div class="hcard home-grid-card hcard-third" onclick="sp('tools')">
     <div class="hcn">04</div>
     <div class="hct">Quant Tools</div>
-    <p class="hcp">DCF, Black-Scholes, Kelly sizing, Monte Carlo simulation, portfolio construction, and factor correlation — all live in-browser.</p>
+    <p class="hcp">DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.</p>
     <div class="hca">Open toolkit →</div>
+  </div>
+  <div class="hcard home-grid-card hcard-third" onclick="sp('portfolios');setTimeout(showPortFund,150)">
+    <div class="hcn">05</div>
+    <div class="hct">Paper Fund</div>
+    <p class="hcp">Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.</p>
+    <div class="hca">View fund →</div>
   </div>
 </div>
 

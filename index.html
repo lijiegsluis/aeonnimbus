@@ -658,45 +658,103 @@ html.dark .mv2-link{color:#C4A44A}
 .port-kpi-l{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
 .port-card-cta{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:auto;transition:letter-spacing .2s}
 .port-card:hover .port-card-cta{letter-spacing:.18em}
-/* Fund detail */
-.port-detail{padding-top:8px}
+/* Fund detail – FT-style tearsheet */
+.port-detail{padding-top:0}
 .port-back{background:none;border:none;cursor:pointer;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);padding:0 0 0 52px;margin:0 0 28px;display:block;transition:color .2s}
 .port-back:hover{color:var(--gold)}
 @media(max-width:620px){.port-back{padding-left:20px}}
-.fund-header{padding:0 52px 28px;border-bottom:1px solid rgba(196,164,74,.1)}
-@media(max-width:620px){.fund-header{padding:0 20px 24px}}
-.fund-paper-tag{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:#f87171;margin-bottom:8px}
-.fund-title{font-family:var(--FH,'DM Serif Display',serif);font-size:clamp(26px,3vw,40px);line-height:1.08;margin:0 0 10px}
-.fund-desc{font-size:13px;line-height:1.78;color:var(--ink3);max-width:580px;margin-bottom:24px}
-.fund-kpi-row{display:flex;gap:24px;flex-wrap:wrap}
-.fund-kpi-box{display:flex;flex-direction:column;gap:3px}
-.fund-kpi-box .v{font-family:var(--FH,'DM Serif Display',serif);font-size:26px;line-height:1;letter-spacing:-.02em}
-.fund-kpi-box .v.g{color:#4ade80}.fund-kpi-box .v.r{color:#f87171}.fund-kpi-box .v.w{color:var(--ink)}
-.fund-kpi-box .l{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
-.fund-charts{display:grid;grid-template-columns:360px 1fr;gap:24px;padding:28px 52px;align-items:start}
-@media(max-width:960px){.fund-charts{grid-template-columns:1fr;padding:24px 28px}}
-@media(max-width:620px){.fund-charts{padding:20px 20px}}
-.fund-chart-box{background:var(--bg2);border:1px solid rgba(196,164,74,.12);border-radius:4px;padding:20px}
-.fund-chart-label{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
-.fund-chart-since{color:var(--g2);font-size:8px;margin-left:8px;text-transform:none;letter-spacing:0;font-family:var(--FM,monospace)}
-#fund-pie-canvas{display:block;margin:0 auto}
+/* Tearsheet header */
+.ts-hdr{background:var(--bg2);border-bottom:1px solid rgba(196,164,74,.12)}
+.ts-hdr .port-back{padding:18px 52px 0;margin:0;color:var(--g2)}
+@media(max-width:620px){.ts-hdr .port-back{padding:14px 20px 0}}
+.ts-hdr-inner{padding:14px 52px 0}
+@media(max-width:620px){.ts-hdr-inner{padding:10px 20px 0}}
+.ts-breadcrumb{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.ts-bc-tag{font-family:var(--FM,monospace);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:#f87171;background:rgba(248,113,113,.1);padding:3px 8px;border-radius:2px}
+.ts-bc-sep{color:var(--g2);font-size:10px}
+.ts-bc-cat{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.06em;color:var(--ink3)}
+.ts-fund-name{font-family:var(--FH,'DM Serif Display',serif);font-size:clamp(22px,2.8vw,36px);line-height:1.07;margin:0 0 5px;color:var(--ink)}
+.ts-fund-id{font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;color:var(--ink3);margin-bottom:16px}
+.ts-price-bar{display:flex;align-items:flex-end;gap:28px;flex-wrap:wrap;padding-bottom:16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.ts-price-block{display:flex;flex-direction:column;gap:3px}
+.ts-price-label{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.ts-price-value{font-family:var(--FM,monospace);font-size:30px;letter-spacing:-.01em;color:var(--ink);line-height:1}
+.ts-change-block{display:flex;flex-direction:column;gap:3px;padding-bottom:3px}
+.ts-change-val{font-family:var(--FM,monospace);font-size:14px;font-weight:600;line-height:1}
+.ts-change-lbl{font-family:var(--FM,monospace);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+.ts-timestamp{font-family:var(--FM,monospace);font-size:8px;color:var(--g2);padding:8px 0 0}
+.ts-pos{color:#4ade80}
+.ts-neg{color:#f87171}
+.ts-neut{color:var(--ink2)}
+/* Tab bar */
+.ts-tabs{display:flex;margin-top:14px}
+.ts-tab{background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);padding:10px 16px;transition:color .15s,border-color .15s}
+.ts-tab:first-child{padding-left:0}
+.ts-tab:hover{color:var(--ink2)}
+.ts-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+/* Sections */
+.ts-perf-section,.ts-section{border-top:1px solid rgba(196,164,74,.08);padding:24px 52px}
+@media(max-width:960px){.ts-perf-section,.ts-section{padding:20px 28px}}
+@media(max-width:620px){.ts-perf-section,.ts-section{padding:16px 20px}}
+.ts-perf-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ts-sec-title{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.ts-sec-sub{font-family:var(--FM,monospace);font-size:8px;letter-spacing:0;text-transform:none;color:var(--g2);margin-left:8px}
+/* Time-frame toggles */
+.ts-tt-group{display:flex;gap:3px}
+.ts-tt{background:none;border:1px solid rgba(196,164,74,.16);border-radius:2px;cursor:pointer;font-family:var(--FM,monospace);font-size:8px;letter-spacing:.08em;color:var(--ink3);padding:4px 10px;transition:all .15s}
+.ts-tt:hover{color:var(--ink);border-color:rgba(196,164,74,.4)}
+.ts-tt.active{background:rgba(196,164,74,.12);border-color:var(--gold);color:var(--gold)}
+/* Performance chart */
+.ts-chart-wrap{border-radius:3px;overflow:hidden;border:1px solid rgba(196,164,74,.08)}
 #fund-perf-canvas{display:block;width:100%!important;height:auto}
-.fund-legend{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px}
-.fund-leg-item{display:flex;align-items:center;gap:6px;min-width:120px}
-.fund-leg-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
-.fund-leg-name{font-family:var(--FM,monospace);font-size:10px;color:var(--ink3);flex:1}
-.fund-leg-pct{font-family:var(--FM,monospace);font-size:10px;color:var(--g2);font-weight:600}
-.fund-alloc-wrap{padding:0 52px 28px}
-@media(max-width:620px){.fund-alloc-wrap{padding:0 20px 20px}}
-.fund-alloc-label{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
-table.fund-at{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
-table.fund-at th{padding:9px 12px;text-align:left;font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(196,164,74,.12)}
-table.fund-at td{padding:10px 12px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--ink2)}
-table.fund-at tr:last-child td{border-bottom:none}
-table.fund-at td:first-child{color:var(--ink);font-weight:500}
-table.fund-at td:nth-child(2){color:#4ade80;font-weight:600}
-.fund-disc{margin:0 52px 40px;padding:16px;background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.18);border-radius:3px;font-family:var(--FM,monospace);font-size:9.5px;letter-spacing:.04em;color:#f87171}
-@media(max-width:620px){.fund-disc{margin:0 20px 32px}}
+.ts-perf-legend{display:flex;gap:24px;flex-wrap:wrap;margin-top:14px}
+.ts-leg-item{display:flex;align-items:center;gap:8px}
+.ts-leg-line{display:inline-block;width:24px;height:2px;border-radius:1px;vertical-align:middle;flex-shrink:0}
+.ts-leg-dashed{border-top:2px dashed #60a5fa;height:0;background:transparent!important}
+.ts-leg-name{font-family:var(--FM,monospace);font-size:9.5px;color:var(--ink2)}
+.ts-leg-ret{font-family:var(--FM,monospace);font-size:9.5px;font-weight:600}
+/* Profile grid */
+.ts-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
+@media(max-width:760px){.ts-profile-grid{grid-template-columns:1fr}}
+.ts-pt-row{display:flex;align-items:flex-start;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.ts-pt-row:last-child{border-bottom:none}
+.ts-pt-lbl{font-family:var(--FM,monospace);font-size:9px;color:var(--ink3);flex:0 0 48%;padding-right:8px;line-height:1.5}
+.ts-pt-val{font-family:var(--FM,monospace);font-size:9px;color:var(--ink2);line-height:1.5}
+/* Allocation inner layout */
+.ts-alloc-inner{display:grid;grid-template-columns:260px 1fr;gap:36px;align-items:start}
+@media(max-width:760px){.ts-alloc-inner{grid-template-columns:1fr}}
+#fund-pie-canvas{display:block;margin:0 auto}
+.fund-legend{display:flex;flex-wrap:wrap;gap:5px 12px;margin-top:14px}
+.fund-leg-item{display:flex;align-items:center;gap:6px;min-width:100px}
+.fund-leg-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.fund-leg-name{font-family:var(--FM,monospace);font-size:9px;color:var(--ink3);flex:1}
+.fund-leg-pct{font-family:var(--FM,monospace);font-size:9px;color:var(--g2);font-weight:600}
+/* Allocation table */
+table.ts-alloc{width:100%;border-collapse:collapse;font-family:var(--FM,monospace);font-size:9.5px}
+table.ts-alloc th{padding:8px 10px;text-align:left;font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid rgba(196,164,74,.12)}
+table.ts-alloc td{padding:8px 10px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--ink2)}
+table.ts-alloc tr:last-child td{border-bottom:none}
+table.ts-alloc td:first-child{color:var(--ink);font-weight:500}
+table.ts-alloc td:nth-child(2){color:#4ade80;font-weight:600}
+/* Diversification bars */
+.ts-divbar-wrap{display:flex;flex-direction:column;gap:10px;max-width:600px}
+.ts-divbar-row{display:flex;align-items:center;gap:12px}
+.ts-dbl{font-family:var(--FM,monospace);font-size:8.5px;color:var(--ink3);min-width:130px}
+.ts-dbbar{flex:1;height:8px;background:rgba(255,255,255,.06);border-radius:2px;overflow:hidden}
+.ts-dbfill{height:100%;border-radius:2px}
+.ts-dbpct{font-family:var(--FM,monospace);font-size:8.5px;color:var(--ink2);min-width:32px;text-align:right}
+/* Disclaimer */
+.ts-disc{margin:0 52px 40px;padding:14px 16px;background:rgba(248,113,113,.05);border:1px solid rgba(248,113,113,.18);border-radius:3px;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.04em;color:#f87171}
+@media(max-width:620px){.ts-disc{margin:0 20px 32px}}
+/* Light mode */
+html.light .ts-price-bar{border-bottom-color:rgba(0,0,0,.07)}
+html.light .ts-perf-section,html.light .ts-section{border-top-color:rgba(0,0,0,.08)}
+html.light .ts-chart-wrap{border-color:rgba(0,0,0,.08)}
+html.light .ts-pt-row{border-bottom-color:rgba(0,0,0,.06)}
+html.light .ts-dbbar{background:rgba(0,0,0,.07)}
+html.light table.ts-alloc td{border-bottom-color:rgba(0,0,0,.06)}
+html.light table.ts-alloc th{border-bottom-color:rgba(0,0,0,.1)}
+html.light .ts-disc{background:rgba(200,0,0,.04);border-color:rgba(200,0,0,.14)}
 
 /* ── CRED STRIP ───────────────────────────────────────── */
 .cred-strip{display:flex;align-items:center;gap:8px;padding:12px 52px;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.07)}
@@ -5771,60 +5829,164 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 </div>
 </div><!-- /port-grid-wrap -->
 
-<!-- Fund detail view (shown when card 1 is clicked) -->
+<!-- Fund detail view – FT-style tearsheet -->
 <div class="port-detail" id="port-fund-detail" style="display:none">
 
-  <button class="port-back" onclick="hidePortFund()">← Fund Lab</button>
-
-  <div class="fund-header">
-    <div class="fund-paper-tag">● Paper Portfolio — No Real Capital</div>
-    <h2 class="fund-title">Asset Allocation Dynamic Fund</h2>
-    <p class="fund-desc">A macro-driven multi-asset paper portfolio combining regime detection with dynamic rebalancing across seven asset classes. Inception January 2024.</p>
-    <div class="fund-kpi-row">
-      <div class="fund-kpi-box"><span class="v g">+28.4%</span><span class="l">Since Inception</span></div>
-      <div class="fund-kpi-box"><span class="v w">1.31</span><span class="l">Sharpe Ratio</span></div>
-      <div class="fund-kpi-box"><span class="v r">−8.2%</span><span class="l">Max Drawdown</span></div>
-      <div class="fund-kpi-box"><span class="v w">Jan 2024</span><span class="l">Inception</span></div>
-    </div>
-  </div>
-
-  <div class="fund-charts">
-    <!-- Left: Donut allocation chart -->
-    <div class="fund-chart-box">
-      <div class="fund-chart-label">Asset Allocation <span class="fund-chart-since">current weights</span></div>
-      <canvas id="fund-pie-canvas" width="200" height="200"></canvas>
-      <div class="fund-legend" id="fund-pie-legend"></div>
-    </div>
-    <!-- Right: Performance line chart -->
-    <div class="fund-chart-box">
-      <div class="fund-chart-label">Cumulative Return <span class="fund-chart-since">Jan 2024 – May 2026 · indexed to 100</span></div>
-      <canvas id="fund-perf-canvas" width="540" height="260"></canvas>
-      <div class="fund-legend">
-        <div class="fund-leg-item"><div class="fund-leg-dot" style="background:#C8830A"></div><span class="fund-leg-name">Aeon Nimbus Fund</span><span class="fund-leg-pct">+28.4%</span></div>
-        <div class="fund-leg-item"><div class="fund-leg-dot" style="background:#60a5fa;opacity:.7"></div><span class="fund-leg-name">60/40 Benchmark</span><span class="fund-leg-pct">+24.0%</span></div>
+  <!-- ── TEARSHEET HEADER ──────────────────────────────── -->
+  <div class="ts-hdr">
+    <button class="port-back" onclick="hidePortFund()">← Fund Lab</button>
+    <div class="ts-hdr-inner">
+      <div class="ts-breadcrumb">
+        <span class="ts-bc-tag">● Paper Portfolio</span>
+        <span class="ts-bc-sep">·</span>
+        <span class="ts-bc-cat">Multi-Asset · Macro-Driven</span>
+      </div>
+      <h2 class="ts-fund-name" data-i18n="ts_fund_name">Asset Allocation Dynamic Fund</h2>
+      <div class="ts-fund-id">AN2024-MAA · USD · Inception Jan 2024</div>
+      <div class="ts-price-bar">
+        <div class="ts-price-block">
+          <span class="ts-price-label" data-i18n="ts_nav_label">NAV (USD)</span>
+          <span class="ts-price-value">128.40</span>
+        </div>
+        <div class="ts-change-block">
+          <span class="ts-change-val ts-pos">▲ +0.38 / +0.30%</span>
+          <span class="ts-change-lbl" data-i18n="ts_today_chg">Today's Change</span>
+        </div>
+        <div class="ts-change-block">
+          <span class="ts-change-val ts-pos">+14.8%</span>
+          <span class="ts-change-lbl" data-i18n="ts_1y_ret">1 Year Return</span>
+        </div>
+        <div class="ts-change-block">
+          <span class="ts-change-val ts-pos">+28.4%</span>
+          <span class="ts-change-lbl" data-i18n="ts_since_inc">Since Inception</span>
+        </div>
+      </div>
+      <div class="ts-timestamp" data-i18n="ts_timestamp">Simulated performance · As of 23 May 2026 · No real capital deployed</div>
+      <div class="ts-tabs">
+        <button class="ts-tab active" data-i18n="ts_tab_summary">Summary</button>
+        <button class="ts-tab" data-i18n="ts_tab_perf">Performance</button>
+        <button class="ts-tab" data-i18n="ts_tab_hold">Holdings</button>
+        <button class="ts-tab" data-i18n="ts_tab_risk">Risk</button>
       </div>
     </div>
   </div>
 
-  <div class="fund-alloc-wrap">
-    <div class="fund-alloc-label">Allocation Detail</div>
-    <table class="fund-at">
-      <thead>
-        <tr><th>Asset Class</th><th>Weight</th><th>Instruments</th><th>Rationale</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>US Equities</td><td>28%</td><td>SPY, QQQ</td><td>Core growth engine — overweighted in expansion regimes</td></tr>
-        <tr><td>Intl Developed</td><td>18%</td><td>EFA, VEA</td><td>Valuation and macro diversification</td></tr>
-        <tr><td>Emerging Markets</td><td>12%</td><td>MELI, VNET, EEM</td><td>High-conviction names + EM beta</td></tr>
-        <tr><td>Corp Bonds</td><td>15%</td><td>LQD, HYG</td><td>Carry and risk-off regime hedge</td></tr>
-        <tr><td>Gold</td><td>12%</td><td>GLD, GC Futures</td><td>Real asset and USD debasement hedge</td></tr>
-        <tr><td>Cash &amp; T-Bills</td><td>8%</td><td>BIL, SHY</td><td>Tactical dry powder — raised in late-cycle</td></tr>
-        <tr><td>Commodities</td><td>7%</td><td>DBC, WTI</td><td>Inflation tail and energy exposure</td></tr>
-      </tbody>
-    </table>
+  <!-- ── PERFORMANCE CHART ──────────────────────────────── -->
+  <div class="ts-perf-section">
+    <div class="ts-perf-hdr">
+      <div class="ts-sec-title" data-i18n="ts_returns_title">Total Returns on $1,000</div>
+      <div class="ts-tt-group">
+        <button class="ts-tt active" onclick="setFundTF(this,'all')">ALL</button>
+        <button class="ts-tt" onclick="setFundTF(this,'1y')">1Y</button>
+        <button class="ts-tt" onclick="setFundTF(this,'6m')">6M</button>
+        <button class="ts-tt" onclick="setFundTF(this,'3m')">3M</button>
+      </div>
+    </div>
+    <div class="ts-chart-wrap">
+      <canvas id="fund-perf-canvas" width="900" height="280"></canvas>
+    </div>
+    <div class="ts-perf-legend">
+      <div class="ts-leg-item">
+        <span class="ts-leg-line" style="background:#C8830A"></span>
+        <span class="ts-leg-name" data-i18n="ts_fund_legend">Asset Allocation Dynamic Fund</span>
+        <span class="ts-leg-ret ts-pos" id="ts-fund-ret">+28.4%</span>
+      </div>
+      <div class="ts-leg-item">
+        <span class="ts-leg-line ts-leg-dashed"></span>
+        <span class="ts-leg-name" data-i18n="ts_bench_legend">60/40 Benchmark</span>
+        <span class="ts-leg-ret ts-pos" id="ts-bench-ret">+24.0%</span>
+      </div>
+    </div>
   </div>
 
-  <div class="fund-disc">⚠&nbsp; Paper portfolio — no real capital deployed. Performance is simulated and excludes transaction costs, slippage and taxes. Not investment advice.</div>
+  <!-- ── PROFILE & INVESTMENT ──────────────────────────── -->
+  <div class="ts-section">
+    <div class="ts-sec-title" data-i18n="ts_profile_title">Profile &amp; Investment</div>
+    <div class="ts-profile-grid">
+      <div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_fundtype">Fund type</span><span class="ts-pt-val">Paper Portfolio (Simulated)</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_strategy">Strategy</span><span class="ts-pt-val">Macro-Driven Multi-Asset</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_income">Income treatment</span><span class="ts-pt-val">Accumulation</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_category">Category</span><span class="ts-pt-val">Dynamic Asset Allocation</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_universe">Universe</span><span class="ts-pt-val">7 Asset Classes · Global</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_inception">Inception date</span><span class="ts-pt-val">1 Jan 2024</span></div>
+      </div>
+      <div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_currency">Currency</span><span class="ts-pt-val">USD (Simulated)</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_benchmark">Benchmark</span><span class="ts-pt-val">60/40 Global</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_rebalance">Rebalancing</span><span class="ts-pt-val">Monthly</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_regime">Regime detection</span><span class="ts-pt-val">Macro signal-based</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_pricing">Pricing frequency</span><span class="ts-pt-val">Daily</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_manager">Manager</span><span class="ts-pt-val">LiJie Guo · Jan 2024</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── RISK & PERFORMANCE METRICS ──────────────────── -->
+  <div class="ts-section">
+    <div class="ts-sec-title" data-i18n="ts_risk_title">Risk &amp; Performance Metrics</div>
+    <div class="ts-profile-grid">
+      <div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_inception">Since inception</span><span class="ts-pt-val ts-pos">+28.4%</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_1y">1-Year return</span><span class="ts-pt-val ts-pos">+14.8%</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_vol">Annualised vol</span><span class="ts-pt-val ts-neut">9.4%</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_sharpe">Sharpe ratio</span><span class="ts-pt-val ts-neut">1.31</span></div>
+      </div>
+      <div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_mdd">Max drawdown</span><span class="ts-pt-val ts-neg">−8.2%</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_calmar">Calmar ratio</span><span class="ts-pt-val ts-neut">3.46</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_winrate">Monthly win rate</span><span class="ts-pt-val ts-neut">72%</span></div>
+        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_alpha">Alpha vs benchmark</span><span class="ts-pt-val ts-pos">+4.4%</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── ASSET ALLOCATION ──────────────────────────────── -->
+  <div class="ts-section">
+    <div class="ts-sec-title" data-i18n="ts_alloc_title">Asset Allocation</div>
+    <div class="ts-alloc-inner">
+      <div>
+        <canvas id="fund-pie-canvas" width="220" height="220"></canvas>
+        <div class="fund-legend" id="fund-pie-legend"></div>
+      </div>
+      <table class="ts-alloc">
+        <thead>
+          <tr>
+            <th data-i18n="ts_th_class">Asset Class</th>
+            <th data-i18n="ts_th_wt">Weight</th>
+            <th data-i18n="ts_th_inst">Instruments</th>
+            <th data-i18n="ts_th_rat">Rationale</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>US Equities</td><td>28%</td><td>SPY, QQQ</td><td>Core growth engine — overweighted in expansion regimes</td></tr>
+          <tr><td>Intl Developed</td><td>18%</td><td>EFA, VEA</td><td>Valuation and macro diversification</td></tr>
+          <tr><td>Corp Bonds</td><td>15%</td><td>LQD, HYG</td><td>Carry and risk-off regime hedge</td></tr>
+          <tr><td>Emerging Markets</td><td>12%</td><td>MELI, EEM</td><td>High-conviction names + EM beta</td></tr>
+          <tr><td>Gold</td><td>12%</td><td>GLD, GC</td><td>Real asset and USD debasement hedge</td></tr>
+          <tr><td>Cash / T-Bills</td><td>8%</td><td>BIL, SHY</td><td>Tactical dry powder — raised in late-cycle</td></tr>
+          <tr><td>Commodities</td><td>7%</td><td>DBC, WTI</td><td>Inflation tail and energy exposure</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ── DIVERSIFICATION ──────────────────────────────── -->
+  <div class="ts-section">
+    <div class="ts-sec-title" data-i18n="ts_divers_title">Diversification</div>
+    <div class="ts-divbar-wrap">
+      <div class="ts-divbar-row"><span class="ts-dbl">US Equities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:28%;background:#C8830A"></div></div><span class="ts-dbpct">28%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Intl Developed</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:18%;background:#4ade80"></div></div><span class="ts-dbpct">18%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Corp Bonds</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:15%;background:#60a5fa"></div></div><span class="ts-dbpct">15%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Emerging Markets</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#f97316"></div></div><span class="ts-dbpct">12%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Gold</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#fcd34d"></div></div><span class="ts-dbpct">12%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Cash / T-Bills</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:8%;background:#9ca3af"></div></div><span class="ts-dbpct">8%</span></div>
+      <div class="ts-divbar-row"><span class="ts-dbl">Commodities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:7%;background:#a78bfa"></div></div><span class="ts-dbpct">7%</span></div>
+    </div>
+  </div>
+
+  <!-- ── DISCLAIMER ────────────────────────────────────── -->
+  <div class="ts-disc" data-i18n="ts_disclaimer">⚠&nbsp; Paper portfolio — no real capital deployed. Performance is simulated and excludes transaction costs, slippage and taxes. Not investment advice.</div>
 
 </div><!-- /port-fund-detail -->
 
@@ -7050,6 +7212,85 @@ var I18N_BIO={
 };
 Object.keys(I18N_BIO).forEach(function(lang){
   if(I18N[lang]) Object.keys(I18N_BIO[lang]).forEach(function(k){ I18N[lang][k]=I18N_BIO[lang][k]; });
+});
+
+// Fund tearsheet translations
+var I18N_FUND={
+  en:{
+    ts_fund_name:'Asset Allocation Dynamic Fund',ts_nav_label:'NAV (USD)',ts_today_chg:"Today's Change",ts_1y_ret:'1 Year Return',ts_since_inc:'Since Inception',
+    ts_timestamp:'Simulated performance · As of 23 May 2026 · No real capital deployed',
+    ts_tab_summary:'Summary',ts_tab_perf:'Performance',ts_tab_hold:'Holdings',ts_tab_risk:'Risk',
+    ts_returns_title:'Total Returns on $1,000',ts_fund_legend:'Asset Allocation Dynamic Fund',ts_bench_legend:'60/40 Benchmark',
+    ts_profile_title:'Profile & Investment',ts_risk_title:'Risk & Performance Metrics',ts_alloc_title:'Asset Allocation',ts_divers_title:'Diversification',
+    ts_p_fundtype:'Fund type',ts_p_strategy:'Strategy',ts_p_income:'Income treatment',ts_p_category:'Category',ts_p_universe:'Universe',ts_p_inception:'Inception date',
+    ts_p_currency:'Currency',ts_p_benchmark:'Benchmark',ts_p_rebalance:'Rebalancing',ts_p_regime:'Regime detection',ts_p_pricing:'Pricing frequency',ts_p_manager:'Manager',
+    ts_r_inception:'Since inception',ts_r_1y:'1-Year return',ts_r_vol:'Annualised vol',ts_r_sharpe:'Sharpe ratio',ts_r_mdd:'Max drawdown',ts_r_calmar:'Calmar ratio',ts_r_winrate:'Monthly win rate',ts_r_alpha:'Alpha vs benchmark',
+    ts_th_class:'Asset Class',ts_th_wt:'Weight',ts_th_inst:'Instruments',ts_th_rat:'Rationale',
+    ts_disclaimer:'⚠  Paper portfolio — no real capital deployed. Performance is simulated and excludes transaction costs, slippage and taxes. Not investment advice.'
+  },
+  es:{
+    ts_fund_name:'Fondo de Asignación Dinámica',ts_nav_label:'VL (USD)',ts_today_chg:'Cambio Hoy',ts_1y_ret:'Rentabilidad 1 Año',ts_since_inc:'Desde Inicio',
+    ts_timestamp:'Rendimiento simulado · A 23 May 2026 · Sin capital real',
+    ts_tab_summary:'Resumen',ts_tab_perf:'Rendimiento',ts_tab_hold:'Cartera',ts_tab_risk:'Riesgo',
+    ts_returns_title:'Rendimiento Total sobre $1,000',ts_fund_legend:'Fondo de Asignación Dinámica',ts_bench_legend:'Benchmark 60/40',
+    ts_profile_title:'Perfil e Inversión',ts_risk_title:'Métricas de Riesgo',ts_alloc_title:'Asignación de Activos',ts_divers_title:'Diversificación',
+    ts_p_fundtype:'Tipo de fondo',ts_p_strategy:'Estrategia',ts_p_income:'Tratamiento de renta',ts_p_category:'Categoría',ts_p_universe:'Universo',ts_p_inception:'Fecha de inicio',
+    ts_p_currency:'Divisa',ts_p_benchmark:'Índice de referencia',ts_p_rebalance:'Rebalanceo',ts_p_regime:'Detección de régimen',ts_p_pricing:'Frecuencia de precio',ts_p_manager:'Gestor',
+    ts_r_inception:'Desde inicio',ts_r_1y:'Rentabilidad 1 año',ts_r_vol:'Volatilidad anualizada',ts_r_sharpe:'Ratio Sharpe',ts_r_mdd:'Máx. drawdown',ts_r_calmar:'Ratio Calmar',ts_r_winrate:'Tasa de éxito mensual',ts_r_alpha:'Alpha vs benchmark',
+    ts_th_class:'Clase de Activo',ts_th_wt:'Peso',ts_th_inst:'Instrumentos',ts_th_rat:'Justificación',
+    ts_disclaimer:'⚠  Cartera de papel — sin capital real. El rendimiento es simulado y excluye costes de transacción, deslizamiento e impuestos. No es asesoramiento financiero.'
+  },
+  fr:{
+    ts_fund_name:'Fonds d\'Allocation Dynamique',ts_nav_label:'VNI (USD)',ts_today_chg:'Variation du Jour',ts_1y_ret:'Rendement 1 An',ts_since_inc:'Depuis le Lancement',
+    ts_timestamp:'Performance simulée · Au 23 mai 2026 · Aucun capital réel',
+    ts_tab_summary:'Résumé',ts_tab_perf:'Performance',ts_tab_hold:'Portefeuille',ts_tab_risk:'Risque',
+    ts_returns_title:'Rendements Totaux sur $1 000',ts_fund_legend:'Fonds d\'Allocation Dynamique',ts_bench_legend:'Indice 60/40',
+    ts_profile_title:'Profil & Investissement',ts_risk_title:'Métriques de Risque',ts_alloc_title:'Allocation d\'Actifs',ts_divers_title:'Diversification',
+    ts_p_fundtype:'Type de fonds',ts_p_strategy:'Stratégie',ts_p_income:'Traitement du revenu',ts_p_category:'Catégorie',ts_p_universe:'Univers',ts_p_inception:'Date de lancement',
+    ts_p_currency:'Devise',ts_p_benchmark:'Référence',ts_p_rebalance:'Rééquilibrage',ts_p_regime:'Détection de régime',ts_p_pricing:'Fréquence de prix',ts_p_manager:'Gérant',
+    ts_r_inception:'Depuis le lancement',ts_r_1y:'Rendement 1 an',ts_r_vol:'Vol. annualisée',ts_r_sharpe:'Ratio Sharpe',ts_r_mdd:'Drawdown max.',ts_r_calmar:'Ratio Calmar',ts_r_winrate:'Taux de gain mensuel',ts_r_alpha:'Alpha vs indice',
+    ts_th_class:'Classe d\'Actif',ts_th_wt:'Poids',ts_th_inst:'Instruments',ts_th_rat:'Justification',
+    ts_disclaimer:'⚠  Portefeuille fictif — aucun capital réel. La performance est simulée et exclut les coûts de transaction, le glissement et les impôts. Pas de conseil en investissement.'
+  },
+  de:{
+    ts_fund_name:'Dynamischer Allokationsfonds',ts_nav_label:'NIW (USD)',ts_today_chg:'Heutige Änderung',ts_1y_ret:'1-Jahres-Rendite',ts_since_inc:'Seit Auflegung',
+    ts_timestamp:'Simulierte Performance · Stand 23. Mai 2026 · Kein echtes Kapital',
+    ts_tab_summary:'Übersicht',ts_tab_perf:'Performance',ts_tab_hold:'Portfolio',ts_tab_risk:'Risiko',
+    ts_returns_title:'Gesamtrendite auf $1.000',ts_fund_legend:'Dynamischer Allokationsfonds',ts_bench_legend:'60/40 Benchmark',
+    ts_profile_title:'Profil & Investition',ts_risk_title:'Risikokennzahlen',ts_alloc_title:'Vermögensaufteilung',ts_divers_title:'Diversifikation',
+    ts_p_fundtype:'Fondsart',ts_p_strategy:'Strategie',ts_p_income:'Ertragsverwendung',ts_p_category:'Kategorie',ts_p_universe:'Universum',ts_p_inception:'Auflagedatum',
+    ts_p_currency:'Währung',ts_p_benchmark:'Benchmark',ts_p_rebalance:'Rebalancing',ts_p_regime:'Regimeerkennung',ts_p_pricing:'Preisfrequenz',ts_p_manager:'Manager',
+    ts_r_inception:'Seit Auflegung',ts_r_1y:'1-Jahres-Rendite',ts_r_vol:'Annualisierte Vol.',ts_r_sharpe:'Sharpe-Ratio',ts_r_mdd:'Max. Drawdown',ts_r_calmar:'Calmar-Ratio',ts_r_winrate:'Monatl. Trefferquote',ts_r_alpha:'Alpha vs Benchmark',
+    ts_th_class:'Anlageklasse',ts_th_wt:'Gewicht',ts_th_inst:'Instrumente',ts_th_rat:'Begründung',
+    ts_disclaimer:'⚠  Papierportfolio — kein echtes Kapital. Die Performance ist simuliert und schließt Transaktionskosten, Slippage und Steuern aus. Keine Anlageberatung.'
+  },
+  it:{
+    ts_fund_name:'Fondo di Allocazione Dinamica',ts_nav_label:'NAV (USD)',ts_today_chg:'Variazione Odierna',ts_1y_ret:'Rendimento 1 Anno',ts_since_inc:'Dal Lancio',
+    ts_timestamp:'Performance simulata · Al 23 maggio 2026 · Nessun capitale reale',
+    ts_tab_summary:'Riepilogo',ts_tab_perf:'Performance',ts_tab_hold:'Portafoglio',ts_tab_risk:'Rischio',
+    ts_returns_title:'Rendimento Totale su $1.000',ts_fund_legend:'Fondo di Allocazione Dinamica',ts_bench_legend:'Benchmark 60/40',
+    ts_profile_title:'Profilo & Investimento',ts_risk_title:'Metriche di Rischio',ts_alloc_title:'Allocazione degli Attivi',ts_divers_title:'Diversificazione',
+    ts_p_fundtype:'Tipo di fondo',ts_p_strategy:'Strategia',ts_p_income:'Trattamento del reddito',ts_p_category:'Categoria',ts_p_universe:'Universo',ts_p_inception:'Data di lancio',
+    ts_p_currency:'Valuta',ts_p_benchmark:'Benchmark',ts_p_rebalance:'Ribilanciamento',ts_p_regime:'Rilevamento regime',ts_p_pricing:'Frequenza prezzi',ts_p_manager:'Gestore',
+    ts_r_inception:'Dal lancio',ts_r_1y:'Rendimento 1 anno',ts_r_vol:'Vol. annualizzata',ts_r_sharpe:'Indice Sharpe',ts_r_mdd:'Drawdown max.',ts_r_calmar:'Indice Calmar',ts_r_winrate:'Tasso vittorie mensile',ts_r_alpha:'Alpha vs benchmark',
+    ts_th_class:'Classe di Attivo',ts_th_wt:'Peso',ts_th_inst:'Strumenti',ts_th_rat:'Motivazione',
+    ts_disclaimer:'⚠  Portafoglio simulato — nessun capitale reale. La performance è simulata ed esclude costi di transazione, slippage e tasse. Non è una consulenza finanziaria.'
+  },
+  cn:{
+    ts_fund_name:'动态资产配置基金',ts_nav_label:'净值（美元）',ts_today_chg:'今日变动',ts_1y_ret:'1年回报',ts_since_inc:'成立以来',
+    ts_timestamp:'模拟业绩 · 截至2026年5月23日 · 无真实资金',
+    ts_tab_summary:'摘要',ts_tab_perf:'业绩',ts_tab_hold:'持仓',ts_tab_risk:'风险',
+    ts_returns_title:'$1,000的总回报',ts_fund_legend:'动态资产配置基金',ts_bench_legend:'60/40基准',
+    ts_profile_title:'基金概况',ts_risk_title:'风险与业绩指标',ts_alloc_title:'资产配置',ts_divers_title:'多元化分布',
+    ts_p_fundtype:'基金类型',ts_p_strategy:'策略',ts_p_income:'收益处理',ts_p_category:'类别',ts_p_universe:'投资范围',ts_p_inception:'成立日期',
+    ts_p_currency:'货币',ts_p_benchmark:'基准指数',ts_p_rebalance:'再平衡',ts_p_regime:'市场机制识别',ts_p_pricing:'定价频率',ts_p_manager:'基金经理',
+    ts_r_inception:'成立以来',ts_r_1y:'1年回报',ts_r_vol:'年化波动率',ts_r_sharpe:'夏普比率',ts_r_mdd:'最大回撤',ts_r_calmar:'卡玛比率',ts_r_winrate:'月度胜率',ts_r_alpha:'超额收益（Alpha）',
+    ts_th_class:'资产类别',ts_th_wt:'权重',ts_th_inst:'工具',ts_th_rat:'投资逻辑',
+    ts_disclaimer:'⚠  纸面投资组合 — 无真实资金。业绩为模拟数据，不含交易成本、滑点及税费。本内容不构成投资建议。'
+  }
+};
+Object.keys(I18N_FUND).forEach(function(lang){
+  if(I18N[lang]) Object.keys(I18N_FUND[lang]).forEach(function(k){ I18N[lang][k]=I18N_FUND[lang][k]; });
 });
 
 function setLang(lang){
@@ -10037,24 +10278,42 @@ function hidePortFund(){
   if(g) g.style.display='block';
 }
 
+// Timeframe toggle for fund chart
+var _fundTF='all';
+function setFundTF(btn,tf){
+  _fundTF=tf;
+  document.querySelectorAll('.ts-tt').forEach(function(b){b.classList.remove('active');});
+  if(btn) btn.classList.add('active');
+  drawFundPerf();
+  // Update legend return labels
+  var aF=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
+  var aB=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
+  function slc(a){if(tf==='1y')return a.slice(-13);if(tf==='6m')return a.slice(-7);if(tf==='3m')return a.slice(-4);return a;}
+  function pct(a){var r=((a[a.length-1]/a[0]-1)*100);return(r>=0?'+':'')+r.toFixed(1)+'%';}
+  var fr=document.getElementById('ts-fund-ret'),br=document.getElementById('ts-bench-ret');
+  if(fr)fr.textContent=pct(slc(aF));
+  if(br)br.textContent=pct(slc(aB));
+}
+
 function drawFundPie(){
   var canvas=document.getElementById('fund-pie-canvas');
   if(!canvas||!canvas.getContext) return;
   var ctx=canvas.getContext('2d');
   var W=canvas.width, H=canvas.height;
   ctx.clearRect(0,0,W,H);
+  var isLight=document.documentElement.classList.contains('light');
+  var holeBg=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'#1a1923';
   var segs=[
     {l:'US Equities', p:28, c:'#C8830A'},
     {l:'Intl Dev',    p:18, c:'#4ade80'},
-    {l:'EM',          p:12, c:'#f97316'},
     {l:'Corp Bonds',  p:15, c:'#60a5fa'},
+    {l:'EM',          p:12, c:'#f97316'},
     {l:'Gold',        p:12, c:'#fcd34d'},
     {l:'Cash',        p:8,  c:'#9ca3af'},
     {l:'Commodities', p:7,  c:'#a78bfa'}
   ];
   var cx=W/2, cy=H/2, or=W*0.44, ir=W*0.26, a=-Math.PI/2;
   var total=segs.reduce(function(s,d){return s+d.p;},0);
-  // Draw segments
   segs.forEach(function(seg){
     var sw=(seg.p/total)*2*Math.PI;
     ctx.beginPath(); ctx.moveTo(cx,cy);
@@ -10062,24 +10321,23 @@ function drawFundPie(){
     ctx.fillStyle=seg.c; ctx.fill();
     a+=sw;
   });
-  // Divider lines between segments
   a=-Math.PI/2;
   segs.forEach(function(seg){
     var sw=(seg.p/total)*2*Math.PI;
     ctx.beginPath(); ctx.moveTo(cx,cy);
     ctx.lineTo(cx+or*Math.cos(a), cy+or*Math.sin(a));
-    ctx.strokeStyle='#131217'; ctx.lineWidth=1.5; ctx.stroke();
+    ctx.strokeStyle=holeBg; ctx.lineWidth=2; ctx.stroke();
     a+=sw;
   });
-  // Donut hole
   ctx.beginPath(); ctx.arc(cx,cy,ir,0,2*Math.PI);
-  ctx.fillStyle='#131217'; ctx.fill();
-  // Center text
+  ctx.fillStyle=holeBg; ctx.fill();
   ctx.textAlign='center'; ctx.textBaseline='middle';
   ctx.font='bold 13px DM Serif Display,serif';
-  ctx.fillStyle='#e8dfc0'; ctx.fillText('7 Assets',cx,cy-7);
-  ctx.font='8px monospace'; ctx.fillStyle='#666'; ctx.fillText('DIVERSIFIED',cx,cy+8);
-  // Build legend
+  ctx.fillStyle=isLight?'#3a2a00':'#e8dfc0';
+  ctx.fillText('7 Assets',cx,cy-7);
+  ctx.font='8px monospace';
+  ctx.fillStyle=isLight?'#888':'#666';
+  ctx.fillText('DIVERSIFIED',cx,cy+8);
   var leg=document.getElementById('fund-pie-legend');
   if(leg){
     leg.innerHTML=segs.map(function(s){
@@ -10098,63 +10356,76 @@ function drawFundPerf(){
   var ctx=canvas.getContext('2d');
   var W=canvas.width, H=canvas.height;
   ctx.clearRect(0,0,W,H);
-  var pad={t:18,r:16,b:44,l:48};
+  var isLight=document.documentElement.classList.contains('light');
+  var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'#1a1923';
+  var gridCol=isLight?'rgba(0,0,0,.06)':'rgba(255,255,255,.04)';
+  var gridBase=isLight?'rgba(0,0,0,.15)':'rgba(255,255,255,.12)';
+  var labelCol=isLight?'#888':'#555';
+  var axisCol=isLight?'rgba(0,0,0,.1)':'rgba(255,255,255,.07)';
+  var pad={t:18,r:20,b:44,l:48};
   var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
-  // 29 monthly data points: Jan 2024 – May 2026
-  var fund=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,
-            117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,
-            127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
-  var bench=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,
-             112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,
-             120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
-  // X labels: populated every other month, blank for odd indices
-  var xlbls=['Jan 24','','Mar 24','','May 24','','Jul 24','','Sep 24','','Nov 24','',
-             'Jan 25','','Mar 25','','May 25','','Jul 25','','Sep 25','','Nov 25','',
-             'Jan 26','','Mar 26','','May 26'];
+  // Full dataset: Jan 2024 – May 2026 (29 months)
+  var aF=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
+  var aB=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
+  var aX=['Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
+  // Slice by timeframe
+  var fund=aF, bench=aB, xlbls=aX;
+  var tf=_fundTF;
+  if(tf==='1y'){fund=aF.slice(-13);bench=aB.slice(-13);xlbls=aX.slice(-13);}
+  else if(tf==='6m'){fund=aF.slice(-7);bench=aB.slice(-7);xlbls=aX.slice(-7);}
+  else if(tf==='3m'){fund=aF.slice(-4);bench=aB.slice(-4);xlbls=aX.slice(-4);}
+  // Rebase to 100
+  var f0=fund[0], b0=bench[0];
+  fund=fund.map(function(v){return v/f0*100;});
+  bench=bench.map(function(v){return v/b0*100;});
   var n=fund.length;
   var allV=fund.concat(bench);
-  var minV=Math.floor(Math.min.apply(null,allV))-2;
-  var maxV=Math.ceil(Math.max.apply(null,allV))+2;
+  var minV=Math.min.apply(null,allV), maxV=Math.max.apply(null,allV);
+  var span=maxV-minV; minV=minV-span*0.06; maxV=maxV+span*0.06;
   function xp(i){return pad.l+(i/(n-1))*cW;}
   function yp(v){return pad.t+(1-(v-minV)/(maxV-minV))*cH;}
-  // Canvas background
-  ctx.fillStyle='#131217'; ctx.fillRect(0,0,W,H);
-  // Horizontal gridlines + Y labels
-  [100,105,110,115,120,125,130].forEach(function(gv){
-    if(gv<minV||gv>maxV) return;
-    var y=yp(gv);
-    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y);
-    ctx.strokeStyle=gv===100?'rgba(255,255,255,.12)':'rgba(255,255,255,.04)';
+  // Background
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  // Grid lines
+  var nGrid=5, step=Math.ceil(span/nGrid/5)*5||5;
+  var gStart=Math.ceil(minV/step)*step;
+  for(var gv=gStart;gv<=maxV+0.1;gv+=step){
+    var gy=yp(gv);
+    ctx.beginPath(); ctx.moveTo(pad.l,gy); ctx.lineTo(W-pad.r,gy);
+    ctx.strokeStyle=Math.round(gv)===100?gridBase:gridCol;
     ctx.lineWidth=1; ctx.stroke();
-    ctx.fillStyle='#555'; ctx.font='9px monospace';
+    ctx.fillStyle=labelCol; ctx.font='9px monospace';
     ctx.textAlign='right'; ctx.textBaseline='middle';
-    ctx.fillText(gv,pad.l-5,y);
-  });
-  // X axis labels
-  ctx.font='8px monospace'; ctx.fillStyle='#555';
+    ctx.fillText(Math.round(gv),pad.l-5,gy);
+  }
+  // X labels – show first, last and evenly spaced
+  var showEvery=n<=7?1:n<=13?2:3;
+  ctx.font='8px monospace'; ctx.fillStyle=labelCol;
   ctx.textAlign='center'; ctx.textBaseline='top';
-  xlbls.forEach(function(lbl,i){ if(lbl) ctx.fillText(lbl,xp(i),H-pad.b+6); });
+  xlbls.forEach(function(lbl,i){
+    if(i%showEvery===0||i===n-1) ctx.fillText(lbl,xp(i),H-pad.b+6);
+  });
   // Axis border
   ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b);
-  ctx.strokeStyle='rgba(255,255,255,.07)'; ctx.lineWidth=1; ctx.stroke();
-  // Benchmark area fill
+  ctx.strokeStyle=axisCol; ctx.lineWidth=1; ctx.stroke();
+  // Benchmark area
   ctx.beginPath();
-  bench.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
   ctx.fillStyle='rgba(96,165,250,.06)'; ctx.fill();
-  // Fund area fill
+  // Fund area
   ctx.beginPath();
-  fund.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
   ctx.fillStyle='rgba(200,131,10,.09)'; ctx.fill();
   // Benchmark dashed line
   ctx.beginPath();
-  bench.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.strokeStyle='rgba(96,165,250,.65)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]); ctx.stroke();
   ctx.setLineDash([]);
   // Fund solid line
   ctx.beginPath();
-  fund.forEach(function(v,i){ i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v)); });
+  fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.strokeStyle='#C8830A'; ctx.lineWidth=2.5; ctx.stroke();
   // End dots
   ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),4,0,2*Math.PI);

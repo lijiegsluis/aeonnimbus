@@ -471,7 +471,6 @@ html.light .nav-drop-name{color:#3c3830}
 }
 .lang-item:hover{background:rgba(196,164,74,.07)}
 .lang-item.active{background:rgba(196,164,74,.1)}
-.lang-flag{font-size:14px;line-height:1;flex-shrink:0}
 .lang-code{font-family:var(--FM,monospace);font-size:9px;letter-spacing:.14em;color:var(--gold);min-width:22px}
 .lang-full{font-family:var(--FM,monospace);font-size:11px;color:var(--ink2)}
 .lang-item:hover .lang-full,.lang-item.active .lang-full{color:var(--ink)}
@@ -3974,12 +3973,12 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <div class="lang-drop-wrap">
       <button class="dm-btn lang-btn" id="langbtn">🌐 EN</button>
       <div class="lang-dropdown">
-        <button class="lang-item active" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span><span class="lang-code">EN</span><span class="lang-full">English</span></button>
-        <button class="lang-item" onclick="setLang('es')"><span class="lang-flag">🇪🇸</span><span class="lang-code">ES</span><span class="lang-full">Español</span></button>
-        <button class="lang-item" onclick="setLang('fr')"><span class="lang-flag">🇫🇷</span><span class="lang-code">FR</span><span class="lang-full">Français</span></button>
-        <button class="lang-item" onclick="setLang('de')"><span class="lang-flag">🇩🇪</span><span class="lang-code">DE</span><span class="lang-full">Deutsch</span></button>
-        <button class="lang-item" onclick="setLang('it')"><span class="lang-flag">🇮🇹</span><span class="lang-code">IT</span><span class="lang-full">Italiano</span></button>
-        <button class="lang-item" onclick="setLang('cn')"><span class="lang-flag">🇨🇳</span><span class="lang-code">CN</span><span class="lang-full">中文</span></button>
+        <button class="lang-item active" onclick="setLang('en')"><span class="lang-code">EN</span><span class="lang-full">English</span></button>
+        <button class="lang-item" onclick="setLang('es')"><span class="lang-code">ES</span><span class="lang-full">Español</span></button>
+        <button class="lang-item" onclick="setLang('fr')"><span class="lang-code">FR</span><span class="lang-full">Français</span></button>
+        <button class="lang-item" onclick="setLang('de')"><span class="lang-code">DE</span><span class="lang-full">Deutsch</span></button>
+        <button class="lang-item" onclick="setLang('it')"><span class="lang-code">IT</span><span class="lang-full">Italiano</span></button>
+        <button class="lang-item" onclick="setLang('cn')"><span class="lang-code">CN</span><span class="lang-full">中文</span></button>
       </div>
     </div>
     <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
@@ -4013,11 +4012,11 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
       View &amp; Download CV
     </a>
     <div class="mv2-rule line-draw"></div>
-    <div class="mv2-tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
+    <div class="mv2-tagline" data-i18n-html="home_tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
     <div class="mv2-stats">
-      <div class="mv2-stat"><span class="mv2-sn">12</span><span class="mv2-sl">Strategies</span></div>
-      <div class="mv2-stat"><span class="mv2-sn">5</span><span class="mv2-sl">Research categories</span></div>
-      <div class="mv2-stat"><span class="mv2-sn">100%</span><span class="mv2-sl">Transparent</span></div>
+      <div class="mv2-stat"><span class="mv2-sn">12</span><span class="mv2-sl" data-i18n="stat_strategies">Strategies</span></div>
+      <div class="mv2-stat"><span class="mv2-sn">5</span><span class="mv2-sl" data-i18n="stat_research">Research categories</span></div>
+      <div class="mv2-stat"><span class="mv2-sn">100%</span><span class="mv2-sl" data-i18n="stat_transparent">Transparent</span></div>
     </div>
   </div>
     <div class="mv2-right">
@@ -4158,20 +4157,20 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="ftr-block">
   <div class="ftr-col">
     <div class="ftr-icon">📬</div>
-    <div class="ftr-title">Research Notes</div>
-    <div class="ftr-desc">Macro briefs, equity deep dives, and geo/market wraps — published with full thesis before the outcome is known.</div>
-    <a class="ftr-link" href="#" onclick="openSubstack(event)">Subscribe on Substack →</a>
+    <div class="ftr-title" data-i18n="hftr_01_title">Research Notes</div>
+    <div class="ftr-desc" data-i18n="hftr_01_desc">Macro briefs, equity deep dives, and geo/market wraps — published with full thesis before the outcome is known.</div>
+    <a class="ftr-link" href="#" onclick="openSubstack(event)" data-i18n="hftr_01_link">Subscribe on Substack →</a>
   </div>
   <div class="ftr-col">
     <div class="ftr-icon">⚗</div>
-    <div class="ftr-title">Quantitative Models</div>
-    <div class="ftr-desc">Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.</div>
+    <div class="ftr-title" data-i18n="hftr_02_title">Quantitative Models</div>
+    <div class="ftr-desc" data-i18n="hftr_02_desc">Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.</div>
     <a class="ftr-link" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">GitHub →</a>
   </div>
   <div class="ftr-col">
     <div class="ftr-icon">🔗</div>
-    <div class="ftr-title">Connect</div>
-    <div class="ftr-desc">Institutional background in L/S equity, private credit, M&amp;A, and venture. Available for collaborations and conversations.</div>
+    <div class="ftr-title" data-i18n="hftr_03_title">Connect</div>
+    <div class="ftr-desc" data-i18n="hftr_03_desc">Institutional background in L/S equity, private credit, M&amp;A, and venture. Available for collaborations and conversations.</div>
     <a class="ftr-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn →</a>
   </div>
 </div>
@@ -4196,7 +4195,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="pg" id="pg-research">
 <div class="pghd reveal" data-num="02"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
 <div class="fbar">
-  <button class="fb on">All</button><button class="fb">Equity</button><button class="fb">Macro</button><button class="fb">Geo / Markets</button><button class="fb">Central Bank</button>
+  <button class="fb on" data-i18n="fb_all">All</button><button class="fb" data-i18n="fb_equity">Equity</button><button class="fb" data-i18n="fb_macro">Macro</button><button class="fb" data-i18n="fb_geo">Geo / Markets</button><button class="fb" data-i18n="fb_cb">Central Bank</button>
 </div>
 <div class="plist">
   <div class="rlwrap">
@@ -4216,21 +4215,21 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="ftr-block" style="margin-top:48px">
   <div class="ftr-col">
     <div class="ftr-icon">📬</div>
-    <div class="ftr-title">Subscribe Free</div>
-    <div class="ftr-desc">Every note lands in your inbox as published. No spam. Research is always free.</div>
-    <a class="ftr-link" href="#" onclick="openSubstack(event)">Subscribe on Substack →</a>
+    <div class="ftr-title" data-i18n="rftr_01_title">Subscribe Free</div>
+    <div class="ftr-desc" data-i18n="rftr_01_desc">Every note lands in your inbox as published. No spam. Research is always free.</div>
+    <a class="ftr-link" href="#" onclick="openSubstack(event)" data-i18n="rftr_01_link">Subscribe on Substack →</a>
   </div>
   <div class="ftr-col">
     <div class="ftr-icon">📊</div>
-    <div class="ftr-title">Track Record</div>
-    <div class="ftr-desc">Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.</div>
-    <a class="ftr-link" href="#" onclick="sp(‘track’)">View full record →</a>
+    <div class="ftr-title" data-i18n="rftr_02_title">Track Record</div>
+    <div class="ftr-desc" data-i18n="rftr_02_desc">Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.</div>
+    <a class="ftr-link" href="#" onclick="sp(‘track’)" data-i18n="rftr_02_link">View full record →</a>
   </div>
   <div class="ftr-col">
     <div class="ftr-icon">⚗</div>
-    <div class="ftr-title">Interactive Tools</div>
-    <div class="ftr-desc">Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.</div>
-    <a class="ftr-link" href="#" onclick="sp(‘tools’)">Open toolkit →</a>
+    <div class="ftr-title" data-i18n="rftr_03_title">Interactive Tools</div>
+    <div class="ftr-desc" data-i18n="rftr_03_desc">Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.</div>
+    <a class="ftr-link" href="#" onclick="sp(‘tools’)" data-i18n="rftr_03_link">Open toolkit →</a>
   </div>
 </div>
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
@@ -5735,38 +5734,38 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 
   <!-- Card 1: Paper Fund -->
   <div class="port-card" onclick="showPortFund()">
-    <div class="port-card-tag">Paper Fund · Multi-Asset</div>
-    <div class="port-card-title">Asset Allocation<br>Dynamic Fund</div>
-    <div class="port-card-sub">A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.</div>
+    <div class="port-card-tag" data-i18n="pc1_tag">Paper Fund · Multi-Asset</div>
+    <div class="port-card-title" data-i18n-html="pc1_title">Asset Allocation<br>Dynamic Fund</div>
+    <div class="port-card-sub" data-i18n="pc1_sub">A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">+28.4%</span><span class="port-kpi-l">Since Inception</span></div>
-      <div class="port-kpi"><span class="port-kpi-v">1.31</span><span class="port-kpi-l">Sharpe Ratio</span></div>
-      <div class="port-kpi"><span class="port-kpi-v">−8.2%</span><span class="port-kpi-l">Max Drawdown</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">+28.4%</span><span class="port-kpi-l" data-i18n="kpi_inception">Since Inception</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">1.31</span><span class="port-kpi-l" data-i18n="kpi_sharpe">Sharpe Ratio</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">−8.2%</span><span class="port-kpi-l" data-i18n="kpi_drawdown">Max Drawdown</span></div>
     </div>
-    <div class="port-card-cta">View Fund →</div>
+    <div class="port-card-cta" data-i18n="pc1_cta">View Fund →</div>
   </div>
 
   <!-- Card 2: Systematic Strategies -->
   <div class="port-card" onclick="sp('strats')">
-    <div class="port-card-tag">Systematic · Equity &amp; FX</div>
-    <div class="port-card-title">Systematic<br>Strategies</div>
-    <div class="port-card-sub">A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.</div>
+    <div class="port-card-tag" data-i18n="pc2_tag">Systematic · Equity &amp; FX</div>
+    <div class="port-card-title" data-i18n-html="pc2_title">Systematic<br>Strategies</div>
+    <div class="port-card-sub" data-i18n="pc2_sub">A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">12</span><span class="port-kpi-l">Active Strategies</span></div>
-      <div class="port-kpi"><span class="port-kpi-v">2</span><span class="port-kpi-l">Asset Classes</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">12</span><span class="port-kpi-l" data-i18n="kpi_active_strats">Active Strategies</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">2</span><span class="port-kpi-l" data-i18n="kpi_asset_classes">Asset Classes</span></div>
     </div>
-    <div class="port-card-cta">Explore Strategies →</div>
+    <div class="port-card-cta" data-i18n="pc2_cta">Explore Strategies →</div>
   </div>
 
   <!-- Card 3: Quant Tools -->
   <div class="port-card" onclick="sp('tools')">
-    <div class="port-card-tag">Interactive · Analyst Toolkit</div>
-    <div class="port-card-title">Quant<br>Tools</div>
-    <div class="port-card-sub">Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.</div>
+    <div class="port-card-tag" data-i18n="pc3_tag">Interactive · Analyst Toolkit</div>
+    <div class="port-card-title" data-i18n-html="pc3_title">Quant<br>Tools</div>
+    <div class="port-card-sub" data-i18n="pc3_sub">Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">12+</span><span class="port-kpi-l">Live Models</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">12+</span><span class="port-kpi-l" data-i18n="kpi_live_models">Live Models</span></div>
     </div>
-    <div class="port-card-cta">Open Toolkit →</div>
+    <div class="port-card-cta" data-i18n="pc3_cta">Open Toolkit →</div>
   </div>
 
 </div>
@@ -5848,20 +5847,20 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   <div>
     <form class="ct-form" id="ct-form" onsubmit="submitContact(event)">
       <div class="ct-field">
-        <label class="ct-label" for="ct-name">Name</label>
-        <input class="ct-inp" id="ct-name" type="text" placeholder="Your name" required autocomplete="name">
+        <label class="ct-label" for="ct-name" data-i18n="ct_name">Name</label>
+        <input class="ct-inp" id="ct-name" type="text" placeholder="Your name" data-i18n-placeholder="ct_ph_name" required autocomplete="name">
       </div>
       <div class="ct-field">
-        <label class="ct-label" for="ct-email">Email</label>
+        <label class="ct-label" for="ct-email" data-i18n="ct_email">Email</label>
         <input class="ct-inp" id="ct-email" type="email" placeholder="your@email.com" required autocomplete="email">
       </div>
       <div class="ct-field">
-        <label class="ct-label" for="ct-subject">Subject</label>
-        <input class="ct-inp" id="ct-subject" type="text" placeholder="Research · Collaboration · Hiring · Other">
+        <label class="ct-label" for="ct-subject" data-i18n="ct_subject">Subject</label>
+        <input class="ct-inp" id="ct-subject" type="text" placeholder="Research · Collaboration · Hiring · Other" data-i18n-placeholder="ct_ph_subject">
       </div>
       <div class="ct-field">
-        <label class="ct-label" for="ct-msg">Message</label>
-        <textarea class="ct-inp ct-textarea" id="ct-msg" placeholder="Your message…" required></textarea>
+        <label class="ct-label" for="ct-msg" data-i18n="ct_message">Message</label>
+        <textarea class="ct-inp ct-textarea" id="ct-msg" placeholder="Your message…" data-i18n-placeholder="ct_ph_message" required></textarea>
       </div>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
         <button class="ct-submit" type="submit" data-i18n="contact_submit">Send Message →</button>
@@ -6870,14 +6869,134 @@ var I18N={
 var _currentLang='en';
 var _LANG_LABELS={en:'🌐 EN',es:'🌐 ES',fr:'🌐 FR',de:'🌐 DE',it:'🌐 IT',cn:'🌐 CN'};
 
+// Additional translation keys (merged into I18N at runtime)
+var I18N_EXTRA={
+  en:{
+    home_tagline:'<strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.',
+    stat_strategies:'Strategies',stat_research:'Research categories',stat_transparent:'Transparent',
+    fb_all:'All',fb_equity:'Equity',fb_macro:'Macro',fb_geo:'Geo / Markets',fb_cb:'Central Bank',
+    ct_name:'Name',ct_email:'Email',ct_subject:'Subject',ct_message:'Message',
+    ct_ph_name:'Your name',ct_ph_subject:'Research · Collaboration · Hiring · Other',ct_ph_message:'Your message…',
+    hftr_01_title:'Research Notes',hftr_01_desc:'Macro briefs, equity deep dives, and geo/market wraps — published with full thesis before the outcome is known.',hftr_01_link:'Subscribe on Substack →',
+    hftr_02_title:'Quantitative Models',hftr_02_desc:'Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.',
+    hftr_03_title:'Connect',hftr_03_desc:'Institutional background in L/S equity, private credit, M&A, and venture. Available for collaborations and conversations.',
+    rftr_01_title:'Subscribe Free',rftr_01_desc:'Every note lands in your inbox as published. No spam. Research is always free.',rftr_01_link:'Subscribe on Substack →',
+    rftr_02_title:'Track Record',rftr_02_desc:'Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.',rftr_02_link:'View full record →',
+    rftr_03_title:'Interactive Tools',rftr_03_desc:'Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.',rftr_03_link:'Open toolkit →',
+    pc1_tag:'Paper Fund · Multi-Asset',pc1_title:'Asset Allocation<br>Dynamic Fund',pc1_sub:'A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.',pc1_cta:'View Fund →',
+    pc2_tag:'Systematic · Equity & FX',pc2_title:'Systematic<br>Strategies',pc2_sub:'A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.',pc2_cta:'Explore Strategies →',
+    pc3_tag:'Interactive · Analyst Toolkit',pc3_title:'Quant<br>Tools',pc3_sub:'Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.',pc3_cta:'Open Toolkit →',
+    kpi_inception:'Since Inception',kpi_sharpe:'Sharpe Ratio',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Active Strategies',kpi_asset_classes:'Asset Classes',kpi_live_models:'Live Models'
+  },
+  es:{
+    home_tagline:'<strong>Mercados globales. Visión sin cobertura.</strong><br><br>El mundo siempre tiene un precio incorrecto en algún lugar. El capital sigue narrativas. Las narrativas siguen el poder. La mayoría lee el precio. Esto trata de leer lo que lo mueve.',
+    stat_strategies:'Estrategias',stat_research:'Categorías de investigación',stat_transparent:'Transparente',
+    fb_all:'Todos',fb_equity:'Renta Variable',fb_macro:'Macro',fb_geo:'Geo / Mercados',fb_cb:'Banco Central',
+    ct_name:'Nombre',ct_email:'Correo electrónico',ct_subject:'Asunto',ct_message:'Mensaje',
+    ct_ph_name:'Tu nombre',ct_ph_subject:'Investigación · Colaboración · Trabajo · Otro',ct_ph_message:'Tu mensaje…',
+    hftr_01_title:'Notas de Investigación',hftr_01_desc:'Análisis macro, inmersiones en renta variable y análisis geopolíticos — publicados con tesis completa antes del resultado.',hftr_01_link:'Suscribirse en Substack →',
+    hftr_02_title:'Modelos Cuantitativos',hftr_02_desc:'Black-Scholes, Monte Carlo, DCF, construcción de carteras — todo open-source, en el navegador.',
+    hftr_03_title:'Conectar',hftr_03_desc:'Experiencia institucional en L/S equity, crédito privado, M&A y venture. Disponible para colaboraciones.',
+    rftr_01_title:'Suscribirse Gratis',rftr_01_desc:'Cada nota en tu bandeja de entrada. Sin spam. La investigación siempre es gratuita.',rftr_01_link:'Suscribirse en Substack →',
+    rftr_02_title:'Historial',rftr_02_desc:'Cada operación publicada con entrada, objetivo y tesis completa. Ganancias y pérdidas en el registro.',rftr_02_link:'Ver historial completo →',
+    rftr_03_title:'Herramientas Interactivas',rftr_03_desc:'Black-Scholes, DCF, construcción de carteras — herramientas gratuitas en el navegador.',rftr_03_link:'Abrir toolkit →',
+    pc1_tag:'Fondo Simulado · Multi-Activo',pc1_title:'Fondo de Asignación<br>Dinámica',pc1_sub:'Portafolio macro impulsado que reequilibra dinámicamente entre siete clases de activos con dimensionamiento según régimen.',pc1_cta:'Ver Fondo →',
+    pc2_tag:'Sistemático · Renta Variable y FX',pc2_title:'Estrategias<br>Sistemáticas',pc2_sub:'Una biblioteca de 12 estrategias cuantitativas propietarias: momentum, reversión a la media y regímenes macro en acciones y FX global.',pc2_cta:'Explorar Estrategias →',
+    pc3_tag:'Interactivo · Toolkit de Analista',pc3_title:'Herramientas<br>Cuantitativas',pc3_sub:'Toolkit de analista en vivo — DCF, opciones, Monte Carlo, factor analytics. Todo lo que un gestor necesita, abierto a todos.',pc3_cta:'Abrir Toolkit →',
+    kpi_inception:'Desde Inicio',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Máx. Caída',kpi_active_strats:'Estrategias Activas',kpi_asset_classes:'Clases de Activos',kpi_live_models:'Modelos en Vivo'
+  },
+  fr:{
+    home_tagline:"<strong>Marchés mondiaux. Vues non couvertes.</strong><br><br>Le monde est toujours mal valorisé quelque part. Le capital suit les récits. Les récits suivent le pouvoir. La plupart lisent le prix. Ceci lit ce qui le fait bouger.",
+    stat_strategies:'Stratégies',stat_research:'Catégories de recherche',stat_transparent:'Transparent',
+    fb_all:'Tout',fb_equity:'Actions',fb_macro:'Macro',fb_geo:'Géo / Marchés',fb_cb:'Banque Centrale',
+    ct_name:'Nom',ct_email:'E-mail',ct_subject:'Objet',ct_message:'Message',
+    ct_ph_name:'Votre nom',ct_ph_subject:'Recherche · Collaboration · Recrutement · Autre',ct_ph_message:'Votre message…',
+    hftr_01_title:'Notes de Recherche',hftr_01_desc:"Analyses macro, deep dives actions, lectures géopolitiques — publiés avec thèse complète avant le résultat.",hftr_01_link:'S\'abonner sur Substack →',
+    hftr_02_title:'Modèles Quantitatifs',hftr_02_desc:'Black-Scholes, Monte Carlo, DCF, construction de portefeuille — tout open-source, dans le navigateur.',
+    hftr_03_title:'Contact',hftr_03_desc:"Expérience institutionnelle en L/S actions, crédit privé, M&A et venture. Disponible pour collaborations.",
+    rftr_01_title:'Abonnement Gratuit',rftr_01_desc:'Chaque note dans votre boîte mail. Pas de spam. La recherche est toujours gratuite.',rftr_01_link:'S\'abonner sur Substack →',
+    rftr_02_title:'Historique',rftr_02_desc:'Chaque position publiée avec entrée, cible et thèse. Gains et pertes — tout en archive.',rftr_02_link:'Voir l\'historique complet →',
+    rftr_03_title:'Outils Interactifs',rftr_03_desc:'Black-Scholes, DCF, construction de portefeuille — outils gratuits dans le navigateur.',rftr_03_link:'Ouvrir le toolkit →',
+    pc1_tag:'Fonds Simulé · Multi-Actifs',pc1_title:"Fonds d'Allocation<br>Dynamique",pc1_sub:"Portefeuille macro rééquilibrant dynamiquement sur sept classes d'actifs avec dimensionnement par régime.",pc1_cta:'Voir le Fonds →',
+    pc2_tag:'Systématique · Actions & FX',pc2_title:'Stratégies<br>Systématiques',pc2_sub:'Une bibliothèque de 12 stratégies quantitatives : momentum, retour à la moyenne et régimes macro sur actions et FX mondial.',pc2_cta:'Explorer les Stratégies →',
+    pc3_tag:'Interactif · Boîte à Outils',pc3_title:'Outils<br>Quantitatifs',pc3_sub:"Toolkit d'analyste live — DCF, options, Monte Carlo, factor analytics. Tout ce qu'un gérant attend, ouvert à tous.",pc3_cta:'Ouvrir le Toolkit →',
+    kpi_inception:'Depuis Inception',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Perte Maximale',kpi_active_strats:'Stratégies Actives',kpi_asset_classes:"Classes d'Actifs",kpi_live_models:'Modèles en Direct'
+  },
+  de:{
+    home_tagline:'<strong>Globale Märkte. Ungesicherte Ansichten.</strong><br><br>Die Welt ist immer irgendwo falsch bewertet. Kapital folgt Narrativen. Narrative folgen der Macht. Die meisten lesen den Preis. Es geht darum, zu lesen, was ihn bewegt.',
+    stat_strategies:'Strategien',stat_research:'Forschungskategorien',stat_transparent:'Transparent',
+    fb_all:'Alle',fb_equity:'Aktien',fb_macro:'Makro',fb_geo:'Geo / Märkte',fb_cb:'Zentralbank',
+    ct_name:'Name',ct_email:'E-Mail',ct_subject:'Betreff',ct_message:'Nachricht',
+    ct_ph_name:'Ihr Name',ct_ph_subject:'Research · Zusammenarbeit · Recruiting · Sonstiges',ct_ph_message:'Ihre Nachricht…',
+    hftr_01_title:'Research-Notizen',hftr_01_desc:'Makro-Analysen, Aktien-Deep-Dives, geopolitische Lektüren — mit vollständiger These vor dem Ergebnis.',hftr_01_link:'Auf Substack abonnieren →',
+    hftr_02_title:'Quantitative Modelle',hftr_02_desc:'Black-Scholes, Monte Carlo, DCF, Portfoliokonstruktion — alles open-source, direkt im Browser.',
+    hftr_03_title:'Kontakt',hftr_03_desc:'Institutioneller Hintergrund in L/S Aktien, Private Credit, M&A und Venture. Für Kooperationen verfügbar.',
+    rftr_01_title:'Kostenlos abonnieren',rftr_01_desc:'Jede Notiz landet in Ihrem Posteingang. Kein Spam. Research ist immer kostenlos.',rftr_01_link:'Auf Substack abonnieren →',
+    rftr_02_title:'Track Record',rftr_02_desc:'Jede Position mit Einstieg, Ziel und vollständiger These. Gewinne und Verluste — alles im Protokoll.',rftr_02_link:'Vollständigen Record ansehen →',
+    rftr_03_title:'Interaktive Tools',rftr_03_desc:'Black-Scholes, DCF, Portfoliokonstruktion — kostenlose Open-Source-Tools im Browser.',rftr_03_link:'Toolkit öffnen →',
+    pc1_tag:'Paper-Fonds · Multi-Asset',pc1_title:'Asset-Allokations-<br>Dynamikfonds',pc1_sub:'Makro-getriebenes Paper-Portfolio, das dynamisch über sieben Anlageklassen umschichtet mit regimebasiertem Sizing.',pc1_cta:'Fonds ansehen →',
+    pc2_tag:'Systematisch · Aktien & FX',pc2_title:'Systematische<br>Strategien',pc2_sub:'Eine Bibliothek von 12 quantitativen Strategien: Momentum, Mean-Reversion und Makro-Regime über US-Aktien und globale FX-Paare.',pc2_cta:'Strategien erkunden →',
+    pc3_tag:'Interaktiv · Analysten-Toolkit',pc3_title:'Quant-<br>Tools',pc3_sub:'Live-Analysten-Toolkit — DCF, Optionen, Monte Carlo, Faktor-Analytics. Alles, was ein PM erwartet, offen für alle.',pc3_cta:'Toolkit öffnen →',
+    kpi_inception:'Seit Auflage',kpi_sharpe:'Sharpe-Ratio',kpi_drawdown:'Max. Verlust',kpi_active_strats:'Aktive Strategien',kpi_asset_classes:'Anlageklassen',kpi_live_models:'Live-Modelle'
+  },
+  it:{
+    home_tagline:'<strong>Mercati globali. Visioni senza copertura.</strong><br><br>Il mondo è sempre valutato male da qualche parte. Il capitale segue le narrazioni. Le narrazioni seguono il potere. La maggior parte legge il prezzo. Questo riguarda leggere ciò che lo muove.',
+    stat_strategies:'Strategie',stat_research:'Categorie di ricerca',stat_transparent:'Trasparente',
+    fb_all:'Tutti',fb_equity:'Azionario',fb_macro:'Macro',fb_geo:'Geo / Mercati',fb_cb:'Banca Centrale',
+    ct_name:'Nome',ct_email:'Email',ct_subject:'Oggetto',ct_message:'Messaggio',
+    ct_ph_name:'Il tuo nome',ct_ph_subject:'Ricerca · Collaborazione · Lavoro · Altro',ct_ph_message:'Il tuo messaggio…',
+    hftr_01_title:'Note di Ricerca',hftr_01_desc:'Analisi macro, deep dive azionari, letture geopolitiche — pubblicati con tesi completa prima del risultato.',hftr_01_link:'Iscriviti su Substack →',
+    hftr_02_title:'Modelli Quantitativi',hftr_02_desc:'Black-Scholes, Monte Carlo, DCF, costruzione di portafoglio — tutto open-source, nel browser.',
+    hftr_03_title:'Connetti',hftr_03_desc:'Background istituzionale in L/S equity, credito privato, M&A e venture. Disponibile per collaborazioni.',
+    rftr_01_title:'Iscriviti Gratis',rftr_01_desc:'Ogni nota nella tua casella di posta. Nessuno spam. La ricerca è sempre gratuita.',rftr_01_link:'Iscriviti su Substack →',
+    rftr_02_title:'Track Record',rftr_02_desc:'Ogni posizione pubblicata con entrata, obiettivo e tesi completa. Guadagni e perdite — tutto nel registro.',rftr_02_link:'Vedi il record completo →',
+    rftr_03_title:'Strumenti Interattivi',rftr_03_desc:'Black-Scholes, DCF, costruzione di portafoglio — strumenti gratuiti open-source nel browser.',rftr_03_link:'Apri toolkit →',
+    pc1_tag:'Fondo Simulato · Multi-Asset',pc1_title:'Fondo di Allocazione<br>Dinamica',pc1_sub:"Portafoglio macro che ribilancia dinamicamente su sette classi di attivi con dimensionamento basato sul regime.",pc1_cta:'Vedi il Fondo →',
+    pc2_tag:'Sistematico · Azionario & FX',pc2_title:'Strategie<br>Sistematiche',pc2_sub:'Una libreria di 12 strategie quantitative: momentum, mean-reversion e regimi macro su azioni USA e FX globale.',pc2_cta:'Esplora Strategie →',
+    pc3_tag:'Interattivo · Toolkit Analista',pc3_title:'Strumenti<br>Quantitativi',pc3_sub:'Toolkit analista live — DCF, opzioni, Monte Carlo, factor analytics. Tutto ciò che un PM si aspetta, aperto a tutti.',pc3_cta:'Apri Toolkit →',
+    kpi_inception:"Dall'Inizio",kpi_sharpe:'Indice di Sharpe',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Strategie Attive',kpi_asset_classes:'Classi di Attivi',kpi_live_models:'Modelli Live'
+  },
+  cn:{
+    home_tagline:'<strong>全球市场。无对冲观点。</strong><br><br>世界某处永远存在错误定价。资本追随叙事，叙事追随权力。大多数人读取价格，而这里关于读懂推动价格的力量。',
+    stat_strategies:'策略数量',stat_research:'研究类别',stat_transparent:'透明度',
+    fb_all:'全部',fb_equity:'股票',fb_macro:'宏观',fb_geo:'地缘 / 市场',fb_cb:'央行',
+    ct_name:'姓名',ct_email:'邮箱',ct_subject:'主题',ct_message:'留言',
+    ct_ph_name:'您的姓名',ct_ph_subject:'研究 · 合作 · 招聘 · 其他',ct_ph_message:'您的留言…',
+    hftr_01_title:'研究笔记',hftr_01_desc:'宏观简报、股票深度研究、地缘政治解读——完整论点在结果前公开发布。',hftr_01_link:'在Substack订阅 →',
+    hftr_02_title:'量化模型',hftr_02_desc:'Black-Scholes、蒙特卡洛、DCF、投资组合构建——全部开源，浏览器内运行。',
+    hftr_03_title:'联系',hftr_03_desc:'机构背景：多空股票、私人信贷、并购及风险投资。欢迎合作与交流。',
+    rftr_01_title:'免费订阅',rftr_01_desc:'每篇研究直接发送至您的邮箱，无垃圾邮件，研究始终免费。',rftr_01_link:'在Substack订阅 →',
+    rftr_02_title:'业绩记录',rftr_02_desc:'每笔交易均附入场、目标和完整论点，盈亏全部记录在案。',rftr_02_link:'查看完整记录 →',
+    rftr_03_title:'交互式工具',rftr_03_desc:'Black-Scholes、DCF、投资组合构建——免费开源浏览器工具。',rftr_03_link:'打开工具箱 →',
+    pc1_tag:'模拟基金 · 多资产',pc1_title:'动态资产<br>配置基金',pc1_sub:'宏观驱动的模拟投资组合，在七大资产类别间动态再平衡，根据市场环境调整仓位。',pc1_cta:'查看基金 →',
+    pc2_tag:'系统化 · 股票与外汇',pc2_title:'系统化<br>策略',pc2_sub:'12个专有量化策略：动量、均值回归和宏观机制，覆盖美国股票和全球外汇。',pc2_cta:'探索策略 →',
+    pc3_tag:'交互式 · 分析师工具包',pc3_title:'量化<br>工具',pc3_sub:'实时分析师工具包——DCF、期权定价、蒙特卡洛、因子分析等。基金经理所需的一切，向所有人开放。',pc3_cta:'打开工具包 →',
+    kpi_inception:'成立以来',kpi_sharpe:'夏普比率',kpi_drawdown:'最大回撤',kpi_active_strats:'活跃策略',kpi_asset_classes:'资产类别',kpi_live_models:'实时模型'
+  }
+};
+// Merge extra keys into main I18N object
+Object.keys(I18N_EXTRA).forEach(function(lang){
+  if(I18N[lang]) Object.keys(I18N_EXTRA[lang]).forEach(function(k){ I18N[lang][k]=I18N_EXTRA[lang][k]; });
+});
+
 function setLang(lang){
   if(!I18N[lang]) return;
   _currentLang=lang;
   var T=I18N[lang];
-  // Update all data-i18n elements
+  // textContent replacements
   document.querySelectorAll('[data-i18n]').forEach(function(el){
     var key=el.getAttribute('data-i18n');
     if(T[key]!==undefined) el.textContent=T[key];
+  });
+  // innerHTML replacements (elements with <br>, <strong>, etc.)
+  document.querySelectorAll('[data-i18n-html]').forEach(function(el){
+    var key=el.getAttribute('data-i18n-html');
+    if(T[key]!==undefined) el.innerHTML=T[key];
+  });
+  // placeholder attribute replacements
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+    var key=el.getAttribute('data-i18n-placeholder');
+    if(T[key]!==undefined) el.setAttribute('placeholder',T[key]);
   });
   // Update language button label
   var lb=document.getElementById('langbtn');

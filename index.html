@@ -394,6 +394,54 @@ html.dark #stt{background:#E8E4DC;color:#0F0E0B}
 .dm-btn{font-size:9px;background:none;border:1px solid rgba(128,128,128,.3);color:#888;padding:4px 10px;cursor:pointer;transition:all .2s;font-family:monospace;letter-spacing:.08em;text-transform:uppercase}
 .dm-btn:hover{border-color:#8B6914;color:#8B6914}
 
+/* ── NAV DROPDOWN (Fund Lab) ────────────────────── */
+.nav-drop-wrap{position:relative;display:inline-flex;align-items:center}
+.nav-dropdown{
+  position:absolute;top:calc(100% + 18px);left:50%;
+  transform:translateX(-50%) translateY(-6px);
+  background:var(--bg2);
+  border:1px solid rgba(196,164,74,.18);
+  border-radius:4px;
+  padding:6px 0;
+  min-width:232px;
+  opacity:0;pointer-events:none;
+  transition:opacity .18s ease,transform .18s ease;
+  z-index:300;
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+}
+/* small arrow */
+.nav-dropdown::before{
+  content:'';position:absolute;top:-5px;left:50%;transform:translateX(-50%) rotate(45deg);
+  width:8px;height:8px;background:var(--bg2);
+  border-left:1px solid rgba(196,164,74,.18);border-top:1px solid rgba(196,164,74,.18);
+}
+.nav-drop-wrap:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.nav-drop-item{
+  display:block;padding:11px 20px;cursor:pointer;
+  transition:background .14s;text-decoration:none;
+  border:none;background:none;width:100%;text-align:left;
+}
+.nav-drop-item:hover{background:rgba(196,164,74,.07)}
+.nav-drop-item+.nav-drop-item{border-top:1px solid rgba(196,164,74,.07)}
+.nav-drop-tag{
+  display:block;font-family:var(--FM,monospace);font-size:7.5px;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:3px;
+}
+.nav-drop-name{
+  display:block;font-family:var(--FM,monospace);font-size:11px;
+  color:var(--ink2);letter-spacing:.04em;
+}
+.nav-drop-item:hover .nav-drop-name{color:var(--ink)}
+/* light mode dropdown */
+html.light .nav-dropdown{
+  background:#fff;border-color:rgba(0,0,0,.1);box-shadow:0 8px 32px rgba(0,0,0,.14);
+}
+html.light .nav-dropdown::before{background:#fff;border-color:rgba(0,0,0,.1)}
+html.light .nav-drop-item:hover{background:rgba(122,88,0,.05)}
+html.light .nav-drop-name{color:#3c3830}
+html.light .nav-drop-item:hover .nav-drop-name{color:#1c1914}
+html.light .nav-drop-item+.nav-drop-item{border-color:rgba(0,0,0,.06)}
+
 /* ══════════════════════════════════════════════════
    LIGHT MODE — warm beige + gold header
 ══════════════════════════════════════════════════ */
@@ -1170,6 +1218,9 @@ nav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,.28); }
 
 
 /* masthead layout override */
+.masthead-v2 .mv2-left {
+  padding-top: 24px;
+}
 .masthead-v2 .mv2-right {
   padding-top: 24px;
   position: sticky;
@@ -3860,8 +3911,24 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <button class="nbtn on" onclick="sp('home')">Home</button>
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('research')">Research</button>
-    <button class="nbtn" onclick="sp('tools')">Strategies</button>
-    <button class="nbtn" onclick="sp('portfolios')">Fund Lab</button>
+    <button class="nbtn" onclick="sp('strats')">Strategies</button>
+    <div class="nav-drop-wrap">
+      <button class="nbtn" onclick="sp('portfolios')">Fund Lab ▾</button>
+      <div class="nav-dropdown">
+        <button class="nav-drop-item" onclick="sp('portfolios');setTimeout(showPortFund,150)">
+          <span class="nav-drop-tag">Paper Fund</span>
+          <span class="nav-drop-name">Asset Allocation Dynamic Fund</span>
+        </button>
+        <button class="nav-drop-item" onclick="sp('strats')">
+          <span class="nav-drop-tag">Systematic</span>
+          <span class="nav-drop-name">Systematic Strategies</span>
+        </button>
+        <button class="nav-drop-item" onclick="sp('tools')">
+          <span class="nav-drop-tag">Quant</span>
+          <span class="nav-drop-name">Quant Tools &amp; Models</span>
+        </button>
+      </div>
+    </div>
     <button class="nbtn" onclick="sp('contact')">Contact</button>
 
     <button id="dmbtn" class="dm-btn" onclick="toggleDark()">☀ Light</button>
@@ -5617,14 +5684,14 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   </div>
 
   <!-- Card 3: Quant Tools -->
-  <div class="port-card" onclick="window.open(GITHUB_URL,'_blank')">
-    <div class="port-card-tag">Open Source · Python</div>
+  <div class="port-card" onclick="sp('tools')">
+    <div class="port-card-tag">Interactive · Analyst Toolkit</div>
     <div class="port-card-title">Quant<br>Tools</div>
-    <div class="port-card-sub">Public GitHub repository with Python backtesting scripts, alpha research notebooks, data pipeline utilities and signal construction tools.</div>
+    <div class="port-card-sub">Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">GitHub</span><span class="port-kpi-l">Open Source</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">12+</span><span class="port-kpi-l">Live Models</span></div>
     </div>
-    <div class="port-card-cta">View on GitHub →</div>
+    <div class="port-card-cta">Open Toolkit →</div>
   </div>
 
 </div>
@@ -6062,7 +6129,7 @@ function sp(id){
     if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['track'],['research'],['tools','strats'],['portfolios'],['contact']];
+    const map=[['home'],['track'],['research'],['strats'],['portfolios','tools'],['contact']];
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }

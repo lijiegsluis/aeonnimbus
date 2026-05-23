@@ -445,6 +445,40 @@ html.light .nav-dropdown{
 html.light .nav-dropdown::before{background:#fff;border-color:rgba(0,0,0,.1)}
 html.light .nav-drop-item:hover{background:rgba(122,88,0,.05)}
 html.light .nav-drop-name{color:#3c3830}
+
+/* ── LANGUAGE SWITCHER ──────────────────────────── */
+.lang-drop-wrap{position:relative;display:inline-flex;align-items:center}
+.lang-drop-wrap::after{content:'';position:absolute;top:100%;left:-16px;right:-16px;height:18px}
+.lang-dropdown{
+  position:absolute;top:calc(100% + 14px);right:0;
+  transform:translateY(-4px);
+  background:var(--bg2);border:1px solid rgba(196,164,74,.18);border-radius:4px;
+  padding:5px 0;min-width:168px;opacity:0;pointer-events:none;
+  transition:opacity .15s ease,transform .15s ease;z-index:300;
+  box-shadow:0 12px 40px rgba(0,0,0,.4);
+}
+.lang-dropdown::before{
+  content:'';position:absolute;top:-5px;right:18px;transform:rotate(45deg);
+  width:8px;height:8px;background:var(--bg2);
+  border-left:1px solid rgba(196,164,74,.18);border-top:1px solid rgba(196,164,74,.18);
+}
+.lang-drop-wrap:hover .lang-dropdown{opacity:1;pointer-events:all;transform:translateY(0)}
+.lang-item{
+  display:flex;align-items:center;gap:9px;width:100%;
+  padding:9px 16px;cursor:pointer;
+  background:none;border:none;text-align:left;
+  transition:background .12s;
+}
+.lang-item:hover{background:rgba(196,164,74,.07)}
+.lang-item.active{background:rgba(196,164,74,.1)}
+.lang-flag{font-size:14px;line-height:1;flex-shrink:0}
+.lang-code{font-family:var(--FM,monospace);font-size:9px;letter-spacing:.14em;color:var(--gold);min-width:22px}
+.lang-full{font-family:var(--FM,monospace);font-size:11px;color:var(--ink2)}
+.lang-item:hover .lang-full,.lang-item.active .lang-full{color:var(--ink)}
+html.light .lang-dropdown{background:#fff;border-color:rgba(0,0,0,.1);box-shadow:0 8px 32px rgba(0,0,0,.14)}
+html.light .lang-dropdown::before{background:#fff;border-color:rgba(0,0,0,.1)}
+html.light .lang-item:hover{background:rgba(122,88,0,.05)}
+html.light .lang-full{color:#3c3830}
 html.light .nav-drop-item:hover .nav-drop-name{color:#1c1914}
 html.light .nav-drop-item+.nav-drop-item{border-color:rgba(0,0,0,.06)}
 
@@ -3914,29 +3948,40 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <nav>
   <div class="nlogo" onclick="sp('home')" style="font-family:var(--FM,monospace);letter-spacing:.06em;font-size:12px;font-weight:500">LIJIE GUO<span style="opacity:.35;margin:0 8px">·</span><span style="opacity:.5;letter-spacing:.12em;font-size:.82em">AEON NIMBUS</span></div>
   <div class="nlinks" style="display:flex;align-items:center;gap:24px">
-    <button class="nbtn on" onclick="sp('home')">Home</button>
-    <button class="nbtn" onclick="sp('track')">Track Record</button>
-    <button class="nbtn" onclick="sp('research')">Research</button>
+    <button class="nbtn on" onclick="sp('home')" data-i18n="nav_home">Home</button>
+    <button class="nbtn" onclick="sp('track')" data-i18n="nav_track">Track Record</button>
+    <button class="nbtn" onclick="sp('research')" data-i18n="nav_research">Research</button>
     <div class="nav-drop-wrap">
-      <button class="nbtn" onclick="sp('portfolios')">Fund Lab ▾</button>
+      <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Fund Lab</span> ▾</button>
       <div class="nav-dropdown">
         <button class="nav-drop-item" onclick="sp('portfolios');setTimeout(showPortFund,150)">
-          <span class="nav-drop-tag">Paper Fund</span>
-          <span class="nav-drop-name">Asset Allocation Dynamic Fund</span>
+          <span class="nav-drop-tag" data-i18n="drop_paper_tag">Paper Fund</span>
+          <span class="nav-drop-name" data-i18n="drop_paper_name">Asset Allocation Dynamic Fund</span>
         </button>
         <button class="nav-drop-item" onclick="sp('strats')">
-          <span class="nav-drop-tag">Systematic</span>
-          <span class="nav-drop-name">Systematic Strategies</span>
+          <span class="nav-drop-tag" data-i18n="drop_sys_tag">Systematic</span>
+          <span class="nav-drop-name" data-i18n="drop_sys_name">Systematic Strategies</span>
         </button>
         <button class="nav-drop-item" onclick="sp('tools')">
-          <span class="nav-drop-tag">Quant</span>
-          <span class="nav-drop-name">Quant Tools &amp; Models</span>
+          <span class="nav-drop-tag" data-i18n="drop_quant_tag">Quant</span>
+          <span class="nav-drop-name" data-i18n="drop_quant_name">Quant Tools &amp; Models</span>
         </button>
       </div>
     </div>
-    <button class="nbtn" onclick="sp('contact')">Contact</button>
+    <button class="nbtn" onclick="sp('contact')" data-i18n="nav_contact">Contact</button>
 
     <button id="dmbtn" class="dm-btn" onclick="toggleDark()">☀ Light</button>
+    <div class="lang-drop-wrap">
+      <button class="dm-btn lang-btn" id="langbtn">🌐 EN</button>
+      <div class="lang-dropdown">
+        <button class="lang-item active" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span><span class="lang-code">EN</span><span class="lang-full">English</span></button>
+        <button class="lang-item" onclick="setLang('es')"><span class="lang-flag">🇪🇸</span><span class="lang-code">ES</span><span class="lang-full">Español</span></button>
+        <button class="lang-item" onclick="setLang('fr')"><span class="lang-flag">🇫🇷</span><span class="lang-code">FR</span><span class="lang-full">Français</span></button>
+        <button class="lang-item" onclick="setLang('de')"><span class="lang-flag">🇩🇪</span><span class="lang-code">DE</span><span class="lang-full">Deutsch</span></button>
+        <button class="lang-item" onclick="setLang('it')"><span class="lang-flag">🇮🇹</span><span class="lang-code">IT</span><span class="lang-full">Italiano</span></button>
+        <button class="lang-item" onclick="setLang('cn')"><span class="lang-flag">🇨🇳</span><span class="lang-code">CN</span><span class="lang-full">中文</span></button>
+      </div>
+    </div>
     <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
     <a id="nav-github" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" title="GitHub" class="nav-ext-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     <a class="nav-ext-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
@@ -4069,33 +4114,33 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="hgrid">
   <div class="hcard home-grid-card hcard-half" style="border-left:2px solid var(--gold)" onclick="sp('track')">
     <div class="hcn">01</div>
-    <div class="hct">Track Record</div>
-    <p class="hcp">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p>
-    <div class="hca">View record →</div>
+    <div class="hct" data-i18n="hcard_01_title">Track Record</div>
+    <p class="hcp" data-i18n="hcard_01_desc">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p>
+    <div class="hca" data-i18n="hcard_01_cta">View record →</div>
   </div>
   <div class="hcard home-grid-card hcard-half" onclick="sp('research')">
     <div class="hcn">02</div>
-    <div class="hct">Research Notes</div>
-    <p class="hcp">Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.</p>
-    <div class="hca">Read latest →</div>
+    <div class="hct" data-i18n="hcard_02_title">Research Notes</div>
+    <p class="hcp" data-i18n="hcard_02_desc">Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.</p>
+    <div class="hca" data-i18n="hcard_02_cta">Read latest →</div>
   </div>
   <div class="hcard home-grid-card hcard-third" onclick="sp('portfolios');setTimeout(showPortFund,150)">
     <div class="hcn">03</div>
-    <div class="hct">Paper Fund</div>
-    <p class="hcp">Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.</p>
-    <div class="hca">View fund →</div>
+    <div class="hct" data-i18n="hcard_03_title">Paper Fund</div>
+    <p class="hcp" data-i18n="hcard_03_desc">Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.</p>
+    <div class="hca" data-i18n="hcard_03_cta">View fund →</div>
   </div>
   <div class="hcard home-grid-card hcard-third" onclick="sp('strats')">
     <div class="hcn">04</div>
-    <div class="hct">Systematic Strategies</div>
-    <p class="hcp">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models.</p>
-    <div class="hca">Explore strategies →</div>
+    <div class="hct" data-i18n="hcard_04_title">Systematic Strategies</div>
+    <p class="hcp" data-i18n="hcard_04_desc">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models.</p>
+    <div class="hca" data-i18n="hcard_04_cta">Explore strategies →</div>
   </div>
   <div class="hcard home-grid-card hcard-third" onclick="sp('tools')">
     <div class="hcn">05</div>
-    <div class="hct">Quant Tools</div>
-    <p class="hcp">DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.</p>
-    <div class="hca">Open toolkit →</div>
+    <div class="hct" data-i18n="hcard_05_title">Quant Tools</div>
+    <p class="hcp" data-i18n="hcard_05_desc">DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.</p>
+    <div class="hca" data-i18n="hcard_05_cta">Open toolkit →</div>
   </div>
 </div>
 
@@ -4149,7 +4194,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 </div><!-- /pg-home -->
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
 <div class="pg" id="pg-research">
-<div class="pghd reveal" data-num="02"><div class="pgtag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
+<div class="pghd reveal" data-num="02"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
 <div class="fbar">
   <button class="fb on">All</button><button class="fb">Equity</button><button class="fb">Macro</button><button class="fb">Geo / Markets</button><button class="fb">Central Bank</button>
 </div>
@@ -4193,7 +4238,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
 <div class="pg" id="pg-track">
-<div class="pghd reveal"><div class="pgtag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub">Every call published publicly before outcome is known. Losses included. Never deleted.</p></div>
+<div class="pghd reveal"><div class="pgtag" data-i18n="track_tag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub" data-i18n="track_sub">Every call published publicly before outcome is known. Losses included. Never deleted.</p></div>
 <div class="trnote" style="margin:24px 44px 0">
   <p><strong>Why this matters:</strong> Any analyst can show you winners. The credibility is in publishing every call with position size, stop, and entry — before knowing the outcome — and recording losses with the same transparency as wins. This is what a fund will ask for. Every row here is timestamped on Substack the day it was published.</p>
 </div>
@@ -4353,7 +4398,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
 <div class="pg" id="pg-tools">
-<div class="pghd reveal"><div class="pgtag">Interactive analyst toolkit</div><h2 class="pgtitle">Quant <em>Tools</em></h2><p class="pgsub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
+<div class="pghd reveal"><div class="pgtag" data-i18n="tools_tag">Interactive analyst toolkit</div><h2 class="pgtitle">Quant <em>Tools</em></h2><p class="pgsub" data-i18n="tools_sub">Every tool a PM or equity research desk expects fluency in — live, free, open to all.</p></div>
 
 <!-- Tool thumbnail grid -->
 <div class="tool-grid">
@@ -5135,9 +5180,9 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="pg" id="pg-strats">
 
 <div class="pghd reveal">
-  <div class="pgtag">Proprietary Systematic Research</div>
+  <div class="pgtag" data-i18n="strats_tag">Proprietary Systematic Research</div>
   <h2 class="pgtitle">Quantitative <em>Strategies</em></h2>
-  <p class="pgsub">Twelve fully systematic strategies across systematic equity, FX, and commodities — institutional-grade algorithmic systems backtested on 99–100% real tick data across 12+ years of full market cycles.</p>
+  <p class="pgsub" data-i18n="strats_sub">Twelve fully systematic strategies across systematic equity, FX, and commodities — institutional-grade algorithmic systems backtested on 99–100% real tick data across 12+ years of full market cycles.</p>
 </div>
 
 <!-- Sub-tab navigation -->
@@ -5679,9 +5724,9 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="pg" id="pg-portfolios">
 
 <div class="pghd reveal">
-  <div class="pgtag">Portfolio &amp; Products</div>
+  <div class="pgtag" data-i18n="port_tag">Portfolio &amp; Products</div>
   <h2 class="pgtitle">Fund <em>Lab</em></h2>
-  <p class="pgsub">Three vehicles for research, capital allocation and quantitative tooling.</p>
+  <p class="pgsub" data-i18n="port_sub">Three vehicles for research, capital allocation and quantitative tooling.</p>
 </div>
 
 <!-- Grid view: 3 product cards -->
@@ -5792,9 +5837,9 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="pg" id="pg-contact">
 
 <div class="pghd reveal">
-  <div class="pgtag">Get In Touch</div>
+  <div class="pgtag" data-i18n="contact_tag">Get In Touch</div>
   <h2 class="pgtitle">Let's <em>Talk</em></h2>
-  <p class="pgsub">Interested in research, quantitative strategies, collaborations, or hiring opportunities? I typically respond within 24–48 hours.</p>
+  <p class="pgsub" data-i18n="contact_sub">Interested in research, quantitative strategies, collaborations, or hiring opportunities? I typically respond within 24–48 hours.</p>
 </div>
 
 <div class="ct-layout">
@@ -5819,7 +5864,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
         <textarea class="ct-inp ct-textarea" id="ct-msg" placeholder="Your message…" required></textarea>
       </div>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-        <button class="ct-submit" type="submit">Send Message →</button>
+        <button class="ct-submit" type="submit" data-i18n="contact_submit">Send Message →</button>
         <span style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em">Opens your email client to send</span>
       </div>
       <div class="ct-success" id="ct-success" style="display:none">
@@ -6642,6 +6687,212 @@ function toggleDark(){
     const btn=document.getElementById('dmbtn');
     if(btn) btn.textContent='◐ Dark';
   }
+})();
+
+// ═══ LANGUAGE / i18n ══════════════════════════════════════
+var I18N={
+  en:{
+    nav_home:'Home',nav_track:'Track Record',nav_research:'Research',
+    nav_fundlab:'Fund Lab',nav_contact:'Contact',
+    drop_paper_tag:'Paper Fund',drop_paper_name:'Asset Allocation Dynamic Fund',
+    drop_sys_tag:'Systematic',drop_sys_name:'Systematic Strategies',
+    drop_quant_tag:'Quant',drop_quant_name:'Quant Tools & Models',
+    hcard_01_title:'Track Record',
+    hcard_01_desc:'Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.',
+    hcard_01_cta:'View record →',
+    hcard_02_title:'Research Notes',
+    hcard_02_desc:'Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.',
+    hcard_02_cta:'Read latest →',
+    hcard_03_title:'Paper Fund',
+    hcard_03_desc:'Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.',
+    hcard_03_cta:'View fund →',
+    hcard_04_title:'Systematic Strategies',
+    hcard_04_desc:'12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models.',
+    hcard_04_cta:'Explore strategies →',
+    hcard_05_title:'Quant Tools',
+    hcard_05_desc:'DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.',
+    hcard_05_cta:'Open toolkit →',
+    research_tag:'Published research',
+    track_tag:'Audited performance',track_sub:'Every call published publicly before outcome is known. Losses included. Never deleted.',
+    tools_tag:'Interactive analyst toolkit',tools_sub:'Every tool a PM or equity research desk expects fluency in — live, free, open to all.',
+    strats_tag:'Proprietary Systematic Research',strats_sub:'Twelve fully systematic strategies across equity, FX, and commodities — institutional-grade algorithmic systems.',
+    port_tag:'Portfolio & Products',port_sub:'Three vehicles for research, capital allocation and quantitative tooling.',
+    contact_tag:'Get In Touch',contact_sub:'Interested in research, quantitative strategies, collaborations, or hiring? I typically respond within 24–48 hours.',
+    contact_submit:'Send Message →'
+  },
+  es:{
+    nav_home:'Inicio',nav_track:'Historial',nav_research:'Investigación',
+    nav_fundlab:'Fund Lab',nav_contact:'Contacto',
+    drop_paper_tag:'Fondo Simulado',drop_paper_name:'Fondo Dinámico de Asignación de Activos',
+    drop_sys_tag:'Sistemático',drop_sys_name:'Estrategias Sistemáticas',
+    drop_quant_tag:'Cuant.',drop_quant_name:'Herramientas Cuantitativas',
+    hcard_01_title:'Historial',
+    hcard_01_desc:'Cada operación publicada antes del resultado — entrada, objetivo, stop y tamaño. Pérdidas incluidas.',
+    hcard_01_cta:'Ver historial →',
+    hcard_02_title:'Notas de Investigación',
+    hcard_02_desc:'Análisis macro, inmersiones en renta variable, lecturas geopolíticas y análisis de bancos centrales.',
+    hcard_02_cta:'Leer más →',
+    hcard_03_title:'Fondo Simulado',
+    hcard_03_desc:'Fondo dinámico de asignación de activos — macro, siete clases de activos, +28,4% desde inicio con Sharpe 1,31.',
+    hcard_03_cta:'Ver fondo →',
+    hcard_04_title:'Estrategias Sistemáticas',
+    hcard_04_desc:'12 estrategias plenamente sistemáticas en renta variable y FX — momentum, reversión a la media y macro.',
+    hcard_04_cta:'Explorar estrategias →',
+    hcard_05_title:'Herramientas Cuantitativas',
+    hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, construcción de carteras y correlación de factores — en el navegador.',
+    hcard_05_cta:'Abrir toolkit →',
+    research_tag:'Investigación publicada',
+    track_tag:'Desempeño auditado',track_sub:'Cada operación publicada antes del resultado. Pérdidas incluidas. Nunca eliminadas.',
+    tools_tag:'Kit de herramientas interactivo',tools_sub:'Cada herramienta que un gestor o analista necesita — gratis, en el navegador.',
+    strats_tag:'Investigación Sistemática Propia',strats_sub:'Doce estrategias plenamente sistemáticas en renta variable, FX y materias primas.',
+    port_tag:'Portafolio y Productos',port_sub:'Tres vehículos para investigación, asignación de capital y herramientas cuantitativas.',
+    contact_tag:'Contactar',contact_sub:'¿Interesado en investigación, estrategias cuantitativas, colaboraciones o contratación? Respondo en 24–48 horas.',
+    contact_submit:'Enviar Mensaje →'
+  },
+  fr:{
+    nav_home:'Accueil',nav_track:'Historique',nav_research:'Recherche',
+    nav_fundlab:'Fund Lab',nav_contact:'Contact',
+    drop_paper_tag:'Fonds Simulé',drop_paper_name:"Fonds d'Allocation Dynamique",
+    drop_sys_tag:'Systématique',drop_sys_name:'Stratégies Systématiques',
+    drop_quant_tag:'Quant.',drop_quant_name:'Outils Quantitatifs',
+    hcard_01_title:'Historique',
+    hcard_01_desc:'Chaque position publiée avant le résultat — entrée, cible, stop et taille. Pertes incluses.',
+    hcard_01_cta:"Voir l'historique →",
+    hcard_02_title:'Notes de Recherche',
+    hcard_02_desc:'Analyses macro, deep dives actions, lectures géopolitiques et analyses des banques centrales.',
+    hcard_02_cta:'Lire →',
+    hcard_03_title:'Fonds Simulé',
+    hcard_03_desc:"Fonds d'allocation dynamique — macro, sept classes d'actifs, +28,4% depuis inception, Sharpe 1,31.",
+    hcard_03_cta:'Voir le fonds →',
+    hcard_04_title:'Stratégies Systématiques',
+    hcard_04_desc:'12 stratégies entièrement systématiques sur actions et FX — momentum, retour à la moyenne et macro.',
+    hcard_04_cta:'Explorer →',
+    hcard_05_title:'Outils Quantitatifs',
+    hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, construction de portefeuille — directement dans le navigateur.',
+    hcard_05_cta:'Ouvrir le toolkit →',
+    research_tag:'Recherche publiée',
+    track_tag:'Performance auditée',track_sub:'Chaque position publiée avant le résultat. Pertes incluses. Jamais supprimées.',
+    tools_tag:'Boîte à outils interactive',tools_sub:"Chaque outil qu'un gérant ou analyste utilise — gratuit, dans le navigateur.",
+    strats_tag:'Recherche Systématique Propriétaire',strats_sub:"Douze stratégies entièrement systématiques sur actions, FX et matières premières.",
+    port_tag:'Portefeuille & Produits',port_sub:"Trois véhicules pour la recherche, l'allocation de capital et les outils quantitatifs.",
+    contact_tag:'Nous Contacter',contact_sub:"Intéressé par la recherche, les stratégies quant, des collaborations ou un recrutement ? Réponse sous 24–48h.",
+    contact_submit:'Envoyer →'
+  },
+  de:{
+    nav_home:'Startseite',nav_track:'Track Record',nav_research:'Research',
+    nav_fundlab:'Fund Lab',nav_contact:'Kontakt',
+    drop_paper_tag:'Paper-Fonds',drop_paper_name:'Dynamischer Asset-Allokations-Fonds',
+    drop_sys_tag:'Systematisch',drop_sys_name:'Systematische Strategien',
+    drop_quant_tag:'Quant.',drop_quant_name:'Quant-Tools & Modelle',
+    hcard_01_title:'Track Record',
+    hcard_01_desc:'Jede Position vor dem Ergebnis veröffentlicht — Einstieg, Ziel, Stop und Größe. Verluste inbegriffen.',
+    hcard_01_cta:'Aufzeichnung ansehen →',
+    hcard_02_title:'Research-Notizen',
+    hcard_02_desc:'Makro-Analysen, Aktien-Deep-Dives, geopolitische Einschätzungen und Zentralbankanalysen.',
+    hcard_02_cta:'Neueste lesen →',
+    hcard_03_title:'Paper-Fonds',
+    hcard_03_desc:'Dynamischer Asset-Allokations-Fonds — makro-gesteuert, sieben Anlageklassen, +28,4% seit Auflage, Sharpe 1,31.',
+    hcard_03_cta:'Fonds ansehen →',
+    hcard_04_title:'Systematische Strategien',
+    hcard_04_desc:'12 vollsystematische Strategien für Aktien und FX — Momentum, Mean-Reversion und Makro.',
+    hcard_04_cta:'Strategien erkunden →',
+    hcard_05_title:'Quant-Tools',
+    hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, Portfoliokonstruktion und Faktorkorrelation — direkt im Browser.',
+    hcard_05_cta:'Toolkit öffnen →',
+    research_tag:'Veröffentlichte Forschung',
+    track_tag:'Geprüfte Performance',track_sub:'Jede Position vor dem Ergebnis veröffentlicht. Verluste inbegriffen. Nie gelöscht.',
+    tools_tag:'Interaktives Analysten-Toolkit',tools_sub:'Jedes Tool, das ein PM oder Analysten-Desk braucht — live, kostenlos, offen für alle.',
+    strats_tag:'Proprietäre systematische Forschung',strats_sub:'Zwölf vollsystematische Strategien für Aktien, FX und Rohstoffe.',
+    port_tag:'Portfolio & Produkte',port_sub:'Drei Vehikel für Research, Kapitalallokation und quantitative Tools.',
+    contact_tag:'Kontakt aufnehmen',contact_sub:'Interesse an Research, Quant-Strategien, Kooperationen oder Recruiting? Antwort in 24–48 Stunden.',
+    contact_submit:'Nachricht senden →'
+  },
+  it:{
+    nav_home:'Home',nav_track:'Track Record',nav_research:'Ricerca',
+    nav_fundlab:'Fund Lab',nav_contact:'Contatti',
+    drop_paper_tag:'Fondo Simulato',drop_paper_name:'Fondo di Allocazione Dinamica',
+    drop_sys_tag:'Sistematico',drop_sys_name:'Strategie Sistematiche',
+    drop_quant_tag:'Quant.',drop_quant_name:'Strumenti Quantitativi',
+    hcard_01_title:'Track Record',
+    hcard_01_desc:'Ogni posizione pubblicata prima del risultato — entrata, obiettivo, stop e dimensione. Perdite incluse.',
+    hcard_01_cta:'Vedi il record →',
+    hcard_02_title:'Note di Ricerca',
+    hcard_02_desc:'Analisi macro, deep dive azionari, letture geopolitiche e analisi delle banche centrali.',
+    hcard_02_cta:'Leggi →',
+    hcard_03_title:'Fondo Simulato',
+    hcard_03_desc:"Fondo di allocazione dinamica — macro, sette classi di attivi, +28,4% dall'inizio, Sharpe 1,31.",
+    hcard_03_cta:'Vedi il fondo →',
+    hcard_04_title:'Strategie Sistematiche',
+    hcard_04_desc:'12 strategie pienamente sistematiche su azioni e FX — momentum, mean-reversion e macro.',
+    hcard_04_cta:'Esplora strategie →',
+    hcard_05_title:'Strumenti Quantitativi',
+    hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, costruzione di portafoglio e correlazione fattoriale — nel browser.',
+    hcard_05_cta:'Apri toolkit →',
+    research_tag:'Ricerca pubblicata',
+    track_tag:'Performance verificata',track_sub:'Ogni posizione pubblicata prima del risultato. Perdite incluse. Mai cancellate.',
+    tools_tag:'Toolkit interattivo per analisti',tools_sub:'Ogni strumento che un PM o analista si aspetta — live, gratuito, aperto a tutti.',
+    strats_tag:'Ricerca Sistematica Proprietaria',strats_sub:'Dodici strategie pienamente sistematiche su azioni, FX e materie prime.',
+    port_tag:'Portafoglio & Prodotti',port_sub:'Tre veicoli per ricerca, allocazione di capitale e strumenti quantitativi.',
+    contact_tag:'Contattaci',contact_sub:'Interessato a ricerca, strategie quant, collaborazioni o opportunità? Rispondo entro 24–48 ore.',
+    contact_submit:'Invia Messaggio →'
+  },
+  cn:{
+    nav_home:'首页',nav_track:'业绩记录',nav_research:'研究',
+    nav_fundlab:'基金实验室',nav_contact:'联系',
+    drop_paper_tag:'模拟基金',drop_paper_name:'动态资产配置基金',
+    drop_sys_tag:'系统化',drop_sys_name:'系统化策略',
+    drop_quant_tag:'量化',drop_quant_name:'量化工具与模型',
+    hcard_01_title:'业绩记录',
+    hcard_01_desc:'每笔交易在结果公布前公开发布——入场、目标、止损及仓位大小。盈亏均记录在案。',
+    hcard_01_cta:'查看记录 →',
+    hcard_02_title:'研究笔记',
+    hcard_02_desc:'宏观简报、股票深度研究、地缘政治解读及央行分析——完整论点在结果前公开。',
+    hcard_02_cta:'阅读最新 →',
+    hcard_03_title:'模拟基金',
+    hcard_03_desc:'动态资产配置模拟基金——宏观驱动，七大资产类别，成立以来+28.4%，夏普比率1.31。',
+    hcard_03_cta:'查看基金 →',
+    hcard_04_title:'系统化策略',
+    hcard_04_desc:'12个全系统化策略，涵盖股票和外汇——动量、均值回归及宏观模型。',
+    hcard_04_cta:'探索策略 →',
+    hcard_05_title:'量化工具',
+    hcard_05_desc:'DCF、Black-Scholes、Kelly公式、蒙特卡洛、投资组合构建及因子相关性——浏览器内实时运行。',
+    hcard_05_cta:'打开工具箱 →',
+    research_tag:'已发布研究',
+    track_tag:'经审计的业绩',track_sub:'每笔交易在结果公布前公开发布，包括亏损，从不删除。',
+    tools_tag:'交互式分析工具包',tools_sub:'基金经理和分析师所需的每项工具——实时、免费、向所有人开放。',
+    strats_tag:'专有系统化研究',strats_sub:'十二个全系统化策略，涵盖股票、外汇和大宗商品。',
+    port_tag:'投资组合与产品',port_sub:'三大载体：研究、资本配置和量化工具。',
+    contact_tag:'联系我们',contact_sub:'对研究、量化策略、合作或招聘机会感兴趣？通常在24–48小时内回复。',
+    contact_submit:'发送消息 →'
+  }
+};
+
+var _currentLang='en';
+var _LANG_LABELS={en:'🌐 EN',es:'🌐 ES',fr:'🌐 FR',de:'🌐 DE',it:'🌐 IT',cn:'🌐 CN'};
+
+function setLang(lang){
+  if(!I18N[lang]) return;
+  _currentLang=lang;
+  var T=I18N[lang];
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(function(el){
+    var key=el.getAttribute('data-i18n');
+    if(T[key]!==undefined) el.textContent=T[key];
+  });
+  // Update language button label
+  var lb=document.getElementById('langbtn');
+  if(lb) lb.textContent=_LANG_LABELS[lang]||'🌐';
+  // Update active state on lang-items
+  document.querySelectorAll('.lang-item').forEach(function(el){
+    el.classList.toggle('active',el.getAttribute('onclick').indexOf("'"+lang+"'")>-1);
+  });
+  // Persist
+  localStorage.setItem('lang',lang);
+}
+
+(function initLang(){
+  var saved=localStorage.getItem('lang')||'en';
+  if(saved!=='en') setLang(saved);
 })();
 
 // ═══ PROGRESS BAR + SCROLL-TO-TOP ═════════════════════════

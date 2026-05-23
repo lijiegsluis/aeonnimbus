@@ -145,7 +145,7 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 .tksep{color:var(--g3);margin:0 4px}
 
 /* Home grid */
-.hgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
+.hgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);border-top:1px solid var(--line2)}
 .hcard{padding:36px 32px;background:var(--bg1);cursor:pointer;position:relative;overflow:hidden;transition:background .2s}
 .hcard-hero{grid-column:1/-1;border-left:2px solid var(--gold)}
 .ptab-bar{display:flex;gap:0;margin:0 44px;border-bottom:1px solid var(--line2)}
@@ -357,7 +357,7 @@ footer{padding:32px 44px;border-top:1px solid var(--line2);display:flex;justify-
 @media(max-width:860px){
   .hero{grid-template-columns:1fr;padding:44px 20px}
   .spanel{display:none}
-  .hgrid{grid-template-columns:1fr 1fr}
+  .hgrid{grid-template-columns:1fr 1fr 1fr}
   nav{padding:0 20px}
   .pghd,.plist,.trwrap,.tgrid,.fbar,.trnote{padding-left:20px;padding-right:20px}
   .perfrow{margin-left:20px;margin-right:20px;grid-template-columns:repeat(3,1fr)}
@@ -3915,7 +3915,6 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <button class="nbtn on" onclick="sp('home')">Home</button>
     <button class="nbtn" onclick="sp('track')">Track Record</button>
     <button class="nbtn" onclick="sp('research')">Research</button>
-    <button class="nbtn" onclick="sp('strats')">Strategies</button>
     <div class="nav-drop-wrap">
       <button class="nbtn" onclick="sp('portfolios')">Fund Lab ▾</button>
       <div class="nav-dropdown">
@@ -4066,9 +4065,30 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 </div></div>
 
 <div class="hgrid">
-  <div class="hcard home-grid-card hcard-hero" onclick="sp('track')"><div class="hcn">01</div><div class="hct">Track Record</div><p class="hcp">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p><div class="hca">View record →</div></div>
-  <div class="hcard home-grid-card" onclick="sp('research')"><div class="hcn">02</div><div class="hct">Research Notes</div><p class="hcp">Equity deep dives, macro briefs, geo/market wraps, central bank analysis.</p><div class="hca">Read latest →</div></div>
-  <div class="hcard home-grid-card" onclick="sp('tools')"><div class="hcn">03</div><div class="hct">Strategies &amp; Tools</div><p class="hcp">12 systematic strategies backtested 2006–2026 across equity &amp; FX, plus DCF, Black-Scholes, Kelly sizing, portfolio construction, and correlation tools.</p><div class="hca">Explore →</div></div>
+  <div class="hcard home-grid-card hcard-hero" onclick="sp('track')">
+    <div class="hcn">01</div>
+    <div class="hct">Track Record</div>
+    <p class="hcp">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p>
+    <div class="hca">View record →</div>
+  </div>
+  <div class="hcard home-grid-card" onclick="sp('research')">
+    <div class="hcn">02</div>
+    <div class="hct">Research Notes</div>
+    <p class="hcp">Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.</p>
+    <div class="hca">Read latest →</div>
+  </div>
+  <div class="hcard home-grid-card" onclick="sp('strats')">
+    <div class="hcn">03</div>
+    <div class="hct">Systematic Strategies</div>
+    <p class="hcp">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models backtested on 12+ years of real tick data.</p>
+    <div class="hca">Explore strategies →</div>
+  </div>
+  <div class="hcard home-grid-card" onclick="sp('tools')">
+    <div class="hcn">04</div>
+    <div class="hct">Quant Tools</div>
+    <p class="hcp">DCF, Black-Scholes, Kelly sizing, Monte Carlo simulation, portfolio construction, and factor correlation — all live in-browser.</p>
+    <div class="hca">Open toolkit →</div>
+  </div>
 </div>
 
 
@@ -4093,7 +4113,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <div class="ftr-icon">⚗</div>
     <div class="ftr-title">Quantitative Models</div>
     <div class="ftr-desc">Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.</div>
-    <a class="ftr-link" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">View on GitHub →</a>
+    <a class="ftr-link" href="#" onclick="event.preventDefault();sp('tools')">Open toolkit →</a>
   </div>
   <div class="ftr-col">
     <div class="ftr-icon">🔗</div>
@@ -6131,7 +6151,7 @@ function sp(id){
     if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['track'],['research'],['strats'],['portfolios','tools'],['contact']];
+    const map=[['home'],['track'],['research'],['portfolios','tools','strats'],['contact']];
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }

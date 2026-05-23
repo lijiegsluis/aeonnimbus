@@ -396,16 +396,20 @@ html.dark #stt{background:#E8E4DC;color:#0F0E0B}
 
 /* ── NAV DROPDOWN (Fund Lab) ────────────────────── */
 .nav-drop-wrap{position:relative;display:inline-flex;align-items:center}
+/* Invisible bridge: fills the gap between button and panel so hover never breaks */
+.nav-drop-wrap::after{
+  content:'';position:absolute;top:100%;left:-24px;right:-24px;height:20px;
+}
 .nav-dropdown{
-  position:absolute;top:calc(100% + 18px);left:50%;
-  transform:translateX(-50%) translateY(-6px);
+  position:absolute;top:calc(100% + 16px);left:50%;
+  transform:translateX(-50%) translateY(-4px);
   background:var(--bg2);
   border:1px solid rgba(196,164,74,.18);
   border-radius:4px;
   padding:6px 0;
-  min-width:232px;
+  min-width:240px;
   opacity:0;pointer-events:none;
-  transition:opacity .18s ease,transform .18s ease;
+  transition:opacity .15s ease,transform .15s ease;
   z-index:300;
   box-shadow:0 12px 40px rgba(0,0,0,.4);
 }

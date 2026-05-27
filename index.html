@@ -9699,7 +9699,7 @@ function exportPortExcel(){
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
     '$VNET':'VNET', '$MELI':'MELI', '$ORCL':'ORCL', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
-    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
+    '$RDDT':'RDDT', 'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
   };
 
   var openItems = [];
@@ -9743,11 +9743,11 @@ function exportPortExcel(){
 /* ── LAST PRICE & ROI COLUMNS — powered by Finnhub ──────────────── */
 (function(){
   var FH_KEY = 'd883b7hr01qmhaki18mgd883b7hr01qmhaki18n0';
-  var CACHE_KEY = '_trPriceCache';
+  var CACHE_KEY = '_trPriceCache_v2';
   var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
     '$MELI':'MELI','$ORCL':'ORCL','$NU':'NU','$ADEA':'ADEA',
-    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA'
+    '$IREN':'IREN','$VNET':'VNET','$RDDT':'RDDT','$BA':'BA','$NVDA':'NVDA'
   };
 
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }

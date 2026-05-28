@@ -195,7 +195,7 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 .sto{background:rgba(74,222,128,.1);color:#4ade80}.stc{background:rgba(255,255,255,.05);color:var(--g2)}
 
 /* ═══ TRACK RECORD ══════════════════════════════════ */
-.perfrow{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--line2);margin:0 44px 32px;border:1px solid var(--line2)}
+.perfrow{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--line2);margin:0 44px 32px;border:1px solid var(--line2)}
 .pc{padding:20px 16px;background:var(--bg1);text-align:center}
 .pcl{font-family:var(--FM);font-size:8.5px;color:var(--g2);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
 .pcv{font-family:var(--FD);font-size:24px;font-weight:700;color:var(--white)}
@@ -362,7 +362,7 @@ footer{padding:32px 44px;border-top:1px solid var(--line2);display:flex;justify-
   .hgrid{grid-template-columns:1fr 1fr}.hcard-half,.hcard-third{grid-column:span 1}
   nav{padding:0 20px}
   .pghd,.plist,.trwrap,.tgrid,.fbar,.trnote{padding-left:20px;padding-right:20px}
-  .perfrow{margin-left:20px;margin-right:20px;grid-template-columns:repeat(3,1fr)}
+  .perfrow{margin-left:20px;margin-right:20px;grid-template-columns:repeat(4,1fr)}
   .post{grid-template-columns:1fr;gap:5px}
   .pm{flex-direction:row;align-items:center}
   footer{flex-direction:column;gap:14px;padding:24px 20px;text-align:center}
@@ -3448,9 +3448,10 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
   gap: 0 !important;
   background: transparent !important;
   border: 1px solid var(--rule) !important;
+  grid-template-columns: repeat(8,1fr) !important;
 }
 .pc {
-  padding: 22px 18px !important;
+  padding: 18px 10px !important;
   background: var(--bg1) !important;
   border-right: 1px solid var(--rule) !important;
   transition: background .2s;
@@ -3459,15 +3460,15 @@ table.tr td { font-size: 12px; padding: 12px 14px; }
 .pc:last-child { border-right: none !important; }
 .pc:hover { background: var(--bg2) !important; }
 .pcv {
-  font-size: 26px !important;
+  font-size: 20px !important;
   font-weight: 700 !important;
   letter-spacing: -.02em !important;
   line-height: 1.1 !important;
   margin: 4px 0 !important;
 }
 .pcl {
-  font-size: 8px !important;
-  letter-spacing: .15em !important;
+  font-size: 7.5px !important;
+  letter-spacing: .1em !important;
   color: var(--ink3) !important;
   margin-bottom: 6px !important;
 }

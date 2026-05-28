@@ -4307,6 +4307,8 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <div class="pc"><div class="pcl">Losses</div><div class="pcv r" id="tr-losses">0</div><div class="pcs">Stopped out</div></div>
     <div class="pc"><div class="pcl">Avg return (closed)</div><div class="pcv g" id="tr-avgret">—</div><div class="pcs" id="tr-closed-label">0 closed positions</div></div>
     <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs">Closed only</div></div>
+    <div class="pc"><div class="pcl">Unrealised return</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Open positions · live</div></div>
+    <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
   </div>
 </div>
 <div class="trwrap">
@@ -9680,6 +9682,17 @@ function exportPortExcel(){
     var avgRet   = closedRets.length ? closedRets.reduce(function(a,b){return a+b;},0)/closedRets.length : 0;
     var hitRate  = closed > 0 ? Math.round((wins/closed)*100) : 0;
 
+    /* Capital Deployed — sum Size% of open rows */
+    var deployed = 0;
+    rows.forEach(function(row){
+      if(!row.querySelector('.bdg.bo')) return;
+      var sizeCell = Array.from(row.querySelectorAll('td')).find(function(td){ return td.dataset.label==='Size'; });
+      if(sizeCell){
+        var v = parseFloat((sizeCell.textContent||'').replace('%','').trim());
+        if(!isNaN(v)) deployed += v;
+      }
+    });
+
     function el(id){ return document.getElementById(id); }
     if(el('tr-total'))        el('tr-total').textContent        = total;
     if(el('tr-open'))         el('tr-open').textContent         = open;
@@ -9692,6 +9705,7 @@ function exportPortExcel(){
       el('tr-avgret').textContent = s + avgRet.toFixed(1) + '%';
       el('tr-avgret').className   = 'pcv ' + (avgRet >= 0 ? 'g' : 'r');
     }
+    if(el('tr-deployed')) el('tr-deployed').textContent = deployed > 0 ? deployed.toFixed(0) + '%' : '—';
   }
   recalc(); /* run immediately from static HTML */
   window._trRecalc = recalc; /* exposed for RSS call injection */
@@ -9790,6 +9804,7 @@ function exportPortExcel(){
 
   /* Paint prices from a {SYM:price} map onto the DOM */
   function paint(items, prices){
+    var openRois = [];
     items.forEach(function(item){
       var price = prices[item.sym];
       if(price == null || isNaN(+price)) return;
@@ -9803,8 +9818,17 @@ function exportPortExcel(){
         item.roiCell.textContent = sign+roi.toFixed(1)+'%';
         item.roiCell.style.color = roi >= 0 ? '#4ade80' : '#f87171';
         item.roiCell.style.fontWeight = '600';
+        openRois.push(roi);
       }
     });
+    /* Update Unrealised Return stat card */
+    var openRetEl = document.getElementById('tr-openret');
+    if(openRetEl && openRois.length){
+      var avg = openRois.reduce(function(a,b){return a+b;},0) / openRois.length;
+      var sign = avg >= 0 ? '+' : '';
+      openRetEl.textContent = sign + avg.toFixed(1) + '%';
+      openRetEl.className   = 'pcv ' + (avg >= 0 ? 'g' : 'r');
+    }
   }
 
   /* Fetch fresh prices from Finnhub for given symbol list, return promise of {SYM:price} */

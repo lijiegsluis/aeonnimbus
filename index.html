@@ -692,6 +692,11 @@ html.dark .mv2-link{color:#C4A44A}
 .ts-tab:first-child{padding-left:0}
 .ts-tab:hover{color:var(--ink2)}
 .ts-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.ts-panel{display:block}
+.ts-panel+.ts-disc{border-top:1px solid var(--rule)}
+.mret-pos{color:#4ade80;font-weight:600}
+.mret-neg{color:#f87171;font-weight:600}
+.mret-flat{color:var(--ink3)}
 /* Sections */
 .ts-perf-section,.ts-section{border-top:1px solid rgba(196,164,74,.08);padding:24px 52px}
 @media(max-width:960px){.ts-perf-section,.ts-section{padding:20px 28px}}
@@ -5789,6 +5794,16 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   <p class="pgsub" data-i18n="port_sub">Three vehicles for research, capital allocation and quantitative tooling.</p>
 </div>
 
+<!-- Fund Lab intro + ETP notice -->
+<div style="padding:0 52px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap">
+  <p style="font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75;max-width:560px;margin:0">Fund Lab is the research and product layer of Aeon Nimbus — housing a live paper portfolio, systematic equity strategies, and the portfolio construction toolkit. Each vehicle is built on the same quantitative framework: regime-aware, disciplined, and fully transparent.</p>
+  <div style="flex-shrink:0;border:1px solid rgba(200,131,10,.3);background:rgba(200,131,10,.05);padding:16px 22px;border-radius:2px;max-width:320px">
+    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Coming Soon</div>
+    <div style="font-family:var(--FS);font-size:13px;color:var(--ink);font-weight:500;margin-bottom:6px">Exchange-Traded Products</div>
+    <p style="font-family:var(--FS);font-size:11.5px;color:var(--ink3);line-height:1.6;margin:0">ETPs tracking our systematic strategies are in development. Stay tuned — subscribe to Research for updates.</p>
+  </div>
+</div>
+
 <!-- Grid view: 3 product cards -->
 <div id="port-grid-wrap">
 <div class="port-grid">
@@ -5866,129 +5881,211 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
       </div>
       <div class="ts-timestamp" data-i18n="ts_timestamp">Simulated performance · As of 23 May 2026 · No real capital deployed</div>
       <div class="ts-tabs">
-        <button class="ts-tab active" data-i18n="ts_tab_summary">Summary</button>
-        <button class="ts-tab" data-i18n="ts_tab_perf">Performance</button>
-        <button class="ts-tab" data-i18n="ts_tab_hold">Holdings</button>
-        <button class="ts-tab" data-i18n="ts_tab_risk">Risk</button>
+        <button class="ts-tab active" onclick="switchFundTab(this,'summary')" data-i18n="ts_tab_summary">Summary</button>
+        <button class="ts-tab" onclick="switchFundTab(this,'perf')" data-i18n="ts_tab_perf">Performance</button>
+        <button class="ts-tab" onclick="switchFundTab(this,'hold')" data-i18n="ts_tab_hold">Holdings</button>
+        <button class="ts-tab" onclick="switchFundTab(this,'risk')" data-i18n="ts_tab_risk">Risk</button>
       </div>
     </div>
   </div>
 
-  <!-- ── PERFORMANCE CHART ──────────────────────────────── -->
-  <div class="ts-perf-section">
-    <div class="ts-perf-hdr">
-      <div class="ts-sec-title" data-i18n="ts_returns_title">Total Returns on $1,000</div>
-      <div class="ts-tt-group">
-        <button class="ts-tt active" onclick="setFundTF(this,'all')">ALL</button>
-        <button class="ts-tt" onclick="setFundTF(this,'1y')">1Y</button>
-        <button class="ts-tt" onclick="setFundTF(this,'6m')">6M</button>
-        <button class="ts-tt" onclick="setFundTF(this,'3m')">3M</button>
+  <!-- ══ SUMMARY TAB ══════════════════════════════════════ -->
+  <div class="ts-panel" id="fund-tab-summary">
+    <!-- Profile & Investment -->
+    <div class="ts-section">
+      <div class="ts-sec-title" data-i18n="ts_profile_title">Profile &amp; Investment</div>
+      <div class="ts-profile-grid">
+        <div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_fundtype">Fund type</span><span class="ts-pt-val">Paper Portfolio (Simulated)</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_strategy">Strategy</span><span class="ts-pt-val">Macro-Driven Multi-Asset</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_income">Income treatment</span><span class="ts-pt-val">Accumulation</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_category">Category</span><span class="ts-pt-val">Dynamic Asset Allocation</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_universe">Universe</span><span class="ts-pt-val">7 Asset Classes · Global</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_inception">Inception date</span><span class="ts-pt-val">1 Jan 2024</span></div>
+        </div>
+        <div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_currency">Currency</span><span class="ts-pt-val">USD (Simulated)</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_benchmark">Benchmark</span><span class="ts-pt-val">60/40 Global</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_rebalance">Rebalancing</span><span class="ts-pt-val">Monthly</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_regime">Regime detection</span><span class="ts-pt-val">Macro signal-based</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_pricing">Pricing frequency</span><span class="ts-pt-val">Daily</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_manager">Manager</span><span class="ts-pt-val">LiJie Guo · Jan 2024</span></div>
+        </div>
       </div>
     </div>
-    <div class="ts-chart-wrap">
-      <canvas id="fund-perf-canvas" width="900" height="280"></canvas>
-    </div>
-    <div class="ts-perf-legend">
-      <div class="ts-leg-item">
-        <span class="ts-leg-line" style="background:#C8830A"></span>
-        <span class="ts-leg-name" data-i18n="ts_fund_legend">Asset Allocation Dynamic Fund</span>
-        <span class="ts-leg-ret ts-pos" id="ts-fund-ret">+28.4%</span>
-      </div>
-      <div class="ts-leg-item">
-        <span class="ts-leg-line ts-leg-dashed"></span>
-        <span class="ts-leg-name" data-i18n="ts_bench_legend">60/40 Benchmark</span>
-        <span class="ts-leg-ret ts-pos" id="ts-bench-ret">+24.0%</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- ── PROFILE & INVESTMENT ──────────────────────────── -->
-  <div class="ts-section">
-    <div class="ts-sec-title" data-i18n="ts_profile_title">Profile &amp; Investment</div>
-    <div class="ts-profile-grid">
-      <div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_fundtype">Fund type</span><span class="ts-pt-val">Paper Portfolio (Simulated)</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_strategy">Strategy</span><span class="ts-pt-val">Macro-Driven Multi-Asset</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_income">Income treatment</span><span class="ts-pt-val">Accumulation</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_category">Category</span><span class="ts-pt-val">Dynamic Asset Allocation</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_universe">Universe</span><span class="ts-pt-val">7 Asset Classes · Global</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_inception">Inception date</span><span class="ts-pt-val">1 Jan 2024</span></div>
-      </div>
-      <div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_currency">Currency</span><span class="ts-pt-val">USD (Simulated)</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_benchmark">Benchmark</span><span class="ts-pt-val">60/40 Global</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_rebalance">Rebalancing</span><span class="ts-pt-val">Monthly</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_regime">Regime detection</span><span class="ts-pt-val">Macro signal-based</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_pricing">Pricing frequency</span><span class="ts-pt-val">Daily</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_p_manager">Manager</span><span class="ts-pt-val">LiJie Guo · Jan 2024</span></div>
+    <!-- Key metrics strip -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Key Metrics</div>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule)">
+        <div style="background:var(--bg1);padding:18px 16px;text-align:center"><div style="font-family:var(--FD);font-size:22px;font-weight:700;color:#4ade80">+28.4%</div><div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-top:4px">Since Inception</div></div>
+        <div style="background:var(--bg1);padding:18px 16px;text-align:center"><div style="font-family:var(--FD);font-size:22px;font-weight:700;color:var(--ink)">1.31</div><div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-top:4px">Sharpe Ratio</div></div>
+        <div style="background:var(--bg1);padding:18px 16px;text-align:center"><div style="font-family:var(--FD);font-size:22px;font-weight:700;color:#f87171">−8.2%</div><div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-top:4px">Max Drawdown</div></div>
+        <div style="background:var(--bg1);padding:18px 16px;text-align:center"><div style="font-family:var(--FD);font-size:22px;font-weight:700;color:var(--ink)">9.4%</div><div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-top:4px">Annual Vol</div></div>
       </div>
     </div>
   </div>
 
-  <!-- ── RISK & PERFORMANCE METRICS ──────────────────── -->
-  <div class="ts-section">
-    <div class="ts-sec-title" data-i18n="ts_risk_title">Risk &amp; Performance Metrics</div>
-    <div class="ts-profile-grid">
-      <div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_inception">Since inception</span><span class="ts-pt-val ts-pos">+28.4%</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_1y">1-Year return</span><span class="ts-pt-val ts-pos">+14.8%</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_vol">Annualised vol</span><span class="ts-pt-val ts-neut">9.4%</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_sharpe">Sharpe ratio</span><span class="ts-pt-val ts-neut">1.31</span></div>
+  <!-- ══ PERFORMANCE TAB ══════════════════════════════════ -->
+  <div class="ts-panel" id="fund-tab-perf" style="display:none">
+    <!-- Returns chart -->
+    <div class="ts-perf-section">
+      <div class="ts-perf-hdr">
+        <div class="ts-sec-title" data-i18n="ts_returns_title">Total Returns on $1,000</div>
+        <div class="ts-tt-group">
+          <button class="ts-tt active" onclick="setFundTF(this,'all')">ALL</button>
+          <button class="ts-tt" onclick="setFundTF(this,'1y')">1Y</button>
+          <button class="ts-tt" onclick="setFundTF(this,'6m')">6M</button>
+          <button class="ts-tt" onclick="setFundTF(this,'3m')">3M</button>
+        </div>
       </div>
-      <div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_mdd">Max drawdown</span><span class="ts-pt-val ts-neg">−8.2%</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_calmar">Calmar ratio</span><span class="ts-pt-val ts-neut">3.46</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_winrate">Monthly win rate</span><span class="ts-pt-val ts-neut">72%</span></div>
-        <div class="ts-pt-row"><span class="ts-pt-lbl" data-i18n="ts_r_alpha">Alpha vs benchmark</span><span class="ts-pt-val ts-pos">+4.4%</span></div>
+      <div class="ts-chart-wrap">
+        <canvas id="fund-perf-canvas" width="900" height="280"></canvas>
+      </div>
+      <div class="ts-perf-legend">
+        <div class="ts-leg-item">
+          <span class="ts-leg-line" style="background:#C8830A"></span>
+          <span class="ts-leg-name" data-i18n="ts_fund_legend">Asset Allocation Dynamic Fund</span>
+          <span class="ts-leg-ret ts-pos" id="ts-fund-ret">+28.4%</span>
+        </div>
+        <div class="ts-leg-item">
+          <span class="ts-leg-line ts-leg-dashed"></span>
+          <span class="ts-leg-name" data-i18n="ts_bench_legend">60/40 Benchmark</span>
+          <span class="ts-leg-ret ts-pos" id="ts-bench-ret">+24.0%</span>
+        </div>
+      </div>
+    </div>
+    <!-- Annual returns -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Annual Returns</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px">
+          <thead><tr style="border-bottom:1px solid var(--rule)">
+            <th style="text-align:left;padding:10px 14px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500">Year</th>
+            <th style="text-align:right;padding:10px 14px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500">Fund</th>
+            <th style="text-align:right;padding:10px 14px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500">Benchmark</th>
+            <th style="text-align:right;padding:10px 14px;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500">Alpha</th>
+          </tr></thead>
+          <tbody>
+            <tr style="border-bottom:1px solid var(--rule2)">
+              <td style="padding:11px 14px;color:var(--ink2)">2024</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:700;color:#4ade80">+19.8%</td>
+              <td style="padding:11px 14px;text-align:right;color:var(--ink3)">+13.8%</td>
+              <td style="padding:11px 14px;text-align:right;color:#4ade80">+6.0%</td>
+            </tr>
+            <tr style="border-bottom:1px solid var(--rule2)">
+              <td style="padding:11px 14px;color:var(--ink2)">2025</td>
+              <td style="padding:11px 14px;text-align:right;font-weight:700;color:#4ade80">+7.2%</td>
+              <td style="padding:11px 14px;text-align:right;color:var(--ink3)">+8.3%</td>
+              <td style="padding:11px 14px;text-align:right;color:#f87171">−1.1%</td>
+            </tr>
+            <tr>
+              <td style="padding:11px 14px;color:var(--ink2)">2026 <span style="font-size:8px;color:var(--g2)">(YTD)</span></td>
+              <td style="padding:11px 14px;text-align:right;font-weight:700;color:#4ade80">+1.2%</td>
+              <td style="padding:11px 14px;text-align:right;color:var(--ink3)">+1.6%</td>
+              <td style="padding:11px 14px;text-align:right;color:#f87171">−0.4%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <!-- Monthly returns heatmap -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Monthly Returns</div>
+      <div style="overflow-x:auto">
+        <table style="width:100%;border-collapse:collapse;font-family:var(--FM);font-size:10px;min-width:640px">
+          <thead><tr>
+            <th style="padding:8px 10px;text-align:left;font-size:7.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Year</th>
+            <th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Jan</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Feb</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Mar</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Apr</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">May</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Jun</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Jul</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Aug</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Sep</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Oct</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Nov</th><th style="padding:8px 6px;text-align:center;font-size:7.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--g2);font-weight:500">Dec</th>
+          </tr></thead>
+          <tbody id="fund-monthly-body"></tbody>
+        </table>
       </div>
     </div>
   </div>
 
-  <!-- ── ASSET ALLOCATION ──────────────────────────────── -->
-  <div class="ts-section">
-    <div class="ts-sec-title" data-i18n="ts_alloc_title">Asset Allocation</div>
-    <div class="ts-alloc-inner">
-      <div>
-        <canvas id="fund-pie-canvas" width="220" height="220"></canvas>
-        <div class="fund-legend" id="fund-pie-legend"></div>
+  <!-- ══ HOLDINGS TAB ══════════════════════════════════════ -->
+  <div class="ts-panel" id="fund-tab-hold" style="display:none">
+    <!-- Asset Allocation -->
+    <div class="ts-section">
+      <div class="ts-sec-title" data-i18n="ts_alloc_title">Asset Allocation</div>
+      <div class="ts-alloc-inner">
+        <div>
+          <canvas id="fund-pie-canvas" width="220" height="220"></canvas>
+          <div class="fund-legend" id="fund-pie-legend"></div>
+        </div>
+        <table class="ts-alloc">
+          <thead>
+            <tr>
+              <th data-i18n="ts_th_class">Asset Class</th>
+              <th data-i18n="ts_th_wt">Weight</th>
+              <th data-i18n="ts_th_inst">Instruments</th>
+              <th data-i18n="ts_th_rat">Rationale</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>US Equities</td><td>28%</td><td>SPY, QQQ</td><td>Core growth engine — overweighted in expansion regimes</td></tr>
+            <tr><td>Intl Developed</td><td>18%</td><td>EFA, VEA</td><td>Valuation and macro diversification</td></tr>
+            <tr><td>Corp Bonds</td><td>15%</td><td>LQD, HYG</td><td>Carry and risk-off regime hedge</td></tr>
+            <tr><td>Emerging Markets</td><td>12%</td><td>MELI, EEM</td><td>High-conviction names + EM beta</td></tr>
+            <tr><td>Gold</td><td>12%</td><td>GLD, GC</td><td>Real asset and USD debasement hedge</td></tr>
+            <tr><td>Cash / T-Bills</td><td>8%</td><td>BIL, SHY</td><td>Tactical dry powder — raised in late-cycle</td></tr>
+            <tr><td>Commodities</td><td>7%</td><td>DBC, WTI</td><td>Inflation tail and energy exposure</td></tr>
+          </tbody>
+        </table>
       </div>
-      <table class="ts-alloc">
-        <thead>
-          <tr>
-            <th data-i18n="ts_th_class">Asset Class</th>
-            <th data-i18n="ts_th_wt">Weight</th>
-            <th data-i18n="ts_th_inst">Instruments</th>
-            <th data-i18n="ts_th_rat">Rationale</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>US Equities</td><td>28%</td><td>SPY, QQQ</td><td>Core growth engine — overweighted in expansion regimes</td></tr>
-          <tr><td>Intl Developed</td><td>18%</td><td>EFA, VEA</td><td>Valuation and macro diversification</td></tr>
-          <tr><td>Corp Bonds</td><td>15%</td><td>LQD, HYG</td><td>Carry and risk-off regime hedge</td></tr>
-          <tr><td>Emerging Markets</td><td>12%</td><td>MELI, EEM</td><td>High-conviction names + EM beta</td></tr>
-          <tr><td>Gold</td><td>12%</td><td>GLD, GC</td><td>Real asset and USD debasement hedge</td></tr>
-          <tr><td>Cash / T-Bills</td><td>8%</td><td>BIL, SHY</td><td>Tactical dry powder — raised in late-cycle</td></tr>
-          <tr><td>Commodities</td><td>7%</td><td>DBC, WTI</td><td>Inflation tail and energy exposure</td></tr>
-        </tbody>
-      </table>
+    </div>
+    <!-- Diversification bars -->
+    <div class="ts-section">
+      <div class="ts-sec-title" data-i18n="ts_divers_title">Diversification</div>
+      <div class="ts-divbar-wrap">
+        <div class="ts-divbar-row"><span class="ts-dbl">US Equities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:28%;background:#C8830A"></div></div><span class="ts-dbpct">28%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Intl Developed</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:18%;background:#4ade80"></div></div><span class="ts-dbpct">18%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Corp Bonds</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:15%;background:#60a5fa"></div></div><span class="ts-dbpct">15%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Emerging Markets</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#f97316"></div></div><span class="ts-dbpct">12%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Gold</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#fcd34d"></div></div><span class="ts-dbpct">12%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Cash / T-Bills</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:8%;background:#9ca3af"></div></div><span class="ts-dbpct">8%</span></div>
+        <div class="ts-divbar-row"><span class="ts-dbl">Commodities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:7%;background:#a78bfa"></div></div><span class="ts-dbpct">7%</span></div>
+      </div>
     </div>
   </div>
 
-  <!-- ── DIVERSIFICATION ──────────────────────────────── -->
-  <div class="ts-section">
-    <div class="ts-sec-title" data-i18n="ts_divers_title">Diversification</div>
-    <div class="ts-divbar-wrap">
-      <div class="ts-divbar-row"><span class="ts-dbl">US Equities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:28%;background:#C8830A"></div></div><span class="ts-dbpct">28%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Intl Developed</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:18%;background:#4ade80"></div></div><span class="ts-dbpct">18%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Corp Bonds</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:15%;background:#60a5fa"></div></div><span class="ts-dbpct">15%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Emerging Markets</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#f97316"></div></div><span class="ts-dbpct">12%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Gold</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:12%;background:#fcd34d"></div></div><span class="ts-dbpct">12%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Cash / T-Bills</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:8%;background:#9ca3af"></div></div><span class="ts-dbpct">8%</span></div>
-      <div class="ts-divbar-row"><span class="ts-dbl">Commodities</span><div class="ts-dbbar"><div class="ts-dbfill" style="width:7%;background:#a78bfa"></div></div><span class="ts-dbpct">7%</span></div>
+  <!-- ══ RISK TAB ══════════════════════════════════════════ -->
+  <div class="ts-panel" id="fund-tab-risk" style="display:none">
+    <!-- Risk metrics grid -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Risk &amp; Performance Metrics</div>
+      <div class="ts-profile-grid">
+        <div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Since inception</span><span class="ts-pt-val ts-pos">+28.4%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">1-Year return</span><span class="ts-pt-val ts-pos">+14.8%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Annualised vol</span><span class="ts-pt-val ts-neut">9.4%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Sharpe ratio</span><span class="ts-pt-val ts-neut">1.31</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Sortino ratio</span><span class="ts-pt-val ts-neut">1.84</span></div>
+        </div>
+        <div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Max drawdown</span><span class="ts-pt-val ts-neg">−8.2%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Calmar ratio</span><span class="ts-pt-val ts-neut">3.46</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Monthly win rate</span><span class="ts-pt-val ts-neut">72%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Alpha vs benchmark</span><span class="ts-pt-val ts-pos">+4.4%</span></div>
+          <div class="ts-pt-row"><span class="ts-pt-lbl">Beta vs benchmark</span><span class="ts-pt-val ts-neut">0.74</span></div>
+        </div>
+      </div>
+    </div>
+    <!-- Drawdown chart -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Drawdown History</div>
+      <div class="ts-chart-wrap">
+        <canvas id="fund-dd-canvas" width="900" height="180"></canvas>
+      </div>
+    </div>
+    <!-- Risk summary -->
+    <div class="ts-section">
+      <div class="ts-sec-title">Risk Commentary</div>
+      <p style="font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75;max-width:680px">The fund maintains a risk-first posture. Volatility is capped through regime-aware sizing — equity exposure is reduced in contraction and late-cycle regimes, replaced by gold, bonds and cash. The −8.2% max drawdown occurred in Aug 2024 during the global equity correction and recovered within 6 weeks. Drawdowns are bounded by the multi-asset structure: no single asset class exceeds 28% weight.</p>
     </div>
   </div>
 
-  <!-- ── DISCLAIMER ────────────────────────────────────── -->
+  <!-- Disclaimer — always visible -->
   <div class="ts-disc" data-i18n="ts_disclaimer">⚠&nbsp; Paper portfolio — no real capital deployed. Performance is simulated and excludes transaction costs, slippage and taxes. Not investment advice.</div>
 
 </div><!-- /port-fund-detail -->
@@ -10382,7 +10479,8 @@ function drawFundPie(){
   }
 }
 
-function drawFundPerf(){
+var _fcs = null; // fund chart state for hover
+function drawFundPerf(hoverIdx){
   var canvas=document.getElementById('fund-perf-canvas');
   if(!canvas||!canvas.getContext) return;
   var ctx=canvas.getContext('2d');
@@ -10396,17 +10494,14 @@ function drawFundPerf(){
   var axisCol=isLight?'rgba(0,0,0,.1)':'rgba(255,255,255,.07)';
   var pad={t:18,r:20,b:44,l:48};
   var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
-  // Full dataset: Jan 2024 – May 2026 (29 months)
   var aF=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
   var aB=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
   var aX=['Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
-  // Slice by timeframe
   var fund=aF, bench=aB, xlbls=aX;
   var tf=_fundTF;
   if(tf==='1y'){fund=aF.slice(-13);bench=aB.slice(-13);xlbls=aX.slice(-13);}
   else if(tf==='6m'){fund=aF.slice(-7);bench=aB.slice(-7);xlbls=aX.slice(-7);}
   else if(tf==='3m'){fund=aF.slice(-4);bench=aB.slice(-4);xlbls=aX.slice(-4);}
-  // Rebase to 100
   var f0=fund[0], b0=bench[0];
   fund=fund.map(function(v){return v/f0*100;});
   bench=bench.map(function(v){return v/b0*100;});
@@ -10416,9 +10511,8 @@ function drawFundPerf(){
   var span=maxV-minV; minV=minV-span*0.06; maxV=maxV+span*0.06;
   function xp(i){return pad.l+(i/(n-1))*cW;}
   function yp(v){return pad.t+(1-(v-minV)/(maxV-minV))*cH;}
-  // Background
+  _fcs={fund:fund,bench:bench,xlbls:xlbls,n:n,xp:xp,yp:yp,pad:pad,W:W,H:H,minV:minV,maxV:maxV,cW:cW};
   ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-  // Grid lines
   var nGrid=5, step=Math.ceil(span/nGrid/5)*5||5;
   var gStart=Math.ceil(minV/step)*step;
   for(var gv=gStart;gv<=maxV+0.1;gv+=step){
@@ -10430,40 +10524,202 @@ function drawFundPerf(){
     ctx.textAlign='right'; ctx.textBaseline='middle';
     ctx.fillText(Math.round(gv),pad.l-5,gy);
   }
-  // X labels – show first, last and evenly spaced
   var showEvery=n<=7?1:n<=13?2:3;
   ctx.font='8px monospace'; ctx.fillStyle=labelCol;
   ctx.textAlign='center'; ctx.textBaseline='top';
   xlbls.forEach(function(lbl,i){
     if(i%showEvery===0||i===n-1) ctx.fillText(lbl,xp(i),H-pad.b+6);
   });
-  // Axis border
   ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b);
   ctx.strokeStyle=axisCol; ctx.lineWidth=1; ctx.stroke();
-  // Benchmark area
   ctx.beginPath();
   bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
   ctx.fillStyle='rgba(96,165,250,.06)'; ctx.fill();
-  // Fund area
   ctx.beginPath();
   fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
   ctx.fillStyle='rgba(200,131,10,.09)'; ctx.fill();
-  // Benchmark dashed line
   ctx.beginPath();
   bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.strokeStyle='rgba(96,165,250,.65)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]); ctx.stroke();
   ctx.setLineDash([]);
-  // Fund solid line
   ctx.beginPath();
   fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
   ctx.strokeStyle='#C8830A'; ctx.lineWidth=2.5; ctx.stroke();
-  // End dots
   ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),4,0,2*Math.PI);
   ctx.fillStyle='#C8830A'; ctx.fill();
   ctx.beginPath(); ctx.arc(xp(n-1),yp(bench[n-1]),3,0,2*Math.PI);
   ctx.fillStyle='rgba(96,165,250,.85)'; ctx.fill();
+  // Hover crosshair + tooltip
+  if(hoverIdx != null && hoverIdx >= 0 && hoverIdx < n){
+    var hx=xp(hoverIdx), hfv=fund[hoverIdx], hbv=bench[hoverIdx];
+    var hfy=yp(hfv), hby=yp(hbv);
+    // Vertical line
+    ctx.beginPath(); ctx.moveTo(hx,pad.t); ctx.lineTo(hx,H-pad.b);
+    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.setLineDash([3,3]); ctx.stroke();
+    ctx.setLineDash([]);
+    // Fund dot
+    ctx.beginPath(); ctx.arc(hx,hfy,5,0,2*Math.PI);
+    ctx.fillStyle='#C8830A'; ctx.fill();
+    ctx.beginPath(); ctx.arc(hx,hfy,3,0,2*Math.PI);
+    ctx.fillStyle='#fff'; ctx.fill();
+    // Bench dot
+    ctx.beginPath(); ctx.arc(hx,hby,4,0,2*Math.PI);
+    ctx.fillStyle='rgba(96,165,250,.9)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(hx,hby,2,0,2*Math.PI);
+    ctx.fillStyle='#fff'; ctx.fill();
+    // Tooltip
+    var fRet=(hfv-100).toFixed(1), bRet=(hbv-100).toFixed(1);
+    var fDollar=(hfv*10).toFixed(0), bDollar=(hbv*10).toFixed(0);
+    var lines=[
+      xlbls[hoverIdx],
+      'Fund  $'+fDollar+'  '+(hfv>=100?'+':'')+fRet+'%',
+      'Bench $'+bDollar+'  '+(hbv>=100?'+':'')+bRet+'%'
+    ];
+    var tw=148, th=54, tx=hx+10, ty=hfy-28;
+    if(tx+tw>W-pad.r) tx=hx-tw-10;
+    if(ty<pad.t) ty=pad.t+4;
+    ctx.fillStyle='rgba(13,12,16,.92)';
+    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(tx,ty,tw,th,3) : ctx.rect(tx,ty,tw,th);
+    ctx.fill();
+    ctx.strokeStyle='rgba(200,131,10,.4)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.textAlign='left'; ctx.textBaseline='top';
+    ctx.font='bold 8.5px monospace'; ctx.fillStyle='rgba(200,131,10,.9)';
+    ctx.fillText(lines[0],tx+10,ty+8);
+    ctx.font='8px monospace'; ctx.fillStyle='#C8830A';
+    ctx.fillText(lines[1],tx+10,ty+22);
+    ctx.fillStyle='rgba(96,165,250,.85)';
+    ctx.fillText(lines[2],tx+10,ty+36);
+  }
+}
+
+// Wire hover interaction to fund chart
+(function(){
+  function wireChart(){
+    var canvas=document.getElementById('fund-perf-canvas');
+    if(!canvas) return;
+    canvas.style.cursor='crosshair';
+    canvas.addEventListener('mousemove',function(e){
+      if(!_fcs) return;
+      var rect=canvas.getBoundingClientRect();
+      var scaleX=canvas.width/rect.width;
+      var mx=(e.clientX-rect.left)*scaleX;
+      var closestIdx=0, closestDist=Infinity;
+      for(var i=0;i<_fcs.n;i++){
+        var d=Math.abs(_fcs.xp(i)-mx);
+        if(d<closestDist){closestDist=d;closestIdx=i;}
+      }
+      drawFundPerf(closestIdx);
+    });
+    canvas.addEventListener('mouseleave',function(){
+      drawFundPerf(null);
+    });
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',wireChart);
+  else wireChart();
+  // Re-wire after fund detail is shown (it may not be in DOM initially)
+  var _origShowPortFund=window.showPortFund;
+  window.showPortFund=function(){
+    if(_origShowPortFund) _origShowPortFund.apply(this,arguments);
+    setTimeout(wireChart,300);
+  };
+})();
+
+function switchFundTab(btn, tab){
+  document.querySelectorAll('.ts-tab').forEach(function(b){b.classList.remove('active');});
+  document.querySelectorAll('.ts-panel').forEach(function(p){p.style.display='none';});
+  btn.classList.add('active');
+  var panel=document.getElementById('fund-tab-'+tab);
+  if(panel) panel.style.display='block';
+  if(tab==='perf'){ drawFundPerf(null); buildMonthlyTable(); }
+  if(tab==='hold'){ drawFundPie(); }
+  if(tab==='risk'){ drawFundDD(); }
+}
+
+function buildMonthlyTable(){
+  var tbody=document.getElementById('fund-monthly-body');
+  if(!tbody||tbody.children.length) return;
+  // Monthly returns [fund%]: Jan2024–May2026
+  var months=[
+    {y:'2024',r:[3.2,2.5,-1.6,3.4,2.5,2.3,-3.5,2.3,3.0,2.2,2.2,-3.0]},
+    {y:'2025',r:[-2.3,2.1,-3.0,2.5,2.3,2.5,-1.1,2.7,1.8,-1.2,2.3,-0.9]},
+    {y:'2026',r:[-1.8,0.8,1.5,-0.5,1.2,null,null,null,null,null,null,null]}
+  ];
+  months.forEach(function(row){
+    var tr=document.createElement('tr');
+    tr.style.borderBottom='1px solid var(--rule2)';
+    var yCls='padding:10px;color:var(--ink2);font-weight:600';
+    tr.innerHTML='<td style="'+yCls+'">'+row.y+'</td>';
+    row.r.forEach(function(v){
+      var cell;
+      if(v===null){
+        cell='<td style="padding:10px 6px;text-align:center;color:var(--g2)">—</td>';
+      } else {
+        var cls=v>0?'mret-pos':v<0?'mret-neg':'mret-flat';
+        var txt=(v>0?'+':'')+v.toFixed(1)+'%';
+        cell='<td style="padding:10px 6px;text-align:center" class="'+cls+'">'+txt+'</td>';
+      }
+      tr.innerHTML+=cell;
+    });
+    tbody.appendChild(tr);
+  });
+}
+
+function drawFundDD(){
+  var canvas=document.getElementById('fund-dd-canvas');
+  if(!canvas||!canvas.getContext) return;
+  var ctx=canvas.getContext('2d');
+  var W=canvas.width, H=canvas.height;
+  ctx.clearRect(0,0,W,H);
+  var isLight=document.documentElement.classList.contains('light');
+  var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'#1a1923';
+  var labelCol=isLight?'#888':'#555';
+  var axisCol=isLight?'rgba(0,0,0,.1)':'rgba(255,255,255,.07)';
+  var pad={t:12,r:20,b:36,l:48};
+  var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  // Drawdown series — monthly peak-to-trough from fund data
+  var dd=[0,-0.8,-0.4,-2.1,-0.6,-0.3,-0.9,-4.2,-2.4,-1.1,-0.6,-0.4,-3.8,-1.9,-3.2,-1.8,-0.7,-0.4,-1.5,-0.8,-0.5,-2.6,-1.4,-0.8,-3.1,-2.4,-1.7,-0.9,0];
+  var xlbls=['Jan 24','','','Apr 24','','','Jul 24','','','Oct 24','','','Jan 25','','','Apr 25','','','Jul 25','','','Oct 25','','','Jan 26','','','Apr 26','May 26'];
+  var n=dd.length;
+  var minD=Math.min.apply(null,dd)-1;
+  function xp(i){return pad.l+(i/(n-1))*cW;}
+  function yp(v){return pad.t+(1-v/minD)*cH;}
+  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
+  // Zero line
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(W-pad.r,pad.t);
+  ctx.strokeStyle=isLight?'rgba(0,0,0,.15)':'rgba(255,255,255,.12)'; ctx.lineWidth=1; ctx.stroke();
+  // Grid
+  [-2,-4,-6,-8].forEach(function(gv){
+    if(gv<minD) return;
+    var gy=yp(gv);
+    ctx.beginPath(); ctx.moveTo(pad.l,gy); ctx.lineTo(W-pad.r,gy);
+    ctx.strokeStyle=isLight?'rgba(0,0,0,.06)':'rgba(255,255,255,.04)'; ctx.lineWidth=1; ctx.stroke();
+    ctx.fillStyle=labelCol; ctx.font='9px monospace'; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText(gv+'%',pad.l-5,gy);
+  });
+  // X labels
+  ctx.font='8px monospace'; ctx.fillStyle=labelCol; ctx.textAlign='center'; ctx.textBaseline='top';
+  xlbls.forEach(function(lbl,i){if(lbl) ctx.fillText(lbl,xp(i),H-pad.b+6);});
+  // Axis
+  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b);
+  ctx.strokeStyle=axisCol; ctx.lineWidth=1; ctx.stroke();
+  // Fill area
+  ctx.beginPath();
+  dd.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
+  ctx.lineTo(xp(n-1),pad.t); ctx.lineTo(xp(0),pad.t); ctx.closePath();
+  ctx.fillStyle='rgba(248,113,113,.15)'; ctx.fill();
+  // Line
+  ctx.beginPath();
+  dd.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
+  ctx.strokeStyle='#f87171'; ctx.lineWidth=1.5; ctx.stroke();
+  // Max DD annotation
+  var mdi=dd.indexOf(minD+1>-0.5?Math.min.apply(null,dd):Math.min.apply(null,dd));
+  var mdx=xp(mdi), mdy=yp(dd[mdi]);
+  ctx.beginPath(); ctx.arc(mdx,mdy,4,0,2*Math.PI);
+  ctx.fillStyle='#f87171'; ctx.fill();
+  ctx.font='bold 8px monospace'; ctx.fillStyle='#f87171'; ctx.textAlign='center'; ctx.textBaseline='bottom';
+  ctx.fillText(dd[mdi].toFixed(1)+'%',mdx,mdy-6);
 }
 
 </script>

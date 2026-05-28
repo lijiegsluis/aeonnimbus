@@ -702,21 +702,21 @@ html.dark .mv2-link{color:#C4A44A}
 @media(max-width:960px){.ts-perf-section,.ts-section{padding:20px 28px}}
 @media(max-width:620px){.ts-perf-section,.ts-section{padding:16px 20px}}
 .ts-perf-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
-.ts-sec-title{font-family:var(--FM,monospace);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+.ts-sec-title{font-family:var(--FS,sans-serif);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;font-weight:600}
 .ts-sec-sub{font-family:var(--FM,monospace);font-size:8px;letter-spacing:0;text-transform:none;color:var(--g2);margin-left:8px}
 /* Time-frame toggles */
 .ts-tt-group{display:flex;gap:3px}
-.ts-tt{background:none;border:1px solid rgba(196,164,74,.16);border-radius:2px;cursor:pointer;font-family:var(--FM,monospace);font-size:8px;letter-spacing:.08em;color:var(--ink3);padding:4px 10px;transition:all .15s}
+.ts-tt{background:none;border:1px solid rgba(196,164,74,.16);border-radius:2px;cursor:pointer;font-family:var(--FS,sans-serif);font-size:9px;letter-spacing:.06em;color:var(--ink3);padding:4px 11px;transition:all .15s}
 .ts-tt:hover{color:var(--ink);border-color:rgba(196,164,74,.4)}
 .ts-tt.active{background:rgba(196,164,74,.12);border-color:var(--gold);color:var(--gold)}
 /* Performance chart */
-.ts-chart-wrap{border-radius:4px;overflow:hidden;border:1px solid rgba(196,164,74,.10)}
+.ts-chart-wrap{border-radius:3px;overflow:hidden;border:1px solid rgba(196,164,74,.10)}
 #fund-perf-canvas{display:block;width:100%!important;height:auto}
-.ts-perf-legend{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.ts-perf-legend{display:flex;gap:32px;flex-wrap:wrap;margin-top:16px;align-items:center}
 .ts-leg-item{display:flex;align-items:center;gap:10px}
 .ts-leg-line{display:inline-block;width:28px;height:2px;border-radius:1px;vertical-align:middle;flex-shrink:0}
-.ts-leg-dashed{border-top:2px dashed rgba(96,165,250,.65);height:0;background:transparent!important}
-.ts-leg-name{font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2)}
+.ts-leg-dashed{border-top:1.5px dashed rgba(148,163,184,.60);height:0;background:transparent!important}
+.ts-leg-name{font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);letter-spacing:.01em}
 .ts-leg-ret{font-family:var(--FS,sans-serif);font-size:11px;font-weight:700}
 /* Profile grid */
 .ts-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
@@ -5950,7 +5950,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
         <div class="ts-leg-item">
           <span class="ts-leg-line ts-leg-dashed"></span>
           <span class="ts-leg-name" data-i18n="ts_bench_legend">60/40 Benchmark</span>
-          <span class="ts-leg-ret ts-pos" id="ts-bench-ret">+24.0%</span>
+          <span class="ts-leg-ret" id="ts-bench-ret" style="color:rgba(148,163,184,.85)">+24.0%</span>
         </div>
       </div>
     </div>
@@ -10487,17 +10487,20 @@ function drawFundPerf(hoverIdx){
   var W=canvas.width,H=canvas.height;
   ctx.clearRect(0,0,W,H);
   var isLight=document.documentElement.classList.contains('light');
-  var bgFill=isLight?'#f5f4f8':'#0D0C10';
-  var INK=isLight?'rgba(0,0,0,.30)':'rgba(255,255,255,.28)';
-  var GRID0=isLight?'rgba(0,0,0,.12)':'rgba(255,255,255,.12)';
-  var GRID=isLight?'rgba(0,0,0,.05)':'rgba(255,255,255,.04)';
-  var GOLD='#C8830A';
-  var SYS="system-ui,-apple-system,'Segoe UI',sans-serif";
+  var BG    =isLight?'#f5f4f8':'#0D0C10';
+  var INK   =isLight?'rgba(0,0,0,.28)':'rgba(255,255,255,.26)';
+  var GRID0 =isLight?'rgba(0,0,0,.13)':'rgba(255,255,255,.13)';   // zero line
+  var GRID  =isLight?'rgba(0,0,0,.04)':'rgba(255,255,255,.035)'; // other horizontals
+  var GOLD  ='#C8830A';
+  var SLATE =isLight?'rgba(100,116,139,.70)':'rgba(148,163,184,.55)';
+  var SYS   ="system-ui,-apple-system,'Segoe UI',sans-serif";
+  var MO    ={Jan:'January',Feb:'February',Mar:'March',Apr:'April',May:'May',Jun:'June',Jul:'July',Aug:'August',Sep:'September',Oct:'October',Nov:'November',Dec:'December'};
+  function expandDate(s){var p=s.split(' ');return (MO[p[0]]||p[0])+' 20'+p[1];}
+  function fmtDollar(v){return '$'+Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,',');}
   var aF=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
   var aB=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
   var aX=['Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
-  var fund=aF,bench=aB,xlbls=aX;
-  var tf=_fundTF;
+  var fund=aF,bench=aB,xlbls=aX,tf=_fundTF;
   if(tf==='1y'){fund=aF.slice(-13);bench=aB.slice(-13);xlbls=aX.slice(-13);}
   else if(tf==='6m'){fund=aF.slice(-7);bench=aB.slice(-7);xlbls=aX.slice(-7);}
   else if(tf==='3m'){fund=aF.slice(-4);bench=aB.slice(-4);xlbls=aX.slice(-4);}
@@ -10505,20 +10508,17 @@ function drawFundPerf(hoverIdx){
   fund=fund.map(function(v){return v/f0*100;});
   bench=bench.map(function(v){return v/b0*100;});
   var n=fund.length;
-  var allV=fund.concat(bench);
-  var minV=Math.min.apply(null,allV),maxV=Math.max.apply(null,allV);
-  var span=maxV-minV;
-  minV-=span*0.15; maxV+=span*0.09;
-  var pad={t:28,r:32,b:54,l:68};
+  var allV=fund.concat(bench),minV=Math.min.apply(null,allV),maxV=Math.max.apply(null,allV);
+  var span=maxV-minV; minV-=span*0.15; maxV+=span*0.10;
+  var pad={t:28,r:84,b:52,l:66};
   var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
   function xp(i){return pad.l+(i/(n-1))*cW;}
   function yp(v){return pad.t+(1-(v-minV)/(maxV-minV))*cH;}
   _fcs={fund:fund,bench:bench,xlbls:xlbls,n:n,xp:xp,yp:yp,pad:pad,W:W,H:H,minV:minV,maxV:maxV,cW:cW};
-  // Background
-  ctx.fillStyle=bgFill; ctx.fillRect(0,0,W,H);
-  // Smooth Catmull-Rom bezier curve
+  ctx.fillStyle=BG; ctx.fillRect(0,0,W,H);
+  // Catmull-Rom smooth curve (gentle tension)
   function curvePath(pts){
-    var a=0.25;
+    var a=0.15;
     ctx.beginPath(); ctx.moveTo(xp(0),yp(pts[0]));
     for(var i=0;i<n-1;i++){
       var p0=Math.max(0,i-1),p2=i+1,p3=Math.min(n-1,i+2);
@@ -10527,93 +10527,95 @@ function drawFundPerf(hoverIdx){
       ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,xp(p2),yp(pts[p2]));
     }
   }
-  // Y-axis: percentage-return grid
+  // Y-axis: % return grid lines
   var retSpan=maxV-minV;
   var step=retSpan>20?5:retSpan>8?2:1;
-  var gridStart=Math.ceil((minV-100)/step)*step;
-  for(var gPct=gridStart;gPct<=(maxV-100+0.01);gPct+=step){
+  for(var gPct=Math.ceil((minV-100)/step)*step;gPct<=(maxV-100+0.01);gPct+=step){
     var gv=100+gPct; if(gv<minV||gv>maxV) continue;
     var gy=yp(gv);
     ctx.beginPath(); ctx.moveTo(pad.l,gy); ctx.lineTo(W-pad.r,gy);
-    ctx.strokeStyle=gPct===0?GRID0:GRID;
-    ctx.lineWidth=gPct===0?1:0.5;
-    ctx.setLineDash(gPct===0?[]:[3,6]); ctx.stroke(); ctx.setLineDash([]);
-    ctx.font='11px '+SYS; ctx.fillStyle=INK;
-    ctx.textAlign='right'; ctx.textBaseline='middle';
-    ctx.fillText((gPct>0?'+':gPct<0?'':'')+gPct+'%',pad.l-12,gy);
+    ctx.strokeStyle=gPct===0?GRID0:GRID; ctx.lineWidth=gPct===0?1:0.5;
+    ctx.setLineDash(gPct===0?[]:[2,7]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font='11px '+SYS; ctx.fillStyle=INK; ctx.textAlign='right'; ctx.textBaseline='middle';
+    ctx.fillText((gPct>0?'+':'')+gPct+'%',pad.l-10,gy);
   }
-  // X-axis labels
-  var showEvery=n<=7?1:n<=13?2:4;
+  // X-axis labels (quarterly cadence for multi-year)
   ctx.font='11px '+SYS; ctx.fillStyle=INK; ctx.textAlign='center'; ctx.textBaseline='top';
-  xlbls.forEach(function(lbl,i){if(i%showEvery===0||i===n-1)ctx.fillText(lbl,xp(i),H-pad.b+12);});
-  // Benchmark gradient fill
-  var gB=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
-  gB.addColorStop(0,'rgba(96,165,250,.11)'); gB.addColorStop(1,'rgba(96,165,250,0)');
-  curvePath(bench); ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
-  ctx.fillStyle=gB; ctx.fill();
-  // Fund gradient fill
+  xlbls.forEach(function(lbl,i){
+    var show=n<=7||(n<=13&&i%2===0)||(n>13&&i%3===0)||i===n-1;
+    if(show) ctx.fillText(lbl,xp(i),H-pad.b+10);
+  });
+  // Minimal area fills (almost invisible — line chart is the hero)
   var gF=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
-  gF.addColorStop(0,'rgba(200,131,10,.22)'); gF.addColorStop(1,'rgba(200,131,10,0)');
+  gF.addColorStop(0,'rgba(200,131,10,.08)'); gF.addColorStop(0.7,'rgba(200,131,10,.02)'); gF.addColorStop(1,'rgba(200,131,10,0)');
   curvePath(fund); ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
   ctx.fillStyle=gF; ctx.fill();
-  // Benchmark line (dashed)
-  curvePath(bench); ctx.strokeStyle='rgba(96,165,250,.45)'; ctx.lineWidth=1.5;
-  ctx.lineJoin='round'; ctx.lineCap='round'; ctx.setLineDash([5,6]); ctx.stroke(); ctx.setLineDash([]);
-  // Fund line
-  curvePath(fund); ctx.strokeStyle=GOLD; ctx.lineWidth=2.5;
+  // Benchmark line (slate, thin, dashed)
+  curvePath(bench); ctx.strokeStyle=SLATE; ctx.lineWidth=1.2;
+  ctx.lineJoin='round'; ctx.lineCap='round'; ctx.setLineDash([5,7]); ctx.stroke(); ctx.setLineDash([]);
+  // Fund line (gold, solid)
+  curvePath(fund); ctx.strokeStyle=GOLD; ctx.lineWidth=2;
   ctx.lineJoin='round'; ctx.lineCap='round'; ctx.stroke();
-  // End-of-series dots
-  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),5,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
-  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),2.5,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
-  ctx.beginPath(); ctx.arc(xp(n-1),yp(bench[n-1]),4,0,2*Math.PI); ctx.fillStyle='rgba(96,165,250,.6)'; ctx.fill();
+  // End-of-series: small terminal dots + return annotations
+  var xe=xp(n-1),yfe=yp(fund[n-1]),ybe=yp(bench[n-1]);
+  ctx.beginPath(); ctx.arc(xe,yfe,3.5,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
+  ctx.beginPath(); ctx.arc(xe,ybe,3,0,2*Math.PI); ctx.fillStyle=SLATE; ctx.fill();
+  var fRetEnd=fund[n-1]-100,bRetEnd=bench[n-1]-100;
+  ctx.font='bold 10px '+SYS; ctx.textAlign='left'; ctx.textBaseline='middle';
+  ctx.fillStyle=GOLD;
+  ctx.fillText((fRetEnd>=0?'+':'')+fRetEnd.toFixed(1)+'%',xe+9,yfe);
+  ctx.fillStyle=SLATE;
+  ctx.fillText((bRetEnd>=0?'+':'')+bRetEnd.toFixed(1)+'%',xe+9,ybe);
   // Hover overlay
   if(hoverIdx!=null&&hoverIdx>=0&&hoverIdx<n){
     var hx=xp(hoverIdx),hfv=fund[hoverIdx],hbv=bench[hoverIdx];
     var hfy=yp(hfv),hby=yp(hbv);
-    // Vertical guide
+    // Vertical rule
     ctx.beginPath(); ctx.moveTo(hx,pad.t); ctx.lineTo(hx,H-pad.b);
-    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1; ctx.setLineDash([]); ctx.stroke();
-    // Fund dot (gold ring with bg core)
-    ctx.beginPath(); ctx.arc(hx,hfy,6,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
-    ctx.beginPath(); ctx.arc(hx,hfy,3,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
-    // Bench dot (blue ring)
-    ctx.beginPath(); ctx.arc(hx,hby,5,0,2*Math.PI); ctx.fillStyle='rgba(96,165,250,.85)'; ctx.fill();
-    ctx.beginPath(); ctx.arc(hx,hby,2.5,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
-    // Tooltip
-    var fRet=hfv-100,bRet=hbv-100;
-    var tw=196,th=82,tx=hx+18,ty=pad.t+6;
-    if(tx+tw>W-pad.r) tx=hx-tw-18;
+    ctx.strokeStyle=isLight?'rgba(0,0,0,.09)':'rgba(255,255,255,.09)';
+    ctx.lineWidth=1; ctx.setLineDash([]); ctx.stroke();
+    // Horizontal guide (fund level → Y-axis)
+    ctx.beginPath(); ctx.moveTo(pad.l,hfy); ctx.lineTo(hx,hfy);
+    ctx.strokeStyle='rgba(200,131,10,.12)'; ctx.lineWidth=0.5;
+    ctx.setLineDash([2,5]); ctx.stroke(); ctx.setLineDash([]);
+    // Dots: solid, clean
+    ctx.beginPath(); ctx.arc(hx,hfy,4.5,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
+    ctx.beginPath(); ctx.arc(hx,hby,3.5,0,2*Math.PI); ctx.fillStyle=SLATE; ctx.fill();
+    // Tooltip — sharp corners, institutional style
+    var fRet=hfv-100,bRet=hbv-100,alpha=fRet-bRet;
+    var tw=210,th=102,tx=hx+16,ty=pad.t+6;
+    if(tx+tw>W-pad.r) tx=hx-tw-16;
     if(ty+th>H-pad.b) ty=H-pad.b-th-6;
-    var tbg=isLight?'rgba(255,255,255,.97)':'rgba(8,7,12,.97)';
-    ctx.fillStyle=tbg;
-    ctx.beginPath(); if(ctx.roundRect)ctx.roundRect(tx,ty,tw,th,4); else ctx.rect(tx,ty,tw,th); ctx.fill();
-    ctx.strokeStyle='rgba(200,131,10,.22)'; ctx.lineWidth=1; ctx.stroke();
+    var TBG=isLight?'rgba(248,247,251,.98)':'rgba(6,6,9,.98)';
+    ctx.fillStyle=TBG; ctx.fillRect(tx,ty,tw,th);
+    ctx.strokeStyle='rgba(200,131,10,.18)'; ctx.lineWidth=1; ctx.strokeRect(tx,ty,tw,th);
     // Date header
-    ctx.font='bold 9.5px '+SYS;
-    ctx.fillStyle=isLight?'rgba(0,0,0,.38)':'rgba(255,255,255,.38)';
+    ctx.font='600 9.5px '+SYS;
+    ctx.fillStyle=isLight?'rgba(0,0,0,.38)':'rgba(255,255,255,.36)';
     ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.fillText(xlbls[hoverIdx].toUpperCase(),tx+14,ty+12);
-    // Separator
-    ctx.beginPath(); ctx.moveTo(tx+14,ty+26); ctx.lineTo(tx+tw-14,ty+26);
+    ctx.fillText(expandDate(xlbls[hoverIdx]).toUpperCase(),tx+12,ty+11);
+    // Rule
+    ctx.beginPath(); ctx.moveTo(tx+12,ty+26); ctx.lineTo(tx+tw-12,ty+26);
     ctx.strokeStyle=isLight?'rgba(0,0,0,.07)':'rgba(255,255,255,.07)'; ctx.lineWidth=0.5; ctx.stroke();
-    // Fund row
-    var r1=ty+33,r2=ty+57;
-    ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.font='10.5px '+SYS; ctx.fillStyle=GOLD;
-    ctx.fillText('Fund',tx+14,r1);
-    ctx.fillStyle='rgba(96,165,250,.85)';
-    ctx.fillText('Benchmark',tx+14,r2);
-    // Value column
-    ctx.font='bold 10.5px '+SYS;
-    ctx.fillStyle=isLight?'rgba(0,0,0,.60)':'rgba(255,255,255,.60)';
-    ctx.textAlign='right';
-    ctx.fillText('$'+(hfv*10).toFixed(0),tx+tw-60,r1);
-    ctx.fillText('$'+(hbv*10).toFixed(0),tx+tw-60,r2);
-    // Return column
-    ctx.fillStyle=fRet>=0?'#4ade80':'#f87171';
-    ctx.fillText((fRet>=0?'+':'')+fRet.toFixed(1)+'%',tx+tw-14,r1);
-    ctx.fillStyle=bRet>=0?'#4ade80':'#f87171';
-    ctx.fillText((bRet>=0?'+':'')+bRet.toFixed(1)+'%',tx+tw-14,r2);
+    // Three data rows: Fund / Benchmark / Alpha
+    var rows=[
+      {lbl:'Fund',      col:GOLD,                                  val:fmtDollar(hfv*10), ret:fRet},
+      {lbl:'Benchmark', col:SLATE,                                 val:fmtDollar(hbv*10), ret:bRet},
+      {lbl:'Alpha',     col:alpha>=0?'#4ade80':'#f87171',          val:'',                ret:alpha}
+    ];
+    rows.forEach(function(row,ri){
+      var ry=ty+32+ri*22;
+      ctx.textAlign='left'; ctx.textBaseline='top';
+      ctx.font='10.5px '+SYS; ctx.fillStyle=row.col;
+      ctx.fillText(row.lbl,tx+12,ry);
+      if(row.val){
+        ctx.textAlign='right'; ctx.font='600 10.5px '+SYS;
+        ctx.fillStyle=isLight?'rgba(0,0,0,.50)':'rgba(255,255,255,.50)';
+        ctx.fillText(row.val,tx+tw-58,ry);
+      }
+      ctx.textAlign='right'; ctx.font='600 10.5px '+SYS; ctx.fillStyle=row.col;
+      ctx.fillText((row.ret>=0?'+':'')+row.ret.toFixed(1)+'%',tx+tw-12,ry);
+    });
   }
 }
 

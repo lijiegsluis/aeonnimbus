@@ -710,14 +710,14 @@ html.dark .mv2-link{color:#C4A44A}
 .ts-tt:hover{color:var(--ink);border-color:rgba(196,164,74,.4)}
 .ts-tt.active{background:rgba(196,164,74,.12);border-color:var(--gold);color:var(--gold)}
 /* Performance chart */
-.ts-chart-wrap{border-radius:3px;overflow:hidden;border:1px solid rgba(196,164,74,.08)}
+.ts-chart-wrap{border-radius:4px;overflow:hidden;border:1px solid rgba(196,164,74,.10)}
 #fund-perf-canvas{display:block;width:100%!important;height:auto}
-.ts-perf-legend{display:flex;gap:24px;flex-wrap:wrap;margin-top:14px}
-.ts-leg-item{display:flex;align-items:center;gap:8px}
-.ts-leg-line{display:inline-block;width:24px;height:2px;border-radius:1px;vertical-align:middle;flex-shrink:0}
-.ts-leg-dashed{border-top:2px dashed #60a5fa;height:0;background:transparent!important}
-.ts-leg-name{font-family:var(--FM,monospace);font-size:9.5px;color:var(--ink2)}
-.ts-leg-ret{font-family:var(--FM,monospace);font-size:9.5px;font-weight:600}
+.ts-perf-legend{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;align-items:center}
+.ts-leg-item{display:flex;align-items:center;gap:10px}
+.ts-leg-line{display:inline-block;width:28px;height:2px;border-radius:1px;vertical-align:middle;flex-shrink:0}
+.ts-leg-dashed{border-top:2px dashed rgba(96,165,250,.65);height:0;background:transparent!important}
+.ts-leg-name{font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2)}
+.ts-leg-ret{font-family:var(--FS,sans-serif);font-size:11px;font-weight:700}
 /* Profile grid */
 .ts-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 52px}
 @media(max-width:760px){.ts-profile-grid{grid-template-columns:1fr}}
@@ -5939,7 +5939,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
         </div>
       </div>
       <div class="ts-chart-wrap">
-        <canvas id="fund-perf-canvas" width="900" height="280"></canvas>
+        <canvas id="fund-perf-canvas" width="1200" height="360"></canvas>
       </div>
       <div class="ts-perf-legend">
         <div class="ts-leg-item">
@@ -10484,113 +10484,136 @@ function drawFundPerf(hoverIdx){
   var canvas=document.getElementById('fund-perf-canvas');
   if(!canvas||!canvas.getContext) return;
   var ctx=canvas.getContext('2d');
-  var W=canvas.width, H=canvas.height;
+  var W=canvas.width,H=canvas.height;
   ctx.clearRect(0,0,W,H);
   var isLight=document.documentElement.classList.contains('light');
-  var bg=getComputedStyle(document.documentElement).getPropertyValue('--bg2').trim()||'#1a1923';
-  var gridCol=isLight?'rgba(0,0,0,.06)':'rgba(255,255,255,.04)';
-  var gridBase=isLight?'rgba(0,0,0,.15)':'rgba(255,255,255,.12)';
-  var labelCol=isLight?'#888':'#555';
-  var axisCol=isLight?'rgba(0,0,0,.1)':'rgba(255,255,255,.07)';
-  var pad={t:18,r:20,b:44,l:48};
-  var cW=W-pad.l-pad.r, cH=H-pad.t-pad.b;
+  var bgFill=isLight?'#f5f4f8':'#0D0C10';
+  var INK=isLight?'rgba(0,0,0,.30)':'rgba(255,255,255,.28)';
+  var GRID0=isLight?'rgba(0,0,0,.12)':'rgba(255,255,255,.12)';
+  var GRID=isLight?'rgba(0,0,0,.05)':'rgba(255,255,255,.04)';
+  var GOLD='#C8830A';
+  var SYS="system-ui,-apple-system,'Segoe UI',sans-serif";
   var aF=[100,103.2,105.8,104.1,107.6,110.3,112.8,108.9,111.4,114.7,117.2,119.8,116.2,118.9,121.4,117.8,120.6,123.5,122.1,125.4,127.8,124.3,127.1,129.6,126.8,128.9,130.4,127.2,128.4];
   var aB=[100,102.1,103.8,102.3,104.7,106.8,108.2,105.4,107.6,110.1,112.4,113.8,111.2,113.4,115.6,112.8,115.1,117.3,116.4,118.7,120.9,118.2,120.6,122.1,119.8,121.2,122.8,120.4,124.0];
   var aX=['Jan 24','Feb 24','Mar 24','Apr 24','May 24','Jun 24','Jul 24','Aug 24','Sep 24','Oct 24','Nov 24','Dec 24','Jan 25','Feb 25','Mar 25','Apr 25','May 25','Jun 25','Jul 25','Aug 25','Sep 25','Oct 25','Nov 25','Dec 25','Jan 26','Feb 26','Mar 26','Apr 26','May 26'];
-  var fund=aF, bench=aB, xlbls=aX;
+  var fund=aF,bench=aB,xlbls=aX;
   var tf=_fundTF;
   if(tf==='1y'){fund=aF.slice(-13);bench=aB.slice(-13);xlbls=aX.slice(-13);}
   else if(tf==='6m'){fund=aF.slice(-7);bench=aB.slice(-7);xlbls=aX.slice(-7);}
   else if(tf==='3m'){fund=aF.slice(-4);bench=aB.slice(-4);xlbls=aX.slice(-4);}
-  var f0=fund[0], b0=bench[0];
+  var f0=fund[0],b0=bench[0];
   fund=fund.map(function(v){return v/f0*100;});
   bench=bench.map(function(v){return v/b0*100;});
   var n=fund.length;
   var allV=fund.concat(bench);
-  var minV=Math.min.apply(null,allV), maxV=Math.max.apply(null,allV);
-  var span=maxV-minV; minV=minV-span*0.06; maxV=maxV+span*0.06;
+  var minV=Math.min.apply(null,allV),maxV=Math.max.apply(null,allV);
+  var span=maxV-minV;
+  minV-=span*0.15; maxV+=span*0.09;
+  var pad={t:28,r:32,b:54,l:68};
+  var cW=W-pad.l-pad.r,cH=H-pad.t-pad.b;
   function xp(i){return pad.l+(i/(n-1))*cW;}
   function yp(v){return pad.t+(1-(v-minV)/(maxV-minV))*cH;}
   _fcs={fund:fund,bench:bench,xlbls:xlbls,n:n,xp:xp,yp:yp,pad:pad,W:W,H:H,minV:minV,maxV:maxV,cW:cW};
-  ctx.fillStyle=bg; ctx.fillRect(0,0,W,H);
-  var nGrid=5, step=Math.ceil(span/nGrid/5)*5||5;
-  var gStart=Math.ceil(minV/step)*step;
-  for(var gv=gStart;gv<=maxV+0.1;gv+=step){
+  // Background
+  ctx.fillStyle=bgFill; ctx.fillRect(0,0,W,H);
+  // Smooth Catmull-Rom bezier curve
+  function curvePath(pts){
+    var a=0.25;
+    ctx.beginPath(); ctx.moveTo(xp(0),yp(pts[0]));
+    for(var i=0;i<n-1;i++){
+      var p0=Math.max(0,i-1),p2=i+1,p3=Math.min(n-1,i+2);
+      var cp1x=xp(i)+(xp(p2)-xp(p0))*a, cp1y=yp(pts[i])+(yp(pts[p2])-yp(pts[p0]))*a;
+      var cp2x=xp(p2)-(xp(p3)-xp(i))*a, cp2y=yp(pts[p2])-(yp(pts[p3])-yp(pts[i]))*a;
+      ctx.bezierCurveTo(cp1x,cp1y,cp2x,cp2y,xp(p2),yp(pts[p2]));
+    }
+  }
+  // Y-axis: percentage-return grid
+  var retSpan=maxV-minV;
+  var step=retSpan>20?5:retSpan>8?2:1;
+  var gridStart=Math.ceil((minV-100)/step)*step;
+  for(var gPct=gridStart;gPct<=(maxV-100+0.01);gPct+=step){
+    var gv=100+gPct; if(gv<minV||gv>maxV) continue;
     var gy=yp(gv);
     ctx.beginPath(); ctx.moveTo(pad.l,gy); ctx.lineTo(W-pad.r,gy);
-    ctx.strokeStyle=Math.round(gv)===100?gridBase:gridCol;
-    ctx.lineWidth=1; ctx.stroke();
-    ctx.fillStyle=labelCol; ctx.font='9px monospace';
+    ctx.strokeStyle=gPct===0?GRID0:GRID;
+    ctx.lineWidth=gPct===0?1:0.5;
+    ctx.setLineDash(gPct===0?[]:[3,6]); ctx.stroke(); ctx.setLineDash([]);
+    ctx.font='11px '+SYS; ctx.fillStyle=INK;
     ctx.textAlign='right'; ctx.textBaseline='middle';
-    ctx.fillText(Math.round(gv),pad.l-5,gy);
+    ctx.fillText((gPct>0?'+':gPct<0?'':'')+gPct+'%',pad.l-12,gy);
   }
-  var showEvery=n<=7?1:n<=13?2:3;
-  ctx.font='8px monospace'; ctx.fillStyle=labelCol;
-  ctx.textAlign='center'; ctx.textBaseline='top';
-  xlbls.forEach(function(lbl,i){
-    if(i%showEvery===0||i===n-1) ctx.fillText(lbl,xp(i),H-pad.b+6);
-  });
-  ctx.beginPath(); ctx.moveTo(pad.l,pad.t); ctx.lineTo(pad.l,H-pad.b); ctx.lineTo(W-pad.r,H-pad.b);
-  ctx.strokeStyle=axisCol; ctx.lineWidth=1; ctx.stroke();
-  ctx.beginPath();
-  bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
-  ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
-  ctx.fillStyle='rgba(96,165,250,.06)'; ctx.fill();
-  ctx.beginPath();
-  fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
-  ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
-  ctx.fillStyle='rgba(200,131,10,.09)'; ctx.fill();
-  ctx.beginPath();
-  bench.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
-  ctx.strokeStyle='rgba(96,165,250,.65)'; ctx.lineWidth=1.5; ctx.setLineDash([5,4]); ctx.stroke();
-  ctx.setLineDash([]);
-  ctx.beginPath();
-  fund.forEach(function(v,i){i===0?ctx.moveTo(xp(i),yp(v)):ctx.lineTo(xp(i),yp(v));});
-  ctx.strokeStyle='#C8830A'; ctx.lineWidth=2.5; ctx.stroke();
-  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),4,0,2*Math.PI);
-  ctx.fillStyle='#C8830A'; ctx.fill();
-  ctx.beginPath(); ctx.arc(xp(n-1),yp(bench[n-1]),3,0,2*Math.PI);
-  ctx.fillStyle='rgba(96,165,250,.85)'; ctx.fill();
-  // Hover crosshair + tooltip
-  if(hoverIdx != null && hoverIdx >= 0 && hoverIdx < n){
-    var hx=xp(hoverIdx), hfv=fund[hoverIdx], hbv=bench[hoverIdx];
-    var hfy=yp(hfv), hby=yp(hbv);
-    // Vertical line
+  // X-axis labels
+  var showEvery=n<=7?1:n<=13?2:4;
+  ctx.font='11px '+SYS; ctx.fillStyle=INK; ctx.textAlign='center'; ctx.textBaseline='top';
+  xlbls.forEach(function(lbl,i){if(i%showEvery===0||i===n-1)ctx.fillText(lbl,xp(i),H-pad.b+12);});
+  // Benchmark gradient fill
+  var gB=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  gB.addColorStop(0,'rgba(96,165,250,.11)'); gB.addColorStop(1,'rgba(96,165,250,0)');
+  curvePath(bench); ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
+  ctx.fillStyle=gB; ctx.fill();
+  // Fund gradient fill
+  var gF=ctx.createLinearGradient(0,pad.t,0,H-pad.b);
+  gF.addColorStop(0,'rgba(200,131,10,.22)'); gF.addColorStop(1,'rgba(200,131,10,0)');
+  curvePath(fund); ctx.lineTo(xp(n-1),H-pad.b); ctx.lineTo(xp(0),H-pad.b); ctx.closePath();
+  ctx.fillStyle=gF; ctx.fill();
+  // Benchmark line (dashed)
+  curvePath(bench); ctx.strokeStyle='rgba(96,165,250,.45)'; ctx.lineWidth=1.5;
+  ctx.lineJoin='round'; ctx.lineCap='round'; ctx.setLineDash([5,6]); ctx.stroke(); ctx.setLineDash([]);
+  // Fund line
+  curvePath(fund); ctx.strokeStyle=GOLD; ctx.lineWidth=2.5;
+  ctx.lineJoin='round'; ctx.lineCap='round'; ctx.stroke();
+  // End-of-series dots
+  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),5,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
+  ctx.beginPath(); ctx.arc(xp(n-1),yp(fund[n-1]),2.5,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
+  ctx.beginPath(); ctx.arc(xp(n-1),yp(bench[n-1]),4,0,2*Math.PI); ctx.fillStyle='rgba(96,165,250,.6)'; ctx.fill();
+  // Hover overlay
+  if(hoverIdx!=null&&hoverIdx>=0&&hoverIdx<n){
+    var hx=xp(hoverIdx),hfv=fund[hoverIdx],hbv=bench[hoverIdx];
+    var hfy=yp(hfv),hby=yp(hbv);
+    // Vertical guide
     ctx.beginPath(); ctx.moveTo(hx,pad.t); ctx.lineTo(hx,H-pad.b);
-    ctx.strokeStyle='rgba(255,255,255,.18)'; ctx.lineWidth=1; ctx.setLineDash([3,3]); ctx.stroke();
-    ctx.setLineDash([]);
-    // Fund dot
-    ctx.beginPath(); ctx.arc(hx,hfy,5,0,2*Math.PI);
-    ctx.fillStyle='#C8830A'; ctx.fill();
-    ctx.beginPath(); ctx.arc(hx,hfy,3,0,2*Math.PI);
-    ctx.fillStyle='#fff'; ctx.fill();
-    // Bench dot
-    ctx.beginPath(); ctx.arc(hx,hby,4,0,2*Math.PI);
-    ctx.fillStyle='rgba(96,165,250,.9)'; ctx.fill();
-    ctx.beginPath(); ctx.arc(hx,hby,2,0,2*Math.PI);
-    ctx.fillStyle='#fff'; ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.09)'; ctx.lineWidth=1; ctx.setLineDash([]); ctx.stroke();
+    // Fund dot (gold ring with bg core)
+    ctx.beginPath(); ctx.arc(hx,hfy,6,0,2*Math.PI); ctx.fillStyle=GOLD; ctx.fill();
+    ctx.beginPath(); ctx.arc(hx,hfy,3,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
+    // Bench dot (blue ring)
+    ctx.beginPath(); ctx.arc(hx,hby,5,0,2*Math.PI); ctx.fillStyle='rgba(96,165,250,.85)'; ctx.fill();
+    ctx.beginPath(); ctx.arc(hx,hby,2.5,0,2*Math.PI); ctx.fillStyle=bgFill; ctx.fill();
     // Tooltip
-    var fRet=(hfv-100).toFixed(1), bRet=(hbv-100).toFixed(1);
-    var fDollar=(hfv*10).toFixed(0), bDollar=(hbv*10).toFixed(0);
-    var lines=[
-      xlbls[hoverIdx],
-      'Fund  $'+fDollar+'  '+(hfv>=100?'+':'')+fRet+'%',
-      'Bench $'+bDollar+'  '+(hbv>=100?'+':'')+bRet+'%'
-    ];
-    var tw=148, th=54, tx=hx+10, ty=hfy-28;
-    if(tx+tw>W-pad.r) tx=hx-tw-10;
-    if(ty<pad.t) ty=pad.t+4;
-    ctx.fillStyle='rgba(13,12,16,.92)';
-    ctx.beginPath(); ctx.roundRect ? ctx.roundRect(tx,ty,tw,th,3) : ctx.rect(tx,ty,tw,th);
-    ctx.fill();
-    ctx.strokeStyle='rgba(200,131,10,.4)'; ctx.lineWidth=1; ctx.stroke();
+    var fRet=hfv-100,bRet=hbv-100;
+    var tw=196,th=82,tx=hx+18,ty=pad.t+6;
+    if(tx+tw>W-pad.r) tx=hx-tw-18;
+    if(ty+th>H-pad.b) ty=H-pad.b-th-6;
+    var tbg=isLight?'rgba(255,255,255,.97)':'rgba(8,7,12,.97)';
+    ctx.fillStyle=tbg;
+    ctx.beginPath(); if(ctx.roundRect)ctx.roundRect(tx,ty,tw,th,4); else ctx.rect(tx,ty,tw,th); ctx.fill();
+    ctx.strokeStyle='rgba(200,131,10,.22)'; ctx.lineWidth=1; ctx.stroke();
+    // Date header
+    ctx.font='bold 9.5px '+SYS;
+    ctx.fillStyle=isLight?'rgba(0,0,0,.38)':'rgba(255,255,255,.38)';
     ctx.textAlign='left'; ctx.textBaseline='top';
-    ctx.font='bold 8.5px monospace'; ctx.fillStyle='rgba(200,131,10,.9)';
-    ctx.fillText(lines[0],tx+10,ty+8);
-    ctx.font='8px monospace'; ctx.fillStyle='#C8830A';
-    ctx.fillText(lines[1],tx+10,ty+22);
+    ctx.fillText(xlbls[hoverIdx].toUpperCase(),tx+14,ty+12);
+    // Separator
+    ctx.beginPath(); ctx.moveTo(tx+14,ty+26); ctx.lineTo(tx+tw-14,ty+26);
+    ctx.strokeStyle=isLight?'rgba(0,0,0,.07)':'rgba(255,255,255,.07)'; ctx.lineWidth=0.5; ctx.stroke();
+    // Fund row
+    var r1=ty+33,r2=ty+57;
+    ctx.textAlign='left'; ctx.textBaseline='top';
+    ctx.font='10.5px '+SYS; ctx.fillStyle=GOLD;
+    ctx.fillText('Fund',tx+14,r1);
     ctx.fillStyle='rgba(96,165,250,.85)';
-    ctx.fillText(lines[2],tx+10,ty+36);
+    ctx.fillText('Benchmark',tx+14,r2);
+    // Value column
+    ctx.font='bold 10.5px '+SYS;
+    ctx.fillStyle=isLight?'rgba(0,0,0,.60)':'rgba(255,255,255,.60)';
+    ctx.textAlign='right';
+    ctx.fillText('$'+(hfv*10).toFixed(0),tx+tw-60,r1);
+    ctx.fillText('$'+(hbv*10).toFixed(0),tx+tw-60,r2);
+    // Return column
+    ctx.fillStyle=fRet>=0?'#4ade80':'#f87171';
+    ctx.fillText((fRet>=0?'+':'')+fRet.toFixed(1)+'%',tx+tw-14,r1);
+    ctx.fillStyle=bRet>=0?'#4ade80':'#f87171';
+    ctx.fillText((bRet>=0?'+':'')+bRet.toFixed(1)+'%',tx+tw-14,r2);
   }
 }
 

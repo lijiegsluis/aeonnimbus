@@ -9741,15 +9741,25 @@ function exportPortExcel(){
       ((data.quoteResponse||{}).result||[]).forEach(function(x){
         q[x.symbol] = x.regularMarketPrice;
       });
+      var openRois = [];
       openItems.forEach(function(item){
         var price = q[item.sym];
         if(price == null || !item.retCell) return;
         var pnl = (price - item.entry) / item.entry * 100;
+        openRois.push(pnl);
         var sign = pnl >= 0 ? '+' : '';
         item.retCell.textContent     = sign + pnl.toFixed(1) + '%';
         item.retCell.style.color     = pnl >= 0 ? '#4ade80' : '#f87171';
         item.retCell.style.fontWeight = '700';
       });
+      /* Unrealised Return stat — avg across all live-priced open positions */
+      var openRetEl = document.getElementById('tr-openret');
+      if(openRetEl && openRois.length){
+        var avg  = openRois.reduce(function(a,b){return a+b;},0) / openRois.length;
+        var sign = avg >= 0 ? '+' : '';
+        openRetEl.textContent = sign + avg.toFixed(1) + '%';
+        openRetEl.className   = 'pcv ' + (avg >= 0 ? 'g' : 'r');
+      }
     })
     .catch(function(){});
 })();
@@ -9804,7 +9814,6 @@ function exportPortExcel(){
 
   /* Paint prices from a {SYM:price} map onto the DOM */
   function paint(items, prices){
-    var openRois = [];
     items.forEach(function(item){
       var price = prices[item.sym];
       if(price == null || isNaN(+price)) return;
@@ -9818,17 +9827,8 @@ function exportPortExcel(){
         item.roiCell.textContent = sign+roi.toFixed(1)+'%';
         item.roiCell.style.color = roi >= 0 ? '#4ade80' : '#f87171';
         item.roiCell.style.fontWeight = '600';
-        openRois.push(roi);
       }
     });
-    /* Update Unrealised Return stat card */
-    var openRetEl = document.getElementById('tr-openret');
-    if(openRetEl && openRois.length){
-      var avg = openRois.reduce(function(a,b){return a+b;},0) / openRois.length;
-      var sign = avg >= 0 ? '+' : '';
-      openRetEl.textContent = sign + avg.toFixed(1) + '%';
-      openRetEl.className   = 'pcv ' + (avg >= 0 ? 'g' : 'r');
-    }
   }
 
   /* Fetch fresh prices from Finnhub for given symbol list, return promise of {SYM:price} */

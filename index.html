@@ -4302,12 +4302,12 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 </div>
 <div style="padding:24px 44px 0">
   <div class="perfrow">
-    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs">Live · tracking</div></div>
-    <div class="pc"><div class="pcl">Open</div><div class="pcv" id="tr-open">0</div><div class="pcs">Active</div></div>
-    <div class="pc"><div class="pcl">Wins</div><div class="pcv g" id="tr-wins">0</div><div class="pcs">Closed profitable</div></div>
-    <div class="pc"><div class="pcl">Losses</div><div class="pcv r" id="tr-losses">0</div><div class="pcs">Stopped out</div></div>
-    <div class="pc"><div class="pcl">Avg return (closed)</div><div class="pcv g" id="tr-avgret">—</div><div class="pcs" id="tr-closed-label">0 closed positions</div></div>
-    <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs">Closed only</div></div>
+    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs">Published &amp; tracked</div></div>
+    <div class="pc"><div class="pcl">Open</div><div class="pcv" id="tr-open">0</div><div class="pcs">Active positions</div></div>
+    <div class="pc"><div class="pcl">Avg. win</div><div class="pcv g" id="tr-wins">—</div><div class="pcs">Closed profitable</div></div>
+    <div class="pc"><div class="pcl">Avg. loss</div><div class="pcv r" id="tr-losses">—</div><div class="pcs">Closed at stop</div></div>
+    <div class="pc"><div class="pcl">Avg. return (closed)</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-closed-label">Realised P&amp;L</div></div>
+    <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs">Closed positions only</div></div>
     <div class="pc"><div class="pcl">Avg. return (open)</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Unrealised · live</div></div>
     <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
   </div>
@@ -9652,7 +9652,7 @@ function exportPortExcel(){
   function recalc(){
     var rows = document.querySelectorAll('table.tr tbody tr');
     if(!rows.length) return;
-    var total=0, open=0, wins=0, losses=0, closedRets=[];
+    var total=0, open=0, winRets=[], lossRets=[], closedRets=[];
 
     rows.forEach(function(row){
       total++;
@@ -9660,28 +9660,27 @@ function exportPortExcel(){
       if(!badge) return;
       var retCell = row.querySelector('.tr-ret');
 
+      function parseRet(cell){
+        if(!cell) return NaN;
+        var m = cell.textContent.trim().match(/([\+\-]?[\d.]+)%/);
+        return m ? parseFloat(m[1]) : NaN;
+      }
       if(badge.classList.contains('bo')){
         open++;
       } else if(badge.classList.contains('bw')){
-        wins++;
-        if(retCell){
-          var v = retCell.textContent.trim();
-          var m = v.match(/([+\-\u2212]?[\d.]+)%/);
-          if(m) closedRets.push(parseFloat(m[1].replace('\u2212','-')));
-        }
+        var v = parseRet(retCell);
+        if(!isNaN(v)){ winRets.push(v); closedRets.push(v); }
       } else if(badge.classList.contains('bl')){
-        losses++;
-        if(retCell){
-          var v2 = retCell.textContent.trim();
-          var m2 = v2.match(/([+\-\u2212]?[\d.]+)%/);
-          if(m2) closedRets.push(parseFloat(m2[1].replace('\u2212','-')));
-        }
+        var v2 = parseRet(retCell);
+        if(!isNaN(v2)){ lossRets.push(v2); closedRets.push(v2); }
       }
     });
 
-    var closed   = wins + losses;
-    var avgRet   = closedRets.length ? closedRets.reduce(function(a,b){return a+b;},0)/closedRets.length : 0;
-    var hitRate  = closed > 0 ? Math.round((wins/closed)*100) : 0;
+    var closed  = winRets.length + lossRets.length;
+    var hitRate = closed > 0 ? Math.round((winRets.length/closed)*100) : null;
+    var avgRet  = closedRets.length ? closedRets.reduce(function(a,b){return a+b;},0)/closedRets.length : null;
+    var avgWin  = winRets.length  ? winRets.reduce(function(a,b){return a+b;},0)/winRets.length   : null;
+    var avgLoss = lossRets.length ? lossRets.reduce(function(a,b){return a+b;},0)/lossRets.length : null;
 
     /* Capital Deployed — sum Size% of open rows */
     var deployed = 0;
@@ -9695,18 +9694,25 @@ function exportPortExcel(){
     });
 
     function el(id){ return document.getElementById(id); }
-    if(el('tr-total'))        el('tr-total').textContent        = total;
-    if(el('tr-open'))         el('tr-open').textContent         = open;
-    if(el('tr-wins'))         el('tr-wins').textContent         = wins;
-    if(el('tr-losses'))       el('tr-losses').textContent       = losses;
-    if(el('tr-hitrate'))      el('tr-hitrate').textContent      = hitRate + '%';
-    if(el('tr-closed-label')) el('tr-closed-label').textContent = closed + ' closed position' + (closed!==1?'s':'');
-    if(el('tr-avgret')){
-      var s = avgRet >= 0 ? '+' : '';
-      el('tr-avgret').textContent = s + avgRet.toFixed(1) + '%';
-      el('tr-avgret').className   = 'pcv ' + (avgRet >= 0 ? 'g' : 'r');
+    function fmt(v){ return v===null ? '—' : (v>=0?'+':'')+v.toFixed(1)+'%'; }
+
+    if(el('tr-total')) el('tr-total').textContent = total;
+    if(el('tr-open'))  el('tr-open').textContent  = open;
+    if(el('tr-wins')){
+      el('tr-wins').textContent = fmt(avgWin);
+      el('tr-wins').className   = avgWin===null ? 'pcv' : 'pcv g';
     }
-    if(el('tr-deployed')) el('tr-deployed').textContent = deployed > 0 ? deployed.toFixed(0) + '%' : '—';
+    if(el('tr-losses')){
+      el('tr-losses').textContent = fmt(avgLoss);
+      el('tr-losses').className   = avgLoss===null ? 'pcv' : 'pcv r';
+    }
+    if(el('tr-hitrate')) el('tr-hitrate').textContent = hitRate===null ? '—' : hitRate+'%';
+    if(el('tr-closed-label')) el('tr-closed-label').textContent = closed>0 ? closed+' closed position'+(closed!==1?'s':'') : 'Realised P&L';
+    if(el('tr-avgret')){
+      el('tr-avgret').textContent = fmt(avgRet);
+      el('tr-avgret').className   = avgRet===null ? 'pcv' : 'pcv '+(avgRet>=0?'g':'r');
+    }
+    if(el('tr-deployed')) el('tr-deployed').textContent = deployed>0 ? deployed.toFixed(0)+'%' : '—';
   }
   recalc(); /* run immediately from static HTML */
   window._trRecalc = recalc; /* exposed for RSS call injection */

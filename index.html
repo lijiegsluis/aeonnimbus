@@ -9434,6 +9434,13 @@ function exportPortExcel(){
       const tkHtml = postLink
         ? `<a href="${postLink}" target="_blank" style="color:var(--gold);text-decoration:none">${displayTk}</a>`
         : displayTk;
+      const isClosed  = !!call.return;
+      const isWin     = isClosed && String(call.return).startsWith('+');
+      const badgeCls  = isClosed ? (isWin ? 'bw' : 'bl') : 'bo';
+      const badgeTxt  = isClosed ? call.return : 'Open';
+      const retStyle  = isClosed ? ` style="color:${isWin?'#4ade80':'#f87171'};font-weight:700"` : '';
+      const retTxt    = isClosed ? call.return : '—';
+      const exitPx    = isClosed && call.exitPrice ? '$'+Number(call.exitPrice).toFixed(2) : '—';
       const row = document.createElement('tr');
       row.dataset.rssId = item.guid||item.link||ticker;
       row.dataset.sym   = displayTk;        /* '$MELI' etc — used by price refresh */
@@ -9447,10 +9454,10 @@ function exportPortExcel(){
         `<td data-label="Stop">${fmt(call.stop)}</td>`,
         `<td data-label="Size">${call.size||'—'}</td>`,
         `<td data-label="Horizon">${call.horizon||'—'}</td>`,
-        '<td data-label="Status"><span class="bdg bo">Open</span></td>',
-        '<td class="tr-ret" data-label="Return">—</td>',
-        '<td class="tr-last" data-label="Last Price">—</td>',
-        '<td class="tr-roi" data-label="ROI">—</td>'
+        `<td data-label="Status"><span class="bdg ${badgeCls}">${badgeTxt}</span></td>`,
+        `<td class="tr-ret" data-label="Return"${retStyle}>${retTxt}</td>`,
+        `<td class="tr-last" data-label="Last Price">${exitPx}</td>`,
+        `<td class="tr-roi" data-label="ROI">${isClosed?'—':' —'}</td>`
       ].join('');
       // Insert newest first
       tbody.insertBefore(row, tbody.firstChild);
@@ -9459,7 +9466,7 @@ function exportPortExcel(){
 
     /* ── KNOWN_CALLS — full call registry; source of truth for track record ── */
     const KNOWN_CALLS = {
-      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z'},
+      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z', exitPrice:'246.06', exitDate:'2026-06-01T17:00:00Z', return:'+71.7%'},
       'mercadolibre': {ticker:'MELI', entry:'1774.00',target:'2750.00',stop:'1420.00',size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify',   pubDate:'2026-04-13T00:00:00Z'},
       'nu holdings' : {ticker:'NU',   entry:'14.53',  target:'21.00',  stop:'11.20', size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient',    pubDate:'2026-05-01T00:00:00Z'},
       'adeia'       : {ticker:'ADEA', entry:'30.00',  target:'42.00',  stop:'20.00', size:'2%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer',         pubDate:'2026-05-04T00:00:00Z'},
@@ -9816,7 +9823,7 @@ function exportPortExcel(){
 
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
-    '$VNET':'VNET', '$MELI':'MELI', '$ORCL':'ORCL', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
+    '$VNET':'VNET', '$MELI':'MELI', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
     '$RDDT':'RDDT', 'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
   };
 
@@ -9861,10 +9868,10 @@ function exportPortExcel(){
 /* ── LAST PRICE & ROI COLUMNS — powered by Finnhub ──────────────── */
 (function(){
   var FH_KEY = 'd883b7hr01qmhaki18mgd883b7hr01qmhaki18n0';
-  var CACHE_KEY = '_trPriceCache_v3';
+  var CACHE_KEY = '_trPriceCache_v4';
   var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
-    '$MELI':'MELI','$ORCL':'ORCL','$NU':'NU','$ADEA':'ADEA',
+    '$MELI':'MELI','$NU':'NU','$ADEA':'ADEA',
     '$IREN':'IREN','$VNET':'VNET','$RDDT':'RDDT','$BA':'BA','$NVDA':'NVDA'
   };
 
@@ -9884,10 +9891,11 @@ function exportPortExcel(){
     try{ localStorage.setItem(CACHE_KEY,JSON.stringify({ts:Date.now(),prices:prices})); }catch(e){}
   }
 
-  /* Collect all rows that have live-price cells and return item list */
+  /* Collect open rows that have live-price cells and return item list */
   function collectItems(){
     var items = [];
     document.querySelectorAll('table.tr tbody tr').forEach(function(row){
+      if(!row.querySelector('.bdg.bo')) return; /* skip closed positions */
       var txt = row.dataset.sym || ((row.querySelector('.tdtk')||{}).textContent||'').trim();
       if(!txt) return;
       var sym = TICKER_MAP[txt] || txt.replace(/^\$/,'');

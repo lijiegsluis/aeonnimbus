@@ -3983,6 +3983,16 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 .ct-avail-dot.amber{background:#fbbf24;box-shadow:0 0 5px rgba(251,191,36,.5)}
 @media(max-width:900px){.ct-layout{grid-template-columns:1fr;padding:36px 28px 56px}}
 @media(max-width:700px){.ct-layout{padding:32px 20px 48px;gap:32px}}
+
+/* === Scroll-driven bio accordion stage === */
+#bac-stage{position:relative}
+@media(min-width:901px){
+  #bac-stage{height:calc(100vh + 120vh)}
+  #bac-stage .masthead-v2{position:sticky;top:58px;height:calc(100vh - 58px);overflow:hidden!important;background:var(--bg);z-index:2}
+  #bac-stage .mv2-right{position:static!important}
+}
+@keyframes bacFadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
+.bac[open] .bac-body{animation:bacFadeIn .28s ease}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -4067,6 +4077,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <!-- ═══════════════ HOME ═══════════════════════════ -->
 <div class="pg on" id="pg-home">
 <!-- ══ MASTHEAD ════════════════════════════════════════════ -->
+<div id="bac-stage">
 <div class="masthead-v2">
   <div class="mv2-left">
     <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
@@ -4147,6 +4158,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
       <a class="mv2-link ul-draw" href="#" onclick="openSubstack(event)" style="color:var(--sub-orange,#FF6719)">→ Subscribe on Substack ↗</a>
     </div>
   </div>
+</div><!-- /bac-stage -->
 
 
 <!-- Credential strip -->
@@ -10787,5 +10799,67 @@ function drawFundDD(){
     <div class="am-body" id="am-body-content"></div>
   </div>
 </div>
+
+<script>
+/* ── Scroll-driven bio accordion ─────────────────────────── */
+(function(){
+  function initBacScroll(){
+    var stage = document.getElementById('bac-stage');
+    if(!stage) return;
+    var bacs = Array.from(document.querySelectorAll('.bio-accord .bac'));
+    if(!bacs.length) return;
+    var ITEMS = bacs.length;
+    var _cur = -1;
+
+    function setOpen(idx){
+      if(idx === _cur) return;
+      _cur = idx;
+      bacs.forEach(function(el,i){
+        if(i === idx){ el.setAttribute('open',''); }
+        else { el.removeAttribute('open'); }
+      });
+    }
+
+    function onScroll(){
+      /* Only active on desktop and when home page is showing */
+      if(window.innerWidth <= 900) return;
+      var pg = document.getElementById('pg-home');
+      if(!pg || !pg.classList.contains('on')) return;
+
+      var rect = stage.getBoundingClientRect();
+      var stageH = stage.offsetHeight;
+      var viewH  = window.innerHeight;
+      var travel = stageH - viewH;          /* scrollable distance inside stage */
+      var scrolledPast = -(rect.top - 58);  /* how far past top (accounting for nav) */
+
+      if(scrolledPast <= 0){ setOpen(0); return; }
+      if(scrolledPast >= travel){ setOpen(ITEMS - 1); return; }
+
+      var step = travel / (ITEMS - 1);
+      setOpen(Math.min(Math.floor(scrolledPast / step), ITEMS - 1));
+    }
+
+    /* Block click-to-toggle on desktop so only scroll drives it */
+    bacs.forEach(function(el){
+      var s = el.querySelector('summary');
+      if(s){
+        s.addEventListener('click', function(e){
+          if(window.innerWidth > 900) e.preventDefault();
+        });
+      }
+    });
+
+    window.addEventListener('scroll', onScroll, {passive:true});
+    window.addEventListener('resize', onScroll, {passive:true});
+    onScroll();
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initBacScroll);
+  } else {
+    initBacScroll();
+  }
+})();
+</script>
 </body>
 </html>

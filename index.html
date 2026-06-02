@@ -10839,16 +10839,6 @@ function drawFundDD(){
       setOpen(Math.min(Math.floor(scrolledPast / step), ITEMS - 1));
     }
 
-    /* Block click-to-toggle on desktop so only scroll drives it */
-    bacs.forEach(function(el){
-      var s = el.querySelector('summary');
-      if(s){
-        s.addEventListener('click', function(e){
-          if(window.innerWidth > 900) e.preventDefault();
-        });
-      }
-    });
-
     window.addEventListener('scroll', onScroll, {passive:true});
     window.addEventListener('resize', onScroll, {passive:true});
     onScroll();

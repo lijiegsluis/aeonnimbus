@@ -3306,6 +3306,7 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
   align-items: center;
   gap: 8px;
   margin-top: 20px;
+  align-self: flex-start;
   font-family: var(--FM);
   font-size: 8px;
   font-weight: 600;
@@ -3987,7 +3988,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 /* === Scroll-driven bio accordion stage === */
 #bac-stage{position:relative}
 @media(min-width:901px){
-  #bac-stage{height:calc(100vh + 120vh)}
+  #bac-stage{height:calc(100vh + 35vh)}
   #bac-stage .masthead-v2{position:sticky;top:58px;height:calc(100vh - 58px);overflow:hidden!important;background:var(--bg);z-index:2}
   #bac-stage .mv2-right{position:static!important}
 }
@@ -4265,6 +4266,20 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div class="hf-disclaimer">
   Aeon Nimbus Research is an independent research platform. All content is for informational and educational purposes only and does not constitute investment advice, a solicitation, or an offer to buy or sell any security. Past performance is not indicative of future results. LiJie Guo · London · <a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:underline">LinkedIn</a>
 </div>
+
+<footer>
+  <div class="flogo">LiJie Guo · Aeon Nimbus Research</div>
+  <div class="flinks">
+    <span class="flnk ul-draw" onclick="sp('home')">Home</span>
+    <span class="flnk ul-draw" onclick="sp('research')">Research</span>
+    <span class="flnk ul-draw" onclick="sp('track')">Track Record</span>
+    <span class="flnk ul-draw" onclick="sp('strats')">Strategies</span>
+    <span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span>
+    <span class="flnk ul-draw" onclick="sp('contact')">Contact</span>
+    <a class="flnk" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
+    <a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
+  </div>
+</footer>
 
 </div><!-- /pg-home -->
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
@@ -8453,6 +8468,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 (function(){
   var ldr = document.getElementById('page-loader');
   if(!ldr) return;
+  // Skip animation on repeat visits within the same session
+  if(sessionStorage.getItem('an_visited')){
+    ldr.classList.add('done');
+    return;
+  }
+  sessionStorage.setItem('an_visited','1');
   window.addEventListener('load', function(){
     setTimeout(function(){ ldr.classList.add('done'); }, 850);
   });

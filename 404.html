@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Page Not Found — Aeon Nimbus Research</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect fill='%2307070A' width='32' height='32'/%3E%3Ctext y='24' x='16' font-size='22' font-family='monospace' font-weight='bold' text-anchor='middle' fill='%23C8830A'%3EA%3C/text%3E%3C/svg%3E">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,600;1,6..72,400&family=Inter:wght@300;400;500&family=JetBrains+Mono:wght@400&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#07070A;--ink:#F0ECE4;--ink2:#B4AFA8;--ink3:#706B65;
+  --gold:#C8830A;--gold2:#E09820;--rule:rgba(200,131,10,.13);
+  --FH:'Newsreader',Georgia,serif;--FD:'Inter',system-ui,sans-serif;--FM:'JetBrains Mono',monospace;
+}
+body{background:var(--bg);color:var(--ink);font-family:var(--FD);min-height:100vh;display:flex;flex-direction:column;overflow-x:hidden}
+body::before{content:'';position:fixed;top:0;left:0;right:0;bottom:0;background-image:radial-gradient(circle,rgba(196,164,74,.04) 1px,transparent 1px);background-size:28px 28px;pointer-events:none;z-index:0}
+
+nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 40px;height:58px;background:rgba(7,7,10,.92);backdrop-filter:blur(18px);border-bottom:1px solid var(--rule)}
+.nlogo{font-family:var(--FM);font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--gold);text-decoration:none}
+.nlogo span{opacity:.5;font-weight:300;letter-spacing:.12em;font-size:.82em;margin-left:8px}
+.nav-home{font-family:var(--FM);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);text-decoration:none;border-bottom:1px solid transparent;padding:3px 0;transition:color .2s,border-color .2s}
+.nav-home:hover{color:var(--gold);border-bottom-color:var(--gold)}
+
+main{flex:1;display:flex;align-items:center;justify-content:center;padding:80px 40px;position:relative;z-index:1}
+.e404-wrap{text-align:center;max-width:520px}
+.e404-code{font-family:var(--FM);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;opacity:.8}
+.e404-num{font-family:var(--FH);font-size:clamp(80px,12vw,128px);font-weight:600;line-height:1;color:var(--ink);margin-bottom:8px;letter-spacing:-.02em}
+.e404-num em{color:var(--gold);font-style:italic}
+.e404-rule{width:48px;height:1px;background:var(--gold);opacity:.4;margin:24px auto}
+.e404-msg{font-family:var(--FH);font-size:18px;font-weight:400;color:var(--ink2);line-height:1.7;margin-bottom:40px;font-style:italic}
+.e404-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.e404-btn{font-family:var(--FM);font-size:9px;letter-spacing:.16em;text-transform:uppercase;padding:10px 22px;border:1px solid var(--gold);color:var(--gold);background:transparent;cursor:pointer;text-decoration:none;transition:background .2s,color .2s;border-radius:2px}
+.e404-btn:hover{background:var(--gold);color:#000}
+.e404-btn.primary{background:var(--gold);color:#000}
+.e404-btn.primary:hover{background:var(--gold2)}
+
+footer{border-top:1px solid var(--rule);padding:24px 40px;display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3)}
+footer a{color:var(--ink3);text-decoration:none;transition:color .2s}
+footer a:hover{color:var(--gold)}
+@media(max-width:600px){nav{padding:0 20px}main{padding:60px 20px}footer{padding:20px;flex-direction:column;gap:10px;text-align:center}}
+</style>
+</head>
+<body>
+<nav>
+  <a class="nlogo" href="/">LIJIE GUO<span>AEON NIMBUS</span></a>
+  <a class="nav-home" href="/">← Return Home</a>
+</nav>
+
+<main>
+  <div class="e404-wrap">
+    <div class="e404-code">Error — Page not found</div>
+    <div class="e404-num">4<em>0</em>4</div>
+    <div class="e404-rule"></div>
+    <p class="e404-msg">The page you're looking for doesn't exist, or may have moved. The research is still here.</p>
+    <div class="e404-links">
+      <a class="e404-btn primary" href="/">Go Home</a>
+      <a class="e404-btn" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
+      <a class="e404-btn" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <span>© LiJie Guo · Aeon Nimbus Research · London</span>
+  <span>Independent macro &amp; equity research</span>
+</footer>
+</body>
+</html>

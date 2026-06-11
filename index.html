@@ -9863,7 +9863,7 @@ function exportPortExcel(){
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
     '$VNET':'VNET', '$MELI':'MELI', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
-    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA'
+    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA', '$MRVL':'MRVL'
   };
 
   var openItems = [];
@@ -9911,7 +9911,7 @@ function exportPortExcel(){
   var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
     '$MELI':'MELI','$NU':'NU','$ADEA':'ADEA',
-    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA'
+    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA','$MRVL':'MRVL'
   };
 
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }

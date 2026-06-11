@@ -3330,6 +3330,71 @@ table.rl tbody tr:hover .rl-title{color:var(--gold)}
 }
 .mv2-cv-btn svg { flex-shrink: 0; }
 
+/* Subscribe as hero primary CTA */
+.mv2-sub-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  margin-top:20px;align-self:flex-start;
+  font-family:var(--FM);font-size:8px;font-weight:600;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:#fff;background:var(--sub-orange,#FF6719);
+  border:1px solid var(--sub-orange,#FF6719);
+  padding:9px 18px 8px;text-decoration:none;border-radius:2px;
+  transition:background .2s,border-color .2s,box-shadow .2s;
+  opacity:0;transform:translateY(8px);
+  animation:fadeUp .6s var(--ease-out-expo,cubic-bezier(.16,1,.3,1)) .55s forwards;
+}
+.mv2-sub-btn:hover{background:#E0540A;border-color:#E0540A;box-shadow:0 0 20px rgba(255,103,25,.4)}
+.mv2-cv-link{
+  display:block;margin-top:10px;
+  font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;
+  color:rgba(200,131,10,.6);text-decoration:none;
+  opacity:0;animation:fadeUp .6s var(--ease-out-expo,cubic-bezier(.16,1,.3,1)) .72s forwards;
+  transition:color .2s;
+}
+.mv2-cv-link:hover{color:var(--gold)}
+
+/* Home latest research strip */
+.home-research-strip{margin:52px 44px 0;padding-top:32px;border-top:1px solid var(--line2)}
+@media(max-width:700px){.home-research-strip{margin:40px 20px 0}}
+.hrs-label{font-family:var(--FM);font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hrs-post{display:grid;grid-template-columns:76px 1fr auto;gap:16px;align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line2);cursor:pointer;text-decoration:none;color:inherit}
+.hrs-post:hover .hrs-title{color:var(--gold)}
+.hrs-date{font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.05em}
+.hrs-title{font-size:13px;font-weight:500;line-height:1.4;transition:color .2s}
+.hrs-chip{font-family:var(--FM);font-size:8px;letter-spacing:.06em;color:var(--g2);white-space:nowrap}
+.hrs-cta{display:inline-block;margin-top:16px;font-family:var(--FM);font-size:8.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);cursor:pointer;text-decoration:none;transition:letter-spacing .2s}
+.hrs-cta:hover{letter-spacing:.2em}
+.hrs-loading{font-family:var(--FM);font-size:10px;color:var(--g2);padding:16px 0;letter-spacing:.08em}
+
+/* Home subscribe section */
+.home-sub-section{
+  margin:56px 44px 0;padding:40px 48px;
+  border:1px solid rgba(255,103,25,.2);background:rgba(255,103,25,.03);
+  display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center;
+}
+@media(max-width:700px){.home-sub-section{grid-template-columns:1fr;gap:20px;margin:40px 20px 0;padding:28px 24px}}
+.hss-eyebrow{font-family:var(--FM);font-size:8px;letter-spacing:.2em;text-transform:uppercase;color:var(--sub-orange,#FF6719);margin-bottom:8px}
+.hss-title{font-size:20px;font-weight:600;line-height:1.25;margin-bottom:8px}
+.hss-desc{font-size:13px;color:var(--g2);line-height:1.62;max-width:480px}
+.hss-right{display:flex;flex-direction:column;align-items:flex-start;gap:10px}
+.hss-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:var(--FM);font-size:8.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;
+  background:var(--sub-orange,#FF6719);color:#fff;padding:12px 24px;
+  text-decoration:none;white-space:nowrap;transition:background .2s,box-shadow .2s;
+}
+.hss-btn:hover{background:#E0540A;box-shadow:0 0 20px rgba(255,103,25,.35)}
+.hss-note{font-family:var(--FM);font-size:9px;color:var(--g2)}
+
+/* Expanded legal disclaimer */
+.hf-disclaimer{
+  margin:48px 44px 0;padding:28px 36px;
+  border-top:1px solid var(--line2);
+  font-family:var(--FM);font-size:10px;color:var(--g2);line-height:1.75;letter-spacing:.03em;
+}
+@media(max-width:700px){.hf-disclaimer{margin:40px 20px 0;padding:24px 20px}}
+.hf-disclaimer strong{color:var(--g1,#888);letter-spacing:.08em;text-transform:uppercase;font-size:8.5px}
+
 /* ═══════════════════════════════════════════════════════
    READABILITY & AESTHETIC ENHANCEMENT
    Institutional research site best-practices
@@ -4030,7 +4095,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
       <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Fund Lab</span> ▾</button>
       <div class="nav-dropdown">
         <button class="nav-drop-item" onclick="sp('portfolios');setTimeout(showPortFund,150)">
-          <span class="nav-drop-tag" data-i18n="drop_paper_tag">Paper Fund</span>
+          <span class="nav-drop-tag" data-i18n="drop_paper_tag">Model Portfolio</span>
           <span class="nav-drop-name" data-i18n="drop_paper_name">Asset Allocation Dynamic Fund</span>
         </button>
         <button class="nav-drop-item" onclick="sp('strats')">
@@ -4084,16 +4149,17 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   <div class="mv2-left">
     <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
     <div class="mv2-name">LiJie<br><em>Guo.</em></div>
-    <a class="mv2-cv-btn" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      View &amp; Download CV
+    <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Subscribe — Research Free
     </a>
+    <a class="mv2-cv-link" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>Download CV →</a>
     <div class="mv2-rule line-draw"></div>
     <div class="mv2-tagline" data-i18n-html="home_tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
     <div class="mv2-stats">
-      <div class="mv2-stat"><span class="mv2-sn">12</span><span class="mv2-sl" data-i18n="stat_strategies">Strategies</span></div>
-      <div class="mv2-stat"><span class="mv2-sn">5</span><span class="mv2-sl" data-i18n="stat_research">Research categories</span></div>
-      <div class="mv2-stat"><span class="mv2-sn">100%</span><span class="mv2-sl" data-i18n="stat_transparent">Transparent</span></div>
+      <div class="mv2-stat"><span class="mv2-sn">12</span><span class="mv2-sl">Strategies</span></div>
+      <div class="mv2-stat"><span class="mv2-sn">5</span><span class="mv2-sl">Research categories</span></div>
+      <div class="mv2-stat"><span class="mv2-sn" id="mv2-calls-n">—</span><span class="mv2-sl">Pre-Outcome Calls</span></div>
     </div>
   </div>
     <div class="mv2-right">
@@ -4203,7 +4269,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   </div>
   <div class="hcard home-grid-card hcard-third" onclick="sp('portfolios');setTimeout(showPortFund,150)">
     <div class="hcn">03</div>
-    <div class="hct" data-i18n="hcard_03_title">Paper Fund</div>
+    <div class="hct" data-i18n="hcard_03_title">Model Portfolio</div>
     <p class="hcp" data-i18n="hcard_03_desc">Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.</p>
     <div class="hca" data-i18n="hcard_03_cta">View fund →</div>
   </div>
@@ -4229,6 +4295,13 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   <div id="fc-card-wrap">
     <div class="fc-empty">Loading live data…</div>
   </div>
+</div>
+
+<!-- ══ LATEST RESEARCH STRIP ═══════════════════════════ -->
+<div class="home-research-strip" id="home-research-strip">
+  <div class="hrs-label">Latest Research</div>
+  <div id="hrs-posts"><div class="hrs-loading">Loading latest research…</div></div>
+  <span class="hrs-cta" onclick="sp('research')">View all research →</span>
 </div>
 
 <!-- Follow the Research block -->
@@ -4263,9 +4336,25 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   </div>
 </div>
 
+<!-- ══ SUBSCRIBE CAPTURE ══════════════════════════════ -->
+<div class="home-sub-section">
+  <div>
+    <div class="hss-eyebrow">Independent Research · Free</div>
+    <div class="hss-title">Research delivered to your inbox</div>
+    <div class="hss-desc">Macro briefs, equity deep dives, geopolitical reads — each with a formal investment call published before the outcome is known. Every result, including the losses, on the record.</div>
+  </div>
+  <div class="hss-right">
+    <a class="hss-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Subscribe on Substack
+    </a>
+    <div class="hss-note">Free · No spam · Unsubscribe anytime</div>
+  </div>
+</div>
+
 <!-- ══ DISCLAIMER ════════════════════════════════════ -->
 <div class="hf-disclaimer">
-  Aeon Nimbus Research is an independent research platform. All content is for informational and educational purposes only and does not constitute investment advice, a solicitation, or an offer to buy or sell any security. Past performance is not indicative of future results. LiJie Guo · London · <a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:underline">LinkedIn</a>
+  <strong>Legal Disclaimer</strong> — Aeon Nimbus Research is an independent research and analysis platform operated by LiJie Guo, London, United Kingdom. All content published on this website and associated channels is for informational and educational purposes only. Nothing on this site constitutes investment advice, a solicitation, a recommendation, or an offer or invitation to buy or sell any financial instrument or security. Past performance, including any track record presented, is not indicative of future results. Investment decisions are solely the reader's own responsibility. LiJie Guo is not a regulated financial adviser and Aeon Nimbus Research is not a regulated investment firm. Investment calls are published for research transparency purposes only and are not directed at any specific investor. This site is not directed at persons in jurisdictions where publication or distribution of such content would be contrary to law or regulation. For enquiries: <a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:underline">LinkedIn ↗</a>
 </div>
 
 <footer>
@@ -4347,6 +4436,13 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
     <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs">Closed positions only</div></div>
     <div class="pc"><div class="pcl">Avg. return (open)</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Unrealised · live</div></div>
     <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
+  </div>
+  <!-- Benchmark row -->
+  <div style="display:flex;align-items:center;gap:24px;padding:12px 44px 4px;flex-wrap:wrap">
+    <div style="font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)">Benchmark · S&amp;P 500 since first call (08 Apr 2026)</div>
+    <div style="font-family:var(--FM);font-size:12px;font-weight:600" id="tr-spx-ret">—</div>
+    <div style="font-family:var(--FM);font-size:8px;color:var(--g2);letter-spacing:.06em">vs. Avg. closed return: <span id="tr-vs-spx" style="font-weight:600">—</span></div>
+    <div style="font-family:var(--FM);font-size:8px;color:var(--g2);margin-left:auto;opacity:.6">Live price · methodology note below</div>
   </div>
 </div>
 <div class="trwrap">
@@ -5840,9 +5936,9 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 <div id="port-grid-wrap">
 <div class="port-grid">
 
-  <!-- Card 1: Paper Fund -->
+  <!-- Card 1: Model Portfolio -->
   <div class="port-card" onclick="showPortFund()">
-    <div class="port-card-tag" data-i18n="pc1_tag">Paper Fund · Multi-Asset</div>
+    <div class="port-card-tag" data-i18n="pc1_tag">Model Portfolio · Multi-Asset</div>
     <div class="port-card-title" data-i18n-html="pc1_title">Asset Allocation<br>Dynamic Fund</div>
     <div class="port-card-sub" data-i18n="pc1_sub">A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.</div>
     <div class="port-kpis">
@@ -6987,7 +7083,7 @@ var I18N={
   en:{
     nav_home:'Home',nav_track:'Track Record',nav_research:'Research',
     nav_fundlab:'Fund Lab',nav_contact:'Contact',
-    drop_paper_tag:'Paper Fund',drop_paper_name:'Asset Allocation Dynamic Fund',
+    drop_paper_tag:'Model Portfolio',drop_paper_name:'Asset Allocation Dynamic Fund',
     drop_sys_tag:'Systematic',drop_sys_name:'Systematic Strategies',
     drop_quant_tag:'Quant',drop_quant_name:'Quant Tools & Models',
     hcard_01_title:'Track Record',
@@ -6996,7 +7092,7 @@ var I18N={
     hcard_02_title:'Research Notes',
     hcard_02_desc:'Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.',
     hcard_02_cta:'Read latest →',
-    hcard_03_title:'Paper Fund',
+    hcard_03_title:'Model Portfolio',
     hcard_03_desc:'Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.',
     hcard_03_cta:'View fund →',
     hcard_04_title:'Systematic Strategies',
@@ -7177,7 +7273,7 @@ var I18N_EXTRA={
     rftr_01_title:'Subscribe Free',rftr_01_desc:'Every note lands in your inbox as published. No spam. Research is always free.',rftr_01_link:'Subscribe on Substack →',
     rftr_02_title:'Track Record',rftr_02_desc:'Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.',rftr_02_link:'View full record →',
     rftr_03_title:'Interactive Tools',rftr_03_desc:'Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.',rftr_03_link:'Open toolkit →',
-    pc1_tag:'Paper Fund · Multi-Asset',pc1_title:'Asset Allocation<br>Dynamic Fund',pc1_sub:'A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.',pc1_cta:'View Fund →',
+    pc1_tag:'Model Portfolio · Multi-Asset',pc1_title:'Asset Allocation<br>Dynamic Fund',pc1_sub:'A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.',pc1_cta:'View Fund →',
     pc2_tag:'Systematic · Equity & FX',pc2_title:'Systematic<br>Strategies',pc2_sub:'A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.',pc2_cta:'Explore Strategies →',
     pc3_tag:'Interactive · Analyst Toolkit',pc3_title:'Quant<br>Tools',pc3_sub:'Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.',pc3_cta:'Open Toolkit →',
     kpi_inception:'Since Inception',kpi_sharpe:'Sharpe Ratio',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Active Strategies',kpi_asset_classes:'Asset Classes',kpi_live_models:'Live Models'
@@ -9528,6 +9624,61 @@ function exportPortExcel(){
     }
     populateKnownCalls();
 
+    /* ── Set call counter stat on masthead ─────────── */
+    (function(){
+      const el = document.getElementById('mv2-calls-n');
+      if(el) el.textContent = Object.keys(KNOWN_CALLS).length;
+    })();
+
+    /* ── Featured call from KNOWN_CALLS (immediate, before RSS) ── */
+    (function(){
+      const wrap = document.getElementById('fc-card-wrap');
+      if(!wrap) return;
+      // Find most recent open call
+      const sorted = Object.values(KNOWN_CALLS)
+        .filter(c => !c.return)
+        .sort((a,b) => new Date(b.pubDate) - new Date(a.pubDate));
+      if(!sorted.length) return;
+      const call = sorted[0];
+      const ticker = (call.ticker||'').toUpperCase();
+      const entry  = parseFloat(call.entry||0);
+      const pubDate = new Date(call.pubDate);
+      const dateStr = pubDate.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+      const fmt = v => !v||v==='—'?'—':'$'+v;
+      function renderFC(price){
+        const plPct  = price && entry ? ((price-entry)/entry)*100 : null;
+        const plSign = plPct !== null ? (plPct>=0?'+':'') : '';
+        const plCls  = plPct === null ? 'neu' : plPct>0.5?'pos':plPct<-0.5?'neg':'neu';
+        const plTxt  = plPct !== null ? plSign+plPct.toFixed(1)+'%' : '—';
+        const lastTxt = price ? '$'+price.toFixed(2) : '—';
+        wrap.innerHTML = `
+          <div class="fc-card" style="cursor:default">
+            <div>
+              <div class="fc-ticker">$${ticker}</div>
+              <div class="fc-name" style="font-family:var(--FM);font-size:9px;color:var(--g2);letter-spacing:.06em;margin-top:2px">${dateStr}</div>
+            </div>
+            <div class="fc-meta">
+              <div class="fc-row"><span class="fc-lbl">Entry</span><span class="fc-val">${fmt(call.entry)}</span></div>
+              <div class="fc-row"><span class="fc-lbl">Target</span><span class="fc-val">${fmt(call.target)}</span></div>
+              <div class="fc-row"><span class="fc-lbl">Stop</span><span class="fc-val">${fmt(call.stop)}</span></div>
+              <div class="fc-row"><span class="fc-lbl">Size</span><span class="fc-val">${call.size||'—'}</span></div>
+            </div>
+            <div class="fc-pl ${plCls}" style="align-self:center">
+              <div style="font-size:11px;font-family:var(--FM);color:var(--g2);letter-spacing:.08em;margin-bottom:4px">Live P&L</div>
+              <div style="font-size:22px;font-weight:700;letter-spacing:-.01em">${plTxt}</div>
+              <div style="font-size:10px;font-family:var(--FM);color:var(--g2);margin-top:2px">Last: ${lastTxt}</div>
+            </div>
+          </div>`;
+      }
+      renderFC(null);
+      fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols='+encodeURIComponent(ticker))
+        .then(r=>r.json())
+        .then(d=>{
+          const price=(((d.quoteResponse||{}).result)||[])[0];
+          if(price) renderFC(price.regularMarketPrice);
+        }).catch(()=>{});
+    })();
+
     /* ── Title case helper (Substack posts arrive in ALL CAPS) ─── */
     function toTitleCase(s){
       if(!s) return s;
@@ -9719,6 +9870,23 @@ function exportPortExcel(){
         activeBtn.click();
       // Populate featured call on home page
       populateFeaturedCall(items);
+      // Populate home research strip with 3 latest posts
+      (function(){
+        const wrap = document.getElementById('hrs-posts');
+        if(!wrap) return;
+        const top3 = items.slice(0,3);
+        if(!top3.length){ wrap.innerHTML=''; return; }
+        wrap.innerHTML = top3.map(function(item){
+          const cat = detectCat(item);
+          const d = new Date(item.pubDate);
+          const ds = d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'});
+          return `<a class="hrs-post" href="${item.link||'#'}" target="_blank" rel="noopener">
+            <span class="hrs-date">${ds}</span>
+            <span class="hrs-title">${toTitleCase(item.title||'Untitled')}</span>
+            <span class="hrs-chip">${cat.label}</span>
+          </a>`;
+        }).join('');
+      })();
     }
 
     /* ── Fetch RSS — rss2json primary, allorigins fallback ── */
@@ -9859,6 +10027,38 @@ function exportPortExcel(){
   }
   recalc(); /* run immediately from static HTML */
   window._trRecalc = recalc; /* exposed for RSS call injection */
+
+  /* ── SPX benchmark since first call ────────────────────
+     Start price: SPX close on 08 Apr 2026 (first published call).
+     NOTE: Verify this value against a reliable historical source.
+     Approx 5,074 based on the tariff-correction trough in early Apr 2026. */
+  var SPX_START = 5074;
+  fetch('https://query1.finance.yahoo.com/v7/finance/quote?symbols=%5EGSPC')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      var q = (((data.quoteResponse||{}).result)||[])[0];
+      if(!q) return;
+      var spxNow = q.regularMarketPrice;
+      var spxRet = (spxNow - SPX_START) / SPX_START * 100;
+      var spxSign = spxRet >= 0 ? '+' : '';
+      var spxEl = document.getElementById('tr-spx-ret');
+      if(spxEl){
+        spxEl.textContent = spxSign + spxRet.toFixed(1) + '%';
+        spxEl.style.color = spxRet >= 0 ? '#4ade80' : '#f87171';
+      }
+      /* vs-SPX: compare closed avg return to SPX */
+      var avgRetEl = document.getElementById('tr-avgret');
+      var vsEl = document.getElementById('tr-vs-spx');
+      if(avgRetEl && vsEl){
+        var avgRet2 = parseFloat(avgRetEl.textContent);
+        if(!isNaN(avgRet2)){
+          var diff = avgRet2 - spxRet;
+          var dSign = diff >= 0 ? '+' : '';
+          vsEl.textContent = dSign + diff.toFixed(1) + '% vs index';
+          vsEl.style.color = diff >= 0 ? '#4ade80' : '#f87171';
+        }
+      }
+    }).catch(function(){});
 
   /* Fetch live prices for open positions */
   var TICKER_MAP = {

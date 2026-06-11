@@ -9471,7 +9471,7 @@ function exportPortExcel(){
       const postLink = item.link || call.link;
       const tkHtml = postLink
         ? `<a href="${postLink}" target="_blank" style="color:var(--gold);text-decoration:none">${displayTk}</a>`
-        : displayTk;
+        : `<span style="color:var(--gold)">${displayTk}</span>`;
       const isClosed  = !!call.return;
       const isWin     = isClosed && String(call.return).startsWith('+');
       const badgeCls  = isClosed ? (isWin ? 'bw' : 'bl') : 'bo';

@@ -9607,6 +9607,7 @@ function exportPortExcel(){
       'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z'},
       'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%'},
       'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z'},
+      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z'},
     };
     function knownCallFromTitle(title){
       const t=(title||'').toLowerCase();
@@ -10063,7 +10064,7 @@ function exportPortExcel(){
   /* Fetch live prices for open positions */
   var TICKER_MAP = {
     '$VNET':'VNET', '$MELI':'MELI', '$ADEA':'ADEA', '$NU':'NU', '$IREN':'IREN',
-    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA', '$MRVL':'MRVL'
+    'GOLD':'GC=F', '$BA':'BA', '$NVDA':'NVDA', '$MRVL':'MRVL', '$LMND':'LMND'
   };
 
   var openItems = [];
@@ -10111,7 +10112,7 @@ function exportPortExcel(){
   var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
     '$MELI':'MELI','$NU':'NU','$ADEA':'ADEA',
-    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA','$MRVL':'MRVL'
+    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA','$MRVL':'MRVL','$LMND':'LMND'
   };
 
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }

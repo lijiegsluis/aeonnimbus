@@ -10053,12 +10053,9 @@ function exportPortExcel(){
 
   /* ── SPX benchmark since first call ────────────────────
      Start price: SPX close on 08 Apr 2026 (first published call).
-     PENDING: this baseline has not yet been verified against a reliable
-     historical source (still the original placeholder). Do not treat the
-     resulting return as fact until SPX_START is confirmed and this comment
-     is removed. Current-price side is real (FMP ^GSPC direct quote). */
-  var SPX_START = 5074;
-  var SPX_START_VERIFIED = false;
+     Verified by LiJie directly — 6,800. */
+  var SPX_START = 6800;
+  var SPX_START_VERIFIED = true;
   fetch('https://financialmodelingprep.com/stable/quote?symbol=%5EGSPC&apikey=VkvNMOEziKpuUPoctmEDOYjN4v19VGB6')
     .then(function(r){return r.json();})
     .then(function(arr){

@@ -9530,10 +9530,13 @@ function exportPortExcel(){
         .replace('$','').replace(/%/g,'').trim().toUpperCase();
       if(!ticker) return;
 
-      // Find existing row for this ticker
+      // Find existing row for this specific call instance — match on ticker AND
+      // entry pubDate, not ticker alone, so a ticker can be re-opened after a
+      // prior close without the new position being mistaken for the old one.
       const existing = [...tbody.querySelectorAll('tr')].find(row=>{
         const tk = row.querySelector('.tdtk');
-        return tk && tk.textContent.replace('$','').trim().toUpperCase()===ticker;
+        const sameTicker = tk && tk.textContent.replace('$','').trim().toUpperCase()===ticker;
+        return sameTicker && row.dataset.callPubdate===(call.pubDate||'');
       });
 
       // Update-only: post contains return/status, update existing row
@@ -9582,6 +9585,7 @@ function exportPortExcel(){
       row.dataset.rssId = item.guid||item.link||ticker;
       row.dataset.sym   = displayTk;        /* '$MELI' etc — used by price refresh */
       row.dataset.entry = call.entry||'';   /* raw numeric string */
+      row.dataset.callPubdate = call.pubDate||''; /* identifies this specific call instance */
       row.innerHTML = [
         `<td data-label="Date">${dateStr}</td>`,
         `<td class="tdtk" data-label="Ticker">${tkHtml}</td>`,
@@ -9607,10 +9611,12 @@ function exportPortExcel(){
       'mercadolibre': {ticker:'MELI', entry:'1774.00',target:'2750.00',stop:'1420.00',size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify',   pubDate:'2026-04-13T00:00:00Z'},
       'nu holdings' : {ticker:'NU',   entry:'14.53',  target:'21.00',  stop:'11.20', size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient',    pubDate:'2026-05-01T00:00:00Z'},
       'adeia'       : {ticker:'ADEA', entry:'30.00',  target:'42.00',  stop:'20.00', size:'2%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer',         pubDate:'2026-05-04T00:00:00Z'},
-      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z'},
+      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z', exitPrice:'65.30', exitDate:'2026-06-03T00:00:00Z', return:'+36.4%'},
       'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%'},
-      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z'},
-      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z'},
+      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z', exitPrice:'323.26', exitDate:'2026-06-18T00:00:00Z', return:'+31.9%'},
+      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z', exitPrice:'80.23', exitDate:'2026-07-07T00:00:00Z', return:'+34.7%'},
+      'marvell2'    : {ticker:'MRVL', entry:'227.13', target:'350.00', stop:'176.00', size:'5%', horizon:'6–12m',  pubDate:'2026-07-08T00:00:00Z'},
+      'oracle2'     : {ticker:'ORCL', entry:'138.07', target:'242.00', stop:'113.60', size:'5%', horizon:'12–18m', pubDate:'2026-07-08T00:00:00Z'},
     };
     function knownCallFromTitle(title){
       const t=(title||'').toLowerCase();
@@ -10088,7 +10094,7 @@ function exportPortExcel(){
   var CACHE_TTL = 5 * 60 * 1000; /* 5 minutes */
   var TICKER_MAP = {
     '$MELI':'MELI','$NU':'NU','$ADEA':'ADEA',
-    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA','$MRVL':'MRVL','$LMND':'LMND'
+    '$IREN':'IREN','$VNET':'VNET','$BA':'BA','$NVDA':'NVDA','$MRVL':'MRVL','$LMND':'LMND','$ORCL':'ORCL'
   };
 
   function parseP(s){ var v=parseFloat(String(s||'').replace(/[$,\s]/g,'')); return isNaN(v)?NaN:v; }

@@ -4439,7 +4439,7 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
   </div>
   <!-- Benchmark row -->
   <div style="display:flex;align-items:center;gap:24px;padding:12px 44px 4px;flex-wrap:wrap">
-    <div style="font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)">Benchmark · S&amp;P 500 since first call (08 Apr 2026)</div>
+    <div style="font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)">Benchmark · S&amp;P 500 since first call (08 Apr 2026) <span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal">— baseline pending verification</span></div>
     <div style="font-family:var(--FM);font-size:12px;font-weight:600" id="tr-spx-ret">—</div>
     <div style="font-family:var(--FM);font-size:8px;color:var(--g2);letter-spacing:.06em">vs. Avg. closed return: <span id="tr-vs-spx" style="font-weight:600">—</span></div>
     <div style="font-family:var(--FM);font-size:8px;color:var(--g2);margin-left:auto;opacity:.6">Live price · methodology note below</div>
@@ -10053,17 +10053,21 @@ function exportPortExcel(){
 
   /* ── SPX benchmark since first call ────────────────────
      Start price: SPX close on 08 Apr 2026 (first published call).
-     NOTE: Verify this value against a reliable historical source.
-     Approx 5,074 based on the tariff-correction trough in early Apr 2026. */
+     PENDING: this baseline has not yet been verified against a reliable
+     historical source (still the original placeholder). Do not treat the
+     resulting return as fact until SPX_START is confirmed and this comment
+     is removed. Current-price side is real (FMP ^GSPC direct quote). */
   var SPX_START = 5074;
-  /* Finnhub's free tier doesn't carry the ^GSPC index — proxy via SPY (S&P 500 ETF),
-     using the standard ~10x SPY-to-SPX approximation. */
-  fetch('https://finnhub.io/api/v1/quote?symbol=SPY&token=d883b7hr01qmhaki18mgd883b7hr01qmhaki18n0')
+  var SPX_START_VERIFIED = false;
+  fetch('https://financialmodelingprep.com/stable/quote?symbol=%5EGSPC&apikey=VkvNMOEziKpuUPoctmEDOYjN4v19VGB6')
     .then(function(r){return r.json();})
-    .then(function(q){
-      if(!q || !q.c) return;
-      var spxNow = q.c * 10;
+    .then(function(arr){
+      var q = arr && arr[0];
+      if(!q || !q.price) return;
+      var spxNow = q.price;
       var spxRet = (spxNow - SPX_START) / SPX_START * 100;
+      var pendingEl = document.getElementById('tr-spx-pending');
+      if(pendingEl) pendingEl.style.display = SPX_START_VERIFIED ? 'none' : '';
       var spxSign = spxRet >= 0 ? '+' : '';
       var spxEl = document.getElementById('tr-spx-ret');
       if(spxEl){

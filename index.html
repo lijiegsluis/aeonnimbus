@@ -4564,6 +4564,15 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
   <div style="padding:2px 44px 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · methodology note below</div>
 </div>
 
+<!-- ══ BEST CALLS GALLERY ════════════════════════════ -->
+<div class="bc-section">
+  <div class="bc-header">
+    <div class="rc-title" style="margin-bottom:4px">Best Calls</div>
+    <div class="bc-subtitle">Every closed position — thesis published before the outcome was known</div>
+  </div>
+  <div class="bc-grid" id="bc-grid"></div>
+</div>
+
 <!-- ══ PORTFOLIO VALUE SIMULATOR ═══════════════════ -->
 <div class="sim-section" id="sim-section">
   <div class="sim-top-grid">
@@ -9743,14 +9752,14 @@ function exportPortExcel(){
 
     /* ── KNOWN_CALLS — full call registry; source of truth for track record ── */
     const KNOWN_CALLS = {
-      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z', exitPrice:'249.88', exitDate:'2026-06-01T17:00:00Z', return:'+74.3%'},
+      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z', exitPrice:'249.88', exitDate:'2026-06-01T17:00:00Z', return:'+74.3%', company:'Oracle Corporation',   thesis:'$98B cloud backlog invisible to the street — AI demand pulled Oracle\'s 5-year infrastructure runway into 18 months'},
       'mercadolibre': {ticker:'MELI', entry:'1774.00',target:'2750.00',stop:'1420.00',size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify',   pubDate:'2026-04-13T00:00:00Z'},
       'nu holdings' : {ticker:'NU',   entry:'14.53',  target:'21.00',  stop:'11.20', size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient',    pubDate:'2026-05-01T00:00:00Z'},
       'adeia'       : {ticker:'ADEA', entry:'30.00',  target:'42.00',  stop:'20.00', size:'2%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer',         pubDate:'2026-05-04T00:00:00Z'},
-      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z', exitPrice:'65.30', exitDate:'2026-06-03T00:00:00Z', return:'+36.4%'},
-      'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%'},
-      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z', exitPrice:'323.26', exitDate:'2026-06-18T00:00:00Z', return:'+31.9%'},
-      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z', exitPrice:'80.23', exitDate:'2026-07-07T00:00:00Z', return:'+34.7%'},
+      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z', exitPrice:'65.30', exitDate:'2026-06-03T00:00:00Z', return:'+36.4%', company:'IREN Limited',        thesis:'Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve'},
+      'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%', company:'Reddit, Inc.',        thesis:'AI\'s training feedstock, not its victim — Reddit\'s unique human corpus is the data infrastructure every major lab depends on'},
+      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z', exitPrice:'323.26', exitDate:'2026-06-18T00:00:00Z', return:'+31.9%', company:'Marvell Technology',   thesis:'Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn\'t modeled'},
+      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z', exitPrice:'80.23', exitDate:'2026-07-07T00:00:00Z', return:'+34.7%', company:'Lemonade, Inc.',      thesis:'Loss ratio finally cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure'},
       'marvell2'    : {ticker:'MRVL', entry:'227.13', target:'350.00', stop:'176.00', size:'5%', horizon:'6–12m',  pubDate:'2026-07-08T00:00:00Z'},
       'oracle2'     : {ticker:'ORCL', entry:'138.07', target:'242.00', stop:'113.60', size:'5%', horizon:'12–18m', pubDate:'2026-07-08T00:00:00Z'},
       'iren2'       : {ticker:'IREN', entry:'41.18',  target:'86.00',  stop:'32.00',  size:'3%', horizon:'12m',    pubDate:'2026-07-08T00:00:00Z'},
@@ -9776,6 +9785,40 @@ function exportPortExcel(){
       });
     }
     populateKnownCalls();
+
+    /* ── Best Calls Gallery ─────────────────────────── */
+    (function(){
+      var grid = document.getElementById('bc-grid');
+      if(!grid) return;
+      var closed = Object.values(KNOWN_CALLS)
+        .filter(function(c){ return c.return && c.exitDate; })
+        .sort(function(a,b){ return new Date(b.exitDate)-new Date(a.exitDate); });
+      if(!closed.length){ grid.parentElement.style.display='none'; return; }
+      grid.innerHTML = closed.map(function(c){
+        var pub  = new Date(c.pubDate);
+        var exit = new Date(c.exitDate);
+        var fmt  = function(d){ return d.toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric'}); };
+        var href = c.link ? 'href="'+c.link+'" target="_blank" rel="noopener"' : '';
+        var tag  = c.link ? 'a' : 'div';
+        return '<'+tag+' class="bc-card" '+href+'>'+
+          '<div class="bc-top">'+
+            '<div>'+
+              '<div class="bc-ticker">$'+c.ticker+'</div>'+
+              (c.company ? '<div class="bc-company">'+c.company+'</div>' : '')+
+            '</div>'+
+            '<div class="bc-return">'+c.return+'</div>'+
+          '</div>'+
+          (c.thesis ? '<div class="bc-thesis">'+c.thesis+'</div>' : '')+
+          '<div class="bc-prices">'+
+            '<span class="bc-price-val">$'+c.entry+'</span>'+
+            '<span class="bc-arrow">→</span>'+
+            '<span class="bc-price-val">$'+c.exitPrice+'</span>'+
+          '</div>'+
+          '<div class="bc-dates">'+fmt(pub)+' → '+fmt(exit)+'</div>'+
+          (c.link ? '<div class="bc-link-badge">Read thesis ↗</div>' : '')+
+        '</'+tag+'>';
+      }).join('');
+    })();
 
     /* ── Set call counter stat on masthead ─────────── */
     (function(){
@@ -11502,6 +11545,78 @@ html.light .mv2-name em {
 }
 
 /* ── Equity sparkline ─────────────────────────────── */
+/* ── Best Calls Gallery ────────────────────────── */
+.bc-section { margin: 0 44px 0; }
+@media(max-width:700px){ .bc-section { margin: 0 20px; } }
+.bc-header { margin-bottom: 20px; }
+.bc-subtitle { font-family: var(--FM); font-size: 10px; letter-spacing: .06em; color: var(--ink3); margin-top: 4px; }
+.bc-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 32px;
+}
+@media(max-width:1100px){ .bc-grid { grid-template-columns: repeat(3,1fr); } }
+@media(max-width:700px) { .bc-grid { grid-template-columns: 1fr 1fr; } }
+@media(max-width:440px) { .bc-grid { grid-template-columns: 1fr; } }
+
+.bc-card {
+  background: var(--bg2);
+  border: 1px solid rgba(196,164,74,.14);
+  border-radius: 4px;
+  padding: 20px 18px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; overflow: hidden;
+  transition: border-color .2s, transform .2s, box-shadow .2s;
+  text-decoration: none;
+}
+.bc-card:hover {
+  border-color: rgba(196,164,74,.5);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px rgba(0,0,0,.45);
+}
+.bc-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), rgba(200,131,10,.3));
+}
+.bc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; }
+.bc-ticker {
+  font-family: var(--FH, 'DM Serif Display', serif);
+  font-size: 28px; line-height: 1; color: var(--gold); letter-spacing: -.01em;
+}
+.bc-return {
+  font-family: var(--FM); font-size: 13px; font-weight: 700;
+  color: #4ade80; background: rgba(74,222,128,.1);
+  border: 1px solid rgba(74,222,128,.25);
+  border-radius: 3px; padding: 4px 10px;
+  white-space: nowrap; align-self: flex-start; margin-top: 4px;
+}
+.bc-company {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink3); margin-top: -4px;
+}
+.bc-thesis {
+  font-family: var(--FS, sans-serif); font-size: 11.5px; line-height: 1.6;
+  color: var(--ink2); font-style: italic; flex: 1;
+  border-left: 2px solid rgba(200,131,10,.3); padding-left: 10px;
+}
+.bc-prices {
+  display: flex; align-items: center; gap: 6px;
+  font-family: var(--FM); font-size: 10px; color: var(--ink3);
+}
+.bc-price-val { color: var(--ink2); font-weight: 600; }
+.bc-arrow { color: var(--gold); font-size: 9px; }
+.bc-dates {
+  font-family: var(--FM); font-size: 9px; color: var(--g2); letter-spacing: .04em;
+}
+.bc-link-badge {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--gold); opacity: .7;
+  margin-top: 2px; transition: opacity .2s;
+}
+.bc-card:hover .bc-link-badge { opacity: 1; }
+
 #tr-sparkline-wrap {
   margin: 20px 44px 0;
   padding: 14px 20px 12px;
@@ -11528,8 +11643,8 @@ html.light .mv2-name em {
 }
 .tr-range-btn:hover { color: var(--ink); background: rgba(200,131,10,.06); }
 .tr-range-btn.on { color: var(--gold); background: rgba(200,131,10,.1); border-color: rgba(200,131,10,.3); font-weight: 600; }
-#tr-sparkline { width: 100%; height: 64px; display: block; }
-#tr-sparkline-empty { font-family: var(--FM); font-size: 11px; color: var(--ink3); font-style: italic; height: 64px; display: flex; align-items: center; justify-content: center; }
+#tr-sparkline { width: 100%; height: 180px; display: block; }
+#tr-sparkline-empty { font-family: var(--FM); font-size: 11px; color: var(--ink3); font-style: italic; height: 180px; display: flex; align-items: center; justify-content: center; }
 
 /* ── Stat card subtle hover glow ─────────────────── */
 .pc {
@@ -11632,14 +11747,16 @@ html.light .mv2-name em {
       if(!m || !exitDate) return;
       var t = new Date(exitDate).getTime();
       if(isNaN(t)) return;
-      closes.push({t: t, ret: parseFloat(m[1])});
+      var tkEl = row.querySelector('.tdtk');
+      var ticker = tkEl ? tkEl.textContent.trim() : '';
+      closes.push({t: t, ret: parseFloat(m[1]), ticker: ticker, retStr: (parseFloat(m[1])>=0?'+':'')+parseFloat(m[1]).toFixed(1)+'%'});
     });
     if(closes.length < 2) return null;
     closes.sort(function(a,b){ return a.t - b.t; });
     var cum = 0;
-    var pts = closes.map(function(c){ cum += c.ret; return {t: c.t, v: cum}; });
+    var pts = closes.map(function(c){ cum += c.ret; return {t: c.t, v: cum, ticker: c.ticker, retStr: c.retStr}; });
     var now = Date.now();
-    if(now > pts[pts.length-1].t) pts.push({t: now, v: cum});
+    if(now > pts[pts.length-1].t) pts.push({t: now, v: cum, tail: true});
     return pts;
   }
 
@@ -11741,17 +11858,79 @@ html.light .mv2-name em {
       ctx.stroke();
     }
 
+    /* ── Annotate each closed call with ticker + return label ── */
+    var annotPts = pts.filter(function(p){ return p.ticker && !p.tail; });
+    var labelFont = '9px monospace';
+    var labelPad  = { x: 7, y: 4 };
+
+    annotPts.forEach(function(p, i){
+      var cx = xOf(p), cy = yOf(p.v);
+      var label = '$' + p.ticker + ' ' + p.retStr;
+      ctx.font = labelFont;
+      var tw = ctx.measureText(label).width;
+      var bw = tw + labelPad.x * 2, bh = 16;
+      /* alternate above/below to avoid overlap with close-together dates */
+      var above = (i % 2 === 0);
+      var stemLen = 22;
+      var by = above ? cy - stemLen - bh : cy + stemLen;
+
+      /* clamp so labels don't escape the canvas */
+      var bx = Math.max(2, Math.min(W - bw - 2, cx - bw/2));
+      var topEdge = above ? by : by + bh;
+      if(topEdge < 2) by = 2;
+      if(by + bh > H - 2) by = H - bh - 2;
+
+      /* stem line */
+      ctx.beginPath();
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx, above ? by + bh : by);
+      ctx.strokeStyle = 'rgba(200,131,10,.35)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([2,2]);
+      ctx.stroke();
+      ctx.setLineDash([]);
+
+      /* label background */
+      ctx.fillStyle = 'rgba(20,16,10,.88)';
+      ctx.strokeStyle = 'rgba(200,131,10,.45)';
+      ctx.lineWidth = .8;
+      ctx.beginPath();
+      ctx.roundRect(bx, by, bw, bh, 2);
+      ctx.fill();
+      ctx.stroke();
+
+      /* label text */
+      ctx.fillStyle = '#C8830A';
+      ctx.font = labelFont;
+      ctx.textBaseline = 'middle';
+      ctx.fillText(label, bx + labelPad.x, by + bh/2);
+
+      /* dot */
+      ctx.beginPath();
+      ctx.arc(cx, cy, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = '#C8830A';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(cx, cy, 5.5, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(200,131,10,.3)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    });
+
+    /* tail dot (live endpoint, no label) */
     var last = pts[pts.length-1];
-    var lx = xOf(last), ly = yOf(last.v);
-    ctx.beginPath();
-    ctx.arc(lx, ly, 3.5, 0, Math.PI*2);
-    ctx.fillStyle = '#C8830A';
-    ctx.fill();
-    ctx.beginPath();
-    ctx.arc(lx, ly, 5.5, 0, Math.PI*2);
-    ctx.strokeStyle = 'rgba(200,131,10,.3)';
-    ctx.lineWidth   = 1.5;
-    ctx.stroke();
+    if(last.tail){
+      var lx = xOf(last), ly = yOf(last.v);
+      ctx.beginPath();
+      ctx.arc(lx, ly, 3.5, 0, Math.PI*2);
+      ctx.fillStyle = '#C8830A';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(lx, ly, 5.5, 0, Math.PI*2);
+      ctx.strokeStyle = 'rgba(200,131,10,.3)';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+    }
     return true;
   }
 

@@ -4534,8 +4534,16 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
 <div class="pg" id="pg-track">
 <div class="pghd reveal"><div class="pgtag" data-i18n="track_tag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub" data-i18n="track_sub">Every call published publicly before outcome is known. Losses included. Never deleted.</p></div>
-<div class="trnote" style="margin:24px 44px 0">
-  <p><strong>Why this matters:</strong> Any analyst can show you winners. The credibility is in publishing every call with position size, stop, and entry — before knowing the outcome — and recording losses with the same transparency as wins. This is what a fund will ask for. Every row here is timestamped on Substack the day it was published.</p>
+<div style="padding:24px 44px 0">
+  <div class="perfrow perfrow-6">
+    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs" id="tr-open-sub">— open</div></div>
+    <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
+    <div class="pc"><div class="pcl">Avg. return · closed</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-winloss-sub">Realised P&amp;L</div></div>
+    <div class="pc"><div class="pcl">Avg. return · open</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Unrealised · equal-weight · live</div></div>
+    <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
+    <div class="pc pc-bench"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx">—</div><div class="pcs">Since first call · S&amp;P itself: <span id="tr-spx-ret">—</span></div></div>
+  </div>
+  <div style="padding:2px 44px 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · methodology note below</div>
 </div>
 <div id="tr-sparkline-wrap" style="display:none">
   <div id="tr-sparkline-head">
@@ -4551,17 +4559,6 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
   </div>
   <canvas id="tr-sparkline"></canvas>
   <div id="tr-sparkline-empty" style="display:none">No closed calls in this range.</div>
-</div>
-<div style="padding:24px 44px 0">
-  <div class="perfrow perfrow-6">
-    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs" id="tr-open-sub">— open</div></div>
-    <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
-    <div class="pc"><div class="pcl">Avg. return · closed</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-winloss-sub">Realised P&amp;L</div></div>
-    <div class="pc"><div class="pcl">Avg. return · open</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Unrealised · equal-weight · live</div></div>
-    <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
-    <div class="pc pc-bench"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx">—</div><div class="pcs">Since first call · S&amp;P itself: <span id="tr-spx-ret">—</span></div></div>
-  </div>
-  <div style="padding:2px 44px 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · methodology note below</div>
 </div>
 
 <!-- ══ BEST CALLS GALLERY ════════════════════════════ -->
@@ -4605,8 +4602,6 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
       <div class="rc-note" id="pc-note">Sized by position weight · live ROI from the table above</div>
     </div>
   </div>
-  <div class="sim-wins-head">Every Win</div>
-  <div class="sim-wins-grid" id="sim-wins-grid"></div>
   <div class="sim-note">Simulated for illustration, applying real published returns and position sizes to a hypothetical AUM — not a live fund, not investment advice.</div>
 </div>
 
@@ -4617,122 +4612,8 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
   </table>
 </div>
 
-<!-- ══ PROPRIETARY FX RESEARCH ══════════════════════════ -->
-<div class="fx-section">
-<div class="fx-teaser">
-  <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
-  <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
-  <div class="fx-desc">Two proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 6,071 trades. No discretionary overlay. Methodology proprietary. Full backtest data available to qualified institutional allocators upon request.</div>
-  <button onclick="sp('strats')" style="margin-bottom:20px;font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;background:none;border:1px solid rgba(200,131,10,.45);color:var(--gold);padding:9px 18px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.background='rgba(200,131,10,.08)'" onmouseout="this.style.borderColor='rgba(200,131,10,.45)';this.style.background='none'">View All Systematic Strategies →</button>
-
-  <!-- Combined stats strip -->
-  <div class="fx-combined">
-    <div class="fx-cs"><div class="fx-cs-v">6,071</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">Both Sharpe Ratios</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">Both LR Correlations</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">99%</div><div class="fx-cs-l">Real Tick Quality</div></div>
-  </div>
-
-  <div class="fx-cards">
-
-    <!-- ── USD/JPY CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Trend Following</span>
-          <div class="fx-pair">USD / JPY</div>
-          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.13</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.90</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual md">Strong</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.83%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">9.68&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">39.6%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.20%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.29</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,163</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gUJ3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C30,85 60,84 90,82 C115,79 130,74 150,65 C168,55 182,42 202,27 C218,14 242,5 272,1 L300,0 L300,88 L0,88 Z" fill="url(#gUJ3)"/>
-            <path d="M0,86 C30,85 60,84 90,82 C115,79 130,74 150,65 C168,55 182,42 202,27 C218,14 242,5 272,1 L300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Statistically robust sample. Stress-tested through COVID volatility (2020) and the 2022–2023 JPY intervention cycle.</div>
-        <span class="fx-badge">Proprietary &middot; Compounded</span>
-      </div>
-    </div>
-
-    <!-- ── XAU/USD CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag sys">Mean Reversion</span>
-          <div class="fx-pair">XAU / USD</div>
-          <div class="fx-inst">Commodities &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.82</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Excellent</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.96</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.54%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.86&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 pos">51.2%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.22</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,908</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gXA3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,85 C25,84 50,83 75,81 C100,79 122,76 148,71 C172,66 190,59 212,49 C232,38 255,22 278,7 L300,0 L300,88 L0,88 Z" fill="url(#gXA3)"/>
-            <path d="M0,85 C25,84 50,83 75,81 C100,79 122,76 148,71 C172,66 190,59 212,49 C232,38 255,22 278,7 L300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Smoothest equity curve of the two strategies — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the USD/JPY strategy, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold’s secular bull (2018–2025) and two Fed tightening cycles.</div>
-        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
-      </div>
-    </div>
-
-  </div>
-  <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
+<div class="trnote" style="margin:32px 44px 0">
+  <p><strong>Methodology:</strong> Every call is published on Substack with entry price, stop-loss, position size, and full thesis — before the outcome is known. Returns are calculated from the published entry price to exit price. Open P&amp;L uses live prices. S&amp;P 500 benchmark starts from 08 Apr 2026, the date of the first call. All positions, including losses, remain on the record and are never edited or deleted.</p>
 </div>
 </div>
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
@@ -9792,7 +9673,7 @@ function exportPortExcel(){
       if(!grid) return;
       var closed = Object.values(KNOWN_CALLS)
         .filter(function(c){ return c.return && c.exitDate; })
-        .sort(function(a,b){ return new Date(b.exitDate)-new Date(a.exitDate); });
+        .sort(function(a,b){ return parseFloat(b.return)-parseFloat(a.return); });
       if(!closed.length){ grid.parentElement.style.display='none'; return; }
       grid.innerHTML = closed.map(function(c){
         var pub  = new Date(c.pubDate);

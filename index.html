@@ -9761,7 +9761,7 @@ function exportPortExcel(){
         `<td data-label="Date">${dateStr}</td>`,
         `<td class="tdtk" data-label="Ticker">${tkHtml}</td>`,
         `<td class="${dirCls}" data-label="Dir">${dir}</td>`,
-        `<td data-label="Entry">${fmt(call.entry)}</td>`,
+        `<td data-label="Entry">${fmt(call.entry)}${call.lotCount > 1 ? `<span style="display:block;font-size:10px;color:var(--g2);margin-top:2px">${call.lotCount} lots · blended</span>` : ''}</td>`,
         `<td data-label="Target">${fmt(call.target)}</td>`,
         `<td data-label="Stop">${fmt(call.stop)}</td>`,
         `<td data-label="Size">${call.size||'—'}</td>`,
@@ -9803,14 +9803,49 @@ function exportPortExcel(){
     }
 
     /* ── Pre-populate track record from KNOWN_CALLS on every page load ── */
-    /* Sorted oldest→newest so each prepend lands newest at top */
+    /* Open positions with multiple lots (same ticker) are blended into one row.
+       Closed positions always appear as individual rows (each has its own result). */
     function populateKnownCalls(){
-      const sorted = Object.values(KNOWN_CALLS).slice().sort((a,b)=>new Date(a.pubDate)-new Date(b.pubDate));
+      const all = Object.values(KNOWN_CALLS);
+
+      // Split closed vs open
+      const closed = all.filter(c => c.return);
+      const open   = all.filter(c => !c.return);
+
+      // Group open lots by ticker and blend
+      const openGroups = {};
+      open.forEach(function(c){
+        if(!openGroups[c.ticker]) openGroups[c.ticker] = [];
+        openGroups[c.ticker].push(c);
+      });
+      const blendedOpen = Object.values(openGroups).map(function(lots){
+        if(lots.length === 1) return lots[0];
+        // Sizes as numbers
+        const sizes = lots.map(c => parseFloat((c.size||'0').replace('%','')));
+        const totalSize = sizes.reduce((a,b) => a+b, 0);
+        // Weighted-average entry
+        const blendedEntry = lots.reduce(function(sum, c, i){ return sum + parseFloat(c.entry) * sizes[i]; }, 0) / totalSize;
+        // Earliest lot for pubDate / link
+        const earliest = lots.slice().sort((a,b) => new Date(a.pubDate)-new Date(b.pubDate))[0];
+        return {
+          ticker:    lots[0].ticker,
+          entry:     blendedEntry.toFixed(2),
+          target:    lots[0].target,
+          stop:      lots[0].stop,
+          size:      totalSize + '%',
+          horizon:   lots[0].horizon,
+          link:      earliest.link,
+          pubDate:   earliest.pubDate,
+          lotCount:  lots.length,  // signals blended row to injectCallRow
+        };
+      });
+
+      // Merge and sort oldest→newest (prepend means newest lands on top)
+      const combined = closed.concat(blendedOpen)
+        .sort((a,b) => new Date(a.pubDate) - new Date(b.pubDate));
+
       const seenTickers = new Set();
-      sorted.forEach(function(call){
-        // Flag re-entries on a ticker that already appeared earlier in the
-        // record, so the table can visually distinguish them from a first
-        // appearance (same ticker can otherwise look like a duplicate row).
+      combined.forEach(function(call){
         const reopened = seenTickers.has(call.ticker);
         seenTickers.add(call.ticker);
         injectCallRow({pubDate:call.pubDate, guid:call.ticker, link:call.link}, Object.assign({}, call, {reopened:reopened}));

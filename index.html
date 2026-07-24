@@ -4593,6 +4593,57 @@ a.nav-ext-link { display: none !important; }
 }
 
 /* ══ ABOUT / CREDENTIALS SECTION ════════════════════════ */
+/* ── About dedicated page ────────────────────────── */
+.about-pg-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border-top: 1px solid var(--rule);
+}
+.about-pg-left {
+  padding: 56px 56px 72px 56px;
+  border-right: 1px solid var(--rule);
+}
+.about-pg-right {
+  padding: 56px 56px 72px 56px;
+}
+.about-pg-h3 {
+  font-family: var(--FM);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 24px;
+}
+.about-focus-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about-focus-list li {
+  font-family: var(--FS);
+  font-size: 13.5px;
+  color: var(--g2);
+  line-height: 1.5;
+  padding-left: 16px;
+  border-left: 2px solid rgba(200,131,10,.3);
+}
+.about-pg-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+@media(max-width:900px) {
+  .about-pg-body { grid-template-columns: 1fr; }
+  .about-pg-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 28px; }
+  .about-pg-right { padding: 40px 28px; }
+}
+
 .about-section {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -4890,6 +4941,7 @@ a.nav-ext-link { display: none !important; }
   <div class="nlogo" onclick="sp('home')" style="font-family:var(--FM,monospace);letter-spacing:.06em;font-size:12px;font-weight:500">LIJIE GUO<span style="opacity:.35;margin:0 8px">·</span><span style="opacity:.5;letter-spacing:.12em;font-size:.82em">AEON NIMBUS</span></div>
   <div class="nlinks" style="display:flex;align-items:center;gap:24px">
     <button class="nbtn on" onclick="sp('home')" data-i18n="nav_home">Home</button>
+    <button class="nbtn" onclick="sp('about')">About</button>
     <button class="nbtn" onclick="sp('track')" data-i18n="nav_track">Track Record</button>
     <button class="nbtn" onclick="sp('research')" data-i18n="nav_research">Research</button>
     <div class="nav-drop-wrap">
@@ -5333,6 +5385,83 @@ a.nav-ext-link { display: none !important; }
 </footer>
 
 </div><!-- /pg-home -->
+<!-- ═══════════════ ABOUT ══════════════════════════ -->
+<div class="pg" id="pg-about">
+<div class="pghd reveal">
+  <div class="pgtag">Independent Macro &amp; Equity Research · London</div>
+  <h2 class="pgtitle">About <em>LiJie Guo</em></h2>
+  <p class="pgsub">Independent analyst. No institutional bias. Every call published before the outcome is known.</p>
+</div>
+
+<div class="about-pg-body">
+  <div class="about-pg-left">
+    <h3 class="about-pg-h3">Background</h3>
+    <div class="about-body">
+      <p><strong>LiJie Guo</strong> is an independent macro and equity research analyst based in London. Aeon Nimbus Research publishes formal investment calls — with entry price, stop-loss, position size, and full thesis — <em>before</em> the outcome is known, creating a real-time, auditable track record.</p>
+      <p>The research covers global macro, single-stock equity, geopolitical market dynamics, and central bank policy. Every view is published publicly, every result is recorded — wins and losses alike.</p>
+      <p>Background spans <strong>long/short equity, private credit, M&amp;A advisory, and venture</strong>. The analytical framework combines fundamental bottom-up analysis with a top-down macro overlay and systematic quantitative filters.</p>
+      <p>The mission is simple: produce institutional-quality research in public, with full accountability. No hidden track record. No cherry-picked calls. Everything on the record from day one.</p>
+    </div>
+    <h3 class="about-pg-h3" style="margin-top:40px">Research Focus</h3>
+    <div class="about-body">
+      <ul class="about-focus-list">
+        <li><strong>Global Macro</strong> — central bank policy, geopolitical risk, cross-asset flows</li>
+        <li><strong>Single-Stock Equity</strong> — deep-dive fundamental analysis with quantitative screens</li>
+        <li><strong>Thematic</strong> — AI infrastructure, energy transition, structural disruption</li>
+        <li><strong>Quantitative</strong> — systematic strategies, factor models, portfolio construction</li>
+      </ul>
+    </div>
+    <div class="about-pg-actions">
+      <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe — Research Free</a>
+      <a class="mv2-cv-link" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>Download CV →</a>
+    </div>
+  </div>
+  <div class="about-pg-right">
+    <h3 class="about-pg-h3">Closed Calls · Track Record</h3>
+    <ul class="cred-list">
+      <li class="cred-item">
+        <span class="cred-num">01</span>
+        <div>
+          <div class="cred-title">Oracle Corporation (ORCL) — +74.3%</div>
+          <div class="cred-desc">Equity call published pre-outcome. AI cloud infrastructure thesis. Largest return on record.</div>
+        </div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-num">02</span>
+        <div>
+          <div class="cred-title">IREN Limited (IREN) — +36.4%</div>
+          <div class="cred-desc">Bitcoin mining infrastructure + AI compute pivot thesis. Called ahead of sector re-rating.</div>
+        </div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-num">03</span>
+        <div>
+          <div class="cred-title">Lemonade, Inc. (LMND) — +34.7%</div>
+          <div class="cred-desc">AI-native insurance underwriting model at deep value entry. Structural re-rating thesis.</div>
+        </div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-num">04</span>
+        <div>
+          <div class="cred-title">Reddit, Inc. (RDDT) — +32.5%</div>
+          <div class="cred-desc">Data licensing + AI training data moat thesis. Published before analyst consensus shifted.</div>
+        </div>
+      </li>
+      <li class="cred-item">
+        <span class="cred-num">05</span>
+        <div>
+          <div class="cred-title">Marvell Technology (MRVL) — +31.9%</div>
+          <div class="cred-desc">Custom ASIC and data centre interconnect demand thesis. Strong earnings catalyst call.</div>
+        </div>
+      </li>
+    </ul>
+    <button class="mvr-cta" onclick="sp('track')" style="margin-top:24px;width:100%">View full track record →</button>
+  </div>
+</div>
+
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('about')">About</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+</div>
+
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
 <div class="pg" id="pg-research">
 <div class="pghd reveal" data-num="02"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
@@ -7624,7 +7753,7 @@ function sp(id){
     if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['track'],['research'],['portfolios','tools','strats'],['services'],['contact']];
+    const map=[['home'],['about'],['track'],['research'],['portfolios','tools','strats'],['services'],['contact']];
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }

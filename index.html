@@ -4168,6 +4168,113 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
 }
 @keyframes bacFadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
 .bac[open] .bac-body{animation:bacFadeIn .28s ease}
+
+/* ═══════════════════════════════════════════════════════
+   DESIGN POLISH — finalized professional layer
+═══════════════════════════════════════════════════════ */
+
+/* 1. Bigger, bolder hero name */
+.mv2-name {
+  font-size: clamp(80px, 13.5vw, 195px) !important;
+  line-height: .86 !important;
+  letter-spacing: -.03em !important;
+}
+
+/* 2. Nav CTA — gold filled pill */
+.nav-cta {
+  background: var(--gold) !important;
+  color: #0a0908 !important;
+  border-color: var(--gold) !important;
+  border-radius: 100px !important;
+  font-weight: 600 !important;
+  font-size: 9.5px !important;
+  padding: 8px 22px !important;
+  letter-spacing: .1em !important;
+  transition: background .2s, border-color .2s !important;
+}
+.nav-cta:hover {
+  background: var(--gold2) !important;
+  border-color: var(--gold2) !important;
+  color: #0a0908 !important;
+}
+
+/* 3. Hide nav external link clutter; keep Substack CTA only */
+a.nav-ext-link { display: none !important; }
+#nav-github { display: none !important; }
+
+/* 4. Home grid card headings — bigger and bolder */
+.hct {
+  font-size: 22px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.01em !important;
+}
+.hcard { padding: 44px 36px !important; }
+
+/* 5. Metrics strip */
+.metrics-strip {
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg);
+  padding: 0 56px;
+  overflow-x: auto;
+  position: relative;
+  z-index: 10;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.metrics-strip::-webkit-scrollbar { display: none; }
+.ms-inner {
+  display: flex;
+  align-items: flex-end;
+  gap: 0;
+  padding: 36px 0 32px;
+  min-width: max-content;
+}
+.ms-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-right: 52px;
+}
+.ms-item:not(:last-child) {
+  border-right: 1px solid var(--rule);
+  margin-right: 52px;
+}
+.ms-n {
+  font-family: var(--FH);
+  font-size: clamp(34px, 4.5vw, 62px);
+  font-weight: 400;
+  color: var(--ink);
+  line-height: 1;
+  letter-spacing: -.025em;
+}
+.ms-n.ms-gold { color: var(--gold); }
+.ms-l {
+  font-family: var(--FM);
+  font-size: 8px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--g1);
+}
+@media(max-width:900px) {
+  .metrics-strip { padding: 0 28px; }
+  .ms-item { padding-right: 32px; }
+  .ms-item:not(:last-child) { margin-right: 32px; }
+  .ms-n { font-size: clamp(28px, 6vw, 48px); }
+}
+@media(max-width:600px) {
+  .metrics-strip { padding: 0 20px; }
+  .ms-item { padding-right: 24px; }
+  .ms-item:not(:last-child) { margin-right: 24px; }
+  .ms-inner { padding: 24px 0 20px; }
+}
+
+/* 6. Markets bar — thinner, more refined */
+.mkt-bar {
+  height: 22px !important;
+  font-size: 7.5px !important;
+  letter-spacing: .13em !important;
+  opacity: .75 !important;
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -4232,7 +4339,7 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
         <button class="lang-item" onclick="setLang('cn')"><span class="lang-code">CN</span><span class="lang-full">中文</span></button>
       </div>
     </div>
-    <a class="nav-cta" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
+    <a class="nav-cta" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe →</a>
     <a id="nav-github" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" title="GitHub" class="nav-ext-link"><svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg> GitHub</a>
     <a class="nav-ext-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
   </div>
@@ -4347,6 +4454,31 @@ html:not(.light) .masthead-v2, html:not(.light) #bac-stage .masthead-v2{
   </div>
 </div><!-- /bac-stage -->
 
+<!-- Metrics strip -->
+<div class="metrics-strip">
+  <div class="ms-inner">
+    <div class="ms-item">
+      <span class="ms-n ms-gold" id="ms-calls">—</span>
+      <span class="ms-l">Closed Calls</span>
+    </div>
+    <div class="ms-item">
+      <span class="ms-n ms-gold" id="ms-avgret">—</span>
+      <span class="ms-l">Avg Return</span>
+    </div>
+    <div class="ms-item">
+      <span class="ms-n ms-gold" id="ms-hitrate">—</span>
+      <span class="ms-l">Hit Rate</span>
+    </div>
+    <div class="ms-item">
+      <span class="ms-n" id="ms-open">9</span>
+      <span class="ms-l">Open Positions</span>
+    </div>
+    <div class="ms-item">
+      <span class="ms-n">$0</span>
+      <span class="ms-l">Subscription Cost</span>
+    </div>
+  </div>
+</div>
 
 <!-- Credential strip -->
 
@@ -10334,6 +10466,10 @@ function exportPortExcel(){
     }
     if(el('mv2-hitrate')) animateStat('mv2-hitrate', hitRate, '%', 0);
     if(el('mv2-avgret'))  animateStat('mv2-avgret', avgRet, '%', 1);
+    /* mirror stats to metrics strip */
+    if(el('ms-calls'))   animateStat('ms-calls',   closed,  '', 0);
+    if(el('ms-hitrate')) animateStat('ms-hitrate', hitRate, '%', 0);
+    if(el('ms-avgret'))  animateStat('ms-avgret',  avgRet,  '%', 1);
     if(el('tr-closed-label')) el('tr-closed-label').textContent = closed>0 ? closed+' closed position'+(closed!==1?'s':'') : 'Realised P&L';
     if(el('tr-avgret')){
       el('tr-avgret').textContent = fmt(avgRet);

@@ -4638,6 +4638,19 @@ a.nav-ext-link { display: none !important; }
   flex-wrap: wrap;
   margin-top: 32px;
 }
+.about-edu-logos { display: flex; flex-direction: column; gap: 16px; }
+.about-edu-item { display: flex; align-items: flex-start; gap: 14px; }
+.about-edu-badge {
+  width: 36px; height: 36px; min-width: 36px;
+  background: rgba(200,131,10,.12);
+  border: 1px solid rgba(200,131,10,.3);
+  border-radius: 4px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--FM); font-size: 9px; letter-spacing: .06em;
+  color: var(--gold); font-weight: 600;
+}
+.about-edu-name { font-family: var(--FS); font-size: 13px; color: var(--ink); line-height: 1.4; }
+.about-edu-prog { font-family: var(--FM); font-size: 9px; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); margin-top: 2px; }
 @media(max-width:900px) {
   .about-pg-body { grid-template-columns: 1fr; }
   .about-pg-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 28px; }
@@ -5395,21 +5408,17 @@ a.nav-ext-link { display: none !important; }
 
 <div class="about-pg-body">
   <div class="about-pg-left">
-    <h3 class="about-pg-h3">Background</h3>
+    <h3 class="about-pg-h3">The Platform</h3>
     <div class="about-body">
-      <p><strong>LiJie Guo</strong> is an independent macro and equity research analyst based in London. Aeon Nimbus Research publishes formal investment calls — with entry price, stop-loss, position size, and full thesis — <em>before</em> the outcome is known, creating a real-time, auditable track record.</p>
-      <p>The research covers global macro, single-stock equity, geopolitical market dynamics, and central bank policy. Every view is published publicly, every result is recorded — wins and losses alike.</p>
-      <p>Background spans <strong>long/short equity, private credit, M&amp;A advisory, and venture</strong>. The analytical framework combines fundamental bottom-up analysis with a top-down macro overlay and systematic quantitative filters.</p>
-      <p>The mission is simple: produce institutional-quality research in public, with full accountability. No hidden track record. No cherry-picked calls. Everything on the record from day one.</p>
+      <p><em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> across five FX and commodity pairs and seven systematic equity models, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.</p>
     </div>
-    <h3 class="about-pg-h3" style="margin-top:40px">Research Focus</h3>
+    <h3 class="about-pg-h3" style="margin-top:36px">Experience</h3>
     <div class="about-body">
-      <ul class="about-focus-list">
-        <li><strong>Global Macro</strong> — central bank policy, geopolitical risk, cross-asset flows</li>
-        <li><strong>Single-Stock Equity</strong> — deep-dive fundamental analysis with quantitative screens</li>
-        <li><strong>Thematic</strong> — AI infrastructure, energy transition, structural disruption</li>
-        <li><strong>Quantitative</strong> — systematic strategies, factor models, portfolio construction</li>
-      </ul>
+      <p>His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.</p>
+    </div>
+    <h3 class="about-pg-h3" style="margin-top:36px">Background</h3>
+    <div class="about-body">
+      <p>Spanish-born and ethnically Chinese, drawn from his first market investment at 18 to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.</p>
     </div>
     <div class="about-pg-actions">
       <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe — Research Free</a>
@@ -5417,45 +5426,37 @@ a.nav-ext-link { display: none !important; }
     </div>
   </div>
   <div class="about-pg-right">
-    <h3 class="about-pg-h3">Closed Calls · Track Record</h3>
-    <ul class="cred-list">
-      <li class="cred-item">
-        <span class="cred-num">01</span>
+    <h3 class="about-pg-h3">Education</h3>
+    <div class="about-body">
+      <p>He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.</p>
+    </div>
+    <div class="about-edu-logos" style="margin-top:28px">
+      <div class="about-edu-item">
+        <div class="about-edu-badge">EM</div>
         <div>
-          <div class="cred-title">Oracle Corporation (ORCL) — +74.3%</div>
-          <div class="cred-desc">Equity call published pre-outcome. AI cloud infrastructure thesis. Largest return on record.</div>
+          <div class="about-edu-name">emlyon Business School</div>
+          <div class="about-edu-prog">MSc in Management</div>
         </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">02</span>
+      </div>
+      <div class="about-edu-item">
+        <div class="about-edu-badge">PM</div>
         <div>
-          <div class="cred-title">IREN Limited (IREN) — +36.4%</div>
-          <div class="cred-desc">Bitcoin mining infrastructure + AI compute pivot thesis. Called ahead of sector re-rating.</div>
+          <div class="about-edu-name">Politecnico di Milano</div>
+          <div class="about-edu-prog">MSc · GSOM</div>
         </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">03</span>
+      </div>
+      <div class="about-edu-item">
+        <div class="about-edu-badge">BS</div>
         <div>
-          <div class="cred-title">Lemonade, Inc. (LMND) — +34.7%</div>
-          <div class="cred-desc">AI-native insurance underwriting model at deep value entry. Structural re-rating thesis.</div>
+          <div class="about-edu-name">Bayes Business School, City University of London</div>
+          <div class="about-edu-prog">MSc in Finance</div>
         </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">04</span>
-        <div>
-          <div class="cred-title">Reddit, Inc. (RDDT) — +32.5%</div>
-          <div class="cred-desc">Data licensing + AI training data moat thesis. Published before analyst consensus shifted.</div>
-        </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">05</span>
-        <div>
-          <div class="cred-title">Marvell Technology (MRVL) — +31.9%</div>
-          <div class="cred-desc">Custom ASIC and data centre interconnect demand thesis. Strong earnings catalyst call.</div>
-        </div>
-      </li>
-    </ul>
-    <button class="mvr-cta" onclick="sp('track')" style="margin-top:24px;width:100%">View full track record →</button>
+      </div>
+    </div>
+    <h3 class="about-pg-h3" style="margin-top:40px">Current Research</h3>
+    <div class="about-body">
+      <p>He is currently conducting the <em>Jupiter Asset Management Industry Research Project</em> (London) — investigating equity return predictability across Japanese, US and European markets at Jupiter AM (FTSE 250, £51bn AUM). Jointly supervised by an <em>Asset Pricing</em> professor at Bayes Business School, a <em>Systematic Equity Portfolio Manager</em> at Jupiter Asset Management, and a <em>Computational Finance</em> professor at Paris Dauphine. He leads the economic framework, hypothesis construction, and Python implementation of factor models and statistical tests.</p>
+    </div>
   </div>
 </div>
 

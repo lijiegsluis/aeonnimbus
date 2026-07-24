@@ -4,7 +4,26 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>LiJie Guo — Aeon Nimbus Research</title>
-<meta name="description" content="LiJie Guo — Independent macro and equity research. Market views, thematic deep dives, geopolitical analysis, and formal investment calls published with full thesis before the outcome is known.">
+<meta name="description" content="Independent macro research with 100% hit rate. ORCL +74.3%, RDDT +32.5%, MRVL +31.9%. LiJie Guo — Aeon Nimbus Research, London. Investment calls published before the outcome. Free on Substack.">
+<meta name="keywords" content="macro research, equity research, investment calls, track record, independent research analyst, London, LiJie Guo, Aeon Nimbus, Oracle, Marvell, Reddit, systematic strategies">
+<link rel="canonical" href="https://aeonnimbus.com/">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "LiJie Guo",
+  "jobTitle": "Independent Macro Research Analyst",
+  "url": "https://aeonnimbus.com",
+  "sameAs": ["https://www.linkedin.com/in/lijieguo-es/","https://aeonnimbus.substack.com"],
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Aeon Nimbus Research",
+    "url": "https://aeonnimbus.com",
+    "description": "Independent macro and equity research platform publishing formal investment calls with full thesis before the outcome is known."
+  },
+  "description": "Independent macro and equity research analyst with 100% hit rate on 5 closed calls. Notable calls: Oracle +74.3%, Reddit +32.5%, IREN +36.4%, Lemonade +34.7%, Marvell +31.9%."
+}
+</script>
 <meta property="og:title" content="LiJie Guo — Aeon Nimbus Research">
 <meta property="og:description" content="Independent macro and equity research. Market views, deep dives, and formal investment calls — published with full thesis before the outcome is known.">
 <meta property="og:type" content="website">
@@ -4275,6 +4294,221 @@ a.nav-ext-link { display: none !important; }
   letter-spacing: .13em !important;
   opacity: .75 !important;
 }
+
+/* 7. Returns marquee strip */
+.rm-wrap {
+  overflow: hidden;
+  border-bottom: 1px solid var(--rule);
+  background: var(--bg1);
+  padding: 10px 0;
+  position: relative;
+  z-index: 10;
+}
+.rm-wrap::before, .rm-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+.rm-wrap::before { left: 0; background: linear-gradient(90deg, var(--bg1), transparent); }
+.rm-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--bg1), transparent); }
+.rm-track {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  white-space: nowrap;
+  width: max-content;
+  animation: rm-scroll 18s linear infinite;
+}
+@keyframes rm-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.rm-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.rm-tk {
+  font-family: var(--FM);
+  font-size: 9px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--g1);
+}
+.rm-ret {
+  font-family: var(--FH);
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--green);
+  letter-spacing: -.01em;
+}
+.rm-sep {
+  color: var(--rule);
+  font-size: 16px;
+  flex-shrink: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rm-track { animation: none; }
+}
+
+/* 8. Hero right column — closed calls proof panel */
+.mv2-right {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding: var(--sp-7) 52px var(--sp-7) var(--sp-7) !important;
+}
+.mvr-eyebrow {
+  font-family: var(--FM);
+  font-size: 8px;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 28px;
+}
+.mvr-eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.mvr-list {
+  display: flex;
+  flex-direction: column;
+}
+.mvr-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: opacity .2s;
+}
+.mvr-item:hover { opacity: .75; }
+.mvr-item:first-child { border-top: 1px solid var(--rule); }
+.mvr-num {
+  font-family: var(--FM);
+  font-size: 8px;
+  color: var(--g2);
+  letter-spacing: .14em;
+  width: 18px;
+  flex-shrink: 0;
+}
+.mvr-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.mvr-tk {
+  font-family: var(--FM);
+  font-size: 11.5px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: .08em;
+}
+.mvr-co {
+  font-family: var(--FD);
+  font-size: 11px;
+  color: var(--g1);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.mvr-ret {
+  font-family: var(--FH);
+  font-size: clamp(20px, 2.4vw, 34px);
+  font-weight: 400;
+  color: #3EAF72;
+  line-height: 1;
+  letter-spacing: -.025em;
+  flex-shrink: 0;
+}
+.mvr-footer {
+  margin-top: 22px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--FM);
+  font-size: 8.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--g1);
+}
+.mvr-footer-sep { color: var(--g2); }
+.mvr-cta {
+  margin-top: 20px;
+  font-family: var(--FM);
+  font-size: 8.5px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: letter-spacing .2s;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.mvr-cta:hover { letter-spacing: .18em; }
+
+/* 9. Hero left column — tighten vertical flow */
+.mv2-left .mv2-tagline {
+  margin-top: 28px !important;
+  font-size: 14px !important;
+}
+.mv2-left .mv2-sub-btn {
+  margin-top: 32px !important;
+}
+
+/* 10. Section header eyebrows for home content */
+.home-sec-header {
+  padding: 56px 56px 0;
+  border-top: 1px solid var(--rule);
+}
+.home-sec-eyebrow {
+  font-family: var(--FM);
+  font-size: 8px;
+  letter-spacing: .24em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.home-sec-eyebrow::before {
+  content: '';
+  width: 20px;
+  height: 1px;
+  background: var(--gold);
+  flex-shrink: 0;
+}
+.home-sec-h2 {
+  font-family: var(--FH);
+  font-size: clamp(28px, 3.5vw, 46px);
+  font-weight: 400;
+  color: var(--ink);
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  margin-bottom: 40px;
+}
+@media(max-width:768px) {
+  .home-sec-header { padding: 40px 20px 0; }
+  .mv2-right { display: none !important; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -4365,7 +4599,7 @@ a.nav-ext-link { display: none !important; }
 <div class="masthead-v2">
   <div class="mv2-left">
     <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
-    <div class="mv2-name">LiJie<br><em>Guo.</em></div>
+    <h1 class="mv2-name">LiJie<br><em>Guo.</em></h1>
     <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">
       <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
       Subscribe — Research Free
@@ -4384,7 +4618,42 @@ a.nav-ext-link { display: none !important; }
     </div>
   </div>
     <div class="mv2-right">
-    <div class="mv2-bio-label" data-i18n="bio_about">About</div>
+    <!-- Closed calls proof panel -->
+    <div class="mvr-eyebrow">Closed Calls · All on the Record</div>
+    <div class="mvr-list">
+      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
+        <span class="mvr-num">01</span>
+        <span class="mvr-info"><span class="mvr-tk">ORCL</span><span class="mvr-co">Oracle Corporation</span></span>
+        <span class="mvr-ret">+74.3%</span>
+      </div>
+      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
+        <span class="mvr-num">02</span>
+        <span class="mvr-info"><span class="mvr-tk">RDDT</span><span class="mvr-co">Reddit, Inc.</span></span>
+        <span class="mvr-ret">+32.5%</span>
+      </div>
+      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
+        <span class="mvr-num">03</span>
+        <span class="mvr-info"><span class="mvr-tk">IREN</span><span class="mvr-co">IREN Limited</span></span>
+        <span class="mvr-ret">+36.4%</span>
+      </div>
+      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
+        <span class="mvr-num">04</span>
+        <span class="mvr-info"><span class="mvr-tk">MRVL</span><span class="mvr-co">Marvell Technology</span></span>
+        <span class="mvr-ret">+31.9%</span>
+      </div>
+      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
+        <span class="mvr-num">05</span>
+        <span class="mvr-info"><span class="mvr-tk">LMND</span><span class="mvr-co">Lemonade, Inc.</span></span>
+        <span class="mvr-ret">+34.7%</span>
+      </div>
+    </div>
+    <div class="mvr-footer">
+      <span>100% hit rate</span>
+      <span class="mvr-footer-sep">·</span>
+      <span>Avg. +42.0% per closed call</span>
+    </div>
+    <button class="mvr-cta" onclick="sp('track')">View full track record →</button>
+    <div style="display:none" data-i18n="bio_about">About</div>
 <div class="bio-accord">
 
   <details class="bac" open>
@@ -4448,11 +4717,36 @@ a.nav-ext-link { display: none !important; }
       <a class="mv2-link ul-draw" onclick="sp('research')">→ Latest research</a>
       <a class="mv2-link ul-draw" onclick="sp('track')">→ Full track record</a>
       <a class="mv2-link ul-draw" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">→ LinkedIn ↗</a>
-      <a class="mv2-link ul-draw" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">→ GitHub ↗</a>
       <a class="mv2-link ul-draw" href="#" onclick="openSubstack(event)">→ Subscribe on Substack ↗</a>
     </div>
   </div>
 </div><!-- /bac-stage -->
+
+<!-- Returns marquee -->
+<div class="rm-wrap" aria-hidden="true">
+  <div class="rm-track">
+    <span class="rm-item"><span class="rm-tk">ORCL</span><span class="rm-ret">+74.3%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">RDDT</span><span class="rm-ret">+32.5%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">MRVL</span><span class="rm-ret">+31.9%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">IREN</span><span class="rm-ret">+36.4%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">LMND</span><span class="rm-ret">+34.7%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">ORCL</span><span class="rm-ret">+74.3%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">RDDT</span><span class="rm-ret">+32.5%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">MRVL</span><span class="rm-ret">+31.9%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">IREN</span><span class="rm-ret">+36.4%</span></span>
+    <span class="rm-sep">·</span>
+    <span class="rm-item"><span class="rm-tk">LMND</span><span class="rm-ret">+34.7%</span></span>
+    <span class="rm-sep">·</span>
+  </div>
+</div>
 
 <!-- Metrics strip -->
 <div class="metrics-strip">
@@ -4505,6 +4799,10 @@ a.nav-ext-link { display: none !important; }
   <span class="tki"><span class="tks">2s10s</span>−18bp<span class="tkd">INVERTED</span></span>
 </div></div>
 
+<div class="home-sec-header">
+  <div class="home-sec-eyebrow">What We Publish</div>
+  <h2 class="home-sec-h2">Independent research across<br>macro, equity, and systems.</h2>
+</div>
 <div class="hgrid">
   <div class="hcard home-grid-card hcard-half" style="border-left:2px solid var(--gold)" onclick="sp('track')">
     <div class="hcn">01</div>

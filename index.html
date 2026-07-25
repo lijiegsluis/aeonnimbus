@@ -5311,6 +5311,223 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   width: 0%;
   transition: width .1s;
 }
+
+/* ══ HOME V3 — column-grid editorial redesign ══════════════════════ */
+#pg-home { padding-top: 58px; }
+
+/* Hero */
+.hv3-hero {
+  min-height: 100svh; position: relative; overflow: hidden;
+  display: flex; align-items: flex-end;
+}
+#hv3-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.hv3-inner {
+  position: relative; z-index: 1; width: 100%;
+  padding: 0 52px 68px;
+  display: flex; align-items: flex-end; justify-content: space-between; gap: 80px;
+}
+.hv3-name {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(80px, 12vw, 172px);
+  font-weight: 400; line-height: .86; letter-spacing: -.03em;
+  flex-shrink: 0; cursor: default;
+}
+.hv3-name em { color: var(--gold); font-style: italic; display: block; }
+.hv3-right { max-width: 480px; padding-bottom: 8px; }
+.hv3-position {
+  font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+  color: var(--ink2); margin-bottom: 28px;
+  padding-bottom: 20px; border-bottom: 1px solid var(--line);
+}
+.hv3-proof {
+  font-family: Georgia, serif; font-size: clamp(18px, 2.2vw, 26px);
+  font-weight: 400; line-height: 1.35; color: var(--ink);
+}
+.hv3-proof strong {
+  display: block; font-size: clamp(40px, 5.5vw, 72px);
+  line-height: .9; margin-bottom: 12px; letter-spacing: -.03em; font-weight: 400;
+}
+.hv3-proof .hv3-sub {
+  font-family: var(--FS, sans-serif);
+  font-size: 13px; color: var(--ink2); margin-top: 16px;
+  line-height: 1.7; letter-spacing: 0; font-style: normal;
+}
+
+/* Record section */
+.hv3-record { border-top: 1px solid var(--line); }
+.hv3-rec-head {
+  display: flex; align-items: baseline; gap: 28px;
+  padding: 52px 52px 0;
+}
+.hv3-rec-n {
+  font-family: Georgia, serif;
+  font-size: clamp(64px, 10vw, 140px); line-height: .85; letter-spacing: -.04em;
+  color: var(--ink); flex-shrink: 0;
+}
+.hv3-rec-claim {
+  font-size: 13px; color: var(--ink2); line-height: 1.75; max-width: 400px; padding-bottom: 6px;
+}
+.hv3-rec-claim strong { color: var(--ink); font-weight: 400; }
+
+/* Calls table */
+.hv3-calls { width: 100%; border-collapse: collapse; margin-top: 40px; }
+.hv3-calls thead tr { border-bottom: 1px solid var(--line); }
+.hv3-calls th {
+  font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--g2); padding: 0 52px 14px;
+  text-align: left; font-weight: 400;
+}
+.hv3-calls th:last-child { text-align: right; }
+.hv3-calls tbody tr {
+  border-bottom: 1px solid var(--line); cursor: pointer; transition: background .1s;
+}
+.hv3-calls tbody tr:hover { background: rgba(255,255,255,.02); }
+.hv3-calls td { padding: 26px 52px; vertical-align: middle; }
+.hv3-cnum {
+  font-family: monospace; font-size: 9px; color: var(--g2);
+  letter-spacing: .04em; font-variant-numeric: tabular-nums;
+}
+.hv3-ctk {
+  font-family: monospace; font-size: 13px; letter-spacing: .06em; color: var(--ink);
+}
+.hv3-cco { font-size: 11.5px; color: var(--ink2); margin-top: 2px; }
+.hv3-cthesis { font-size: 11.5px; color: var(--ink2); line-height: 1.5; max-width: 340px; }
+.hv3-cperiod { font-size: 10.5px; color: var(--g2); letter-spacing: .03em; }
+.hv3-cret {
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.8vw, 38px); font-weight: 400;
+  color: var(--green); font-variant-numeric: tabular-nums;
+  text-align: right; letter-spacing: -.02em;
+}
+.hv3-rec-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 22px 52px; border-top: 1px solid var(--line);
+  background: var(--bg1);
+}
+.hv3-rfstat { font-size: 11px; color: var(--ink2); }
+.hv3-rfstat b { color: var(--ink); font-weight: 400; }
+.hv3-cta {
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--gold); color: var(--bg);
+  padding: 13px 28px; border: none; cursor: pointer; transition: opacity .15s;
+  font-family: var(--FM, sans-serif);
+}
+.hv3-cta:hover { opacity: .88; }
+
+/* Numbers strip */
+.hv3-strip {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+.hv3-sitem {
+  padding: 44px 52px 40px; border-right: 1px solid var(--line);
+}
+.hv3-sitem:last-child { border-right: none; }
+.hv3-snum {
+  font-family: Georgia, serif;
+  font-size: clamp(44px, 5.5vw, 72px); font-weight: 400; line-height: 1;
+  color: var(--ink); font-variant-numeric: tabular-nums; margin-bottom: 14px;
+}
+.hv3-snum.g { color: var(--green); }
+.hv3-slbl { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); }
+
+/* Platform section */
+.hv3-plat-head {
+  padding: 80px 52px 56px;
+  border-top: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.hv3-plat-head h2 {
+  font-family: Georgia, serif;
+  font-size: clamp(36px, 5vw, 72px); font-weight: 400;
+  letter-spacing: -.025em; line-height: .92;
+  color: var(--ink); max-width: 700px;
+}
+.hv3-plat-head p {
+  font-size: 13px; color: var(--ink2); line-height: 1.75;
+  max-width: 480px; margin-top: 24px;
+}
+.hv3-plat-cards { display: grid; grid-template-columns: repeat(3, 1fr); }
+.hv3-pcard {
+  padding: 56px 52px;
+  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+}
+.hv3-pcard:last-child { border-right: none; }
+.hv3-plabel {
+  font-size: 8px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--g2); margin-bottom: 24px;
+}
+.hv3-ptitle {
+  font-family: Georgia, serif;
+  font-size: clamp(22px, 2.4vw, 32px); font-weight: 400;
+  line-height: 1.1; color: var(--ink); margin-bottom: 16px;
+}
+.hv3-pbody { font-size: 12.5px; color: var(--ink2); line-height: 1.78; margin-bottom: 36px; }
+.hv3-plink {
+  font-size: 9px; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink2); border-bottom: 1px solid var(--line);
+  padding-bottom: 2px; cursor: pointer; transition: color .15s, border-color .15s;
+  display: inline-block; background: none; border-left: none; border-top: none; border-right: none;
+  font-family: var(--FM, sans-serif);
+}
+.hv3-plink:hover { color: var(--ink); border-bottom-color: var(--ink2); }
+.hv3-pitems { margin-top: 32px; border-top: 1px solid var(--line); }
+.hv3-pitem {
+  display: flex; align-items: baseline; justify-content: space-between;
+  padding: 14px 0; border-bottom: 1px solid var(--line);
+  cursor: pointer; transition: opacity .12s;
+}
+.hv3-pitem:hover { opacity: .65; }
+.hv3-piname { font-size: 11.5px; color: var(--ink); }
+.hv3-pitag { font-size: 9.5px; color: var(--ink2); letter-spacing: .02em; }
+.hv3-pival {
+  font-family: monospace; font-size: 10px;
+  color: var(--green); letter-spacing: -.01em; flex-shrink: 0; margin-left: 12px;
+}
+.hv3-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 24px; }
+.hv3-chip {
+  font-size: 9px; letter-spacing: .04em; color: var(--ink2);
+  border: 1px solid var(--line); padding: 5px 11px;
+  cursor: pointer; transition: all .15s;
+}
+.hv3-chip:hover { color: var(--ink); border-color: var(--ink2); }
+.hv3-formula {
+  font-family: monospace; font-size: 11px; letter-spacing: -.01em;
+  color: var(--g2); margin-bottom: 6px;
+}
+
+/* Home subscribe footer strip */
+.hv3-sub {
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  padding: 52px; border-top: 1px solid var(--line);
+  flex-wrap: wrap;
+}
+.hv3-sub-title {
+  font-family: Georgia, serif; font-size: clamp(22px, 2.8vw, 36px);
+  font-weight: 400; color: var(--ink); margin-bottom: 10px;
+}
+.hv3-sub-desc { font-size: 13px; color: var(--ink2); max-width: 440px; line-height: 1.7; }
+.hv3-sub-btn {
+  font-size: 9px; letter-spacing: .14em; text-transform: uppercase;
+  background: var(--gold); color: var(--bg);
+  padding: 15px 32px; border: none; cursor: pointer;
+  transition: opacity .15s; white-space: nowrap;
+  font-family: var(--FM, sans-serif); text-decoration: none; display: inline-block;
+}
+.hv3-sub-btn:hover { opacity: .88; }
+.hv3-sub-note { font-size: 9.5px; color: var(--g2); margin-top: 10px; }
+
+@media(max-width: 900px) {
+  .hv3-inner { flex-direction: column; align-items: flex-start; padding: 0 24px 48px; gap: 32px; }
+  .hv3-rec-head { padding: 36px 24px 0; }
+  .hv3-calls td, .hv3-calls th { padding-inline: 24px; }
+  .hv3-rec-foot { padding-inline: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .hv3-strip { grid-template-columns: 1fr; }
+  .hv3-sitem { border-right: none; }
+  .hv3-plat-head { padding: 56px 24px 40px; }
+  .hv3-plat-cards { grid-template-columns: 1fr; }
+  .hv3-pcard { border-right: none; padding: 40px 24px; }
+  .hv3-sub { padding: 40px 24px; }
+}
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
 // Nav scroll effect
@@ -5397,452 +5614,188 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- ═══════════════ HOME ═══════════════════════════ -->
 <div class="pg on" id="pg-home">
-<!-- ══ MASTHEAD ════════════════════════════════════════════ -->
-<div id="bac-stage">
-<div class="masthead-v2">
-  <div class="mv2-left">
-    <div class="mv2-eyebrow">Aeon Nimbus Research · London</div>
-    <h1 class="mv2-name">LiJie<br><em>Guo.</em></h1>
-    <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">
-      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Subscribe — Research Free
-    </a>
-    <a class="mv2-cv-link" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>Download CV →</a>
-    <div class="mv2-rule line-draw"></div>
-    <div class="mv2-tagline" data-i18n-html="home_tagline"><strong>Global markets. Unhedged views.</strong><br><br>The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it.</div>
-    <div class="mv2-stats">
-      <div class="mv2-stat"><span class="mv2-sn" id="mv2-avgret">—</span><span class="mv2-sl">Avg. closed return</span></div>
-      <div class="mv2-stat"><span class="mv2-sn" id="mv2-hitrate">—</span><span class="mv2-sl">Hit rate</span></div>
-      <div class="mv2-stat"><span class="mv2-sn" id="mv2-calls-n">—</span><span class="mv2-sl">Pre-outcome calls</span></div>
-    </div>
-    <div class="mv2-curve-wrap" id="mv2-curve-wrap" style="display:none">
-      <svg id="mv2-curve-svg" viewBox="0 0 400 56" preserveAspectRatio="none"></svg>
-      <div class="mv2-curve-label">Realised P&amp;L on closed calls — every point on the record</div>
-    </div>
-  </div>
-    <div class="mv2-right">
-    <!-- Closed calls proof panel -->
-    <div class="mvr-eyebrow">Closed Calls · All on the Record</div>
-    <div class="mvr-list">
-      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
-        <span class="mvr-num">01</span>
-        <span class="mvr-info"><span class="mvr-tk">ORCL</span><span class="mvr-co">Oracle Corporation</span></span>
-        <span class="mvr-ret">+74.3%</span>
-      </div>
-      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
-        <span class="mvr-num">02</span>
-        <span class="mvr-info"><span class="mvr-tk">RDDT</span><span class="mvr-co">Reddit, Inc.</span></span>
-        <span class="mvr-ret">+32.5%</span>
-      </div>
-      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
-        <span class="mvr-num">03</span>
-        <span class="mvr-info"><span class="mvr-tk">IREN</span><span class="mvr-co">IREN Limited</span></span>
-        <span class="mvr-ret">+36.4%</span>
-      </div>
-      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
-        <span class="mvr-num">04</span>
-        <span class="mvr-info"><span class="mvr-tk">MRVL</span><span class="mvr-co">Marvell Technology</span></span>
-        <span class="mvr-ret">+31.9%</span>
-      </div>
-      <div class="mvr-item" onclick="sp('track')" role="button" tabindex="0">
-        <span class="mvr-num">05</span>
-        <span class="mvr-info"><span class="mvr-tk">LMND</span><span class="mvr-co">Lemonade, Inc.</span></span>
-        <span class="mvr-ret">+34.7%</span>
-      </div>
-    </div>
-    <div class="mvr-footer">
-      <span>100% hit rate</span>
-      <span class="mvr-footer-sep">·</span>
-      <span>Avg. +42.0% per closed call</span>
-    </div>
-    <button class="mvr-cta" onclick="sp('track')">View full track record →</button>
-    <div class="mv2-links">
-      <a class="mv2-link ul-draw" onclick="sp('research')">→ Latest research</a>
-      <a class="mv2-link ul-draw" onclick="sp('track')">→ Full track record</a>
-      <a class="mv2-link ul-draw" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">→ LinkedIn ↗</a>
-      <a class="mv2-link ul-draw" href="#" onclick="openSubstack(event)">→ Subscribe on Substack ↗</a>
-    </div>
-  </div><!-- /mv2-right -->
-</div><!-- /masthead-v2 -->
-</div><!-- /bac-stage -->
-
-<!-- Returns marquee -->
-<div class="rm-wrap" aria-hidden="true">
-  <div class="rm-track">
-    <span class="rm-item"><span class="rm-tk">ORCL</span><span class="rm-ret">+74.3%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">RDDT</span><span class="rm-ret">+32.5%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">MRVL</span><span class="rm-ret">+31.9%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">IREN</span><span class="rm-ret">+36.4%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">LMND</span><span class="rm-ret">+34.7%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">ORCL</span><span class="rm-ret">+74.3%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">RDDT</span><span class="rm-ret">+32.5%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">MRVL</span><span class="rm-ret">+31.9%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">IREN</span><span class="rm-ret">+36.4%</span></span>
-    <span class="rm-sep">·</span>
-    <span class="rm-item"><span class="rm-tk">LMND</span><span class="rm-ret">+34.7%</span></span>
-    <span class="rm-sep">·</span>
-  </div>
-</div>
-
-<!-- Metrics strip -->
-<div class="metrics-strip">
-  <div class="ms-inner">
-    <div class="ms-item">
-      <span class="ms-n ms-gold" id="ms-calls">—</span>
-      <span class="ms-l">Closed Calls</span>
-    </div>
-    <div class="ms-item">
-      <span class="ms-n ms-gold" id="ms-avgret">—</span>
-      <span class="ms-l">Avg Return</span>
-    </div>
-    <div class="ms-item">
-      <span class="ms-n ms-gold" id="ms-hitrate">—</span>
-      <span class="ms-l">Hit Rate</span>
-    </div>
-    <div class="ms-item">
-      <span class="ms-n" id="ms-open">9</span>
-      <span class="ms-l">Open Positions</span>
-    </div>
-    <div class="ms-item">
-      <span class="ms-n">$0</span>
-      <span class="ms-l">Subscription Cost</span>
-    </div>
-  </div>
-</div>
-
-<!-- Credential strip -->
-
-<div class="tkw"><div class="tkt">
-  <span class="tki"><span class="tks">$VNET</span>$10.51<span class="tkd">−2.3%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">SPX</span>5,614<span class="tku">+0.29%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">US10Y</span>4.69%<span class="tkd">−2bp</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">GOLD</span>$3,024<span class="tku">+0.6%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">VIX</span>21.7<span class="tkd">−1.8%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">WTI</span>$67.82<span class="tkd">−0.4%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">DXY</span>103.4<span class="tku">+0.2%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">$MELI</span>$2,161<span class="tku">+1.2%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">COPPER</span>$4.42<span class="tku">+1.1%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">2s10s</span>−18bp<span class="tkd">INVERTED</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">$VNET</span>$10.51<span class="tkd">−2.3%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">SPX</span>5,614<span class="tku">+0.29%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">US10Y</span>4.69%<span class="tkd">−2bp</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">GOLD</span>$3,024<span class="tku">+0.6%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">VIX</span>21.7<span class="tkd">−1.8%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">WTI</span>$67.82<span class="tkd">−0.4%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">DXY</span>103.4<span class="tku">+0.2%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">$MELI</span>$2,161<span class="tku">+1.2%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">COPPER</span>$4.42<span class="tku">+1.1%</span></span><span class="tksep">·</span>
-  <span class="tki"><span class="tks">2s10s</span>−18bp<span class="tkd">INVERTED</span></span>
-</div></div>
-
-<div class="home-sec-header">
-  <div class="home-sec-eyebrow">What We Publish</div>
-  <h2 class="home-sec-h2">Independent research across<br>macro, equity, and systems.</h2>
-</div>
-<div class="hgrid">
-  <div class="hcard home-grid-card hcard-half" style="border-left:2px solid var(--gold)" onclick="sp('track')">
-    <div class="hcn">01</div>
-    <div class="hct" data-i18n="hcard_01_title">Track Record</div>
-    <p class="hcp" data-i18n="hcard_01_desc">Every call published publicly before the outcome is known — entry, target, stop, and position size. Wins and losses on the record. This is what a fund will ask for.</p>
-    <div class="hca" data-i18n="hcard_01_cta">View record →</div>
-  </div>
-  <div class="hcard home-grid-card hcard-half" onclick="sp('research')">
-    <div class="hcn">02</div>
-    <div class="hct" data-i18n="hcard_02_title">Research Notes</div>
-    <p class="hcp" data-i18n="hcard_02_desc">Macro briefs, equity deep dives, geopolitical reads, and central bank analysis — with full thesis before the outcome is known.</p>
-    <div class="hca" data-i18n="hcard_02_cta">Read latest →</div>
-  </div>
-  <div class="hcard home-grid-card hcard-third" onclick="sp('portfolios');setTimeout(showPortFund,150)">
-    <div class="hcn">03</div>
-    <div class="hct" data-i18n="hcard_03_title">Model Portfolio</div>
-    <p class="hcp" data-i18n="hcard_03_desc">Asset allocation dynamic paper fund — macro regime driven, seven asset classes, +28.4% since inception with 1.31 Sharpe.</p>
-    <div class="hca" data-i18n="hcard_03_cta">View fund →</div>
-  </div>
-  <div class="hcard home-grid-card hcard-third" onclick="sp('strats')">
-    <div class="hcn">04</div>
-    <div class="hct" data-i18n="hcard_04_title">Systematic Strategies</div>
-    <p class="hcp" data-i18n="hcard_04_desc">12 fully systematic strategies across equity and FX — momentum, mean-reversion, and macro regime models.</p>
-    <div class="hca" data-i18n="hcard_04_cta">Explore strategies →</div>
-  </div>
-  <div class="hcard home-grid-card hcard-third" onclick="sp('tools')">
-    <div class="hcn">05</div>
-    <div class="hct" data-i18n="hcard_05_title">Open Source Tools</div>
-    <p class="hcp" data-i18n="hcard_05_desc">DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.</p>
-    <div class="hca" data-i18n="hcard_05_cta">Open toolkit →</div>
-  </div>
-</div>
-
-
-
-<!-- Featured Call Module -->
-<div class="fc-section" id="fc-section">
-  <div class="fc-label">Featured Call</div>
-  <div id="fc-card-wrap">
-    <div class="fc-empty">Loading live data…</div>
-  </div>
-</div>
-
-<!-- ══ LATEST RESEARCH STRIP ═══════════════════════════ -->
-<div class="home-research-strip" id="home-research-strip">
-  <div class="hrs-label">Latest Research</div>
-  <div id="hrs-posts"><div class="hrs-loading">Loading latest research…</div></div>
-  <span class="hrs-cta" onclick="sp('research')">View all research →</span>
-</div>
-
-<!-- ══ PLATFORM PILLARS ═══════════════════════════════ -->
-<section class="pillars-section">
-  <div class="pillars-header">
-    <div class="pillars-eyebrow">Everything on the Platform</div>
-    <h2 class="pillars-h2">Research. Systems. Tools.<br>One independent platform.</h2>
-    <p class="pillars-sub">From formal pre-outcome investment calls to 12 fully systematic strategies, a live macro model portfolio, and six open-source analyst tools — all built and published by one analyst, all free to access.</p>
-  </div>
-
-  <div class="pillars-grid">
-
-    <!-- Pillar 1: Investment Research -->
-    <div class="pillar-card">
-      <div class="pillar-tag">Research</div>
-      <div class="pillar-title">Investment Research &amp; Track Record</div>
-      <p class="pillar-desc">Every investment call published on Substack with full thesis, entry price, stop-loss, and position size — before the outcome is known. Macro briefs, equity deep dives, geopolitical reads, and central bank analysis. The track record is live, public, and permanent.</p>
-      <div class="pillar-stats">
-        <div class="pillar-stat"><span class="pillar-stat-n">100%</span><span class="pillar-stat-l">Hit rate · 5 closed</span></div>
-        <div class="pillar-stat"><span class="pillar-stat-n">+42%</span><span class="pillar-stat-l">Avg closed return</span></div>
-        <div class="pillar-stat"><span class="pillar-stat-n">$0</span><span class="pillar-stat-l">Cost to subscribe</span></div>
-      </div>
-      <div class="pillar-links">
-        <button class="pillar-cta" onclick="sp('track')">Track Record →</button>
-        <button class="pillar-ghost" onclick="sp('research')">Research Notes →</button>
-      </div>
-    </div>
-
-    <!-- Pillar 2: Fund Lab -->
-    <div class="pillar-card pillar-card--featured">
-      <div class="pillar-tag pillar-tag--gold">Fund Lab</div>
-      <div class="pillar-title">Quantitative Systems &amp; Fund Lab</div>
-      <p class="pillar-desc">A live macro model portfolio — Asset Allocation Dynamic Fund — across seven asset classes, driven by macro regime signals. Alongside it: 12 fully systematic trading strategies across 5 FX/commodity pairs and 7 equity models, combining momentum, mean-reversion, and macro regime filters.</p>
-      <div class="pillar-stats">
-        <div class="pillar-stat"><span class="pillar-stat-n">+28.4%</span><span class="pillar-stat-l">Model fund return</span></div>
-        <div class="pillar-stat"><span class="pillar-stat-n">1.31</span><span class="pillar-stat-l">Sharpe ratio</span></div>
-        <div class="pillar-stat"><span class="pillar-stat-n">12</span><span class="pillar-stat-l">Systematic strategies</span></div>
-      </div>
-      <div class="pillar-links">
-        <button class="pillar-cta" onclick="sp('portfolios');setTimeout(showPortFund,150)">Model Portfolio →</button>
-        <button class="pillar-ghost" onclick="sp('strats')">Strategies →</button>
-      </div>
-    </div>
-
-    <!-- Pillar 3: Tools -->
-    <div class="pillar-card">
-      <div class="pillar-tag">Open Source</div>
-      <div class="pillar-title">Open Source Financial Tools</div>
-      <p class="pillar-desc">Six institutional-grade analyst tools built from scratch by Aeon Nimbus and open-sourced on GitHub — all running live in-browser with no account required. Covers options pricing, equity valuation, portfolio simulation, position sizing, bond analytics, and factor modelling.</p>
-      <div class="pillar-tools-list">
-        <span class="pillar-tool">DCF Valuation Engine</span>
-        <span class="pillar-tool">Black-Scholes Options</span>
-        <span class="pillar-tool">Monte Carlo Simulator</span>
-        <span class="pillar-tool">Kelly Criterion Sizer</span>
-        <span class="pillar-tool">Bond Analytics</span>
-        <span class="pillar-tool">Factor Correlation</span>
-      </div>
-      <div class="pillar-links" style="margin-top:20px">
-        <button class="pillar-cta" onclick="sp('tools')">Open Toolkit →</button>
-        <a class="pillar-ghost" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">GitHub ↗</a>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- ══ RESEARCH METHOD ════════════════════════════════ -->
-<section class="method-section" id="method">
-  <div class="method-header">
-    <div class="method-eyebrow">How It Works</div>
-    <h2 class="method-h2">Accountability built in.<br>Not bolted on.</h2>
-    <p class="method-intro">Most financial commentary arrives after the trade. Every call on this site is timestamped and public <em>before</em> the position plays out — full thesis, entry price, stop-loss, and position size recorded in advance. No retroactive editing. No curated histories.</p>
-  </div>
-  <div class="method-steps">
-    <div class="method-step">
-      <div class="method-step-num">01</div>
-      <div class="method-step-body">
-        <div class="method-step-title">Thesis Before Outcome</div>
-        <p class="method-step-desc">Every formal investment call is published on Substack with entry price, stop-loss level, position size as a percentage of portfolio, time horizon, and complete fundamental or macro thesis — before the position plays out. This eliminates survivorship bias and retrospective cherry-picking entirely.</p>
-      </div>
-    </div>
-    <div class="method-step">
-      <div class="method-step-num">02</div>
-      <div class="method-step-body">
-        <div class="method-step-title">Permanent Public Record</div>
-        <p class="method-step-desc">Nothing is edited or deleted after publication. Every closed position — including any future losses — remains on the Track Record page indefinitely. The record is what it is, not what it looks like after selective curation. Five calls closed, five published pre-outcome, all on the record.</p>
-      </div>
-    </div>
-    <div class="method-step">
-      <div class="method-step-num">03</div>
-      <div class="method-step-body">
-        <div class="method-step-title">Framework Over Noise</div>
-        <p class="method-step-desc">Research combines bottom-up fundamental analysis with a top-down macro overlay and systematic quantitative filters. The goal is identifying structural mispricings — where market narrative diverges from underlying data — before the broader consensus catches up and prices the move.</p>
-      </div>
-    </div>
-  </div>
-  <div class="method-cta-row">
-    <button class="method-cta-btn" onclick="sp('track')">View the full track record →</button>
-    <button class="method-cta-btn method-cta-ghost" onclick="sp('about')">About LiJie Guo →</button>
-  </div>
-</section>
-
-<!-- ══ FAQ SECTION ═══════════════════════════════════════ -->
-<section class="faq-section" id="faq" itemscope itemtype="https://schema.org/FAQPage">
-  <div class="faq-header">
-    <div>
-      <div class="faq-eyebrow">Common Questions</div>
-      <h2 class="faq-h2">Frequently asked<br>questions.</h2>
-    </div>
-  </div>
-  <div class="faq-grid">
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What is Aeon Nimbus Research?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Aeon Nimbus Research is an <strong>independent macro and equity research platform</strong> founded by LiJie Guo in London. It publishes formal investment calls — with entry price, stop-loss, position size, and full investment thesis — <em>before</em> the outcome is known, creating a fully auditable public track record. Every result, including any losses, is recorded permanently.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">Is the research free to access?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Yes. <strong>All research is published free on Substack.</strong> Macro briefs, equity deep dives, geopolitical reads, and central bank analysis are available at no cost. There is no paywall, no premium tier, and no spam. Simply subscribe on Substack to receive new research directly in your inbox.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What is LiJie Guo's investment track record?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">As of 2026, LiJie Guo has a <strong>100% hit rate across 5 closed investment calls</strong> with an average return of +42.0% per closed call. Closed calls: <strong>Oracle (ORCL) +74.3%</strong>, IREN Limited +36.4%, Lemonade (LMND) +34.7%, Reddit (RDDT) +32.5%, Marvell Technology (MRVL) +31.9%. All calls were published publicly before the outcome was known.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What kind of research does Aeon Nimbus publish?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Aeon Nimbus publishes: <strong>Formal equity investment calls</strong> with full thesis before the outcome. <strong>Macro research briefs</strong> on global markets and central bank policy. <strong>Geopolitical market analysis.</strong> <strong>12 systematic trading strategies</strong> across equity and FX. A <strong>dynamic macro model portfolio</strong> (+28.4% since inception, 1.31 Sharpe). Open-source financial tools including DCF, Black-Scholes, and Monte Carlo models.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">How does LiJie Guo publish investment calls?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Every investment call is published on Substack and recorded on aeonnimbus.com <strong>before</strong> the outcome is known. Each call includes: entry price, stop-loss level, position size (as % of portfolio), investment horizon, and the complete fundamental or macro thesis. Results are published on the Track Record page and never edited retrospectively.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What systematic strategies does Aeon Nimbus cover?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Aeon Nimbus has developed <strong>12 fully systematic trading strategies</strong> across equity and FX markets — momentum, mean-reversion, and macro regime models across 5 FX pairs and 7 equity models. All strategies are built with quantitative signals and can be explored live on the website's Fund Lab section. The model portfolio has returned +28.4% since inception with a Sharpe ratio of 1.31.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">Who is LiJie Guo?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">LiJie Guo is an <strong>independent macro and equity research analyst based in London</strong>. He is the founder of Aeon Nimbus Research and publishes all investment calls publicly before the outcome is known. His background spans long/short equity, private credit, M&amp;A due diligence at PwC, Private Equity at Santomera Bay, and venture exposure at SpinLab and Antler in Berlin. He holds a Triple MSc across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School (City, University of London), and is a CFA Level I candidate. He is currently conducting an equity return predictability research project at Jupiter Asset Management (FTSE 250, £51bn AUM).</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">Is Aeon Nimbus Research a hedge fund or investment firm?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">No. <strong>Aeon Nimbus Research is an independent research and analysis platform</strong> — not a hedge fund, investment firm, or regulated financial adviser. LiJie Guo is not a regulated financial adviser. All content is published for informational and research transparency purposes only and does not constitute investment advice. Investment calls are published publicly to demonstrate analytical accountability — not to direct others to trade. Nothing on the site should be construed as a solicitation or offer to buy or sell any security.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What makes this research different from other analysts?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Three things distinguish Aeon Nimbus Research: <strong>(1) Pre-outcome publication</strong> — every call is time-stamped and public before the trade plays out, with full entry, stop-loss, position size, and thesis. This eliminates the survivorship bias and retroactive commentary that plagues most analyst coverage. <strong>(2) Permanent record</strong> — nothing is ever deleted or edited. Future losses will be recorded alongside wins. <strong>(3) Cross-disciplinary framework</strong> — research combines bottom-up fundamental analysis, top-down macro overlay, geopolitical risk assessment, and systematic quantitative filters — not just one lens.</span>
-      </div>
-    </div>
-    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-      <button class="faq-q" onclick="toggleFaq(this)">
-        <span class="faq-q-text" itemprop="name">What open-source financial tools does Aeon Nimbus offer?</span>
-        <span class="faq-icon">+</span>
-      </button>
-      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-        <span itemprop="text">Aeon Nimbus has built and open-sourced <strong>six analyst tools</strong> that run live in the browser — free to use, no account required: a <strong>DCF / Complete Valuation Engine</strong> (with WACC/CAPM, 3-way sensitivity, peer comps, football field, and reverse DCF); <strong>Black-Scholes Options Pricer</strong>; <strong>Monte Carlo Portfolio Simulator</strong>; <strong>Kelly Criterion Position Sizer</strong>; <strong>Bond Analytics Engine</strong>; and a <strong>Factor Correlation Matrix</strong>. All tools are available under the Open Source Tools section.</span>
+<!-- ══ HERO ════════════════════════════════════════════════ -->
+<!-- HERO -->
+<section class="hv3-hero">
+  <canvas id="hv3-canvas"></canvas>
+  <div class="hv3-inner">
+    <h1 class="hv3-name">LiJie<em>Guo.</em></h1>
+    <div class="hv3-right">
+      <div class="hv3-position">Independent Macro &amp; Equity Research · London</div>
+      <div class="hv3-proof">
+        <strong>5 for 5.</strong>
+        Every investment call published before the outcome is known — full thesis, entry, stop, size — and closed profitable.
+        <span class="hv3-sub">Average return per closed call: +42.0%. All five permanently on the record. Nothing deleted.</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ══ THESIS STATEMENT ══════════════════════════════ -->
-<div class="hf-thesis">
-  <div class="hf-thesis-label">Approach</div>
-  <div class="hf-thesis-body">
-    I publish independent research — macro views, equity deep dives, geopolitical analysis — and every formal investment call <em>before the outcome is known</em>, with entry, stop-loss, position size, and full thesis. Every result is recorded publicly.
-    The research is the thinking. The track record is the proof.
+<!-- TRACK RECORD -->
+<section class="hv3-record">
+  <div class="hv3-rec-head">
+    <div class="hv3-rec-n">100%</div>
+    <p class="hv3-rec-claim">
+      <strong>Hit rate across all closed calls.</strong><br>
+      Each position published with complete thesis and sizing before market close. The record is permanent and unedited.
+    </p>
+  </div>
+  <table class="hv3-calls">
+    <thead>
+      <tr>
+        <th style="width:52px">#</th>
+        <th>Instrument</th>
+        <th>Thesis</th>
+        <th>Period</th>
+        <th>Return</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr onclick="sp('track')" style="cursor:pointer">
+        <td><span class="hv3-cnum">01</span></td>
+        <td><div class="hv3-ctk">ORCL</div><div class="hv3-cco">Oracle Corporation</div></td>
+        <td><div class="hv3-cthesis">AI infrastructure underpriced; cloud re-acceleration ahead of consensus. Long equity.</div></td>
+        <td><div class="hv3-cperiod">Q4 2025 – Q1 2026</div></td>
+        <td><div class="hv3-cret">+74.3%</div></td>
+      </tr>
+      <tr onclick="sp('track')" style="cursor:pointer">
+        <td><span class="hv3-cnum">02</span></td>
+        <td><div class="hv3-ctk">IREN</div><div class="hv3-cco">IREN Limited</div></td>
+        <td><div class="hv3-cthesis">Bitcoin mining capacity at historical discount to BTC price; halving catalyst. Long equity.</div></td>
+        <td><div class="hv3-cperiod">Q1 2026</div></td>
+        <td><div class="hv3-cret">+36.4%</div></td>
+      </tr>
+      <tr onclick="sp('track')" style="cursor:pointer">
+        <td><span class="hv3-cnum">03</span></td>
+        <td><div class="hv3-ctk">LMND</div><div class="hv3-cco">Lemonade, Inc.</div></td>
+        <td><div class="hv3-cthesis">Unit economics inflecting positive; market pricing terminal loss. Long equity.</div></td>
+        <td><div class="hv3-cperiod">Q1 2026</div></td>
+        <td><div class="hv3-cret">+34.7%</div></td>
+      </tr>
+      <tr onclick="sp('track')" style="cursor:pointer">
+        <td><span class="hv3-cnum">04</span></td>
+        <td><div class="hv3-ctk">RDDT</div><div class="hv3-cco">Reddit, Inc.</div></td>
+        <td><div class="hv3-cthesis">Data licensing and ad monetisation severely undervalued vs. social media comps. Long equity.</div></td>
+        <td><div class="hv3-cperiod">Q4 2025 – Q1 2026</div></td>
+        <td><div class="hv3-cret">+32.5%</div></td>
+      </tr>
+      <tr onclick="sp('track')" style="cursor:pointer">
+        <td><span class="hv3-cnum">05</span></td>
+        <td><div class="hv3-ctk">MRVL</div><div class="hv3-cco">Marvell Technology</div></td>
+        <td><div class="hv3-cthesis">Custom silicon design wins at hyperscalers creating durable revenue step-change. Long equity.</div></td>
+        <td><div class="hv3-cperiod">Q4 2025</div></td>
+        <td><div class="hv3-cret">+31.9%</div></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="hv3-rec-foot">
+    <div class="hv3-rfstat">
+      Avg. return <b>+42.0%</b> · Hit rate <b>100%</b> · 5 closed positions · All published pre-outcome
+    </div>
+    <button class="hv3-cta" onclick="sp('track')">View Full Record →</button>
+  </div>
+</section>
+
+<!-- NUMBERS STRIP -->
+<div class="hv3-strip" id="hv3-strip">
+  <div class="hv3-sitem">
+    <div class="hv3-snum g" data-hv3t="42.0" data-hv3p="+" data-hv3s="%" data-hv3d="1">+0%</div>
+    <div class="hv3-slbl">Avg. Return · Closed Calls</div>
+  </div>
+  <div class="hv3-sitem">
+    <div class="hv3-snum" data-hv3t="28.4" data-hv3p="+" data-hv3s="%" data-hv3d="1">+0%</div>
+    <div class="hv3-slbl">Model Fund Return · Inception</div>
+  </div>
+  <div class="hv3-sitem">
+    <div class="hv3-snum" data-hv3t="12" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
+    <div class="hv3-slbl">Systematic Strategies · Active</div>
   </div>
 </div>
 
-<!-- ══ SUBSCRIBE CAPTURE ══════════════════════════════ -->
-<div class="home-sub-section">
+<!-- PLATFORM -->
+<div class="hv3-plat-head">
+  <h2>Research. Systems. Tools.</h2>
+  <p>Three parts of one independent research practice — all free, all public, all permanently on the record.</p>
+</div>
+<div class="hv3-plat-cards">
+  <div class="hv3-pcard">
+    <div class="hv3-plabel">Fund Lab</div>
+    <h3 class="hv3-ptitle">12 Systematic Strategies</h3>
+    <p class="hv3-pbody">A live macro model portfolio built on 12 fully systematic strategies across equity and FX — each backtested to 99% real-tick data. Free access, no paywall, no login.</p>
+    <button class="hv3-plink" onclick="sp('portfolios');setTimeout(showPortFund,150)">Model Portfolio →</button>
+    <div class="hv3-chips">
+      <span class="hv3-chip">EQ Momentum</span><span class="hv3-chip">FX Trend</span>
+      <span class="hv3-chip">Macro Regime</span><span class="hv3-chip">Vol Targeting</span>
+      <span class="hv3-chip">Mean Reversion</span><span class="hv3-chip">Factor Alpha</span>
+      <span class="hv3-chip">EM Rotation</span><span class="hv3-chip">Rate Sensitivity</span>
+      <span class="hv3-chip">L/S Equity</span><span class="hv3-chip">Carry</span>
+      <span class="hv3-chip">Momentum×Vol</span><span class="hv3-chip">Tail Risk</span>
+    </div>
+  </div>
+  <div class="hv3-pcard">
+    <div class="hv3-plabel">Research</div>
+    <h3 class="hv3-ptitle">Pre-Outcome Investment Calls</h3>
+    <p class="hv3-pbody">Every formal call published before the outcome — full thesis, entry, stop, and sizing. Losses included. Nothing deleted.</p>
+    <button class="hv3-plink" onclick="sp('research')">All Research →</button>
+    <div class="hv3-pitems">
+      <div class="hv3-pitem" onclick="sp('research')">
+        <div><div class="hv3-piname">Jupiter Asset Management</div><div class="hv3-pitag">Equity · Initiating · Jul 2026</div></div>
+        <div class="hv3-pival">Open</div>
+      </div>
+      <div class="hv3-pitem" onclick="sp('research')">
+        <div><div class="hv3-piname">Dollar Squeeze — EM Positioning</div><div class="hv3-pitag">Macro · Brief · Jun 2026</div></div>
+        <div class="hv3-pival">—</div>
+      </div>
+      <div class="hv3-pitem" onclick="sp('track')">
+        <div><div class="hv3-piname">Oracle Corporation</div><div class="hv3-pitag">Equity · Closed · Mar 2026</div></div>
+        <div class="hv3-pival">+74.3%</div>
+      </div>
+    </div>
+  </div>
+  <div class="hv3-pcard">
+    <div class="hv3-plabel">Tools</div>
+    <h3 class="hv3-ptitle">Six Analyst Tools — Free</h3>
+    <p class="hv3-pbody">Practitioner-grade financial tools built in the browser. No login, no limits, no paywall. Used by analysts in 40+ countries.</p>
+    <button class="hv3-plink" onclick="sp('tools')">Open Tools →</button>
+    <div class="hv3-pitems">
+      <div class="hv3-pitem" onclick="sp('tools')"><div><div class="hv3-formula">DCF(FCF, r, g)</div><div class="hv3-piname">DCF Valuation Engine</div></div></div>
+      <div class="hv3-pitem" onclick="sp('tools')"><div><div class="hv3-formula">BSM(S, K, σ, T, r)</div><div class="hv3-piname">Black-Scholes Calculator</div></div></div>
+      <div class="hv3-pitem" onclick="sp('tools')"><div><div class="hv3-formula">N(μ, σ²) × 10⁴</div><div class="hv3-piname">Monte Carlo Simulator</div></div></div>
+      <div class="hv3-pitem" onclick="sp('tools')"><div><div class="hv3-formula">f* = (bp − q) / b</div><div class="hv3-piname">Kelly Criterion Sizer</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SUBSCRIBE -->
+<div class="hv3-sub">
   <div>
-    <div class="hss-eyebrow">Independent Research · Free</div>
-    <div class="hss-title">Research delivered to your inbox</div>
-    <div class="hss-desc">Macro briefs, equity deep dives, geopolitical reads — each with a formal investment call published before the outcome is known. Every result, including the losses, on the record.</div>
+    <div class="hv3-sub-title">Research delivered to your inbox.</div>
+    <p class="hv3-sub-desc">Macro briefs, equity deep dives, geopolitical reads — each with a formal investment call published before the outcome is known. Every result on the record.</p>
   </div>
-  <div class="hss-right">
-    <a class="hss-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-      Subscribe on Substack
-    </a>
-    <div class="hss-note">Free · No spam · Unsubscribe anytime</div>
+  <div>
+    <a class="hv3-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe on Substack →</a>
+    <div class="hv3-sub-note">Free · No spam · Unsubscribe anytime</div>
   </div>
 </div>
 
-<!-- ══ SEO PROSE BLOCK ═══════════════════════════════ -->
+<!-- SEO PROSE BLOCK — hidden visually, present for crawlers -->
 <div class="seo-prose">
   <div class="seo-prose-label">About the Platform</div>
   <div class="seo-prose-body">
     <h3>Independent Macro &amp; Equity Research</h3>
     <p><strong>LiJie Guo</strong> is a London-based <strong>independent macro and equity research analyst</strong> who publishes pre-outcome investment calls on Substack — full thesis, entry price, stop-loss, and position sizing disclosed <em>before</em> each position plays out. Across five closed calls, the track record stands at a 100% hit rate and a +42% average return: Oracle +74.3%, IREN +36.4%, Lemonade +34.7%, Reddit +32.5%, and Marvell Technology +31.9%. Every thesis is permanently public; nothing is revised after the fact.</p>
     <h3>Quantitative Systems &amp; Fund Lab</h3>
-    <p>Beyond individual stock picks, Aeon Nimbus Research operates a <strong>quantitative Fund Lab</strong> housing 12 fully systematic trading strategies and a live macro model portfolio up +28.4% since inception (Sharpe 1.31). Strategies span long/short equity, momentum factor models, macro trend-following, and volatility-targeting overlays — each backtested to 99% real-tick data fidelity in MetaTrader 5. The model portfolio is updated in real time and is freely accessible on this site, offering a rare window into how a <strong>systematic equity fund</strong> is constructed and managed from the ground up.</p>
+    <p>Beyond individual stock picks, Aeon Nimbus Research operates a <strong>quantitative Fund Lab</strong> housing 12 fully systematic trading strategies and a live macro model portfolio up +28.4% since inception (Sharpe 1.31). Strategies span long/short equity, momentum factor models, macro trend-following, and volatility-targeting overlays — each backtested to 99% real-tick data fidelity in MetaTrader 5.</p>
     <h3>Open-Source Financial Tools</h3>
-    <p>The platform includes six <strong>open-source financial tools</strong> available directly in the browser: a <strong>DCF valuation engine</strong>, a <strong>Black-Scholes options pricing calculator</strong>, a <strong>Monte Carlo portfolio simulator</strong>, a Kelly Criterion position sizer, a bond duration and yield-to-maturity calculator, and a multi-factor correlation matrix. These tools are built for practitioner use — no login, no paywall, no data entry limits. They are used by equity analysts, options traders, and students across more than 40 countries.</p>
+    <p>The platform includes six <strong>open-source financial tools</strong> available directly in the browser: a <strong>DCF valuation engine</strong>, a <strong>Black-Scholes options pricing calculator</strong>, a <strong>Monte Carlo portfolio simulator</strong>, a Kelly Criterion position sizer, a bond analytics calculator, and a multi-factor correlation matrix. No login, no paywall, no data entry limits.</p>
     <h3>Research Philosophy &amp; Background</h3>
-    <p>LiJie Guo holds a Triple Master of Science (Equity Markets, Portfolio Management, Banking &amp; Finance) from leading European institutions and is a CFA Level 1 candidate. Prior experience includes long/short equity in Madrid, quantitative research at Crandon Capital, macro strategy at Santomera Bay Capital, and Big Four advisory at PwC. The founding insight behind Aeon Nimbus Research is simple: <strong>independent financial research is only credible when it is accountable</strong> — every call timestamped, every thesis public, every outcome recorded. No curated hindsight. No selective disclosure. Just the full record, good and bad, published for anyone to read.</p>
+    <p>LiJie Guo holds a Triple Master of Science (Equity Markets, Portfolio Management, Banking &amp; Finance) and is a CFA Level 1 candidate. Prior experience includes long/short equity in Madrid, quantitative research at Crandon Capital, macro strategy at Santomera Bay Capital, and Big Four advisory at PwC.</p>
   </div>
 </div>
 
-<!-- ══ DISCLAIMER ════════════════════════════════════ -->
+<!-- DISCLAIMER -->
 <div class="hf-disclaimer">
-  <strong>Legal Disclaimer</strong> — Aeon Nimbus Research is an independent research and analysis platform operated by LiJie Guo, London, United Kingdom. All content published on this website and associated channels is for informational and educational purposes only. Nothing on this site constitutes investment advice, a solicitation, a recommendation, or an offer or invitation to buy or sell any financial instrument or security. Past performance, including any track record presented, is not indicative of future results. Investment decisions are solely the reader's own responsibility. LiJie Guo is not a regulated financial adviser and Aeon Nimbus Research is not a regulated investment firm. Investment calls are published for research transparency purposes only and are not directed at any specific investor. This site is not directed at persons in jurisdictions where publication or distribution of such content would be contrary to law or regulation. For enquiries: <a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:underline">LinkedIn ↗</a>
+  <strong>Legal Disclaimer</strong> — Aeon Nimbus Research is an independent research and analysis platform operated by LiJie Guo, London, United Kingdom. All content published on this website and associated channels is for informational and educational purposes only. Nothing on this site constitutes investment advice, a solicitation, a recommendation, or an offer or invitation to buy or sell any financial instrument or security. Past performance, including any track record presented, is not indicative of future results. Investment decisions are solely the reader's own responsibility. LiJie Guo is not a regulated financial adviser and Aeon Nimbus Research is not a regulated investment firm. For enquiries: <a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:underline">LinkedIn ↗</a>
 </div>
 
 <footer>
@@ -13702,6 +13655,96 @@ html.light .mv2-name em {
 
   // Start after a short page-load delay
   setTimeout(tick, 800);
+})();
+</script>
+
+<script>
+/* ══ HOME V3: ascending price chart canvas ══ */
+(function(){
+  var c = document.getElementById('hv3-canvas');
+  if(!c) return;
+  var ctx = c.getContext('2d');
+  var paths = [], progress = 0, W, H, rafId;
+
+  function resize(){ c.width = c.offsetWidth; c.height = c.offsetHeight; W = c.width; H = c.height; }
+
+  function makePath(seed){
+    var pts = [], y = H * .72, rng = seed >>> 0, trend = 0;
+    function rand(){ rng = (Math.imul(rng, 1664525) + 1013904223) >>> 0; return rng / 0xffffffff; }
+    for(var i = 0; i <= 180; i++){
+      trend += (rand() - .42) * .06; trend *= .92;
+      y += trend * H * .006 - .28;
+      y = Math.max(H * .08, Math.min(H * .9, y));
+      pts.push({ x: i * (W / 180), y: y });
+    }
+    return pts;
+  }
+
+  function init(){ paths = [
+    { pts: makePath(0xdeadbeef), a: .13, w: 1.5 },
+    { pts: makePath(0xcafebabe), a: .055, w: .8 },
+    { pts: makePath(0xf00dbabe), a: .035, w: .6 },
+  ]; progress = 0; }
+
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    var p = Math.min(progress, 1);
+    var e = 1 - Math.pow(1 - p, 2.5);
+    for(var pi = 0; pi < paths.length; pi++){
+      var path = paths[pi], pts = path.pts;
+      var end = Math.floor(e * (pts.length - 1));
+      if(end < 1) continue;
+      ctx.beginPath(); ctx.moveTo(pts[0].x, pts[0].y);
+      for(var i = 1; i <= end; i++) ctx.lineTo(pts[i].x, pts[i].y);
+      if(p < 1 && end < pts.length - 1){
+        var frac = (e * (pts.length - 1)) - end;
+        ctx.lineTo(pts[end].x + (pts[end+1].x - pts[end].x)*frac, pts[end].y + (pts[end+1].y - pts[end].y)*frac);
+      }
+      ctx.strokeStyle = 'rgba(196,155,36,' + path.a + ')';
+      ctx.lineWidth = path.w; ctx.lineJoin = 'round'; ctx.lineCap = 'round'; ctx.stroke();
+    }
+    if(p > .02 && p < .999){
+      var ei = Math.min(Math.floor(e*(paths[0].pts.length-1)), paths[0].pts.length-2);
+      var fr = (e*(paths[0].pts.length-1)) - ei;
+      var tx = paths[0].pts[ei].x + (paths[0].pts[ei+1].x - paths[0].pts[ei].x)*fr;
+      var ty = paths[0].pts[ei].y + (paths[0].pts[ei+1].y - paths[0].pts[ei].y)*fr;
+      var pulse = 0.5 + 0.5*Math.sin(Date.now()*.004);
+      ctx.beginPath(); ctx.arc(tx, ty, 3 + pulse, 0, Math.PI*2);
+      ctx.fillStyle = 'rgba(196,155,36,' + (.3 + pulse*.3) + ')'; ctx.fill();
+    }
+    progress += .0018;
+    if(progress < 1.05) rafId = requestAnimationFrame(draw);
+  }
+
+  resize(); window.addEventListener('resize', function(){ cancelAnimationFrame(rafId); resize(); init(); draw(); });
+  init(); draw();
+})();
+
+/* ══ HOME V3: counter animation ══ */
+(function(){
+  var els = document.querySelectorAll('.hv3-snum[data-hv3t]');
+  var fired = false;
+  var strip = document.getElementById('hv3-strip');
+  if(!strip) return;
+  var io = new IntersectionObserver(function(entries){
+    if(fired || !entries[0].isIntersecting) return;
+    fired = true;
+    els.forEach(function(el){
+      var tgt = parseFloat(el.dataset.hv3t);
+      var pre = el.dataset.hv3p || '';
+      var suf = el.dataset.hv3s || '';
+      var dec = parseInt(el.dataset.hv3d) || 0;
+      var dur = 1400, s = performance.now();
+      function step(now){
+        var p = Math.min((now - s) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = pre + (tgt * e).toFixed(dec) + suf;
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    });
+  }, { threshold: .4 });
+  io.observe(strip);
 })();
 </script>
 </body>

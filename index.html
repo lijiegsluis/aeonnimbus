@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <!-- ══ PRIMARY META ══════════════════════════════════════════ -->
-<title>Independent Macro Research — LiJie Guo | Aeon Nimbus Research</title>
-<meta name="description" content="LiJie Guo publishes independent macro &amp; equity research with a 100% hit rate: ORCL +74.3%, IREN +36.4%, LMND +34.7%, RDDT +32.5%, MRVL +31.9%. Full thesis published before every outcome. Free on Substack.">
-<meta name="keywords" content="independent macro research, equity research analyst, investment calls track record, LiJie Guo, Aeon Nimbus Research, macro analyst London, Oracle stock call, Reddit stock call, Marvell Technology, free investment research, systematic trading strategies">
+<title>LiJie Guo — Independent Macro &amp; Equity Research Analyst | Aeon Nimbus Research</title>
+<meta name="description" content="LiJie Guo is an independent macro and equity research analyst in London. 100% hit rate, +42% avg return across 5 closed calls: ORCL +74.3%, IREN +36.4%, LMND +34.7%, RDDT +32.5%, MRVL +31.9%. Full thesis published before every outcome. Triple MSc · CFA L1 candidate. Free research on Substack.">
+<meta name="keywords" content="LiJie Guo, Aeon Nimbus Research, independent macro research analyst London, equity research track record, investment calls before outcome, free investment research Substack, systematic trading strategies, Triple MSc finance, CFA candidate, Oracle ORCL call, Reddit RDDT call, macro analyst, geopolitical market analysis, factor models Python, Jupiter Asset Management research">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="LiJie Guo">
 <meta name="theme-color" content="#07070A">
@@ -4593,6 +4593,70 @@ a.nav-ext-link { display: none !important; }
 }
 
 /* ══ ABOUT / CREDENTIALS SECTION ════════════════════════ */
+/* ── Research Method section (home) ─────────────── */
+.method-section {
+  border-top: 1px solid var(--rule);
+  padding: 80px 56px 72px;
+}
+.method-eyebrow {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.method-eyebrow::before { content: '——'; opacity: .5; }
+.method-h2 {
+  font-family: var(--FH); font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 500; line-height: 1.08; letter-spacing: -.015em;
+  color: var(--ink); margin: 0 0 18px; max-width: 620px;
+}
+.method-intro {
+  font-family: var(--FS); font-size: 14px; color: var(--g2);
+  line-height: 1.7; max-width: 600px; margin-bottom: 56px;
+}
+.method-steps {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0;
+  border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+}
+.method-step {
+  border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 36px 36px 40px; display: flex; gap: 20px; align-items: flex-start;
+  transition: background .2s;
+}
+.method-step:hover { background: rgba(200,131,10,.03); }
+.method-step-num {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .14em;
+  color: var(--gold); opacity: .7; padding-top: 3px; min-width: 22px;
+}
+.method-step-title {
+  font-family: var(--FM); font-size: 10px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 14px;
+}
+.method-step-desc {
+  font-family: var(--FS); font-size: 13px; color: var(--g2);
+  line-height: 1.7; margin: 0;
+}
+.method-cta-row {
+  display: flex; align-items: center; gap: 16px;
+  margin-top: 40px; flex-wrap: wrap;
+}
+.method-cta-btn {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .12em;
+  text-transform: uppercase; background: var(--gold); color: #07070a;
+  border: none; padding: 11px 22px; cursor: pointer; border-radius: 2px;
+  transition: opacity .15s;
+}
+.method-cta-btn:hover { opacity: .85; }
+.method-cta-ghost {
+  background: transparent; color: var(--gold);
+  border: 1px solid rgba(200,131,10,.4);
+}
+.method-cta-ghost:hover { background: rgba(200,131,10,.06); opacity: 1; }
+@media(max-width:900px) {
+  .method-section { padding: 56px 28px 52px; }
+  .method-steps { grid-template-columns: 1fr; }
+  .method-step { border-left: none; }
+}
+
 /* ── About dedicated page ────────────────────────── */
 .about-pg-body {
   display: grid;
@@ -4638,6 +4702,137 @@ a.nav-ext-link { display: none !important; }
   flex-wrap: wrap;
   margin-top: 32px;
 }
+/* ── About page stat strip ───────────────────────── */
+.abt-stat-strip {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 56px; border-bottom: 1px solid var(--rule);
+  background: rgba(200,131,10,.03);
+}
+.abt-stat { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.abt-stat-n {
+  font-family: var(--FH); font-size: 22px; font-weight: 500;
+  color: var(--gold); letter-spacing: -.01em; line-height: 1;
+}
+.abt-stat-l {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .15em;
+  text-transform: uppercase; color: var(--g2); text-align: center;
+}
+.abt-stat-div { width: 1px; height: 36px; background: var(--rule); }
+
+/* ── About philosophy block ──────────────────────── */
+.abt-philosophy {
+  padding: 64px 56px 56px;
+  border-bottom: 1px solid var(--rule);
+  max-width: 900px;
+}
+.abt-phil-label {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 28px;
+}
+.abt-phil-label::before { content: '——'; opacity: .5; }
+.abt-phil-quote {
+  font-family: var(--FH); font-size: clamp(20px, 2.5vw, 28px);
+  font-weight: 400; font-style: italic; line-height: 1.45;
+  color: var(--ink); margin: 0 0 28px; padding: 0;
+  border-left: 3px solid var(--gold); padding-left: 24px;
+}
+.abt-phil-body {
+  font-family: var(--FS); font-size: 14px; color: var(--g2);
+  line-height: 1.75; margin: 0;
+}
+
+/* ── Career timeline ─────────────────────────────── */
+.abt-timeline-section {
+  padding: 56px 56px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.abt-tl-label {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 40px;
+}
+.abt-tl-label::before { content: '——'; opacity: .5; }
+.abt-timeline {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border-top: 1px solid var(--rule); border-left: 1px solid var(--rule);
+  margin-bottom: 0;
+}
+.abt-tl-item {
+  border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  padding: 32px 28px 32px; position: relative;
+  transition: background .2s;
+}
+.abt-tl-item:hover { background: rgba(200,131,10,.03); }
+.abt-tl-item--current { background: rgba(200,131,10,.04); }
+.abt-tl-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rule); margin-bottom: 16px;
+}
+.abt-tl-item--current .abt-tl-dot { background: var(--gold); }
+.abt-tl-co {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink); margin-bottom: 6px;
+  display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+}
+.abt-tl-badge {
+  font-family: var(--FM); font-size: 7.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: #07070a; background: var(--gold);
+  padding: 2px 6px; border-radius: 2px;
+}
+.abt-tl-role {
+  font-family: var(--FS); font-size: 12px; color: var(--gold);
+  font-style: italic; margin-bottom: 12px;
+}
+.abt-tl-desc {
+  font-family: var(--FS); font-size: 12px; color: var(--g2);
+  line-height: 1.65; margin: 0;
+}
+
+/* ── Research card ───────────────────────────────── */
+.abt-research-card {
+  border: 1px solid var(--rule); border-radius: 3px;
+  padding: 24px 24px 20px;
+  background: rgba(200,131,10,.02);
+}
+.abt-rc-tag {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 10px;
+}
+.abt-rc-title {
+  font-family: var(--FS); font-size: 14px; font-weight: 600;
+  color: var(--ink); line-height: 1.4; margin-bottom: 12px;
+}
+.abt-rc-body {
+  font-family: var(--FS); font-size: 12.5px; color: var(--g2);
+  line-height: 1.7; margin-bottom: 16px;
+}
+.abt-rc-roles { display: flex; flex-wrap: wrap; gap: 6px; }
+.abt-rc-role-lbl {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--g2);
+  border: 1px solid var(--rule); padding: 4px 8px; border-radius: 2px;
+}
+
+/* ── Availability list ───────────────────────────── */
+.abt-avail-list { display: flex; flex-direction: column; gap: 10px; margin-top: 16px; }
+.abt-avail-item {
+  font-family: var(--FS); font-size: 13px; color: var(--g2);
+  display: flex; align-items: center; gap: 10px;
+}
+.abt-avail-dot {
+  width: 5px; height: 5px; border-radius: 50%;
+  background: var(--gold); opacity: .7; min-width: 5px;
+}
+
+@media(max-width:900px) {
+  .abt-stat-strip { flex-wrap: wrap; gap: 20px; padding: 24px 28px; justify-content: center; }
+  .abt-stat-div { display: none; }
+  .abt-philosophy { padding: 44px 28px 40px; }
+  .abt-timeline-section { padding: 44px 28px 0; }
+  .abt-timeline { grid-template-columns: 1fr; }
+}
+
 .about-edu-logos { display: flex; flex-direction: column; gap: 16px; }
 .about-edu-item { display: flex; align-items: flex-start; gap: 14px; }
 .about-edu-badge {
@@ -5233,56 +5428,39 @@ a.nav-ext-link { display: none !important; }
 </div>
 
 
-<!-- ══ ABOUT / CREDENTIALS ══════════════════════════ -->
-<section class="about-section" id="about" itemscope itemtype="https://schema.org/Person">
-  <div class="about-left">
-    <div class="about-eyebrow">About</div>
-    <h2 class="about-h2">Independent analysis.<br>No institutional bias.</h2>
-    <div class="about-body">
-      <p><strong>LiJie Guo</strong> is an independent macro and equity research analyst based in London. Aeon Nimbus Research publishes formal investment calls — with entry, stop-loss, position size, and full thesis — <em>before</em> the outcome is known, creating a real-time, auditable track record.</p>
-      <p>The research covers global macro, single-stock equity, geopolitical market dynamics, and central bank policy. Every view is published publicly, every result is recorded — wins and losses alike.</p>
-      <p>Background spans <strong>long/short equity, private credit, M&amp;A advisory, and venture</strong>. The analytical framework combines fundamental bottom-up analysis with a top-down macro overlay and systematic quantitative filters.</p>
+<!-- ══ RESEARCH METHOD ════════════════════════════════ -->
+<section class="method-section" id="method">
+  <div class="method-header">
+    <div class="method-eyebrow">How It Works</div>
+    <h2 class="method-h2">Accountability built in.<br>Not bolted on.</h2>
+    <p class="method-intro">Most financial commentary arrives after the trade. Every call on this site is timestamped and public <em>before</em> the position plays out — full thesis, entry price, stop-loss, and position size recorded in advance. No retroactive editing. No curated histories.</p>
+  </div>
+  <div class="method-steps">
+    <div class="method-step">
+      <div class="method-step-num">01</div>
+      <div class="method-step-body">
+        <div class="method-step-title">Thesis Before Outcome</div>
+        <p class="method-step-desc">Every formal investment call is published on Substack with entry price, stop-loss level, position size as a percentage of portfolio, time horizon, and complete fundamental or macro thesis — before the position plays out. This eliminates survivorship bias and retrospective cherry-picking entirely.</p>
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">02</div>
+      <div class="method-step-body">
+        <div class="method-step-title">Permanent Public Record</div>
+        <p class="method-step-desc">Nothing is edited or deleted after publication. Every closed position — including any future losses — remains on the Track Record page indefinitely. The record is what it is, not what it looks like after selective curation. Five calls closed, five published pre-outcome, all on the record.</p>
+      </div>
+    </div>
+    <div class="method-step">
+      <div class="method-step-num">03</div>
+      <div class="method-step-body">
+        <div class="method-step-title">Framework Over Noise</div>
+        <p class="method-step-desc">Research combines bottom-up fundamental analysis with a top-down macro overlay and systematic quantitative filters. The goal is identifying structural mispricings — where market narrative diverges from underlying data — before the broader consensus catches up and prices the move.</p>
+      </div>
     </div>
   </div>
-  <div class="about-right">
-    <div class="about-eyebrow">Track Record at a Glance</div>
-    <ul class="cred-list">
-      <li class="cred-item">
-        <span class="cred-num">01</span>
-        <div>
-          <div class="cred-title">Oracle Corporation (ORCL) — +74.3%</div>
-          <div class="cred-desc">Equity call published pre-outcome. AI cloud infrastructure thesis. Largest return on record.</div>
-        </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">02</span>
-        <div>
-          <div class="cred-title">IREN Limited (IREN) — +36.4%</div>
-          <div class="cred-desc">Bitcoin mining infrastructure + AI compute pivot thesis. Called ahead of sector re-rating.</div>
-        </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">03</span>
-        <div>
-          <div class="cred-title">Lemonade, Inc. (LMND) — +34.7%</div>
-          <div class="cred-desc">AI-native insurance underwriting model at deep value entry. Structural re-rating thesis.</div>
-        </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">04</span>
-        <div>
-          <div class="cred-title">Reddit, Inc. (RDDT) — +32.5%</div>
-          <div class="cred-desc">Data licensing + AI training data moat thesis. Published before analyst consensus shifted.</div>
-        </div>
-      </li>
-      <li class="cred-item">
-        <span class="cred-num">05</span>
-        <div>
-          <div class="cred-title">Marvell Technology (MRVL) — +31.9%</div>
-          <div class="cred-desc">Custom ASIC and data centre interconnect demand thesis. Strong earnings catalyst call.</div>
-        </div>
-      </li>
-    </ul>
+  <div class="method-cta-row">
+    <button class="method-cta-btn" onclick="sp('track')">View the full track record →</button>
+    <button class="method-cta-btn method-cta-ghost" onclick="sp('about')">About LiJie Guo →</button>
   </div>
 </section>
 
@@ -5349,6 +5527,42 @@ a.nav-ext-link { display: none !important; }
         <span itemprop="text">Aeon Nimbus has developed <strong>12 fully systematic trading strategies</strong> across equity and FX markets — momentum, mean-reversion, and macro regime models across 5 FX pairs and 7 equity models. All strategies are built with quantitative signals and can be explored live on the website's Fund Lab section. The model portfolio has returned +28.4% since inception with a Sharpe ratio of 1.31.</span>
       </div>
     </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text" itemprop="name">Who is LiJie Guo?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">LiJie Guo is an <strong>independent macro and equity research analyst based in London</strong>. He is the founder of Aeon Nimbus Research and publishes all investment calls publicly before the outcome is known. His background spans long/short equity, private credit, M&amp;A due diligence at PwC, Private Equity at Santomera Bay, and venture exposure at SpinLab and Antler in Berlin. He holds a Triple MSc across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School (City, University of London), and is a CFA Level I candidate. He is currently conducting an equity return predictability research project at Jupiter Asset Management (FTSE 250, £51bn AUM).</span>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text" itemprop="name">Is Aeon Nimbus Research a hedge fund or investment firm?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">No. <strong>Aeon Nimbus Research is an independent research and analysis platform</strong> — not a hedge fund, investment firm, or regulated financial adviser. LiJie Guo is not a regulated financial adviser. All content is published for informational and research transparency purposes only and does not constitute investment advice. Investment calls are published publicly to demonstrate analytical accountability — not to direct others to trade. Nothing on the site should be construed as a solicitation or offer to buy or sell any security.</span>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text" itemprop="name">What makes this research different from other analysts?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Three things distinguish Aeon Nimbus Research: <strong>(1) Pre-outcome publication</strong> — every call is time-stamped and public before the trade plays out, with full entry, stop-loss, position size, and thesis. This eliminates the survivorship bias and retroactive commentary that plagues most analyst coverage. <strong>(2) Permanent record</strong> — nothing is ever deleted or edited. Future losses will be recorded alongside wins. <strong>(3) Cross-disciplinary framework</strong> — research combines bottom-up fundamental analysis, top-down macro overlay, geopolitical risk assessment, and systematic quantitative filters — not just one lens.</span>
+      </div>
+    </div>
+    <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        <span class="faq-q-text" itemprop="name">What open-source financial tools does Aeon Nimbus offer?</span>
+        <span class="faq-icon">+</span>
+      </button>
+      <div class="faq-a" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+        <span itemprop="text">Aeon Nimbus has built and open-sourced <strong>six analyst tools</strong> that run live in the browser — free to use, no account required: a <strong>DCF / Complete Valuation Engine</strong> (with WACC/CAPM, 3-way sensitivity, peer comps, football field, and reverse DCF); <strong>Black-Scholes Options Pricer</strong>; <strong>Monte Carlo Portfolio Simulator</strong>; <strong>Kelly Criterion Position Sizer</strong>; <strong>Bond Analytics Engine</strong>; and a <strong>Factor Correlation Matrix</strong>. All tools are available under the Open Source Tools section.</span>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -5402,61 +5616,139 @@ a.nav-ext-link { display: none !important; }
 <div class="pg" id="pg-about">
 <div class="pghd reveal">
   <div class="pgtag">Independent Macro &amp; Equity Research · London</div>
-  <h2 class="pgtitle">About <em>LiJie Guo</em></h2>
-  <p class="pgsub">Independent analyst. No institutional bias. Every call published before the outcome is known.</p>
+  <h2 class="pgtitle">LiJie <em>Guo.</em></h2>
+  <p class="pgsub">Spanish-born, ethnically Chinese. Based in London. Independent macro and equity research analyst — publishing every investment call before the outcome is known.</p>
 </div>
 
-<div class="about-pg-body">
-  <div class="about-pg-left">
-    <h3 class="about-pg-h3">The Platform</h3>
-    <div class="about-body">
-      <p><em>Aeon Nimbus</em> is an independent macro and equity research platform — publishing market views, thematic deep dives, geopolitical reads, and central bank analysis — alongside formal investment calls, each with entry, stop-loss, position size, and full thesis recorded before the outcome is known. LiJie has also developed <em>proprietary algorithmic strategies</em> across five FX and commodity pairs and seven systematic equity models, combining quantitative signals with macro conviction. Every position, including the losses, is on the record.</p>
+<!-- Credential stat strip -->
+<div class="abt-stat-strip">
+  <div class="abt-stat"><span class="abt-stat-n">Triple</span><span class="abt-stat-l">MSc · 3 Schools</span></div>
+  <div class="abt-stat-div"></div>
+  <div class="abt-stat"><span class="abt-stat-n">CFA</span><span class="abt-stat-l">Level I Candidate</span></div>
+  <div class="abt-stat-div"></div>
+  <div class="abt-stat"><span class="abt-stat-n">4+</span><span class="abt-stat-l">Institutions · 3 Countries</span></div>
+  <div class="abt-stat-div"></div>
+  <div class="abt-stat"><span class="abt-stat-n">12</span><span class="abt-stat-l">Systematic Strategies</span></div>
+  <div class="abt-stat-div"></div>
+  <div class="abt-stat"><span class="abt-stat-n">£51bn</span><span class="abt-stat-l">AUM Research Scope</span></div>
+</div>
+
+<!-- Philosophy / intro -->
+<div class="abt-philosophy">
+  <div class="abt-phil-label">Investment Philosophy</div>
+  <blockquote class="abt-phil-quote">"The world is always mispriced somewhere. Capital follows narratives. Narratives follow power. Most investors read the price. This is about reading what moves it."</blockquote>
+  <p class="abt-phil-body"><em>Aeon Nimbus</em> is an independent macro and equity research platform built on a single principle: every formal investment call is published with full thesis, entry, stop-loss, and position size <strong>before the outcome is known</strong>. No retrospective commentary. No curated track records. The research covers global macro, single-stock equity, geopolitical market dynamics, and central bank policy — combined with proprietary algorithmic strategies across 5 FX/commodity pairs and 7 systematic equity models.</p>
+</div>
+
+<!-- Career timeline -->
+<div class="abt-timeline-section">
+  <div class="abt-tl-label">Career Progression</div>
+  <div class="abt-timeline">
+    <div class="abt-tl-item">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">Independent Fund Platform · Spain</div>
+        <div class="abt-tl-role">Long/Short Equity &amp; Macro</div>
+        <p class="abt-tl-desc">Portfolio research and trade execution across L/S equity and macro strategies at a leading independent fund platform in Spain.</p>
+      </div>
     </div>
-    <h3 class="about-pg-h3" style="margin-top:36px">Experience</h3>
-    <div class="about-body">
-      <p>His experience spans the capital structure — from long/short equity and macro at a leading independent fund platform in Spain, to Private Credit and Real Estate at <em>Crandon</em>, Private Equity portfolio management and Strategy &amp; Operations at <em>Santomera Bay's</em> private office in Barcelona, and M&amp;A financial due diligence at <em>PwC</em>. He gained early exposure to Europe's venture ecosystem through <em>SpinLab</em> — the HHL Accelerator — and <em>Antler</em>, the world's most active early-stage VC, in Berlin.</p>
+    <div class="abt-tl-item">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">Crandon</div>
+        <div class="abt-tl-role">Private Credit &amp; Real Estate</div>
+        <p class="abt-tl-desc">Credit analysis and real estate investment across private debt and direct property strategies.</p>
+      </div>
     </div>
-    <h3 class="about-pg-h3" style="margin-top:36px">Background</h3>
-    <div class="about-body">
-      <p>Spanish-born and ethnically Chinese, drawn from his first market investment at 18 to the intersection of <em>global macro, technology, emerging markets, and asymmetric risk</em>.</p>
+    <div class="abt-tl-item">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">Santomera Bay · Barcelona</div>
+        <div class="abt-tl-role">Private Equity &amp; Strategy</div>
+        <p class="abt-tl-desc">Portfolio management and Strategy &amp; Operations at a private family office in Barcelona, covering direct PE positions and strategic advisory.</p>
+      </div>
     </div>
-    <div class="about-pg-actions">
-      <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe — Research Free</a>
-      <a class="mv2-cv-link" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>Download CV →</a>
+    <div class="abt-tl-item">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">PwC</div>
+        <div class="abt-tl-role">M&amp;A Financial Due Diligence</div>
+        <p class="abt-tl-desc">Financial due diligence on M&amp;A transactions, covering financial modelling, quality of earnings, and deal structuring analysis.</p>
+      </div>
+    </div>
+    <div class="abt-tl-item">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">SpinLab (HHL) · Antler · Berlin</div>
+        <div class="abt-tl-role">Venture &amp; Early-Stage VC</div>
+        <p class="abt-tl-desc">Early exposure to Europe's venture ecosystem through the HHL Accelerator (SpinLab) and Antler, the world's most active early-stage VC, in Berlin.</p>
+      </div>
+    </div>
+    <div class="abt-tl-item abt-tl-item--current">
+      <div class="abt-tl-dot"></div>
+      <div class="abt-tl-content">
+        <div class="abt-tl-co">Aeon Nimbus Research · London <span class="abt-tl-badge">Current</span></div>
+        <div class="abt-tl-role">Independent Macro &amp; Equity Research</div>
+        <p class="abt-tl-desc">Publishing independent macro and equity research with a public, pre-outcome track record. 100% hit rate across 5 closed calls, avg +42.0% return. 12 systematic strategies. Open-source financial tools.</p>
+      </div>
     </div>
   </div>
-  <div class="about-pg-right">
+</div>
+
+<!-- Education + Research -->
+<div class="about-pg-body">
+  <div class="about-pg-left">
     <h3 class="about-pg-h3">Education</h3>
-    <div class="about-body">
-      <p>He holds a <em>Triple MSc</em> across emlyon Business School, Politecnico di Milano GSOM, and Bayes Business School, City University of London, and is a <em>CFA Level I candidate</em>.</p>
-    </div>
-    <div class="about-edu-logos" style="margin-top:28px">
+    <p class="about-body" style="margin-bottom:28px">He holds a <em>Triple MSc</em> across three leading European business schools, and is a <em>CFA Level I candidate</em> — combining quantitative finance, management, and applied research.</p>
+    <div class="about-edu-logos">
       <div class="about-edu-item">
         <div class="about-edu-badge">EM</div>
         <div>
           <div class="about-edu-name">emlyon Business School</div>
-          <div class="about-edu-prog">MSc in Management</div>
+          <div class="about-edu-prog">MSc in Management · France</div>
         </div>
       </div>
       <div class="about-edu-item">
         <div class="about-edu-badge">PM</div>
         <div>
           <div class="about-edu-name">Politecnico di Milano</div>
-          <div class="about-edu-prog">MSc · GSOM</div>
+          <div class="about-edu-prog">MSc · GSOM · Italy</div>
         </div>
       </div>
       <div class="about-edu-item">
         <div class="about-edu-badge">BS</div>
         <div>
-          <div class="about-edu-name">Bayes Business School, City University of London</div>
-          <div class="about-edu-prog">MSc in Finance</div>
+          <div class="about-edu-name">Bayes Business School</div>
+          <div class="about-edu-prog">MSc in Finance · City, University of London</div>
         </div>
       </div>
     </div>
-    <h3 class="about-pg-h3" style="margin-top:40px">Current Research</h3>
-    <div class="about-body">
-      <p>He is currently conducting the <em>Jupiter Asset Management Industry Research Project</em> (London) — investigating equity return predictability across Japanese, US and European markets at Jupiter AM (FTSE 250, £51bn AUM). Jointly supervised by an <em>Asset Pricing</em> professor at Bayes Business School, a <em>Systematic Equity Portfolio Manager</em> at Jupiter Asset Management, and a <em>Computational Finance</em> professor at Paris Dauphine. He leads the economic framework, hypothesis construction, and Python implementation of factor models and statistical tests.</p>
+    <div class="about-pg-actions" style="margin-top:40px">
+      <a class="mv2-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe — Research Free</a>
+      <a class="mv2-cv-link" href="LJGS_CV_2026_FinalCV.pdf" target="_blank" download>Download CV →</a>
     </div>
+  </div>
+  <div class="about-pg-right">
+    <h3 class="about-pg-h3">Current Research</h3>
+    <div class="abt-research-card">
+      <div class="abt-rc-tag">Jupiter Asset Management · London · FTSE 250</div>
+      <div class="abt-rc-title">Equity Return Predictability Across Japanese, US &amp; European Markets</div>
+      <p class="abt-rc-body">An industry research project at Jupiter Asset Management (£51bn AUM) investigating cross-market equity return predictability using factor models and statistical tests. The project is jointly supervised by an Asset Pricing professor at Bayes Business School, a Systematic Equity Portfolio Manager at Jupiter AM, and a Computational Finance professor at Paris Dauphine University.</p>
+      <div class="abt-rc-roles">
+        <div class="abt-rc-role"><span class="abt-rc-role-lbl">Economic framework</span></div>
+        <div class="abt-rc-role"><span class="abt-rc-role-lbl">Hypothesis construction</span></div>
+        <div class="abt-rc-role"><span class="abt-rc-role-lbl">Python · Factor models</span></div>
+        <div class="abt-rc-role"><span class="abt-rc-role-lbl">Statistical tests</span></div>
+      </div>
+    </div>
+    <h3 class="about-pg-h3" style="margin-top:40px">Availability</h3>
+    <div class="abt-avail-list">
+      <div class="abt-avail-item"><span class="abt-avail-dot"></span>Open to research collaborations</div>
+      <div class="abt-avail-item"><span class="abt-avail-dot"></span>Open to institutional enquiries</div>
+      <div class="abt-avail-item"><span class="abt-avail-dot"></span>Considering full-time roles</div>
+      <div class="abt-avail-item"><span class="abt-avail-dot"></span>Selective on advisory roles</div>
+    </div>
+    <button class="method-cta-btn" onclick="sp('contact')" style="margin-top:24px">Get in touch →</button>
   </div>
 </div>
 

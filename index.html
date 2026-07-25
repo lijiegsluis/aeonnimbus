@@ -5314,53 +5314,6 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 /* ══ PREMIUM LAYER ══════════════════════════════════════════════════ */
 
-/* Hide default cursor globally */
-@media (pointer:fine) {
-  * { cursor: none !important; }
-}
-
-/* Custom crosshair cursor */
-.an-cursor {
-  position: fixed; top: 0; left: 0; z-index: 9997;
-  pointer-events: none; will-change: transform;
-}
-.an-ring {
-  position: absolute;
-  width: 38px; height: 38px;
-  border: 1px solid rgba(196,155,36,.55);
-  border-radius: 50%;
-  transform: translate(-50%,-50%);
-  transition: width .28s cubic-bezier(.16,1,.3,1),
-              height .28s cubic-bezier(.16,1,.3,1),
-              border-color .2s, opacity .2s;
-}
-.an-cross-h {
-  position: absolute; top: 50%; left: 50%;
-  width: 14px; height: 1px;
-  background: rgba(196,155,36,.4);
-  transform: translate(-50%,-50%);
-}
-.an-cross-v {
-  position: absolute; top: 50%; left: 50%;
-  width: 1px; height: 14px;
-  background: rgba(196,155,36,.4);
-  transform: translate(-50%,-50%);
-}
-.an-dot {
-  position: absolute; width: 4px; height: 4px;
-  background: #c49b24; border-radius: 50%;
-  transform: translate(-50%,-50%);
-  transition: transform .1s;
-}
-body.an-hover .an-ring {
-  width: 64px; height: 64px;
-  border-color: rgba(196,155,36,.95);
-}
-body.an-hover .an-cross-h { width: 22px; }
-body.an-hover .an-cross-v { height: 22px; }
-body.an-click .an-ring { width: 22px; height: 22px; border-color: #fff; }
-body.an-click .an-dot { background: #fff; }
-@media (pointer:coarse) { .an-cursor { display: none; } }
 
 /* Film grain overlay */
 .an-grain {
@@ -5738,13 +5691,6 @@ body.an-click .an-dot { background: #fff; }
 </script>
 </head>
 <body>
-<!-- CURSOR -->
-<div class="an-cursor" id="an-cursor">
-  <div class="an-ring" id="an-ring">
-    <div class="an-cross-h"></div><div class="an-cross-v"></div>
-  </div>
-  <div class="an-dot" id="an-dot"></div>
-</div>
 <!-- GRAIN -->
 <div class="an-grain" aria-hidden="true"></div>
 <!-- PAGE LOADER -->
@@ -13898,30 +13844,14 @@ function qsa(s,c){ return (c||document).querySelectorAll(s); }
 function lerp(a,b,t){ return a+(b-a)*t; }
 function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
 
-/* ── 1. CUSTOM CROSSHAIR CURSOR ── */
+/* ── 1. HERO CURSOR GLOW (mouse-tracked radial gradient) ── */
 (function(){
-  var ring=qs('#an-ring'), dot=qs('#an-dot');
-  if(!ring||!('ontouchstart' in window===false&&window.matchMedia('(pointer:fine)').matches)) return;
-  var mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my,dx=mx,dy=my;
-  document.addEventListener('mousemove',function(e){ mx=e.clientX; my=e.clientY; });
-  document.addEventListener('mousedown',function(){ document.body.classList.add('an-click'); });
-  document.addEventListener('mouseup',function(){ document.body.classList.remove('an-click'); });
-  document.addEventListener('mouseover',function(e){
-    var t=e.target&&e.target.closest('button,a,[onclick],.nav-link,.flnk,.hv3-calls tbody tr,.hv3-pcard,.hv3-chip,.hv3-pitem,.mag-wrap,.nsub');
-    document.body.classList.toggle('an-hover',!!t);
-  });
   var hero=qs('.hv3-hero');
+  if(!hero) return;
   document.addEventListener('mousemove',function(e){
-    if(hero){ hero.style.setProperty('--mx',((e.clientX/window.innerWidth)*100).toFixed(1)+'%'); hero.style.setProperty('--my',((e.clientY/window.innerHeight)*100).toFixed(1)+'%'); }
+    hero.style.setProperty('--mx',((e.clientX/window.innerWidth)*100).toFixed(1)+'%');
+    hero.style.setProperty('--my',((e.clientY/window.innerHeight)*100).toFixed(1)+'%');
   });
-  function tick(){
-    rx=lerp(rx,mx,.1); ry=lerp(ry,my,.1);
-    dx=lerp(dx,mx,.35); dy=lerp(dy,my,.35);
-    ring.style.transform='translate(calc('+rx.toFixed(1)+'px - 50%),calc('+ry.toFixed(1)+'px - 50%))';
-    dot.style.transform='translate(calc('+dx.toFixed(1)+'px - 50%),calc('+dy.toFixed(1)+'px - 50%))';
-    requestAnimationFrame(tick);
-  }
-  tick();
 })();
 
 /* ── 2. NAV GLASSMORPHISM ── */

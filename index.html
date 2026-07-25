@@ -5455,6 +5455,85 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 }
 .hv3-snum.g { animation: an-glow-g 3.5s ease-in-out infinite; }
 
+/* ── CREDENTIALS STRIP ── */
+.hv3-creds {
+  border-top: 1px solid var(--line);
+  padding: 0 52px;
+  display: flex; align-items: stretch;
+  overflow-x: auto; gap: 0;
+}
+.hv3-cred-item {
+  flex: 1; min-width: 160px;
+  padding: 28px 0 24px;
+  border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; gap: 5px;
+}
+.hv3-cred-item:last-child { border-right: none; padding-right: 0; }
+.hv3-cred-item:not(:first-child) { padding-left: 36px; }
+.hv3-cred-label {
+  font-size: 7.5px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--g2); font-family: var(--FM, sans-serif);
+}
+.hv3-cred-val {
+  font-size: 13px; color: var(--ink); line-height: 1.3;
+}
+.hv3-cred-val em { color: var(--gold); font-style: normal; }
+@media(max-width:900px){
+  .hv3-creds { padding: 0 24px; flex-wrap: wrap; }
+  .hv3-cred-item { flex: 1 1 45%; min-width: 140px; border-right: none; border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .hv3-cred-item:not(:first-child) { padding-left: 0; }
+  .hv3-cred-item:nth-child(odd) { padding-right: 20px; }
+}
+
+/* ── THESIS SECTION ── */
+.hv3-thesis {
+  border-top: 1px solid var(--line);
+  padding: 80px 52px 80px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 80px;
+  align-items: start;
+}
+.hv3-thesis-left {}
+.hv3-thesis-eyebrow {
+  font-size: 8px; letter-spacing: .26em; text-transform: uppercase;
+  color: var(--g2); margin-bottom: 20px;
+}
+.hv3-thesis-title {
+  font-family: Georgia, serif;
+  font-size: clamp(28px, 3.5vw, 52px); font-weight: 400;
+  line-height: 1.05; letter-spacing: -.025em; color: var(--ink);
+  margin-bottom: 32px;
+}
+.hv3-thesis-title em { color: var(--gold); font-style: italic; }
+.hv3-thesis-body {
+  font-size: 15px; line-height: 1.75; color: var(--ink2);
+  max-width: 480px; margin-bottom: 36px;
+}
+.hv3-thesis-body strong { color: var(--ink); font-weight: 500; }
+.hv3-thesis-right {
+  padding-top: 8px;
+}
+.hv3-tenet {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--line);
+}
+.hv3-tenet:first-child { border-top: 1px solid var(--line); }
+.hv3-tenet-n {
+  font-family: monospace; font-size: 9px; letter-spacing: .1em;
+  color: var(--g2); margin-bottom: 8px;
+}
+.hv3-tenet-title {
+  font-family: Georgia, serif; font-size: 17px; font-weight: 400;
+  color: var(--ink); margin-bottom: 7px; line-height: 1.25;
+}
+.hv3-tenet-body {
+  font-size: 13px; line-height: 1.65; color: var(--ink2);
+}
+@media(max-width:900px) {
+  .hv3-thesis { grid-template-columns: 1fr; padding: 56px 24px 48px; gap: 40px 0; }
+}
+
 @media(max-width:900px) {
   .hv3-pnl { padding: 48px 24px 36px; }
   .hv3-pnl-labels { display: none; }
@@ -5469,7 +5548,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   min-height: 100svh; position: relative; overflow: hidden;
   display: flex; align-items: flex-end;
 }
-#hv3-canvas { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+#hv3-canvas { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
 .hv3-inner {
   position: relative; z-index: 1; width: 100%;
   padding: 0 52px 68px;
@@ -5782,6 +5861,30 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </section>
 
+<!-- CREDENTIALS STRIP -->
+<div class="hv3-creds">
+  <div class="hv3-cred-item">
+    <div class="hv3-cred-label">Education</div>
+    <div class="hv3-cred-val"><em>Triple MSc</em> — Equity Markets, Portfolio Management, Banking &amp; Finance</div>
+  </div>
+  <div class="hv3-cred-item">
+    <div class="hv3-cred-label">Designation</div>
+    <div class="hv3-cred-val">CFA Level I Candidate</div>
+  </div>
+  <div class="hv3-cred-item">
+    <div class="hv3-cred-label">Experience</div>
+    <div class="hv3-cred-val">L/S Equity · Quant Research · Macro Strategy</div>
+  </div>
+  <div class="hv3-cred-item">
+    <div class="hv3-cred-label">Prior Firms</div>
+    <div class="hv3-cred-val">Crandon Capital · Santomera Bay · PwC</div>
+  </div>
+  <div class="hv3-cred-item">
+    <div class="hv3-cred-label">Track Record</div>
+    <div class="hv3-cred-val"><em>100%</em> hit rate · 5 closed calls · All pre-published</div>
+  </div>
+</div>
+
 <!-- TRACK RECORD -->
 <section class="hv3-record">
   <div class="hv3-rec-head">
@@ -5805,36 +5908,36 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">01</span></td>
         <td><div class="hv3-ctk">ORCL</div><div class="hv3-cco">Oracle Corporation</div></td>
-        <td><div class="hv3-cthesis">AI infrastructure underpriced; cloud re-acceleration ahead of consensus. Long equity.</div></td>
-        <td><div class="hv3-cperiod">Q4 2025 – Q1 2026</div></td>
+        <td><div class="hv3-cthesis">$98B cloud backlog invisible to the street — AI demand pulled Oracle's 5-year infrastructure runway into 18 months.</div></td>
+        <td><div class="hv3-cperiod">Apr – Jun 2026</div></td>
         <td><div class="hv3-cret">+74.3%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">02</span></td>
         <td><div class="hv3-ctk">IREN</div><div class="hv3-cco">IREN Limited</div></td>
-        <td><div class="hv3-cthesis">Bitcoin mining capacity at historical discount to BTC price; halving catalyst. Long equity.</div></td>
-        <td><div class="hv3-cperiod">Q1 2026</div></td>
+        <td><div class="hv3-cthesis">Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve.</div></td>
+        <td><div class="hv3-cperiod">May – Jun 2026</div></td>
         <td><div class="hv3-cret">+36.4%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">03</span></td>
         <td><div class="hv3-ctk">LMND</div><div class="hv3-cco">Lemonade, Inc.</div></td>
-        <td><div class="hv3-cthesis">Unit economics inflecting positive; market pricing terminal loss. Long equity.</div></td>
-        <td><div class="hv3-cperiod">Q1 2026</div></td>
+        <td><div class="hv3-cthesis">Loss ratio cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure.</div></td>
+        <td><div class="hv3-cperiod">Jul 2026</div></td>
         <td><div class="hv3-cret">+34.7%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">04</span></td>
         <td><div class="hv3-ctk">RDDT</div><div class="hv3-cco">Reddit, Inc.</div></td>
-        <td><div class="hv3-cthesis">Data licensing and ad monetisation severely undervalued vs. social media comps. Long equity.</div></td>
-        <td><div class="hv3-cperiod">Q4 2025 – Q1 2026</div></td>
+        <td><div class="hv3-cthesis">AI's training feedstock, not its victim — Reddit's unique human corpus is the data infrastructure every major lab depends on.</div></td>
+        <td><div class="hv3-cperiod">May – Jun 2026</div></td>
         <td><div class="hv3-cret">+32.5%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">05</span></td>
         <td><div class="hv3-ctk">MRVL</div><div class="hv3-cco">Marvell Technology</div></td>
-        <td><div class="hv3-cthesis">Custom silicon design wins at hyperscalers creating durable revenue step-change. Long equity.</div></td>
-        <td><div class="hv3-cperiod">Q4 2025</div></td>
+        <td><div class="hv3-cthesis">Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn't modeled.</div></td>
+        <td><div class="hv3-cperiod">Jun 2026</div></td>
         <td><div class="hv3-cret">+31.9%</div></td>
       </tr>
     </tbody>
@@ -5883,6 +5986,43 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <span class="hv3-pnl-lbl"><b>MRVL +31.9%</b></span>
     <span class="hv3-pnl-lbl"><b>IREN +36.4%</b></span>
     <span class="hv3-pnl-lbl"><b>LMND +34.7%</b></span>
+  </div>
+</section>
+
+<!-- THESIS -->
+<section class="hv3-thesis">
+  <div class="hv3-thesis-left">
+    <div class="hv3-thesis-eyebrow" data-sr="">Investment Philosophy</div>
+    <h2 class="hv3-thesis-title" data-sr="">The market misprices<br><em>divergence.</em></h2>
+    <p class="hv3-thesis-body" data-sr="">
+      Every position begins with a single question: <strong>what does the market believe, and why is that belief wrong?</strong>
+      The answer is rarely about sectors. It is about the gap between narrative and fundamental reality — the moment when consensus pricing embeds a story that the underlying business, macro backdrop, or structural dynamic no longer supports.
+    </p>
+    <p class="hv3-thesis-body" data-sr="">
+      The approach is bottom-up in execution and top-down in framing. A company's unit economics, balance sheet inflection, or competitive moat matters most — but it matters <em>when</em> the macro backdrop creates the catalyst that makes the market look. Patience to wait for that convergence, discipline to size asymmetrically, and the willingness to publish the full thesis <strong>before the outcome is known</strong> — that is the practice.
+    </p>
+  </div>
+  <div class="hv3-thesis-right">
+    <div class="hv3-tenet" data-sr="">
+      <div class="hv3-tenet-n">01 — EDGE</div>
+      <div class="hv3-tenet-title">Narrative vs. Reality</div>
+      <div class="hv3-tenet-body">Markets price stories. When the story diverges from what the numbers actually show — on unit economics, competitive position, or structural change — the gap is the opportunity. Sector is irrelevant. The divergence is not.</div>
+    </div>
+    <div class="hv3-tenet" data-sr="">
+      <div class="hv3-tenet-n">02 — CONSTRUCTION</div>
+      <div class="hv3-tenet-title">Asymmetric Risk · Defined Loss</div>
+      <div class="hv3-tenet-body">Every call enters with a defined stop. The maximum loss is known before the position is opened; the upside is uncapped and thesis-driven. Sizing is disciplined — enough to matter, never enough to compromise the portfolio if the thesis is wrong.</div>
+    </div>
+    <div class="hv3-tenet" data-sr="">
+      <div class="hv3-tenet-n">03 — PROCESS</div>
+      <div class="hv3-tenet-title">Catalyst-Driven Timing</div>
+      <div class="hv3-tenet-body">Being right too early is the same as being wrong. Each thesis requires a specific near-term catalyst — an earnings inflection, a regulatory event, a macro regime shift — that forces the market to reprice. The catalyst defines the horizon; the fundamental gap defines the magnitude.</div>
+    </div>
+    <div class="hv3-tenet" data-sr="">
+      <div class="hv3-tenet-n">04 — ACCOUNTABILITY</div>
+      <div class="hv3-tenet-title">Published Before the Outcome</div>
+      <div class="hv3-tenet-body">Full thesis, entry price, stop-loss, and position size go public before the position plays out. Nothing is revised retrospectively. The record — wins and future losses alike — stays permanently public. Accountability is the only honest framework for trust.</div>
+    </div>
   </div>
 </section>
 
@@ -14017,7 +14157,7 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
 (function(){
   var canvas=qs('#hv3-pnl-canvas'),tip=qs('#hv3-pnl-tip'),tipRet=qs('#hv3-tip-ret'),tipTk=qs('#hv3-tip-tk'),finalEl=qs('#hv3-pnl-final');
   if(!canvas) return;
-  var calls=[{tk:'ORCL',ret:74.3,period:'Q4 2025'},{tk:'RDDT',ret:32.5,period:'Q4 2025'},{tk:'MRVL',ret:31.9,period:'Q4 2025'},{tk:'IREN',ret:36.4,period:'Q1 2026'},{tk:'LMND',ret:34.7,period:'Q1 2026'}];
+  var calls=[{tk:'ORCL',ret:74.3,period:'Apr–Jun 2026'},{tk:'IREN',ret:36.4,period:'May–Jun 2026'},{tk:'LMND',ret:34.7,period:'Jul 2026'},{tk:'RDDT',ret:32.5,period:'May–Jun 2026'},{tk:'MRVL',ret:31.9,period:'Jun 2026'}];
   var pts=[{val:100,tk:'Start'}]; var v=100;
   calls.forEach(function(c){ v*=(1+c.ret/100); pts.push({val:v,tk:c.tk,ret:c.ret,period:c.period}); });
   if(finalEl) finalEl.textContent=v.toFixed(0);
@@ -14026,7 +14166,9 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
   function resize(){ canvas.width=(canvas.offsetWidth||700)*dpr; canvas.height=(canvas.offsetHeight||240)*dpr; ctx2=canvas.getContext('2d'); ctx2.scale(dpr,dpr); W=canvas.offsetWidth; H=canvas.offsetHeight; }
   function ptXY(i){ var minV=92,maxV=pts[pts.length-1].val+10,x=pad.l+(i/(pts.length-1))*(W-pad.l-pad.r),y=H-pad.b-((pts[i].val-minV)/(maxV-minV))*(H-pad.t-pad.b); return {x:x,y:y}; }
   function draw(){
+    requestAnimationFrame(draw);
     ctx2.clearRect(0,0,W,H);
+    if(animProg<=0) return;
     var minV=92,maxV=pts[pts.length-1].val+10;
     [100,150,200,250,300].forEach(function(gv){ var gy=H-pad.b-((gv-minV)/(maxV-minV))*(H-pad.t-pad.b); if(gy<pad.t||gy>H-pad.b) return; ctx2.beginPath(); ctx2.setLineDash([4,8]); ctx2.strokeStyle='rgba(255,255,255,.042)'; ctx2.lineWidth=1; ctx2.moveTo(pad.l,gy); ctx2.lineTo(W-pad.r,gy); ctx2.stroke(); ctx2.setLineDash([]); ctx2.font='9px monospace'; ctx2.fillStyle='rgba(110,102,88,.42)'; ctx2.textAlign='right'; ctx2.textBaseline='middle'; ctx2.fillText('$'+gv,pad.l-8,gy); });
     var last=clamp(Math.floor(animProg*(pts.length-1)),0,pts.length-1),frac=(animProg*(pts.length-1))-last;
@@ -14047,9 +14189,9 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
     if(last>0){ var curV=last<pts.length-1?pts[last].val+(pts[last+1].val-pts[last].val)*frac:pts[pts.length-1].val; ctx2.font='600 12px -apple-system,sans-serif'; ctx2.fillStyle='#4fce7a'; ctx2.textAlign='left'; ctx2.textBaseline='middle'; ctx2.fillText('$'+curV.toFixed(0),tip2.x+10,tip2.y); }
     ctx2.textBaseline='top'; ctx2.textAlign='center'; ctx2.font='8px monospace'; ctx2.fillStyle='rgba(110,102,88,.38)';
     pts.forEach(function(p,i){ var xy=ptXY(i); ctx2.fillText(i===0?'Start':p.tk,xy.x,H-pad.b+10); });
-    requestAnimationFrame(draw);
   }
-  var io=new IntersectionObserver(function(entries){ if(!entries[0].isIntersecting||animating) return; animating=true; var s=performance.now(),dur=2400; (function step(now){ animProg=1-Math.pow(1-(now-s)/dur<0?0:Math.min((now-s)/dur,1),3); if((now-s)<dur) requestAnimationFrame(step); })(performance.now()); },{threshold:.25});
+  function startAnim(){ if(animating) return; animating=true; var s=performance.now(),dur=2200; (function step(now){ var p=Math.min((now-s)/dur,1); animProg=1-Math.pow(1-p,3); if(p<1) requestAnimationFrame(step); })(performance.now()); }
+  var io=new IntersectionObserver(function(entries){ if(entries[0].isIntersecting) startAnim(); },{threshold:.05,rootMargin:'0px 0px -80px 0px'});
   var sec=qs('#hv3-pnl'); if(sec) io.observe(sec);
   canvas.addEventListener('mousemove',function(e){ var r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,closest=-1,minD=36; pts.forEach(function(pt,i){ if(i===0) return; var xy=ptXY(i),d=Math.abs(mx-xy.x); if(d<minD){ minD=d; closest=i; } }); hovered=closest; if(tip&&closest>0){ var xy=ptXY(closest),pct=((pts[closest].val/100-1)*100).toFixed(1); tip.classList.add('vis'); tipRet.textContent='$'+pts[closest].val.toFixed(0)+' (+'+pct+'%)'; tipTk.textContent=pts[closest].tk+' · '+calls[closest-1].period; tip.style.left=Math.min(xy.x+12,W-160)+'px'; tip.style.top=(xy.y-60)+'px'; } else if(tip) tip.classList.remove('vis'); });
   canvas.addEventListener('mouseleave',function(){ hovered=-1; if(tip) tip.classList.remove('vis'); });

@@ -5478,12 +5478,6 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   font-size: 13px; color: var(--ink); line-height: 1.3;
 }
 .hv3-cred-val em { color: var(--gold); font-style: normal; }
-@media(max-width:900px){
-  .hv3-creds { padding: 0 24px; flex-wrap: wrap; }
-  .hv3-cred-item { flex: 1 1 45%; min-width: 140px; border-right: none; border-bottom: 1px solid var(--line); padding: 20px 0; }
-  .hv3-cred-item:not(:first-child) { padding-left: 0; }
-  .hv3-cred-item:nth-child(odd) { padding-right: 20px; }
-}
 
 /* ── THESIS SECTION ── */
 .hv3-thesis {
@@ -5494,7 +5488,6 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   gap: 0 80px;
   align-items: start;
 }
-.hv3-thesis-left {}
 .hv3-thesis-eyebrow {
   font-size: 8px; letter-spacing: .26em; text-transform: uppercase;
   color: var(--g2); margin-bottom: 20px;
@@ -5532,12 +5525,24 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 }
 @media(max-width:900px) {
   .hv3-thesis { grid-template-columns: 1fr; padding: 56px 24px 48px; gap: 40px 0; }
-}
-
-@media(max-width:900px) {
   .hv3-pnl { padding: 48px 24px 36px; }
   .hv3-pnl-labels { display: none; }
   .an-grain { display: none; }
+  .hv3-inner { flex-direction: column; align-items: flex-start; padding: 0 24px 48px; gap: 32px; }
+  .hv3-rec-head { padding: 36px 24px 0; }
+  .hv3-calls td, .hv3-calls th { padding-inline: 20px; }
+  .hv3-calls th:nth-child(3), .hv3-calls td:nth-child(3) { display: none; }
+  .hv3-rec-foot { padding-inline: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
+  .hv3-strip { grid-template-columns: 1fr; }
+  .hv3-sitem { border-right: none; }
+  .hv3-plat-head { padding: 56px 24px 40px; }
+  .hv3-plat-cards { grid-template-columns: 1fr; }
+  .hv3-pcard { border-right: none; padding: 40px 24px; }
+  .hv3-sub { padding: 40px 24px; }
+  .hv3-creds { padding: 0 24px; flex-wrap: wrap; }
+  .hv3-cred-item { flex: 1 1 45%; min-width: 140px; border-right: none; border-bottom: 1px solid var(--line); padding: 20px 0; }
+  .hv3-cred-item:not(:first-child) { padding-left: 0; }
+  .hv3-cred-item:nth-child(odd) { padding-right: 20px; }
 }
 
 /* ══ HOME V3 — column-grid editorial redesign ══════════════════════ */
@@ -5576,6 +5581,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   line-height: .9; margin-bottom: 12px; letter-spacing: -.03em; font-weight: 400;
 }
 .hv3-proof .hv3-sub {
+  display: block;
   font-family: var(--FS, sans-serif);
   font-size: 13px; color: var(--ink2); margin-top: 16px;
   line-height: 1.7; letter-spacing: 0; font-style: normal;
@@ -5620,7 +5626,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 }
 .hv3-cco { font-size: 11.5px; color: var(--ink2); margin-top: 2px; }
 .hv3-cthesis { font-size: 11.5px; color: var(--ink2); line-height: 1.5; max-width: 340px; }
-.hv3-cperiod { font-size: 10.5px; color: var(--g2); letter-spacing: .03em; }
+.hv3-cperiod { font-size: 10.5px; color: var(--g2); letter-spacing: .03em; white-space: nowrap; }
 .hv3-cret {
   font-family: Georgia, serif;
   font-size: clamp(22px, 2.8vw, 38px); font-weight: 400;
@@ -5674,10 +5680,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   font-size: 13px; color: var(--ink2); line-height: 1.75;
   max-width: 480px; margin-top: 24px;
 }
-.hv3-plat-cards { display: grid; grid-template-columns: repeat(3, 1fr); }
+.hv3-plat-cards { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--line); }
 .hv3-pcard {
   padding: 56px 52px;
-  border-right: 1px solid var(--line); border-bottom: 1px solid var(--line);
+  border-right: 1px solid var(--line);
 }
 .hv3-pcard:last-child { border-right: none; }
 .hv3-plabel {
@@ -5726,7 +5732,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 /* Home subscribe footer strip */
 .hv3-sub {
   display: flex; align-items: center; justify-content: space-between; gap: 40px;
-  padding: 52px; border-top: 1px solid var(--line);
+  padding: 52px; border-top: none;
   flex-wrap: wrap;
 }
 .hv3-sub-title {
@@ -5744,30 +5750,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 .hv3-sub-btn:hover { opacity: .88; }
 .hv3-sub-note { font-size: 9.5px; color: var(--g2); margin-top: 10px; }
 
-@media(max-width: 900px) {
-  .hv3-inner { flex-direction: column; align-items: flex-start; padding: 0 24px 48px; gap: 32px; }
-  .hv3-rec-head { padding: 36px 24px 0; }
-  .hv3-calls td, .hv3-calls th { padding-inline: 24px; }
-  .hv3-rec-foot { padding-inline: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
-  .hv3-strip { grid-template-columns: 1fr; }
-  .hv3-sitem { border-right: none; }
-  .hv3-plat-head { padding: 56px 24px 40px; }
-  .hv3-plat-cards { grid-template-columns: 1fr; }
-  .hv3-pcard { border-right: none; padding: 40px 24px; }
-  .hv3-sub { padding: 40px 24px; }
-}
 </style>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js">
-// Nav scroll effect
-(function(){
-  const nav = document.querySelector('nav');
-  if(!nav) return;
-  const onScroll = () => nav.classList.toggle('scrolled', window.scrollY > 20);
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-})();
-
-</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
 <!-- GRAIN -->

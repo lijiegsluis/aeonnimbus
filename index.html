@@ -92,8 +92,37 @@
         "@type": "Question",
         "name": "What systematic strategies does Aeon Nimbus offer?",
         "acceptedAnswer": { "@type": "Answer", "text": "Aeon Nimbus has developed 12 fully systematic strategies across equity and FX markets, covering momentum, mean-reversion, and macro regime models. These include strategies across 5 FX pairs and 7 equity models combining quantitative signals. All strategy performance is available on the website." }
+      },
+      {
+        "@type": "Question",
+        "name": "Who is LiJie Guo?",
+        "acceptedAnswer": { "@type": "Answer", "text": "LiJie Guo is a London-based independent macro and equity research analyst and the founder of Aeon Nimbus Research. He holds a Triple Master of Science in Equity Markets, Portfolio Management, and Banking & Finance, and is a CFA Level 1 candidate. His career spans long/short equity in Madrid, quantitative research at Crandon Capital, macro strategy at Santomera Bay Capital, and Big Four advisory at PwC. He publishes all investment calls pre-outcome on Substack with a fully auditable public track record." }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Aeon Nimbus Research have free financial tools?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Aeon Nimbus Research provides six open-source financial tools available free in the browser: a DCF valuation engine, a Black-Scholes options pricing calculator, a Monte Carlo portfolio simulator, a Kelly Criterion position sizer, a bond analytics calculator, and a multi-factor correlation matrix. All tools require no login and have no data limits." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Aeon Nimbus Research a hedge fund?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Aeon Nimbus Research is an independent research and analysis platform. It is not a regulated investment firm, does not manage external capital, and does not solicit investors. The Fund Lab and model portfolio are simulated research vehicles for developing and displaying quantitative methodology. All investment calls and research content are published for transparency and educational purposes only." }
       }
     ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://aeonnimbus.com/",
+    "name": "LiJie Guo — Independent Macro & Equity Research Analyst | Aeon Nimbus Research",
+    "description": "LiJie Guo is an independent macro and equity research analyst in London with a 100% hit rate and +42% average return across 5 closed calls. Publishes pre-outcome investment theses, 12 systematic strategies, a live macro model portfolio, and 6 open-source financial tools — all free.",
+    "url": "https://aeonnimbus.com",
+    "inLanguage": "en-GB",
+    "isPartOf": { "@type": "WebSite", "url": "https://aeonnimbus.com" },
+    "about": { "@id": "https://aeonnimbus.com/#lijieguo" },
+    "author": { "@id": "https://aeonnimbus.com/#lijieguo" },
+    "publisher": { "@id": "https://aeonnimbus.com/#organization" },
+    "keywords": "independent macro research, equity research analyst London, pre-outcome investment calls, systematic trading strategies, DCF calculator, Black-Scholes calculator, fund lab, quantitative finance, investment track record, free financial tools"
   }
 ]
 </script>
@@ -4593,6 +4622,114 @@ a.nav-ext-link { display: none !important; }
 }
 
 /* ══ ABOUT / CREDENTIALS SECTION ════════════════════════ */
+/* ── Platform Pillars section ───────────────────── */
+.pillars-section {
+  border-top: 1px solid var(--rule);
+  padding: 80px 56px 72px;
+}
+.pillars-header { max-width: 780px; margin-bottom: 56px; }
+.pillars-eyebrow {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .24em;
+  text-transform: uppercase; color: var(--gold);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 20px;
+}
+.pillars-eyebrow::before { content: '——'; opacity: .5; }
+.pillars-h2 {
+  font-family: var(--FH); font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 500; line-height: 1.08; letter-spacing: -.015em;
+  color: var(--ink); margin: 0 0 16px;
+}
+.pillars-sub {
+  font-family: var(--FS); font-size: 14px; color: var(--g2); line-height: 1.7;
+}
+.pillars-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  border: 1px solid var(--rule);
+}
+.pillar-card {
+  padding: 40px 36px 36px; border-right: 1px solid var(--rule);
+  display: flex; flex-direction: column; transition: background .2s;
+}
+.pillar-card:last-child { border-right: none; }
+.pillar-card:hover { background: rgba(200,131,10,.025); }
+.pillar-card--featured { background: rgba(200,131,10,.03); }
+.pillar-tag {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--g2);
+  border: 1px solid var(--rule); display: inline-block;
+  padding: 3px 8px; border-radius: 2px; margin-bottom: 20px; align-self: flex-start;
+}
+.pillar-tag--gold { color: var(--gold); border-color: rgba(200,131,10,.4); background: rgba(200,131,10,.06); }
+.pillar-title {
+  font-family: var(--FM); font-size: 11px; letter-spacing: .06em;
+  color: var(--ink); margin-bottom: 16px; line-height: 1.4;
+}
+.pillar-desc {
+  font-family: var(--FS); font-size: 13px; color: var(--g2);
+  line-height: 1.7; margin: 0 0 28px; flex: 1;
+}
+.pillar-stats { display: flex; gap: 24px; margin-bottom: 28px; padding-top: 20px; border-top: 1px solid var(--rule); }
+.pillar-stat { display: flex; flex-direction: column; gap: 4px; }
+.pillar-stat-n { font-family: var(--FH); font-size: 20px; color: var(--gold); line-height: 1; }
+.pillar-stat-l { font-family: var(--FM); font-size: 8px; letter-spacing: .1em; text-transform: uppercase; color: var(--g2); }
+.pillar-tools-list {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  margin-bottom: 8px; padding-top: 20px; border-top: 1px solid var(--rule);
+}
+.pillar-tool {
+  font-family: var(--FM); font-size: 8px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--g2);
+  border: 1px solid var(--rule); padding: 5px 9px; border-radius: 2px;
+}
+.pillar-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: auto; }
+.pillar-cta {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  background: var(--gold); color: #07070a; border: none;
+  padding: 10px 18px; cursor: pointer; border-radius: 2px; transition: opacity .15s;
+  text-decoration: none; display: inline-flex; align-items: center;
+}
+.pillar-cta:hover { opacity: .85; }
+.pillar-ghost {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .1em; text-transform: uppercase;
+  background: transparent; color: var(--g2); border: 1px solid var(--rule);
+  padding: 10px 18px; cursor: pointer; border-radius: 2px; transition: border-color .15s, color .15s;
+  text-decoration: none; display: inline-flex; align-items: center;
+}
+.pillar-ghost:hover { color: var(--gold); border-color: rgba(200,131,10,.4); }
+@media(max-width:1000px) {
+  .pillars-section { padding: 56px 28px 52px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .pillar-card { border-right: none; border-bottom: 1px solid var(--rule); }
+  .pillar-card:last-child { border-bottom: none; }
+}
+
+/* ── SEO prose block ─────────────────────────────── */
+.seo-prose {
+  border-top: 1px solid var(--rule);
+  padding: 64px 56px 64px;
+  display: grid; grid-template-columns: 260px 1fr; gap: 56px; align-items: start;
+}
+.seo-prose-label {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .22em;
+  text-transform: uppercase; color: var(--g2); padding-top: 4px;
+  position: sticky; top: 80px;
+}
+.seo-prose-body { }
+.seo-prose-body h3 {
+  font-family: var(--FM); font-size: 10px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold); margin: 0 0 12px;
+}
+.seo-prose-body p {
+  font-family: var(--FS); font-size: 13.5px; color: var(--g2);
+  line-height: 1.8; margin: 0 0 36px; max-width: 680px;
+}
+.seo-prose-body p:last-child { margin-bottom: 0; }
+.seo-prose-body strong { color: var(--ink); font-weight: 600; }
+@media(max-width:900px) {
+  .seo-prose { grid-template-columns: 1fr; gap: 24px; padding: 44px 28px; }
+  .seo-prose-label { position: static; }
+}
+
 /* ── Research Method section (home) ─────────────── */
 .method-section {
   border-top: 1px solid var(--rule);
@@ -5405,27 +5542,69 @@ a.nav-ext-link { display: none !important; }
   <span class="hrs-cta" onclick="sp('research')">View all research →</span>
 </div>
 
-<!-- Follow the Research block -->
-<div class="ftr-block">
-  <div class="ftr-col">
-    <div class="ftr-icon">01</div>
-    <div class="ftr-title" data-i18n="hftr_01_title">Research Notes</div>
-    <div class="ftr-desc" data-i18n="hftr_01_desc">Macro briefs, equity deep dives, and geo/market wraps — delivered to your inbox as published.</div>
-    <a class="ftr-link" href="#" onclick="openSubstack(event)" data-i18n="hftr_01_link">Subscribe on Substack →</a>
+<!-- ══ PLATFORM PILLARS ═══════════════════════════════ -->
+<section class="pillars-section">
+  <div class="pillars-header">
+    <div class="pillars-eyebrow">Everything on the Platform</div>
+    <h2 class="pillars-h2">Research. Systems. Tools.<br>One independent platform.</h2>
+    <p class="pillars-sub">From formal pre-outcome investment calls to 12 fully systematic strategies, a live macro model portfolio, and six open-source analyst tools — all built and published by one analyst, all free to access.</p>
   </div>
-  <div class="ftr-col">
-    <div class="ftr-icon">02</div>
-    <div class="ftr-title" data-i18n="hftr_02_title">Quantitative Models</div>
-    <div class="ftr-desc" data-i18n="hftr_02_desc">Black-Scholes, Monte Carlo, DCF, portfolio construction, and more — all open-source, all in-browser.</div>
-    <a class="ftr-link" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">GitHub →</a>
+
+  <div class="pillars-grid">
+
+    <!-- Pillar 1: Investment Research -->
+    <div class="pillar-card">
+      <div class="pillar-tag">Research</div>
+      <div class="pillar-title">Investment Research &amp; Track Record</div>
+      <p class="pillar-desc">Every investment call published on Substack with full thesis, entry price, stop-loss, and position size — before the outcome is known. Macro briefs, equity deep dives, geopolitical reads, and central bank analysis. The track record is live, public, and permanent.</p>
+      <div class="pillar-stats">
+        <div class="pillar-stat"><span class="pillar-stat-n">100%</span><span class="pillar-stat-l">Hit rate · 5 closed</span></div>
+        <div class="pillar-stat"><span class="pillar-stat-n">+42%</span><span class="pillar-stat-l">Avg closed return</span></div>
+        <div class="pillar-stat"><span class="pillar-stat-n">$0</span><span class="pillar-stat-l">Cost to subscribe</span></div>
+      </div>
+      <div class="pillar-links">
+        <button class="pillar-cta" onclick="sp('track')">Track Record →</button>
+        <button class="pillar-ghost" onclick="sp('research')">Research Notes →</button>
+      </div>
+    </div>
+
+    <!-- Pillar 2: Fund Lab -->
+    <div class="pillar-card pillar-card--featured">
+      <div class="pillar-tag pillar-tag--gold">Fund Lab</div>
+      <div class="pillar-title">Quantitative Systems &amp; Fund Lab</div>
+      <p class="pillar-desc">A live macro model portfolio — Asset Allocation Dynamic Fund — across seven asset classes, driven by macro regime signals. Alongside it: 12 fully systematic trading strategies across 5 FX/commodity pairs and 7 equity models, combining momentum, mean-reversion, and macro regime filters.</p>
+      <div class="pillar-stats">
+        <div class="pillar-stat"><span class="pillar-stat-n">+28.4%</span><span class="pillar-stat-l">Model fund return</span></div>
+        <div class="pillar-stat"><span class="pillar-stat-n">1.31</span><span class="pillar-stat-l">Sharpe ratio</span></div>
+        <div class="pillar-stat"><span class="pillar-stat-n">12</span><span class="pillar-stat-l">Systematic strategies</span></div>
+      </div>
+      <div class="pillar-links">
+        <button class="pillar-cta" onclick="sp('portfolios');setTimeout(showPortFund,150)">Model Portfolio →</button>
+        <button class="pillar-ghost" onclick="sp('strats')">Strategies →</button>
+      </div>
+    </div>
+
+    <!-- Pillar 3: Tools -->
+    <div class="pillar-card">
+      <div class="pillar-tag">Open Source</div>
+      <div class="pillar-title">Open Source Financial Tools</div>
+      <p class="pillar-desc">Six institutional-grade analyst tools built from scratch by Aeon Nimbus and open-sourced on GitHub — all running live in-browser with no account required. Covers options pricing, equity valuation, portfolio simulation, position sizing, bond analytics, and factor modelling.</p>
+      <div class="pillar-tools-list">
+        <span class="pillar-tool">DCF Valuation Engine</span>
+        <span class="pillar-tool">Black-Scholes Options</span>
+        <span class="pillar-tool">Monte Carlo Simulator</span>
+        <span class="pillar-tool">Kelly Criterion Sizer</span>
+        <span class="pillar-tool">Bond Analytics</span>
+        <span class="pillar-tool">Factor Correlation</span>
+      </div>
+      <div class="pillar-links" style="margin-top:20px">
+        <button class="pillar-cta" onclick="sp('tools')">Open Toolkit →</button>
+        <a class="pillar-ghost" href="https://github.com/lijiegsluis?tab=repositories" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+
   </div>
-  <div class="ftr-col">
-    <div class="ftr-icon">03</div>
-    <div class="ftr-title" data-i18n="hftr_03_title">Connect</div>
-    <div class="ftr-desc" data-i18n="hftr_03_desc">Institutional background in L/S equity, private credit, M&amp;A, and venture. Available for collaborations and conversations.</div>
-    <a class="ftr-link" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn →</a>
-  </div>
-</div>
+</section>
 
 
 <!-- ══ RESEARCH METHOD ════════════════════════════════ -->
@@ -5588,6 +5767,21 @@ a.nav-ext-link { display: none !important; }
       Subscribe on Substack
     </a>
     <div class="hss-note">Free · No spam · Unsubscribe anytime</div>
+  </div>
+</div>
+
+<!-- ══ SEO PROSE BLOCK ═══════════════════════════════ -->
+<div class="seo-prose">
+  <div class="seo-prose-label">About the Platform</div>
+  <div class="seo-prose-body">
+    <h3>Independent Macro &amp; Equity Research</h3>
+    <p><strong>LiJie Guo</strong> is a London-based <strong>independent macro and equity research analyst</strong> who publishes pre-outcome investment calls on Substack — full thesis, entry price, stop-loss, and position sizing disclosed <em>before</em> each position plays out. Across five closed calls, the track record stands at a 100% hit rate and a +42% average return: Oracle +74.3%, IREN +36.4%, Lemonade +34.7%, Reddit +32.5%, and Marvell Technology +31.9%. Every thesis is permanently public; nothing is revised after the fact.</p>
+    <h3>Quantitative Systems &amp; Fund Lab</h3>
+    <p>Beyond individual stock picks, Aeon Nimbus Research operates a <strong>quantitative Fund Lab</strong> housing 12 fully systematic trading strategies and a live macro model portfolio up +28.4% since inception (Sharpe 1.31). Strategies span long/short equity, momentum factor models, macro trend-following, and volatility-targeting overlays — each backtested to 99% real-tick data fidelity in MetaTrader 5. The model portfolio is updated in real time and is freely accessible on this site, offering a rare window into how a <strong>systematic equity fund</strong> is constructed and managed from the ground up.</p>
+    <h3>Open-Source Financial Tools</h3>
+    <p>The platform includes six <strong>open-source financial tools</strong> available directly in the browser: a <strong>DCF valuation engine</strong>, a <strong>Black-Scholes options pricing calculator</strong>, a <strong>Monte Carlo portfolio simulator</strong>, a Kelly Criterion position sizer, a bond duration and yield-to-maturity calculator, and a multi-factor correlation matrix. These tools are built for practitioner use — no login, no paywall, no data entry limits. They are used by equity analysts, options traders, and students across more than 40 countries.</p>
+    <h3>Research Philosophy &amp; Background</h3>
+    <p>LiJie Guo holds a Triple Master of Science (Equity Markets, Portfolio Management, Banking &amp; Finance) from leading European institutions and is a CFA Level 1 candidate. Prior experience includes long/short equity in Madrid, quantitative research at Crandon Capital, macro strategy at Santomera Bay Capital, and Big Four advisory at PwC. The founding insight behind Aeon Nimbus Research is simple: <strong>independent financial research is only credible when it is accountable</strong> — every call timestamped, every thesis public, every outcome recorded. No curated hindsight. No selective disclosure. Just the full record, good and bad, published for anyone to read.</p>
   </div>
 </div>
 

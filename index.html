@@ -5448,6 +5448,75 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 }
 .hv3-pnl-lbl b { color: var(--green); font-weight: 400; }
 
+/* Simulation controls */
+.hv3-sim-controls {
+  display: flex; align-items: flex-start; gap: 48px; flex-wrap: wrap;
+  margin-bottom: 4px;
+}
+.hv3-sim-label {
+  display: block; font-size: 8px; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--g2); margin-bottom: 10px;
+}
+.hv3-sim-aum-field {
+  display: flex; align-items: center; gap: 0;
+  border: 1px solid var(--line); background: transparent;
+  width: 200px;
+}
+.hv3-sim-currency {
+  padding: 0 10px; font-size: 13px; color: var(--g2);
+  border-right: 1px solid var(--line); line-height: 36px;
+  font-family: var(--FM, monospace);
+}
+.hv3-sim-input {
+  flex: 1; background: transparent; border: none; outline: none;
+  padding: 0 12px; height: 36px; font-size: 13px; color: var(--ink);
+  font-family: var(--FM, monospace); font-variant-numeric: tabular-nums;
+  -moz-appearance: textfield;
+}
+.hv3-sim-input::-webkit-outer-spin-button,
+.hv3-sim-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.hv3-sim-alloc-row {
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.hv3-sim-alloc-item {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.hv3-sim-alloc-tk {
+  font-size: 9px; letter-spacing: .08em; color: var(--g2);
+  font-family: var(--FM, monospace); text-transform: uppercase;
+}
+.hv3-sim-alloc-tk b { color: var(--green); font-weight: 400; }
+.hv3-sim-alloc-input {
+  width: 56px; text-align: center; background: transparent;
+  border: 1px solid var(--line); outline: none;
+  padding: 4px 6px; height: 30px; font-size: 12px; color: var(--ink);
+  font-family: var(--FM, monospace);
+  -moz-appearance: textfield;
+}
+.hv3-sim-alloc-input::-webkit-outer-spin-button,
+.hv3-sim-alloc-input::-webkit-inner-spin-button { -webkit-appearance: none; }
+.hv3-sim-alloc-input:focus { border-color: rgba(196,155,36,.4); }
+
+/* Cumulative P&L stats strip */
+.hv3-pnl-stats {
+  display: flex; gap: 0; border-top: 1px solid var(--line);
+  margin-top: 28px; flex-wrap: wrap;
+}
+.hv3-pnl-stat {
+  flex: 1; min-width: 140px; padding: 20px 0;
+  border-right: 1px solid var(--line);
+}
+.hv3-pnl-stat:last-child { border-right: none; }
+.hv3-pnl-stat-lbl {
+  font-size: 8px; letter-spacing: .2em; text-transform: uppercase;
+  color: var(--g2); margin-bottom: 8px;
+}
+.hv3-pnl-stat-val {
+  font-family: Georgia, serif; font-size: 22px; color: var(--ink);
+  font-variant-numeric: tabular-nums; letter-spacing: -.02em;
+}
+.hv3-pnl-stat-val.green { color: var(--green); }
+
 /* Glow pulse on live numbers */
 @keyframes an-glow-g {
   0%,100% { text-shadow: none; }
@@ -5527,6 +5596,11 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   .hv3-thesis { grid-template-columns: 1fr; padding: 56px 24px 48px; gap: 40px 0; }
   .hv3-pnl { padding: 48px 24px 36px; }
   .hv3-pnl-labels { display: none; }
+  .hv3-sim-controls { flex-direction: column; gap: 24px; }
+  .hv3-sim-aum-field { width: 100%; }
+  .hv3-pnl-stats { flex-wrap: wrap; }
+  .hv3-pnl-stat { flex: 1 1 45%; border-right: none; border-bottom: 1px solid var(--line); padding: 16px 0; }
+  .hv3-pnl-stat:last-child { border-bottom: none; }
   .an-grain { display: none; }
   .hv3-inner { flex-direction: column; align-items: flex-start; padding: 0 24px 48px; gap: 32px; }
   .hv3-rec-head { padding: 36px 24px 0; }
@@ -5953,23 +6027,56 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- CUMULATIVE P&L CURVE -->
 <section class="hv3-pnl" id="hv3-pnl">
   <div class="hv3-pnl-head" data-sr="up">
-    <div class="hv3-pnl-eyebrow">Portfolio Simulation · $100 Equal-Weighted</div>
-    <div class="hv3-pnl-title">From $100 to $<span id="hv3-pnl-final">—</span> across five calls.</div>
+    <div class="hv3-pnl-eyebrow">Portfolio Simulation · Closed Calls</div>
+    <div class="hv3-pnl-title">Cumulative P&amp;L: <span id="hv3-pnl-final">—</span></div>
   </div>
-  <div style="position:relative">
-    <canvas id="hv3-pnl-canvas" style="width:100%;height:240px;display:block"></canvas>
+
+  <!-- AUM + allocation controls -->
+  <div class="hv3-sim-controls" data-sr="up">
+    <div class="hv3-sim-aum-wrap">
+      <span class="hv3-sim-label">Portfolio AUM</span>
+      <div class="hv3-sim-aum-field">
+        <span class="hv3-sim-currency">$</span>
+        <input id="hv3-aum" class="hv3-sim-input" type="number" value="1000000" min="10000" step="10000">
+      </div>
+    </div>
+    <div class="hv3-sim-allocs">
+      <span class="hv3-sim-label">Allocation per call (%)</span>
+      <div class="hv3-sim-alloc-row" id="hv3-alloc-row"></div>
+    </div>
+  </div>
+
+  <!-- canvas -->
+  <div style="position:relative;margin-top:28px">
+    <canvas id="hv3-pnl-canvas" style="width:100%;height:260px;display:block"></canvas>
     <div class="hv3-pnl-tip" id="hv3-pnl-tip">
       <span class="hv3-pnl-tip-ret" id="hv3-tip-ret">—</span>
       <span class="hv3-pnl-tip-tk" id="hv3-tip-tk">—</span>
     </div>
   </div>
-  <div class="hv3-pnl-labels">
-    <span class="hv3-pnl-lbl">Inception</span>
-    <span class="hv3-pnl-lbl"><b>ORCL +74.3%</b></span>
-    <span class="hv3-pnl-lbl"><b>RDDT +32.5%</b></span>
-    <span class="hv3-pnl-lbl"><b>MRVL +31.9%</b></span>
-    <span class="hv3-pnl-lbl"><b>IREN +36.4%</b></span>
-    <span class="hv3-pnl-lbl"><b>LMND +34.7%</b></span>
+
+  <!-- cumulative P&L stats -->
+  <div class="hv3-pnl-stats" id="hv3-pnl-stats">
+    <div class="hv3-pnl-stat">
+      <div class="hv3-pnl-stat-lbl">Capital Deployed</div>
+      <div class="hv3-pnl-stat-val" id="hv3-stat-deployed">—</div>
+    </div>
+    <div class="hv3-pnl-stat">
+      <div class="hv3-pnl-stat-lbl">Total Gain</div>
+      <div class="hv3-pnl-stat-val green" id="hv3-stat-gain">—</div>
+    </div>
+    <div class="hv3-pnl-stat">
+      <div class="hv3-pnl-stat-lbl">Final Portfolio</div>
+      <div class="hv3-pnl-stat-val" id="hv3-stat-final">—</div>
+    </div>
+    <div class="hv3-pnl-stat">
+      <div class="hv3-pnl-stat-lbl">Return on AUM</div>
+      <div class="hv3-pnl-stat-val green" id="hv3-stat-roaum">—</div>
+    </div>
+    <div class="hv3-pnl-stat">
+      <div class="hv3-pnl-stat-lbl">Avg per Call</div>
+      <div class="hv3-pnl-stat-val green" id="hv3-stat-avg">—</div>
+    </div>
   </div>
 </section>
 
@@ -14142,45 +14249,78 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
 (function(){
   var canvas=qs('#hv3-pnl-canvas'),tip=qs('#hv3-pnl-tip'),tipRet=qs('#hv3-tip-ret'),tipTk=qs('#hv3-tip-tk'),finalEl=qs('#hv3-pnl-final');
   if(!canvas) return;
-  var calls=[{tk:'ORCL',ret:74.3,period:'Apr–Jun 2026'},{tk:'IREN',ret:36.4,period:'May–Jun 2026'},{tk:'LMND',ret:34.7,period:'Jul 2026'},{tk:'RDDT',ret:32.5,period:'May–Jun 2026'},{tk:'MRVL',ret:31.9,period:'Jun 2026'}];
-  var pts=[{val:100,tk:'Start'}]; var v=100;
-  calls.forEach(function(c){ v*=(1+c.ret/100); pts.push({val:v,tk:c.tk,ret:c.ret,period:c.period}); });
-  if(finalEl) finalEl.textContent=v.toFixed(0);
+  var calls=[
+    {tk:'ORCL',ret:74.3,period:'Apr–Jun 2026',alloc:3},
+    {tk:'IREN',ret:36.4,period:'May–Jun 2026',alloc:3},
+    {tk:'LMND',ret:34.7,period:'Jul 2026',    alloc:3},
+    {tk:'RDDT',ret:32.5,period:'May–Jun 2026',alloc:3},
+    {tk:'MRVL',ret:31.9,period:'Jun 2026',    alloc:3}
+  ];
+  /* build allocation inputs */
+  var allocRow=qs('#hv3-alloc-row');
+  if(allocRow){ calls.forEach(function(c,i){ var el=document.createElement('div'); el.className='hv3-sim-alloc-item'; el.innerHTML='<div class="hv3-sim-alloc-tk"><b>'+c.tk+'</b><br>+'+c.ret+'%</div><input class="hv3-sim-alloc-input" type="number" value="'+c.alloc+'" min="0.5" max="100" step="0.5" data-i="'+i+'">'; allocRow.appendChild(el); }); allocRow.addEventListener('input',function(e){ if(e.target.dataset.i!=null){ calls[+e.target.dataset.i].alloc=parseFloat(e.target.value)||0; recalc(); } }); }
+  var aumEl=qs('#hv3-aum'); if(aumEl) aumEl.addEventListener('input',recalc);
+  function getAUM(){ return parseFloat((aumEl&&aumEl.value)||'1000000')||1000000; }
+  function fmtD(v){ if(Math.abs(v)>=1e6) return '$'+(v/1e6).toFixed(3)+'M'; if(Math.abs(v)>=1e3) return '$'+(v/1e3).toFixed(1)+'K'; return '$'+v.toFixed(0); }
+  function fmtPnl(v){ return (v>=0?'+':'')+fmtD(v); }
+  var pts=[];
+  function recalc(){
+    var aum=getAUM(); var cumG=0;
+    pts=[{val:aum,tk:'Start',gain:0,cumGain:0}];
+    calls.forEach(function(c){ var g=aum*(c.alloc/100)*(c.ret/100); cumG+=g; pts.push({val:aum+cumG,tk:c.tk,gain:g,cumGain:cumG,ret:c.ret,period:c.period,alloc:c.alloc}); });
+    var last=pts[pts.length-1];
+    if(finalEl) finalEl.textContent=fmtPnl(last.cumGain);
+    var deployed=calls.reduce(function(s,c){ return s+aum*(c.alloc/100); },0);
+    var sd=qs('#hv3-stat-deployed'),sg=qs('#hv3-stat-gain'),sf=qs('#hv3-stat-final'),sr=qs('#hv3-stat-roaum'),sa=qs('#hv3-stat-avg');
+    if(sd) sd.textContent=fmtD(deployed);
+    if(sg) sg.textContent=fmtPnl(last.cumGain);
+    if(sf) sf.textContent=fmtD(last.val);
+    if(sr) sr.textContent='+'+(last.cumGain/aum*100).toFixed(2)+'%';
+    if(sa) sa.textContent=fmtPnl(last.cumGain/calls.length);
+  }
   var dpr=window.devicePixelRatio||1,W,H,ctx2,animProg=0,animating=false,hovered=-1;
-  var pad={l:56,r:48,t:28,b:44};
-  function resize(){ canvas.width=(canvas.offsetWidth||700)*dpr; canvas.height=(canvas.offsetHeight||240)*dpr; ctx2=canvas.getContext('2d'); ctx2.scale(dpr,dpr); W=canvas.offsetWidth; H=canvas.offsetHeight; }
-  function ptXY(i){ var minV=92,maxV=pts[pts.length-1].val+10,x=pad.l+(i/(pts.length-1))*(W-pad.l-pad.r),y=H-pad.b-((pts[i].val-minV)/(maxV-minV))*(H-pad.t-pad.b); return {x:x,y:y}; }
+  var pad={l:90,r:48,t:28,b:44};
+  function resize(){ canvas.width=(canvas.offsetWidth||700)*dpr; canvas.height=(canvas.offsetHeight||260)*dpr; ctx2=canvas.getContext('2d'); ctx2.scale(dpr,dpr); W=canvas.offsetWidth; H=canvas.offsetHeight; }
+  function ptXY(i){ var vals=pts.map(function(p){return p.val;}),minV=Math.min.apply(null,vals)*0.982,maxV=Math.max.apply(null,vals)*1.015; var x=pad.l+(i/(pts.length-1))*(W-pad.l-pad.r),y=H-pad.b-((pts[i].val-minV)/(maxV-minV))*(H-pad.t-pad.b); return {x:x,y:y,minV:minV,maxV:maxV}; }
   function draw(){
     requestAnimationFrame(draw);
+    if(!ctx2||pts.length<2) return;
     ctx2.clearRect(0,0,W,H);
     if(animProg<=0) return;
-    var minV=92,maxV=pts[pts.length-1].val+10;
-    [100,150,200,250,300].forEach(function(gv){ var gy=H-pad.b-((gv-minV)/(maxV-minV))*(H-pad.t-pad.b); if(gy<pad.t||gy>H-pad.b) return; ctx2.beginPath(); ctx2.setLineDash([4,8]); ctx2.strokeStyle='rgba(255,255,255,.042)'; ctx2.lineWidth=1; ctx2.moveTo(pad.l,gy); ctx2.lineTo(W-pad.r,gy); ctx2.stroke(); ctx2.setLineDash([]); ctx2.font='9px monospace'; ctx2.fillStyle='rgba(110,102,88,.42)'; ctx2.textAlign='right'; ctx2.textBaseline='middle'; ctx2.fillText('$'+gv,pad.l-8,gy); });
+    var aum=getAUM(),vals=pts.map(function(p){return p.val;}),minV=Math.min.apply(null,vals)*0.982,maxV=Math.max.apply(null,vals)*1.015;
+    /* grid */
+    var range=maxV-aum,step=range/3;
+    [aum,aum+step,aum+step*2,aum+step*3].forEach(function(gv){
+      var gy=H-pad.b-((gv-minV)/(maxV-minV))*(H-pad.t-pad.b);
+      if(gy<pad.t-4||gy>H-pad.b+4) return;
+      ctx2.beginPath(); ctx2.setLineDash([4,8]);
+      ctx2.strokeStyle=gv===aum?'rgba(255,255,255,.12)':'rgba(255,255,255,.042)';
+      ctx2.lineWidth=gv===aum?1.5:1;
+      ctx2.moveTo(pad.l,gy); ctx2.lineTo(W-pad.r,gy); ctx2.stroke(); ctx2.setLineDash([]);
+      ctx2.font='9px monospace'; ctx2.fillStyle=gv===aum?'rgba(196,155,36,.65)':'rgba(110,102,88,.42)';
+      ctx2.textAlign='right'; ctx2.textBaseline='middle'; ctx2.fillText(fmtD(gv),pad.l-8,gy);
+    });
     var last=clamp(Math.floor(animProg*(pts.length-1)),0,pts.length-1),frac=(animProg*(pts.length-1))-last;
     var drawn=[]; for(var i=0;i<=last;i++) drawn.push(ptXY(i));
     if(last<pts.length-1&&frac>0){ var a=ptXY(last),b=ptXY(last+1); drawn.push({x:a.x+(b.x-a.x)*frac,y:a.y+(b.y-a.y)*frac}); }
     if(drawn.length<2) return;
-    var grd=ctx2.createLinearGradient(0,pad.t,0,H-pad.b); grd.addColorStop(0,'rgba(79,206,122,.2)'); grd.addColorStop(1,'rgba(79,206,122,.015)');
+    var grd=ctx2.createLinearGradient(0,pad.t,0,H-pad.b); grd.addColorStop(0,'rgba(79,206,122,.18)'); grd.addColorStop(1,'rgba(79,206,122,.01)');
     ctx2.beginPath(); ctx2.moveTo(drawn[0].x,H-pad.b); drawn.forEach(function(p){ ctx2.lineTo(p.x,p.y); }); ctx2.lineTo(drawn[drawn.length-1].x,H-pad.b); ctx2.closePath(); ctx2.fillStyle=grd; ctx2.fill();
     ctx2.beginPath(); ctx2.moveTo(drawn[0].x,drawn[0].y); for(var i=1;i<drawn.length;i++) ctx2.lineTo(drawn[i].x,drawn[i].y); ctx2.strokeStyle='#4fce7a'; ctx2.lineWidth=2.2; ctx2.lineJoin='round'; ctx2.lineCap='round'; ctx2.stroke();
-    for(var i=0;i<=last&&i<pts.length;i++){
-      var pt=ptXY(i),isH=(hovered===i);
-      if(pts[i].tk==='Start'){ ctx2.beginPath(); ctx2.arc(pt.x,pt.y,3.5,0,Math.PI*2); ctx2.fillStyle='rgba(110,102,88,.55)'; ctx2.fill(); }
-      else{ var g=ctx2.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,isH?18:12); g.addColorStop(0,'rgba(79,206,122,'+(isH?.6:.32)+')'); g.addColorStop(1,'rgba(79,206,122,0)'); ctx2.fillStyle=g; ctx2.beginPath(); ctx2.arc(pt.x,pt.y,isH?18:12,0,Math.PI*2); ctx2.fill(); ctx2.beginPath(); ctx2.arc(pt.x,pt.y,isH?5.5:3.5,0,Math.PI*2); ctx2.fillStyle='#4fce7a'; ctx2.fill(); ctx2.font=(isH?'600 ':'')+'8.5px monospace'; ctx2.fillStyle=isH?'rgba(196,155,36,.95)':'rgba(110,102,88,.48)'; ctx2.textAlign='center'; ctx2.textBaseline='bottom'; ctx2.fillText(pts[i].tk,pt.x,pt.y-11); }
-    }
+    for(var i=0;i<=last&&i<pts.length;i++){ var pt=ptXY(i),isH=(hovered===i); if(pts[i].tk==='Start'){ ctx2.beginPath(); ctx2.arc(pt.x,pt.y,3.5,0,Math.PI*2); ctx2.fillStyle='rgba(110,102,88,.55)'; ctx2.fill(); } else { var g=ctx2.createRadialGradient(pt.x,pt.y,0,pt.x,pt.y,isH?18:12); g.addColorStop(0,'rgba(79,206,122,'+(isH?.6:.32)+')'); g.addColorStop(1,'rgba(79,206,122,0)'); ctx2.fillStyle=g; ctx2.beginPath(); ctx2.arc(pt.x,pt.y,isH?18:12,0,Math.PI*2); ctx2.fill(); ctx2.beginPath(); ctx2.arc(pt.x,pt.y,isH?5.5:3.5,0,Math.PI*2); ctx2.fillStyle='#4fce7a'; ctx2.fill(); ctx2.font=(isH?'600 ':'')+'8.5px monospace'; ctx2.fillStyle=isH?'rgba(196,155,36,.95)':'rgba(110,102,88,.48)'; ctx2.textAlign='center'; ctx2.textBaseline='bottom'; ctx2.fillText(pts[i].tk,pt.x,pt.y-11); } }
     var tip2=drawn[drawn.length-1],pulse=.5+.5*Math.sin(Date.now()*.004);
     var g2=ctx2.createRadialGradient(tip2.x,tip2.y,0,tip2.x,tip2.y,10+pulse*5); g2.addColorStop(0,'rgba(79,206,122,'+(0.48+pulse*.25)+')'); g2.addColorStop(1,'rgba(79,206,122,0)'); ctx2.fillStyle=g2; ctx2.beginPath(); ctx2.arc(tip2.x,tip2.y,10+pulse*5,0,Math.PI*2); ctx2.fill();
     ctx2.beginPath(); ctx2.arc(tip2.x,tip2.y,4.5,0,Math.PI*2); ctx2.fillStyle='#4fce7a'; ctx2.fill();
-    if(last>0){ var curV=last<pts.length-1?pts[last].val+(pts[last+1].val-pts[last].val)*frac:pts[pts.length-1].val; ctx2.font='600 12px -apple-system,sans-serif'; ctx2.fillStyle='#4fce7a'; ctx2.textAlign='left'; ctx2.textBaseline='middle'; ctx2.fillText('$'+curV.toFixed(0),tip2.x+10,tip2.y); }
+    if(last>0){ var curV=last<pts.length-1?pts[last].val+(pts[last+1].val-pts[last].val)*frac:pts[pts.length-1].val; ctx2.font='600 12px -apple-system,sans-serif'; ctx2.fillStyle='#4fce7a'; ctx2.textAlign='left'; ctx2.textBaseline='middle'; ctx2.fillText(fmtD(curV),tip2.x+10,tip2.y); }
     ctx2.textBaseline='top'; ctx2.textAlign='center'; ctx2.font='8px monospace'; ctx2.fillStyle='rgba(110,102,88,.38)';
     pts.forEach(function(p,i){ var xy=ptXY(i); ctx2.fillText(i===0?'Start':p.tk,xy.x,H-pad.b+10); });
   }
   function startAnim(){ if(animating) return; animating=true; var s=performance.now(),dur=2200; (function step(now){ var p=Math.min((now-s)/dur,1); animProg=1-Math.pow(1-p,3); if(p<1) requestAnimationFrame(step); })(performance.now()); }
   var io=new IntersectionObserver(function(entries){ if(entries[0].isIntersecting) startAnim(); },{threshold:.05,rootMargin:'0px 0px -80px 0px'});
   var sec=qs('#hv3-pnl'); if(sec) io.observe(sec);
-  canvas.addEventListener('mousemove',function(e){ var r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,closest=-1,minD=36; pts.forEach(function(pt,i){ if(i===0) return; var xy=ptXY(i),d=Math.abs(mx-xy.x); if(d<minD){ minD=d; closest=i; } }); hovered=closest; if(tip&&closest>0){ var xy=ptXY(closest),pct=((pts[closest].val/100-1)*100).toFixed(1); tip.classList.add('vis'); tipRet.textContent='$'+pts[closest].val.toFixed(0)+' (+'+pct+'%)'; tipTk.textContent=pts[closest].tk+' · '+calls[closest-1].period; tip.style.left=Math.min(xy.x+12,W-160)+'px'; tip.style.top=(xy.y-60)+'px'; } else if(tip) tip.classList.remove('vis'); });
+  canvas.addEventListener('mousemove',function(e){ var r=canvas.getBoundingClientRect(),mx=e.clientX-r.left,closest=-1,minD=36; pts.forEach(function(pt,i){ if(i===0) return; var xy=ptXY(i),d=Math.abs(mx-xy.x); if(d<minD){ minD=d; closest=i; } }); hovered=closest; if(tip&&closest>0){ var xy=ptXY(closest),p=pts[closest]; tip.classList.add('vis'); tipRet.textContent=fmtPnl(p.gain)+' ('+p.alloc+'% × +'+p.ret+'%)'; tipTk.textContent=p.tk+' · '+p.period; tip.style.left=Math.min(xy.x+12,W-210)+'px'; tip.style.top=(xy.y-60)+'px'; } else if(tip) tip.classList.remove('vis'); });
   canvas.addEventListener('mouseleave',function(){ hovered=-1; if(tip) tip.classList.remove('vis'); });
-  resize(); window.addEventListener('resize',resize); draw();
+  recalc(); resize(); window.addEventListener('resize',resize); draw();
 })();
 
 /* ── 10. COUNTER ANIMATION (numbers strip) ── */

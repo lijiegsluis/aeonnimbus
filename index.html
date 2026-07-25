@@ -107,7 +107,7 @@
       {
         "@type": "Question",
         "name": "Is Aeon Nimbus Research a hedge fund?",
-        "acceptedAnswer": { "@type": "Answer", "text": "No. Aeon Nimbus Research is an independent research and analysis platform. It is not a regulated investment firm, does not manage external capital, and does not solicit investors. The Fund Lab and model portfolio are simulated research vehicles for developing and displaying quantitative methodology. All investment calls and research content are published for transparency and educational purposes only." }
+        "acceptedAnswer": { "@type": "Answer", "text": "No. Aeon Nimbus Research is an independent research and analysis platform. It is not a regulated investment firm, does not manage external capital, and does not solicit investors. The Research Lab and model portfolio are simulated research vehicles for developing and displaying quantitative methodology. All investment calls and research content are published for transparency and educational purposes only." }
       },
       {
         "@type": "Question",
@@ -5169,6 +5169,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   .about-pg-body { grid-template-columns: 1fr; }
   .about-pg-left { border-right: none; border-bottom: 1px solid var(--rule); padding: 40px 28px; }
   .about-pg-right { padding: 40px 28px; }
+  #pg-about section[style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
+  #pg-about section[style*="padding:72px 52px"] { padding: 48px 24px 56px !important; }
 }
 
 .about-section {
@@ -5837,10 +5839,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   .hv3-inner { flex-direction: column; align-items: flex-start; padding: 0 24px 48px; gap: 32px; }
   .hv3-rec-head { padding: 36px 24px 0; }
   .hv3-calls td, .hv3-calls th { padding-inline: 20px; }
-  .hv3-calls th:nth-child(3), .hv3-calls td:nth-child(3) { display: none; }
+  .hv3-calls th:nth-child(n+3):nth-child(-n+6), .hv3-calls td:nth-child(n+3):nth-child(-n+6) { display: none; }
   .hv3-rec-foot { padding-inline: 24px; flex-direction: column; gap: 16px; align-items: flex-start; }
-  .hv3-strip { grid-template-columns: 1fr; }
-  .hv3-sitem { border-right: none; }
+  .hv3-strip { grid-template-columns: repeat(2, 1fr); }
+  .hv3-sitem { border-right: none; border-bottom: 1px solid var(--line); }
+  .hv3-sitem:nth-child(odd) { border-right: 1px solid var(--line); }
+  .hv3-sitem:last-child, .hv3-sitem:nth-last-child(2):nth-child(odd) { border-bottom: none; }
   .hv3-plat-head { padding: 56px 24px 40px; }
   .hv3-plat-cards { grid-template-columns: 1fr; }
   .hv3-pcard { border-right: none; padding: 40px 24px; }
@@ -5956,7 +5960,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 /* Numbers strip */
 .hv3-strip {
-  display: grid; grid-template-columns: repeat(3, 1fr);
+  display: grid; grid-template-columns: repeat(4, 1fr);
   border-top: 1px solid var(--line);
 }
 .hv3-sitem {
@@ -5970,6 +5974,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 }
 .hv3-snum.g { color: var(--green); }
 .hv3-slbl { font-size: 9px; letter-spacing: .18em; text-transform: uppercase; color: var(--ink2); }
+.hv3-cons { font-family: var(--FM, monospace); font-size: 9px; letter-spacing: .04em; color: var(--gold); line-height: 1.5; }
+.hv3-cpub { font-family: var(--FM, monospace); font-size: 9px; color: var(--ink2); white-space: nowrap; }
+.hv3-thesis-link { color: inherit; text-decoration: none; }
+.hv3-thesis-link:hover { color: var(--gold); }
 
 /* Platform section */
 .hv3-plat-head {
@@ -6082,7 +6090,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="nbtn" onclick="sp('track')" data-i18n="nav_track">Track Record</button>
     <button class="nbtn" onclick="sp('research')" data-i18n="nav_research">Research</button>
     <div class="nav-drop-wrap">
-      <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Fund Lab</span> ▾</button>
+      <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Research Lab</span> ▾</button>
       <div class="nav-dropdown">
         <button class="nav-drop-item" onclick="sp('portfolios');setTimeout(showPortFund,150)">
           <span class="nav-drop-tag" data-i18n="drop_paper_tag">Model Portfolio</span>
@@ -6167,11 +6175,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div class="hv3-cred-item">
     <div class="hv3-cred-label">Prior Firms</div>
-    <div class="hv3-cred-val">Jupiter AM · Crandon AM · Santomera Bay · PwC · SpinLab &amp; Antler</div>
+    <div class="hv3-cred-val"><a href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" style="color:inherit;text-decoration:none;border-bottom:1px solid rgba(196,164,74,.35)">Jupiter AM · Crandon AM · Santomera Bay · PwC · SpinLab &amp; Antler ↗</a></div>
   </div>
   <div class="hv3-cred-item">
     <div class="hv3-cred-label">Track Record</div>
     <div class="hv3-cred-val"><em>100%</em> hit rate · 5 closed calls · All pre-published</div>
+  </div>
+  <div class="hv3-cred-item" style="flex-direction:row;align-items:center;justify-content:flex-end;gap:16px">
+    <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:7px;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,164,74,.35);padding:9px 16px;border-radius:2px;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s">&#8595;&nbsp;Q2 2026 Investor Letter</a>
   </div>
 </div>
 
@@ -6190,6 +6201,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <th style="width:52px">#</th>
         <th>Instrument</th>
         <th>Thesis</th>
+        <th>vs. Street</th>
+        <th>Published</th>
         <th>Period</th>
         <th>Return</th>
       </tr>
@@ -6198,14 +6211,18 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">01</span></td>
         <td><div class="hv3-ctk">ORCL</div><div class="hv3-cco">Oracle Corporation</div></td>
-        <td><div class="hv3-cthesis">$98B cloud backlog invisible to the street — AI demand pulled Oracle's 5-year infrastructure runway into 18 months.</div></td>
+        <td><div class="hv3-cthesis"><a href="https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market" target="_blank" class="hv3-thesis-link" onclick="event.stopPropagation()">$98B cloud backlog invisible to the street — AI demand pulled Oracle's 5-year infrastructure runway into 18 months ↗</a></div></td>
+        <td><div class="hv3-cons">Buy · Missed $98B backlog</div></td>
+        <td><div class="hv3-cpub">8 Apr 2026</div></td>
         <td><div class="hv3-cperiod">Apr – Jun 2026</div></td>
         <td><div class="hv3-cret">+74.3%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">02</span></td>
         <td><div class="hv3-ctk">IREN</div><div class="hv3-cco">IREN Limited</div></td>
-        <td><div class="hv3-cthesis">Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve.</div></td>
+        <td><div class="hv3-cthesis"><a href="https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat" target="_blank" class="hv3-thesis-link" onclick="event.stopPropagation()">Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve ↗</a></div></td>
+        <td><div class="hv3-cons">Uncovered · Macro fear mispriced</div></td>
+        <td><div class="hv3-cpub">20 May 2026</div></td>
         <td><div class="hv3-cperiod">May – Jun 2026</div></td>
         <td><div class="hv3-cret">+36.4%</div></td>
       </tr>
@@ -6213,13 +6230,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <td><span class="hv3-cnum">03</span></td>
         <td><div class="hv3-ctk">LMND</div><div class="hv3-cco">Lemonade, Inc.</div></td>
         <td><div class="hv3-cthesis">Loss ratio cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure.</div></td>
+        <td><div class="hv3-cons">Street Sell · Missed loss-ratio turn</div></td>
+        <td><div class="hv3-cpub">2 Jul 2026</div></td>
         <td><div class="hv3-cperiod">Jul 2026</div></td>
         <td><div class="hv3-cret">+34.7%</div></td>
       </tr>
       <tr onclick="sp('track')" style="cursor:pointer">
         <td><span class="hv3-cnum">04</span></td>
         <td><div class="hv3-ctk">RDDT</div><div class="hv3-cco">Reddit, Inc.</div></td>
-        <td><div class="hv3-cthesis">AI's training feedstock, not its victim — Reddit's unique human corpus is the data infrastructure every major lab depends on.</div></td>
+        <td><div class="hv3-cthesis"><a href="https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock" target="_blank" class="hv3-thesis-link" onclick="event.stopPropagation()">AI's training feedstock, not its victim — Reddit's unique human corpus is the data infrastructure every major lab depends on ↗</a></div></td>
+        <td><div class="hv3-cons">Street Mixed · Missed AI data angle</div></td>
+        <td><div class="hv3-cpub">27 May 2026</div></td>
         <td><div class="hv3-cperiod">May – Jun 2026</div></td>
         <td><div class="hv3-cret">+32.5%</div></td>
       </tr>
@@ -6227,6 +6248,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <td><span class="hv3-cnum">05</span></td>
         <td><div class="hv3-ctk">MRVL</div><div class="hv3-cco">Marvell Technology</div></td>
         <td><div class="hv3-cthesis">Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn't modeled.</div></td>
+        <td><div class="hv3-cons">Street Buy · Missed ASIC cycle</div></td>
+        <td><div class="hv3-cpub">9 Jun 2026</div></td>
         <td><div class="hv3-cperiod">Jun 2026</div></td>
         <td><div class="hv3-cret">+31.9%</div></td>
       </tr>
@@ -6253,6 +6276,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="hv3-sitem">
     <div class="hv3-snum" data-hv3t="12" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
     <div class="hv3-slbl">Systematic Strategies · Active</div>
+  </div>
+  <div class="hv3-sitem">
+    <div class="hv3-snum" data-hv3t="1.31" data-hv3p="" data-hv3s="" data-hv3d="2">0</div>
+    <div class="hv3-slbl">Sharpe Ratio · Model Portfolio</div>
   </div>
 </div>
 
@@ -6356,7 +6383,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 <div class="hv3-plat-cards">
   <div class="hv3-pcard">
-    <div class="hv3-plabel">Fund Lab</div>
+    <div class="hv3-plabel">Research Lab</div>
     <h3 class="hv3-ptitle">12 Systematic Strategies</h3>
     <p class="hv3-pbody">A live macro model portfolio built on 12 fully systematic strategies across equity and FX — each backtested to 99% real-tick data. Free access, no paywall, no login.</p>
     <button class="hv3-plink" onclick="sp('portfolios');setTimeout(showPortFund,150)">Model Portfolio →</button>
@@ -6518,7 +6545,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <span class="flnk ul-draw" onclick="sp('research')">Research</span>
     <span class="flnk ul-draw" onclick="sp('track')">Track Record</span>
     <span class="flnk ul-draw" onclick="sp('strats')">Strategies</span>
-    <span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span>
+    <span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span>
     <span class="flnk ul-draw" onclick="sp('services')">Services</span>
     <span class="flnk ul-draw" onclick="sp('contact')">Contact</span>
     <a class="flnk" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
@@ -6669,7 +6696,58 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </div>
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('about')">About</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<!-- ══ RESEARCH METHODOLOGY ══════════════════════════════ -->
+<section style="border-top:1px solid var(--rule);padding:72px 52px 80px;max-width:1100px;margin:0 auto">
+  <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:20px">Research Methodology</div>
+  <h2 style="font-family:Georgia,serif;font-size:clamp(24px,3vw,40px);font-weight:400;color:var(--ink);margin:0 0 40px;text-wrap:balance">How I Build an Investment Thesis</h2>
+
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)">
+
+    <div style="padding:32px 28px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">01 · SCREENING</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">Macro-first, then single-stock</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">Every idea starts with a macro read: what is the prevailing regime, where is the central bank in its cycle, and which sectors benefit from or are exposed to the current geopolitical configuration. Only then do I screen for single stocks within that macro frame — avoiding sector bets that fight the regime.</p>
+    </div>
+
+    <div style="padding:32px 28px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">02 · FUNDAMENTAL ANALYSIS</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">Identify what the street is missing</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">I look for one key variable the consensus has mispriced: a structural inflection that hasn't yet shown up in earnings, a balance sheet item the market is treating incorrectly, or a demand driver that sell-side models have not incorporated. Each call requires a specific, falsifiable thesis — not directional sentiment.</p>
+    </div>
+
+    <div style="padding:32px 28px">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">03 · POSITION CONSTRUCTION</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">Size, stop, and time horizon first</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">Before publishing, I set three parameters: position size as % of portfolio (typically 2–5%), a hard stop-loss at the level that would invalidate the thesis, and an investment horizon (not a price target timeline). Sizing is driven by conviction and correlation — I will not concentrate across correlated names.</p>
+    </div>
+
+    <div style="padding:32px 28px;border-top:1px solid var(--rule);border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">04 · PRE-OUTCOME PUBLICATION</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">The record is written before the result</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">Every call is published on Substack and recorded on aeonnimbus.com with a timestamp before the market closes on the entry date. The full thesis, entry price, stop-loss, and size are all visible before the outcome is known. Nothing is retroactively edited or deleted — the record stands permanently regardless of result.</p>
+    </div>
+
+    <div style="padding:32px 28px;border-top:1px solid var(--rule);border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">05 · SYSTEMATIC OVERLAY</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">Quantitative signals as a second opinion</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">Discretionary calls are stress-tested against the 12 systematic strategies running in parallel. If the quant models flatly contradict a discretionary thesis, I either reduce size or re-examine my fundamental assumptions. The systematic portfolio is not a replacement for fundamental thinking — it is a check on behavioural bias and timing.</p>
+    </div>
+
+    <div style="padding:32px 28px;border-top:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.12em;color:var(--gold);margin-bottom:12px">06 · EXIT DISCIPLINE</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);margin-bottom:10px">Rules-based, not emotional</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:13px;color:var(--ink2);line-height:1.7;margin:0">Positions are closed when: the stop-loss is triggered, the original thesis is invalidated by new data, a better risk-adjusted opportunity presents itself, or the position reaches a point where continued holding requires a new thesis rather than the original one. Hitting a price target is not automatically a close trigger — the thesis must be reassessed at every major inflection.</p>
+    </div>
+
+  </div>
+
+  <div style="margin-top:32px;display:flex;gap:16px;flex-wrap:wrap;align-items:center">
+    <button class="method-cta-btn" onclick="sp('track')">View Track Record →</button>
+    <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(196,164,74,.3);padding-bottom:2px">&#8595; Download Q2 Letter</a>
+  </div>
+</section>
+
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('about')">About</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
@@ -6714,7 +6792,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <a class="ftr-link" href="#" onclick="sp('tools')" data-i18n="rftr_03_link">Open toolkit →</a>
   </div>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
@@ -6816,7 +6894,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="trnote" style="margin:32px 44px 0">
   <p><strong>Methodology:</strong> Every call is published on Substack with entry price, stop-loss, position size, and full thesis — before the outcome is known. Returns are calculated from the published entry price to exit price. Open P&amp;L uses live prices. S&amp;P 500 benchmark starts from 08 Apr 2026, the date of the first call. All positions, including losses, remain on the record and are never edited or deleted.</p>
 </div>
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
@@ -7599,7 +7677,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 </div><!-- /qp-section -->
 <!-- tgrid -->
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">All tools are for educational and informational purposes only. Not financial advice. Results are model-based estimates only.</div>
 </div>
 
@@ -8261,7 +8339,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 </div>
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
 </div><!-- /pg-strats -->
 
@@ -8278,7 +8356,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- Fund Lab intro + ETP notice -->
 <div style="padding:0 52px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap">
-  <p style="font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75;max-width:560px;margin:0">Fund Lab is the research and product layer of Aeon Nimbus — housing a live paper portfolio, systematic equity strategies, and the portfolio construction toolkit. Each vehicle is built on the same quantitative framework: regime-aware, disciplined, and fully transparent.</p>
+  <p style="font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75;max-width:560px;margin:0">Research Lab is the research and product layer of Aeon Nimbus — housing a live paper portfolio, systematic equity strategies, and the portfolio construction toolkit. Each vehicle is built on the same quantitative framework: regime-aware, disciplined, and fully transparent.</p>
   <div style="flex-shrink:0;border:1px solid rgba(200,131,10,.3);background:rgba(200,131,10,.05);padding:16px 22px;border-radius:2px;max-width:320px">
     <div style="font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Coming Soon</div>
     <div style="font-family:var(--FS);font-size:13px;color:var(--ink);font-weight:500;margin-bottom:6px">Exchange-Traded Products</div>
@@ -8334,7 +8412,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
   <!-- ── TEARSHEET HEADER ──────────────────────────────── -->
   <div class="ts-hdr">
-    <button class="port-back" onclick="hidePortFund()">← Fund Lab</button>
+    <button class="port-back" onclick="hidePortFund()">← Research Lab</button>
     <div class="ts-hdr-inner">
       <div class="ts-breadcrumb">
         <span class="ts-bc-tag">● Paper Portfolio</span>
@@ -8580,42 +8658,94 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="pg" id="pg-services">
 
 <div class="pghd reveal">
-  <div class="pgtag">Beyond Research</div>
-  <h2 class="pgtitle">Work <em>With Me</em></h2>
-  <p class="pgsub">Productized services alongside the free research. Software and educational offerings only — nothing here is personalized investment advice.</p>
+  <div class="pgtag">Work With Me</div>
+  <h2 class="pgtitle">Services &amp; <em>Consulting</em></h2>
+  <p class="pgsub">Four ways to work together — research access, quantitative model development, strategy sessions, and financial tooling. Nothing here constitutes investment advice.</p>
 </div>
 
-<div style="padding:0 44px 24px"><a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a></div>
+<div style="padding:0 44px 24px;display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+  <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a>
+  <span style="font-family:var(--FM);font-size:9px;color:var(--ink3);letter-spacing:.04em">Free sample of research format &amp; methodology</span>
+</div>
+
 <div class="wr-wrap" style="padding:0 44px 60px">
-  <div class="wr-grid">
+  <div class="wr-grid" style="grid-template-columns:repeat(2,1fr);gap:20px">
+
+    <!-- Card 1 -->
     <div class="wr-card">
-      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">CONSULTING</div>
-      <div class="wr-card-name">AI TOOLS — BUILDING</div>
-      <div class="wr-card-strat">Productized engagement</div>
-      <div class="wr-card-desc">I design and build the same kind of AI-driven tooling, automation, and data pipelines that power this site — scoped to your team or product, with fixed deliverables agreed up front.</div>
+      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">RESEARCH ACCESS</div>
+      <div class="wr-card-name">EQUITY &amp; MACRO RESEARCH</div>
+      <div class="wr-card-strat">For investors, analysts, and PMs</div>
+      <div class="wr-card-desc">Every formal investment call — entry, stop-loss, position size, and full thesis — published before the outcome is known. Macro briefs, central bank reads, and geopolitical market analysis. Currently free on Substack. Premium structured delivery available for institutional teams requiring formatted reports or direct distribution.</div>
+      <ul style="font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:2;list-style:none;padding:0;margin:12px 0 20px">
+        <li>✓ Pre-outcome calls with full thesis</li>
+        <li>✓ Macro briefs &amp; central bank analysis</li>
+        <li>✓ Permanent auditable track record</li>
+        <li>✓ Open model portfolio · 12 strategies</li>
+      </ul>
+      <div class="wr-card-assets">Educational &amp; informational — not investment advice.</div>
+      <a class="wr-card-cta" href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="display:inline-block;text-decoration:none">Subscribe Free →</a>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="wr-card">
+      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">QUANT CONSULTING</div>
+      <div class="wr-card-name">SYSTEMATIC MODEL DEVELOPMENT</div>
+      <div class="wr-card-strat">For funds, prop desks &amp; fintech teams</div>
+      <div class="wr-card-desc">Fixed-scope engagements covering systematic strategy design, factor model construction, backtesting frameworks, and financial data pipelines. Delivered from the same quantitative process behind the 12 strategies published on this site — regime-aware, walk-forward validated, and production-ready.</div>
+      <ul style="font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:2;list-style:none;padding:0;margin:12px 0 20px">
+        <li>✓ Strategy design &amp; backtesting</li>
+        <li>✓ Factor model construction · Python</li>
+        <li>✓ Data pipeline &amp; signal engineering</li>
+        <li>✓ Fixed deliverables agreed up front</li>
+      </ul>
+      <div class="wr-card-assets">Software &amp; methodology consulting — not investment advice.</div>
+      <button class="wr-card-cta" onclick="sp('contact')">Enquire →</button>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="wr-card">
+      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">CONSULTATION</div>
+      <div class="wr-card-name">STRATEGY CONSULTATION CALL</div>
+      <div class="wr-card-strat">For PMs, analysts &amp; quant developers</div>
+      <div class="wr-card-desc">90-minute focused session on systematic strategy development, portfolio construction methodology, or macro research process. Structured around your specific problem — strategy validation, factor selection, position sizing, or research framework design. One-off, no retainer required.</div>
+      <ul style="font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:2;list-style:none;padding:0;margin:12px 0 20px">
+        <li>✓ 90-min one-on-one session</li>
+        <li>✓ Systematic strategy &amp; backtesting</li>
+        <li>✓ Portfolio construction &amp; risk</li>
+        <li>✓ Written summary delivered after</li>
+      </ul>
+      <div class="wr-card-assets">Educational — not personalised investment advice.</div>
+      <button class="wr-card-cta" onclick="sp('contact')">Book a session →</button>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="wr-card">
+      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">AI &amp; AUTOMATION</div>
+      <div class="wr-card-name">FINANCIAL TOOLING &amp; AI BUILD</div>
+      <div class="wr-card-strat">For finance teams &amp; fintech products</div>
+      <div class="wr-card-desc">Design and build of AI-driven research tooling, data automation, and financial dashboards — the same stack behind this site. Scoped as fixed-deliverable projects: define the problem, agree the output, ship. Particularly suited to investment firms wanting to automate research workflows or build internal quantitative tools.</div>
+      <ul style="font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:2;list-style:none;padding:0;margin:12px 0 20px">
+        <li>✓ AI research automation</li>
+        <li>✓ Financial dashboard &amp; data pipeline</li>
+        <li>✓ Quantitative tooling &amp; screeners</li>
+        <li>✓ Fixed scope, fixed deliverables</li>
+      </ul>
       <div class="wr-card-assets">Software &amp; workflow consulting — not investment advice.</div>
       <button class="wr-card-cta" onclick="sp('contact')">Enquire →</button>
     </div>
-    <div class="wr-card">
-      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">PREMIUM</div>
-      <div class="wr-card-name">AI TOOLS — PREMIUM</div>
-      <div class="wr-card-strat">Paid access tier</div>
-      <div class="wr-card-desc">Ongoing access to the tools, templates, and build patterns behind the consulting engagements above — for teams who want the toolkit without a bespoke project.</div>
-      <div class="wr-card-assets">Software product — not investment advice.</div>
-      <button class="wr-card-cta" onclick="sp('contact')">Get access →</button>
-    </div>
-    <div class="wr-card">
-      <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">EDUCATION</div>
-      <div class="wr-card-name">QUANT STRATEGY TUTORIALS</div>
-      <div class="wr-card-strat">Learn the methodology</div>
-      <div class="wr-card-desc">How to design, backtest, and validate a systematic strategy — the frameworks and common pitfalls, taught from the same process behind the strategies published on this site.</div>
-      <div class="wr-card-assets">Educational content only — not personalised investment advice.</div>
-      <button class="wr-card-cta" onclick="sp('contact')">Learn more →</button>
-    </div>
+
+  </div>
+
+  <!-- Availability note -->
+  <div style="margin-top:40px;padding:28px 32px;border:1px solid var(--rule);border-left:3px solid var(--gold);font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75">
+    <strong style="font-family:var(--FM);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)">Current Availability</strong><br>
+    Open to project enquiries and consultation bookings. Background spans long/short equity (Madrid), quant research (Crandon AM), macro strategy (Santomera Bay Capital), Big Four M&amp;A advisory (PwC), and venture (Antler · SpinLab). Based in London — remote-first for consulting engagements.
+    <div style="margin-top:16px"><button class="wr-card-cta" onclick="sp('contact')" style="font-size:10px;padding:10px 20px">Get in touch →</button></div>
   </div>
 </div>
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
 
 <div class="pg" id="pg-contact">
@@ -8715,7 +8845,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 </div><!-- /ct-layout -->
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Fund Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div><!-- /pg-contact -->
 
 <script>
@@ -9453,7 +9583,7 @@ function toggleDark(){
 var I18N={
   en:{
     nav_home:'Home',nav_track:'Track Record',nav_research:'Research',
-    nav_fundlab:'Fund Lab',nav_contact:'Contact',
+    nav_fundlab:'Research Lab',nav_contact:'Contact',
     drop_paper_tag:'Model Portfolio',drop_paper_name:'Asset Allocation Dynamic Fund',
     drop_sys_tag:'Systematic',drop_sys_name:'Systematic Strategies',
     drop_quant_tag:'Quant',drop_quant_name:'Open Source Tools',
@@ -9482,7 +9612,7 @@ var I18N={
   },
   es:{
     nav_home:'Inicio',nav_track:'Historial',nav_research:'Investigación',
-    nav_fundlab:'Fund Lab',nav_contact:'Contacto',
+    nav_fundlab:'Research Lab',nav_contact:'Contacto',
     drop_paper_tag:'Fondo Simulado',drop_paper_name:'Fondo Dinámico de Asignación de Activos',
     drop_sys_tag:'Sistemático',drop_sys_name:'Estrategias Sistemáticas',
     drop_quant_tag:'Cuant.',drop_quant_name:'Herramientas Cuantitativas',
@@ -9511,7 +9641,7 @@ var I18N={
   },
   fr:{
     nav_home:'Accueil',nav_track:'Historique',nav_research:'Recherche',
-    nav_fundlab:'Fund Lab',nav_contact:'Contact',
+    nav_fundlab:'Research Lab',nav_contact:'Contact',
     drop_paper_tag:'Fonds Simulé',drop_paper_name:"Fonds d'Allocation Dynamique",
     drop_sys_tag:'Systématique',drop_sys_name:'Stratégies Systématiques',
     drop_quant_tag:'Quant.',drop_quant_name:'Outils Quantitatifs',
@@ -9540,7 +9670,7 @@ var I18N={
   },
   de:{
     nav_home:'Startseite',nav_track:'Track Record',nav_research:'Research',
-    nav_fundlab:'Fund Lab',nav_contact:'Kontakt',
+    nav_fundlab:'Research Lab',nav_contact:'Kontakt',
     drop_paper_tag:'Paper-Fonds',drop_paper_name:'Dynamischer Asset-Allokations-Fonds',
     drop_sys_tag:'Systematisch',drop_sys_name:'Systematische Strategien',
     drop_quant_tag:'Quant.',drop_quant_name:'Quant-Tools & Modelle',
@@ -9569,7 +9699,7 @@ var I18N={
   },
   it:{
     nav_home:'Home',nav_track:'Track Record',nav_research:'Ricerca',
-    nav_fundlab:'Fund Lab',nav_contact:'Contatti',
+    nav_fundlab:'Research Lab',nav_contact:'Contatti',
     drop_paper_tag:'Fondo Simulato',drop_paper_name:'Fondo di Allocazione Dinamica',
     drop_sys_tag:'Sistematico',drop_sys_name:'Strategie Sistematiche',
     drop_quant_tag:'Quant.',drop_quant_name:'Strumenti Quantitativi',

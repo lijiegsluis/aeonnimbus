@@ -5171,6 +5171,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   .about-pg-right { padding: 40px 28px; }
   #pg-about section[style*="grid-template-columns:repeat(3"] { grid-template-columns: 1fr !important; }
   #pg-about section[style*="padding:72px 52px"] { padding: 48px 24px 56px !important; }
+  .cov-grid { grid-template-columns: repeat(2, 1fr) !important; }
+  .cov-grid > div:nth-child(2n) { border-right: none !important; }
+  .cov-grid > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
+  .feat-grid { grid-template-columns: 1fr !important; }
+  .feat-grid > a { border-right: none !important; border-bottom: 1px solid var(--rule); }
+  .feat-grid > a:last-child { border-bottom: none; }
 }
 
 .about-section {
@@ -6086,7 +6092,6 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="nlogo" onclick="sp('home')" style="font-family:var(--FM,monospace);letter-spacing:.06em;font-size:12px;font-weight:500">LIJIE GUO<span style="opacity:.35;margin:0 8px">·</span><span style="opacity:.5;letter-spacing:.12em;font-size:.82em">AEON NIMBUS</span></div>
   <div class="nlinks" style="display:flex;align-items:center;gap:24px">
     <button class="nbtn on" onclick="sp('home')" data-i18n="nav_home">Home</button>
-    <button class="nbtn" onclick="sp('about')">About</button>
     <button class="nbtn" onclick="sp('track')" data-i18n="nav_track">Track Record</button>
     <button class="nbtn" onclick="sp('research')" data-i18n="nav_research">Research</button>
     <div class="nav-drop-wrap">
@@ -6152,8 +6157,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="hv3-position">Independent Macro &amp; Equity Research · London</div>
       <div class="hv3-proof">
         <strong>5 for 5.</strong>
-        Every investment call published before the outcome is known — full thesis, entry, stop, size — and closed profitable.
-        <span class="hv3-sub">Average return per closed call: +42.0%. All five permanently on the record. Nothing deleted.</span>
+        Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known — and closed profitable.
+        <span class="hv3-sub">Average return per closed call: +42.0% · Hit rate: 100% · All five permanently on the record.</span>
       </div>
     </div>
   </div>
@@ -6430,6 +6435,57 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </div>
 
+<!-- COVERAGE UNIVERSE -->
+<div style="border-top:1px solid var(--line);padding:64px 52px 68px">
+  <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:18px">Coverage Universe</div>
+  <h2 style="font-family:Georgia,serif;font-size:clamp(20px,2.4vw,30px);font-weight:400;color:var(--ink);margin:0 0 48px;text-wrap:balance">Sectors &amp; Themes Under Active Coverage</h2>
+  <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:0;border:1px solid var(--rule)" id="cov-grid" class="cov-grid">
+
+    <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Technology</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        AI Infrastructure<br>Semiconductors<br>Cloud &amp; SaaS<br>Custom Silicon<br>Data Centres<br>Cybersecurity
+      </div>
+    </div>
+
+    <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Financials</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        Insurtech<br>Digital Banking<br>Capital Markets<br>Alt. Asset Mgmt<br>Credit<br>Fintech
+      </div>
+    </div>
+
+    <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Consumer &amp; Media</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        Social Platforms<br>Digital Media<br>E-Commerce<br>Consumer Tech<br>Gaming<br>Marketplaces
+      </div>
+    </div>
+
+    <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Energy &amp; Infra</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        Digital Mining<br>Power &amp; Utilities<br>Energy Transition<br>Data Infra<br>Storage<br>Grid Tech
+      </div>
+    </div>
+
+    <div style="padding:24px 20px;border-right:1px solid var(--rule)">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Global Macro</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        Central Bank Policy<br>FX &amp; Rates<br>EM Markets<br>Geopolitics<br>Credit Cycles<br>Commodities
+      </div>
+    </div>
+
+    <div style="padding:24px 20px">
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:14px">Systematic</div>
+      <div style="font-family:var(--FS,sans-serif);font-size:11px;color:var(--ink2);line-height:2">
+        EQ Momentum<br>FX Trend<br>Macro Regime<br>Mean Reversion<br>Vol Targeting<br>Carry &amp; Factor
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- SUBSCRIBE -->
 <div class="hv3-sub">
   <div>
@@ -6439,6 +6495,41 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div>
     <a class="hv3-sub-btn" href="https://aeonnimbus.substack.com/subscribe" target="_blank">Subscribe on Substack →</a>
     <div class="hv3-sub-note">Free · No spam · Unsubscribe anytime</div>
+  </div>
+</div>
+
+<!-- FEATURED RESEARCH -->
+<div style="border-top:1px solid var(--line);padding:64px 52px 72px">
+  <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:40px;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px">Featured Research</div>
+      <h2 style="font-family:Georgia,serif;font-size:clamp(20px,2.4vw,30px);font-weight:400;color:var(--ink);margin:0;text-wrap:balance">Recent Investment Calls &amp; Macro Briefs</h2>
+    </div>
+    <a href="https://aeonnimbus.substack.com" target="_blank" style="font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(196,164,74,.35);padding-bottom:2px;white-space:nowrap">All Research ↗</a>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--rule)" class="feat-grid">
+
+    <a href="https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market" target="_blank" style="display:block;padding:32px 28px;border-right:1px solid var(--rule);text-decoration:none;transition:background .15s" onmouseover="this.style.background='rgba(196,164,74,.04)'" onmouseout="this.style.background=''">
+      <div style="font-family:var(--FM,monospace);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Equity · Closed +74.3%</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);line-height:1.35;margin-bottom:12px;text-wrap:balance">Oracle Corporation — The $98B Backlog the Market Couldn't See</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:12px;color:var(--ink2);line-height:1.65;margin:0 0 20px">AI demand compressed Oracle's 5-year infrastructure runway to 18 months. Entry $143.36 · Exit $249.88 · Published 8 Apr 2026 before the outcome.</p>
+      <div style="font-family:var(--FM,monospace);font-size:9px;color:var(--gold)">Read thesis ↗</div>
+    </a>
+
+    <a href="https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat" target="_blank" style="display:block;padding:32px 28px;border-right:1px solid var(--rule);text-decoration:none;transition:background .15s" onmouseover="this.style.background='rgba(196,164,74,.04)'" onmouseout="this.style.background=''">
+      <div style="font-family:var(--FM,monospace);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Equity · Closed +36.4%</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);line-height:1.35;margin-bottom:12px;text-wrap:balance">IREN Limited — The Power Is the Moat</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:12px;color:var(--ink2);line-height:1.65;margin:0 0 20px">Market priced macro fear into a business with proprietary power infrastructure compounding on the energy cost curve. Entry $47.88 · Published 20 May 2026.</p>
+      <div style="font-family:var(--FM,monospace);font-size:9px;color:var(--gold)">Read thesis ↗</div>
+    </a>
+
+    <a href="https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock" target="_blank" style="display:block;padding:32px 28px;text-decoration:none;transition:background .15s" onmouseover="this.style.background='rgba(196,164,74,.04)'" onmouseout="this.style.background=''">
+      <div style="font-family:var(--FM,monospace);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Equity · Closed +32.5%</div>
+      <div style="font-family:Georgia,serif;font-size:16px;color:var(--ink);line-height:1.35;margin-bottom:12px;text-wrap:balance">Reddit — Not AI's Victim. Its Feedstock.</div>
+      <p style="font-family:var(--FS,sans-serif);font-size:12px;color:var(--ink2);line-height:1.65;margin:0 0 20px">Reddit's unique human corpus is the data infrastructure every major AI lab depends on. The street called it a loser in the AI era. Entry $140.88 · Published 27 May 2026.</p>
+      <div style="font-family:var(--FM,monospace);font-size:9px;color:var(--gold)">Read thesis ↗</div>
+    </a>
+
   </div>
 </div>
 
@@ -6539,17 +6630,31 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 
 <footer>
-  <div class="flogo">LiJie Guo · Aeon Nimbus Research</div>
-  <div class="flinks">
-    <span class="flnk ul-draw" onclick="sp('home')">Home</span>
-    <span class="flnk ul-draw" onclick="sp('research')">Research</span>
-    <span class="flnk ul-draw" onclick="sp('track')">Track Record</span>
-    <span class="flnk ul-draw" onclick="sp('strats')">Strategies</span>
-    <span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span>
-    <span class="flnk ul-draw" onclick="sp('services')">Services</span>
-    <span class="flnk ul-draw" onclick="sp('contact')">Contact</span>
-    <a class="flnk" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
-    <a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:start;padding:40px 52px 28px;border-top:1px solid var(--rule);max-width:none;margin:0">
+    <div>
+      <div class="flogo" style="margin-bottom:8px">LiJie Guo · Aeon Nimbus Research</div>
+      <div style="font-family:var(--FM,monospace);font-size:9px;color:var(--ink3);letter-spacing:.06em">Independent Macro &amp; Equity Research</div>
+      <div style="font-family:var(--FM,monospace);font-size:9px;color:var(--ink3);letter-spacing:.06em;margin-top:4px">London, United Kingdom</div>
+    </div>
+    <div style="text-align:right">
+      <div class="flinks" style="justify-content:flex-end;margin-bottom:12px">
+        <span class="flnk ul-draw" onclick="sp('home')">Home</span>
+        <span class="flnk ul-draw" onclick="sp('research')">Research</span>
+        <span class="flnk ul-draw" onclick="sp('track')">Track Record</span>
+        <span class="flnk ul-draw" onclick="sp('strats')">Strategies</span>
+        <span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span>
+        <span class="flnk ul-draw" onclick="sp('about')">About</span>
+        <span class="flnk ul-draw" onclick="sp('services')">Services</span>
+        <span class="flnk ul-draw" onclick="sp('contact')">Contact</span>
+      </div>
+      <div class="flinks" style="justify-content:flex-end">
+        <a class="flnk" href="https://aeonnimbus.substack.com" target="_blank">Substack ↗</a>
+        <a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+  <div style="padding:0 52px 28px;font-family:var(--FM,monospace);font-size:8px;color:var(--ink3);letter-spacing:.04em;border-top:1px solid rgba(196,164,74,.08);margin-top:16px;padding-top:16px">
+    © 2026 Aeon Nimbus Research · LiJie Guo · All research published for informational purposes only · Not investment advice
   </div>
 </footer>
 

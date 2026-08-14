@@ -6962,9 +6962,27 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- ══ UNREALIZED P&L SUMMARY ══════════════════════ -->
 <div id="upnl-section" style="margin:0 44px 32px;border:1px solid var(--line2);border-radius:3px;overflow:hidden">
-  <div style="background:rgba(200,131,10,.06);border-bottom:1px solid var(--line2);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
-    <div style="font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)">Unrealized P&amp;L · Open Positions · Live</div>
-    <div style="font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.7">Against AUM set in simulator below</div>
+  <div style="background:rgba(200,131,10,.06);border-bottom:1px solid var(--line2);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Unrealized P&amp;L · Open Positions · Live</div>
+      <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
+        <div>
+          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Realized&nbsp;&nbsp;</span>
+          <span id="upnl-closed-lbl" style="font-family:var(--FM);font-size:14px;font-weight:700;color:var(--white)">—</span>
+        </div>
+        <div style="color:var(--g2);font-family:var(--FM);font-size:12px">+</div>
+        <div>
+          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Unrealized&nbsp;&nbsp;</span>
+          <span id="upnl-open-lbl" style="font-family:var(--FM);font-size:14px;font-weight:700;color:var(--white)">—</span>
+        </div>
+        <div style="color:var(--g2);font-family:var(--FM);font-size:12px">=</div>
+        <div>
+          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Total P&amp;L&nbsp;&nbsp;</span>
+          <span id="upnl-total-lbl" style="font-family:var(--FM);font-size:20px;font-weight:700;letter-spacing:-.01em">—</span>
+        </div>
+      </div>
+    </div>
+    <div style="font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.7;text-align:right">Against AUM set in simulator below</div>
   </div>
   <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2)">
     <div style="background:var(--bg);padding:18px 20px">
@@ -12940,6 +12958,8 @@ function exportPortExcel(){
     var total = closed.reduce(function(a,r){ return a + r.dollar; }, 0);
     totalEl.textContent = fmtMoney(total);
     totalEl.className = 'sim-result-val' + (total < 0 ? ' neg' : '');
+    window._trClosedPnl = total;
+    if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
     if(countEl) countEl.textContent = closed.length;
 
     wins.sort(function(a,b){ return b.dollar - a.dollar; });
@@ -13194,6 +13214,10 @@ function exportPortExcel(){
         }
         if(countEl) countEl.textContent = items.length;
         if(brkEl)   brkEl.innerHTML = rowsHtml;
+
+        /* store for combined total */
+        window._trUnrealPnl = totalDollar;
+        if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
       }
     })();
 
@@ -13248,6 +13272,32 @@ function exportPortExcel(){
   }
 
   window._trRefreshPrices = refresh;
+
+  /* Combined Total P&L = closed (realized) + open (unrealized) */
+  window._trUpdateTotalPnl = function(){
+    var closed  = window._trClosedPnl  || 0;
+    var unreal  = window._trUnrealPnl  || 0;
+    var total   = closed + unreal;
+
+    function fmt(n){
+      var sign = n >= 0 ? '+' : '-';
+      var abs  = Math.abs(n);
+      var str  = abs >= 1e6 ? sign+'$'+(abs/1e6).toFixed(2)+'M' : sign+'$'+Math.round(abs).toLocaleString('en-US');
+      return {str:str, pos: n >= 0};
+    }
+
+    var cFmt = fmt(closed);
+    var uFmt = fmt(unreal);
+    var tFmt = fmt(total);
+
+    var cEl = document.getElementById('upnl-closed-lbl');
+    var uEl = document.getElementById('upnl-open-lbl');
+    var tEl = document.getElementById('upnl-total-lbl');
+    if(cEl){ cEl.textContent = cFmt.str; cEl.style.color = cFmt.pos ? '#4ade80' : '#f87171'; }
+    if(uEl){ uEl.textContent = uFmt.str; uEl.style.color = uFmt.pos ? '#4ade80' : '#f87171'; }
+    if(tEl){ tEl.textContent = tFmt.str; tEl.style.color = tFmt.pos ? 'var(--gold)' : '#f87171'; }
+  };
+
   setTimeout(refresh, 800);
 })();
 

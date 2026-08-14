@@ -459,6 +459,7 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 /* ═══ TRACK RECORD ══════════════════════════════════ */
 .perfrow{display:grid;grid-template-columns:repeat(8,1fr);gap:1px;background:var(--line2);margin:0 44px 32px;border:1px solid var(--line2)}
 .perfrow-6{grid-template-columns:repeat(6,1fr)}
+.perfrow-5{grid-template-columns:repeat(5,1fr)}
 .pc{padding:20px 16px;background:var(--bg1);text-align:center}
 .pc-bench{background:rgba(200,131,10,.05);position:relative}
 .pc-bench::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--gold)}
@@ -508,6 +509,8 @@ table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
 .tdtk{font-weight:700;color:var(--gold)}.tdl{color:#4ade80}.tds{color:#f87171}
 .bdg{padding:3px 9px;font-size:8px;letter-spacing:.09em;text-transform:uppercase}
 .bw{background:rgba(74,222,128,.12);color:#4ade80}.bl{background:rgba(248,113,113,.1);color:#f87171}.bo{background:rgba(196,154,42,.12);color:var(--gold)}
+.tr-section-lbl{font-family:var(--FM);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);padding:32px 44px 12px;display:flex;align-items:center;gap:16px}
+.tr-section-lbl::after{content:'';flex:1;height:1px;background:var(--line2)}
 .trnote{padding:16px 44px;margin-bottom:24px;background:rgba(196,154,42,.05);border-left:3px solid var(--gold)}
 .trnote p{font-family:var(--FS);font-size:13px;color:var(--white3);line-height:1.7;font-style:italic}
 .trnote strong{color:var(--gold);font-style:normal}
@@ -629,6 +632,8 @@ footer{padding:32px 44px;border-top:1px solid var(--line2);display:flex;justify-
   .pghd,.plist,.trwrap,.tgrid,.fbar,.trnote{padding-left:20px;padding-right:20px}
   .perfrow{margin-left:20px;margin-right:20px;grid-template-columns:repeat(4,1fr)}
   .perfrow-6{grid-template-columns:repeat(3,1fr)}
+  .perfrow-5{grid-template-columns:repeat(3,1fr)}
+  .tr-section-lbl{padding-left:20px;padding-right:20px}
   .post{grid-template-columns:1fr;gap:5px}
   .pm{flex-direction:row;align-items:center}
   footer{flex-direction:column;gap:14px;padding:24px 20px;text-align:center}
@@ -6933,17 +6938,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="pg" id="pg-track">
 <div class="pghd reveal"><div class="pgtag" data-i18n="track_tag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub" data-i18n="track_sub">Every call published publicly before outcome is known. Losses included. Never deleted.</p><div style="margin-top:16px"><a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a></div></div>
 <div style="padding:24px 44px 0">
-  <div class="perfrow perfrow-6">
+  <div class="perfrow perfrow-5">
     <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs" id="tr-open-sub">— open</div></div>
     <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
     <div class="pc"><div class="pcl">Avg. return · closed</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-winloss-sub">Realised P&amp;L</div></div>
-    <div class="pc"><div class="pcl">Avg. return · open</div><div class="pcv" id="tr-openret">—</div><div class="pcs">Unrealised · equal-weight · live</div></div>
     <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
     <div class="pc pc-bench"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx">—</div><div class="pcs">Since first call · S&amp;P itself: <span id="tr-spx-ret">—</span></div></div>
   </div>
-  <div style="padding:2px 44px 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · methodology note below</div>
-  <div style="padding:10px 44px 0;font-family:var(--FS);font-size:12px;color:var(--white3);line-height:1.6;font-style:italic;opacity:.8">&#9888;&nbsp; A 100% hit rate needs a caveat: five trades closed, all closed early rather than run to full target or stop, and the streak has not yet been tested by a realised loss. Treat this as a live, transparent starting point — not a mature track record.</div>
+  <div style="padding:2px 0 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology note ↓</a></div>
 </div>
+<!-- hidden element keeps tr-openret wired for JS -->
+<span id="tr-openret" style="display:none"></span>
 <div id="tr-sparkline-wrap" style="display:none">
   <div id="tr-sparkline-head">
     <div id="tr-sparkline-label">Cumulative P&amp;L — Closed Positions</div>
@@ -6960,56 +6965,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div id="tr-sparkline-empty" style="display:none">No closed calls in this range.</div>
 </div>
 
-<!-- ══ UNREALIZED P&L SUMMARY ══════════════════════ -->
-<div id="upnl-section" style="margin:0 44px 32px;border:1px solid var(--line2);border-radius:3px;overflow:hidden">
-  <div style="background:rgba(200,131,10,.06);border-bottom:1px solid var(--line2);padding:14px 22px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
-    <div>
-      <div style="font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:6px">Unrealized P&amp;L · Open Positions · Live</div>
-      <div style="display:flex;align-items:baseline;gap:24px;flex-wrap:wrap">
-        <div>
-          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Realized&nbsp;&nbsp;</span>
-          <span id="upnl-closed-lbl" style="font-family:var(--FM);font-size:14px;font-weight:700;color:var(--white)">—</span>
-        </div>
-        <div style="color:var(--g2);font-family:var(--FM);font-size:12px">+</div>
-        <div>
-          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Unrealized&nbsp;&nbsp;</span>
-          <span id="upnl-open-lbl" style="font-family:var(--FM);font-size:14px;font-weight:700;color:var(--white)">—</span>
-        </div>
-        <div style="color:var(--g2);font-family:var(--FM);font-size:12px">=</div>
-        <div>
-          <span style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)">Total P&amp;L&nbsp;&nbsp;</span>
-          <span id="upnl-total-lbl" style="font-family:var(--FM);font-size:20px;font-weight:700;letter-spacing:-.01em">—</span>
-        </div>
-      </div>
-    </div>
-    <div style="font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.7;text-align:right">Against AUM set in simulator below</div>
-  </div>
-  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line2)">
-    <div style="background:var(--bg);padding:18px 20px">
-      <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:8px">Total Unrealized P&amp;L</div>
-      <div id="upnl-dollar" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.01em">—</div>
-      <div style="font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:4px">Dollar gain / loss on AUM</div>
-    </div>
-    <div style="background:var(--bg);padding:18px 20px">
-      <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:8px">Weighted Return</div>
-      <div id="upnl-wret" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.01em">—</div>
-      <div style="font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:4px">Size-weighted avg ROI</div>
-    </div>
-    <div style="background:var(--bg);padding:18px 20px">
-      <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:8px">Best Position</div>
-      <div id="upnl-best" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--white);letter-spacing:-.01em">—</div>
-      <div id="upnl-best-sub" style="font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:4px">Top performer</div>
-    </div>
-    <div style="background:var(--bg);padding:18px 20px">
-      <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:8px">Open Positions</div>
-      <div id="upnl-count" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.01em">—</div>
-      <div style="font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:4px">Live-priced today</div>
-    </div>
-  </div>
-  <div id="upnl-breakdown" style="padding:14px 22px;display:flex;flex-wrap:wrap;gap:10px 20px;border-top:1px solid var(--line2)"></div>
-</div>
-
-<!-- ══ BEST CALLS GALLERY ════════════════════════════ -->
+<!-- ══ CLOSED POSITIONS ═══════════════════════════════ -->
+<div class="tr-section-lbl">Closed Positions</div>
 <div class="bc-section">
   <div class="bc-header">
     <div class="rc-title" style="margin-bottom:4px">Best Calls</div>
@@ -7019,6 +6976,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 
 <!-- ══ PORTFOLIO VALUE SIMULATOR ═══════════════════ -->
+<div class="tr-section-lbl">Capital Simulation</div>
 <div class="sim-section" id="sim-section">
   <div class="sim-top-grid">
     <div class="sim-left">
@@ -7053,6 +7011,40 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="sim-note">Simulated for illustration, applying real published returns and position sizes to a hypothetical AUM — not a live fund, not investment advice.</div>
 </div>
 
+<!-- ══ OPEN BOOK ═══════════════════════════════════ -->
+<div class="tr-section-lbl">Open Book · Live Prices</div>
+<div id="upnl-section" style="margin:0 44px 0;border:1px solid var(--line2);border-radius:3px;overflow:hidden">
+  <div style="background:rgba(200,131,10,.06);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
+    <div style="display:flex;align-items:baseline;gap:28px;flex-wrap:wrap">
+      <div>
+        <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Realized</div>
+        <span id="upnl-closed-lbl" style="font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:-.01em">—</span>
+      </div>
+      <div style="color:var(--line);font-family:var(--FM);font-size:16px;align-self:center">+</div>
+      <div>
+        <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Unrealized</div>
+        <span id="upnl-open-lbl" style="font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:-.01em">—</span>
+      </div>
+      <div style="color:var(--line);font-family:var(--FM);font-size:16px;align-self:center">=</div>
+      <div>
+        <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">Total P&amp;L</div>
+        <span id="upnl-total-lbl" style="font-family:var(--FM);font-size:26px;font-weight:700;letter-spacing:-.02em">—</span>
+      </div>
+    </div>
+    <div style="text-align:right">
+      <div style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Weighted return · open</div>
+      <div id="upnl-wret" style="font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:-.01em">—</div>
+    </div>
+  </div>
+  <div id="upnl-breakdown" style="padding:12px 24px;display:flex;flex-wrap:wrap;gap:8px 18px;border-top:1px solid var(--line2);background:var(--bg1)"></div>
+  <span id="upnl-dollar" style="display:none"></span>
+  <span id="upnl-best" style="display:none"></span>
+  <span id="upnl-best-sub" style="display:none"></span>
+  <span id="upnl-count" style="display:none"></span>
+</div>
+
+<!-- ══ FULL RECORD ════════════════════════════════ -->
+<div class="tr-section-lbl">Full Record</div>
 <div class="trwrap">
   <table class="tr">
     <thead><tr><th>Date</th><th>Ticker</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
@@ -7074,8 +7066,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </div>
 
-<div class="trnote" style="margin:32px 44px 0">
+<div class="trnote" id="tr-methodology" style="margin:32px 44px 0">
   <p><strong>Methodology:</strong> Every call is published on Substack with entry price, stop-loss, position size, and full thesis — before the outcome is known. Returns are calculated from the published entry price to exit price. Open P&amp;L uses live prices. S&amp;P 500 benchmark starts from 08 Apr 2026, the date of the first call. All positions, including losses, remain on the record and are never edited or deleted.</p>
+  <p style="margin-top:10px;font-style:normal;color:var(--g2)">&#9888;&nbsp; A 100% hit rate carries a caveat: five trades closed, all closed early rather than run to full target or stop. The streak has not yet been tested by a realised loss. Treat this as a live, transparent starting point — not a mature track record.</p>
 </div>
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>

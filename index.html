@@ -509,8 +509,12 @@ table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
 .tdtk{font-weight:700;color:var(--gold)}.tdl{color:#4ade80}.tds{color:#f87171}
 .bdg{padding:3px 9px;font-size:8px;letter-spacing:.09em;text-transform:uppercase}
 .bw{background:rgba(74,222,128,.12);color:#4ade80}.bl{background:rgba(248,113,113,.1);color:#f87171}.bo{background:rgba(196,154,42,.12);color:var(--gold)}
-.tr-section-lbl{font-family:var(--FM);font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--g2);padding:32px 44px 12px;display:flex;align-items:center;gap:16px}
+.tr-section-lbl{font-family:var(--FM);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);padding:32px 44px 14px;display:flex;align-items:center;gap:16px;font-weight:500}
 .tr-section-lbl::after{content:'';flex:1;height:1px;background:var(--line2)}
+.pc-hero{background:rgba(200,131,10,.04)!important}
+.pc-num-lg{font-size:32px!important;line-height:1.05}
+table.tr thead th{position:sticky;top:0;z-index:3;background:var(--bg1)}
+@media(max-width:600px){#pg-track .pghd+div[style*="grid-template-columns"]{grid-template-columns:1fr!important}}
 .trnote{padding:16px 44px;margin-bottom:24px;background:rgba(196,154,42,.05);border-left:3px solid var(--gold)}
 .trnote p{font-family:var(--FS);font-size:13px;color:var(--white3);line-height:1.7;font-style:italic}
 .trnote strong{color:var(--gold);font-style:normal}
@@ -3218,6 +3222,7 @@ footer{
 .pc{padding:18px 14px!important}
 .pcv{font-size:22px!important}
 .pcl{font-size:8px!important;letter-spacing:.1em!important}
+.pc.pc-hero .pc-num-lg{font-size:32px!important;line-height:1.05!important}
 
 /* Scroll-to-top button */
 #stt{
@@ -6936,16 +6941,21 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
 <div class="pg" id="pg-track">
-<div class="pghd reveal"><div class="pgtag" data-i18n="track_tag">Audited performance</div><h2 class="pgtitle">Track <em>Record</em></h2><p class="pgsub" data-i18n="track_sub">Every call published publicly before outcome is known. Losses included. Never deleted.</p><div style="margin-top:16px"><a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a></div></div>
-<div style="padding:24px 44px 0">
+<div class="pghd reveal" style="padding-top:28px;padding-bottom:20px">
+  <div class="pgtag" data-i18n="track_tag">Audited performance</div>
+  <h2 class="pgtitle" style="margin-bottom:8px">Track <em>Record</em></h2>
+  <p class="pgsub" data-i18n="track_sub" style="margin-bottom:12px">Every call published publicly before the outcome is known. Losses included. Never deleted.</p>
+  <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a>
+</div>
+<div style="padding:20px 44px 0">
   <div class="perfrow perfrow-5">
     <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs" id="tr-open-sub">— open</div></div>
-    <div class="pc"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
+    <div class="pc pc-hero"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate" style="font-size:32px!important;line-height:1.1">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
     <div class="pc"><div class="pcl">Avg. return · closed</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-winloss-sub">Realised P&amp;L</div></div>
     <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
-    <div class="pc pc-bench"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx">—</div><div class="pcs">Since first call · S&amp;P itself: <span id="tr-spx-ret">—</span></div></div>
+    <div class="pc pc-bench pc-hero"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx" style="font-size:32px!important;line-height:1.1">—</div><div class="pcs">Since first call · S&amp;P: <span id="tr-spx-ret">—</span></div></div>
   </div>
-  <div style="padding:2px 0 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.6">Live prices · S&amp;P 500 benchmarked from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology note ↓</a></div>
+  <div style="padding:4px 0 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.7">Live prices · S&amp;P 500 from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology ↓</a></div>
 </div>
 <!-- hidden element keeps tr-openret wired for JS -->
 <span id="tr-openret" style="display:none"></span>
@@ -6967,11 +6977,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- ══ CLOSED POSITIONS ═══════════════════════════════ -->
 <div class="tr-section-lbl">Closed Positions</div>
-<div class="bc-section">
-  <div class="bc-header">
-    <div class="rc-title" style="margin-bottom:4px">Best Calls</div>
-    <div class="bc-subtitle">Every closed position — thesis published before the outcome was known</div>
-  </div>
+<div class="bc-section" style="padding-top:4px">
   <div class="bc-grid" id="bc-grid"></div>
 </div>
 
@@ -6981,7 +6987,6 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="sim-top-grid">
     <div class="sim-left">
       <div class="sim-head">
-        <div class="rc-title" style="margin-bottom:0">Portfolio Value Simulator</div>
         <label class="sim-input-wrap">
           <span class="sim-label">Simulated AUM</span>
           <span class="sim-dollar">$</span>
@@ -6994,7 +6999,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </div>
     </div>
     <div class="sim-right">
-      <div class="rc-title" style="margin-bottom:0">Open Position Composition</div>
+      <div style="font-family:var(--FM);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px">Open Position Composition</div>
       <div class="pie-wrap" id="pie-wrap">
         <div class="pie-svg-box">
           <svg id="pie-svg" viewBox="0 0 140 140"><circle class="pie-track" cx="70" cy="70" r="56"></circle></svg>
@@ -7020,12 +7025,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Realized</div>
         <span id="upnl-closed-lbl" style="font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:-.01em">—</span>
       </div>
-      <div style="color:var(--line);font-family:var(--FM);font-size:16px;align-self:center">+</div>
+      <div style="color:var(--g2);font-family:var(--FM);font-size:18px;font-weight:300;align-self:center;opacity:.8">+</div>
       <div>
         <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Unrealized</div>
         <span id="upnl-open-lbl" style="font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:-.01em">—</span>
       </div>
-      <div style="color:var(--line);font-family:var(--FM);font-size:16px;align-self:center">=</div>
+      <div style="color:rgba(200,131,10,.6);font-family:var(--FM);font-size:18px;font-weight:300;align-self:center">=</div>
       <div>
         <div style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:5px">Total P&amp;L</div>
         <span id="upnl-total-lbl" style="font-family:var(--FM);font-size:26px;font-weight:700;letter-spacing:-.02em">—</span>
@@ -7052,8 +7057,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </table>
 </div>
 
-<div style="padding:32px 44px 0">
-  <div style="font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:16px">Investor Letters — 2026</div>
+<div class="tr-section-lbl">Investor Letters</div>
+<div style="padding:0 44px 0">
+  <div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);margin-bottom:12px">2026</div>
   <div style="display:flex;flex-direction:column;gap:10px;max-width:560px">
     <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:flex;align-items:center;justify-content:space-between;border:1px solid var(--rule);padding:14px 18px;border-radius:3px;text-decoration:none;transition:border-color .15s,background .15s" onmouseover="this.style.borderColor='rgba(200,131,10,.5)';this.style.background='rgba(200,131,10,.04)'" onmouseout="this.style.borderColor='var(--rule)';this.style.background=''">
       <div>
@@ -7066,7 +7072,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </div>
 
-<div class="trnote" id="tr-methodology" style="margin:32px 44px 0">
+<div class="tr-section-lbl" style="padding-top:20px">Methodology &amp; Disclosures</div>
+<div class="trnote" id="tr-methodology" style="margin:0 44px 0">
   <p><strong>Methodology:</strong> Every call is published on Substack with entry price, stop-loss, position size, and full thesis — before the outcome is known. Returns are calculated from the published entry price to exit price. Open P&amp;L uses live prices. S&amp;P 500 benchmark starts from 08 Apr 2026, the date of the first call. All positions, including losses, remain on the record and are never edited or deleted.</p>
   <p style="margin-top:10px;font-style:normal;color:var(--g2)">&#9888;&nbsp; A 100% hit rate carries a caveat: five trades closed, all closed early rather than run to full target or stop. The streak has not yet been tested by a realised loss. Treat this as a live, transparent starting point — not a mature track record.</p>
 </div>
@@ -12359,6 +12366,20 @@ function exportPortExcel(){
         injectCallRow({pubDate:call.pubDate, guid:call.ticker, link:call.link}, Object.assign({}, call, {reopened:reopened}));
       });
     }
+    /* inject at-a-glance strip after pghd (static HTML silently dropped by parser) */
+    (function(){
+      var pghd = document.querySelector('#pg-track .pghd');
+      if(!pghd || document.getElementById('tr-qv-hitrate')) return;
+      var strip = document.createElement('div');
+      strip.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);border-bottom:1px solid var(--line2);margin:0 44px';
+      strip.innerHTML = [
+        '<div style="background:var(--bg1);padding:14px 20px;display:flex;align-items:baseline;gap:14px"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Hit rate</span><span id="tr-qv-hitrate" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.01em">—</span></div>',
+        '<div style="background:var(--bg1);padding:14px 20px;display:flex;align-items:baseline;gap:14px"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Avg return · closed</span><span id="tr-qv-avgret" style="font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:-.01em">—</span></div>',
+        '<div style="background:rgba(200,131,10,.05);padding:14px 20px;display:flex;align-items:baseline;gap:14px;border-left:2px solid rgba(200,131,10,.3)"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Alpha vs S&amp;P 500</span><span id="tr-qv-alpha" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.01em">—</span></div>'
+      ].join('');
+      pghd.insertAdjacentElement('afterend', strip);
+    })();
+
     populateKnownCalls();
 
     /* ── Best Calls Gallery ─────────────────────────── */
@@ -12817,6 +12838,8 @@ function exportPortExcel(){
       el('tr-winloss-sub').textContent = wlTxt;
     }
     if(el('tr-hitrate')) el('tr-hitrate').textContent = hitRate===null ? '—' : hitRate+'%';
+    /* mirror to hero quick-view */
+    if(el('tr-qv-hitrate')) el('tr-qv-hitrate').textContent = hitRate===null ? '—' : hitRate+'%';
     /* Masthead performance stats (replace static inventory counts) — animated
        count-up on first paint only, instant on every recalc after that, and
        skipped entirely under prefers-reduced-motion. */
@@ -12851,6 +12874,7 @@ function exportPortExcel(){
       el('tr-avgret').textContent = fmt(avgRet);
       el('tr-avgret').className   = avgRet===null ? 'pcv' : 'pcv '+(avgRet>=0?'g':'r');
     }
+    if(el('tr-qv-avgret')){ el('tr-qv-avgret').textContent = fmt(avgRet); el('tr-qv-avgret').style.color = avgRet===null||avgRet>=0 ? 'var(--white)' : '#f87171'; }
     if(el('tr-deployed')) el('tr-deployed').textContent = deployed>0 ? deployed.toFixed(0)+'%' : '—';
 
     /* ── Hero equity curve — draws the actual cumulative realised P&L
@@ -13006,6 +13030,8 @@ function exportPortExcel(){
           var dSign = diff >= 0 ? '+' : '';
           vsEl.textContent = dSign + diff.toFixed(1) + '%';
           vsEl.className = 'pcv ' + (diff >= 0 ? 'g' : 'r');
+          var qvAlpha = document.getElementById('tr-qv-alpha');
+          if(qvAlpha){ qvAlpha.textContent = dSign + diff.toFixed(1) + '%'; qvAlpha.style.color = diff >= 0 ? 'var(--gold)' : '#f87171'; }
         }
       }
     }).catch(function(){});
@@ -14610,6 +14636,20 @@ html.light .mv2-name em {
       ctx.lineWidth = 1.5;
       ctx.stroke();
     }
+
+    /* y-axis min/max labels */
+    ctx.font = '9px monospace';
+    ctx.textBaseline = 'middle';
+    var fmtY = function(v){ return (v>=0?'+':'')+v.toFixed(1)+'%'; };
+    ctx.fillStyle = 'rgba(200,131,10,.55)';
+    ctx.textAlign = 'left';
+    ctx.fillText(fmtY(maxV), pad+2, pad+6);
+    if(minV < 0){
+      ctx.fillStyle = 'rgba(248,113,113,.55)';
+      ctx.fillText(fmtY(minV), pad+2, H-pad-6);
+    }
+    ctx.textAlign = 'left';
+
     return true;
   }
 

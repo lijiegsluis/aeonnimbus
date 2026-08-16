@@ -7095,12 +7095,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <span id="upnl-total-lbl" style="font-family:var(--FM);font-size:26px;font-weight:700;letter-spacing:-.02em">—</span>
       </div>
     </div>
-    <div style="text-align:right">
+    <div id="upnl-wret-wrap" style="text-align:right;display:none">
       <div style="font-family:var(--FM);font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);margin-bottom:5px">Weighted return · open</div>
       <div id="upnl-wret" style="font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:-.01em">—</div>
     </div>
   </div>
-  <div id="upnl-breakdown" style="padding:12px 24px;display:flex;flex-wrap:wrap;gap:8px 18px;border-top:1px solid var(--line2);background:var(--bg1)"></div>
+  <div id="upnl-breakdown" style="padding:12px 24px;display:none;flex-wrap:wrap;gap:8px 18px;border-top:1px solid var(--line2);background:var(--bg1)"></div>
   <span id="upnl-dollar" style="display:none"></span>
   <span id="upnl-best" style="display:none"></span>
   <span id="upnl-best-sub" style="display:none"></span>
@@ -13287,6 +13287,8 @@ function exportPortExcel(){
         dollarEl.style.color = totalDollar >= 0 ? '#4ade80' : '#f87171';
         wretEl.textContent   = retSign + wRet.toFixed(1) + '%';
         wretEl.style.color   = retCls;
+        var wretWrap = document.getElementById('upnl-wret-wrap');
+        if(wretWrap) wretWrap.style.display = 'block';
         if(bestEl && bestSym){
           var bSign = bestRoi >= 0 ? '+' : '';
           bestEl.textContent    = bSign + bestRoi.toFixed(1) + '%';
@@ -13294,7 +13296,7 @@ function exportPortExcel(){
           if(bestSubEl) bestSubEl.textContent = bestSym;
         }
         if(countEl) countEl.textContent = items.length;
-        if(brkEl)   brkEl.innerHTML = rowsHtml;
+        if(brkEl){ brkEl.innerHTML = rowsHtml; brkEl.style.display = rowsHtml ? 'flex' : 'none'; }
 
         /* store for combined total */
         window._trUnrealPnl = totalDollar;
@@ -13356,9 +13358,9 @@ function exportPortExcel(){
 
   /* Combined Total P&L = closed (realized) + open (unrealized) */
   window._trUpdateTotalPnl = function(){
-    var closed  = window._trClosedPnl  || 0;
-    var unreal  = window._trUnrealPnl  || 0;
-    var total   = closed + unreal;
+    var closed       = window._trClosedPnl  || 0;
+    var unrealReady  = window._trUnrealPnl  != null; // null/undefined = not yet loaded
+    var unreal       = unrealReady ? window._trUnrealPnl : 0;
 
     function fmt(n){
       var sign = n >= 0 ? '+' : '-';
@@ -13368,15 +13370,20 @@ function exportPortExcel(){
     }
 
     var cFmt = fmt(closed);
-    var uFmt = fmt(unreal);
-    var tFmt = fmt(total);
-
     var cEl = document.getElementById('upnl-closed-lbl');
     var uEl = document.getElementById('upnl-open-lbl');
     var tEl = document.getElementById('upnl-total-lbl');
     if(cEl){ cEl.textContent = cFmt.str; cEl.style.color = cFmt.pos ? '#4ade80' : '#f87171'; }
-    if(uEl){ uEl.textContent = uFmt.str; uEl.style.color = uFmt.pos ? '#4ade80' : '#f87171'; }
-    if(tEl){ tEl.textContent = tFmt.str; tEl.style.color = tFmt.pos ? 'var(--gold)' : '#f87171'; }
+    if(!unrealReady){
+      /* Finnhub not yet responded — leave unrealized + total as placeholder */
+      if(uEl){ uEl.textContent = '—'; uEl.style.color = ''; }
+      if(tEl){ tEl.textContent = cFmt.str; tEl.style.color = cFmt.pos ? 'var(--gold)' : '#f87171'; }
+    } else {
+      var uFmt = fmt(unreal);
+      var tFmt = fmt(closed + unreal);
+      if(uEl){ uEl.textContent = uFmt.str; uEl.style.color = uFmt.pos ? '#4ade80' : '#f87171'; }
+      if(tEl){ tEl.textContent = tFmt.str; tEl.style.color = tFmt.pos ? 'var(--gold)' : '#f87171'; }
+    }
   };
   /* Paint realized P&L immediately — no need to wait for Finnhub */
   window._trUpdateTotalPnl();

@@ -13378,6 +13378,8 @@ function exportPortExcel(){
     if(uEl){ uEl.textContent = uFmt.str; uEl.style.color = uFmt.pos ? '#4ade80' : '#f87171'; }
     if(tEl){ tEl.textContent = tFmt.str; tEl.style.color = tFmt.pos ? 'var(--gold)' : '#f87171'; }
   };
+  /* Paint realized P&L immediately — no need to wait for Finnhub */
+  window._trUpdateTotalPnl();
 
   setTimeout(refresh, 800);
 })();

@@ -4163,6 +4163,35 @@ html:not(.light) .fc-card:hover {
 @media(max-width:700px){.sim-section{margin:24px 20px}.sim-wins-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:480px){.sim-wins-grid{grid-template-columns:1fr}}
 
+/* ── New Capital Simulation layout ─────────────────── */
+.sim-section{margin:0 44px 0;border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.sim-hero-row{display:flex;align-items:stretch;gap:0;border-bottom:1px solid var(--line2)}
+.sim-input-col{padding:28px 32px;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--line2);min-width:240px}
+.sim-input-wrap{display:flex;flex-direction:column;gap:8px}
+.sim-input-line{display:flex;align-items:baseline;gap:6px;border:1px solid var(--line2);border-radius:2px;padding:10px 14px;background:var(--bg2)}
+.sim-input-line:focus-within{border-color:rgba(200,131,10,.5)}
+.sim-result-col{flex:1;padding:28px 32px;display:flex;flex-direction:column;justify-content:center;gap:10px}
+.sim-result-duo{display:flex;align-items:center;gap:0}
+.sim-result-duo > div:not(.sim-result-divider){display:flex;flex-direction:column;gap:6px;flex:1}
+.sim-result-sublbl{font-family:var(--FM);font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--g2)}
+.sim-result-pct{font-family:var(--FM);font-size:32px;font-weight:700;color:var(--gold);letter-spacing:-.025em;font-variant-numeric:tabular-nums}
+.sim-result-pct.neg{color:#f87171}
+.sim-result-divider{width:1px;background:var(--line2);align-self:stretch;margin:0 28px}
+.sim-result-sub{font-family:var(--FM);font-size:8.5px;color:var(--g2);opacity:.7}
+.sim-bars-head{display:flex;align-items:center;justify-content:space-between;padding:16px 24px 10px;border-bottom:1px solid var(--line2);font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2)}
+.sim-bars-hint{font-size:7.5px;letter-spacing:.05em;text-transform:none;opacity:.65}
+.sim-bars{padding:4px 0 4px;background:var(--bg1)}
+.sim-bar-row{display:flex;align-items:center;gap:0;padding:0 24px;height:36px;border-bottom:1px solid rgba(255,255,255,.04)}
+.sim-bar-row:last-child{border-bottom:none}
+.sim-bar-tk{font-family:var(--FM);font-size:11px;font-weight:700;color:var(--gold);width:56px;flex-shrink:0}
+.sim-bar-track{flex:1;height:6px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden;margin:0 12px}
+.sim-bar-fill{height:100%;border-radius:3px;transition:width .4s cubic-bezier(.16,1,.3,1)}
+.sim-bar-fill.pos{background:rgba(74,222,128,.7)}
+.sim-bar-fill.neg{background:rgba(248,113,113,.7)}
+.sim-bar-dollar{font-family:var(--FM);font-size:11px;font-weight:700;font-variant-numeric:tabular-nums;width:90px;text-align:right;flex-shrink:0}
+.sim-bar-pct{font-family:var(--FM);font-size:9px;color:var(--g2);width:50px;text-align:right;flex-shrink:0;padding-left:8px}
+.sim-note{padding:12px 24px;font-family:var(--FM);font-size:8.5px;color:var(--g2);opacity:.65;border-top:1px solid var(--line2);font-style:italic}
+@media(max-width:700px){.sim-section{margin:0 20px}.sim-hero-row{flex-direction:column}.sim-input-col{border-right:none;border-bottom:1px solid var(--line2);min-width:0}.sim-result-divider{width:auto;height:1px;margin:12px 0}}
 /* ── Tools thumbnail grid ───────────────────────── */
 .tool-grid {
   display: grid; grid-template-columns: repeat(3,1fr);
@@ -7007,50 +7036,48 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div id="tr-sparkline-empty" style="display:none">No closed calls in this range.</div>
 </div>
 
-<!-- ══ CLOSED POSITIONS ═══════════════════════════════ -->
-<div class="tr-section-lbl">Closed Positions</div>
-<div class="bc-section" style="padding-top:4px">
-  <div class="bc-grid" id="bc-grid"></div>
-</div>
-
 <!-- ══ PORTFOLIO VALUE SIMULATOR ═══════════════════ -->
 <div class="tr-section-lbl">Capital Simulation</div>
 <div class="sim-section" id="sim-section">
-  <div class="sim-top-grid">
-    <div class="sim-left">
-      <div class="sim-head">
-        <label class="sim-input-wrap">
-          <span class="sim-label">Simulated AUM</span>
+  <!-- Top: AUM input + result headline -->
+  <div class="sim-hero-row">
+    <div class="sim-input-col">
+      <label class="sim-input-wrap">
+        <span class="sim-label">Simulated AUM</span>
+        <div class="sim-input-line">
           <span class="sim-dollar">$</span>
           <input type="text" id="sim-aum" inputmode="numeric" value="10,000,000">
-        </label>
-      </div>
-      <div class="sim-result">
-        <div class="sim-result-val" id="sim-total-pl">—</div>
-        <div class="sim-result-label">cumulative realised P&amp;L across <span id="sim-closed-count">—</span> closed calls, at recorded position sizing</div>
-      </div>
-    </div>
-    <div class="sim-right">
-      <div style="font-family:var(--FM);font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);margin-bottom:12px">Open Position Composition</div>
-      <div class="pie-wrap" id="pie-wrap">
-        <div class="pie-svg-box">
-          <svg id="pie-svg" viewBox="0 0 140 140"><circle class="pie-track" cx="70" cy="70" r="56"></circle></svg>
-          <div class="pie-center">
-            <div class="pie-center-val" id="pie-total-size">—</div>
-            <div class="pie-center-lbl">Deployed</div>
-          </div>
         </div>
-        <div class="pie-legend" id="pie-legend"></div>
+      </label>
+    </div>
+    <div class="sim-result-col">
+      <div class="sim-result-duo">
+        <div>
+          <div class="sim-result-sublbl">Realised P&amp;L</div>
+          <div class="sim-result-val" id="sim-total-pl">—</div>
+        </div>
+        <div class="sim-result-divider"></div>
+        <div>
+          <div class="sim-result-sublbl">Return on AUM</div>
+          <div class="sim-result-pct" id="sim-total-pct">—</div>
+        </div>
       </div>
-      <div class="rc-note" id="pc-note">Sized by position weight · live ROI from the table above</div>
+      <div class="sim-result-sub">across <span id="sim-closed-count">—</span> closed calls at published position sizing</div>
     </div>
   </div>
-  <div class="sim-note">Simulated for illustration, applying real published returns and position sizes to a hypothetical AUM — not a live fund, not investment advice.</div>
+  <!-- Per-call breakdown bars -->
+  <div class="sim-bars-head">
+    <span>Per-call contribution</span>
+    <span class="sim-bars-hint">bars scaled to largest gain</span>
+  </div>
+  <div id="sim-wins-grid" class="sim-bars"></div>
+  <div class="sim-note">Simulated for illustration — real published returns and position sizes applied to a hypothetical AUM. Not a live fund, not investment advice.</div>
 </div>
 
 <!-- ══ OPEN BOOK ═══════════════════════════════════ -->
 <div class="tr-section-lbl">Open Book · Live Prices</div>
-<div id="upnl-section" style="margin:0 44px 0;border:1px solid var(--line2);border-radius:3px;overflow:hidden">
+<div id="upnl-section" style="margin:0 44px;border:1px solid var(--line2);border-radius:3px;overflow:hidden">
+  <!-- P&L summary row -->
   <div style="background:rgba(200,131,10,.06);padding:18px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:20px">
     <div style="display:flex;align-items:baseline;gap:28px;flex-wrap:wrap">
       <div>
@@ -7079,6 +7106,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <span id="upnl-best-sub" style="display:none"></span>
   <span id="upnl-count" style="display:none"></span>
 </div>
+
+<!-- ══ BEST / CLOSED CALLS ═══════════════════════ -->
+<div class="tr-section-lbl">Closed Positions</div>
+<div class="bc-section" style="padding-top:4px"><div class="bc-grid" id="bc-grid"></div></div>
 
 <!-- ══ FULL RECORD ════════════════════════════════ -->
 <div class="tr-section-lbl">Full Record</div>
@@ -12997,15 +13028,28 @@ function exportPortExcel(){
     if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
     if(countEl) countEl.textContent = closed.length;
 
-    wins.sort(function(a,b){ return b.dollar - a.dollar; });
-    if(gridEl) gridEl.innerHTML = wins.length ? wins.map(function(w){
-      return '<div class="sim-win-card">'+
-        '<div class="sim-win-tk">'+w.ticker+'</div>'+
-        '<div class="sim-win-ret">+'+w.retPct.toFixed(1)+'%</div>'+
-        '<div class="sim-win-dollar">+'+fmtMoney(w.dollar)+'</div>'+
-        '<div class="sim-win-meta">'+w.entry+' → '+w.exit+' · '+w.sizePct+'% size · '+w.date+'</div>'+
+    // Populate % return on AUM
+    var pctEl = document.getElementById('sim-total-pct');
+    if(pctEl && aum > 0){
+      var pct = total / aum * 100;
+      pctEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+      pctEl.className = 'sim-result-pct' + (pct < 0 ? ' neg' : '');
+    }
+
+    // Horizontal bars — all closed, sorted by dollar contribution desc
+    closed.sort(function(a,b){ return b.dollar - a.dollar; });
+    var maxAbs = closed.reduce(function(m,r){ return Math.max(m, Math.abs(r.dollar)); }, 0);
+    if(gridEl) gridEl.innerHTML = closed.length ? closed.map(function(r){
+      var w = maxAbs > 0 ? Math.abs(r.dollar) / maxAbs * 100 : 0;
+      var pos = r.dollar >= 0;
+      var sign = pos ? '+' : '';
+      return '<div class="sim-bar-row">'+
+        '<div class="sim-bar-tk">'+r.ticker+'</div>'+
+        '<div class="sim-bar-track"><div class="sim-bar-fill '+(pos?'pos':'neg')+'" style="width:'+w.toFixed(1)+'%"></div></div>'+
+        '<div class="sim-bar-dollar" style="color:'+(pos?'#4ade80':'#f87171')+'">'+sign+fmtMoney(r.dollar)+'</div>'+
+        '<div class="sim-bar-pct">'+sign+r.retPct.toFixed(1)+'%</div>'+
       '</div>';
-    }).join('') : '<div class="pc-empty">No closed wins yet.</div>';
+    }).join('') : '<div style="padding:16px 24px;font-size:11px;color:var(--g2)">No closed calls yet.</div>';
   }
   (function wireSimInput(){
     var input = document.getElementById('sim-aum');

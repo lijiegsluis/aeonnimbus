@@ -13312,14 +13312,32 @@ function exportPortExcel(){
   }
 
   /* Fetch fresh prices from Finnhub for given symbol list, return promise of {SYM:price} */
+  var FMP_KEY = 'VkvNMOEziKpuUPoctmEDOYjN4v19VGB6';
   function fetchFresh(syms){
     var prices = {};
     syms.forEach(function(s){ prices[s] = null; });
+    /* Primary: FMP /stable/profile — one call per symbol, free tier, CORS OK */
     var fetches = syms.map(function(sym){
-      return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+FH_KEY)
+      return fetch('https://financialmodelingprep.com/stable/profile?symbol='+sym+'&apikey='+FMP_KEY)
         .then(function(r){ return r.json(); })
-        .then(function(d){ if(d && d.c && d.c !== 0) prices[sym] = d.c; })
-        .catch(function(){});
+        .then(function(d){
+          var p = d && d[0] && d[0].price;
+          if(p && p !== 0) prices[sym] = p;
+          /* Fallback: Finnhub if FMP returned nothing */
+          if(!prices[sym]){
+            return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+FH_KEY)
+              .then(function(r){ return r.json(); })
+              .then(function(fh){ if(fh && fh.c && fh.c !== 0) prices[sym] = fh.c; })
+              .catch(function(){});
+          }
+        })
+        .catch(function(){
+          /* FMP failed entirely — try Finnhub */
+          return fetch('https://finnhub.io/api/v1/quote?symbol='+sym+'&token='+FH_KEY)
+            .then(function(r){ return r.json(); })
+            .then(function(fh){ if(fh && fh.c && fh.c !== 0) prices[sym] = fh.c; })
+            .catch(function(){});
+        });
     });
     return Promise.all(fetches).then(function(){ return prices; });
   }

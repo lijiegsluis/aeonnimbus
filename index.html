@@ -13301,6 +13301,10 @@ function exportPortExcel(){
         /* store for combined total */
         window._trUnrealPnl = totalDollar;
         if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
+      } else {
+        /* Prices fetched but no valid ROI — mark as loaded so labels update */
+        if(window._trUnrealPnl == null) window._trUnrealPnl = 0;
+        if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
       }
     })();
 
@@ -13322,7 +13326,14 @@ function exportPortExcel(){
 
   function refresh(){
     var items = collectItems();
-    if(!items.length) return;
+    if(!items.length){
+      /* No open positions — mark unrealized as $0 so labels populate */
+      if(window._trUnrealPnl == null){
+        window._trUnrealPnl = 0;
+        if(typeof window._trUpdateTotalPnl === 'function') window._trUpdateTotalPnl();
+      }
+      return;
+    }
 
     /* Deduplicate symbols */
     var symSet = {};

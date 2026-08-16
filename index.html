@@ -511,6 +511,16 @@ table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
 .bw{background:rgba(74,222,128,.12);color:#4ade80}.bl{background:rgba(248,113,113,.1);color:#f87171}.bo{background:rgba(196,154,42,.12);color:var(--gold)}
 .tr-section-lbl{font-family:var(--FM);font-size:8.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2);padding:32px 44px 14px;display:flex;align-items:center;gap:16px;font-weight:500}
 .tr-section-lbl::after{content:'';flex:1;height:1px;background:var(--line2)}
+/* ── Track record metrics bar ── */
+.tr-mbar{display:grid;grid-template-columns:1fr 1.15fr 1fr 1fr 1.15fr;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2)}
+.tr-mb{padding:22px 32px;border-right:1px solid var(--line2);display:flex;flex-direction:column;gap:5px}
+.tr-mb:last-child{border-right:none}
+.tr-mb-hero{background:rgba(200,131,10,.035)}
+.tr-mb-lbl{font-family:var(--FM);font-size:7.5px;letter-spacing:.13em;text-transform:uppercase;color:var(--g2)}
+.tr-mb-val{font-family:var(--FM);font-size:26px;font-weight:700;color:var(--white);letter-spacing:-.025em;line-height:1}
+.tr-mb-hero .tr-mb-val{font-size:32px;color:var(--gold)}
+.tr-mb-sub{font-family:var(--FM);font-size:8.5px;color:var(--g2);opacity:.75}
+.tr-mbar-note{padding:7px 44px;font-family:var(--FM);font-size:7.5px;color:var(--g2);opacity:.6;border-bottom:1px solid var(--line2)}
 .pc-hero{background:rgba(200,131,10,.04)!important}
 .pc-num-lg{font-size:32px!important;line-height:1.05}
 table.tr thead th{position:sticky;top:0;z-index:3;background:var(--bg1)}
@@ -638,6 +648,10 @@ footer{padding:32px 44px;border-top:1px solid var(--line2);display:flex;justify-
   .perfrow-6{grid-template-columns:repeat(3,1fr)}
   .perfrow-5{grid-template-columns:repeat(3,1fr)}
   .tr-section-lbl{padding-left:20px;padding-right:20px}
+  .tr-mbar{grid-template-columns:1fr 1fr 1fr}
+  .tr-mb{padding:18px 20px}
+  .tr-mb-hero .tr-mb-val{font-size:28px}
+  .tr-mbar-note{padding:6px 20px}
   .post{grid-template-columns:1fr;gap:5px}
   .pm{flex-direction:row;align-items:center}
   footer{flex-direction:column;gap:14px;padding:24px 20px;text-align:center}
@@ -6947,16 +6961,34 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <p class="pgsub" data-i18n="track_sub" style="margin-bottom:12px">Every call published publicly before the outcome is known. Losses included. Never deleted.</p>
   <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a>
 </div>
-<div style="padding:20px 44px 0">
-  <div class="perfrow perfrow-5">
-    <div class="pc"><div class="pcl">Total calls</div><div class="pcv gold" id="tr-total">0</div><div class="pcs" id="tr-open-sub">— open</div></div>
-    <div class="pc pc-hero"><div class="pcl">Hit rate</div><div class="pcv gold" id="tr-hitrate" style="font-size:32px!important;line-height:1.1">—</div><div class="pcs" id="tr-closed-label">Closed positions only</div></div>
-    <div class="pc"><div class="pcl">Avg. return · closed</div><div class="pcv" id="tr-avgret">—</div><div class="pcs" id="tr-winloss-sub">Realised P&amp;L</div></div>
-    <div class="pc"><div class="pcl">Capital deployed</div><div class="pcv gold" id="tr-deployed">—</div><div class="pcs">Open position sizing</div></div>
-    <div class="pc pc-bench pc-hero"><div class="pcl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div><div class="pcv" id="tr-vs-spx" style="font-size:32px!important;line-height:1.1">—</div><div class="pcs">Since first call · S&amp;P: <span id="tr-spx-ret">—</span></div></div>
+<div class="tr-mbar">
+  <div class="tr-mb">
+    <div class="tr-mb-lbl">Total calls</div>
+    <div class="tr-mb-val" id="tr-total">—</div>
+    <div class="tr-mb-sub" id="tr-open-sub">— open · — closed</div>
   </div>
-  <div style="padding:4px 0 0;font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.7">Live prices · S&amp;P 500 from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology ↓</a></div>
+  <div class="tr-mb tr-mb-hero">
+    <div class="tr-mb-lbl">Hit rate</div>
+    <div class="tr-mb-val" id="tr-hitrate">—</div>
+    <div class="tr-mb-sub" id="tr-closed-label">Closed positions only</div>
+  </div>
+  <div class="tr-mb">
+    <div class="tr-mb-lbl">Avg. return · closed</div>
+    <div class="tr-mb-val" id="tr-avgret">—</div>
+    <div class="tr-mb-sub" id="tr-winloss-sub">Realised P&amp;L</div>
+  </div>
+  <div class="tr-mb">
+    <div class="tr-mb-lbl">Capital deployed</div>
+    <div class="tr-mb-val" id="tr-deployed">—</div>
+    <div class="tr-mb-sub">Open position sizing</div>
+  </div>
+  <div class="tr-mb tr-mb-hero tr-mb-alpha">
+    <div class="tr-mb-lbl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div>
+    <div class="tr-mb-val" id="tr-vs-spx">—</div>
+    <div class="tr-mb-sub">Since first call · S&amp;P: <span id="tr-spx-ret">—</span></div>
+  </div>
 </div>
+<div class="tr-mbar-note">Live prices · S&amp;P 500 from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology ↓</a></div>
 <!-- hidden element keeps tr-openret wired for JS -->
 <span id="tr-openret" style="display:none"></span>
 <div id="tr-sparkline-wrap" style="display:none">
@@ -12366,20 +12398,6 @@ function exportPortExcel(){
         injectCallRow({pubDate:call.pubDate, guid:call.ticker, link:call.link}, Object.assign({}, call, {reopened:reopened}));
       });
     }
-    /* inject at-a-glance strip after pghd (static HTML silently dropped by parser) */
-    (function(){
-      var pghd = document.querySelector('#pg-track .pghd');
-      if(!pghd || document.getElementById('tr-qv-hitrate')) return;
-      var strip = document.createElement('div');
-      strip.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);border-bottom:1px solid var(--line2);margin:0 44px';
-      strip.innerHTML = [
-        '<div style="background:var(--bg1);padding:14px 20px;display:flex;align-items:baseline;gap:14px"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Hit rate</span><span id="tr-qv-hitrate" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.01em">—</span></div>',
-        '<div style="background:var(--bg1);padding:14px 20px;display:flex;align-items:baseline;gap:14px"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Avg return · closed</span><span id="tr-qv-avgret" style="font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:-.01em">—</span></div>',
-        '<div style="background:rgba(200,131,10,.05);padding:14px 20px;display:flex;align-items:baseline;gap:14px;border-left:2px solid rgba(200,131,10,.3)"><span style="font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);white-space:nowrap">Alpha vs S&amp;P 500</span><span id="tr-qv-alpha" style="font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.01em">—</span></div>'
-      ].join('');
-      pghd.insertAdjacentElement('afterend', strip);
-    })();
-
     populateKnownCalls();
 
     /* ── Best Calls Gallery ─────────────────────────── */
@@ -12872,7 +12890,7 @@ function exportPortExcel(){
     if(el('tr-closed-label')) el('tr-closed-label').textContent = closed>0 ? closed+' closed position'+(closed!==1?'s':'') : 'Realised P&L';
     if(el('tr-avgret')){
       el('tr-avgret').textContent = fmt(avgRet);
-      el('tr-avgret').className   = avgRet===null ? 'pcv' : 'pcv '+(avgRet>=0?'g':'r');
+      el('tr-avgret').style.color = avgRet===null || avgRet>=0 ? 'var(--white)' : '#f87171';
     }
     if(el('tr-qv-avgret')){ el('tr-qv-avgret').textContent = fmt(avgRet); el('tr-qv-avgret').style.color = avgRet===null||avgRet>=0 ? 'var(--white)' : '#f87171'; }
     if(el('tr-deployed')) el('tr-deployed').textContent = deployed>0 ? deployed.toFixed(0)+'%' : '—';
@@ -13029,7 +13047,7 @@ function exportPortExcel(){
           var diff = avgRet2 - spxRet;
           var dSign = diff >= 0 ? '+' : '';
           vsEl.textContent = dSign + diff.toFixed(1) + '%';
-          vsEl.className = 'pcv ' + (diff >= 0 ? 'g' : 'r');
+          vsEl.style.color = diff >= 0 ? 'var(--gold)' : '#f87171';
           var qvAlpha = document.getElementById('tr-qv-alpha');
           if(qvAlpha){ qvAlpha.textContent = dSign + diff.toFixed(1) + '%'; qvAlpha.style.color = diff >= 0 ? 'var(--gold)' : '#f87171'; }
         }

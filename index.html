@@ -7443,6 +7443,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Open Source · GitHub ↗</div>
     <div class="tgt-open">Open Tool</div>
   </div>
+  <div class="tg-thumb" id="tgt-sotp" onclick="openToolThumb('sotp')">
+    <span class="tgt-badge">Core</span>
+    <div class="tgt-icon">SP</div>
+    <div class="tgt-name">Sum-of-the-Parts Builder</div>
+    <div class="tgt-desc">Segment valuation · Revenue / EBITDA / EBIT multiples · Implied price · Contribution waterfall</div>
+    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Open Source · GitHub ↗</div>
+    <div class="tgt-open">Open Tool</div>
+  </div>
 </div>
 
 <div class="tgrid" id="tgrid-panels">
@@ -7961,6 +7969,63 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <button class="xls-btn" onclick="exportIdeaExcel()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.83L14.17 3zM13 5l4 4h-4V5zM8.5 16.5l-3-4.5h1.8l1.7 2.67L10.7 12h1.8l-3 4.5 3 4.5H10.7l-1.7-2.67L7.3 21H5.5l3-4.5zm7 4.5h-1.5L13 18.5l-1 2.5H10.5l1.75-4.5L10.5 12H12l1 2.5 1-2.5h1.5l-1.75 4.5L15.5 21z"/></svg> Export to Excel</button>
 </div>
 </div></div>
+
+<!-- ───── SOTP BUILDER ────────────────────────────────── -->
+<div class="tc" id="tc-sotp">
+<div class="tchd" onclick="tog('sotp')">
+  <div class="tcleft"><div class="tico">SP</div><div><div class="tname">Sum-of-the-Parts Builder</div><div class="tdesc">Segment valuation · Revenue / EBITDA / EBIT multiples · Implied price · Contribution waterfall</div></div></div>
+  <span class="tbadge">Core</span><a href="https://github.com/lijiegsluis/aeonnimbus" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+</div>
+<div class="tbody" id="tb-sotp">
+<p style="font-family:var(--FS);font-size:14px;color:var(--white3);line-height:1.8;margin-bottom:20px"><em>Value each business segment independently, then sum to an enterprise value. Useful for conglomerates, holding companies, or any business with distinct revenue streams that deserve different multiples. Add up to 8 segments.</em></p>
+
+<!-- Header inputs -->
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px">
+  <div><div class="vlbl">Company / Ticker</div><input class="vin" id="sotp-company" value="Oracle Corporation (ORCL)" placeholder="Company name"></div>
+  <div><div class="vlbl">Net Debt ($M)</div><input class="vin" id="sotp-netdebt" type="number" value="87000" placeholder="e.g. 5000"></div>
+  <div><div class="vlbl">Shares Outstanding (M)</div><input class="vin" id="sotp-shares" type="number" value="2730" placeholder="e.g. 500"></div>
+</div>
+
+<!-- Segment table -->
+<div style="overflow-x:auto;margin-bottom:16px">
+  <table style="width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px">
+    <thead><tr style="border-bottom:1px solid var(--rule2)">
+      <th style="padding:8px 10px;text-align:left;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Segment</th>
+      <th style="padding:8px 10px;text-align:left;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Metric ($M)</th>
+      <th style="padding:8px 10px;text-align:left;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Basis</th>
+      <th style="padding:8px 10px;text-align:right;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Multiple (×)</th>
+      <th style="padding:8px 10px;text-align:right;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--g2);font-weight:500">Implied EV ($M)</th>
+      <th style="padding:8px 10px;width:32px"></th>
+    </tr></thead>
+    <tbody id="sotp-rows"></tbody>
+  </table>
+</div>
+
+<div style="display:flex;gap:10px;align-items:center;margin-bottom:20px;flex-wrap:wrap">
+  <button class="vbtn" onclick="sotpAddRow()" style="background:transparent;border:1px solid var(--rule);color:var(--white3);padding:7px 16px;font-size:9px">+ Add Segment</button>
+  <button class="vbtn" onclick="sotpCalc()">Calculate SOTP</button>
+  <button class="vbtn" style="background:transparent;border:1px solid var(--rule);color:var(--white3);padding:7px 16px;font-size:9px" onclick="sotpLoadOracle()">Load Oracle Example</button>
+</div>
+
+<!-- Results -->
+<div id="sotp-result" style="display:none">
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:1px;background:var(--rule2);border:1px solid var(--rule2);border-radius:3px;overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--bg2);padding:16px 18px"><div class="vlbl" style="margin-bottom:4px">Enterprise Value</div><div style="font-family:var(--FM);font-size:20px;font-weight:700;color:var(--gold)" id="sotp-r-ev">—</div></div>
+    <div style="background:var(--bg2);padding:16px 18px"><div class="vlbl" style="margin-bottom:4px">Less Net Debt</div><div style="font-family:var(--FM);font-size:20px;font-weight:700;color:#f87171" id="sotp-r-nd">—</div></div>
+    <div style="background:var(--bg2);padding:16px 18px"><div class="vlbl" style="margin-bottom:4px">Equity Value</div><div style="font-family:var(--FM);font-size:20px;font-weight:700;color:var(--ink)" id="sotp-r-eq">—</div></div>
+    <div style="background:var(--bg2);padding:16px 18px"><div class="vlbl" style="margin-bottom:4px">Implied Price</div><div style="font-family:var(--FM);font-size:20px;font-weight:700;" id="sotp-r-price">—</div></div>
+  </div>
+  <!-- Waterfall bars -->
+  <div id="sotp-waterfall" style="margin-bottom:16px"></div>
+  <!-- Segment contribution table -->
+  <div style="overflow-x:auto;margin-bottom:12px"><table style="width:100%;border-collapse:collapse;font-family:var(--FM);font-size:10px" id="sotp-breakdown-table"></table></div>
+</div>
+
+<div class="export-row" style="margin-top:4px">
+  <button class="xls-btn" onclick="sotpExport()"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.17 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V9.83L14.17 3zM13 5l4 4h-4V5zM8.5 16.5l-3-4.5h1.8l1.7 2.67L10.7 12h1.8l-3 4.5 3 4.5H10.7l-1.7-2.67L7.3 21H5.5l3-4.5zm7 4.5h-1.5L13 18.5l-1 2.5H10.5l1.75-4.5L10.5 12H12l1 2.5 1-2.5h1.5l-1.75 4.5L15.5 21z"/></svg> Export to Excel</button>
+</div>
+</div>
+</div>
 
 </div>
 
@@ -15591,6 +15656,152 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
   } else {
     sotpRecalc();
   }
+})();
+
+/* ═══ SOTP TOOL (generic builder on Tools page) ══════════════════════════ */
+(function(){
+  var rowCount = 0;
+
+  var BASES = ['Revenue','EBITDA','EBIT','FCF','Book Value'];
+
+  function makeRow(name, metric, basis, multiple){
+    var id = ++rowCount;
+    var opts = BASES.map(function(b){ return '<option'+(b===basis?' selected':'')+'>'+b+'</option>'; }).join('');
+    var tr = document.createElement('tr');
+    tr.id = 'sotp-tr-'+id;
+    tr.style.borderBottom = '1px solid rgba(255,255,255,.05)';
+    tr.innerHTML =
+      '<td style="padding:6px 6px 6px 10px"><input class="vin" style="width:160px;padding:5px 8px;font-size:11px" value="'+name+'" placeholder="Segment name"></td>'+
+      '<td style="padding:6px"><input class="vin" style="width:110px;padding:5px 8px;font-size:11px;text-align:right" type="number" value="'+metric+'" placeholder="e.g. 5000"></td>'+
+      '<td style="padding:6px"><select class="vin" style="padding:5px 8px;font-size:11px">'+opts+'</select></td>'+
+      '<td style="padding:6px;text-align:right"><input class="vin" style="width:70px;padding:5px 8px;font-size:11px;text-align:right" type="number" value="'+multiple+'" step="0.5" min="0.1"></td>'+
+      '<td style="padding:6px;text-align:right;font-family:var(--FM);font-size:11px;color:#4ade80;font-variant-numeric:tabular-nums" class="sotp-ev-out">—</td>'+
+      '<td style="padding:6px;text-align:center"><button onclick="document.getElementById(\'sotp-tr-'+id+'\').remove()" style="background:none;border:none;color:var(--g2);cursor:pointer;font-size:14px;line-height:1;padding:2px 4px">×</button></td>';
+    return tr;
+  }
+
+  window.sotpAddRow = function(name, metric, basis, multiple){
+    var tbody = document.getElementById('sotp-rows');
+    if(!tbody) return;
+    if(tbody.rows.length >= 8){ alert('Max 8 segments.'); return; }
+    tbody.appendChild(makeRow(name||'New Segment', metric||0, basis||'Revenue', multiple||5));
+  };
+
+  window.sotpLoadOracle = function(){
+    var tbody = document.getElementById('sotp-rows');
+    if(!tbody) return;
+    tbody.innerHTML = '';
+    rowCount = 0;
+    document.getElementById('sotp-company').value  = 'Oracle Corporation (ORCL)';
+    document.getElementById('sotp-netdebt').value  = 87000;
+    document.getElementById('sotp-shares').value   = 2730;
+    [
+      ['Cloud Infrastructure (OCI)', 13500, 'Revenue', 15],
+      ['Cloud Applications (SaaS)',  9200,  'Revenue', 6],
+      ['Database & License Support', 16300, 'EBITDA',  14],
+      ['Hardware',                   3400,  'Revenue', 0.8],
+      ['Services & Other',           11100, 'Revenue', 1.2],
+    ].forEach(function(r){ tbody.appendChild(makeRow(r[0],r[1],r[2],r[3])); });
+  };
+
+  window.sotpCalc = function(){
+    var rows = document.querySelectorAll('#sotp-rows tr');
+    if(!rows.length){ alert('Add at least one segment first.'); return; }
+    var nd  = parseFloat(document.getElementById('sotp-netdebt').value)||0;
+    var sh  = parseFloat(document.getElementById('sotp-shares').value)||1;
+    var segs = [], totalEV = 0;
+    rows.forEach(function(tr){
+      var inputs = tr.querySelectorAll('input,select');
+      var name = inputs[0].value||'Segment';
+      var metric = parseFloat(inputs[1].value)||0;
+      var basis = inputs[2].value;
+      var mult = parseFloat(inputs[3].value)||0;
+      var ev = metric * mult;
+      totalEV += ev;
+      tr.querySelector('.sotp-ev-out').textContent = ev >= 1000 ? '$'+(ev/1000).toFixed(1)+'B' : '$'+Math.round(ev)+'M';
+      segs.push({name:name, ev:ev, pct: 0});
+    });
+    segs.forEach(function(s){ s.pct = totalEV > 0 ? s.ev / totalEV * 100 : 0; });
+    var equity = totalEV - nd;
+    var price  = equity / sh; // $/share ($M equity / M shares = $/share)
+
+    var fmt = function(n){ return n >= 1000 ? '$'+(n/1000).toFixed(1)+'B' : '$'+Math.round(n)+'M'; };
+    document.getElementById('sotp-r-ev').textContent   = fmt(totalEV);
+    document.getElementById('sotp-r-nd').textContent   = '('+fmt(nd)+')';
+    document.getElementById('sotp-r-eq').textContent   = fmt(equity);
+    var prEl = document.getElementById('sotp-r-price');
+    prEl.textContent = '$'+price.toFixed(2);
+    prEl.style.color = price > 0 ? 'var(--gold)' : '#f87171';
+
+    // Waterfall bars
+    var wf = document.getElementById('sotp-waterfall');
+    wf.innerHTML = '<div style="font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);margin-bottom:10px">Segment contribution to EV</div>' +
+      segs.map(function(s){
+        var w = Math.abs(s.pct).toFixed(1);
+        var col = s.ev >= 0 ? '#4ade80' : '#f87171';
+        return '<div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">'+
+          '<div style="font-family:var(--FM);font-size:10px;width:200px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;flex-shrink:0">'+s.name+'</div>'+
+          '<div style="flex:1;height:5px;background:rgba(255,255,255,.06);border-radius:3px;overflow:hidden">'+
+            '<div style="width:'+w+'%;height:100%;background:'+col+';border-radius:3px"></div>'+
+          '</div>'+
+          '<div style="font-family:var(--FM);font-size:10px;font-variant-numeric:tabular-nums;width:48px;text-align:right;color:'+col+'">'+s.pct.toFixed(1)+'%</div>'+
+        '</div>';
+      }).join('');
+
+    // Breakdown table
+    var bt = document.getElementById('sotp-breakdown-table');
+    bt.innerHTML =
+      '<thead><tr style="border-bottom:1px solid var(--rule2)">'+
+        '<th style="padding:7px 10px;text-align:left;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);font-weight:500">Segment</th>'+
+        '<th style="padding:7px 10px;text-align:right;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);font-weight:500">EV ($M)</th>'+
+        '<th style="padding:7px 10px;text-align:right;font-size:8.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2);font-weight:500">% of EV</th>'+
+      '</tr></thead>'+
+      '<tbody>'+segs.map(function(s){
+        return '<tr style="border-bottom:1px solid rgba(255,255,255,.04)">'+
+          '<td style="padding:6px 10px;color:var(--ink2)">'+s.name+'</td>'+
+          '<td style="padding:6px 10px;text-align:right;color:#4ade80;font-variant-numeric:tabular-nums">'+fmt(s.ev)+'</td>'+
+          '<td style="padding:6px 10px;text-align:right;color:var(--g2);font-variant-numeric:tabular-nums">'+s.pct.toFixed(1)+'%</td>'+
+        '</tr>';
+      }).join('')+
+      '<tr style="border-top:1px solid var(--rule2)">'+
+        '<td style="padding:8px 10px;font-weight:700;color:var(--ink)">Total Enterprise Value</td>'+
+        '<td style="padding:8px 10px;text-align:right;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums">'+fmt(totalEV)+'</td>'+
+        '<td style="padding:8px 10px;text-align:right;color:var(--g2)">100%</td>'+
+      '</tr>'+
+      '</tbody>';
+
+    document.getElementById('sotp-result').style.display = 'block';
+  };
+
+  window.sotpExport = function(){
+    var rows = [['Segment','Metric ($M)','Basis','Multiple','Implied EV ($M)']];
+    document.querySelectorAll('#sotp-rows tr').forEach(function(tr){
+      var inp = tr.querySelectorAll('input,select');
+      var ev = parseFloat(inp[1].value)*parseFloat(inp[3].value)||0;
+      rows.push([inp[0].value, inp[1].value, inp[2].value, inp[3].value, ev.toFixed(0)]);
+    });
+    var nd = document.getElementById('sotp-netdebt').value;
+    var sh = document.getElementById('sotp-shares').value;
+    rows.push(['']);
+    rows.push(['Net Debt ($M)', nd]);
+    rows.push(['Shares (M)', sh]);
+    if(window.XLSX){
+      var wb = XLSX.utils.book_new();
+      var ws = XLSX.utils.aoa_to_sheet(rows);
+      XLSX.utils.book_append_sheet(wb, ws, 'SOTP');
+      XLSX.writeFile(wb, (document.getElementById('sotp-company').value||'SOTP')+'.xlsx');
+    }
+  };
+
+  // Initialise with 3 blank rows on first open
+  document.addEventListener('DOMContentLoaded', function(){
+    var tbody = document.getElementById('sotp-rows');
+    if(tbody && !tbody.rows.length){
+      sotpAddRow('Segment A', 5000, 'Revenue', 8);
+      sotpAddRow('Segment B', 3000, 'EBITDA', 12);
+      sotpAddRow('Segment C', 2000, 'Revenue', 3);
+    }
+  });
 })();
 
 /* ═══ THESIS CATALYSTS ════════════════════════════════════════════════════ */

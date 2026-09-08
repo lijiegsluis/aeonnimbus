@@ -6173,6 +6173,41 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 .fdisc{font-family:var(--FM);font-size:7.5px;color:var(--g2);opacity:.45;text-align:center;max-width:860px;margin:20px auto 0;line-height:1.9;letter-spacing:.01em;padding:0 16px}
 @media(max-width:900px){.ml-section{padding:44px 24px 52px}.ml-body{grid-template-columns:1fr}.ml-price-num{font-size:30px}.ml-tv-share{margin-left:0}}
 
+/* ═══ THESIS CATALYSTS ══════════════════════════════ */
+.cat-section{padding:16px 44px 32px}
+.cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line2);border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.cat-card{background:var(--bg1);padding:20px 20px;display:flex;flex-direction:column}
+.cat-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px}
+.cat-tk{font-family:var(--FM);font-size:12px;font-weight:700;color:var(--gold)}
+.cat-ret{font-family:var(--FM);font-size:11px;font-weight:700;color:#4ade80}
+.cat-lbl{font-family:var(--FM);font-size:7px;letter-spacing:.15em;text-transform:uppercase;color:var(--g2);margin-bottom:4px;opacity:.7}
+.cat-text{font-family:var(--FS);font-size:11.5px;color:var(--ink2);line-height:1.65;flex:1;margin-bottom:10px}
+.cat-date-line{font-family:var(--FM);font-size:8px;color:var(--g2);margin-bottom:12px}
+.cat-sell{font-family:var(--FM);font-size:9px;color:var(--g2);line-height:1.75;padding-top:10px;border-top:1px solid var(--line2);opacity:.8}
+@media(max-width:900px){.cat-section{padding:16px 24px 32px}.cat-grid{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.cat-grid{grid-template-columns:1fr}}
+
+/* ═══ SOTP SECTION ══════════════════════════════════ */
+.sotp-section{border-top:1px solid var(--line2);padding:44px 52px 56px;background:var(--bg2)}
+.sotp-table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:10px}
+.sotp-table thead tr{border-bottom:1px solid var(--line2)}
+.sotp-table th{padding:9px 12px;text-align:right;font-weight:500;font-size:8px;letter-spacing:.08em;text-transform:uppercase;color:var(--g2)}
+.sotp-table th:first-child,.sotp-table th:nth-child(2){text-align:left}
+.sotp-table td{padding:0 12px;text-align:right;font-variant-numeric:tabular-nums;vertical-align:middle}
+.sotp-table td:first-child{text-align:left;color:var(--ink);font-size:11px}
+.sotp-table td:nth-child(2){text-align:left;color:var(--g2);font-size:9px}
+.sotp-table .sotp-row{border-bottom:1px solid rgba(255,255,255,.04)}
+.sotp-table .sotp-row:last-of-type{border-bottom:1px solid var(--line2)}
+.sotp-table .sotp-sum td{border-top:1px solid var(--line2);padding-top:10px;padding-bottom:10px;font-weight:700;color:var(--ink)}
+.sotp-table .sotp-final td{padding-top:6px;padding-bottom:12px;color:var(--gold);font-size:13px;font-weight:700}
+.sotp-multi-cell{display:flex;align-items:center;gap:8px;justify-content:flex-end;padding:8px 0}
+.sotp-multi-lbl{font-family:var(--FM);font-size:10px;font-weight:600;color:var(--gold);width:36px;text-align:right;flex-shrink:0}
+.sotp-slider{width:90px;-webkit-appearance:none;height:2px;border-radius:1px;background:var(--line2);outline:none;cursor:pointer}
+.sotp-slider::-webkit-slider-thumb{-webkit-appearance:none;width:12px;height:12px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 0 2px var(--bg2)}
+.sotp-slider::-moz-range-thumb{width:12px;height:12px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg2)}
+.sotp-ev-cell{color:#4ade80;font-weight:600}
+@media(max-width:900px){.sotp-section{padding:36px 24px 44px}.sotp-slider{width:60px}}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
@@ -6731,6 +6766,82 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </div>
     </div>
   </div>
+
+  <!-- SOTP -->
+  <div class="sotp-section">
+    <div class="ml-eyebrow" style="margin-bottom:10px">Sum-of-the-Parts · Oracle Corporation</div>
+    <h3 style="font-family:Georgia,serif;font-size:clamp(15px,1.8vw,20px);font-weight:400;color:var(--ink);margin:0 0 6px">Segment Valuation — NTM Multiples</h3>
+    <p style="font-family:var(--FS);font-size:12px;color:var(--ink2);margin:0 0 24px;max-width:600px;line-height:1.6">Adjust the revenue or EBITDA multiple per segment. The implied share price updates alongside the DCF above — SOTP on NTM numbers typically captures a static floor; the DCF growth assumptions capture the incremental value the thesis was betting on.</p>
+    <div style="overflow-x:auto">
+      <table class="sotp-table">
+        <thead><tr>
+          <th style="text-align:left">Segment</th>
+          <th style="text-align:left">NTM Revenue ($B)</th>
+          <th>Basis</th>
+          <th>Multiple</th>
+          <th>Implied EV ($B)</th>
+        </tr></thead>
+        <tbody>
+          <tr class="sotp-row">
+            <td>Cloud Infrastructure (OCI)</td>
+            <td id="sotp-rev-0">13.5</td>
+            <td>Revenue</td>
+            <td><div class="sotp-multi-cell"><span class="sotp-multi-lbl" id="sotpv-0">15×</span><input type="range" class="sotp-slider" id="sotps-0" min="5" max="30" value="15" step="1" oninput="sotpRecalc()"></div></td>
+            <td class="sotp-ev-cell" id="sotpev-0">202.5</td>
+          </tr>
+          <tr class="sotp-row">
+            <td>Cloud Applications (SaaS)</td>
+            <td id="sotp-rev-1">9.2</td>
+            <td>Revenue</td>
+            <td><div class="sotp-multi-cell"><span class="sotp-multi-lbl" id="sotpv-1">6×</span><input type="range" class="sotp-slider" id="sotps-1" min="2" max="15" value="6" step="1" oninput="sotpRecalc()"></div></td>
+            <td class="sotp-ev-cell" id="sotpev-1">55.2</td>
+          </tr>
+          <tr class="sotp-row">
+            <td>Database &amp; License Support</td>
+            <td id="sotp-rev-2" style="font-size:9px;color:var(--g2)">$16.3B EBITDA<br><span style="font-size:8px;opacity:.7">(65% margin on $25.0B rev)</span></td>
+            <td>EBITDA</td>
+            <td><div class="sotp-multi-cell"><span class="sotp-multi-lbl" id="sotpv-2">14×</span><input type="range" class="sotp-slider" id="sotps-2" min="6" max="22" value="14" step="1" oninput="sotpRecalc()"></div></td>
+            <td class="sotp-ev-cell" id="sotpev-2">228.2</td>
+          </tr>
+          <tr class="sotp-row">
+            <td>Hardware</td>
+            <td id="sotp-rev-3">3.4</td>
+            <td>Revenue</td>
+            <td><div class="sotp-multi-cell"><span class="sotp-multi-lbl" id="sotpv-3">0.8×</span><input type="range" class="sotp-slider" id="sotps-3" min="2" max="30" value="8" step="1" oninput="sotpRecalc()" data-scale="0.1"></div></td>
+            <td class="sotp-ev-cell" id="sotpev-3">2.7</td>
+          </tr>
+          <tr class="sotp-row">
+            <td>Services &amp; Other</td>
+            <td id="sotp-rev-4">11.1</td>
+            <td>Revenue</td>
+            <td><div class="sotp-multi-cell"><span class="sotp-multi-lbl" id="sotpv-4">1.2×</span><input type="range" class="sotp-slider" id="sotps-4" min="4" max="30" value="12" step="1" oninput="sotpRecalc()" data-scale="0.1"></div></td>
+            <td class="sotp-ev-cell" id="sotpev-4">13.3</td>
+          </tr>
+          <tr class="sotp-sum">
+            <td colspan="4">Enterprise Value</td>
+            <td id="sotp-ev-total" style="color:var(--ink);font-size:12px">501.9</td>
+          </tr>
+          <tr class="sotp-sum" style="color:var(--g2)">
+            <td colspan="4" style="font-weight:400;color:var(--g2);font-size:10px">Less: Net Debt</td>
+            <td style="font-weight:400;color:var(--g2)">(87.0)</td>
+          </tr>
+          <tr class="sotp-sum">
+            <td colspan="4">Equity Value</td>
+            <td id="sotp-equity-total">414.9</td>
+          </tr>
+          <tr class="sotp-final">
+            <td colspan="4" style="font-size:11px;font-weight:600;letter-spacing:.04em">Implied Price (2.73B shares)</td>
+            <td id="sotp-price">$152</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.65;margin-top:12px;line-height:1.8">
+      NTM revenue estimated from FY2025 actuals: OCI ($9.0B × 1.50), SaaS ($8.0B × 1.15), DB/License ($25.0B × 1.03), Hardware ($3.5B × 0.97), Services ($10.9B × 1.02).
+      Database EBITDA assumes 65% margin on NTM license support revenue. Net debt $87.0B. Shares 2.73B.
+      SOTP on NTM numbers is a static floor — the DCF captures growth value beyond Year 1. Illustrative only. Not investment advice.
+    </p>
+  </div>
 </div>
 
 <!-- SEO CONTENT — rich crawlable text merged from Analyst page -->
@@ -7237,6 +7348,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- ══ BEST / CLOSED CALLS ═══════════════════════ -->
 <div class="tr-section-lbl">Closed Positions</div>
 <div class="bc-section" style="padding-top:4px"><div class="bc-grid" id="bc-grid"></div></div>
+
+<!-- ══ THESIS CATALYSTS ══════════════════════════ -->
+<div class="tr-section-lbl">Thesis Catalysts</div>
+<div class="cat-section">
+  <div class="cat-grid" id="cat-grid">
+    <div style="padding:20px;font-family:var(--FM);font-size:10px;color:var(--g2)">Loading…</div>
+  </div>
+</div>
 
 <!-- ══ FULL RECORD ════════════════════════════════ -->
 <div class="tr-section-lbl">Full Record</div>
@@ -12482,14 +12601,14 @@ function exportPortExcel(){
 
     /* ── KNOWN_CALLS — full call registry; source of truth for track record ── */
     const KNOWN_CALLS = {
-      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z', exitPrice:'249.88', exitDate:'2026-06-01T17:00:00Z', return:'+74.3%', company:'Oracle Corporation',   thesis:'$98B cloud backlog invisible to the street — AI demand pulled Oracle\'s 5-year infrastructure runway into 18 months'},
+      'oracle'      : {ticker:'ORCL', entry:'143.36', target:'242.00', stop:'118.00', size:'3%', horizon:'12–18m', link:'https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market',        pubDate:'2026-04-08T00:00:00Z', exitPrice:'249.88', exitDate:'2026-06-01T17:00:00Z', return:'+74.3%', company:'Oracle Corporation',   thesis:'$98B cloud backlog invisible to the street — AI demand pulled Oracle\'s 5-year infrastructure runway into 18 months', catalyst:'Q4 FY2026 results: cloud revenue +28% YoY; IaaS bookings growth >100% YoY; backlog expanded $98B → $130B. FY2027 guidance implied +21% growth vs +14% consensus. Street forced to reopen cloud monetisation models.', catalystDate:'2026-06-09', sellSide:'Pre-call: neutral consensus, $165 median PT. Post-earnings: median PT moved to $270+; analysts revised cloud backlog monetisation timeline from 5 years to 18 months — exactly the thesis.'},
       'mercadolibre': {ticker:'MELI', entry:'1774.00',target:'2750.00',stop:'1420.00',size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify',   pubDate:'2026-04-13T00:00:00Z'},
       'nu holdings' : {ticker:'NU',   entry:'14.53',  target:'21.00',  stop:'11.20', size:'3%', horizon:'18–24m', link:'https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient',    pubDate:'2026-05-01T00:00:00Z'},
       'adeia'       : {ticker:'ADEA', entry:'30.00',  target:'42.00',  stop:'20.00', size:'2%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer',         pubDate:'2026-05-04T00:00:00Z'},
-      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z', exitPrice:'65.30', exitDate:'2026-06-03T00:00:00Z', return:'+36.4%', company:'IREN Limited',        thesis:'Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve'},
-      'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%', company:'Reddit, Inc.',        thesis:'AI\'s training feedstock, not its victim — Reddit\'s unique human corpus is the data infrastructure every major lab depends on'},
-      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z', exitPrice:'323.26', exitDate:'2026-06-18T00:00:00Z', return:'+31.9%', company:'Marvell Technology',   thesis:'Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn\'t modeled'},
-      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z', exitPrice:'80.23', exitDate:'2026-07-07T00:00:00Z', return:'+34.7%', company:'Lemonade, Inc.',      thesis:'Loss ratio finally cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure'},
+      'iren'        : {ticker:'IREN', entry:'47.88',  target:'86.00',  stop:'32.00', size:'3%', horizon:'12m',    link:'https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat',        pubDate:'2026-05-20T00:00:00Z', exitPrice:'65.30', exitDate:'2026-06-03T00:00:00Z', return:'+36.4%', company:'IREN Limited',        thesis:'Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve', catalyst:'Q3 FY2026 operational update: exahash capacity +40% QoQ; power PPA renewed at $0.021/kWh locked through 2031 — well below network average all-in cost. BTC breakeven <$23K vs $47K network floor.', catalystDate:'2026-06-03', sellSide:'Street consensus: neutral-to-sell on macro BTC exposure. Post-update: proprietary low-cost power reframed as structural competitive moat, not commodity risk.'},
+      'reddit'      : {ticker:'RDDT', entry:'140.88', target:'182.00', stop:'122.00',size:'3%', horizon:'12–18m',link:'https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock',   pubDate:'2026-05-27T00:00:00Z', exitPrice:'186.68', exitDate:'2026-06-04T00:00:00Z', return:'+32.5%', company:'Reddit, Inc.',        thesis:'AI\'s training feedstock, not its victim — Reddit\'s unique human corpus is the data infrastructure every major lab depends on', catalyst:'Q1 2026 results: AI data licensing revenue well ahead of consensus; DAU +27% YoY; international monetisation running ahead of schedule. Sell-side TAM models for licensing revenue were tripled in response.', catalystDate:'2026-06-04', sellSide:'Street consensus: AI would displace Reddit\'s relevance. Q1 print proved the inverse — licensing contracts with major AI labs established Reddit as structural input, not a vulnerable output.'},
+      'marvell'     : {ticker:'MRVL', entry:'245.05', target:'350.00', stop:'190.00', size:'3%', horizon:'6–12m',  pubDate:'2026-06-09T00:00:00Z', exitPrice:'323.26', exitDate:'2026-06-18T00:00:00Z', return:'+31.9%', company:'Marvell Technology',   thesis:'Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn\'t modeled', catalyst:'Investor Day (Jun 2026): confirmed 3 hyperscaler ASIC design wins with committed multi-year volume; guided $1.5B+ custom silicon FY2027 revenue — roughly 2× the street estimate at $700M. Full earnings revision followed within 2 weeks.', catalystDate:'2026-06-18', sellSide:'Pre-day: consensus modelled ASIC contribution at ~$700M FY2027. Post-Investor Day: revised to $1.5B+; total revenue estimates up ~18%; near-unanimous Buy conviction across coverage.'},
+      'lemonade'    : {ticker:'LMND', entry:'59.56',  target:'85.00',  stop:'47.96',  size:'3%', horizon:'12–18m', pubDate:'2026-07-02T00:00:00Z', exitPrice:'80.23', exitDate:'2026-07-07T00:00:00Z', return:'+34.7%', company:'Lemonade, Inc.',      thesis:'Loss ratio finally cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure', catalyst:'Q2 2026 results: loss ratio 68% — first sub-70% print in company history. Reinsurance quota share renewed at improved economics. AI claims automation drove ~4pp of margin improvement vs prior year.', catalystDate:'2026-07-07', sellSide:'Pre-report: ~8:2 sell-to-buy ratio; bear consensus anchored to structurally impaired loss ratio. First sub-70% print collapsed the core bear case; multiple upgrades followed within the week.'},
       'marvell2'    : {ticker:'MRVL', entry:'227.13', target:'350.00', stop:'159.42', size:'5%', horizon:'6–12m',  pubDate:'2026-07-08T00:00:00Z'},
       'oracle2'     : {ticker:'ORCL', entry:'138.07', target:'242.00', stop:'96.00',  size:'5%', horizon:'12–18m', pubDate:'2026-07-08T00:00:00Z'},
       'iren2'       : {ticker:'IREN', entry:'41.18',  target:'86.00',  stop:'28.91',  size:'3%', horizon:'12m',    pubDate:'2026-07-08T00:00:00Z'},
@@ -12498,7 +12617,7 @@ function exportPortExcel(){
       'marvell3'    : {ticker:'MRVL', entry:'184.37', target:'350.00', stop:'159.42', size:'5%', horizon:'6–12m',  pubDate:'2026-07-19T00:00:00Z'},
       'iren3'       : {ticker:'IREN', entry:'33.22',  target:'86.00',  stop:'28.91',  size:'3%', horizon:'12m',    pubDate:'2026-07-19T00:00:00Z'},
       'ibm'         : {ticker:'IBM',  entry:'211.07', target:'260.00', stop:'165.00', size:'5%', horizon:'12–18m', pubDate:'2026-07-19T00:00:00Z'},
-      'sndk'        : {ticker:'SNDK', entry:'1370.57',target:'1800.00',stop:'1025.00',size:'5%', horizon:'12–18m', pubDate:'2026-07-19T00:00:00Z', exitPrice:'1813.85', exitDate:'2026-08-17T00:00:00Z', return:'+32.3%', company:'SandDisk Corporation', thesis:''},
+      'sndk'        : {ticker:'SNDK', entry:'1370.57',target:'1800.00',stop:'1025.00',size:'5%', horizon:'12–18m', pubDate:'2026-07-19T00:00:00Z', exitPrice:'1813.85', exitDate:'2026-08-17T00:00:00Z', return:'+32.3%', company:'SandDisk Corporation', thesis:'Storage cycle recovery mispriced — NAND pricing inflection embedded in results before consensus updated forward estimates', catalyst:'NAND pricing inflection confirmed: enterprise SSD ASPs +22% QoQ in Q2 2026 per industry data. FY2026 Q4 guidance issued above consensus. Western Digital spin-off premium re-rated pure-play storage multiple as standalone entity.', catalystDate:'2026-08-17', sellSide:'Street anchored to trough NAND pricing through 2026. ASP data and upside guidance forced upward estimate revision; consensus PT moved +20–25% in the month leading to exit.'},
       'asts'        : {ticker:'ASTS', entry:'55.75',  target:'95.00',  stop:'42.00',  size:'3%', horizon:'12–18m', pubDate:'2026-07-19T00:00:00Z'},
     };
     function knownCallFromTitle(title){
@@ -15436,6 +15555,74 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
     document.addEventListener('DOMContentLoaded', mlRecalc);
   } else {
     mlRecalc();
+  }
+})();
+
+/* ═══ SOTP ═══════════════════════════════════════════════════════════════ */
+(function(){
+  // NTM revenues ($B) and EBITDA for segment 2
+  var NTM  = [13.5, 9.2, 16.3, 3.4, 11.1]; // seg 2 is EBITDA
+  var NET_DEBT = 87.0, SHARES = 2.73;
+
+  window.sotpRecalc = function(){
+    var evs = [];
+    for(var i=0;i<5;i++){
+      var s = document.getElementById('sotps-'+i);
+      var scale = parseFloat(s.dataset.scale||'1');
+      var raw = +s.value * scale;
+      document.getElementById('sotpv-'+i).textContent = raw.toFixed(raw<10&&scale<1?1:0)+'×';
+      var ev = NTM[i] * raw;
+      evs.push(ev);
+      document.getElementById('sotpev-'+i).textContent = ev.toFixed(1);
+    }
+    var totalEV = evs.reduce(function(a,b){return a+b;},0);
+    var equity  = totalEV - NET_DEBT;
+    var price   = Math.max(0, equity / SHARES);
+    var evEl = document.getElementById('sotp-ev-total');
+    var eqEl = document.getElementById('sotp-equity-total');
+    var prEl = document.getElementById('sotp-price');
+    if(evEl) evEl.textContent = totalEV.toFixed(1);
+    if(eqEl) eqEl.textContent = equity.toFixed(1);
+    if(prEl){ prEl.textContent = '$'+Math.round(price); prEl.style.color = price>=143.36?'var(--gold)':'#f87171'; }
+  };
+
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', sotpRecalc);
+  } else {
+    sotpRecalc();
+  }
+})();
+
+/* ═══ THESIS CATALYSTS ════════════════════════════════════════════════════ */
+(function(){
+  function buildCatGrid(){
+    var grid = document.getElementById('cat-grid');
+    if(!grid) return;
+    // KNOWN_CALLS is in a different script scope — read from the DOM's bc-grid cards
+    // instead we mirror the closed calls here directly
+    var calls = [
+      {ticker:'ORCL', ret:'+74.3%', catalyst:'Q4 FY2026 results: cloud revenue +28% YoY; IaaS bookings growth >100% YoY; backlog expanded $98B → $130B. FY2027 guidance implied +21% growth vs +14% consensus. Street forced to reopen cloud monetisation models.', date:'9 Jun 2026', sellSide:'Pre-call: neutral consensus, $165 median PT. Post-earnings: median PT moved to $270+; analysts revised cloud backlog monetisation timeline from 5 years to 18 months — exactly the thesis.'},
+      {ticker:'IREN', ret:'+36.4%', catalyst:'Q3 FY2026 operational update: exahash capacity +40% QoQ; power PPA renewed at $0.021/kWh locked through 2031 — well below network average all-in cost. BTC breakeven <$23K vs $47K network floor.', date:'3 Jun 2026', sellSide:'Street consensus: neutral-to-sell on macro BTC exposure. Post-update: proprietary low-cost power reframed as structural competitive moat, not commodity risk.'},
+      {ticker:'RDDT', ret:'+32.5%', catalyst:'Q1 2026 results: AI data licensing revenue well ahead of consensus; DAU +27% YoY; international monetisation running ahead of schedule. Sell-side TAM models for licensing revenue were tripled in response.', date:'4 Jun 2026', sellSide:'Street consensus: AI would displace Reddit\'s relevance. Q1 print proved the inverse — licensing contracts with major AI labs established Reddit as structural input, not a vulnerable output.'},
+      {ticker:'MRVL', ret:'+31.9%', catalyst:'Investor Day (Jun 2026): confirmed 3 hyperscaler ASIC design wins with committed multi-year volume; guided $1.5B+ custom silicon FY2027 revenue — roughly 2× the street estimate at $700M. Full earnings revision followed within 2 weeks.', date:'18 Jun 2026', sellSide:'Pre-day: consensus modelled ASIC contribution at ~$700M FY2027. Post-Investor Day: revised to $1.5B+; total revenue estimates up ~18%; near-unanimous Buy conviction across coverage.'},
+      {ticker:'LMND', ret:'+34.7%', catalyst:'Q2 2026 results: loss ratio 68% — first sub-70% print in company history. Reinsurance quota share renewed at improved economics. AI claims automation drove ~4pp of margin improvement vs prior year.', date:'7 Jul 2026', sellSide:'Pre-report: ~8:2 sell-to-buy ratio; bear consensus anchored to structurally impaired loss ratio. First sub-70% print collapsed the core bear case; multiple upgrades followed within the week.'},
+      {ticker:'SNDK', ret:'+32.3%', catalyst:'NAND pricing inflection confirmed: enterprise SSD ASPs +22% QoQ in Q2 2026 per industry data. FY2026 Q4 guidance issued above consensus. Western Digital spin-off premium re-rated pure-play storage multiple as standalone entity.', date:'17 Aug 2026', sellSide:'Street anchored to trough NAND pricing through 2026. ASP data and upside guidance forced upward estimate revision; consensus PT moved +20–25% in the month leading to exit.'},
+    ];
+    grid.innerHTML = calls.map(function(c){
+      return '<div class="cat-card">'+
+        '<div class="cat-head"><span class="cat-tk">$'+c.ticker+'</span><span class="cat-ret">'+c.ret+'</span></div>'+
+        '<div class="cat-lbl">Thesis Catalyst · Played '+c.date+'</div>'+
+        '<p class="cat-text">'+c.catalyst+'</p>'+
+        '<hr style="border:none;border-top:1px solid var(--line2);margin:0 0 10px">'+
+        '<div class="cat-lbl">Consensus Before → After</div>'+
+        '<div class="cat-sell">'+c.sellSide+'</div>'+
+      '</div>';
+    }).join('');
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', buildCatGrid);
+  } else {
+    buildCatGrid();
   }
 })();
 </script>

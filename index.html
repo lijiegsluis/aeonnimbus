@@ -6124,6 +6124,55 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 .hv3-sub-btn:hover { opacity: .88; }
 .hv3-sub-note { font-size: 9.5px; color: var(--g2); margin-top: 10px; }
 
+/* ═══ MODELLING LAB ══════════════════════════════════ */
+.ml-section{border-top:1px solid var(--line);padding:64px 52px 72px;background:var(--bg1)}
+.ml-eyebrow{font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.ml-heading{font-family:Georgia,serif;font-size:clamp(18px,2.2vw,26px);font-weight:400;color:var(--ink);margin:0 0 8px;text-wrap:balance}
+.ml-sub{font-family:var(--FS);font-size:13px;color:var(--ink2);margin:0 0 40px;max-width:620px;line-height:1.65}
+.ml-body{display:grid;grid-template-columns:300px 1fr;gap:28px;align-items:start}
+.ml-controls{border:1px solid var(--line2);border-radius:3px;padding:22px;background:var(--bg2)}
+.ml-ctrl-head-row{font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--line2)}
+.ml-control{margin-bottom:16px}
+.ml-ctrl-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.ml-ctrl-lbl{font-family:var(--FM);font-size:10px;color:var(--ink2)}
+.ml-ctrl-val{font-family:var(--FM);font-size:11px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;min-width:36px;text-align:right}
+.ml-slider{width:100%;-webkit-appearance:none;height:3px;border-radius:2px;background:var(--line2);outline:none;cursor:pointer;display:block}
+.ml-slider::-webkit-slider-thumb{-webkit-appearance:none;width:13px;height:13px;border-radius:50%;background:var(--gold);cursor:pointer;box-shadow:0 0 0 2px var(--bg2)}
+.ml-slider::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:var(--gold);cursor:pointer;border:2px solid var(--bg2)}
+.ml-ctrl-range{display:flex;justify-content:space-between;font-family:var(--FM);font-size:8px;color:var(--g2);margin-top:4px;opacity:.55}
+.ml-output{display:flex;flex-direction:column;gap:18px}
+.ml-price-hero{border:1px solid var(--line2);border-radius:3px;padding:20px 28px;background:var(--bg2);display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.ml-price-num{font-family:var(--FM);font-size:38px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.025em;color:var(--gold)}
+.ml-price-meta{display:flex;flex-direction:column;gap:5px}
+.ml-price-lbl{font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--g2);margin-bottom:2px}
+.ml-price-upside{font-family:var(--FM);font-size:13px;font-variant-numeric:tabular-nums;font-weight:700}
+.ml-price-vs{font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:4px}
+.ml-tv-share{margin-left:auto;text-align:right}
+.ml-tv-num{font-family:var(--FM);font-size:13px;font-variant-numeric:tabular-nums;font-weight:600}
+.ml-table-wrap{border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.ml-table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:10px}
+.ml-table thead tr{border-bottom:1px solid var(--line2);background:var(--bg2)}
+.ml-table th{padding:9px 12px;text-align:right;font-weight:500;letter-spacing:.08em;font-size:8px;text-transform:uppercase;color:var(--g2)}
+.ml-table th:first-child{text-align:left}
+.ml-table td{padding:7px 12px;text-align:right;border-bottom:1px solid rgba(255,255,255,.04);font-variant-numeric:tabular-nums;color:var(--ink2)}
+.ml-table td:first-child{text-align:left;color:var(--ink3);font-size:9.5px}
+.ml-table .ml-sum-row td{border-top:1px solid var(--line2);border-bottom:none;color:var(--ink);font-weight:600}
+.ml-table .ml-sum-row:last-child td{color:var(--gold)}
+.ml-table .ml-fcf-pos{color:#4ade80}
+.ml-sens-wrap{border:1px solid var(--line2);border-radius:3px;overflow:hidden}
+.ml-sens-head{padding:10px 14px;font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--g2);border-bottom:1px solid var(--line2);background:var(--bg2)}
+.ml-sens{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:9.5px;font-variant-numeric:tabular-nums}
+.ml-sens th{padding:7px 10px;text-align:center;font-weight:500;color:var(--g2);font-size:8px;text-transform:uppercase;letter-spacing:.06em}
+.ml-sens th:first-child{text-align:left;padding-left:14px}
+.ml-sens td{padding:6px 10px;text-align:center;border-top:1px solid rgba(255,255,255,.04)}
+.ml-sens td:first-child{text-align:left;padding-left:14px;color:var(--g2);font-size:8.5px}
+.ml-sens-hi{color:#4ade80;font-weight:700}
+.ml-sens-md{color:var(--gold)}
+.ml-sens-lo{color:#f87171}
+.ml-footnote{font-family:var(--FM);font-size:8px;color:var(--g2);opacity:.65;line-height:1.8;padding-top:12px;border-top:1px solid var(--line2)}
+.fdisc{font-family:var(--FM);font-size:7.5px;color:var(--g2);opacity:.45;text-align:center;max-width:860px;margin:20px auto 0;line-height:1.9;letter-spacing:.01em;padding:0 16px}
+@media(max-width:900px){.ml-section{padding:44px 24px 52px}.ml-body{grid-template-columns:1fr}.ml-price-num{font-size:30px}.ml-tv-share{margin-left:0}}
+
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
@@ -6583,6 +6632,107 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </div>
 
+<!-- MODELLING LAB -->
+<div class="ml-section">
+  <div class="ml-eyebrow">Modelling Lab · Case Study No. 01</div>
+  <h2 class="ml-heading">Oracle Corporation — Interactive DCF</h2>
+  <p class="ml-sub">Stress-test the thesis published 8 Apr 2026. Adjust growth rates, terminal margin, and discount rate — the implied share price updates in real time. Base inputs reflect the published call's assumptions.</p>
+
+  <div class="ml-body">
+    <!-- Controls -->
+    <div class="ml-controls">
+      <div class="ml-ctrl-head-row">Assumptions</div>
+
+      <div class="ml-control">
+        <div class="ml-ctrl-head"><span class="ml-ctrl-lbl">Revenue CAGR — Yr 1–3</span><span class="ml-ctrl-val" id="mlv-cagr1">22%</span></div>
+        <input type="range" class="ml-slider" id="mls-cagr1" min="5" max="40" value="22" step="1" oninput="mlRecalc()">
+        <div class="ml-ctrl-range"><span>5%</span><span>40%</span></div>
+      </div>
+
+      <div class="ml-control">
+        <div class="ml-ctrl-head"><span class="ml-ctrl-lbl">Revenue CAGR — Yr 4–5</span><span class="ml-ctrl-val" id="mlv-cagr2">14%</span></div>
+        <input type="range" class="ml-slider" id="mls-cagr2" min="3" max="30" value="14" step="1" oninput="mlRecalc()">
+        <div class="ml-ctrl-range"><span>3%</span><span>30%</span></div>
+      </div>
+
+      <div class="ml-control">
+        <div class="ml-ctrl-head"><span class="ml-ctrl-lbl">Terminal EBIT Margin</span><span class="ml-ctrl-val" id="mlv-margin">35%</span></div>
+        <input type="range" class="ml-slider" id="mls-margin" min="20" max="50" value="35" step="1" oninput="mlRecalc()">
+        <div class="ml-ctrl-range"><span>20%</span><span>50%</span></div>
+      </div>
+
+      <div class="ml-control">
+        <div class="ml-ctrl-head"><span class="ml-ctrl-lbl">WACC</span><span class="ml-ctrl-val" id="mlv-wacc">9.5%</span></div>
+        <input type="range" class="ml-slider" id="mls-wacc" min="70" max="140" value="95" step="5" oninput="mlRecalc()">
+        <div class="ml-ctrl-range"><span>7.0%</span><span>14.0%</span></div>
+      </div>
+
+      <div class="ml-control" style="margin-bottom:0">
+        <div class="ml-ctrl-head"><span class="ml-ctrl-lbl">Terminal Growth Rate</span><span class="ml-ctrl-val" id="mlv-tg">4.0%</span></div>
+        <input type="range" class="ml-slider" id="mls-tg" min="10" max="60" value="40" step="5" oninput="mlRecalc()">
+        <div class="ml-ctrl-range"><span>1.0%</span><span>6.0%</span></div>
+      </div>
+
+      <div style="margin-top:18px;padding-top:16px;border-top:1px solid var(--line2)">
+        <div style="font-family:var(--FM);font-size:8px;color:var(--g2);line-height:1.9;opacity:.85">
+          <div>Base revenue (FY2025): <strong style="color:var(--ink2)">$56.4B</strong></div>
+          <div>Net debt: <strong style="color:var(--ink2)">$87.0B</strong></div>
+          <div>Shares outstanding: <strong style="color:var(--ink2)">2.73B</strong></div>
+          <div>D&amp;A 3.5% of rev · CapEx 5.0% of rev · Tax 17%</div>
+          <div>Margin glides 28% → terminal over 5 years</div>
+        </div>
+        <button onclick="mlReset()" style="margin-top:14px;width:100%;font-family:var(--FM);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:8px;border:1px solid var(--line2);background:transparent;color:var(--g2);cursor:pointer;border-radius:2px;transition:border-color .15s,color .15s" onmouseover="this.style.borderColor='rgba(196,164,74,.5)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--line2)';this.style.color='var(--g2)'">Reset to Thesis Defaults</button>
+      </div>
+    </div>
+
+    <!-- Output -->
+    <div class="ml-output">
+      <!-- Implied price hero -->
+      <div class="ml-price-hero">
+        <div>
+          <div class="ml-price-lbl">Implied Share Price</div>
+          <div class="ml-price-num" id="ml-price">—</div>
+          <div class="ml-price-vs">Entry $143.36 · Exit $249.88</div>
+        </div>
+        <div class="ml-price-meta">
+          <div class="ml-price-lbl">Upside vs. Entry</div>
+          <div class="ml-price-upside" id="ml-upside">—</div>
+        </div>
+        <div class="ml-tv-share">
+          <div class="ml-price-lbl">TV / EV</div>
+          <div class="ml-tv-num" id="ml-tv-share">—</div>
+        </div>
+      </div>
+
+      <!-- FCF projection table -->
+      <div class="ml-table-wrap">
+        <table class="ml-table">
+          <thead><tr>
+            <th>Year</th>
+            <th>Revenue ($B)</th>
+            <th>EBIT Margin</th>
+            <th>Free Cash Flow ($B)</th>
+            <th>PV of FCF ($B)</th>
+          </tr></thead>
+          <tbody id="ml-fcf-body"></tbody>
+        </table>
+      </div>
+
+      <!-- Sensitivity: WACC × Terminal Growth -->
+      <div class="ml-sens-wrap">
+        <div class="ml-sens-head">Sensitivity — Implied Price · WACC (rows) × Terminal Growth (cols)</div>
+        <table class="ml-sens" id="ml-sens-table"></table>
+      </div>
+
+      <div class="ml-footnote">
+        Model assumptions: FY2025 base revenue $56.4B · Net debt $87.0B · Shares 2.73B · D&amp;A 3.5% of revenue · CapEx 5.0% of revenue · Effective tax rate 17% · EBIT margin glides from 28% (Year 1) to the terminal input by Year 5.
+        The published call (8 Apr 2026) was entered at $143.36 and closed at $249.88 on 1 Jun 2026 (+74.3%). The realised return reflects both intrinsic value convergence and multiple expansion as cloud revenue accelerated ahead of consensus.
+        For illustrative and educational purposes only. Not investment advice.
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- SEO CONTENT — rich crawlable text merged from Analyst page -->
 <article class="an-seo-wrap" id="seo-analyst-summary">
 
@@ -6911,7 +7061,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
 </section>
 
-<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('about')">About</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('about')">About</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('strats')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div><div class="fdisc">All investment calls are published for informational and research transparency purposes only. Nothing on this site constitutes investment advice, a solicitation, or an offer to buy or sell any security. Past performance does not guarantee future results. All positions, including future losses, remain permanently on the public record. LiJie Guo · Aeon Nimbus Research · London.</div></footer>
 </div>
 
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
@@ -15170,6 +15320,124 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
 })();
 
 })(); /* end premium layer */
+</script>
+
+<script>
+/* ═══ MODELLING LAB — ORCL Interactive DCF ══════════════════════════════ */
+(function(){
+  var BASE_REV   = 56.4;  // FY2025 revenue $B
+  var DA_PCT     = 0.035;
+  var CAPEX_PCT  = 0.05;
+  var TAX        = 0.17;
+  var NET_DEBT   = 87.0;  // $B
+  var SHARES     = 2.73;  // billions
+  var MARGIN_Y1  = 0.28;  // starting EBIT margin
+  var ENTRY      = 143.36;
+  var YEARS      = ['FY2026','FY2027','FY2028','FY2029','FY2030'];
+
+  function calcModel(c1, c2, margin, wacc, tg){
+    var revs=[], fcfs=[], pvs=[], margins=[], sumPV=0;
+    revs.push(BASE_REV*(1+c1));
+    revs.push(revs[0]*(1+c1));
+    revs.push(revs[1]*(1+c1));
+    revs.push(revs[2]*(1+c2));
+    revs.push(revs[3]*(1+c2));
+    for(var i=0;i<5;i++){
+      var t=i+1;
+      var m = MARGIN_Y1 + (margin-MARGIN_Y1)*(t/5);
+      margins.push(m);
+      var fcf = revs[i]*m*(1-TAX) + revs[i]*DA_PCT - revs[i]*CAPEX_PCT;
+      fcfs.push(fcf);
+      var pv = fcf/Math.pow(1+wacc,t);
+      pvs.push(pv); sumPV+=pv;
+    }
+    var tv=0, pvTV=0;
+    if(wacc>tg){ tv=fcfs[4]*(1+tg)/(wacc-tg); pvTV=tv/Math.pow(1+wacc,5); }
+    var ev=sumPV+pvTV, eq=ev-NET_DEBT, price=Math.max(0,eq/SHARES);
+    return {revs:revs,fcfs:fcfs,pvs:pvs,margins:margins,sumPV:sumPV,tv:tv,pvTV:pvTV,ev:ev,price:price};
+  }
+
+  window.mlRecalc = function(){
+    var c1 = +document.getElementById('mls-cagr1').value/100;
+    var c2 = +document.getElementById('mls-cagr2').value/100;
+    var m  = +document.getElementById('mls-margin').value/100;
+    var w  = +document.getElementById('mls-wacc').value/1000;
+    var g  = +document.getElementById('mls-tg').value/1000;
+
+    // Update display labels
+    document.getElementById('mlv-cagr1').textContent = (c1*100).toFixed(0)+'%';
+    document.getElementById('mlv-cagr2').textContent = (c2*100).toFixed(0)+'%';
+    document.getElementById('mlv-margin').textContent = (m*100).toFixed(0)+'%';
+    document.getElementById('mlv-wacc').textContent  = (w*100).toFixed(1)+'%';
+    document.getElementById('mlv-tg').textContent    = (g*100).toFixed(1)+'%';
+
+    var r = calcModel(c1,c2,m,w,g);
+
+    // Price hero
+    var pEl=document.getElementById('ml-price'), uEl=document.getElementById('ml-upside'), tvEl=document.getElementById('ml-tv-share');
+    if(pEl){
+      pEl.textContent = '$'+r.price.toFixed(2);
+      var up=(r.price/ENTRY-1)*100;
+      pEl.style.color = r.price>=ENTRY?'var(--gold)':'#f87171';
+      if(uEl){ uEl.textContent=(up>=0?'+':'')+up.toFixed(1)+'%'; uEl.style.color=up>=0?'#4ade80':'#f87171'; }
+      if(tvEl && r.ev>0){ tvEl.textContent=(r.pvTV/r.ev*100).toFixed(1)+'%'; }
+    }
+
+    // FCF table
+    var tbody=document.getElementById('ml-fcf-body');
+    if(tbody){
+      var rows='';
+      for(var i=0;i<5;i++){
+        rows+='<tr><td>'+YEARS[i]+'</td>'+
+          '<td>'+r.revs[i].toFixed(1)+'</td>'+
+          '<td>'+(r.margins[i]*100).toFixed(1)+'%</td>'+
+          '<td class="ml-fcf-pos">'+r.fcfs[i].toFixed(1)+'</td>'+
+          '<td>'+r.pvs[i].toFixed(1)+'</td>'+
+        '</tr>';
+      }
+      rows+='<tr class="ml-sum-row"><td>Sum PV of FCFs</td><td></td><td></td><td></td><td>'+r.sumPV.toFixed(1)+'</td></tr>';
+      rows+='<tr class="ml-sum-row"><td>Terminal Value (PV)</td><td></td><td></td><td></td><td>'+r.pvTV.toFixed(1)+'</td></tr>';
+      rows+='<tr class="ml-sum-row"><td>Enterprise Value</td><td></td><td></td><td></td><td>'+r.ev.toFixed(1)+'</td></tr>';
+      tbody.innerHTML=rows;
+    }
+
+    // Sensitivity table
+    var sensEl=document.getElementById('ml-sens-table');
+    if(sensEl){
+      var waccs=[0.075,0.085,0.095,0.105,0.115];
+      var tgs=[0.015,0.025,0.035,0.045,0.055];
+      var html='<tr><th>WACC \\ TG</th>';
+      tgs.forEach(function(tg){ html+='<th>'+(tg*100).toFixed(1)+'%</th>'; });
+      html+='</tr>';
+      waccs.forEach(function(ww){
+        html+='<tr><td>'+(ww*100).toFixed(1)+'%</td>';
+        tgs.forEach(function(gg){
+          var p=calcModel(c1,c2,m,ww,gg).price;
+          var cls=p>220?'ml-sens-hi':(p>ENTRY?'ml-sens-md':'ml-sens-lo');
+          html+='<td class="'+cls+'">$'+Math.round(p)+'</td>';
+        });
+        html+='</tr>';
+      });
+      sensEl.innerHTML=html;
+    }
+  };
+
+  window.mlReset = function(){
+    document.getElementById('mls-cagr1').value=22;
+    document.getElementById('mls-cagr2').value=14;
+    document.getElementById('mls-margin').value=35;
+    document.getElementById('mls-wacc').value=95;
+    document.getElementById('mls-tg').value=40;
+    mlRecalc();
+  };
+
+  // Initial render
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', mlRecalc);
+  } else {
+    mlRecalc();
+  }
+})();
 </script>
 </body>
 </html>

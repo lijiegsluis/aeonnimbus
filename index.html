@@ -9471,24 +9471,20 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     </div>
   </div>
 
-</div><!-- /pitcher-wrap -->
-
-<!-- Paywall modal -->
-<div class="pitcher-pw-overlay" id="pitcher-pw-overlay">
-  <div class="pitcher-pw-modal">
-    <button class="pitcher-pw-close" onclick="document.getElementById('pitcher-pw-overlay').classList.remove('on')">×</button>
-    <span class="pitcher-pw-an">AN</span>
-    <h3>You've Used Your Free Credit</h3>
-    <p>Full AI research access is reserved for Aeon Nimbus subscribers and institutional contacts. Join the list to be notified when access opens.</p>
-    <input class="pitcher-pw-email" type="email" id="pitcher-pw-email" placeholder="your@email.com">
-    <button class="pitcher-pw-cta" onclick="pitcherPaywallSubmit()">Stay in the Loop →</button>
-    <div class="pitcher-pw-sub" id="pitcher-pw-sub">Or subscribe on Substack for free research &amp; early access</div>
-    <div style="margin-top:14px">
-      <a href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="font-family:var(--FM);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.08em;opacity:.8">Subscribe to Aeon Nimbus ↗</a>
-    </div>
+<!-- Paywall inline -->
+<div class="pitcher-pw-inline" id="pitcher-pw-inline">
+  <span class="pitcher-pw-an">AN</span>
+  <h3>You've Used Your Free Credit</h3>
+  <p>Full AI research access is reserved for Aeon Nimbus subscribers and institutional contacts. Join the list to be notified when access opens.</p>
+  <input class="pitcher-pw-email" type="email" id="pitcher-pw-email" placeholder="your@email.com">
+  <button class="pitcher-pw-cta" onclick="pitcherPaywallSubmit()">Stay in the Loop →</button>
+  <div class="pitcher-pw-sub" id="pitcher-pw-sub">Or subscribe on Substack for free research &amp; early access</div>
+  <div style="margin-top:14px">
+    <a href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="font-family:var(--FM);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.08em;opacity:.8">Subscribe to Aeon Nimbus ↗</a>
   </div>
 </div>
 
+</div><!-- /pitcher-wrap -->
 </div><!-- /pg-pitcher -->
 
 <script>
@@ -14927,19 +14923,17 @@ html.light .mv2-name em {
 .pitcher-again-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink2);padding:9px 22px;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s}
 .pitcher-again-btn:hover{border-color:var(--gold);color:var(--gold)}
 /* paywall modal */
-.pitcher-pw-overlay{display:flex;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9900;align-items:center;justify-content:center;backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s}
-.pitcher-pw-overlay.on{opacity:1;visibility:visible;pointer-events:all}
-.pitcher-pw-modal{background:var(--bg1);border:1px solid var(--rule);border-radius:10px;padding:48px 44px 44px;max-width:460px;width:90%;text-align:center;position:relative}
-.pitcher-pw-modal h3{font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
-.pitcher-pw-modal p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;margin:0 0 24px}
+.pitcher-pw-inline{display:none;background:var(--bg2);border:1px solid var(--rule);border-radius:10px;padding:52px 44px 48px;max-width:480px;margin:32px auto 64px;text-align:center;opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease}
+.pitcher-pw-inline.on{display:block}
+.pitcher-pw-inline.visible{opacity:1;transform:translateY(0)}
+.pitcher-pw-inline h3{font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
+.pitcher-pw-inline p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;margin:0 0 24px}
 .pitcher-pw-an{font-family:var(--FM);font-size:28px;font-weight:700;letter-spacing:.18em;color:var(--gold);margin-bottom:20px;display:block}
 .pitcher-pw-email{width:100%;font-family:var(--FM);font-size:13px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:11px 14px;border-radius:4px;outline:none;margin-bottom:10px;box-sizing:border-box;letter-spacing:.04em}
 .pitcher-pw-email:focus{border-color:var(--gold)}
 .pitcher-pw-cta{width:100%;font-family:var(--FM);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:13px;border-radius:4px;cursor:pointer;margin-bottom:12px;transition:opacity .2s}
 .pitcher-pw-cta:hover{opacity:.88}
 .pitcher-pw-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.45;letter-spacing:.06em}
-.pitcher-pw-close{position:absolute;top:14px;right:18px;font-family:var(--FM);font-size:18px;color:var(--ink2);opacity:.4;cursor:pointer;background:none;border:none;line-height:1}
-.pitcher-pw-close:hover{opacity:.8}
 .pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;text-align:center;margin-top:6px;min-height:16px;letter-spacing:.04em}
 /* ── Pitcher report interior elements ── */
 .pr-masthead{font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
@@ -16601,10 +16595,14 @@ window.pitcherGenerate = async function(){
 };
 
 window.pitcherAgain = function(){
-  window.scrollTo({top:0, behavior:'smooth'});
-  setTimeout(function(){
-    document.getElementById('pitcher-pw-overlay').classList.add('on');
-  }, 320);
+  var el = document.getElementById('pitcher-pw-inline');
+  el.classList.add('on');
+  requestAnimationFrame(function(){
+    requestAnimationFrame(function(){
+      el.classList.add('visible');
+      el.scrollIntoView({behavior:'smooth', block:'center'});
+    });
+  });
 };
 
 window.pitcherPaywallSubmit = function(){
@@ -16614,7 +16612,7 @@ window.pitcherPaywallSubmit = function(){
   try{ localStorage.setItem('an_pitcher_email', email); }catch(e){}
   sub.textContent = 'You\'re on the list. We\'ll be in touch.';
   document.getElementById('pitcher-pw-email').style.display='none';
-  document.querySelector('.pitcher-pw-cta').style.display='none';
+  document.querySelector('#pitcher-pw-inline .pitcher-pw-cta').style.display='none';
 };
 
 window.pitcherKeySet      = pitcherKeySet;

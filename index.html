@@ -14927,8 +14927,8 @@ html.light .mv2-name em {
 .pitcher-again-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink2);padding:9px 22px;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s}
 .pitcher-again-btn:hover{border-color:var(--gold);color:var(--gold)}
 /* paywall modal */
-.pitcher-pw-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9900;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
-.pitcher-pw-overlay.on{display:flex}
+.pitcher-pw-overlay{display:flex;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9900;align-items:center;justify-content:center;backdrop-filter:blur(6px);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .22s ease,visibility .22s}
+.pitcher-pw-overlay.on{opacity:1;visibility:visible;pointer-events:all}
 .pitcher-pw-modal{background:var(--bg1);border:1px solid var(--rule);border-radius:10px;padding:48px 44px 44px;max-width:460px;width:90%;text-align:center;position:relative}
 .pitcher-pw-modal h3{font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
 .pitcher-pw-modal p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;margin:0 0 24px}

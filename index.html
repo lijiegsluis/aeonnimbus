@@ -6233,6 +6233,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="nbtn" onclick="sp('about')">About</button>
     <button class="nbtn" onclick="sp('track')" data-i18n="nav_track">Track Record</button>
     <button class="nbtn" onclick="sp('research')" data-i18n="nav_research">Research</button>
+    <button class="nbtn" onclick="sp('pitcher')" style="position:relative">AI Pitcher<span style="position:absolute;top:-3px;right:-6px;background:var(--gold);color:#0e0c09;font-size:7px;font-family:var(--FM);font-weight:700;padding:1px 4px;border-radius:3px;letter-spacing:.06em;line-height:1.5">β</span></button>
     <div class="nav-drop-wrap">
       <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Research Lab</span> ▾</button>
       <div class="nav-dropdown">
@@ -9405,6 +9406,77 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div><!-- /pg-contact -->
 
+<!-- ══════════════════════════════════════════════════════
+     AI PITCHER PAGE
+══════════════════════════════════════════════════════ -->
+<div class="pg" id="pg-pitcher">
+
+<div class="pghd reveal" style="text-align:center">
+  <div class="pgtag">Beta</div>
+  <h2 class="pgtitle">AI Stock <em>Pitcher</em></h2>
+  <p class="pgsub" style="max-width:540px;margin:0 auto">Enter a ticker and receive an institutional equity research report — thesis, catalysts, valuation — in the Aeon Nimbus house style. Powered by Claude or GPT-4o via your API key.</p>
+</div>
+
+<div class="pitcher-wrap">
+
+  <!-- API settings -->
+  <div class="pitcher-model-row">
+    <span class="pitcher-model-label">Model</span>
+    <select class="pitcher-model-sel" id="pitcher-model">
+      <option value="claude">Claude Sonnet (Anthropic)</option>
+      <option value="openai">GPT-4o (OpenAI)</option>
+    </select>
+    <div class="pitcher-key-row">
+      <input class="pitcher-key-inp" type="password" id="pitcher-key" placeholder="Paste API key…" autocomplete="off" oninput="pitcherKeySet()">
+      <span class="pitcher-key-status" id="pitcher-key-status"></span>
+    </div>
+  </div>
+
+  <!-- Chat input -->
+  <div class="pitcher-chat-box" id="pitcher-chat-box">
+    <div class="pitcher-chat-label">Pitch an idea</div>
+    <div class="pitcher-input-row">
+      <input class="pitcher-ticker-inp" id="pitcher-ticker" type="text" placeholder="Ticker or company name (e.g. ORCL, Nvidia, MercadoLibre…)" maxlength="80" onkeydown="if(event.key==='Enter')pitcherGenerate()">
+      <button class="pitcher-go-btn" id="pitcher-go-btn" onclick="pitcherGenerate()">Analyse →</button>
+    </div>
+    <textarea class="pitcher-context-inp" id="pitcher-context" rows="2" placeholder="Optional: add context, a thesis angle, or a specific question…"></textarea>
+    <div class="pitcher-err" id="pitcher-err"></div>
+  </div>
+
+  <!-- Loading -->
+  <div class="pitcher-loading" id="pitcher-loading">
+    <div class="pitcher-an-logo">AN</div>
+    <div class="pitcher-load-status" id="pitcher-load-status">Analysing…</div>
+  </div>
+
+  <!-- Report output -->
+  <div class="pitcher-report" id="pitcher-report">
+    <div class="pitcher-report-inner" id="pitcher-report-inner"></div>
+    <div class="pitcher-action-row">
+      <button class="pitcher-again-btn" onclick="pitcherAgain()">Generate Another Idea</button>
+    </div>
+  </div>
+
+</div><!-- /pitcher-wrap -->
+
+<!-- Paywall modal -->
+<div class="pitcher-pw-overlay" id="pitcher-pw-overlay">
+  <div class="pitcher-pw-modal">
+    <button class="pitcher-pw-close" onclick="document.getElementById('pitcher-pw-overlay').classList.remove('on')">×</button>
+    <span class="pitcher-pw-an">AN</span>
+    <h3>You've Used Your Free Credit</h3>
+    <p>Full AI research access is reserved for Aeon Nimbus subscribers and institutional contacts. Join the list to be notified when access opens.</p>
+    <input class="pitcher-pw-email" type="email" id="pitcher-pw-email" placeholder="your@email.com">
+    <button class="pitcher-pw-cta" onclick="pitcherPaywallSubmit()">Stay in the Loop →</button>
+    <div class="pitcher-pw-sub" id="pitcher-pw-sub">Or subscribe on Substack for free research &amp; early access</div>
+    <div style="margin-top:14px">
+      <a href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="font-family:var(--FM);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.08em;opacity:.8">Subscribe to Aeon Nimbus ↗</a>
+    </div>
+  </div>
+</div>
+
+</div><!-- /pg-pitcher -->
+
 <script>
 // ═══ NAVIGATION ══════════════════════════════════════
 // ═══ SUBSTACK CONFIG ══════════════════════════════════════
@@ -9651,7 +9723,7 @@ function sp(id){
     if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['about'],['track'],['research'],['portfolios','tools','strats'],['services'],['contact']];
+    const map=[['home'],['about'],['track'],['research'],['pitcher'],['portfolios','tools','strats'],['services'],['contact']];
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }
@@ -14786,6 +14858,75 @@ html.light .mv2-name em {
   }
   .hcard { opacity: 1; transform: none; }
 }
+
+/* ── AI Pitcher ─────────────────────────────────── */
+.pitcher-wrap{max-width:820px;margin:0 auto;padding:60px 32px 100px}
+.pitcher-header{text-align:center;padding-bottom:48px}
+.pitcher-header h2{font-family:var(--FM);font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:.05em;color:var(--ink);margin:0 0 10px}
+.pitcher-header p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;max-width:520px;margin:0 auto}
+.pitcher-model-row{display:flex;align-items:center;gap:12px;margin-bottom:24px;flex-wrap:wrap}
+.pitcher-model-label{font-family:var(--FM);font-size:10px;letter-spacing:.1em;color:var(--ink2);opacity:.6;text-transform:uppercase}
+.pitcher-model-sel{font-family:var(--FM);font-size:12px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:6px 12px;border-radius:4px;cursor:pointer;outline:none}
+.pitcher-model-sel:focus{border-color:var(--gold)}
+.pitcher-key-row{display:flex;gap:8px;align-items:center;flex:1;min-width:200px}
+.pitcher-key-inp{flex:1;font-family:var(--FM);font-size:12px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:6px 12px;border-radius:4px;outline:none;letter-spacing:.04em}
+.pitcher-key-inp::placeholder{color:var(--ink2);opacity:.4}
+.pitcher-key-inp:focus{border-color:var(--gold)}
+.pitcher-key-status{font-family:var(--FM);font-size:10px;color:#4ade80;letter-spacing:.06em}
+.pitcher-chat-box{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:28px 28px 20px;margin-bottom:12px}
+.pitcher-chat-label{font-family:var(--FM);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:12px}
+.pitcher-input-row{display:flex;gap:10px;align-items:flex-end}
+.pitcher-ticker-inp{flex:1;font-family:var(--FM);font-size:18px;font-weight:600;background:transparent;border:none;border-bottom:1px solid var(--rule);color:var(--ink);padding:8px 0;outline:none;letter-spacing:.08em;text-transform:uppercase}
+.pitcher-ticker-inp::placeholder{font-size:14px;font-weight:400;letter-spacing:.04em;text-transform:none;opacity:.3}
+.pitcher-ticker-inp:focus{border-bottom-color:var(--gold)}
+.pitcher-go-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:10px 22px;border-radius:4px;cursor:pointer;font-weight:700;transition:opacity .2s,transform .15s;white-space:nowrap}
+.pitcher-go-btn:hover{opacity:.88;transform:translateY(-1px)}
+.pitcher-go-btn:disabled{opacity:.35;cursor:default;transform:none}
+.pitcher-context-inp{width:100%;font-family:var(--FS);font-size:13px;background:transparent;border:none;border-top:1px solid var(--rule);color:var(--ink);padding:14px 0 0;outline:none;resize:none;line-height:1.6;margin-top:14px}
+.pitcher-context-inp::placeholder{color:var(--ink2);opacity:.35;font-style:italic}
+/* loading */
+.pitcher-loading{display:none;flex-direction:column;align-items:center;justify-content:center;padding:64px 32px;gap:20px}
+.pitcher-loading.on{display:flex}
+.pitcher-an-logo{font-family:var(--FM);font-size:42px;font-weight:700;letter-spacing:.18em;color:var(--gold);animation:pitcherPulse 2.4s ease-in-out infinite}
+.pitcher-load-status{font-family:var(--FM);font-size:11px;letter-spacing:.1em;color:var(--ink2);opacity:.55;text-transform:uppercase;min-height:18px}
+@keyframes pitcherPulse{0%,100%{opacity:.55;text-shadow:0 0 0 transparent}50%{opacity:1;text-shadow:0 0 28px rgba(196,164,74,.55)}}
+/* report */
+.pitcher-report{display:none}
+.pitcher-report.on{display:block}
+.pitcher-report-inner{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:36px 36px 32px;margin-bottom:20px}
+.pitcher-report-inner h1{font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--ink);margin:0 0 6px;border-bottom:1px solid var(--rule);padding-bottom:14px}
+.pitcher-report-inner h2{font-family:var(--FM);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:28px 0 10px;opacity:.85}
+.pitcher-report-inner h3{font-family:var(--FM);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--ink);margin:18px 0 6px}
+.pitcher-report-inner p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.75;margin:0 0 14px}
+.pitcher-report-inner strong{color:var(--ink);font-weight:600}
+.pitcher-report-inner em{color:var(--gold);font-style:normal;font-weight:500}
+.pitcher-report-inner ul{list-style:none;padding:0;margin:0 0 14px}
+.pitcher-report-inner ul li{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;padding:2px 0 2px 18px;position:relative}
+.pitcher-report-inner ul li::before{content:'·';position:absolute;left:4px;color:var(--gold)}
+.pitcher-report-inner hr{border:none;border-top:1px solid var(--rule);margin:24px 0}
+.pitcher-report-inner table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:12px;margin:14px 0 20px;overflow-x:auto;display:block}
+.pitcher-report-inner th{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--gold);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:10px;white-space:nowrap}
+.pitcher-report-inner td{padding:8px 12px;border-bottom:1px solid rgba(196,164,74,.06);color:var(--ink2);vertical-align:top}
+.pitcher-report-inner tr:last-child td{border-bottom:none}
+.pitcher-report-inner .pitch-disc{font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.38;text-align:center;margin-top:8px;line-height:1.8;letter-spacing:.04em}
+.pitcher-action-row{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:8px}
+.pitcher-again-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink2);padding:9px 22px;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s}
+.pitcher-again-btn:hover{border-color:var(--gold);color:var(--gold)}
+/* paywall modal */
+.pitcher-pw-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:9900;align-items:center;justify-content:center;backdrop-filter:blur(6px)}
+.pitcher-pw-overlay.on{display:flex}
+.pitcher-pw-modal{background:var(--bg1);border:1px solid var(--rule);border-radius:10px;padding:48px 44px 44px;max-width:460px;width:90%;text-align:center;position:relative}
+.pitcher-pw-modal h3{font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
+.pitcher-pw-modal p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;margin:0 0 24px}
+.pitcher-pw-an{font-family:var(--FM);font-size:28px;font-weight:700;letter-spacing:.18em;color:var(--gold);margin-bottom:20px;display:block}
+.pitcher-pw-email{width:100%;font-family:var(--FM);font-size:13px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:11px 14px;border-radius:4px;outline:none;margin-bottom:10px;box-sizing:border-box;letter-spacing:.04em}
+.pitcher-pw-email:focus{border-color:var(--gold)}
+.pitcher-pw-cta{width:100%;font-family:var(--FM);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:13px;border-radius:4px;cursor:pointer;margin-bottom:12px;transition:opacity .2s}
+.pitcher-pw-cta:hover{opacity:.88}
+.pitcher-pw-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.45;letter-spacing:.06em}
+.pitcher-pw-close{position:absolute;top:14px;right:18px;font-family:var(--FM);font-size:18px;color:var(--ink2);opacity:.4;cursor:pointer;background:none;border:none;line-height:1}
+.pitcher-pw-close:hover{opacity:.8}
+.pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;text-align:center;margin-top:6px;min-height:16px;letter-spacing:.04em}
 </style>
 
 <script>
@@ -15835,6 +15976,262 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
   } else {
     buildCatGrid();
   }
+})();
+</script>
+<script>
+/* ═══════════════════════════════════════════════════
+   AI PITCHER — core logic
+   Flow: input → API call → markdown render → paywall on 2nd attempt
+═══════════════════════════════════════════════════ */
+(function(){
+
+var _pitcherUsed = false;
+var _pitcherLoading = false;
+
+/* Minimal markdown → HTML renderer */
+function pitcherMd(md){
+  var lines = md.split('\n');
+  var html = '';
+  var inTable = false, tableHtml = '', inList = false;
+
+  function flushList(){ if(inList){ html += '</ul>'; inList=false; } }
+  function flushTable(){ if(inTable){ html += '</table>'; inTable=false; tableHtml=''; } }
+
+  lines.forEach(function(line){
+    // Table detection
+    if(/^\|/.test(line)){
+      var cells = line.split('|').slice(1,-1).map(function(c){return c.trim();});
+      if(/^[-:| ]+$/.test(line.replace(/\|/g,''))) return; // separator row
+      if(!inTable){ html += '<table>'; inTable=true; }
+      var tag = (!inTable || html.slice(-7)==='<table>') ? 'th' : 'td';
+      // Determine if header (first row after table start)
+      var isHeader = html.slice(-7)==='<table>';
+      var rowHtml = '<tr>' + cells.map(function(c){
+        return '<'+(isHeader?'th':'td')+'>'+inlineFormat(c)+'</'+(isHeader?'th':'td')+'>';
+      }).join('') + '</tr>';
+      html += rowHtml;
+      return;
+    } else { flushTable(); }
+
+    // Headers
+    if(/^### /.test(line)){ flushList(); html += '<h3>'+inlineFormat(line.slice(4))+'</h3>'; return; }
+    if(/^## /.test(line)){ flushList(); html += '<h2>'+inlineFormat(line.slice(3))+'</h2>'; return; }
+    if(/^# /.test(line)){ flushList(); html += '<h1>'+inlineFormat(line.slice(2))+'</h1>'; return; }
+    // HR
+    if(/^---+$/.test(line.trim())){ flushList(); html += '<hr>'; return; }
+    // List
+    if(/^[-*] /.test(line)){
+      if(!inList){ html += '<ul>'; inList=true; }
+      html += '<li>'+inlineFormat(line.slice(2))+'</li>';
+      return;
+    } else { flushList(); }
+    // Blank line
+    if(line.trim()==='') return;
+    // Paragraph
+    html += '<p>'+inlineFormat(line)+'</p>';
+  });
+  flushList(); flushTable();
+  return html;
+}
+
+function inlineFormat(s){
+  return s
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code style="font-family:var(--FM);font-size:.9em;background:var(--bg1);padding:1px 5px;border-radius:3px">$1</code>');
+}
+
+/* System prompt — Aeon Nimbus house style */
+var SYSTEM_PROMPT = `You are the Aeon Nimbus Research AI — an institutional equity research engine built on the methodology of LiJie Guo, independent analyst at Aeon Nimbus Research, London.
+
+Produce a single-stock equity research report in strict Aeon Nimbus house style. Rules:
+- Non-consensus: identify one specific market mispricing and explain why the street is wrong
+- Catalyst-driven: 2-4 specific, dateable near-term catalysts
+- Valuation-anchored: price target with clear methodology (DCF or comparable)
+- Concise and high-conviction: ~900-1200 words total
+- Use real data where possible; flag data cutoff limitations if needed
+
+Output in Markdown only, using this exact structure:
+
+## [TICKER] — [COMPANY NAME]
+**[BUY / HOLD / AVOID]** · Target: $XX · Upside: +XX% · Horizon: 12 months · As of: [month year]
+
+### Executive Summary
+[1-2 paragraph non-consensus thesis. Open with the market's specific mistake. Close with why now is the entry point.]
+
+### Business & Competitive Position
+[3-4 sentences on the business model, revenue drivers, and moat]
+
+### Investment Thesis
+
+**1. [Thesis point — headline claim]**
+[2-3 sentences with supporting data]
+
+**2. [Thesis point]**
+[2-3 sentences]
+
+**3. [Thesis point]**
+[2-3 sentences]
+
+### Catalyst Framework
+
+| Catalyst | Expected Timing | Impact |
+|----------|----------------|--------|
+| [Catalyst 1] | [Q/Month Year] | High |
+| [Catalyst 2] | [Q/Month Year] | High |
+| [Catalyst 3] | [Q/Month Year] | Medium |
+
+### Valuation
+
+[2-3 sentences: methodology, key assumptions, what the target implies]
+
+**Base case**: $XX (+XX%) — [one-line assumption]
+**Bull case**: $XX (+XX%) — [one-line assumption]
+**Bear case**: $XX (-XX%) — [one-line assumption]
+
+### Key Risks
+
+- **[Risk 1]**: [one sentence]
+- **[Risk 2]**: [one sentence]
+- **[Risk 3]**: [one sentence]
+
+### Conclusion
+
+[1 paragraph: restate the non-consensus edge, what would invalidate the thesis, and final conviction]
+
+---
+*Research by Aeon Nimbus AI · For informational purposes only · Not investment advice*`;
+
+function pitcherKeySet(){
+  var v = document.getElementById('pitcher-key').value.trim();
+  document.getElementById('pitcher-key-status').textContent = v.length > 10 ? '✓ Set' : '';
+}
+
+async function callClaude(apiKey, ticker, context){
+  var prompt = 'Write an equity research report for: ' + ticker + (context ? '\n\nAdditional context: '+context : '');
+  var resp = await fetch('https://api.anthropic.com/v1/messages',{
+    method:'POST',
+    headers:{
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'content-type': 'application/json',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-5-20251022',
+      max_tokens: 2048,
+      system: SYSTEM_PROMPT,
+      messages:[{role:'user',content:prompt}]
+    })
+  });
+  if(!resp.ok){
+    var err = await resp.json().catch(function(){return {};});
+    throw new Error((err.error && err.error.message) || 'Anthropic API error '+resp.status);
+  }
+  var data = await resp.json();
+  return data.content[0].text;
+}
+
+async function callOpenAI(apiKey, ticker, context){
+  var prompt = 'Write an equity research report for: ' + ticker + (context ? '\n\nAdditional context: '+context : '');
+  var resp = await fetch('https://api.openai.com/v1/chat/completions',{
+    method:'POST',
+    headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'gpt-4o',
+      max_tokens:2048,
+      messages:[
+        {role:'system',content:SYSTEM_PROMPT},
+        {role:'user',content:prompt}
+      ]
+    })
+  });
+  if(!resp.ok){
+    var err = await resp.json().catch(function(){return {};});
+    throw new Error((err.error && err.error.message) || 'OpenAI API error '+resp.status);
+  }
+  var data = await resp.json();
+  return data.choices[0].message.content;
+}
+
+var _loadPhases = ['Scanning the market…','Building thesis…','Sizing the position…','Calculating valuation…','Formatting report…'];
+var _loadTimer;
+
+function pitcherStartLoad(ticker){
+  var el = document.getElementById('pitcher-load-status');
+  var i = 0;
+  el.textContent = 'Analysing ' + ticker.toUpperCase() + '…';
+  _loadTimer = setInterval(function(){
+    i = (i+1) % _loadPhases.length;
+    el.textContent = _loadPhases[i];
+  }, 2200);
+}
+function pitcherStopLoad(){
+  clearInterval(_loadTimer);
+}
+
+window.pitcherGenerate = async function(){
+  if(_pitcherLoading) return;
+  var ticker = document.getElementById('pitcher-ticker').value.trim();
+  var context = document.getElementById('pitcher-context').value.trim();
+  var apiKey = document.getElementById('pitcher-key').value.trim();
+  var model = document.getElementById('pitcher-model').value;
+  var errEl = document.getElementById('pitcher-err');
+  errEl.textContent = '';
+  if(!ticker){ errEl.textContent = 'Enter a ticker or company name.'; return; }
+  if(!apiKey){ errEl.textContent = 'Paste your API key above to continue.'; return; }
+
+  _pitcherLoading = true;
+  document.getElementById('pitcher-go-btn').disabled = true;
+  document.getElementById('pitcher-chat-box').style.opacity = '0.45';
+  document.getElementById('pitcher-loading').classList.add('on');
+  document.getElementById('pitcher-report').classList.remove('on');
+  pitcherStartLoad(ticker);
+
+  try{
+    var md = model === 'openai' ? await callOpenAI(apiKey,ticker,context) : await callClaude(apiKey,ticker,context);
+    pitcherStopLoad();
+    document.getElementById('pitcher-loading').classList.remove('on');
+    document.getElementById('pitcher-chat-box').style.opacity = '';
+    document.getElementById('pitcher-go-btn').disabled = false;
+    _pitcherLoading = false;
+
+    var inner = document.getElementById('pitcher-report-inner');
+    inner.innerHTML = pitcherMd(md) + '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Powered by ' + (model==='openai'?'OpenAI GPT-4o':'Anthropic Claude') + ' · For informational purposes only · Not investment advice · Always conduct your own due diligence.</p>';
+    document.getElementById('pitcher-report').classList.add('on');
+    _pitcherUsed = true;
+
+    // Smooth scroll to report
+    setTimeout(function(){
+      document.getElementById('pitcher-report').scrollIntoView({behavior:'smooth',block:'start'});
+    },80);
+  } catch(e){
+    pitcherStopLoad();
+    document.getElementById('pitcher-loading').classList.remove('on');
+    document.getElementById('pitcher-chat-box').style.opacity = '';
+    document.getElementById('pitcher-go-btn').disabled = false;
+    _pitcherLoading = false;
+    errEl.textContent = e.message || 'Something went wrong. Check your API key and try again.';
+  }
+};
+
+window.pitcherAgain = function(){
+  if(_pitcherUsed){
+    document.getElementById('pitcher-pw-overlay').classList.add('on');
+  }
+};
+
+window.pitcherPaywallSubmit = function(){
+  var email = document.getElementById('pitcher-pw-email').value.trim();
+  var sub = document.getElementById('pitcher-pw-sub');
+  if(!email || !email.includes('@')){ sub.textContent = 'Please enter a valid email.'; return; }
+  // Store locally and show confirmation
+  try{ localStorage.setItem('an_pitcher_email', email); }catch(e){}
+  sub.textContent = 'You\'re on the list. We\'ll be in touch.';
+  document.getElementById('pitcher-pw-email').style.display='none';
+  document.querySelector('.pitcher-pw-cta').style.display='none';
+};
+
 })();
 </script>
 </body>

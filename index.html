@@ -9422,12 +9422,20 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <!-- API settings -->
   <div class="pitcher-model-row">
     <span class="pitcher-model-label">Model</span>
-    <select class="pitcher-model-sel" id="pitcher-model">
-      <option value="claude">Claude Sonnet (Anthropic)</option>
-      <option value="openai">GPT-4o (OpenAI)</option>
+    <select class="pitcher-model-sel" id="pitcher-model" onchange="pitcherModelChange()">
+      <optgroup label="── Free Tier ──────────────">
+        <option value="gemini-flash" selected>Gemini 2.5 Flash (Google · Free)</option>
+        <option value="gemini-pro">Gemini 2.5 Pro (Google · Free)</option>
+        <option value="groq">Llama 3.3 70B (Groq · Free)</option>
+        <option value="openrouter">Gemini 2.0 Flash (OpenRouter · Free)</option>
+      </optgroup>
+      <optgroup label="── Paid ───────────────────">
+        <option value="claude">Claude Sonnet (Anthropic)</option>
+        <option value="openai">GPT-4o (OpenAI)</option>
+      </optgroup>
     </select>
     <div class="pitcher-key-row">
-      <input class="pitcher-key-inp" type="password" id="pitcher-key" placeholder="Paste API key…" autocomplete="off" oninput="pitcherKeySet()">
+      <input class="pitcher-key-inp" type="password" id="pitcher-key" placeholder="Google AI Studio key → aistudio.google.com (free)" autocomplete="off" oninput="pitcherKeySet()">
       <span class="pitcher-key-status" id="pitcher-key-status"></span>
     </div>
   </div>
@@ -9435,11 +9443,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <!-- Chat input -->
   <div class="pitcher-chat-box" id="pitcher-chat-box">
     <div class="pitcher-chat-label">Pitch an idea</div>
-    <div class="pitcher-input-row">
-      <input class="pitcher-ticker-inp" id="pitcher-ticker" type="text" placeholder="Ticker or company name (e.g. ORCL, Nvidia, MercadoLibre…)" maxlength="80" onkeydown="if(event.key==='Enter')pitcherGenerate()">
-      <button class="pitcher-go-btn" id="pitcher-go-btn" onclick="pitcherGenerate()">Analyse →</button>
+    <div class="pitcher-input-row" style="margin-bottom:14px">
+      <input class="pitcher-ticker-inp" id="pitcher-ticker" type="text" placeholder="Company name or ticker (e.g. ORCL, Nvidia, MercadoLibre…)" maxlength="80" oninput="pitcherTickerUpdate()" onkeydown="if(event.key==='Enter')pitcherGenerate()">
     </div>
-    <textarea class="pitcher-context-inp" id="pitcher-context" rows="2" placeholder="Optional: add context, a thesis angle, or a specific question…"></textarea>
+    <div style="display:flex;gap:10px;align-items:flex-end;border-top:1px solid var(--rule);padding-top:12px">
+      <div style="flex:1">
+        <div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);opacity:.45;margin-bottom:6px">Peer Tickers (optional)</div>
+        <input class="pitcher-ticker-inp" id="pitcher-peers" type="text" placeholder="e.g. MSFT, GOOG, AMZN" maxlength="120" style="font-size:13px;font-weight:400;letter-spacing:.04em">
+      </div>
+      <button class="pitcher-go-btn" id="pitcher-go-btn" onclick="pitcherGenerate()">Generate report →</button>
+    </div>
+    <textarea class="pitcher-context-inp" id="pitcher-context" rows="2" placeholder="Optional: add a thesis angle, a specific question, or recent news context…"></textarea>
     <div class="pitcher-err" id="pitcher-err"></div>
   </div>
 
@@ -16349,14 +16363,115 @@ We would model a position in [COMPANY NAME] ([EXCHANGE]: [TICKER]) at current pr
 ---
 *Research by Aeon Nimbus AI · LiJie Guo methodology · Not investment advice · Verify all data independently · Data may reflect training cutoff*`;
 
-/* ── API calls ───────────────────────────────────── */
+/* ── Provider config ─────────────────────────────── */
+var PROVIDERS = {
+  'gemini-flash': { label:'Gemini 2.5 Flash', keyHint:'Google AI Studio key → aistudio.google.com (free)', free:true },
+  'gemini-pro':   { label:'Gemini 2.5 Pro',   keyHint:'Google AI Studio key → aistudio.google.com (free)', free:true },
+  'groq':         { label:'Llama 3.3 70B (Groq)', keyHint:'Groq API key → console.groq.com (free)',  free:true },
+  'openrouter':   { label:'OpenRouter (free models)', keyHint:'OpenRouter key → openrouter.ai (free tier available)', free:true },
+  'claude':       { label:'Claude Sonnet',     keyHint:'Anthropic API key → console.anthropic.com',   free:false },
+  'openai':       { label:'GPT-4o',            keyHint:'OpenAI API key → platform.openai.com',        free:false }
+};
+
+function pitcherModelChange(){
+  var model = document.getElementById('pitcher-model').value;
+  var cfg = PROVIDERS[model] || PROVIDERS['gemini-flash'];
+  document.getElementById('pitcher-key').placeholder = cfg.keyHint;
+}
+
 function pitcherKeySet(){
   var v = document.getElementById('pitcher-key').value.trim();
   document.getElementById('pitcher-key-status').textContent = v.length > 10 ? '✓ Set' : '';
 }
 
-async function callClaude(apiKey, ticker, context){
-  var prompt = 'Produce a full Aeon Nimbus equity research report for: ' + ticker + (context ? '\n\nAdditional context from the analyst: '+context : '') + '\n\nFollow the system prompt format exactly. Use real data from your training. Note any data cutoff limitations inline. Do not truncate — produce the complete report through Section 14.';
+function pitcherTickerUpdate(){
+  var ticker = (document.getElementById('pitcher-ticker').value.trim() || '').toUpperCase();
+  document.getElementById('pitcher-go-btn').textContent = ticker ? 'Generate report for ' + ticker + ' →' : 'Generate report →';
+}
+
+/* ── API callers ─────────────────────────────────── */
+function buildUserPrompt(ticker, peers, context){
+  var extra = [];
+  if(peers) extra.push('Peer companies for comparison: ' + peers);
+  if(context) extra.push('Additional context from the analyst: ' + context);
+  return 'Produce a full Aeon Nimbus equity research report for: ' + ticker +
+    (extra.length ? '\n\n' + extra.join('\n\n') : '') +
+    '\n\nFollow the system prompt format exactly through Section 14. Use real data from your training knowledge. Note any data cutoff limitations inline where relevant. Do not truncate.';
+}
+
+async function callGemini(apiKey, model, ticker, peers, context){
+  var prompt = buildUserPrompt(ticker, peers, context);
+  var GEMINI_BASE = 'https://generativelanguage.googleapis.com/v1beta/models';
+  var resp = await fetch(GEMINI_BASE + '/' + model + ':generateContent?key=' + apiKey, {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({
+      contents:[{parts:[{text: SYSTEM_PROMPT + '\n\n---\n\n' + prompt}]}],
+      generationConfig:{ temperature:0.4, maxOutputTokens:8192 }
+    })
+  });
+  if(!resp.ok){
+    var err = await resp.json().catch(function(){return {};});
+    throw new Error((err.error && err.error.message) || 'Gemini API error '+resp.status);
+  }
+  var data = await resp.json();
+  if(data.error) throw new Error(data.error.message || 'Gemini error');
+  var text = data.candidates && data.candidates[0] && data.candidates[0].content &&
+             data.candidates[0].content.parts && data.candidates[0].content.parts[0] &&
+             data.candidates[0].content.parts[0].text;
+  if(!text) throw new Error('Gemini returned empty response');
+  return text;
+}
+
+async function callGroq(apiKey, ticker, peers, context){
+  var resp = await fetch('https://api.groq.com/openai/v1/chat/completions',{
+    method:'POST',
+    headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
+    body: JSON.stringify({
+      model:'llama-3.3-70b-versatile',
+      max_tokens:4096,
+      temperature:0.4,
+      messages:[
+        {role:'system', content:SYSTEM_PROMPT},
+        {role:'user',   content:buildUserPrompt(ticker,peers,context)}
+      ]
+    })
+  });
+  if(!resp.ok){
+    var err = await resp.json().catch(function(){return {};});
+    throw new Error((err.error && err.error.message) || 'Groq API error '+resp.status);
+  }
+  var data = await resp.json();
+  return data.choices[0].message.content;
+}
+
+async function callOpenRouter(apiKey, ticker, peers, context){
+  var resp = await fetch('https://openrouter.ai/api/v1/chat/completions',{
+    method:'POST',
+    headers:{
+      'Authorization':'Bearer '+apiKey,
+      'Content-Type':'application/json',
+      'HTTP-Referer':'https://aeonnimbus.com',
+      'X-Title':'Aeon Nimbus AI Pitcher'
+    },
+    body: JSON.stringify({
+      model:'google/gemini-2.0-flash-exp:free',
+      max_tokens:4096,
+      messages:[
+        {role:'system', content:SYSTEM_PROMPT},
+        {role:'user',   content:buildUserPrompt(ticker,peers,context)}
+      ]
+    })
+  });
+  if(!resp.ok){
+    var err = await resp.json().catch(function(){return {};});
+    throw new Error((err.error && err.error.message) || 'OpenRouter API error '+resp.status);
+  }
+  var data = await resp.json();
+  return data.choices[0].message.content;
+}
+
+async function callClaude(apiKey, ticker, peers, context){
   var resp = await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{
@@ -16369,7 +16484,7 @@ async function callClaude(apiKey, ticker, context){
       model: 'claude-sonnet-4-5-20251022',
       max_tokens: 4096,
       system: SYSTEM_PROMPT,
-      messages:[{role:'user',content:prompt}]
+      messages:[{role:'user',content:buildUserPrompt(ticker,peers,context)}]
     })
   });
   if(!resp.ok){
@@ -16380,8 +16495,7 @@ async function callClaude(apiKey, ticker, context){
   return data.content[0].text;
 }
 
-async function callOpenAI(apiKey, ticker, context){
-  var prompt = 'Produce a full Aeon Nimbus equity research report for: ' + ticker + (context ? '\n\nAdditional context from the analyst: '+context : '') + '\n\nFollow the system prompt format exactly. Use real data from your training. Note any data cutoff limitations inline. Do not truncate — produce the complete report through Section 14.';
+async function callOpenAI(apiKey, ticker, peers, context){
   var resp = await fetch('https://api.openai.com/v1/chat/completions',{
     method:'POST',
     headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
@@ -16390,7 +16504,7 @@ async function callOpenAI(apiKey, ticker, context){
       max_tokens:4096,
       messages:[
         {role:'system',content:SYSTEM_PROMPT},
-        {role:'user',content:prompt}
+        {role:'user',content:buildUserPrompt(ticker,peers,context)}
       ]
     })
   });
@@ -16400,6 +16514,16 @@ async function callOpenAI(apiKey, ticker, context){
   }
   var data = await resp.json();
   return data.choices[0].message.content;
+}
+
+async function dispatchCall(model, apiKey, ticker, peers, context){
+  if(model==='gemini-flash') return callGemini(apiKey, 'gemini-2.5-flash', ticker, peers, context);
+  if(model==='gemini-pro')   return callGemini(apiKey, 'gemini-2.5-pro',   ticker, peers, context);
+  if(model==='groq')         return callGroq(apiKey, ticker, peers, context);
+  if(model==='openrouter')   return callOpenRouter(apiKey, ticker, peers, context);
+  if(model==='claude')       return callClaude(apiKey, ticker, peers, context);
+  if(model==='openai')       return callOpenAI(apiKey, ticker, peers, context);
+  throw new Error('Unknown model');
 }
 
 /* ── Loading animation ───────────────────────────── */
@@ -16429,14 +16553,15 @@ function pitcherStopLoad(){ clearInterval(_loadTimer); }
 /* ── Main generate ───────────────────────────────── */
 window.pitcherGenerate = async function(){
   if(_pitcherLoading) return;
-  var ticker = document.getElementById('pitcher-ticker').value.trim();
+  var ticker  = document.getElementById('pitcher-ticker').value.trim();
+  var peers   = document.getElementById('pitcher-peers').value.trim();
   var context = document.getElementById('pitcher-context').value.trim();
-  var apiKey = document.getElementById('pitcher-key').value.trim();
-  var model = document.getElementById('pitcher-model').value;
-  var errEl = document.getElementById('pitcher-err');
+  var apiKey  = document.getElementById('pitcher-key').value.trim();
+  var model   = document.getElementById('pitcher-model').value;
+  var errEl   = document.getElementById('pitcher-err');
   errEl.textContent = '';
-  if(!ticker){ errEl.textContent = 'Enter a ticker or company name.'; return; }
-  if(!apiKey){ errEl.textContent = 'Paste your API key above to continue.'; return; }
+  if(!ticker){ errEl.textContent = 'Enter a company name or ticker.'; return; }
+  if(!apiKey){ errEl.textContent = 'Paste your API key to continue. Gemini and Groq are free.'; return; }
 
   _pitcherLoading = true;
   document.getElementById('pitcher-go-btn').disabled = true;
@@ -16446,18 +16571,18 @@ window.pitcherGenerate = async function(){
   pitcherStartLoad(ticker);
 
   try{
-    var md = model === 'openai' ? await callOpenAI(apiKey,ticker,context) : await callClaude(apiKey,ticker,context);
+    var md = await dispatchCall(model, apiKey, ticker, peers, context);
     pitcherStopLoad();
     document.getElementById('pitcher-loading').classList.remove('on');
     document.getElementById('pitcher-chat-box').style.opacity = '';
     document.getElementById('pitcher-go-btn').disabled = false;
     _pitcherLoading = false;
 
+    var cfg = PROVIDERS[model] || {};
     var inner = document.getElementById('pitcher-report-inner');
-    var modelLabel = model==='openai' ? 'OpenAI GPT-4o' : 'Anthropic Claude Sonnet';
     inner.innerHTML = pitcherMd(md) +
       '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--rule)">' +
-      '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Methodology: LiJie Guo / Aeon Nimbus Research · Model: '+modelLabel+' · Not investment advice · All data should be independently verified · Live positions are published on aeonnimbus.com</p>' +
+      '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Methodology: LiJie Guo / Aeon Nimbus Research · Model: '+(cfg.label||model)+' · Not investment advice · All data should be independently verified · Live positions are published on aeonnimbus.com</p>' +
       '</div>';
     document.getElementById('pitcher-report').classList.add('on');
     _pitcherUsed = true;
@@ -16489,7 +16614,14 @@ window.pitcherPaywallSubmit = function(){
   document.querySelector('.pitcher-pw-cta').style.display='none';
 };
 
-window.pitcherKeySet = pitcherKeySet;
+window.pitcherKeySet      = pitcherKeySet;
+window.pitcherModelChange  = pitcherModelChange;
+window.pitcherTickerUpdate = pitcherTickerUpdate;
+
+// Init key placeholder on load
+document.addEventListener('DOMContentLoaded', function(){
+  pitcherModelChange();
+});
 
 })();
 </script>

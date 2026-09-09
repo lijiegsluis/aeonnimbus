@@ -14927,6 +14927,39 @@ html.light .mv2-name em {
 .pitcher-pw-close{position:absolute;top:14px;right:18px;font-family:var(--FM);font-size:18px;color:var(--ink2);opacity:.4;cursor:pointer;background:none;border:none;line-height:1}
 .pitcher-pw-close:hover{opacity:.8}
 .pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;text-align:center;margin-top:6px;min-height:16px;letter-spacing:.04em}
+/* ── Pitcher report interior elements ── */
+.pr-masthead{font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.pitcher-report-inner h1{font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--ink);margin:0 0 4px;line-height:1.2}
+.pitcher-report-inner h2{font-family:var(--FM);font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 2px}
+.pitcher-report-inner h3{font-family:var(--FM);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 10px;opacity:.8}
+.pitcher-report-inner h4{font-family:var(--FM);font-size:12px;font-weight:600;color:var(--ink);margin:14px 0 6px;letter-spacing:.04em}
+.pr-standfirst{font-family:var(--FS);font-size:15px;color:var(--ink);line-height:1.75;font-style:italic;margin:10px 0 16px;padding-left:14px;border-left:2px solid var(--gold)}
+/* Verdict strip */
+.pr-verdict-strip{display:flex;flex-wrap:wrap;gap:0;margin:16px 0;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.pr-vs-item{flex:1;min-width:80px;padding:10px 14px;font-family:var(--FM);font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.05em;border-right:1px solid var(--rule);background:var(--bg2)}
+.pr-vs-item:last-child{border-right:none}
+.pr-vs-item strong{display:block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:3px}
+/* Data band */
+.pr-data-band{display:flex;flex-wrap:wrap;gap:1px;margin:12px 0 16px;background:var(--rule)}
+.pr-db-item{flex:1;min-width:90px;background:var(--bg2);padding:9px 12px;font-family:var(--FM);font-size:11px;color:var(--ink2)}
+.pr-db-item strong{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px}
+/* Numbered section header */
+.pr-section-hd{display:flex;align-items:baseline;gap:12px;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
+.pr-sec-num{font-family:var(--FM);font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.14em;opacity:.7;min-width:24px}
+.pr-sec-title{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.85}
+/* Invalidation blockquote */
+.pr-invalidation{border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.05);border-radius:4px;padding:12px 16px;margin:14px 0;font-family:var(--FM);font-size:12px;color:#f87171;line-height:1.7;letter-spacing:.03em}
+.pr-invalidation strong{color:#f87171}
+/* Prob-weighted EV line */
+.pr-pwev{font-family:var(--FM);font-size:12px;color:var(--ink);letter-spacing:.04em;margin:6px 0}
+.pr-pwev strong{color:var(--gold)}
+/* Table cell coloring */
+.pitcher-report-inner td.pr-pos{color:#4ade80;font-weight:600}
+.pitcher-report-inner td.pr-neg{color:#f87171;font-weight:600}
+.pitcher-report-inner td.pr-hi{color:#f87171}
+.pitcher-report-inner td.pr-md{color:var(--gold)}
+.pitcher-report-inner td.pr-lo{color:#4ade80}
+.pitcher-report-inner code{font-family:var(--FM);font-size:.88em;background:var(--bg1);padding:1px 5px;border-radius:3px;color:var(--ink2)}
 </style>
 
 <script>
@@ -15980,135 +16013,350 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
 </script>
 <script>
 /* ═══════════════════════════════════════════════════
-   AI PITCHER — core logic
-   Flow: input → API call → markdown render → paywall on 2nd attempt
+   AI PITCHER — Aeon Nimbus house style
+   Master prompt: AEON_NIMBUS_MASTER_PROMPT2.md
+   Report reference: LMND_Deep_Dive_AeonNimbus.pdf
 ═══════════════════════════════════════════════════ */
 (function(){
 
 var _pitcherUsed = false;
 var _pitcherLoading = false;
 
-/* Minimal markdown → HTML renderer */
+/* ── Markdown renderer ───────────────────────────── */
 function pitcherMd(md){
   var lines = md.split('\n');
-  var html = '';
-  var inTable = false, tableHtml = '', inList = false;
+  var out = '';
+  var inTable = false, tableFirstRow = true;
+  var inList = false, inBlockquote = false;
 
-  function flushList(){ if(inList){ html += '</ul>'; inList=false; } }
-  function flushTable(){ if(inTable){ html += '</table>'; inTable=false; tableHtml=''; } }
+  function flushList(){ if(inList){ out += '</ul>'; inList=false; } }
+  function flushTable(){ if(inTable){ out += '</table>'; inTable=false; tableFirstRow=true; } }
+  function flushBq(){ if(inBlockquote){ out += '</blockquote>'; inBlockquote=false; } }
+  function flush(){ flushList(); flushTable(); flushBq(); }
 
   lines.forEach(function(line){
-    // Table detection
+    // Table rows
     if(/^\|/.test(line)){
+      flush();
+      if(/^[-| :]+$/.test(line.replace(/\|/g,'').trim())) return;
       var cells = line.split('|').slice(1,-1).map(function(c){return c.trim();});
-      if(/^[-:| ]+$/.test(line.replace(/\|/g,''))) return; // separator row
-      if(!inTable){ html += '<table>'; inTable=true; }
-      var tag = (!inTable || html.slice(-7)==='<table>') ? 'th' : 'td';
-      // Determine if header (first row after table start)
-      var isHeader = html.slice(-7)==='<table>';
-      var rowHtml = '<tr>' + cells.map(function(c){
-        return '<'+(isHeader?'th':'td')+'>'+inlineFormat(c)+'</'+(isHeader?'th':'td')+'>';
-      }).join('') + '</tr>';
-      html += rowHtml;
+      if(!inTable){ out += '<table>'; inTable=true; tableFirstRow=true; }
+      if(tableFirstRow){
+        out += '<thead><tr>'+cells.map(function(c){return '<th>'+fmt(c)+'</th>';}).join('')+'</tr></thead><tbody>';
+        tableFirstRow=false;
+      } else {
+        out += '<tr>'+cells.map(function(c){
+          var cls = '';
+          // Color coded cells
+          if(/^[−\-]/.test(c)) cls=' class="pr-neg"';
+          else if(/^\+/.test(c)) cls=' class="pr-pos"';
+          else if(c==='High'||c==='HIGH') cls=' class="pr-hi"';
+          else if(c==='Medium'||c==='MEDIUM') cls=' class="pr-md"';
+          else if(c==='Low'||c==='LOW') cls=' class="pr-lo"';
+          return '<td'+cls+'>'+fmt(c)+'</td>';
+        }).join('')+'</tr>';
+      }
       return;
     } else { flushTable(); }
 
+    // Blockquote (invalidation box)
+    if(/^>/.test(line)){
+      flushList();
+      var bqContent = line.replace(/^>\s?/,'');
+      if(!inBlockquote){ out += '<blockquote class="pr-invalidation">'; inBlockquote=true; }
+      out += fmt(bqContent)+' ';
+      return;
+    } else { flushBq(); }
+
     // Headers
-    if(/^### /.test(line)){ flushList(); html += '<h3>'+inlineFormat(line.slice(4))+'</h3>'; return; }
-    if(/^## /.test(line)){ flushList(); html += '<h2>'+inlineFormat(line.slice(3))+'</h2>'; return; }
-    if(/^# /.test(line)){ flushList(); html += '<h1>'+inlineFormat(line.slice(2))+'</h1>'; return; }
+    if(/^#### /.test(line)){ flush(); out += '<h4>'+fmt(line.slice(5))+'</h4>'; return; }
+    if(/^### /.test(line)){
+      flush();
+      var h = line.slice(4);
+      // Numbered section detection (e.g. "01 · SCENARIO ANALYSIS")
+      var numMatch = h.match(/^(\d{2})\s*[·\-]\s*(.+)/);
+      if(numMatch){
+        out += '<div class="pr-section-hd"><span class="pr-sec-num">'+numMatch[1]+'</span><span class="pr-sec-title">'+fmt(numMatch[2])+'</span></div>';
+      } else {
+        out += '<h3>'+fmt(h)+'</h3>';
+      }
+      return;
+    }
+    if(/^## /.test(line)){ flush(); out += '<h2>'+fmt(line.slice(3))+'</h2>'; return; }
+    if(/^# /.test(line)){
+      flush();
+      var h1 = line.slice(2);
+      // Masthead detection
+      if(/AEON NIMBUS/i.test(h1)){
+        out += '<div class="pr-masthead">'+fmt(h1)+'</div>';
+      } else {
+        out += '<h1>'+fmt(h1)+'</h1>';
+      }
+      return;
+    }
+
     // HR
-    if(/^---+$/.test(line.trim())){ flushList(); html += '<hr>'; return; }
+    if(/^---+$/.test(line.trim())){ flush(); out += '<hr>'; return; }
+
     // List
     if(/^[-*] /.test(line)){
-      if(!inList){ html += '<ul>'; inList=true; }
-      html += '<li>'+inlineFormat(line.slice(2))+'</li>';
+      flushBq(); flushTable();
+      if(!inList){ out += '<ul>'; inList=true; }
+      out += '<li>'+fmt(line.slice(2))+'</li>';
       return;
     } else { flushList(); }
+
     // Blank line
     if(line.trim()==='') return;
+
+    // Verdict strip: line containing DIRECTION: / LONG / SHORT
+    if(/\*\*DIRECTION\*\*|\*\*ENTRY\*\*|\*\*TARGET\*\*|\*\*STOP\*\*|\*\*SIZE\*\*/.test(line)){
+      flush();
+      var parts = line.split('·').map(function(p){return p.trim();});
+      out += '<div class="pr-verdict-strip">'+parts.map(function(p){
+        return '<div class="pr-vs-item">'+fmt(p)+'</div>';
+      }).join('')+'</div>';
+      return;
+    }
+
+    // Data band: line that is a series of short metric: value entries
+    if(/^\*\*[A-Z]/.test(line) && (line.match(/\*\*/g)||[]).length >= 4 && /\$|%|[0-9]/.test(line)){
+      flush();
+      // treat as data band
+      var items = line.split('·').map(function(p){return p.trim();});
+      if(items.length >= 3){
+        out += '<div class="pr-data-band">'+items.map(function(it){
+          return '<div class="pr-db-item">'+fmt(it)+'</div>';
+        }).join('')+'</div>';
+        return;
+      }
+    }
+
+    // Probability-weighted / win-loss lines
+    if(/probability.weighted/i.test(line)||/win.*loss.*ratio/i.test(line)){
+      flush();
+      out += '<p class="pr-pwev">'+fmt(line)+'</p>';
+      return;
+    }
+
+    // Italic-only line = standfirst
+    if(/^\*.+\*$/.test(line.trim()) && !line.trim().startsWith('**')){
+      flush();
+      out += '<p class="pr-standfirst">'+fmt(line)+'</p>';
+      return;
+    }
+
     // Paragraph
-    html += '<p>'+inlineFormat(line)+'</p>';
+    flush();
+    out += '<p>'+fmt(line)+'</p>';
   });
-  flushList(); flushTable();
-  return html;
+  flush();
+  return out;
 }
 
-function inlineFormat(s){
+function fmt(s){
   return s
     .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
-    .replace(/\*(.+?)\*/g,'<em>$1</em>')
-    .replace(/`(.+?)`/g,'<code style="font-family:var(--FM);font-size:.9em;background:var(--bg1);padding:1px 5px;border-radius:3px">$1</code>');
+    .replace(/\*([^*]+?)\*/g,'<em>$1</em>')
+    .replace(/`(.+?)`/g,'<code>$1</code>');
 }
 
-/* System prompt — Aeon Nimbus house style */
-var SYSTEM_PROMPT = `You are the Aeon Nimbus Research AI — an institutional equity research engine built on the methodology of LiJie Guo, independent analyst at Aeon Nimbus Research, London.
+/* ── Master system prompt ────────────────────────── */
+var SYSTEM_PROMPT = `You are the Aeon Nimbus Research AI — built on the exact methodology of LiJie Guo, Lead Analyst at Aeon Nimbus Research, London. You produce institutional equity research reports in the Aeon Nimbus house style.
 
-Produce a single-stock equity research report in strict Aeon Nimbus house style. Rules:
-- Non-consensus: identify one specific market mispricing and explain why the street is wrong
-- Catalyst-driven: 2-4 specific, dateable near-term catalysts
-- Valuation-anchored: price target with clear methodology (DCF or comparable)
-- Concise and high-conviction: ~900-1200 words total
-- Use real data where possible; flag data cutoff limitations if needed
+## VOICE RULES (non-negotiable)
+- First person plural throughout: We believe / We note / We observe / We confirm / We conclude
+- Direct attribution of every opinion — never "it appears that" or "one could argue"
+- Business model ALWAYS explained before any multiple or financial figure
+- NEVER use: compelling, robust, landscape (generic), positioned to, leverages, trajectory (vague), unlock, momentum (as thesis substitute), demonstrates, underscores, seamlessly, it is worth noting, going forward, transformative, innovative, cutting-edge, game-changer, paradigm, synergy, value-add, noteworthy, delve, poised to, significant potential, in conclusion, furthermore, additionally, moreover
 
-Output in Markdown only, using this exact structure:
+## MANDATORY FORMAT — output in Markdown only
 
-## [TICKER] — [COMPANY NAME]
-**[BUY / HOLD / AVOID]** · Target: $XX · Upside: +XX% · Horizon: 12 months · As of: [month year]
+# AEON NIMBUS RESEARCH · EQUITY DEEP DIVE
 
-### Executive Summary
-[1-2 paragraph non-consensus thesis. Open with the market's specific mistake. Close with why now is the entry point.]
+## [EXCHANGE]: [TICKER] — [COMPANY NAME]
+*[date] · Research generated by Aeon Nimbus AI*
 
-### Business & Competitive Position
-[3-4 sentences on the business model, revenue drivers, and moat]
+**[ONE-LINE THESIS HEADLINE — the thing the market is missing]**
 
-### Investment Thesis
-
-**1. [Thesis point — headline claim]**
-[2-3 sentences with supporting data]
-
-**2. [Thesis point]**
-[2-3 sentences]
-
-**3. [Thesis point]**
-[2-3 sentences]
-
-### Catalyst Framework
-
-| Catalyst | Expected Timing | Impact |
-|----------|----------------|--------|
-| [Catalyst 1] | [Q/Month Year] | High |
-| [Catalyst 2] | [Q/Month Year] | High |
-| [Catalyst 3] | [Q/Month Year] | Medium |
-
-### Valuation
-
-[2-3 sentences: methodology, key assumptions, what the target implies]
-
-**Base case**: $XX (+XX%) — [one-line assumption]
-**Bull case**: $XX (+XX%) — [one-line assumption]
-**Bear case**: $XX (-XX%) — [one-line assumption]
-
-### Key Risks
-
-- **[Risk 1]**: [one sentence]
-- **[Risk 2]**: [one sentence]
-- **[Risk 3]**: [one sentence]
-
-### Conclusion
-
-[1 paragraph: restate the non-consensus edge, what would invalidate the thesis, and final conviction]
+*[STANDFIRST: 3–4 sentences in italics. Contains: the thesis, the specific mispricing with a dollar or percentage number, and why now. Example: "131 million customers. A cost to serve of $0.80 per month. A ROE of 33%. The market is not pricing any of that."]*
 
 ---
-*Research by Aeon Nimbus AI · For informational purposes only · Not investment advice*`;
 
+**DIRECTION:** [LONG / SHORT / WATCH] · **ENTRY:** $XX.XX · **TARGET:** $XX.XX · **STOP:** $XX.XX · **SIZE:** 3% portfolio · **HORIZON:** 12–18 months
+
+---
+
+| Price | 52W Range | Mkt Cap | [Key Metric] | [Key Metric] | Next Catalyst | Analyst PT |
+|---|---|---|---|---|---|---|
+| $XX.XX | $XX–$XX | $XXB | XX% | XX% | [Q / month year] | $XX |
+
+---
+
+### 01 · SCENARIO ANALYSIS
+
+| | Bear | Base | Bull |
+|---|---|---|---|
+| Weight | 15% | 55% | 30% |
+| Price | $XX | $XX | $XX |
+| Return | −XX% | +XX% | +XX% |
+| Multiple | X×EV/EBITDA | X×EV/EBITDA | X×EV/EBITDA |
+| Conditions | [2–3 sentences] | [2–3 sentences] | [2–3 sentences] |
+
+**Probability-weighted EV from entry:** $XX.XX (+XX%)
+**Win / Loss ratio** ($target − $entry) / ($entry − $stop): X.XX×
+
+> ⚠ **THESIS INVALIDATED IF —** [Specific, falsifiable conditions. Be concrete — name the metric and threshold, e.g. "TTM gross loss ratio re-widens above 70% for two consecutive quarters."]
+
+### 02 · MACRO CONTEXT
+[One paragraph. State explicitly whether the macro regime affects the thesis or not. Reference specific rate environment, sector cycle, currency factors if relevant.]
+
+### 03 · BUSINESS MODEL
+[ALWAYS before any numbers. 3–4 paragraphs. Explain what the company does, how it generates revenue, its competitive moat or lack thereof. For ecosystems: US comparison grid. For infrastructure: technical moat. For fintech: data advantage and unit economics. Do not mention any multiple or financial figure until this section is complete.]
+
+### 04 · FINANCIAL OVERVIEW — FIVE-YEAR HISTORY
+
+| Metric | FY[N-4] | FY[N-3] | FY[N-2] | FY[N-1] | FY[N] |
+|---|---|---|---|---|---|
+| Revenue ($M) | | | | | |
+| Revenue growth | | | | | |
+| EBITDA ($M) / Adj. | | | | | |
+| EBITDA margin | | | | | |
+| Net income ($M) | | | | | |
+| EPS | | | | | |
+| [Key sector metric] | | | | | |
+
+*Source: [company filings / earnings releases. Note any figures estimated or data-cutoff limited.]*
+
+### 05 · WACC CONSTRUCTION
+Built from first principles. Never use a screener WACC.
+
+| Input | Value | Basis |
+|---|---|---|
+| Rf — 10Y UST (approximate, note date) | X.X% | US Treasury |
+| Beta (3yr realised, approximate) | X.XX | Market data |
+| Equity risk premium (Damodaran US base) | 5.5% | Damodaran |
+| Size premium (if small-cap < $5B) | X.X% or 0% | House rule |
+| Country risk premium (if EM revenues > 50%) | X.X% or 0% | Damodaran EM |
+| Ke = Rf + β × ERP + premiums | X.X% | Calculated |
+| Kd (cost of debt, pre-tax) | X.X% | Estimated |
+| Effective tax rate | X% | |
+| D/V · E/V | X% / X% | |
+| **Working WACC** | **X.X%** | |
+
+### 06 · DCF MODEL
+
+| $M unless noted | FY[N+1]E | FY[N+2]E | FY[N+3]E | FY[N+4]E | FY[N+5]E |
+|---|---|---|---|---|---|
+| Revenue growth | | | | | |
+| Revenue ($M) | | | | | |
+| EBIT/EBITDA margin | | | | | |
+| EBIT/EBITDA ($M) | | | | | |
+| Unlevered FCF ($M) | | | | | |
+| PV @ [WACC]% WACC | | | | | |
+
+[2 sentences: terminal value methodology, bridge to equity value, implied price.]
+
+### 07 · SENSITIVITY MATRIX — WACC × EXIT MULTIPLE
+[Show a 5×5 table: WACC on rows (base ±1%, ±2%), exit multiple on columns (base ±0.5× for two steps). Bold or mark the base case cell. Note where the entry price sits in the matrix.]
+
+### 08 · PEER COMPARISON
+
+| Company | Mkt Cap | Rev. Growth | Profitability | Valuation |
+|---|---|---|---|---|
+| [TICKER — our company] | $XB | XX% | XX% margin | X×EV/EBITDA |
+| [PEER 1] | | | | |
+| [PEER 2] | | | | |
+| [PEER 3] | | | | |
+| [PEER 4] | | | | |
+| [PEER 5] | | | | |
+
+[Explain specifically why the target company is mispriced vs peers. Flag and exclude any peer with negative or non-meaningful multiples — state which and why.]
+
+**Weighted valuation blend:**
+
+| Method | Weight | Valuation | Contribution |
+|---|---|---|---|
+| DCF | 50% | $XX | $XX |
+| Comparable EV/EBITDA | 15% | $XX | $XX |
+| Historical EV/EBITDA | 15% | $XX | $XX |
+| Comparable EV/Sales | 5% | $XX | $XX |
+| Comparable P/E | 5% | $XX | $XX |
+| Historical EV/Sales | 5% | $XX | $XX |
+| Historical P/E | 5% | $XX | $XX |
+| **Blended target price** | | | **$XX.XX** |
+
+### 09 · INVESTMENT THESIS — THREE PILLARS
+
+**1 / 3 — [Bold thesis headline]**
+[2–3 paragraphs. Each must advance the argument. Do not restate. Include specific data points.]
+
+**2 / 3 — [Bold thesis headline]**
+[2–3 paragraphs with data]
+
+**3 / 3 — [Bold thesis headline]**
+[2–3 paragraphs with data]
+
+### 10 · VARIANT VIEWS
+
+**VARIANT 1 / 3 — [Topic]**
+**CONSENSUS:** [Named bank, analyst, rating, PT if known] — [their concern in one sentence]
+**NON-CONSENSUS:** [Your specific, quantified, non-consensus view]
+**FALSIFIABLE IF:** [Exact metric and threshold]
+**QUANTIFIED IMPACT:** [Dollar or percentage impact if the non-consensus view is wrong]
+
+**VARIANT 2 / 3 — [Topic]**
+**CONSENSUS:** [Named bank] — [concern]
+**NON-CONSENSUS:** [View]
+**FALSIFIABLE IF:** [Condition]
+**QUANTIFIED IMPACT:** [Impact]
+
+**VARIANT 3 / 3 — [Topic]**
+**CONSENSUS:** [Named bank] — [concern]
+**NON-CONSENSUS:** [View]
+**FALSIFIABLE IF:** [Condition]
+**QUANTIFIED IMPACT:** [Impact]
+
+### 11 · REVERSE DCF
+What must simultaneously be true for the current price to be fair value? Show 3–4 conditions. Explain briefly why each is implausible or unlikely to hold simultaneously.
+
+### 12 · RISK TABLE
+
+| Risk | Probability | Impact |
+|---|---|---|
+| [Risk 1 description] | High / Medium / Low | Large / Moderate / Small |
+| [Risk 2] | | |
+| [Risk 3] | | |
+| [Risk 4] | | |
+| [Risk 5] | | |
+
+### 13 · CATALYST WATCHLIST
+
+| When | Catalyst | What to Watch For |
+|---|---|---|
+| [Date / Quarter] | **[Catalyst name]** | [3–4 sentences: what to look for, how stock moves on each outcome] |
+| [Date] | **[Catalyst name]** | |
+| [Date] | **[Catalyst name]** | |
+| [Date] | **[Catalyst name]** | |
+
+### 14 · MODEL POSITION STATEMENT
+*Based on the analysis above, a model Aeon Nimbus position would be structured as follows:*
+
+We would model a position in [COMPANY NAME] ([EXCHANGE]: [TICKER]) at current prices around $XX.XX. Our price target is $XX.XX — representing +XX% — built off [valuation method justification]. Our model stop would be set at $XX.XX — [reason this level signals the thesis is broken, referencing a structural support, multiple floor, or thesis-break metric]. Standard sizing: 3% of portfolio, reflecting [key risk factors that inform the sizing]. Win / loss skew at these levels: X.XX:1.
+
+*This is a model analysis generated by Aeon Nimbus AI, not a live position by LiJie Guo. All live Aeon Nimbus positions — including losses — are published on aeonnimbus.com before outcomes are known.*
+
+---
+*Research by Aeon Nimbus AI · LiJie Guo methodology · Not investment advice · Verify all data independently · Data may reflect training cutoff*`;
+
+/* ── API calls ───────────────────────────────────── */
 function pitcherKeySet(){
   var v = document.getElementById('pitcher-key').value.trim();
   document.getElementById('pitcher-key-status').textContent = v.length > 10 ? '✓ Set' : '';
 }
 
 async function callClaude(apiKey, ticker, context){
-  var prompt = 'Write an equity research report for: ' + ticker + (context ? '\n\nAdditional context: '+context : '');
+  var prompt = 'Produce a full Aeon Nimbus equity research report for: ' + ticker + (context ? '\n\nAdditional context from the analyst: '+context : '') + '\n\nFollow the system prompt format exactly. Use real data from your training. Note any data cutoff limitations inline. Do not truncate — produce the complete report through Section 14.';
   var resp = await fetch('https://api.anthropic.com/v1/messages',{
     method:'POST',
     headers:{
@@ -16119,7 +16367,7 @@ async function callClaude(apiKey, ticker, context){
     },
     body: JSON.stringify({
       model: 'claude-sonnet-4-5-20251022',
-      max_tokens: 2048,
+      max_tokens: 4096,
       system: SYSTEM_PROMPT,
       messages:[{role:'user',content:prompt}]
     })
@@ -16133,13 +16381,13 @@ async function callClaude(apiKey, ticker, context){
 }
 
 async function callOpenAI(apiKey, ticker, context){
-  var prompt = 'Write an equity research report for: ' + ticker + (context ? '\n\nAdditional context: '+context : '');
+  var prompt = 'Produce a full Aeon Nimbus equity research report for: ' + ticker + (context ? '\n\nAdditional context from the analyst: '+context : '') + '\n\nFollow the system prompt format exactly. Use real data from your training. Note any data cutoff limitations inline. Do not truncate — produce the complete report through Section 14.';
   var resp = await fetch('https://api.openai.com/v1/chat/completions',{
     method:'POST',
     headers:{'Authorization':'Bearer '+apiKey,'Content-Type':'application/json'},
     body: JSON.stringify({
       model:'gpt-4o',
-      max_tokens:2048,
+      max_tokens:4096,
       messages:[
         {role:'system',content:SYSTEM_PROMPT},
         {role:'user',content:prompt}
@@ -16154,7 +16402,17 @@ async function callOpenAI(apiKey, ticker, context){
   return data.choices[0].message.content;
 }
 
-var _loadPhases = ['Scanning the market…','Building thesis…','Sizing the position…','Calculating valuation…','Formatting report…'];
+/* ── Loading animation ───────────────────────────── */
+var _loadPhases = [
+  'Scanning the market…',
+  'Building WACC from first principles…',
+  'Running five-year DCF…',
+  'Identifying the mispricing…',
+  'Writing the thesis pillars…',
+  'Stress-testing variant views…',
+  'Sizing the position…',
+  'Formatting report…'
+];
 var _loadTimer;
 
 function pitcherStartLoad(ticker){
@@ -16164,12 +16422,11 @@ function pitcherStartLoad(ticker){
   _loadTimer = setInterval(function(){
     i = (i+1) % _loadPhases.length;
     el.textContent = _loadPhases[i];
-  }, 2200);
+  }, 2800);
 }
-function pitcherStopLoad(){
-  clearInterval(_loadTimer);
-}
+function pitcherStopLoad(){ clearInterval(_loadTimer); }
 
+/* ── Main generate ───────────────────────────────── */
 window.pitcherGenerate = async function(){
   if(_pitcherLoading) return;
   var ticker = document.getElementById('pitcher-ticker').value.trim();
@@ -16183,7 +16440,7 @@ window.pitcherGenerate = async function(){
 
   _pitcherLoading = true;
   document.getElementById('pitcher-go-btn').disabled = true;
-  document.getElementById('pitcher-chat-box').style.opacity = '0.45';
+  document.getElementById('pitcher-chat-box').style.opacity = '0.4';
   document.getElementById('pitcher-loading').classList.add('on');
   document.getElementById('pitcher-report').classList.remove('on');
   pitcherStartLoad(ticker);
@@ -16197,11 +16454,14 @@ window.pitcherGenerate = async function(){
     _pitcherLoading = false;
 
     var inner = document.getElementById('pitcher-report-inner');
-    inner.innerHTML = pitcherMd(md) + '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Powered by ' + (model==='openai'?'OpenAI GPT-4o':'Anthropic Claude') + ' · For informational purposes only · Not investment advice · Always conduct your own due diligence.</p>';
+    var modelLabel = model==='openai' ? 'OpenAI GPT-4o' : 'Anthropic Claude Sonnet';
+    inner.innerHTML = pitcherMd(md) +
+      '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--rule)">' +
+      '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Methodology: LiJie Guo / Aeon Nimbus Research · Model: '+modelLabel+' · Not investment advice · All data should be independently verified · Live positions are published on aeonnimbus.com</p>' +
+      '</div>';
     document.getElementById('pitcher-report').classList.add('on');
     _pitcherUsed = true;
 
-    // Smooth scroll to report
     setTimeout(function(){
       document.getElementById('pitcher-report').scrollIntoView({behavior:'smooth',block:'start'});
     },80);
@@ -16216,21 +16476,20 @@ window.pitcherGenerate = async function(){
 };
 
 window.pitcherAgain = function(){
-  if(_pitcherUsed){
-    document.getElementById('pitcher-pw-overlay').classList.add('on');
-  }
+  document.getElementById('pitcher-pw-overlay').classList.add('on');
 };
 
 window.pitcherPaywallSubmit = function(){
   var email = document.getElementById('pitcher-pw-email').value.trim();
   var sub = document.getElementById('pitcher-pw-sub');
   if(!email || !email.includes('@')){ sub.textContent = 'Please enter a valid email.'; return; }
-  // Store locally and show confirmation
   try{ localStorage.setItem('an_pitcher_email', email); }catch(e){}
   sub.textContent = 'You\'re on the list. We\'ll be in touch.';
   document.getElementById('pitcher-pw-email').style.display='none';
   document.querySelector('.pitcher-pw-cta').style.display='none';
 };
+
+window.pitcherKeySet = pitcherKeySet;
 
 })();
 </script>

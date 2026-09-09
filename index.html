@@ -16601,7 +16601,10 @@ window.pitcherGenerate = async function(){
 };
 
 window.pitcherAgain = function(){
-  document.getElementById('pitcher-pw-overlay').classList.add('on');
+  window.scrollTo({top:0, behavior:'smooth'});
+  setTimeout(function(){
+    document.getElementById('pitcher-pw-overlay').classList.add('on');
+  }, 320);
 };
 
 window.pitcherPaywallSubmit = function(){

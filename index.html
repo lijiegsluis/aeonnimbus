@@ -14849,7 +14849,7 @@ html.light .mv2-name em {
 }
 
 /* ── AI Pitcher ─────────────────────────────────── */
-.pitcher-wrap{max-width:820px;margin:0 auto;padding:60px 32px 100px}
+.pitcher-wrap{max-width:980px;margin:0 auto;padding:60px 32px 100px}
 .pitcher-header{text-align:center;padding-bottom:48px}
 .pitcher-header h2{font-family:var(--FM);font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:.05em;color:var(--ink);margin:0 0 10px}
 .pitcher-header p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;max-width:520px;margin:0 auto}
@@ -14873,7 +14873,7 @@ html.light .mv2-name em {
 /* report */
 .pitcher-report{display:none}
 .pitcher-report.on{display:block}
-.pitcher-report-inner{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:36px 36px 32px;margin-bottom:20px}
+.pitcher-report-inner{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:44px 44px 36px;margin-bottom:20px;overflow:hidden}
 .pitcher-report-inner h1{font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--ink);margin:0 0 6px;border-bottom:1px solid var(--rule);padding-bottom:14px}
 .pitcher-report-inner h2{font-family:var(--FM);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:28px 0 10px;opacity:.85}
 .pitcher-report-inner h3{font-family:var(--FM);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--ink);margin:18px 0 6px}
@@ -14906,10 +14906,11 @@ html.light .mv2-name em {
 .pitcher-pw-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.45;letter-spacing:.06em}
 .pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;text-align:center;margin-top:6px;min-height:16px;letter-spacing:.04em}
 /* ── Pitcher report interior elements ── */
-.pr-masthead{font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:6px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
-.pitcher-report-inner h1{font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--ink);margin:0 0 4px;line-height:1.2}
-.pitcher-report-inner h2{font-family:var(--FM);font-size:14px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 2px}
-.pitcher-report-inner h3{font-family:var(--FM);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:24px 0 10px;opacity:.8}
+.pr-masthead{font-family:var(--FM);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
+.pr-masthead::after{content:'EQUITY DEEP DIVE';font-size:7px;letter-spacing:.2em;opacity:.6}
+.pitcher-report-inner h1{font-family:var(--FM);font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:.02em;color:var(--ink);margin:8px 0 4px;line-height:1.15}
+.pitcher-report-inner h2{font-family:var(--FM);font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--ink2);margin:0 0 14px;opacity:.7}
+.pitcher-report-inner h3{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:22px 0 8px;opacity:.8}
 .pitcher-report-inner h4{font-family:var(--FM);font-size:12px;font-weight:600;color:var(--ink);margin:14px 0 6px;letter-spacing:.04em}
 .pr-standfirst{font-family:var(--FS);font-size:15px;color:var(--ink);line-height:1.75;font-style:italic;margin:10px 0 16px;padding-left:14px;border-left:2px solid var(--gold)}
 /* Verdict strip */
@@ -14922,9 +14923,16 @@ html.light .mv2-name em {
 .pr-db-item{flex:1;min-width:90px;background:var(--bg2);padding:9px 12px;font-family:var(--FM);font-size:11px;color:var(--ink2)}
 .pr-db-item strong{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px}
 /* Numbered section header */
-.pr-section-hd{display:flex;align-items:baseline;gap:12px;margin:28px 0 10px;padding-bottom:8px;border-bottom:1px solid var(--rule)}
-.pr-sec-num{font-family:var(--FM);font-size:10px;font-weight:700;color:var(--gold);letter-spacing:.14em;opacity:.7;min-width:24px}
-.pr-sec-title{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);opacity:.85}
+.pr-section-hd{display:flex;align-items:center;gap:16px;margin:40px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.pr-sec-num{font-family:var(--FM);font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.06em;opacity:.55;line-height:1;min-width:32px;flex-shrink:0}
+.pr-sec-title{font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);opacity:.8}
+/* Sidebar annotation boxes */
+.pr-aside{float:right;clear:right;width:210px;margin:6px 0 20px 28px;background:var(--bg1);border:1px solid var(--rule);border-left:2px solid rgba(196,164,74,.4);border-radius:4px;padding:14px 16px;font-size:0}
+.pr-aside-label{font-family:var(--FM);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.65;display:block;margin-bottom:8px}
+.pr-aside-body{font-family:var(--FS);font-size:11.5px;color:var(--ink2);line-height:1.65;display:block}
+.pr-aside-formula{font-family:var(--FM);font-size:10.5px;color:var(--ink);line-height:1.7;letter-spacing:.02em;display:block;margin-top:6px;padding:7px 10px;background:rgba(196,164,74,.06);border-radius:3px;white-space:pre-wrap}
+.pr-aside-note{font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.45;letter-spacing:.04em;display:block;margin-top:6px;line-height:1.6}
+@media(max-width:680px){.pr-aside{float:none;width:100%;margin:0 0 18px}}
 /* Invalidation blockquote */
 .pr-invalidation{border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.05);border-radius:4px;padding:12px 16px;margin:14px 0;font-family:var(--FM);font-size:12px;color:#f87171;line-height:1.7;letter-spacing:.03em}
 .pr-invalidation strong{color:#f87171}
@@ -16001,6 +16009,43 @@ var _pitcherUsed = false;
 var _pitcherLoading = false;
 
 /* ── Markdown renderer ───────────────────────────── */
+function pitcherAside(secNum){
+  var asides = {
+    '01': ['SCENARIO FRAMEWORK',
+      'Three scenarios anchored to a falsifiable thesis trigger, not a price target.',
+      'Prob-weighted EV\n= Σ (Pᵢ × EVᵢ)\n\nWin/Loss ratio\n= Bull upside ÷ Bear downside\n\nTarget: ratio > 2×',
+      'A 3:1 W/L ratio at equal probability implies positive EV even when wrong more often than right.'],
+    '05': ['WACC FORMULA',
+      'Cost of capital built from first principles via CAPM — no Bloomberg default.',
+      'WACC = (E/V)·Re + (D/V)·Rd·(1−T)\n\nRe = Rf + β·(ERP + size + CRP)\n\nDamodaran ERP: 5.5%',
+      'Size premium added for small-caps (<$2B). Country risk premium (CRP) for EM/frontier markets.'],
+    '06': ['DCF MECHANICS',
+      'Intrinsic value is the present value of all future free cash flows.',
+      'V = Σ FCFₜ/(1+WACC)ᵗ\n  + TV/(1+WACC)ⁿ\n\nTV = FCFₙ·(1+g) / (WACC−g)',
+      'Terminal value typically represents 60–80% of IV. Small WACC moves dominate — see sensitivity matrix.'],
+    '07': ['SENSITIVITY READ',
+      'Each cell is intrinsic value under a WACC × exit-multiple combination.',
+      'Read diagonally (top-right → bottom-left): the "bear to bull" path. Centre cell = base case.',
+      'Cluster of cells above current price = margin of safety. Cluster below = priced for perfection.'],
+    '08': ['VALUATION BLEND',
+      'No single multiple is definitive. A weighted blend dampens model-specific noise.',
+      'DCF     50%\nEV/EBITDA 25%\nP/E      15%\nP/S      10%',
+      'Weights shift: DCF falls to 30% for pre-profit companies; P/S rises. Peer discount applied for quality gap.'],
+    '11': ['REVERSE DCF',
+      'Instead of asking "what is it worth?", ask "what must be true for the price to be fair?"',
+      'Solve for g where:\nP = Σ FCFₜ/(1+WACC)ᵗ\n  + TV/(1+WACC)ⁿ\n\ng = implied growth rate',
+      'If implied g > consensus or historical base rate, the market is pricing in an optimistic scenario.']
+  };
+  var a = asides[secNum];
+  if(!a) return '';
+  return '<aside class="pr-aside">' +
+    '<span class="pr-aside-label">'+a[0]+'</span>' +
+    '<span class="pr-aside-body">'+a[1]+'</span>' +
+    '<span class="pr-aside-formula">'+a[2]+'</span>' +
+    '<span class="pr-aside-note">'+a[3]+'</span>' +
+    '</aside>';
+}
+
 function pitcherMd(md){
   var lines = md.split('\n');
   var out = '';
@@ -16055,6 +16100,7 @@ function pitcherMd(md){
       var numMatch = h.match(/^(\d{2})\s*[·\-]\s*(.+)/);
       if(numMatch){
         out += '<div class="pr-section-hd"><span class="pr-sec-num">'+numMatch[1]+'</span><span class="pr-sec-title">'+fmt(numMatch[2])+'</span></div>';
+        out += pitcherAside(numMatch[1]);
       } else {
         out += '<h3>'+fmt(h)+'</h3>';
       }

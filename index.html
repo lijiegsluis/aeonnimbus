@@ -15348,6 +15348,20 @@ html.light .mv2-name em {
 /* Prob-weighted EV line */
 .pr-pwev{font-family:var(--FM);font-size:12px;color:var(--ink);letter-spacing:.04em;margin:6px 0}
 .pr-pwev strong{color:var(--gold)}
+/* ── Reverse DCF square comment block ── */
+.pr-rdcf{margin:20px 0 28px;border:1px solid rgba(196,164,74,.22);background:var(--bg1);border-radius:4px;overflow:hidden}
+.pr-rdcf-hd{display:flex;align-items:center;gap:12px;padding:13px 20px;border-bottom:1px solid rgba(196,164,74,.12);background:rgba(196,164,74,.05)}
+.pr-rdcf-hd-label{font-family:var(--FM);font-size:8.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);opacity:.7}
+.pr-rdcf-hd-sub{font-family:var(--FS);font-size:11px;color:var(--ink2);opacity:.55;margin-left:auto}
+.pr-rdcf-body{padding:4px 0}
+.pr-rdcf-cond{display:grid;grid-template-columns:36px 1fr;gap:0;border-bottom:1px solid rgba(196,164,74,.07)}
+.pr-rdcf-cond:last-child{border-bottom:none}
+.pr-rdcf-n{font-family:var(--FM);font-size:18px;font-weight:700;color:var(--gold);opacity:.22;padding:16px 0 16px 20px;line-height:1;align-self:start}
+.pr-rdcf-text{padding:16px 20px 16px 14px}
+.pr-rdcf-cond-title{font-family:var(--FM);font-size:11.5px;font-weight:600;color:var(--ink);letter-spacing:.04em;margin-bottom:5px}
+.pr-rdcf-cond-body{font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.68;margin:0}
+.pr-rdcf-verdict{padding:14px 20px;border-top:1px solid rgba(196,164,74,.12);background:rgba(248,113,113,.04);font-family:var(--FM);font-size:11px;color:#f87171;letter-spacing:.04em;line-height:1.65}
+.pr-rdcf-verdict strong{color:#fca5a5}
 /* Table cell coloring */
 .pitcher-report-inner td.pr-pos{color:#4ade80;font-weight:600}
 .pitcher-report-inner td.pr-neg{color:#f87171;font-weight:600}
@@ -16845,6 +16859,13 @@ function pitcherAside(secNum){
 }
 
 function pitcherMd(md){
+  /* ── Pre-process: extract section 11 content and replace with a placeholder ── */
+  var rdcfHtml = '';
+  md = md.replace(/(### 11\s*[·\-]\s*REVERSE DCF[\s\S]*?)(?=\n### \d{2}|$)/, function(block){
+    rdcfHtml = renderRdcfBlock(block);
+    return '### 11 · REVERSE DCF\n__RDCF_PLACEHOLDER__';
+  });
+
   var lines = md.split('\n');
   var out = '';
   var inTable = false, tableFirstRow = true;
@@ -16968,12 +16989,83 @@ function pitcherMd(md){
       return;
     }
 
-    // Paragraph
+    // Paragraph / placeholder
     flush();
-    out += '<p>'+fmt(line)+'</p>';
+    if(line.trim() === '__RDCF_PLACEHOLDER__'){
+      out += rdcfHtml;
+    } else {
+      out += '<p>'+fmt(line)+'</p>';
+    }
   });
   flush();
   return out;
+}
+
+/* ── Render reverse DCF section as styled square block ── */
+function renderRdcfBlock(section){
+  /* Strip the section header line */
+  var body = section.replace(/^###[^\n]*\n/, '').trim();
+
+  /* Split conditions: numbered lines like "1." or "**1.**" or bullet "- " */
+  /* We parse condition blocks: each starts with a number+dot or bold-number */
+  var conditions = [];
+  /* Try to split on numbered items */
+  var condParts = body.split(/\n(?=\d+[.)]\s|\*\*\d+[.)]\*\*)/);
+  if(condParts.length < 2){
+    /* Fallback: split on bullet/dash */
+    condParts = body.split(/\n(?=[-*]\s)/);
+  }
+  condParts.forEach(function(part){
+    part = part.trim();
+    if(!part) return;
+    /* Extract optional bold title vs body */
+    var titleMatch = part.match(/^(?:\d+[.)]\s*|[-*]\s*|\*\*\d+[.)]\*\*\s*)(?:\*\*([^\n*]+)\*\*|([^\n]+))(.*)$/s);
+    var title = '', bodyText = part;
+    if(titleMatch){
+      title = (titleMatch[1]||titleMatch[2]||'').trim();
+      bodyText = (titleMatch[3]||'').trim();
+      /* Remove the leading number/bullet from bodyText if title is empty */
+      if(!title){
+        bodyText = part.replace(/^(?:\d+[.)]\s*|[-*]\s*|\*\*\d+[.)]\*\*\s*)/,'').trim();
+      }
+    }
+    conditions.push({title: title, body: bodyText});
+  });
+
+  /* Last paragraph after conditions — treat as the "simultaneously implausible" verdict */
+  var verdict = '';
+  /* If last condition looks like a summary (no number prefix), pull it as verdict */
+  if(conditions.length > 0){
+    var last = conditions[conditions.length-1];
+    if(!last.title && /simultaneous|all.*hold|together|therefore|conclusion|each.*imply|imply/i.test(last.body)){
+      verdict = last.body;
+      conditions = conditions.slice(0,-1);
+    }
+  }
+
+  var condHtml = conditions.map(function(c, i){
+    return '<div class="pr-rdcf-cond">'+
+      '<div class="pr-rdcf-n">'+(i+1)+'</div>'+
+      '<div class="pr-rdcf-text">'+
+        (c.title ? '<div class="pr-rdcf-cond-title">'+fmt(c.title)+'</div>' : '')+
+        '<p class="pr-rdcf-cond-body">'+fmt(c.body.replace(/\n/g,' '))+'</p>'+
+      '</div>'+
+    '</div>';
+  }).join('');
+
+  var verdictHtml = verdict ?
+    '<div class="pr-rdcf-verdict">'+
+      '<strong>Simultaneous probability:</strong> '+fmt(verdict)+
+    '</div>' : '';
+
+  return '<div class="pr-rdcf">'+
+    '<div class="pr-rdcf-hd">'+
+      '<span class="pr-rdcf-hd-label">Reverse DCF</span>'+
+      '<span class="pr-rdcf-hd-sub">What must be true for current price = fair value</span>'+
+    '</div>'+
+    '<div class="pr-rdcf-body">'+condHtml+'</div>'+
+    verdictHtml+
+  '</div>';
 }
 
 function fmt(s){
@@ -17140,7 +17232,21 @@ Built from first principles. Never use a screener WACC.
 **QUANTIFIED IMPACT:** [Impact]
 
 ### 11 · REVERSE DCF
-What must simultaneously be true for the current price to be fair value? Show 3–4 conditions. Explain briefly why each is implausible or unlikely to hold simultaneously.
+What must simultaneously be true for the current price to be fair value? List exactly 3–4 conditions as explicitly numbered items in this format:
+
+**1. [Condition title]**
+[1–2 sentences: the specific implied assumption — revenue growth rate, margin level, multiple, etc. — and why it is implausible or historically unprecedented.]
+
+**2. [Condition title]**
+[1–2 sentences]
+
+**3. [Condition title]**
+[1–2 sentences]
+
+**4. [Condition title — optional]**
+[1–2 sentences]
+
+Close with one sentence beginning: "All of these must hold simultaneously — the probability of which is vanishingly small because…"
 
 ### 12 · RISK TABLE
 

@@ -8393,7 +8393,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tcleft"><div class="tico">AA</div><div><div class="tname">Analyst Alpha Signal</div><div class="tdesc">Consensus direction · Broker target vs price-implied · AN contrarian read · Conviction score</div></div></div>
   <div class="tcarr" id="arr-analyst">▾</div>
 </div>
-<div class="tbdy" id="tb-analyst">
+<div class="tbody" id="tb-analyst">
   <p class="aa-intro">Enter a ticker to see Wall Street consensus vs. the Aeon Nimbus contrarian signal. Powered by AI analysis of sell-side positioning.</p>
   <div class="aa-input-row">
     <input class="aa-inp" id="aa-ticker" type="text" placeholder="TICKER" maxlength="10" onkeydown="if(event.key==='Enter')aaAnalyse()">
@@ -8413,7 +8413,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tcleft"><div class="tico">TW</div><div><div class="tname">Trade Exposure</div><div class="tdesc">Revenue geography · Supply chain risk · Tariff sensitivity · War vs Peace positioning</div></div></div>
   <div class="tcarr" id="arr-tradewar">▾</div>
 </div>
-<div class="tbdy" id="tb-tradewar">
+<div class="tbody" id="tb-tradewar">
   <p class="tw-intro">Classify any stock as a Trade War beneficiary, Trade Peace beneficiary, or Domestically Insulated based on revenue geography and supply chain dependencies.</p>
   <div class="tw-input-row">
     <input class="tw-inp" id="tw-ticker" type="text" placeholder="TICKER" maxlength="10" onkeydown="if(event.key==='Enter')twClassify()">
@@ -17602,8 +17602,9 @@ window.aaAnalyse = async function(){
   try{
     var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:512}})});
     var d=await r.json();
-    var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text;
-    txt=txt.replace(/```json?|```/g,'').trim();
+    var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
+    txt=txt.replace(/```json[\s\S]*?```|```[\s\S]*?```/g,function(m){return m.replace(/```json?|```/g,'');});
+    var m=txt.match(/\{[\s\S]*\}/); txt=m?m[0]:txt.trim();
     var j=JSON.parse(txt);
     loading.classList.remove('on');
     var sigCls=j.contrarian.signal==='BULLISH_CONTRARIAN'?'aa-signal-bull':j.contrarian.signal==='BEARISH_CONTRARIAN'?'aa-signal-bear':'aa-signal-conf';
@@ -17620,7 +17621,7 @@ window.aaAnalyse = async function(){
       '<div class="aa-risk-box">⚠ Key risk: '+j.key_risk+'</div>';
   }catch(e){
     loading.classList.remove('on');
-    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to fetch analysis. Try again.</div>';
+    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to fetch analysis — '+e.message+'. Try again.</div>';
   }
 };
 
@@ -17636,8 +17637,9 @@ window.twClassify = async function(){
   try{
     var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:512}})});
     var d=await r.json();
-    var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text;
-    txt=txt.replace(/```json?|```/g,'').trim();
+    var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
+    txt=txt.replace(/```json[\s\S]*?```|```[\s\S]*?```/g,function(m){return m.replace(/```json?|```/g,'');});
+    var m=txt.match(/\{[\s\S]*\}/); txt=m?m[0]:txt.trim();
     var j=JSON.parse(txt);
     loading.classList.remove('on');
     var cls=j.classification==='TRADE_WAR'?'tw-badge-war':j.classification==='TRADE_PEACE'?'tw-badge-peace':'tw-badge-dom';
@@ -17667,7 +17669,7 @@ window.twClassify = async function(){
       '<ul class="tw-risks-list">'+risks+'</ul>';
   }catch(e){
     loading.classList.remove('on');
-    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to classify. Try again.</div>';
+    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to classify — '+e.message+'. Try again.</div>';
   }
 };
 

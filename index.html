@@ -7480,29 +7480,29 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Open Source · GitHub ↗</div>
     <div class="tgt-open">Open Tool</div>
   </div>
-  <div class="tg-thumb" id="tgt-earnings" onclick="openToolThumb('earnings')">
-    <span class="tgt-badge">New</span>
+  <div class="tg-thumb" id="tgt-earnings" onclick="sp('markets');setTimeout(function(){mktTab('earnings',document.querySelector('.mkt-tab[onclick*=earnings]'));},220)">
+    <span class="tgt-badge">Markets</span>
     <div class="tgt-icon">ER</div>
     <div class="tgt-name">Earnings Radar</div>
     <div class="tgt-desc">Upcoming earnings · Beat probability · Implied move · Consensus EPS</div>
-    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Free · No login</div>
-    <div class="tgt-open">Open Tool</div>
+    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Opens in Markets tab</div>
+    <div class="tgt-open">Go to Markets →</div>
   </div>
-  <div class="tg-thumb" id="tgt-congress" onclick="openToolThumb('congress')">
-    <span class="tgt-badge">New</span>
+  <div class="tg-thumb" id="tgt-congress" onclick="sp('markets');setTimeout(function(){mktTab('congress',document.querySelector('.mkt-tab[onclick*=congress]'));},220)">
+    <span class="tgt-badge">Markets</span>
     <div class="tgt-icon">CT</div>
     <div class="tgt-name">Congress Tracker</div>
     <div class="tgt-desc">Political disclosures · Party breakdown · Sector clustering · Overlap alerts</div>
-    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Free · No login</div>
-    <div class="tgt-open">Open Tool</div>
+    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Opens in Markets tab</div>
+    <div class="tgt-open">Go to Markets →</div>
   </div>
-  <div class="tg-thumb" id="tgt-heatmap" onclick="openToolThumb('heatmap')">
-    <span class="tgt-badge">New</span>
+  <div class="tg-thumb" id="tgt-heatmap" onclick="sp('markets');setTimeout(function(){mktTab('heatmap',document.querySelector('.mkt-tab[onclick*=heatmap]'));},220)">
+    <span class="tgt-badge">Markets</span>
     <div class="tgt-icon">SH</div>
-    <div class="tgt-name">Sector Heatmap</div>
-    <div class="tgt-desc">11 GICS sectors · Relative performance · Macro regime overlay · Factor tilts</div>
-    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Free · No login</div>
-    <div class="tgt-open">Open Tool</div>
+    <div class="tgt-name">S&amp;P 500 Heatmap</div>
+    <div class="tgt-desc">Individual stocks · Squarified treemap · Sector filter · 1D / 1W / 1M / YTD</div>
+    <div style="font-family:var(--FM);font-size:7.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--g2);margin-top:auto;padding-top:8px">Opens in Markets tab</div>
+    <div class="tgt-open">Go to Markets →</div>
   </div>
   <div class="tg-thumb" id="tgt-analyst" onclick="openToolThumb('analyst')">
     <span class="tgt-badge">New</span>
@@ -8393,15 +8393,15 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tcleft"><div class="tico">AA</div><div><div class="tname">Analyst Alpha Signal</div><div class="tdesc">Consensus direction · Broker target vs price-implied · AN contrarian read · Conviction score</div></div></div>
   <div class="tcarr" id="arr-analyst">▾</div>
 </div>
-<div class="tbdy" id="tbdy-analyst">
+<div class="tbdy" id="tb-analyst">
   <p class="aa-intro">Enter a ticker to see Wall Street consensus vs. the Aeon Nimbus contrarian signal. Powered by AI analysis of sell-side positioning.</p>
   <div class="aa-input-row">
     <input class="aa-inp" id="aa-ticker" type="text" placeholder="TICKER" maxlength="10" onkeydown="if(event.key==='Enter')aaAnalyse()">
     <button class="aa-btn" onclick="aaAnalyse()">Analyse Consensus</button>
   </div>
   <div class="aa-loading" id="aa-loading">
-    <div class="pitcher-an-logo" style="width:32px;height:32px;animation:spin 1.2s linear infinite"></div>
-    <div style="font-family:var(--FM);font-size:10px;letter-spacing:.12em;color:var(--gold);opacity:.6">Analysing consensus…</div>
+    <div style="font-family:var(--FM);font-size:20px;font-weight:700;letter-spacing:.16em;color:var(--gold);animation:pitcherPulse 2s ease-in-out infinite">AA</div>
+    <div style="font-family:var(--FM);font-size:10px;letter-spacing:.12em;color:var(--gold);opacity:.5;margin-top:6px">Analysing consensus…</div>
   </div>
   <div id="aa-result"></div>
 </div>
@@ -8413,15 +8413,15 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tcleft"><div class="tico">TW</div><div><div class="tname">Trade Exposure</div><div class="tdesc">Revenue geography · Supply chain risk · Tariff sensitivity · War vs Peace positioning</div></div></div>
   <div class="tcarr" id="arr-tradewar">▾</div>
 </div>
-<div class="tbdy" id="tbdy-tradewar">
+<div class="tbdy" id="tb-tradewar">
   <p class="tw-intro">Classify any stock as a Trade War beneficiary, Trade Peace beneficiary, or Domestically Insulated based on revenue geography and supply chain dependencies.</p>
   <div class="tw-input-row">
     <input class="tw-inp" id="tw-ticker" type="text" placeholder="TICKER" maxlength="10" onkeydown="if(event.key==='Enter')twClassify()">
     <button class="tw-btn" onclick="twClassify()">Classify</button>
   </div>
   <div class="tw-loading" id="tw-loading">
-    <div class="pitcher-an-logo" style="width:32px;height:32px;animation:spin 1.2s linear infinite"></div>
-    <div style="font-family:var(--FM);font-size:10px;letter-spacing:.12em;color:var(--gold);opacity:.6">Classifying trade exposure…</div>
+    <div style="font-family:var(--FM);font-size:20px;font-weight:700;letter-spacing:.16em;color:var(--gold);animation:pitcherPulse 2s ease-in-out infinite">TW</div>
+    <div style="font-family:var(--FM);font-size:10px;letter-spacing:.12em;color:var(--gold);opacity:.5;margin-top:6px">Classifying trade exposure…</div>
   </div>
   <div id="tw-result"></div>
 </div>
@@ -10035,7 +10035,7 @@ function openToolThumb(id){
     return;
   }
   // Close all other panels first
-  ['quant','dcf','port','size','corr','idea'].forEach(function(tid){
+  ['quant','dcf','port','size','corr','idea','sotp','analyst','tradewar'].forEach(function(tid){
     const b = document.getElementById('tb-' + tid);
     if(b && tid !== id) b.classList.remove('on');
   });
@@ -15258,79 +15258,85 @@ html.light .mv2-name em {
 }
 
 /* ── AI Pitcher ─────────────────────────────────── */
-.pitcher-wrap{max-width:980px;margin:0 auto;padding:60px 32px 100px}
-.pitcher-header{text-align:center;padding-bottom:48px}
-.pitcher-header h2{font-family:var(--FM);font-size:clamp(22px,3vw,32px);font-weight:600;letter-spacing:.05em;color:var(--ink);margin:0 0 10px}
-.pitcher-header p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;max-width:520px;margin:0 auto}
-.pitcher-chat-box{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:28px 28px 20px;margin-bottom:12px}
-.pitcher-chat-label{font-family:var(--FM);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);opacity:.7;margin-bottom:12px}
-.pitcher-input-row{display:flex;gap:10px;align-items:flex-end}
-.pitcher-ticker-inp{flex:1;font-family:var(--FM);font-size:18px;font-weight:600;background:transparent;border:none;border-bottom:1px solid var(--rule);color:var(--ink);padding:8px 0;outline:none;letter-spacing:.08em;text-transform:uppercase}
-.pitcher-ticker-inp::placeholder{font-size:14px;font-weight:400;letter-spacing:.04em;text-transform:none;opacity:.3}
+/* ═══ PITCHER PAGE ═══════════════════════════════ */
+.pitcher-wrap{max-width:960px;margin:0 auto;padding:48px 28px 100px}
+/* Input card */
+.pitcher-chat-box{border:1px solid var(--rule);border-left:3px solid var(--gold);border-radius:0 6px 6px 0;padding:28px 28px 22px;margin-bottom:16px;background:var(--bg2);position:relative}
+.pitcher-chat-box::before{content:'PITCH AN IDEA';font-family:var(--FM);font-size:7px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.55;position:absolute;top:14px;left:20px}
+.pitcher-chat-label{display:none}
+.pitcher-input-row{display:flex;gap:10px;align-items:flex-end;padding-top:18px}
+.pitcher-ticker-inp{flex:1;font-family:var(--FM);font-size:20px;font-weight:700;background:transparent;border:none;border-bottom:2px solid var(--rule);color:var(--ink);padding:6px 0 10px;outline:none;letter-spacing:.1em;text-transform:uppercase;transition:border-color .18s}
+.pitcher-ticker-inp::placeholder{font-size:14px;font-weight:400;letter-spacing:.04em;text-transform:none;opacity:.25;color:var(--ink2)}
 .pitcher-ticker-inp:focus{border-bottom-color:var(--gold)}
-.pitcher-go-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:10px 22px;border-radius:4px;cursor:pointer;font-weight:700;transition:opacity .2s,transform .15s;white-space:nowrap}
-.pitcher-go-btn:hover{opacity:.88;transform:translateY(-1px)}
-.pitcher-go-btn:disabled{opacity:.35;cursor:default;transform:none}
-.pitcher-context-inp{width:100%;font-family:var(--FS);font-size:13px;background:transparent;border:none;border-top:1px solid var(--rule);color:var(--ink);padding:14px 0 0;outline:none;resize:none;line-height:1.6;margin-top:14px}
-.pitcher-context-inp::placeholder{color:var(--ink2);opacity:.35;font-style:italic}
+.pitcher-go-btn{font-family:var(--FM);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:11px 26px;border-radius:3px;cursor:pointer;font-weight:700;transition:opacity .18s,box-shadow .18s;white-space:nowrap;box-shadow:0 0 0 transparent}
+.pitcher-go-btn:hover{opacity:.9;box-shadow:0 4px 20px rgba(196,164,74,.3)}
+.pitcher-go-btn:disabled{opacity:.3;cursor:default;box-shadow:none}
+.pitcher-context-inp{width:100%;font-family:var(--FS);font-size:13px;background:transparent;border:none;border-top:1px solid var(--rule);color:var(--ink2);padding:14px 0 0;outline:none;resize:none;line-height:1.65;margin-top:16px;box-sizing:border-box}
+.pitcher-context-inp::placeholder{color:var(--ink2);opacity:.3;font-style:italic}
+.pitcher-peers-row{display:flex;gap:10px;align-items:flex-end;border-top:1px solid var(--rule);padding-top:14px;margin-top:14px}
+.pitcher-peers-label{font-family:var(--FM);font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink2);opacity:.4;margin-bottom:6px}
 /* loading */
-.pitcher-loading{display:none;flex-direction:column;align-items:center;justify-content:center;padding:64px 32px;gap:20px}
+.pitcher-loading{display:none;flex-direction:column;align-items:center;justify-content:center;padding:72px 32px;gap:18px}
 .pitcher-loading.on{display:flex}
-.pitcher-an-logo{font-family:var(--FM);font-size:42px;font-weight:700;letter-spacing:.18em;color:var(--gold);animation:pitcherPulse 2.4s ease-in-out infinite}
-.pitcher-load-status{font-family:var(--FM);font-size:11px;letter-spacing:.1em;color:var(--ink2);opacity:.55;text-transform:uppercase;min-height:18px}
-@keyframes pitcherPulse{0%,100%{opacity:.55;text-shadow:0 0 0 transparent}50%{opacity:1;text-shadow:0 0 28px rgba(196,164,74,.55)}}
+.pitcher-an-logo{font-family:var(--FM);font-size:36px;font-weight:700;letter-spacing:.2em;color:var(--gold);animation:pitcherPulse 2.4s ease-in-out infinite;position:relative}
+.pitcher-an-logo::after{content:'';position:absolute;left:50%;bottom:-10px;transform:translateX(-50%);width:36px;height:1px;background:var(--gold);opacity:.3;animation:pitcherBar 2.4s ease-in-out infinite}
+.pitcher-load-status{font-family:var(--FM);font-size:10px;letter-spacing:.14em;color:var(--ink2);opacity:.45;text-transform:uppercase;min-height:16px}
+@keyframes pitcherPulse{0%,100%{opacity:.45;text-shadow:none}50%{opacity:1;text-shadow:0 0 32px rgba(196,164,74,.5)}}
+@keyframes pitcherBar{0%,100%{width:20px;opacity:.2}50%{width:52px;opacity:.5}}
 /* report */
 .pitcher-report{display:none}
 .pitcher-report.on{display:block}
-.pitcher-report-inner{background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:44px 44px 36px;margin-bottom:20px;overflow:hidden}
-.pitcher-report-inner h1{font-family:var(--FM);font-size:22px;font-weight:700;letter-spacing:.04em;color:var(--ink);margin:0 0 6px;border-bottom:1px solid var(--rule);padding-bottom:14px}
-.pitcher-report-inner h2{font-family:var(--FM);font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin:28px 0 10px;opacity:.85}
-.pitcher-report-inner h3{font-family:var(--FM);font-size:13px;font-weight:600;letter-spacing:.06em;color:var(--ink);margin:18px 0 6px}
-.pitcher-report-inner p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.75;margin:0 0 14px}
+.pitcher-report-inner{background:var(--bg2);border:1px solid var(--rule);border-radius:6px;padding:44px 48px 40px;margin-bottom:20px;overflow:hidden}
+@media(max-width:680px){.pitcher-report-inner{padding:24px 20px 24px}}
+.pitcher-report-inner p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.78;margin:0 0 14px}
 .pitcher-report-inner strong{color:var(--ink);font-weight:600}
 .pitcher-report-inner em{color:var(--gold);font-style:normal;font-weight:500}
-.pitcher-report-inner ul{list-style:none;padding:0;margin:0 0 14px}
-.pitcher-report-inner ul li{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;padding:2px 0 2px 18px;position:relative}
-.pitcher-report-inner ul li::before{content:'·';position:absolute;left:4px;color:var(--gold)}
-.pitcher-report-inner hr{border:none;border-top:1px solid var(--rule);margin:24px 0}
-.pitcher-report-inner table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:12px;margin:14px 0 20px;overflow-x:auto;display:block}
-.pitcher-report-inner th{text-align:left;padding:8px 12px;border-bottom:1px solid var(--rule);color:var(--gold);font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:10px;white-space:nowrap}
-.pitcher-report-inner td{padding:8px 12px;border-bottom:1px solid rgba(196,164,74,.06);color:var(--ink2);vertical-align:top}
+.pitcher-report-inner ul{list-style:none;padding:0;margin:0 0 16px}
+.pitcher-report-inner ul li{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.72;padding:3px 0 3px 20px;position:relative}
+.pitcher-report-inner ul li::before{content:'▸';position:absolute;left:2px;color:var(--gold);opacity:.6;font-size:10px;top:5px}
+.pitcher-report-inner hr{border:none;border-top:1px solid var(--rule);margin:28px 0}
+.pitcher-report-inner table{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:12px;margin:14px 0 22px;overflow-x:auto;display:block}
+.pitcher-report-inner th{text-align:left;padding:9px 13px;border-bottom:2px solid var(--rule);color:var(--gold);font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:9.5px;white-space:nowrap;background:rgba(196,164,74,.04)}
+.pitcher-report-inner td{padding:9px 13px;border-bottom:1px solid rgba(196,164,74,.06);color:var(--ink2);vertical-align:top;font-size:12.5px}
 .pitcher-report-inner tr:last-child td{border-bottom:none}
-.pitcher-report-inner .pitch-disc{font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.38;text-align:center;margin-top:8px;line-height:1.8;letter-spacing:.04em}
-.pitcher-action-row{display:flex;gap:12px;align-items:center;justify-content:center;margin-top:8px}
-.pitcher-again-btn{font-family:var(--FM);font-size:11px;letter-spacing:.1em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink2);padding:9px 22px;border-radius:4px;cursor:pointer;transition:border-color .2s,color .2s}
+.pitcher-report-inner tr:hover td{background:rgba(196,164,74,.025)}
+.pitcher-report-inner .pitch-disc{font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.32;text-align:center;margin-top:12px;line-height:1.9;letter-spacing:.05em}
+.pitcher-action-row{display:flex;gap:12px;align-items:center;justify-content:center;padding:8px 0 16px}
+.pitcher-again-btn{font-family:var(--FM);font-size:10px;letter-spacing:.14em;text-transform:uppercase;background:transparent;border:1px solid var(--rule);color:var(--ink2);padding:10px 26px;border-radius:3px;cursor:pointer;transition:border-color .2s,color .2s}
 .pitcher-again-btn:hover{border-color:var(--gold);color:var(--gold)}
-/* paywall modal */
-.pitcher-pw-inline{display:none;background:var(--bg2);border:1px solid var(--rule);border-radius:10px;padding:52px 44px 48px;max-width:480px;margin:32px auto 64px;text-align:center;opacity:0;transform:translateY(12px);transition:opacity .3s ease,transform .3s ease}
+/* paywall */
+.pitcher-pw-inline{display:none;background:var(--bg2);border:1px solid var(--rule);border-radius:8px;padding:52px 44px 48px;max-width:460px;margin:32px auto 64px;text-align:center;opacity:0;transform:translateY(10px);transition:opacity .3s ease,transform .3s ease}
 .pitcher-pw-inline.on{display:block}
 .pitcher-pw-inline.visible{opacity:1;transform:translateY(0)}
-.pitcher-pw-inline h3{font-family:var(--FM);font-size:18px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
-.pitcher-pw-inline p{font-family:var(--FS);font-size:14px;color:var(--ink2);line-height:1.7;margin:0 0 24px}
-.pitcher-pw-an{font-family:var(--FM);font-size:28px;font-weight:700;letter-spacing:.18em;color:var(--gold);margin-bottom:20px;display:block}
-.pitcher-pw-email{width:100%;font-family:var(--FM);font-size:13px;background:var(--bg2);border:1px solid var(--rule);color:var(--ink);padding:11px 14px;border-radius:4px;outline:none;margin-bottom:10px;box-sizing:border-box;letter-spacing:.04em}
+.pitcher-pw-inline h3{font-family:var(--FM);font-size:17px;font-weight:700;letter-spacing:.06em;color:var(--ink);margin:0 0 10px}
+.pitcher-pw-inline p{font-family:var(--FS);font-size:13.5px;color:var(--ink2);line-height:1.72;margin:0 0 24px}
+.pitcher-pw-an{font-family:var(--FM);font-size:26px;font-weight:700;letter-spacing:.2em;color:var(--gold);margin-bottom:22px;display:block}
+.pitcher-pw-email{width:100%;font-family:var(--FM);font-size:13px;background:var(--bg1);border:1px solid var(--rule);color:var(--ink);padding:11px 14px;border-radius:3px;outline:none;margin-bottom:10px;box-sizing:border-box;letter-spacing:.04em;transition:border-color .18s}
 .pitcher-pw-email:focus{border-color:var(--gold)}
-.pitcher-pw-cta{width:100%;font-family:var(--FM);font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:13px;border-radius:4px;cursor:pointer;margin-bottom:12px;transition:opacity .2s}
+.pitcher-pw-cta{width:100%;font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;background:var(--gold);color:#0e0c09;border:none;padding:14px;border-radius:3px;cursor:pointer;margin-bottom:12px;transition:opacity .18s}
 .pitcher-pw-cta:hover{opacity:.88}
-.pitcher-pw-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.45;letter-spacing:.06em}
-.pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;text-align:center;margin-top:6px;min-height:16px;letter-spacing:.04em}
-/* ── Pitcher report interior elements ── */
-.pr-masthead{font-family:var(--FM);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.55;margin-bottom:8px;padding-bottom:12px;border-bottom:2px solid var(--rule);display:flex;justify-content:space-between;align-items:center}
-.pr-masthead::after{content:'EQUITY DEEP DIVE';font-size:7px;letter-spacing:.2em;opacity:.6}
-.pitcher-report-inner h1{font-family:var(--FM);font-size:clamp(20px,3vw,28px);font-weight:700;letter-spacing:.02em;color:var(--ink);margin:8px 0 4px;line-height:1.15}
-.pitcher-report-inner h2{font-family:var(--FM);font-size:13px;font-weight:600;letter-spacing:.05em;color:var(--ink2);margin:0 0 14px;opacity:.7}
-.pitcher-report-inner h3{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:22px 0 8px;opacity:.8}
-.pitcher-report-inner h4{font-family:var(--FM);font-size:12px;font-weight:600;color:var(--ink);margin:14px 0 6px;letter-spacing:.04em}
-.pr-standfirst{font-family:var(--FS);font-size:15px;color:var(--ink);line-height:1.75;font-style:italic;margin:10px 0 16px;padding-left:14px;border-left:2px solid var(--gold)}
-/* Verdict strip */
-.pr-verdict-strip{display:flex;flex-wrap:wrap;gap:0;margin:16px 0;border:1px solid var(--rule);border-radius:4px;overflow:hidden}
-.pr-vs-item{flex:1;min-width:80px;padding:10px 14px;font-family:var(--FM);font-size:11px;font-weight:600;color:var(--ink);letter-spacing:.05em;border-right:1px solid var(--rule);background:var(--bg2)}
+.pitcher-pw-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.4;letter-spacing:.06em}
+.pitcher-err{font-family:var(--FM);font-size:11px;color:#f87171;margin-top:8px;min-height:16px;letter-spacing:.04em}
+/* ═══ REPORT ELEMENTS ═══════════════════════════ */
+.pr-masthead{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:14px;border-bottom:1px solid var(--rule)}
+.pr-masthead-left{font-family:var(--FM);font-size:8px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);opacity:.5}
+.pr-masthead-right{font-family:var(--FM);font-size:7.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);opacity:.35}
+.pitcher-report-inner h1{font-family:var(--FM);font-size:clamp(22px,3vw,30px);font-weight:700;letter-spacing:.03em;color:var(--ink);margin:8px 0 4px;line-height:1.12}
+.pitcher-report-inner h2{font-family:var(--FM);font-size:12.5px;font-weight:600;letter-spacing:.06em;color:var(--ink2);margin:2px 0 18px;opacity:.65}
+.pitcher-report-inner h3{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin:22px 0 8px;opacity:.75}
+.pitcher-report-inner h4{font-family:var(--FM);font-size:12px;font-weight:600;color:var(--ink);margin:16px 0 6px;letter-spacing:.05em}
+.pr-standfirst{font-family:var(--FS);font-size:15.5px;color:var(--ink);line-height:1.78;font-style:italic;margin:14px 0 22px;padding:16px 20px;border-left:3px solid var(--gold);background:rgba(196,164,74,.04);border-radius:0 4px 4px 0}
+/* Trade ticket (DIRECTION / ENTRY / TARGET / STOP) */
+.pr-verdict-strip{display:flex;flex-wrap:wrap;gap:0;margin:20px 0;border:1px solid var(--rule);border-radius:4px;overflow:hidden;font-size:0}
+.pr-vs-item{flex:1;min-width:80px;padding:12px 16px;font-family:var(--FM);font-size:12px;font-weight:700;color:var(--ink);letter-spacing:.06em;border-right:1px solid var(--rule);background:var(--bg1)}
 .pr-vs-item:last-child{border-right:none}
-.pr-vs-item strong{display:block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:3px}
-/* Data band */
-.pr-data-band{display:flex;flex-wrap:wrap;gap:1px;margin:12px 0 16px;background:var(--rule)}
-.pr-db-item{flex:1;min-width:90px;background:var(--bg2);padding:9px 12px;font-family:var(--FM);font-size:11px;color:var(--ink2)}
-.pr-db-item strong{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px}
+.pr-vs-item strong{display:block;font-size:8px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:500;opacity:.6;margin-bottom:4px}
+.pr-vs-long{color:#4ade80!important}
+.pr-vs-short{color:#f87171!important}
+/* Quick stats data band */
+.pr-data-band{display:flex;flex-wrap:wrap;gap:1px;margin:14px 0 18px;background:var(--rule);border-radius:4px;overflow:hidden}
+.pr-db-item{flex:1;min-width:90px;background:var(--bg1);padding:10px 14px;font-family:var(--FM);font-size:12px;color:var(--ink)}
+.pr-db-item strong{display:block;font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;opacity:.6;margin-bottom:3px}
 /* Numbered section header */
 .pr-section-hd{display:flex;align-items:center;gap:16px;margin:40px 0 0;padding:10px 0 10px;border:1px solid var(--rule);border-radius:4px 4px 0 0;padding-inline:16px;background:rgba(196,164,74,.03)}
 .pr-sec-num{font-family:var(--FM);font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.06em;opacity:.55;line-height:1;min-width:32px;flex-shrink:0}
@@ -15342,6 +15348,8 @@ html.light .mv2-name em {
 .pr-aside-formula{grid-column:3/4;grid-row:1/3;font-family:var(--FM);font-size:10px;color:var(--ink);line-height:1.75;letter-spacing:.02em;padding:14px 16px;background:rgba(196,164,74,.05);border-left:1px solid rgba(196,164,74,.1);white-space:pre;align-self:stretch;display:flex;align-items:center}
 .pr-aside-note{grid-column:2/3;grid-row:2/3;font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.4;letter-spacing:.04em;padding:0 16px 12px;line-height:1.6}
 @media(max-width:680px){.pr-aside{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}.pr-aside-label{writing-mode:horizontal-tb;transform:none;grid-column:1;grid-row:1;border-right:none;border-bottom:1px solid rgba(196,164,74,.12);padding:8px 14px}.pr-aside-body{grid-column:1;grid-row:2;padding:12px 14px 6px}.pr-aside-note{grid-column:1;grid-row:3;padding:0 14px 10px}.pr-aside-formula{grid-column:1;grid-row:4;border-left:none;border-top:1px solid rgba(196,164,74,.1);padding:10px 14px}}
+/* Markets-only tools hidden in the tools grid — they redirect to Markets tab */
+#tc-earnings, #tc-congress, #tc-heatmap { display: none !important; }
 /* Invalidation blockquote */
 .pr-invalidation{border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.05);border-radius:4px;padding:12px 16px;margin:14px 0;font-family:var(--FM);font-size:12px;color:#f87171;line-height:1.7;letter-spacing:.03em}
 .pr-invalidation strong{color:#f87171}

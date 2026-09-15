@@ -17600,7 +17600,7 @@ window.aaAnalyse = async function(){
   var key=atob('QVEuQWI4Uk42SlN4RWduemMtVmxfaFdkZk5qeGp2YVlFNklpNlR5QTNCZHVuSE1LWXFtV0E=');
   var prompt='You are a Wall Street research analyst AI. For stock ticker '+ticker+', return ONLY valid JSON (no markdown fences), like this exact format: {"consensus":{"buy_pct":65,"hold_pct":25,"sell_pct":10,"avg_pt":185,"curr_price_est":162,"implied_upside_pct":14},"accuracy":{"overall_pct":62,"notes":"Brief note on analyst track record for this stock"},"contrarian":{"signal":"BULLISH_CONTRARIAN","thesis":"One sentence on why AN contrarian read diverges from consensus","confidence":"High"},"key_risk":"Key risk to consensus in one sentence"}. Use realistic data for '+ticker+'. Signal must be one of: BULLISH_CONTRARIAN, BEARISH_CONTRARIAN, CONSENSUS_CONFIRMS.';
   try{
-    var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:512}})});
+    var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:1024}})});
     var d=await r.json();
     var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
     txt=txt.replace(/```json[\s\S]*?```|```[\s\S]*?```/g,function(m){return m.replace(/```json?|```/g,'');});
@@ -17635,7 +17635,7 @@ window.twClassify = async function(){
   var key=atob('QVEuQWI4Uk42SlN4RWduemMtVmxfaFdkZk5qeGp2YVlFNklpNlR5QTNCZHVuSE1LWXFtV0E=');
   var prompt='You are a trade policy analyst. For stock ticker '+ticker+', return ONLY valid JSON (no markdown): {"classification":"TRADE_WAR","conviction":"High","revenue_geo":{"us_pct":45,"europe_pct":20,"china_pct":18,"em_pct":12,"other_pct":5},"supply_chain":[{"item":"Key input 1","country":"Country","risk_level":"High"},{"item":"Key input 2","country":"Country","risk_level":"Medium"},{"item":"Key input 3","country":"Country","risk_level":"Low"}],"tariff_sensitivity_score":7,"outperforms_in":"OPEN_TRADE","policy_risks":["Risk 1","Risk 2","Risk 3"]}. classification: TRADE_WAR (hurt by protectionism), TRADE_PEACE (benefits from open trade), or DOMESTIC_INSULATED (minimal trade exposure). Use realistic data for '+ticker+'.';
   try{
-    var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:512}})});
+    var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:1024}})});
     var d=await r.json();
     var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
     txt=txt.replace(/```json[\s\S]*?```|```[\s\S]*?```/g,function(m){return m.replace(/```json?|```/g,'');});

@@ -15332,16 +15332,16 @@ html.light .mv2-name em {
 .pr-db-item{flex:1;min-width:90px;background:var(--bg2);padding:9px 12px;font-family:var(--FM);font-size:11px;color:var(--ink2)}
 .pr-db-item strong{display:block;font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:2px}
 /* Numbered section header */
-.pr-section-hd{display:flex;align-items:center;gap:16px;margin:40px 0 14px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.pr-section-hd{display:flex;align-items:center;gap:16px;margin:40px 0 0;padding:10px 0 10px;border:1px solid var(--rule);border-radius:4px 4px 0 0;padding-inline:16px;background:rgba(196,164,74,.03)}
 .pr-sec-num{font-family:var(--FM);font-size:20px;font-weight:700;color:var(--gold);letter-spacing:.06em;opacity:.55;line-height:1;min-width:32px;flex-shrink:0}
 .pr-sec-title{font-family:var(--FM);font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ink);opacity:.8}
-/* Sidebar annotation boxes */
-.pr-aside{float:right;clear:right;width:210px;margin:6px 0 20px 28px;background:var(--bg1);border:1px solid var(--rule);border-left:2px solid rgba(196,164,74,.4);border-radius:4px;padding:14px 16px;font-size:0}
-.pr-aside-label{font-family:var(--FM);font-size:8px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);opacity:.65;display:block;margin-bottom:8px}
-.pr-aside-body{font-family:var(--FS);font-size:11.5px;color:var(--ink2);line-height:1.65;display:block}
-.pr-aside-formula{font-family:var(--FM);font-size:10.5px;color:var(--ink);line-height:1.7;letter-spacing:.02em;display:block;margin-top:6px;padding:7px 10px;background:rgba(196,164,74,.06);border-radius:3px;white-space:pre-wrap}
-.pr-aside-note{font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.45;letter-spacing:.04em;display:block;margin-top:6px;line-height:1.6}
-@media(max-width:680px){.pr-aside{float:none;width:100%;margin:0 0 18px}}
+/* Section annotation strip — sits inline below the section header, no float */
+.pr-aside{display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:0;margin:0 0 22px;background:var(--bg1);border:1px solid var(--rule);border-top:none;border-radius:0 0 4px 4px;overflow:hidden}
+.pr-aside-label{grid-column:1/2;grid-row:1/3;font-family:var(--FM);font-size:7.5px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);opacity:.6;writing-mode:vertical-rl;transform:rotate(180deg);padding:14px 10px;border-right:1px solid rgba(196,164,74,.12);white-space:nowrap;align-self:center}
+.pr-aside-body{grid-column:2/3;grid-row:1/2;font-family:var(--FS);font-size:12px;color:var(--ink2);line-height:1.65;padding:14px 16px 8px}
+.pr-aside-formula{grid-column:3/4;grid-row:1/3;font-family:var(--FM);font-size:10px;color:var(--ink);line-height:1.75;letter-spacing:.02em;padding:14px 16px;background:rgba(196,164,74,.05);border-left:1px solid rgba(196,164,74,.1);white-space:pre;align-self:stretch;display:flex;align-items:center}
+.pr-aside-note{grid-column:2/3;grid-row:2/3;font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.4;letter-spacing:.04em;padding:0 16px 12px;line-height:1.6}
+@media(max-width:680px){.pr-aside{grid-template-columns:1fr;grid-template-rows:auto auto auto auto}.pr-aside-label{writing-mode:horizontal-tb;transform:none;grid-column:1;grid-row:1;border-right:none;border-bottom:1px solid rgba(196,164,74,.12);padding:8px 14px}.pr-aside-body{grid-column:1;grid-row:2;padding:12px 14px 6px}.pr-aside-note{grid-column:1;grid-row:3;padding:0 14px 10px}.pr-aside-formula{grid-column:1;grid-row:4;border-left:none;border-top:1px solid rgba(196,164,74,.1);padding:10px 14px}}
 /* Invalidation blockquote */
 .pr-invalidation{border:1px solid rgba(248,113,113,.3);background:rgba(248,113,113,.05);border-radius:4px;padding:12px 16px;margin:14px 0;font-family:var(--FM);font-size:12px;color:#f87171;line-height:1.7;letter-spacing:.03em}
 .pr-invalidation strong{color:#f87171}
@@ -16919,7 +16919,7 @@ function pitcherMd(md){
       var numMatch = h.match(/^(\d{2})\s*[·\-]\s*(.+)/);
       if(numMatch){
         out += '<div class="pr-section-hd"><span class="pr-sec-num">'+numMatch[1]+'</span><span class="pr-sec-title">'+fmt(numMatch[2])+'</span></div>';
-        out += pitcherAside(numMatch[1]);
+        if(numMatch[1]!=='11') out += pitcherAside(numMatch[1]);
       } else {
         out += '<h3>'+fmt(h)+'</h3>';
       }

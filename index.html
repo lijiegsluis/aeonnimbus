@@ -467,6 +467,33 @@ nav:hover{border-bottom-color:rgba(196,164,74,.22)}
 .pcv{font-family:var(--FD);font-size:24px;font-weight:700;color:var(--white);font-variant-numeric:tabular-nums}
 .pcv.g{color:#4ade80}.pcv.r{color:#f87171}.pcv.gold{color:var(--gold)}
 .pcs{font-family:var(--FM);font-size:9px;color:var(--g2);margin-top:3px}
+/* ── Performance statistics table ─────────────────── */
+.perf-tbl-wrap{margin:0 44px 0;overflow-x:auto}
+.perf-tbl{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
+.perf-tbl thead tr{background:rgba(196,154,42,.08);border-bottom:1px solid rgba(196,154,42,.18)}
+.perf-tbl th{padding:10px 16px;text-align:left;font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500;white-space:nowrap}
+.perf-tbl th:not(:first-child){text-align:right}
+.perf-tbl td{padding:11px 16px;color:var(--ink2);border-bottom:1px solid var(--line2);vertical-align:middle}
+.perf-tbl td:not(:first-child){text-align:right;font-variant-numeric:tabular-nums}
+.perf-tbl tr:last-child td{border-bottom:none}
+.perf-tbl .pt-cat{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);opacity:.5;padding-top:14px;padding-bottom:4px;background:var(--bg1)}
+.perf-tbl .pt-label{color:var(--ink);font-size:11px}
+.perf-tbl .pt-gold{color:var(--gold);font-weight:600}
+.perf-tbl .pt-green{color:#4ade80;font-weight:600}
+.perf-tbl .pt-red{color:#f87171;font-weight:600}
+.perf-tbl .pt-dim{color:var(--g2)}
+.perf-tbl-col-an{background:rgba(196,164,74,.03)}
+.perf-fn{font-size:8px;color:var(--g2);vertical-align:super;line-height:0;margin-left:1px;font-style:normal}
+.perf-defs{margin:10px 44px 0;font-family:var(--FM);font-size:9.5px;color:var(--g2);line-height:1.7;border-top:1px solid var(--line2);padding-top:12px}
+.perf-defs ol{margin:6px 0 0;padding-left:16px;color:var(--g2)}
+.perf-defs li{margin-bottom:3px}
+/* ── Worst-call callout ───────────────────────────── */
+.wc-callout{margin:20px 44px 0;border:1px solid var(--line2);border-left:3px solid var(--gold);background:rgba(196,164,74,.03);padding:16px 20px;display:grid;grid-template-columns:auto 1fr auto;gap:0 20px;align-items:center}
+.wc-label{font-family:var(--FM);font-size:7.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);opacity:.6;margin-bottom:4px}
+.wc-val{font-family:var(--FM);font-size:22px;font-weight:700;color:var(--gold);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.wc-desc{font-family:var(--FS);font-size:12px;color:var(--ink2);line-height:1.6}
+.wc-badge{font-family:var(--FM);font-size:8px;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border:1px solid rgba(74,222,128,.25);color:#4ade80;white-space:nowrap}
+@media(max-width:600px){.perf-tbl-wrap,.perf-defs,.wc-callout{margin-left:20px;margin-right:20px}.wc-callout{grid-template-columns:1fr;gap:10px}.wc-badge{width:fit-content}}
 .trwrap{padding:0 44px 60px;overflow-x:auto}
 table.tr{width:100%;border-collapse:collapse;font-family:var(--FM);font-size:11px}
 table.tr thead tr{background:rgba(196,154,42,.1);border-bottom:1px solid var(--line)}
@@ -7303,8 +7330,99 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div id="tr-sparkline-empty" style="display:none">No closed calls in this range.</div>
 </div>
 
+<!-- ══ PERFORMANCE STATISTICS ════════════════════════ -->
+<div class="tr-section-lbl">Performance Statistics</div>
+<div class="perf-tbl-wrap">
+  <table class="perf-tbl">
+    <thead>
+      <tr>
+        <th>Metric</th>
+        <th class="perf-tbl-col-an">Aeon Nimbus<br><span style="font-weight:400;opacity:.55;letter-spacing:0;text-transform:none">Apr 2026 – present</span></th>
+        <th>S&amp;P 500<sup class="perf-fn">1</sup><br><span style="font-weight:400;opacity:.55;letter-spacing:0;text-transform:none">Same period</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td colspan="3" class="pt-cat">Return</td></tr>
+      <tr>
+        <td class="pt-label">Closed calls — hit rate<sup class="perf-fn">2</sup></td>
+        <td class="perf-tbl-col-an pt-gold">100%</td>
+        <td class="pt-dim">n/a</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Average return per closed call<sup class="perf-fn">3</sup></td>
+        <td class="perf-tbl-col-an pt-gold">+34.5%</td>
+        <td class="pt-dim">n/a</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Portfolio-weighted return<sup class="perf-fn">4</sup></td>
+        <td class="perf-tbl-col-an pt-green" id="pts-wret">—</td>
+        <td class="pt-dim">+<span id="pts-spy">~18</span>%<sup class="perf-fn">5</sup></td>
+      </tr>
+      <tr><td colspan="3" class="pt-cat">Risk</td></tr>
+      <tr>
+        <td class="pt-label">Best closed call</td>
+        <td class="perf-tbl-col-an pt-green">+74.3% (ORCL)</td>
+        <td class="pt-dim">—</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Worst closed call<sup class="perf-fn">6</sup></td>
+        <td class="perf-tbl-col-an pt-gold">+4.8% (ADEA)</td>
+        <td class="pt-dim">—</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Losing trades</td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)">0 of 8</td>
+        <td class="pt-dim">—</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Avg hold period<sup class="perf-fn">7</sup></td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)">~5–8 weeks</td>
+        <td class="pt-dim">—</td>
+      </tr>
+      <tr><td colspan="3" class="pt-cat">Process</td></tr>
+      <tr>
+        <td class="pt-label">Publication timing<sup class="perf-fn">8</sup></td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)">Before outcome — every call</td>
+        <td class="pt-dim">—</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Deleted or edited calls</td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)">0</td>
+        <td class="pt-dim">—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Worst-call callout ─────────────────────────── -->
+<div class="wc-callout">
+  <div>
+    <div class="wc-label">Worst closed call</div>
+    <div class="wc-val">+4.8%</div>
+  </div>
+  <div class="wc-desc">
+    <strong>ADEA · Adeia Inc.</strong> — Published 4 May 2026, closed 4 Aug 2026 at $31.44 (entry $30.00). Thesis partially played out — licensing renewals confirmed but at a slower cadence than modelled. Position exited when the original 12-month thesis no longer justified continued holding at the new risk/reward. The floor of the track record is a positive return, not a loss — but it is recorded and disclosed without qualification.
+  </div>
+  <div class="wc-badge">Floor of track record</div>
+</div>
+
+<!-- Footnote definitions ─────────────────────── -->
+<div class="perf-defs">
+  <strong style="color:var(--ink);font-size:9.5px">Footnotes</strong>
+  <ol>
+    <li><sup>1</sup> S&amp;P 500 (SPY ETF, total return) from 8 April 2026, the date of the first Aeon Nimbus call. Approximate figure — exact benchmark return varies by calculation date.</li>
+    <li><sup>2</sup> Hit rate = closed positions with a positive return ÷ total closed positions. 8 of 8 = 100%.</li>
+    <li><sup>3</sup> Simple (unweighted) average of individual call returns. Not a TWRR or portfolio-level return.</li>
+    <li><sup>4</sup> Weighted by published position size: each call's return × its published size as % of AUM, summed across all closed calls. Simulated on a hypothetical AUM — not a live fund.</li>
+    <li><sup>5</sup> Estimated S&amp;P 500 total return Apr 2026 – Sep 2026. Displayed for context only; investors' actual benchmark returns depend on their portfolio.</li>
+    <li><sup>6</sup> Worst closed call by return. The floor is a gain, not a loss. The track record includes no losing closed positions as of September 2026.</li>
+    <li><sup>7</sup> Approximate average time from publication date to exit date across 8 closed calls. Ranges from 7 days (RDDT) to ~3 months (ADEA).</li>
+    <li><sup>8</sup> All calls published on Substack with full thesis, entry price, stop-loss, position size, and horizon before the position is exited. Timestamped and permanently on record.</li>
+  </ol>
+</div>
+
 <!-- ══ PORTFOLIO VALUE SIMULATOR ═══════════════════ -->
-<div class="tr-section-lbl">Capital Simulation</div>
+<div class="tr-section-lbl" style="padding-top:28px">Capital Simulation</div>
 <div class="sim-section" id="sim-section">
   <!-- Top: AUM input + result headline -->
   <div class="sim-hero-row">
@@ -7413,7 +7531,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tr-section-lbl" style="padding-top:20px">Methodology &amp; Disclosures</div>
 <div class="trnote" id="tr-methodology" style="margin:0 44px 0">
   <p><strong>Methodology:</strong> Every call is published on Substack with entry price, stop-loss, position size, and full thesis — before the outcome is known. Returns are calculated from the published entry price to exit price. Open P&amp;L uses live prices. S&amp;P 500 benchmark starts from 08 Apr 2026, the date of the first call. All positions, including losses, remain on the record and are never edited or deleted.</p>
-  <p style="margin-top:10px;font-style:normal;color:var(--g2)">&#9888;&nbsp; A 100% hit rate carries a caveat: six trades closed, all closed early rather than run to full target or stop. The streak has not yet been tested by a realised loss. Treat this as a live, transparent starting point — not a mature track record.</p>
+  <p style="margin-top:10px;font-style:normal;color:var(--g2)">&#9888;&nbsp; A 100% hit rate carries a caveat: eight trades closed, none reaching a full stop-loss trigger. The worst closed call returned +4.8% (ADEA), which means the track record floor is positive — but the streak has not yet been tested by a realised loss. Treat this as a live, transparent starting point — not a mature track record.</p>
 </div>
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 </div>
@@ -13815,6 +13933,9 @@ function exportPortExcel(){
       var pct = total / aum * 100;
       pctEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
       pctEl.className = 'sim-result-pct' + (pct < 0 ? ' neg' : '');
+      // Mirror into perf stats table
+      var ptsWret = document.getElementById('pts-wret');
+      if(ptsWret){ ptsWret.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%'; ptsWret.className = 'perf-tbl-col-an' + (pct >= 0 ? ' pt-green' : ' pt-red'); }
     }
 
     // Horizontal bars — all closed, sorted by dollar contribution desc

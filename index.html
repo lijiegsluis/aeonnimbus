@@ -1172,6 +1172,12 @@ html.dark .read-time{border-color:rgba(255,255,255,.08)}
 .fx-card-ft{padding:11px 24px 14px;border-top:1px solid rgba(255,255,255,.05);display:flex;align-items:flex-start;gap:16px}
 .fx-note{font-size:11px;color:#7A7670;line-height:1.55;font-style:italic;flex:1}
 .fx-badge{display:inline-block;font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border:1px solid rgba(196,164,74,.38);color:#C4A44A;font-family:monospace;white-space:nowrap;align-self:center;flex-shrink:0}
+.fx-links{display:flex;gap:10px;flex-shrink:0}
+.fx-links a{font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;font-family:monospace;padding:6px 12px;border-radius:1px;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s}
+.fx-links a.pdf{color:#C4A44A;border:1px solid rgba(196,164,74,.38)}
+.fx-links a.pdf:hover{background:rgba(196,164,74,.08)}
+.fx-links a.dash{background:#C4A44A;color:#0C0A08;border:1px solid #C4A44A}
+.fx-links a.dash:hover{opacity:.85}
 @media(max-width:760px){
   .fx-body{grid-template-columns:1fr}
   .fx-body-r{border-left:none;border-top:1px solid rgba(0,0,0,.06);padding:12px 16px}
@@ -4363,6 +4369,11 @@ table.st tbody tr:hover td:first-child{background:rgba(196,154,42,.04)}
 .strat-card-name{font-family:var(--FM);font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--ink);margin-bottom:4px}
 .strat-card-type{font-family:var(--FS);font-size:11px;color:var(--ink3);font-style:italic;margin-bottom:14px}
 .strat-card-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+.strat-card-links{display:flex;gap:8px;margin-top:14px;padding-top:12px;border-top:1px solid var(--rule)}
+.strat-card-links a{flex:1;text-align:center;font-family:var(--FM);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:7px 8px;border-radius:2px;text-decoration:none;transition:background .15s,border-color .15s;white-space:nowrap}
+.strat-card-links a:hover{background:rgba(200,131,10,.08);border-color:rgba(200,131,10,.55)}
+.strat-card-links a.solid{background:var(--gold);color:#07070a;border-color:var(--gold)}
+.strat-card-links a.solid:hover{opacity:.85;background:var(--gold)}
 .strat-stat-v{font-family:var(--FM);font-size:15px;font-weight:700;line-height:1}
 .strat-stat-l{font-family:var(--FM);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-top:3px}
 /* Portfolio Builder */
@@ -8818,6 +8829,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.29</div><div class="strat-stat-l">Prof. Factor</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">3,163</div><div class="strat-stat-l">Trades</div></div>
       </div>
+      <div class="strat-card-links">
+        <a href="reports/usdjpy-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
+        <a href="reports/usdjpy-report.pdf" target="_blank">Full Report (PDF)</a>
+      </div>
     </div>
 
     <!-- XAU/USD -->
@@ -8843,6 +8858,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">51.2%</div><div class="strat-stat-l">Win Rate</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.22</div><div class="strat-stat-l">Prof. Factor</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,908</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+      <div class="strat-card-links">
+        <a href="reports/xauusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
+        <a href="reports/xauusd-report.pdf" target="_blank">Full Report (PDF)</a>
       </div>
     </div>
 
@@ -8870,6 +8889,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.20</div><div class="strat-stat-l">Prof. Factor</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,174</div><div class="strat-stat-l">Trades</div></div>
       </div>
+      <div class="strat-card-links">
+        <a href="reports/eurjpy-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
+        <a href="reports/eurjpy-report.pdf" target="_blank">Full Report (PDF)</a>
+      </div>
     </div>
 
     <!-- GBP/USD -->
@@ -8895,6 +8918,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">49.4%</div><div class="strat-stat-l">Win Rate</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.12</div><div class="strat-stat-l">Prof. Factor</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,037</div><div class="strat-stat-l">Trades</div></div>
+      </div>
+      <div class="strat-card-links">
+        <a href="reports/gbpusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
+        <a href="reports/gbpusd-report.pdf" target="_blank">Full Report (PDF)</a>
       </div>
     </div>
 
@@ -8922,12 +8949,16 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.18</div><div class="strat-stat-l">Prof. Factor</div></div>
         <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1,980</div><div class="strat-stat-l">Trades</div></div>
       </div>
+      <div class="strat-card-links">
+        <a href="reports/eurusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
+        <a href="reports/eurusd-report.pdf" target="_blank">Full Report (PDF)</a>
+      </div>
     </div>
 
   </div><!-- /FX cards -->
 
   <div style="padding:12px 52px 48px;margin-top:8px">
-    <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">Backtested on 99–100% real tick data (MetaTrader 5) — the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade). 12,262 combined trades across a full 12-year cycle (2013–2025) spanning COVID, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Backtested results do not guarantee future performance. Full methodology and walk-forward analysis available to qualified institutional allocators upon request.</p>
+    <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">Backtested on 99–100% real tick data (MetaTrader 5) — the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade). 12,262 combined trades across a full 12-year cycle (2013–2025) spanning COVID, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Backtested results do not guarantee future performance. Full methodology, interactive dashboards, and MetaTrader 5 Strategy Tester reports are published below and freely accessible.</p>
   </div>
 
 </div><!-- /stab-overview -->
@@ -9095,14 +9126,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="fx-teaser">
   <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
   <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
-  <div class="fx-desc">Two proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 6,071 trades. No discretionary overlay. Methodology proprietary. Full backtest data available to qualified institutional allocators upon request.</div>
+  <div class="fx-desc">Five proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99–100% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 12,262 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
 
   <!-- Combined stats strip -->
   <div class="fx-combined">
-    <div class="fx-cs"><div class="fx-cs-v">6,071</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">Both Sharpe Ratios</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">Both LR Correlations</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">99%</div><div class="fx-cs-l">Real Tick Quality</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">12,262</div><div class="fx-cs-l">Combined Trades</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">All LR Correlations</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
   </div>
 
   <div class="fx-cards">
@@ -9151,7 +9182,167 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </div>
       <div class="fx-card-ft">
         <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Statistically robust sample. Stress-tested through COVID volatility (2020) and the 2022–2023 JPY intervention cycle.</div>
+        <div class="fx-links">
+          <a href="reports/usdjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/usdjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
         <span class="fx-badge">Proprietary &middot; Compounded</span>
+      </div>
+    </div>
+
+    <!-- ── EUR/JPY CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Trend Following</span>
+          <div class="fx-pair">EUR / JPY</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">2.20</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kqual hi">Exceptional</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.90</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+            <div class="fx-hd-kqual md">Strong</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">16.35%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.68&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">48.3%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.20</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,174</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gEJ3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0,86 C32,86 65,85 97,84 C127,83 148,81 172,77 C196,72 216,64 236,52 C254,41 274,22 300,2 L300,88 L0,88 Z" fill="url(#gEJ3)"/>
+            <path d="M0,86 C32,86 65,85 97,84 C127,83 148,81 172,77 C196,72 216,64 236,52 C254,41 274,22 300,2" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Highest Sharpe of the five-pair suite despite a mid-pack win rate — the payoff asymmetry does the work. Drawdown profile is comparable to USD/JPY on a shared trend-following engine, applied to a structurally higher-carry cross. Sample spans the full 2013–2025 cycle including the JPY intervention regime.</div>
+        <div class="fx-links">
+          <a href="reports/eurjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/eurjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; Compounded</span>
+      </div>
+    </div>
+
+    <!-- ── GBP/USD CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag sys">Mean Reversion</span>
+          <div class="fx-pair">GBP / USD</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">2.31</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kqual hi">Exceptional</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.97</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+            <div class="fx-hd-kqual hi">Exceptional</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">23.76%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.67&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">49.4%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.03%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.12</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,037</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gGB3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0,86 C28,82 55,77 82,71 C108,65 130,58 154,48 C176,39 196,28 218,17 C238,8 260,2 300,0 L300,88 L0,88 Z" fill="url(#gGB3)"/>
+            <path d="M0,86 C28,82 55,77 82,71 C108,65 130,58 154,48 C176,39 196,28 218,17 C238,8 260,2 300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Highest LR Correlation and highest Sharpe of the suite, but the lowest Recovery Factor — the largest relative drawdown takes longer to recoup on a proportional-risk basis. Near coin-flip win rate is typical of a mean-reversion edge on a high-volatility major. Tested through Brexit-era and 2022 gilt-crisis volatility.</div>
+        <div class="fx-links">
+          <a href="reports/gbpusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/gbpusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 97% Real Ticks</span>
+      </div>
+    </div>
+
+    <!-- ── EUR/USD CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Trend Following</span>
+          <div class="fx-pair">EUR / USD</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">1.91</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kqual hi">Excellent</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.93</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+            <div class="fx-hd-kqual md">Strong</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">34.52%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">4.63&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">44.6%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.18</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">1,980</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gEU3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0,87 C32,87 65,86 97,85 C127,84 150,83 172,80 C196,76 214,70 236,60 C256,50 278,32 300,4 L300,88 L0,88 Z" fill="url(#gEU3)"/>
+            <path d="M0,87 C32,87 65,86 97,85 C127,84 150,83 172,80 C196,76 214,70 236,60 C256,50 278,32 300,4" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Widest relative drawdown of the suite, offset by a solid Recovery Factor and the highest tick-data fidelity available (100%). Trend-following engine on the world's most liquid pair — capacity and slippage assumptions are the most conservative of any strategy shown. Full 12-year cycle including two major ECB/Fed divergence regimes.</div>
+        <div class="fx-links">
+          <a href="reports/eurusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/eurusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 100% Real Ticks</span>
       </div>
     </div>
 
@@ -9198,13 +9389,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Smoothest equity curve of the two strategies — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the USD/JPY strategy, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold's secular bull (2018–2025) and two Fed tightening cycles.</div>
+        <div class="fx-note">Smoothest equity curve of the five-pair suite — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the trend-following pairs, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold's secular bull (2018–2025) and two Fed tightening cycles.</div>
+        <div class="fx-links">
+          <a href="reports/xauusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/xauusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
         <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
       </div>
     </div>
 
   </div>
-  <div class="fx-disclaimer">Backtested on 99% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, walk-forward analysis, and monthly P&amp;L breakdown available to qualified institutional allocators upon request. Past performance is not indicative of future results.</div>
+  <div class="fx-disclaimer">Backtested on 99–100% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, interactive dashboards, and downloadable MetaTrader 5 Strategy Tester reports are published above and freely accessible. Past performance is not indicative of future results.</div>
 </div>
 </div>
 

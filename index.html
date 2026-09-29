@@ -1136,6 +1136,37 @@ html.dark .read-time{border-color:rgba(255,255,255,.08)}
 
 /* ── FX STRATEGY TEASER — always dark section ─────────── */
 .fx-section{padding:0 52px 48px}
+/* ── Strategies: universe strip, risk/reward map, suite switcher ── */
+.su-wrap{padding:0 52px 8px}
+.su-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:18px}
+.su-kpi{background:var(--bg1);padding:16px 18px}
+.su-kpi b{display:block;font-family:var(--FD);font-size:22px;font-weight:600;color:var(--ink)}
+.su-kpi span{font-family:var(--FM);font-size:8px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink3)}
+.su-chart-card{border:1px solid var(--rule);background:var(--bg1);padding:18px 20px 14px;position:relative}
+.su-chart-head{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:flex-start}
+.su-chart-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);margin-top:6px}
+.su-legend{display:flex;gap:14px;flex-wrap:wrap;font-family:var(--FM);font-size:10px;color:var(--ink2)}
+.su-legend span{display:inline-flex;align-items:center;gap:6px}
+.su-chart{width:100%;margin-top:10px}
+.su-chart svg{display:block;width:100%;height:auto;overflow:visible}
+.su-chart .su-pt{cursor:pointer;stroke:var(--bg1);stroke-width:2}
+.su-chart .su-pt:hover,.su-chart .su-pt:focus{stroke:var(--ink);outline:none}
+.su-chart text{font-family:var(--FM);fill:var(--ink2)}
+.su-chart .su-lbl{font-size:10px;fill:var(--ink)}
+.su-tip{position:absolute;pointer-events:none;background:var(--bg3);border:1px solid var(--rule);padding:8px 10px;font-family:var(--FM);font-size:10px;color:var(--ink);line-height:1.6;z-index:5;min-width:150px}
+.su-note{font-family:var(--FM);font-size:9px;color:var(--ink3);line-height:1.7;margin:10px 0 0;max-width:900px}
+.su-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:26px 0 20px}
+.su-tab{font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink2);background:transparent;border:1px solid var(--rule);padding:10px 16px;cursor:pointer;border-radius:2px}
+.su-tab em{font-style:normal;color:var(--ink3);margin-left:6px}
+.su-tab.on{color:#000;background:var(--gold);border-color:var(--gold)}
+.su-tab.on em{color:rgba(0,0,0,.6)}
+.suite-panel{display:none}
+.suite-panel.on{display:block}
+.suite-panel .fx-section{padding-top:8px}
+:root{--su-eq:#3987e5;--su-fx:#c98500;--su-tk:#199e70}
+html.light{--su-eq:#2a78d6;--su-fx:#b37400;--su-tk:#1baf7a}
+@media(max-width:700px){.su-wrap{padding:0 20px 8px}.su-kpis{grid-template-columns:repeat(2,1fr)}.su-tab{flex:1 1 100%;text-align:left}}
+
 .fx-teaser{padding:28px;border:1px solid rgba(196,164,74,.18);background:#0C0A08;margin-top:32px;color:#D6D2C8}
 .fx-eyebrow{font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:#C4A44A;margin-bottom:8px;font-family:monospace}
 .fx-title{font-size:20px;font-weight:600;margin-bottom:6px;color:#E8E4DC}
@@ -6966,7 +6997,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <li><strong>Equity Research</strong> — formal investment calls on US and international equities, with full thesis published before outcome</li>
       <li><strong>Global Macro</strong> — central bank policy analysis, monetary regime forecasting, inflation dynamics, and interest rate impact on markets</li>
       <li><strong>Geopolitical Market Analysis</strong> — how political events and power shifts translate into market dislocations</li>
-      <li><strong>Systematic Strategies</strong> — 12 proprietary quantitative models across 7 equity and 5 FX/commodity strategies, backtested on real tick data across 12+ years of full market cycles</li>
+      <li><strong>Systematic Strategies</strong> — 15 proprietary quantitative models across 7 equity, 5 FX/commodity and 3 Tenkai index/gold strategies, backtested on real tick data across 12+ years of full market cycles</li>
     </ul>
   </section>
 
@@ -8587,7 +8618,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="pghd reveal">
   <div class="pgtag" data-i18n="strats_tag">Proprietary Systematic Research</div>
   <h2 class="pgtitle">Quantitative <em>Strategies</em></h2>
-  <p class="pgsub" data-i18n="strats_sub">Twelve proprietary systematic strategies across equity, FX, and commodities — built to trade, not open-sourced. Backtested on 99–100% real tick data across 12+ years of full market cycles. Full methodology available to qualified allocators on request.</p>
+  <p class="pgsub" data-i18n="strats_sub">Fifteen proprietary systematic strategies across equities, FX, commodities and equity indices — built to trade, not open-sourced. Backtested on 99–100% real tick data across 12+ years of full market cycles. Full methodology available to qualified allocators on request.</p>
 </div>
 
 <!-- Sub-tab navigation -->
@@ -8602,6 +8633,34 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
      ───────────────────────────────────────────────────────── -->
 <div class="stab-panel on" id="stab-overview">
 
+  <!-- Strategy universe: summary, risk/reward map, suite switcher -->
+  <div class="su-wrap">
+    <div class="su-kpis">
+      <div class="su-kpi"><b>15</b><span>Strategies</span></div>
+      <div class="su-kpi"><b>3</b><span>Suites</span></div>
+      <div class="su-kpi"><b>12,913</b><span>Backtested trades · FX &amp; Tenkai</span></div>
+      <div class="su-kpi"><b>2006–2026</b><span>Longest history · Equity</span></div>
+    </div>
+    <div class="su-chart-card">
+      <div class="su-chart-head">
+        <div>
+          <div class="st-eyebrow" style="margin:0">Risk vs. risk-adjusted return · all 15 strategies</div>
+          <div class="su-chart-sub">Sharpe ratio against maximum drawdown. Up and to the left is better. Hover a point for details; click to open its suite.</div>
+        </div>
+        <div class="su-legend" id="su-legend"></div>
+      </div>
+      <div class="su-chart" id="su-chart" role="img" aria-label="Scatter chart of Sharpe ratio versus maximum drawdown for 15 strategies across three suites"></div>
+      <div class="su-tip" id="su-tip" hidden></div>
+      <p class="su-note">Backtests only. Suites differ in period (Equity 2006–2026, FX 2013–2025, Tenkai 2020–2026), data source and sizing, so compare within a suite before comparing across suites. A high Sharpe with low CAGR (Tenkai) and high CAGR with deep drawdowns (Typhon, Erebus) are different risk profiles, not better or worse ones.</p>
+    </div>
+    <div class="su-tabs" role="tablist" aria-label="Strategy suites">
+      <button class="su-tab on" role="tab" data-suite="suite-eq" onclick="showSuite('suite-eq')">Systematic Equity <em>7</em></button>
+      <button class="su-tab" role="tab" data-suite="suite-fx" onclick="showSuite('suite-fx')">FX &amp; Commodities <em>5</em></button>
+      <button class="su-tab" role="tab" data-suite="suite-tk" onclick="showSuite('suite-tk')">Tenkai · Indices &amp; Gold <em>3</em></button>
+    </div>
+  </div>
+
+<div class="suite-panel on" id="suite-eq">
   <!-- Performance table -->
   <div class="st-wrap">
     <div class="st-eyebrow">Systematic Equity Strategies · 7 Models · Backtested 2006–2026</div>
@@ -8694,79 +8753,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div><!-- /st-wrap -->
 
   <!-- Strategy cards -->
-  <div class="strat-grid">
-    <div class="strat-card">
-      <div class="strat-card-name">KAIROS</div>
-      <div class="strat-card-type">Market Neutral Long/Short · Low risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">13.10%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.18</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">15.02%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">KRONOS</div>
-      <div class="strat-card-type">Dual-Momentum Rotation · Moderate risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">20.54%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.00</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">25.43%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">AEGIS</div>
-      <div class="strat-card-type">Market Timing · Moderate risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">14.01%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.08</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">15.61%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">BOREAS</div>
-      <div class="strat-card-type">Trend Following · Moderate risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">18.17%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.04</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">23.55%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">PROTEUS</div>
-      <div class="strat-card-type">Double Layer · Moderate risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">16.83%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.07</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">18.23%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">TYPHON</div>
-      <div class="strat-card-type">Market Timing + Risk · High risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">44.79%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.12</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">42.10%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-    <div class="strat-card">
-      <div class="strat-card-name">EREBUS</div>
-      <div class="strat-card-type">Double Layer + Risk · Very High risk</div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-cagr">54.38%</div><div class="strat-stat-l">CAGR</div></div>
-        <div><div class="strat-stat-v str-sharpe">1.14</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v str-dd">48.30%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-    </div>
-  </div><!-- /strat-grid -->
+  <!-- /strat-grid -->
 
   <div style="padding:12px 52px 12px;margin-top:8px">
     <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">* Annualised figures. Historical backtested performance 2006–2026. Past performance does not guarantee future returns. These are quantitative research models, not investment advice or financial recommendations.</p>
   </div>
+</div><!-- /suite-eq -->
 
-  <!-- ── FX & COMMODITIES DIVIDER ─────────────────────── -->
-  <div style="padding:24px 52px 0"><div style="border-top:1px solid var(--rule)"></div></div>
-
+<div class="suite-panel" id="suite-fx">
   <!-- FX comparison table -->
   <div class="st-wrap" style="padding-top:32px">
     <div class="st-eyebrow">FX &amp; Commodities · Proprietary Systematic · 99–100% Real Tick Data · 2013–2025 · 12,262 Combined Trades</div>
@@ -8821,165 +8815,475 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div><!-- /fx table -->
 
   <!-- FX detail cards -->
-  <div class="strat-grid" style="padding-bottom:0">
+  <!-- /FX cards -->
+<div class="fx-section">
+<div class="fx-teaser">
+  <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
+  <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
+  <div class="fx-desc">Five proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99–100% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 12,262 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
 
-    <!-- USD/JPY -->
-    <div class="strat-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
-        <div class="strat-card-name">USD / JPY</div>
-        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
+  <!-- Combined stats strip -->
+  <div class="fx-combined">
+    <div class="fx-cs"><div class="fx-cs-v">12,262</div><div class="fx-cs-l">Combined Trades</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">All LR Correlations</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
+  </div>
+  <details class="fx-glossary" style="margin:14px 0 18px;font-family:var(--FM);font-size:10.5px;color:var(--ink2);line-height:1.7">
+    <summary style="cursor:pointer;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-size:9px">How to read these metrics</summary>
+    <div style="padding:10px 0 0">
+      <b>LR correlation</b> — correlation between the equity curve and its straight-line (linear regression) fit; 1.0 means perfectly steady growth.<br>
+      <b>Recovery factor</b> — net profit ÷ maximum drawdown; how many times over the strategy earned back its worst drawdown.<br>
+      <b>Profit factor</b> — gross profit ÷ gross loss.<br>
+      <b>Max DD (relative)</b> — largest peak-to-trough fall as a percentage of the equity peak.<br>
+      <b>Tick quality</b> — share of the backtest driven by real historical ticks rather than modelled prices.<br>
+      Sharpe ratios are as reported by the backtest engine. All figures are backtests under the fixed-% risk sizing described below, not live trading results.
+    </div>
+  </details>
+
+  <div class="fx-cards">
+
+    <!-- ── USD/JPY CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Trend Following</span>
+          <div class="fx-pair">USD / JPY</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">2.13</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.90</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
       </div>
-      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
-      <div style="margin-bottom:10px">
-        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
-          <defs><linearGradient id="gUJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,58 C25,57 50,56 80,54 C108,52 128,49 152,44 C174,39 194,31 216,21 C234,13 255,5 278,1 L280,0 L280,60 L0,60Z" fill="url(#gUJ)"/>
-          <path d="M0,58 C25,57 50,56 80,54 C108,52 128,49 152,44 C174,39 194,31 216,21 C234,13 255,5 278,1 L280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
-        </svg>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.83%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">9.68&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">39.6%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.20%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.29</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,163</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gUJ3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,86.0 L3.4,85.6 L6.8,81.8 L10.5,78.5 L14.0,74.9 L17.2,74.0 L20.3,73.9 L23.8,72.4 L27.0,71.2 L30.3,68.6 L33.4,68.2 L36.6,67.7 L39.7,67.9 L43.1,62.2 L46.4,60.6 L49.7,60.8 L52.8,60.4 L56.1,59.3 L59.7,59.6 L62.9,57.9 L66.5,59.6 L69.9,61.0 L73.3,59.2 L76.7,57.0 L80.4,57.5 L83.7,57.1 L87.3,56.7 L90.5,57.4 L93.8,57.5 L97.0,53.8 L100.2,54.4 L103.3,54.5 L106.5,54.7 L109.6,52.1 L112.9,51.0 L116.1,50.8 L119.2,49.3 L122.5,48.8 L125.6,47.4 L128.9,46.8 L132.3,45.2 L135.5,44.7 L138.9,44.8 L142.0,44.7 L145.7,43.1 L148.9,42.9 L152.0,41.4 L155.4,40.4 L159.5,36.2 L162.8,36.3 L165.9,34.2 L169.2,34.2 L172.5,32.0 L175.6,33.1 L178.9,30.7 L182.0,28.7 L185.2,27.6 L188.3,26.6 L191.6,26.2 L194.7,25.0 L197.9,24.5 L201.1,23.8 L204.6,20.5 L207.9,18.8 L211.4,17.4 L214.6,17.0 L217.8,16.6 L221.4,15.2 L224.8,14.8 L227.9,15.2 L231.2,15.3 L234.5,14.6 L237.7,13.5 L241.1,10.6 L244.3,10.1 L247.5,10.5 L250.9,8.0 L254.3,7.8 L258.1,8.2 L261.5,7.6 L265.1,8.0 L268.3,7.2 L272.0,5.1 L275.2,2.6 L278.4,3.1 L281.6,1.7 L284.7,1.0 L288.2,1.4 L291.3,1.2 L300.0,1.3 L300,88 L0,88 Z" fill="url(#gUJ3)"/>
+            <path d="M0.0,86.0 L3.4,85.6 L6.8,81.8 L10.5,78.5 L14.0,74.9 L17.2,74.0 L20.3,73.9 L23.8,72.4 L27.0,71.2 L30.3,68.6 L33.4,68.2 L36.6,67.7 L39.7,67.9 L43.1,62.2 L46.4,60.6 L49.7,60.8 L52.8,60.4 L56.1,59.3 L59.7,59.6 L62.9,57.9 L66.5,59.6 L69.9,61.0 L73.3,59.2 L76.7,57.0 L80.4,57.5 L83.7,57.1 L87.3,56.7 L90.5,57.4 L93.8,57.5 L97.0,53.8 L100.2,54.4 L103.3,54.5 L106.5,54.7 L109.6,52.1 L112.9,51.0 L116.1,50.8 L119.2,49.3 L122.5,48.8 L125.6,47.4 L128.9,46.8 L132.3,45.2 L135.5,44.7 L138.9,44.8 L142.0,44.7 L145.7,43.1 L148.9,42.9 L152.0,41.4 L155.4,40.4 L159.5,36.2 L162.8,36.3 L165.9,34.2 L169.2,34.2 L172.5,32.0 L175.6,33.1 L178.9,30.7 L182.0,28.7 L185.2,27.6 L188.3,26.6 L191.6,26.2 L194.7,25.0 L197.9,24.5 L201.1,23.8 L204.6,20.5 L207.9,18.8 L211.4,17.4 L214.6,17.0 L217.8,16.6 L221.4,15.2 L224.8,14.8 L227.9,15.2 L231.2,15.3 L234.5,14.6 L237.7,13.5 L241.1,10.6 L244.3,10.1 L247.5,10.5 L250.9,8.0 L254.3,7.8 L258.1,8.2 L261.5,7.6 L265.1,8.0 L268.3,7.2 L272.0,5.1 L275.2,2.6 L278.4,3.1 L281.6,1.7 L284.7,1.0 L288.2,1.4 L291.3,1.2 L300.0,1.3" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2026 (actual)</div>
+        </div>
       </div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-sharpe">2.13</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v" style="color:var(--ink2)">0.90</div><div class="strat-stat-l">LR Corr</div></div>
-        <div><div class="strat-stat-v str-dd">15.83%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">39.6%</div><div class="strat-stat-l">Win Rate</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.29</div><div class="strat-stat-l">Prof. Factor</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">3,163</div><div class="strat-stat-l">Trades</div></div>
-      </div>
-      <div class="strat-card-links">
-        <a href="reports/usdjpy-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
-        <a href="reports/usdjpy-report.pdf" target="_blank">Full Report (PDF)</a>
+      <div class="fx-card-ft">
+        <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Statistically robust sample. Stress-tested through COVID volatility (2020) and the 2022–2023 JPY intervention cycle.</div>
+        <div class="fx-links">
+          <a href="reports/usdjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/usdjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; Compounded</span>
       </div>
     </div>
 
-    <!-- XAU/USD -->
-    <div class="strat-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
-        <div class="strat-card-name">XAU / USD</div>
-        <span class="str-risk mod" style="flex-shrink:0">Mean Reversion</span>
+    <!-- ── EUR/JPY CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Trend Following</span>
+          <div class="fx-pair">EUR / JPY</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">2.20</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.90</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
       </div>
-      <div class="strat-card-type">Commodities · 99% Ticks · 2013–2025</div>
-      <div style="margin-bottom:10px">
-        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
-          <defs><linearGradient id="gXA" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,57 C22,56 45,55 70,53 C95,51 118,48 144,44 C168,40 190,34 214,26 C234,18 256,8 278,1 L280,0 L280,60 L0,60Z" fill="url(#gXA)"/>
-          <path d="M0,57 C22,56 45,55 70,53 C95,51 118,48 144,44 C168,40 190,34 214,26 C234,18 256,8 278,1 L280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
-        </svg>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">16.35%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.68&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">48.3%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.20</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,174</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gEJ3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,86.0 L5.3,80.7 L10.8,75.9 L14.6,74.9 L17.8,72.3 L21.1,69.4 L24.6,67.0 L28.0,67.8 L31.1,71.2 L34.0,65.4 L37.0,63.2 L40.0,59.8 L43.8,57.6 L47.7,57.0 L50.8,48.1 L53.8,50.8 L57.3,50.3 L60.9,46.7 L63.9,43.6 L67.1,45.3 L70.9,45.2 L74.6,46.4 L78.9,40.6 L82.8,42.1 L87.2,39.0 L90.5,40.7 L93.5,38.2 L96.6,32.9 L99.9,35.1 L102.9,35.1 L106.1,34.6 L109.1,34.1 L112.5,30.8 L115.6,29.1 L118.6,32.2 L121.8,30.4 L124.9,28.4 L128.2,29.4 L131.2,29.1 L134.6,27.2 L137.7,29.8 L140.8,31.6 L143.8,32.1 L146.8,35.5 L150.1,36.1 L153.2,36.8 L156.2,36.9 L159.3,36.7 L163.5,39.0 L166.8,37.6 L169.9,39.4 L172.9,32.6 L176.0,27.6 L179.2,29.6 L182.0,25.4 L185.0,25.1 L188.2,25.0 L191.3,22.8 L194.3,26.9 L197.2,25.9 L200.3,23.4 L203.3,21.9 L206.5,17.0 L211.0,17.7 L215.1,18.5 L218.4,14.7 L222.0,16.5 L225.8,12.1 L229.6,9.3 L232.9,12.6 L235.9,12.9 L239.0,11.3 L242.0,13.1 L245.4,10.5 L248.5,7.2 L251.8,6.9 L255.3,5.8 L258.6,5.9 L263.3,8.6 L266.8,10.2 L270.8,8.9 L274.9,6.7 L277.9,5.9 L281.1,3.8 L284.1,2.4 L287.3,2.8 L290.3,1.0 L293.9,2.3 L297.0,2.3 L300.0,4.7 L300,88 L0,88 Z" fill="url(#gEJ3)"/>
+            <path d="M0.0,86.0 L5.3,80.7 L10.8,75.9 L14.6,74.9 L17.8,72.3 L21.1,69.4 L24.6,67.0 L28.0,67.8 L31.1,71.2 L34.0,65.4 L37.0,63.2 L40.0,59.8 L43.8,57.6 L47.7,57.0 L50.8,48.1 L53.8,50.8 L57.3,50.3 L60.9,46.7 L63.9,43.6 L67.1,45.3 L70.9,45.2 L74.6,46.4 L78.9,40.6 L82.8,42.1 L87.2,39.0 L90.5,40.7 L93.5,38.2 L96.6,32.9 L99.9,35.1 L102.9,35.1 L106.1,34.6 L109.1,34.1 L112.5,30.8 L115.6,29.1 L118.6,32.2 L121.8,30.4 L124.9,28.4 L128.2,29.4 L131.2,29.1 L134.6,27.2 L137.7,29.8 L140.8,31.6 L143.8,32.1 L146.8,35.5 L150.1,36.1 L153.2,36.8 L156.2,36.9 L159.3,36.7 L163.5,39.0 L166.8,37.6 L169.9,39.4 L172.9,32.6 L176.0,27.6 L179.2,29.6 L182.0,25.4 L185.0,25.1 L188.2,25.0 L191.3,22.8 L194.3,26.9 L197.2,25.9 L200.3,23.4 L203.3,21.9 L206.5,17.0 L211.0,17.7 L215.1,18.5 L218.4,14.7 L222.0,16.5 L225.8,12.1 L229.6,9.3 L232.9,12.6 L235.9,12.9 L239.0,11.3 L242.0,13.1 L245.4,10.5 L248.5,7.2 L251.8,6.9 L255.3,5.8 L258.6,5.9 L263.3,8.6 L266.8,10.2 L270.8,8.9 L274.9,6.7 L277.9,5.9 L281.1,3.8 L284.1,2.4 L287.3,2.8 L290.3,1.0 L293.9,2.3 L297.0,2.3 L300.0,4.7" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2026 (actual)</div>
+        </div>
       </div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-sharpe">1.82</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v" style="color:var(--ink2)">0.96</div><div class="strat-stat-l">LR Corr</div></div>
-        <div><div class="strat-stat-v str-dd">15.54%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">51.2%</div><div class="strat-stat-l">Win Rate</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.22</div><div class="strat-stat-l">Prof. Factor</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,908</div><div class="strat-stat-l">Trades</div></div>
-      </div>
-      <div class="strat-card-links">
-        <a href="reports/xauusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
-        <a href="reports/xauusd-report.pdf" target="_blank">Full Report (PDF)</a>
-      </div>
-    </div>
-
-    <!-- EUR/JPY -->
-    <div class="strat-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
-        <div class="strat-card-name">EUR / JPY</div>
-        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
-      </div>
-      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
-      <div style="margin-bottom:10px">
-        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
-          <defs><linearGradient id="gEJ" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,58 C30,58 60,57 90,56 C118,55 138,53 160,50 C182,46 200,40 220,31 C240,22 260,10 278,2 L280,1 L280,60 L0,60Z" fill="url(#gEJ)"/>
-          <path d="M0,58 C30,58 60,57 90,56 C118,55 138,53 160,50 C182,46 200,40 220,31 C240,22 260,10 278,2 L280,1" fill="none" stroke="#C8830A" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-sharpe">2.20</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v" style="color:var(--ink2)">0.90</div><div class="strat-stat-l">LR Corr</div></div>
-        <div><div class="strat-stat-v str-dd">16.35%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">48.3%</div><div class="strat-stat-l">Win Rate</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.20</div><div class="strat-stat-l">Prof. Factor</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,174</div><div class="strat-stat-l">Trades</div></div>
-      </div>
-      <div class="strat-card-links">
-        <a href="reports/eurjpy-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
-        <a href="reports/eurjpy-report.pdf" target="_blank">Full Report (PDF)</a>
+      <div class="fx-card-ft">
+        <div class="fx-note">Highest Sharpe of the five-pair suite despite a mid-pack win rate — the payoff asymmetry does the work. Drawdown profile is comparable to USD/JPY on a shared trend-following engine, applied to a structurally higher-carry cross. Sample spans the full 2013–2025 cycle including the JPY intervention regime.</div>
+        <div class="fx-links">
+          <a href="reports/eurjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/eurjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; Compounded</span>
       </div>
     </div>
 
-    <!-- GBP/USD -->
-    <div class="strat-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
-        <div class="strat-card-name">GBP / USD</div>
-        <span class="str-risk mod" style="flex-shrink:0">Mean Reversion</span>
+    <!-- ── GBP/USD CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag sys">Mean Reversion</span>
+          <div class="fx-pair">GBP / USD</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">2.31</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.97</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
       </div>
-      <div class="strat-card-type">Foreign Exchange · 99% Ticks · 2013–2025</div>
-      <div style="margin-bottom:10px">
-        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
-          <defs><linearGradient id="gGB" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,58 C25,55 50,52 78,48 C105,44 130,39 156,33 C180,27 204,19 228,11 C248,5 264,1 280,0 L280,60 L0,60Z" fill="url(#gGB)"/>
-          <path d="M0,58 C25,55 50,52 78,48 C105,44 130,39 156,33 C180,27 204,19 228,11 C248,5 264,1 280,0" fill="none" stroke="#C8830A" stroke-width="1.5"/>
-        </svg>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">23.76%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.67&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">49.4%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.03%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.12</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,037</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gGB3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,85.3 L3.5,84.5 L6.9,86.0 L10.0,84.4 L13.2,81.9 L16.7,80.6 L20.0,72.2 L23.3,70.3 L26.8,68.4 L30.3,65.6 L33.7,63.5 L37.1,63.3 L41.2,63.6 L44.5,61.1 L47.9,58.1 L51.3,60.1 L54.5,56.2 L58.1,58.1 L61.6,57.7 L65.0,57.8 L68.4,52.1 L71.6,47.3 L75.0,43.7 L78.5,44.1 L81.8,42.3 L85.1,41.6 L88.2,38.7 L91.6,41.4 L94.8,42.5 L98.1,41.1 L101.3,41.4 L104.9,42.6 L108.3,44.5 L111.4,43.4 L114.5,41.9 L117.8,40.0 L121.4,36.3 L124.9,34.7 L128.3,36.2 L131.9,29.3 L135.0,26.6 L139.1,24.2 L142.5,23.2 L145.7,23.4 L149.0,23.9 L152.2,25.6 L155.6,26.7 L159.2,26.4 L162.6,27.9 L165.9,26.3 L169.2,28.4 L172.5,29.0 L175.8,30.3 L179.0,27.1 L182.3,24.8 L185.5,27.1 L188.8,25.8 L192.1,28.4 L195.7,29.0 L199.1,25.8 L202.2,22.1 L206.6,15.6 L210.1,13.4 L213.7,15.3 L217.1,12.2 L220.4,15.4 L223.8,9.1 L226.9,10.3 L230.2,8.6 L233.4,6.9 L236.8,6.3 L239.9,7.8 L243.3,4.9 L246.4,5.2 L249.5,2.9 L252.8,3.6 L256.1,1.0 L259.6,1.2 L263.0,3.4 L266.5,4.1 L269.7,2.9 L273.1,3.6 L276.5,6.0 L279.8,5.0 L283.1,4.8 L286.6,5.8 L290.1,8.5 L293.4,10.2 L296.8,10.3 L300.0,9.0 L300,88 L0,88 Z" fill="url(#gGB3)"/>
+            <path d="M0.0,85.3 L3.5,84.5 L6.9,86.0 L10.0,84.4 L13.2,81.9 L16.7,80.6 L20.0,72.2 L23.3,70.3 L26.8,68.4 L30.3,65.6 L33.7,63.5 L37.1,63.3 L41.2,63.6 L44.5,61.1 L47.9,58.1 L51.3,60.1 L54.5,56.2 L58.1,58.1 L61.6,57.7 L65.0,57.8 L68.4,52.1 L71.6,47.3 L75.0,43.7 L78.5,44.1 L81.8,42.3 L85.1,41.6 L88.2,38.7 L91.6,41.4 L94.8,42.5 L98.1,41.1 L101.3,41.4 L104.9,42.6 L108.3,44.5 L111.4,43.4 L114.5,41.9 L117.8,40.0 L121.4,36.3 L124.9,34.7 L128.3,36.2 L131.9,29.3 L135.0,26.6 L139.1,24.2 L142.5,23.2 L145.7,23.4 L149.0,23.9 L152.2,25.6 L155.6,26.7 L159.2,26.4 L162.6,27.9 L165.9,26.3 L169.2,28.4 L172.5,29.0 L175.8,30.3 L179.0,27.1 L182.3,24.8 L185.5,27.1 L188.8,25.8 L192.1,28.4 L195.7,29.0 L199.1,25.8 L202.2,22.1 L206.6,15.6 L210.1,13.4 L213.7,15.3 L217.1,12.2 L220.4,15.4 L223.8,9.1 L226.9,10.3 L230.2,8.6 L233.4,6.9 L236.8,6.3 L239.9,7.8 L243.3,4.9 L246.4,5.2 L249.5,2.9 L252.8,3.6 L256.1,1.0 L259.6,1.2 L263.0,3.4 L266.5,4.1 L269.7,2.9 L273.1,3.6 L276.5,6.0 L279.8,5.0 L283.1,4.8 L286.6,5.8 L290.1,8.5 L293.4,10.2 L296.8,10.3 L300.0,9.0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2015&ndash;2026 (actual)</div>
+        </div>
       </div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-sharpe">2.31</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v" style="color:var(--ink2)">0.97</div><div class="strat-stat-l">LR Corr</div></div>
-        <div><div class="strat-stat-v str-dd">23.76%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">49.4%</div><div class="strat-stat-l">Win Rate</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.12</div><div class="strat-stat-l">Prof. Factor</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">2,037</div><div class="strat-stat-l">Trades</div></div>
-      </div>
-      <div class="strat-card-links">
-        <a href="reports/gbpusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
-        <a href="reports/gbpusd-report.pdf" target="_blank">Full Report (PDF)</a>
-      </div>
-    </div>
-
-    <!-- EUR/USD -->
-    <div class="strat-card">
-      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:4px">
-        <div class="strat-card-name">EUR / USD</div>
-        <span class="str-risk low" style="flex-shrink:0">Trend Following</span>
-      </div>
-      <div class="strat-card-type">Foreign Exchange · 100% Ticks · 2013–2025</div>
-      <div style="margin-bottom:10px">
-        <svg viewBox="0 0 280 60" preserveAspectRatio="none" style="width:100%;height:48px;display:block">
-          <defs><linearGradient id="gEU" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#C8830A" stop-opacity=".25"/><stop offset="100%" stop-color="#C8830A" stop-opacity="0"/></linearGradient></defs>
-          <path d="M0,59 C30,59 60,58 90,57 C118,56 142,55 165,52 C188,49 206,44 224,36 C242,27 260,14 278,2 L280,1 L280,60 L0,60Z" fill="url(#gEU)"/>
-          <path d="M0,59 C30,59 60,58 90,57 C118,56 142,55 165,52 C188,49 206,44 224,36 C242,27 260,14 278,2 L280,1" fill="none" stroke="#C8830A" stroke-width="1.5"/>
-        </svg>
-      </div>
-      <div class="strat-card-stats">
-        <div><div class="strat-stat-v str-sharpe">1.91</div><div class="strat-stat-l">Sharpe</div></div>
-        <div><div class="strat-stat-v" style="color:var(--ink2)">0.93</div><div class="strat-stat-l">LR Corr</div></div>
-        <div><div class="strat-stat-v str-dd">34.52%</div><div class="strat-stat-l">Max DD</div></div>
-      </div>
-      <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--rule);display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">44.6%</div><div class="strat-stat-l">Win Rate</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1.18</div><div class="strat-stat-l">Prof. Factor</div></div>
-        <div><div class="strat-stat-v" style="font-size:12px;color:var(--ink2)">1,980</div><div class="strat-stat-l">Trades</div></div>
-      </div>
-      <div class="strat-card-links">
-        <a href="reports/eurusd-dashboard.html" target="_blank" class="solid">Interactive Dashboard →</a>
-        <a href="reports/eurusd-report.pdf" target="_blank">Full Report (PDF)</a>
+      <div class="fx-card-ft">
+        <div class="fx-note">Highest LR Correlation and highest Sharpe of the suite, but the lowest Recovery Factor — the largest relative drawdown takes longer to recoup on a proportional-risk basis. Near coin-flip win rate is typical of a mean-reversion edge on a high-volatility major. Tested through Brexit-era and 2022 gilt-crisis volatility.</div>
+        <div class="fx-links">
+          <a href="reports/gbpusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/gbpusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 97% Real Ticks</span>
       </div>
     </div>
 
-  </div><!-- /FX cards -->
+    <!-- ── EUR/USD CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Trend Following</span>
+          <div class="fx-pair">EUR / USD</div>
+          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">1.91</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.93</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">34.52%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">4.63&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">44.6%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.18</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">1,980</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gEU3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,82.7 L4.3,82.3 L6.6,77.3 L10.3,79.0 L12.8,78.3 L15.1,81.0 L17.8,79.2 L20.7,79.1 L23.7,78.1 L27.0,80.3 L30.2,84.2 L33.6,85.7 L37.5,86.0 L40.5,77.7 L43.7,75.1 L48.1,69.5 L58.8,63.0 L65.2,59.9 L70.4,54.8 L73.3,53.7 L76.1,51.9 L79.8,52.2 L82.1,51.2 L84.9,48.5 L89.6,48.2 L93.6,50.8 L95.8,49.1 L98.7,47.4 L101.4,41.4 L104.7,38.9 L107.7,42.1 L110.0,37.4 L112.5,37.2 L116.8,36.6 L119.4,33.5 L123.7,33.6 L126.9,34.0 L130.0,33.8 L133.0,30.6 L135.6,31.0 L137.9,32.7 L140.6,35.7 L143.3,39.3 L145.9,38.2 L149.2,40.6 L151.6,36.6 L155.5,39.4 L159.9,36.7 L165.3,38.8 L169.2,40.0 L172.8,42.5 L175.1,36.2 L178.4,36.6 L181.2,32.8 L184.1,29.2 L186.3,31.7 L188.9,28.5 L191.4,27.7 L194.4,30.0 L196.7,31.1 L199.4,28.4 L201.7,30.2 L204.4,30.5 L209.7,29.9 L217.2,29.0 L224.5,29.3 L228.2,28.7 L231.6,21.8 L234.3,19.7 L237.6,19.1 L240.3,21.9 L242.7,12.3 L245.3,7.7 L247.9,4.9 L251.5,7.3 L253.9,7.5 L257.0,8.5 L260.0,6.7 L262.9,6.0 L266.0,6.3 L270.3,6.9 L273.6,7.4 L280.1,6.1 L283.2,2.9 L285.8,1.2 L288.4,1.0 L290.8,3.4 L293.9,4.2 L297.7,4.6 L300.0,4.2 L300,88 L0,88 Z" fill="url(#gEU3)"/>
+            <path d="M0.0,82.7 L4.3,82.3 L6.6,77.3 L10.3,79.0 L12.8,78.3 L15.1,81.0 L17.8,79.2 L20.7,79.1 L23.7,78.1 L27.0,80.3 L30.2,84.2 L33.6,85.7 L37.5,86.0 L40.5,77.7 L43.7,75.1 L48.1,69.5 L58.8,63.0 L65.2,59.9 L70.4,54.8 L73.3,53.7 L76.1,51.9 L79.8,52.2 L82.1,51.2 L84.9,48.5 L89.6,48.2 L93.6,50.8 L95.8,49.1 L98.7,47.4 L101.4,41.4 L104.7,38.9 L107.7,42.1 L110.0,37.4 L112.5,37.2 L116.8,36.6 L119.4,33.5 L123.7,33.6 L126.9,34.0 L130.0,33.8 L133.0,30.6 L135.6,31.0 L137.9,32.7 L140.6,35.7 L143.3,39.3 L145.9,38.2 L149.2,40.6 L151.6,36.6 L155.5,39.4 L159.9,36.7 L165.3,38.8 L169.2,40.0 L172.8,42.5 L175.1,36.2 L178.4,36.6 L181.2,32.8 L184.1,29.2 L186.3,31.7 L188.9,28.5 L191.4,27.7 L194.4,30.0 L196.7,31.1 L199.4,28.4 L201.7,30.2 L204.4,30.5 L209.7,29.9 L217.2,29.0 L224.5,29.3 L228.2,28.7 L231.6,21.8 L234.3,19.7 L237.6,19.1 L240.3,21.9 L242.7,12.3 L245.3,7.7 L247.9,4.9 L251.5,7.3 L253.9,7.5 L257.0,8.5 L260.0,6.7 L262.9,6.0 L266.0,6.3 L270.3,6.9 L273.6,7.4 L280.1,6.1 L283.2,2.9 L285.8,1.2 L288.4,1.0 L290.8,3.4 L293.9,4.2 L297.7,4.6 L300.0,4.2" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2026 (actual)</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Widest relative drawdown of the suite, offset by a solid Recovery Factor and the highest tick-data fidelity available (100%). Trend-following engine on the world's most liquid pair — capacity and slippage assumptions are the most conservative of any strategy shown. Full 12-year cycle including two major ECB/Fed divergence regimes.</div>
+        <div class="fx-links">
+          <a href="reports/eurusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/eurusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 100% Real Ticks</span>
+      </div>
+    </div>
 
-  <div style="padding:12px 52px 48px;margin-top:8px">
-    <p style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em;line-height:1.7">Backtested on 99–100% real tick data (MetaTrader 5) — the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade). 12,262 combined trades across a full 12-year cycle (2013–2025) spanning COVID, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Backtested results do not guarantee future performance. Full methodology, interactive dashboards, and MetaTrader 5 Strategy Tester reports are published below and freely accessible.</p>
+    <!-- ── XAU/USD CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag sys">Mean Reversion</span>
+          <div class="fx-pair">XAU / USD</div>
+          <div class="fx-inst">Commodities &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">1.82</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.96</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.54%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.86&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">51.2%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.22</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,908</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gXA3" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,86.0 L4.4,83.9 L8.8,83.5 L12.5,78.4 L15.9,76.1 L19.1,78.3 L22.1,78.9 L25.5,78.3 L28.7,79.3 L31.9,80.0 L35.2,78.1 L38.6,78.7 L41.4,78.3 L44.6,76.2 L47.7,72.6 L50.8,77.4 L54.0,70.6 L57.5,70.7 L60.9,69.5 L63.9,68.8 L67.1,66.0 L70.4,62.4 L73.9,58.5 L77.0,54.5 L80.3,52.2 L83.3,54.5 L86.4,53.3 L89.7,52.4 L92.9,54.3 L96.3,55.7 L99.5,54.0 L102.6,53.9 L105.6,53.3 L109.1,52.3 L113.0,50.8 L116.3,51.8 L119.4,51.8 L122.8,52.4 L125.9,50.9 L129.0,51.1 L132.1,47.8 L135.9,45.8 L139.1,44.8 L142.5,45.2 L146.4,46.5 L149.8,47.9 L152.9,49.8 L157.1,49.0 L160.5,46.4 L164.4,44.6 L167.4,45.5 L171.2,42.1 L174.3,40.7 L177.3,41.5 L180.7,37.2 L183.7,32.6 L186.7,27.6 L189.8,29.0 L192.9,28.2 L195.8,25.2 L198.9,23.6 L202.2,24.1 L205.9,22.9 L208.9,22.9 L211.9,23.0 L215.0,23.6 L218.0,24.7 L221.0,22.5 L224.3,19.7 L227.1,22.1 L230.4,24.6 L233.4,23.3 L236.8,25.0 L240.3,24.8 L243.4,23.7 L246.6,22.9 L250.1,21.9 L253.6,21.0 L257.0,19.3 L260.5,14.9 L263.5,13.3 L266.5,9.5 L269.9,9.7 L273.2,7.7 L278.5,5.6 L281.5,7.1 L284.8,6.1 L289.2,9.3 L293.9,7.5 L300.0,1.0 L300,88 L0,88 Z" fill="url(#gXA3)"/>
+            <path d="M0.0,86.0 L4.4,83.9 L8.8,83.5 L12.5,78.4 L15.9,76.1 L19.1,78.3 L22.1,78.9 L25.5,78.3 L28.7,79.3 L31.9,80.0 L35.2,78.1 L38.6,78.7 L41.4,78.3 L44.6,76.2 L47.7,72.6 L50.8,77.4 L54.0,70.6 L57.5,70.7 L60.9,69.5 L63.9,68.8 L67.1,66.0 L70.4,62.4 L73.9,58.5 L77.0,54.5 L80.3,52.2 L83.3,54.5 L86.4,53.3 L89.7,52.4 L92.9,54.3 L96.3,55.7 L99.5,54.0 L102.6,53.9 L105.6,53.3 L109.1,52.3 L113.0,50.8 L116.3,51.8 L119.4,51.8 L122.8,52.4 L125.9,50.9 L129.0,51.1 L132.1,47.8 L135.9,45.8 L139.1,44.8 L142.5,45.2 L146.4,46.5 L149.8,47.9 L152.9,49.8 L157.1,49.0 L160.5,46.4 L164.4,44.6 L167.4,45.5 L171.2,42.1 L174.3,40.7 L177.3,41.5 L180.7,37.2 L183.7,32.6 L186.7,27.6 L189.8,29.0 L192.9,28.2 L195.8,25.2 L198.9,23.6 L202.2,24.1 L205.9,22.9 L208.9,22.9 L211.9,23.0 L215.0,23.6 L218.0,24.7 L221.0,22.5 L224.3,19.7 L227.1,22.1 L230.4,24.6 L233.4,23.3 L236.8,25.0 L240.3,24.8 L243.4,23.7 L246.6,22.9 L250.1,21.9 L253.6,21.0 L257.0,19.3 L260.5,14.9 L263.5,13.3 L266.5,9.5 L269.9,9.7 L273.2,7.7 L278.5,5.6 L281.5,7.1 L284.8,6.1 L289.2,9.3 L293.9,7.5 L300.0,1.0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2026 (actual)</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Smoothest equity curve of the five-pair suite — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the trend-following pairs, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold's secular bull (2018–2025) and two Fed tightening cycles.</div>
+        <div class="fx-links">
+          <a href="reports/xauusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/xauusd-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="fx-disclaimer">Backtested on 99–100% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, interactive dashboards, and downloadable MetaTrader 5 Strategy Tester reports are published above and freely accessible. Past performance is not indicative of future results.</div>
+</div>
+</div>
+</div><!-- /suite-fx -->
+
+<div class="suite-panel" id="suite-tk">
+  <div class="st-wrap">
+    <div class="st-eyebrow">Tenkai · Indices &amp; Gold · 99–100% Real Tick Data (Dukascopy) · 2020–2026 · 651 Combined Trades</div>
+    <table class="st">
+      <thead><tr><th>Market</th><th>Type</th><th>Sharpe</th><th>LR Corr</th><th>Max DD</th><th>CAGR</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th></tr></thead>
+      <tbody>
+        <tr><td>NAS 100</td><td>Trend (Tenkai)</td><td class="str-sharpe">3.86</td><td>0.95</td><td class="str-dd">8.44%</td><td class="str-cagr">6.9%</td><td>56.05%</td><td>1.55</td><td>5.27×</td><td>223</td></tr>
+        <tr><td>SP 500</td><td>Trend (Tenkai)</td><td class="str-sharpe">1.88</td><td>0.97</td><td class="str-dd">8.98%</td><td class="str-cagr">3.73%</td><td>55.85%</td><td>1.24</td><td>2.51×</td><td>265</td></tr>
+        <tr><td>XAU / USD (Tenkai)</td><td>Mean Reversion</td><td class="str-sharpe">3.62</td><td>0.98</td><td class="str-dd">4.71%</td><td class="str-cagr">5.95%</td><td>60.12%</td><td>1.62</td><td>6.79×</td><td>163</td></tr>
+      </tbody>
+    </table>
+  </div>
+<div class="fx-section">
+<div class="fx-teaser">
+  <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
+  <div class="fx-title">Tenkai Strategy Suite — Indices &amp; Gold</div>
+  <div class="fx-desc">Three proprietary rule-based strategies under the Tenkai engine, backtested 2020–2026 on 99–100% real tick data (Dukascopy) across two major equity indices and a second, distinct gold model. Results presented using proportional position sizing (fixed % risk per trade). Combined sample: 651 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
+
+  <!-- Combined stats strip -->
+  <div class="fx-combined">
+    <div class="fx-cs"><div class="fx-cs-v">651</div><div class="fx-cs-l">Combined Trades</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">≥0.95</div><div class="fx-cs-l">All LR Correlations</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
   </div>
 
-</div><!-- /stab-overview -->
+  <div class="fx-cards">
+
+    <!-- ── NAS100 CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Tenkai &middot; Trend</span>
+          <div class="fx-pair">NAS 100</div>
+          <div class="fx-inst">Equity Index &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">3.86</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.95</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.44%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.27&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">56.05%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">6.9%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.55</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">223</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gNQ1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,86.0 L3.3,82.8 L4.2,80.9 L6.9,80.7 L9.6,85.0 L11.8,84.4 L16.4,82.3 L21.8,79.3 L24.1,80.5 L27.4,77.2 L32.6,78.0 L36.1,74.8 L36.9,78.9 L38.3,75.6 L41.3,79.5 L49.4,76.6 L51.1,75.0 L54.6,77.7 L56.2,79.0 L59.6,76.0 L63.3,77.3 L65.8,77.4 L69.0,73.2 L73.3,72.9 L76.0,77.1 L78.7,79.7 L79.7,77.7 L82.3,74.5 L86.4,75.7 L87.4,75.5 L88.8,73.5 L92.5,76.4 L95.2,74.5 L97.8,71.2 L101.6,72.3 L103.3,72.1 L108.2,67.2 L110.5,70.1 L112.3,67.8 L117.4,63.6 L122.7,61.1 L124.0,64.6 L128.0,62.1 L131.2,57.1 L134.8,54.7 L141.7,55.9 L143.3,55.5 L144.3,53.3 L147.7,52.9 L148.6,46.8 L151.0,50.3 L157.0,47.9 L159.4,51.5 L162.3,49.4 L165.6,52.9 L168.2,58.1 L173.7,61.3 L180.2,59.4 L183.2,59.1 L184.0,57.0 L192.6,56.9 L197.9,51.5 L201.2,47.5 L202.8,45.2 L209.5,40.9 L212.3,38.5 L213.8,38.3 L219.1,39.6 L221.0,43.4 L222.6,36.9 L231.2,32.9 L232.9,38.5 L239.9,41.5 L241.3,39.4 L244.4,35.2 L245.3,32.7 L254.4,32.3 L258.1,33.6 L259.7,33.2 L263.1,30.8 L270.6,30.4 L272.7,27.9 L274.5,24.0 L276.9,24.9 L282.7,20.6 L284.1,14.2 L287.3,9.6 L291.4,4.5 L296.0,8.0 L300.0,1.0 L300,88 L0,88 Z" fill="url(#gNQ1)"/>
+            <path d="M0.0,86.0 L3.3,82.8 L4.2,80.9 L6.9,80.7 L9.6,85.0 L11.8,84.4 L16.4,82.3 L21.8,79.3 L24.1,80.5 L27.4,77.2 L32.6,78.0 L36.1,74.8 L36.9,78.9 L38.3,75.6 L41.3,79.5 L49.4,76.6 L51.1,75.0 L54.6,77.7 L56.2,79.0 L59.6,76.0 L63.3,77.3 L65.8,77.4 L69.0,73.2 L73.3,72.9 L76.0,77.1 L78.7,79.7 L79.7,77.7 L82.3,74.5 L86.4,75.7 L87.4,75.5 L88.8,73.5 L92.5,76.4 L95.2,74.5 L97.8,71.2 L101.6,72.3 L103.3,72.1 L108.2,67.2 L110.5,70.1 L112.3,67.8 L117.4,63.6 L122.7,61.1 L124.0,64.6 L128.0,62.1 L131.2,57.1 L134.8,54.7 L141.7,55.9 L143.3,55.5 L144.3,53.3 L147.7,52.9 L148.6,46.8 L151.0,50.3 L157.0,47.9 L159.4,51.5 L162.3,49.4 L165.6,52.9 L168.2,58.1 L173.7,61.3 L180.2,59.4 L183.2,59.1 L184.0,57.0 L192.6,56.9 L197.9,51.5 L201.2,47.5 L202.8,45.2 L209.5,40.9 L212.3,38.5 L213.8,38.3 L219.1,39.6 L221.0,43.4 L222.6,36.9 L231.2,32.9 L232.9,38.5 L239.9,41.5 L241.3,39.4 L244.4,35.2 L245.3,32.7 L254.4,32.3 L258.1,33.6 L259.7,33.2 L263.1,30.8 L270.6,30.4 L272.7,27.9 L274.5,24.0 L276.9,24.9 L282.7,20.6 L284.1,14.2 L287.3,9.6 L291.4,4.5 L296.0,8.0 L300.0,1.0" fill="none" stroke="#5eada5" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026 (actual)</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Highest Sharpe of the Tenkai suite, with a shorter and smaller sample than the FX suite — reflecting the strategy's more selective trade frequency on a single high-beta index. Recovery Factor above 5× indicates drawdowns are recouped quickly relative to strategy tenor.</div>
+        <div class="fx-links">
+          <a href="reports/nas100-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/nas100-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
+      </div>
+    </div>
+
+    <!-- ── SP500 CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag trend">Tenkai &middot; Trend</span>
+          <div class="fx-pair">SP 500</div>
+          <div class="fx-inst">Equity Index &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">1.88</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.97</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.98%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.51&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">55.85%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">3.73%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.24</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">265</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gSP1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,75.9 L3.8,78.5 L6.9,76.2 L10.6,82.7 L14.2,85.4 L17.5,83.2 L21.6,81.0 L25.2,83.9 L28.6,86.0 L32.0,79.7 L35.5,81.7 L37.9,79.5 L40.7,83.5 L43.0,81.6 L46.4,83.7 L50.0,77.5 L52.0,75.4 L56.0,68.9 L59.5,75.6 L63.1,77.7 L65.5,84.0 L68.1,81.9 L72.7,79.9 L75.0,77.8 L76.7,75.6 L78.7,68.8 L82.2,71.1 L85.5,73.5 L87.3,75.9 L90.9,78.4 L93.1,71.7 L96.1,73.9 L98.7,67.0 L101.1,69.5 L103.5,67.1 L105.3,64.8 L108.8,57.2 L111.5,59.9 L113.9,57.2 L116.8,54.5 L119.8,51.8 L122.8,54.5 L125.2,51.6 L131.8,43.4 L135.7,47.0 L141.4,44.3 L144.2,41.5 L146.7,44.2 L148.5,46.9 L151.9,44.2 L156.3,36.1 L163.0,27.9 L167.1,19.3 L171.6,22.3 L177.1,25.1 L181.4,27.9 L187.2,27.9 L189.7,30.6 L193.4,33.5 L197.7,43.5 L199.5,40.9 L202.5,39.3 L205.3,42.0 L209.4,39.4 L213.4,36.8 L216.8,34.0 L219.9,25.5 L222.3,34.2 L224.5,31.3 L228.7,22.5 L232.7,25.6 L235.7,22.8 L240.7,19.9 L245.0,22.6 L249.2,19.9 L251.2,17.2 L253.8,14.6 L257.3,17.2 L259.6,19.8 L263.0,11.8 L265.0,3.4 L272.6,11.8 L277.6,3.7 L279.8,1.0 L284.0,3.9 L288.3,6.6 L292.2,9.4 L294.0,6.5 L295.7,4.1 L300.0,4.0 L300,88 L0,88 Z" fill="url(#gSP1)"/>
+            <path d="M0.0,75.9 L3.8,78.5 L6.9,76.2 L10.6,82.7 L14.2,85.4 L17.5,83.2 L21.6,81.0 L25.2,83.9 L28.6,86.0 L32.0,79.7 L35.5,81.7 L37.9,79.5 L40.7,83.5 L43.0,81.6 L46.4,83.7 L50.0,77.5 L52.0,75.4 L56.0,68.9 L59.5,75.6 L63.1,77.7 L65.5,84.0 L68.1,81.9 L72.7,79.9 L75.0,77.8 L76.7,75.6 L78.7,68.8 L82.2,71.1 L85.5,73.5 L87.3,75.9 L90.9,78.4 L93.1,71.7 L96.1,73.9 L98.7,67.0 L101.1,69.5 L103.5,67.1 L105.3,64.8 L108.8,57.2 L111.5,59.9 L113.9,57.2 L116.8,54.5 L119.8,51.8 L122.8,54.5 L125.2,51.6 L131.8,43.4 L135.7,47.0 L141.4,44.3 L144.2,41.5 L146.7,44.2 L148.5,46.9 L151.9,44.2 L156.3,36.1 L163.0,27.9 L167.1,19.3 L171.6,22.3 L177.1,25.1 L181.4,27.9 L187.2,27.9 L189.7,30.6 L193.4,33.5 L197.7,43.5 L199.5,40.9 L202.5,39.3 L205.3,42.0 L209.4,39.4 L213.4,36.8 L216.8,34.0 L219.9,25.5 L222.3,34.2 L224.5,31.3 L228.7,22.5 L232.7,25.6 L235.7,22.8 L240.7,19.9 L245.0,22.6 L249.2,19.9 L251.2,17.2 L253.8,14.6 L257.3,17.2 L259.6,19.8 L263.0,11.8 L265.0,3.4 L272.6,11.8 L277.6,3.7 L279.8,1.0 L284.0,3.9 L288.3,6.6 L292.2,9.4 L294.0,6.5 L295.7,4.1 L300.0,4.0" fill="none" stroke="#5eada5" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026 (actual)</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Lowest Recovery Factor of the three, consistent with a lower-beta index and a more gradual compounding profile. Sharpe 1.88 and LR correlation 0.97 across the full 2020–2026 sample.</div>
+        <div class="fx-links">
+          <a href="reports/sp500-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/sp500-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
+      </div>
+    </div>
+
+    <!-- ── XAUUSD TENKAI CARD ───────────────────────────────── -->
+    <div class="fx-card">
+      <div class="fx-card-hd">
+        <div class="fx-card-hd-left">
+          <span class="fx-strat-tag sys">Tenkai &middot; Mean Reversion</span>
+          <div class="fx-pair">XAU / USD <span style="font-size:11px;color:#8A8680;font-weight:400">(Tenkai)</span></div>
+          <div class="fx-inst">Commodities &middot; Systematic</div>
+        </div>
+        <div class="fx-hd-kpis">
+          <div class="fx-hd-kpi first">
+            <div class="fx-hd-kval">3.62</div>
+            <div class="fx-hd-klbl">Sharpe Ratio</div>
+          </div>
+          <div class="fx-hd-kpi">
+            <div class="fx-hd-kval">0.98</div>
+            <div class="fx-hd-klbl">LR Correlation</div>
+          </div>
+        </div>
+      </div>
+      <div class="fx-body">
+        <div class="fx-body-l">
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">4.71%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">6.79&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">60.12%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">5.95%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.62</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">163</div></div>
+        </div>
+        <div class="fx-body-r">
+          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="gXT1" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
+              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
+            </linearGradient></defs>
+            <path d="M0.0,86.0 L1.3,82.3 L4.7,80.3 L7.4,77.6 L9.6,81.0 L11.1,81.0 L15.0,77.0 L16.9,72.9 L18.8,74.9 L20.7,74.5 L31.3,71.3 L32.6,74.2 L37.1,73.9 L38.1,73.7 L40.1,75.4 L43.4,72.0 L47.0,72.0 L54.0,72.2 L57.3,71.8 L62.0,71.6 L64.1,73.3 L68.8,69.6 L72.0,66.1 L75.2,69.9 L79.4,66.2 L83.1,66.1 L85.2,64.0 L86.8,60.4 L88.6,56.7 L91.7,60.4 L93.8,56.0 L101.0,52.2 L104.0,50.4 L105.9,45.8 L107.4,45.6 L108.2,45.3 L112.1,49.3 L113.0,44.5 L114.6,42.1 L117.5,42.3 L119.7,37.0 L122.3,41.6 L125.1,41.7 L126.9,41.2 L130.9,43.4 L132.3,38.3 L134.2,38.0 L135.1,32.5 L137.3,26.7 L141.5,24.8 L150.8,24.4 L152.7,24.2 L155.6,19.0 L164.7,23.9 L166.7,18.6 L167.7,20.8 L169.7,25.4 L172.1,20.4 L174.2,19.9 L175.2,22.4 L177.8,24.4 L184.2,21.8 L186.7,16.4 L189.8,16.0 L190.8,10.8 L193.4,5.3 L199.0,10.0 L204.0,7.9 L208.2,12.1 L216.6,7.3 L218.7,7.0 L220.5,6.7 L225.8,7.1 L229.5,4.4 L230.4,4.4 L234.1,9.3 L234.4,9.2 L241.6,9.0 L252.9,9.8 L261.2,12.2 L265.1,7.0 L266.7,11.3 L267.6,6.4 L269.6,5.7 L272.1,9.9 L284.1,12.0 L286.2,7.3 L289.8,2.3 L296.2,1.0 L300.0,1.5 L300,88 L0,88 Z" fill="url(#gXT1)"/>
+            <path d="M0.0,86.0 L1.3,82.3 L4.7,80.3 L7.4,77.6 L9.6,81.0 L11.1,81.0 L15.0,77.0 L16.9,72.9 L18.8,74.9 L20.7,74.5 L31.3,71.3 L32.6,74.2 L37.1,73.9 L38.1,73.7 L40.1,75.4 L43.4,72.0 L47.0,72.0 L54.0,72.2 L57.3,71.8 L62.0,71.6 L64.1,73.3 L68.8,69.6 L72.0,66.1 L75.2,69.9 L79.4,66.2 L83.1,66.1 L85.2,64.0 L86.8,60.4 L88.6,56.7 L91.7,60.4 L93.8,56.0 L101.0,52.2 L104.0,50.4 L105.9,45.8 L107.4,45.6 L108.2,45.3 L112.1,49.3 L113.0,44.5 L114.6,42.1 L117.5,42.3 L119.7,37.0 L122.3,41.6 L125.1,41.7 L126.9,41.2 L130.9,43.4 L132.3,38.3 L134.2,38.0 L135.1,32.5 L137.3,26.7 L141.5,24.8 L150.8,24.4 L152.7,24.2 L155.6,19.0 L164.7,23.9 L166.7,18.6 L167.7,20.8 L169.7,25.4 L172.1,20.4 L174.2,19.9 L175.2,22.4 L177.8,24.4 L184.2,21.8 L186.7,16.4 L189.8,16.0 L190.8,10.8 L193.4,5.3 L199.0,10.0 L204.0,7.9 L208.2,12.1 L216.6,7.3 L218.7,7.0 L220.5,6.7 L225.8,7.1 L229.5,4.4 L230.4,4.4 L234.1,9.3 L234.4,9.2 L241.6,9.0 L252.9,9.8 L261.2,12.2 L265.1,7.0 L266.7,11.3 L267.6,6.4 L269.6,5.7 L272.1,9.9 L284.1,12.0 L286.2,7.3 L289.8,2.3 L296.2,1.0 L300.0,1.5" fill="none" stroke="#5eada5" stroke-width="1.8"/>
+          </svg>
+          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026 (actual)</div>
+        </div>
+      </div>
+      <div class="fx-card-ft">
+        <div class="fx-note">Lowest drawdown and highest win rate across both the FX and Tenkai suites, at the cost of a shorter track record and smaller trade sample than the flagship gold strategy above. Distinct signal logic from the primary XAU/USD mean-reversion model — not a variant of it.</div>
+        <div class="fx-links">
+          <a href="reports/xauusd-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
+          <a href="reports/xauusd-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
+        </div>
+        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
+      </div>
+    </div>
+
+  </div>
+  <div class="fx-disclaimer">Backtested on 99–100% real tick data (Dukascopy), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Sample period (2020–2026) and trade counts are smaller than the FX &amp; Commodities suite above; treat comparisons across suites accordingly. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, interactive dashboards, and downloadable MetaTrader 5 Strategy Tester reports are published above and freely accessible. Past performance is not indicative of future results.</div>
+</div>
+</div>
+</div><!-- /suite-tk -->
+
+</div><!-- /stab-overview --><!-- /stab-overview -->
 
 <!-- ─────────────────────────────────────────────────────────
      SUB-TAB 2: PORTFOLIO BUILDER
@@ -9140,458 +9444,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div><!-- /stab-reports -->
 
 <!-- ══ FX & COMMODITIES DEEP DIVE ════════════════════ -->
-<div class="fx-section">
-<div class="fx-teaser">
-  <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
-  <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
-  <div class="fx-desc">Five proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99–100% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 12,262 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
 
-  <!-- Combined stats strip -->
-  <div class="fx-combined">
-    <div class="fx-cs"><div class="fx-cs-v">12,262</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">All LR Correlations</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
-  </div>
-  <details class="fx-glossary" style="margin:14px 0 18px;font-family:var(--FM);font-size:10.5px;color:var(--ink2);line-height:1.7">
-    <summary style="cursor:pointer;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-size:9px">How to read these metrics</summary>
-    <div style="padding:10px 0 0">
-      <b>LR correlation</b> — correlation between the equity curve and its straight-line (linear regression) fit; 1.0 means perfectly steady growth.<br>
-      <b>Recovery factor</b> — net profit ÷ maximum drawdown; how many times over the strategy earned back its worst drawdown.<br>
-      <b>Profit factor</b> — gross profit ÷ gross loss.<br>
-      <b>Max DD (relative)</b> — largest peak-to-trough fall as a percentage of the equity peak.<br>
-      <b>Tick quality</b> — share of the backtest driven by real historical ticks rather than modelled prices.<br>
-      Sharpe ratios are as reported by the backtest engine. All figures are backtests under the fixed-% risk sizing described below, not live trading results.
-    </div>
-  </details>
 
-  <div class="fx-cards">
 
-    <!-- ── USD/JPY CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Trend Following</span>
-          <div class="fx-pair">USD / JPY</div>
-          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.13</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.90</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.83%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">9.68&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">39.6%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.20%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.29</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,163</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gUJ3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C30,85 60,84 90,82 C115,79 130,74 150,65 C168,55 182,42 202,27 C218,14 242,5 272,1 L300,0 L300,88 L0,88 Z" fill="url(#gUJ3)"/>
-            <path d="M0,86 C30,85 60,84 90,82 C115,79 130,74 150,65 C168,55 182,42 202,27 C218,14 242,5 272,1 L300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Statistically robust sample. Stress-tested through COVID volatility (2020) and the 2022–2023 JPY intervention cycle.</div>
-        <div class="fx-links">
-          <a href="reports/usdjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/usdjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; Compounded</span>
-      </div>
-    </div>
-
-    <!-- ── EUR/JPY CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Trend Following</span>
-          <div class="fx-pair">EUR / JPY</div>
-          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.20</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.90</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">16.35%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.68&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">48.3%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.20</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,174</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gEJ3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C32,86 65,85 97,84 C127,83 148,81 172,77 C196,72 216,64 236,52 C254,41 274,22 300,2 L300,88 L0,88 Z" fill="url(#gEJ3)"/>
-            <path d="M0,86 C32,86 65,85 97,84 C127,83 148,81 172,77 C196,72 216,64 236,52 C254,41 274,22 300,2" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Highest Sharpe of the five-pair suite despite a mid-pack win rate — the payoff asymmetry does the work. Drawdown profile is comparable to USD/JPY on a shared trend-following engine, applied to a structurally higher-carry cross. Sample spans the full 2013–2025 cycle including the JPY intervention regime.</div>
-        <div class="fx-links">
-          <a href="reports/eurjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/eurjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; Compounded</span>
-      </div>
-    </div>
-
-    <!-- ── GBP/USD CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag sys">Mean Reversion</span>
-          <div class="fx-pair">GBP / USD</div>
-          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.31</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.97</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">23.76%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.67&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">49.4%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.03%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.12</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,037</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gGB3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C28,82 55,77 82,71 C108,65 130,58 154,48 C176,39 196,28 218,17 C238,8 260,2 300,0 L300,88 L0,88 Z" fill="url(#gGB3)"/>
-            <path d="M0,86 C28,82 55,77 82,71 C108,65 130,58 154,48 C176,39 196,28 218,17 C238,8 260,2 300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Highest LR Correlation and highest Sharpe of the suite, but the lowest Recovery Factor — the largest relative drawdown takes longer to recoup on a proportional-risk basis. Near coin-flip win rate is typical of a mean-reversion edge on a high-volatility major. Tested through Brexit-era and 2022 gilt-crisis volatility.</div>
-        <div class="fx-links">
-          <a href="reports/gbpusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/gbpusd-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 97% Real Ticks</span>
-      </div>
-    </div>
-
-    <!-- ── EUR/USD CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Trend Following</span>
-          <div class="fx-pair">EUR / USD</div>
-          <div class="fx-inst">Foreign Exchange &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.91</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.93</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">34.52%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">4.63&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">44.6%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.18</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">1,980</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gEU3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,87 C32,87 65,86 97,85 C127,84 150,83 172,80 C196,76 214,70 236,60 C256,50 278,32 300,4 L300,88 L0,88 Z" fill="url(#gEU3)"/>
-            <path d="M0,87 C32,87 65,86 97,85 C127,84 150,83 172,80 C196,76 214,70 236,60 C256,50 278,32 300,4" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Widest relative drawdown of the suite, offset by a solid Recovery Factor and the highest tick-data fidelity available (100%). Trend-following engine on the world's most liquid pair — capacity and slippage assumptions are the most conservative of any strategy shown. Full 12-year cycle including two major ECB/Fed divergence regimes.</div>
-        <div class="fx-links">
-          <a href="reports/eurusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/eurusd-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 100% Real Ticks</span>
-      </div>
-    </div>
-
-    <!-- ── XAU/USD CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag sys">Mean Reversion</span>
-          <div class="fx-pair">XAU / USD</div>
-          <div class="fx-inst">Commodities &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.82</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.96</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.54%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.86&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">51.2%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.22</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,908</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gXA3" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#8B6914" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,85 C25,84 50,83 75,81 C100,79 122,76 148,71 C172,66 190,59 212,49 C232,38 255,22 278,7 L300,0 L300,88 L0,88 Z" fill="url(#gXA3)"/>
-            <path d="M0,85 C25,84 50,83 75,81 C100,79 122,76 148,71 C172,66 190,59 212,49 C232,38 255,22 278,7 L300,0" fill="none" stroke="#8B6914" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2013&ndash;2025</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Smoothest equity curve of the five-pair suite — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the trend-following pairs, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold's secular bull (2018–2025) and two Fed tightening cycles.</div>
-        <div class="fx-links">
-          <a href="reports/xauusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/xauusd-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
-      </div>
-    </div>
-
-  </div>
-  <div class="fx-disclaimer">Backtested on 99–100% real tick data (MetaTrader 5), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, interactive dashboards, and downloadable MetaTrader 5 Strategy Tester reports are published above and freely accessible. Past performance is not indicative of future results.</div>
-</div>
-</div>
-
-<div class="fx-section">
-<div class="fx-teaser">
-  <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
-  <div class="fx-title">Tenkai Strategy Suite — Indices &amp; Gold</div>
-  <div class="fx-desc">Three proprietary rule-based strategies under the Tenkai engine, backtested 2020–2026 on 99–100% real tick data (Dukascopy) across two major equity indices and a second, distinct gold model. Results presented using proportional position sizing (fixed % risk per trade). Combined sample: 651 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
-
-  <!-- Combined stats strip -->
-  <div class="fx-combined">
-    <div class="fx-cs"><div class="fx-cs-v">651</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">≥0.95</div><div class="fx-cs-l">All LR Correlations</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
-  </div>
-
-  <div class="fx-cards">
-
-    <!-- ── NAS100 CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Tenkai &middot; Trend</span>
-          <div class="fx-pair">NAS 100</div>
-          <div class="fx-inst">Equity Index &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">3.86</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.95</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.44%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.27&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">56.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">6.9%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.55</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">223</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gNQ1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C30,84 55,80 80,74 C105,68 125,58 150,48 C175,38 195,30 220,20 C245,12 270,6 300,2 L300,88 L0,88 Z" fill="url(#gNQ1)"/>
-            <path d="M0,86 C30,84 55,80 80,74 C105,68 125,58 150,48 C175,38 195,30 220,20 C245,12 270,6 300,2" fill="none" stroke="#5eada5" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Highest Sharpe of the Tenkai suite, with a shorter and smaller sample than the FX suite — reflecting the strategy's more selective trade frequency on a single high-beta index. Recovery Factor above 5× indicates drawdowns are recouped quickly relative to strategy tenor.</div>
-        <div class="fx-links">
-          <a href="reports/nas100-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/nas100-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
-      </div>
-    </div>
-
-    <!-- ── SP500 CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag trend">Tenkai &middot; Trend</span>
-          <div class="fx-pair">SP 500</div>
-          <div class="fx-inst">Equity Index &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.88</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.97</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.98%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.51&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">55.85%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">3.73%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.24</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">265</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gSP1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C35,85 65,83 95,80 C125,76 150,70 175,62 C200,54 220,44 245,34 C265,26 282,16 300,10 L300,88 L0,88 Z" fill="url(#gSP1)"/>
-            <path d="M0,86 C35,85 65,83 95,80 C125,76 150,70 175,62 C200,54 220,44 245,34 C265,26 282,16 300,10" fill="none" stroke="#5eada5" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Lowest Recovery Factor of the three, consistent with a lower-beta index and a more gradual compounding profile. Sharpe and LR Correlation both remain in the excellent-to-exceptional range across the full sample.</div>
-        <div class="fx-links">
-          <a href="reports/sp500-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/sp500-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
-      </div>
-    </div>
-
-    <!-- ── XAUUSD TENKAI CARD ───────────────────────────────── -->
-    <div class="fx-card">
-      <div class="fx-card-hd">
-        <div class="fx-card-hd-left">
-          <span class="fx-strat-tag sys">Tenkai &middot; Mean Reversion</span>
-          <div class="fx-pair">XAU / USD <span style="font-size:11px;color:#8A8680;font-weight:400">(Tenkai)</span></div>
-          <div class="fx-inst">Commodities &middot; Systematic</div>
-        </div>
-        <div class="fx-hd-kpis">
-          <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">3.62</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
-          </div>
-          <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.98</div>
-            <div class="fx-hd-klbl">LR Correlation</div>
-          </div>
-        </div>
-      </div>
-      <div class="fx-body">
-        <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">4.71%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">6.79&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">60.12%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">5.95%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.62</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">163</div></div>
-        </div>
-        <div class="fx-body-r">
-          <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <defs><linearGradient id="gXT1" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#5eada5" stop-opacity=".3"/>
-              <stop offset="100%" stop-color="#5eada5" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M0,86 C28,85 52,83 78,80 C102,77 122,72 145,64 C168,56 188,45 212,33 C234,22 260,12 300,4 L300,88 L0,88 Z" fill="url(#gXT1)"/>
-            <path d="M0,86 C28,85 52,83 78,80 C102,77 122,72 145,64 C168,56 188,45 212,33 C234,22 260,12 300,4" fill="none" stroke="#5eada5" stroke-width="1.8"/>
-          </svg>
-          <div class="fx-curve-lbl">Equity Curve &middot; 2020&ndash;2026</div>
-        </div>
-      </div>
-      <div class="fx-card-ft">
-        <div class="fx-note">Lowest drawdown and highest win rate across both the FX and Tenkai suites, at the cost of a shorter track record and smaller trade sample than the flagship gold strategy above. Distinct signal logic from the primary XAU/USD mean-reversion model — not a variant of it.</div>
-        <div class="fx-links">
-          <a href="reports/xauusd-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
-          <a href="reports/xauusd-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
-        </div>
-        <span class="fx-badge">Proprietary &middot; 99% Real Ticks</span>
-      </div>
-    </div>
-
-  </div>
-  <div class="fx-disclaimer">Backtested on 99–100% real tick data (Dukascopy), the highest fidelity available in institutional-grade simulation. Results use proportional position sizing (fixed % risk per trade), directly comparable to standard fund performance metrics. Sample period (2020–2026) and trade counts are smaller than the FX &amp; Commodities suite above; treat comparisons across suites accordingly. Backtested results do not guarantee future performance. Strategies are not offered for public investment. Full methodology, interactive dashboards, and downloadable MetaTrader 5 Strategy Tester reports are published above and freely accessible. Past performance is not indicative of future results.</div>
-</div>
-</div>
 
 <footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('tools')">Strategies</span><span class="flnk ul-draw" onclick="sp('portfolios')">Research Lab</span><span class="flnk ul-draw" onclick="sp('services')">Services</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span><a class="flnk" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank">LinkedIn ↗</a></div></footer>
 <div class="fdisc">Past performance does not guarantee future results. These are quantitative research models only. Not investment advice.</div>
@@ -9639,10 +9494,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="port-card" onclick="sp('strats')">
     <div class="port-card-tag" data-i18n="pc2_tag">Systematic · Equity &amp; FX</div>
     <div class="port-card-title" data-i18n-html="pc2_title">Systematic<br>Strategies</div>
-    <div class="port-card-sub" data-i18n="pc2_sub">A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.</div>
+    <div class="port-card-sub" data-i18n="pc2_sub">A library of 15 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities, global FX, gold and equity indices.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">12</span><span class="port-kpi-l" data-i18n="kpi_active_strats">Active Strategies</span></div>
-      <div class="port-kpi"><span class="port-kpi-v">2</span><span class="port-kpi-l" data-i18n="kpi_asset_classes">Asset Classes</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">15</span><span class="port-kpi-l" data-i18n="kpi_active_strats">Active Strategies</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">3</span><span class="port-kpi-l" data-i18n="kpi_asset_classes">Asset Classes</span></div>
     </div>
     <div class="port-card-cta" data-i18n="pc2_cta">Explore Strategies →</div>
   </div>
@@ -10634,6 +10489,97 @@ function sp(id){
     b.classList.toggle('on',(map[i]||[]).includes(id));
   });
 }
+function showSuite(id){
+  document.querySelectorAll('.suite-panel').forEach(p=>p.classList.toggle('on',p.id===id));
+  document.querySelectorAll('.su-tab').forEach(b=>{const on=b.dataset.suite===id;b.classList.toggle('on',on);b.setAttribute('aria-selected',on);});
+}
+/* Risk/reward map: one point per strategy, identity by suite (colour + shape + direct label) */
+(function(){
+  const SUITES={
+    'suite-eq':{name:'Systematic Equity',color:'var(--su-eq)',shape:'circle'},
+    'suite-fx':{name:'FX & Commodities',color:'var(--su-fx)',shape:'square'},
+    'suite-tk':{name:'Tenkai',color:'var(--su-tk)',shape:'diamond'}
+  };
+  const S=[
+    ['KAIROS','suite-eq',1.18,15.02,'CAGR 13.10%'],['KRONOS','suite-eq',1.00,25.43,'CAGR 20.54%'],['AEGIS','suite-eq',1.08,15.61,'CAGR 14.01%'],
+    ['BOREAS','suite-eq',1.04,23.55,'CAGR 18.17%'],['PROTEUS','suite-eq',1.07,18.23,'CAGR 16.83%'],['TYPHON','suite-eq',1.12,42.10,'CAGR 44.79%'],
+    ['EREBUS','suite-eq',1.14,48.30,'CAGR 54.38%'],
+    ['USD/JPY','suite-fx',2.13,15.83,'3,163 trades'],['XAU/USD','suite-fx',1.82,15.54,'2,908 trades'],['EUR/JPY','suite-fx',2.20,16.35,'2,174 trades'],
+    ['GBP/USD','suite-fx',2.31,23.76,'2,037 trades'],['EUR/USD','suite-fx',1.91,34.52,'1,980 trades'],
+    ['NAS 100','suite-tk',3.86,8.44,'CAGR 6.9%'],['SP 500','suite-tk',1.88,8.98,'CAGR 3.73%'],['XAU (Tenkai)','suite-tk',3.62,4.71,'CAGR 5.95%']
+  ];
+  // Drawing width follows the rendered width so 10px text stays 10px on phones
+  let W=900,H=380;
+  const L=52,R=20,T=14,B=44,X1=50,Y1=4.2;
+  const x=v=>L+v/X1*(W-L-R), y=v=>H-B-v/Y1*(H-T-B);
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
+  function shape(kind,cx,cy,color){
+    if(kind==='circle') return el('circle',{cx,cy,r:6.5,fill:color});
+    if(kind==='square') return el('rect',{x:cx-6,y:cy-6,width:12,height:12,rx:2,fill:color});
+    return el('path',{d:`M${cx} ${cy-8}L${cx+8} ${cy}L${cx} ${cy+8}L${cx-8} ${cy}Z`,fill:color});
+  }
+  function draw(){
+    const host=document.getElementById('su-chart'), tip=document.getElementById('su-tip'), leg=document.getElementById('su-legend');
+    if(!host||!host.clientWidth) return;
+    const cw=Math.round(host.clientWidth);
+    if(host.dataset.w==cw) return; host.dataset.w=cw;
+    W=Math.max(320,Math.min(900,cw)); H=W<600?340:380;
+    host.innerHTML='';
+    leg.innerHTML=Object.values(SUITES).map(s=>{
+      const sw=s.shape==='circle'?'<circle cx="6" cy="6" r="5"/>':s.shape==='square'?'<rect x="1" y="1" width="10" height="10" rx="2"/>':'<path d="M6 0L12 6L6 12L0 6Z"/>';
+      return `<span><svg width="12" height="12" style="fill:${s.color}">${sw}</svg>${s.name}</span>`;}).join('');
+    const svg=el('svg',{viewBox:`0 0 ${W} ${H}`});
+    for(let v=0;v<=X1;v+=10){
+      svg.appendChild(el('line',{x1:x(v),x2:x(v),y1:T,y2:H-B,stroke:'var(--rule)','stroke-width':1}));
+      const t=el('text',{x:x(v),y:H-B+16,'text-anchor':'middle','font-size':10});t.textContent=v+'%';svg.appendChild(t);
+    }
+    for(let v=0;v<=4;v++){
+      svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'var(--rule)','stroke-width':1}));
+      const t=el('text',{x:L-10,y:y(v)+3,'text-anchor':'end','font-size':10});t.textContent=v.toFixed(1);svg.appendChild(t);
+    }
+    const xt=el('text',{x:(L+W-R)/2,y:H-6,'text-anchor':'middle','font-size':10});xt.textContent='Maximum drawdown (lower is better) →';svg.appendChild(xt);
+    const yt=el('text',{x:14,y:(T+H-B)/2,'text-anchor':'middle','font-size':10,transform:`rotate(-90 14 ${(T+H-B)/2})`});yt.textContent='Sharpe ratio (higher is better) →';svg.appendChild(yt);
+    const placed=[], labels=el('g',{}), pts=el('g',{});
+    const hit=(a)=>placed.some(b=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y);
+    S.forEach(([name,suite,sh,dd])=>placed.push({x:x(dd)-8,y:y(sh)-8,w:16,h:16}));
+    S.slice().sort((a,b)=>b[2]-a[2]).forEach(([name,suite,sh,dd])=>{
+      const cx=x(dd),cy=y(sh),w=name.length*6.3+4,h=12;
+      const tries=[[cx+11,cy-6],[cx+11,cy-18],[cx+11,cy+6],[cx-11-w,cy-6],[cx-w/2,cy-24],[cx-w/2,cy+12],[cx+11,cy-30],[cx+11,cy+18]];
+      const spot=tries.map(([lx,ly])=>({x:lx,y:ly,w,h})).find(r=>!hit(r)&&r.x>L&&r.x+r.w<W-R+10);
+      if(!spot) return; // no free space: the point keeps its tooltip and the table row
+      placed.push(spot);
+      const t=el('text',{x:spot.x+2,y:spot.y+h-2,class:'su-lbl'});t.textContent=name;labels.appendChild(t);
+    });
+    S.forEach(([name,suite,sh,dd,extra])=>{
+      const s=SUITES[suite], m=shape(s.shape,x(dd),y(sh),s.color);
+      m.setAttribute('class','su-pt');m.setAttribute('tabindex','0');m.setAttribute('role','button');
+      m.setAttribute('aria-label',`${name}, ${s.name}: Sharpe ${sh.toFixed(2)}, max drawdown ${dd.toFixed(2)}%, ${extra}`);
+      const show=()=>{
+        tip.innerHTML=`<b>${name}</b> · ${s.name}<br>Sharpe ${sh.toFixed(2)} · Max DD ${dd.toFixed(2)}%<br>${extra}`;
+        tip.hidden=false;
+        const hr=host.getBoundingClientRect(), cr=host.parentElement.getBoundingClientRect(), k=hr.width/W;
+        let lx=hr.left-cr.left+x(dd)*k+14, ly=hr.top-cr.top+y(sh)*k-10;
+        if(lx+170>cr.width) lx-=190;
+        tip.style.left=lx+'px'; tip.style.top=ly+'px';
+      };
+      const hide=()=>{tip.hidden=true;};
+      const open=()=>{showSuite(suite);document.querySelector('.su-tabs').scrollIntoView({behavior:'smooth',block:'start'});};
+      m.addEventListener('mouseenter',show);m.addEventListener('mouseleave',hide);
+      m.addEventListener('focus',show);m.addEventListener('blur',hide);
+      m.addEventListener('click',open);m.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});
+      pts.appendChild(m);
+    });
+    svg.appendChild(labels);svg.appendChild(pts);host.appendChild(svg);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',draw); else draw();
+  // The Strategies page is hidden (0 width) until opened, and widths change on resize/rotation
+  let rt; window.addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(draw,150);});
+  const pg=document.getElementById('pg-strats');
+  if(pg) new MutationObserver(()=>setTimeout(draw,30)).observe(pg,{attributes:true,attributeFilter:['class','style']});
+  const ov=document.getElementById('stab-overview');
+  if(ov) new MutationObserver(()=>setTimeout(draw,30)).observe(ov,{attributes:true,attributeFilter:['class']});
+})();
 function showStab(id){
   document.querySelectorAll('.stab-panel').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.stab').forEach(b=>b.classList.remove('on'));
@@ -11146,7 +11092,7 @@ var I18N={
     research_tag:'Published research',
     track_tag:'Audited performance',track_sub:'Every call published publicly before outcome is known. Losses included. Never deleted.',
     tools_tag:'Built & open-sourced by Aeon Nimbus',tools_sub:'Six analyst tools — Black-Scholes to DCF to portfolio construction — built from scratch by Aeon Nimbus, open-sourced on GitHub, and free to use in the browser.',
-    strats_tag:'Proprietary · Not Open-Sourced',strats_sub:'Twelve proprietary systematic strategies across equity, FX, and commodities — built to trade, not open-sourced. Full methodology available to qualified allocators on request.',
+    strats_tag:'Proprietary · Not Open-Sourced',strats_sub:'Fifteen proprietary systematic strategies across equities, FX, commodities and equity indices — built to trade, not open-sourced. Full methodology available to qualified allocators on request.',
     port_tag:'Portfolio & Products',port_sub:'Three vehicles for research, capital allocation and quantitative tooling.',
     contact_tag:'Get In Touch',contact_sub:'Interested in research, quantitative strategies, collaborations, or hiring? I typically respond within 24–48 hours.',
     contact_submit:'Send Message →'
@@ -11175,7 +11121,7 @@ var I18N={
     research_tag:'Investigación publicada',
     track_tag:'Desempeño auditado',track_sub:'Cada operación publicada antes del resultado. Pérdidas incluidas. Nunca eliminadas.',
     tools_tag:'Kit de herramientas interactivo',tools_sub:'Cada herramienta que un gestor o analista necesita — gratis, en el navegador.',
-    strats_tag:'Investigación Sistemática Propia',strats_sub:'Doce estrategias plenamente sistemáticas en renta variable, FX y materias primas.',
+    strats_tag:'Investigación Sistemática Propia',strats_sub:'Quince estrategias plenamente sistemáticas en renta variable, FX, materias primas e índices.',
     port_tag:'Portafolio y Productos',port_sub:'Tres vehículos para investigación, asignación de capital y herramientas cuantitativas.',
     contact_tag:'Contactar',contact_sub:'¿Interesado en investigación, estrategias cuantitativas, colaboraciones o contratación? Respondo en 24–48 horas.',
     contact_submit:'Enviar Mensaje →'
@@ -11204,7 +11150,7 @@ var I18N={
     research_tag:'Recherche publiée',
     track_tag:'Performance auditée',track_sub:'Chaque position publiée avant le résultat. Pertes incluses. Jamais supprimées.',
     tools_tag:'Boîte à outils interactive',tools_sub:"Chaque outil qu'un gérant ou analyste utilise — gratuit, dans le navigateur.",
-    strats_tag:'Recherche Systématique Propriétaire',strats_sub:"Douze stratégies entièrement systématiques sur actions, FX et matières premières.",
+    strats_tag:'Recherche Systématique Propriétaire',strats_sub:"Quinze stratégies entièrement systématiques sur actions, FX, matières premières et indices.",
     port_tag:'Portefeuille & Produits',port_sub:"Trois véhicules pour la recherche, l'allocation de capital et les outils quantitatifs.",
     contact_tag:'Nous Contacter',contact_sub:"Intéressé par la recherche, les stratégies quant, des collaborations ou un recrutement ? Réponse sous 24–48h.",
     contact_submit:'Envoyer →'
@@ -11233,7 +11179,7 @@ var I18N={
     research_tag:'Veröffentlichte Forschung',
     track_tag:'Geprüfte Performance',track_sub:'Jede Position vor dem Ergebnis veröffentlicht. Verluste inbegriffen. Nie gelöscht.',
     tools_tag:'Interaktives Analysten-Toolkit',tools_sub:'Jedes Tool, das ein PM oder Analysten-Desk braucht — live, kostenlos, offen für alle.',
-    strats_tag:'Proprietäre systematische Forschung',strats_sub:'Zwölf vollsystematische Strategien für Aktien, FX und Rohstoffe.',
+    strats_tag:'Proprietäre systematische Forschung',strats_sub:'Fünfzehn vollsystematische Strategien für Aktien, FX, Rohstoffe und Indizes.',
     port_tag:'Portfolio & Produkte',port_sub:'Drei Vehikel für Research, Kapitalallokation und quantitative Tools.',
     contact_tag:'Kontakt aufnehmen',contact_sub:'Interesse an Research, Quant-Strategien, Kooperationen oder Recruiting? Antwort in 24–48 Stunden.',
     contact_submit:'Nachricht senden →'
@@ -11262,7 +11208,7 @@ var I18N={
     research_tag:'Ricerca pubblicata',
     track_tag:'Performance verificata',track_sub:'Ogni posizione pubblicata prima del risultato. Perdite incluse. Mai cancellate.',
     tools_tag:'Toolkit interattivo per analisti',tools_sub:'Ogni strumento che un PM o analista si aspetta — live, gratuito, aperto a tutti.',
-    strats_tag:'Ricerca Sistematica Proprietaria',strats_sub:'Dodici strategie pienamente sistematiche su azioni, FX e materie prime.',
+    strats_tag:'Ricerca Sistematica Proprietaria',strats_sub:'Quindici strategie pienamente sistematiche su azioni, FX, materie prime e indici.',
     port_tag:'Portafoglio & Prodotti',port_sub:'Tre veicoli per ricerca, allocazione di capitale e strumenti quantitativi.',
     contact_tag:'Contattaci',contact_sub:'Interessato a ricerca, strategie quant, collaborazioni o opportunità? Rispondo entro 24–48 ore.',
     contact_submit:'Invia Messaggio →'
@@ -11291,7 +11237,7 @@ var I18N={
     research_tag:'已发布研究',
     track_tag:'经审计的业绩',track_sub:'每笔交易在结果公布前公开发布，包括亏损，从不删除。',
     tools_tag:'交互式分析工具包',tools_sub:'基金经理和分析师所需的每项工具——实时、免费、向所有人开放。',
-    strats_tag:'专有系统化研究',strats_sub:'十二个全系统化策略，涵盖股票、外汇和大宗商品。',
+    strats_tag:'专有系统化研究',strats_sub:'十五个全系统化策略，涵盖股票、外汇、大宗商品和股指。',
     port_tag:'投资组合与产品',port_sub:'三大载体：研究、资本配置和量化工具。',
     contact_tag:'联系我们',contact_sub:'对研究、量化策略、合作或招聘机会感兴趣？通常在24–48小时内回复。',
     contact_submit:'发送消息 →'
@@ -11316,7 +11262,7 @@ var I18N_EXTRA={
     rftr_02_title:'Track Record',rftr_02_desc:'Every formal call published with entry, target, and full thesis. Wins and losses — all on the record.',rftr_02_link:'View full record →',
     rftr_03_title:'Interactive Tools',rftr_03_desc:'Black-Scholes, DCF, portfolio construction, and more — free, open-source, in-browser tools.',rftr_03_link:'Open toolkit →',
     pc1_tag:'Model Portfolio · Multi-Asset',pc1_title:'Asset Allocation<br>Dynamic Fund',pc1_sub:'A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.',pc1_cta:'View Fund →',
-    pc2_tag:'Systematic · Equity & FX',pc2_title:'Systematic<br>Strategies',pc2_sub:'A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.',pc2_cta:'Explore Strategies →',
+    pc2_tag:'Systematic · Equity & FX',pc2_title:'Systematic<br>Strategies',pc2_sub:'A library of 15 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities, global FX, gold and equity indices.',pc2_cta:'Explore Strategies →',
     pc3_tag:'Interactive · Analyst Toolkit',pc3_title:'Quant<br>Tools',pc3_sub:'Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.',pc3_cta:'Open Toolkit →',
     kpi_inception:'Since Inception · Simulated',kpi_sharpe:'Sharpe Ratio',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Active Strategies',kpi_asset_classes:'Asset Classes',kpi_live_models:'Interactive Models'
   },
@@ -11333,7 +11279,7 @@ var I18N_EXTRA={
     rftr_02_title:'Historial',rftr_02_desc:'Cada operación publicada con entrada, objetivo y tesis completa. Ganancias y pérdidas en el registro.',rftr_02_link:'Ver historial completo →',
     rftr_03_title:'Herramientas Interactivas',rftr_03_desc:'Black-Scholes, DCF, construcción de carteras — herramientas gratuitas en el navegador.',rftr_03_link:'Abrir toolkit →',
     pc1_tag:'Fondo Simulado · Multi-Activo',pc1_title:'Fondo de Asignación<br>Dinámica',pc1_sub:'Portafolio macro impulsado que reequilibra dinámicamente entre siete clases de activos con dimensionamiento según régimen.',pc1_cta:'Ver Fondo →',
-    pc2_tag:'Sistemático · Renta Variable y FX',pc2_title:'Estrategias<br>Sistemáticas',pc2_sub:'Una biblioteca de 12 estrategias cuantitativas propietarias: momentum, reversión a la media y regímenes macro en acciones y FX global.',pc2_cta:'Explorar Estrategias →',
+    pc2_tag:'Sistemático · Renta Variable y FX',pc2_title:'Estrategias<br>Sistemáticas',pc2_sub:'Una biblioteca de 15 estrategias cuantitativas propietarias: momentum, reversión a la media y regímenes macro en acciones y FX global.',pc2_cta:'Explorar Estrategias →',
     pc3_tag:'Interactivo · Toolkit de Analista',pc3_title:'Herramientas<br>Cuantitativas',pc3_sub:'Toolkit de analista en vivo — DCF, opciones, Monte Carlo, factor analytics. Todo lo que un gestor necesita, abierto a todos.',pc3_cta:'Abrir Toolkit →',
     kpi_inception:'Desde Inicio · Simulado',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Máx. Caída',kpi_active_strats:'Estrategias Activas',kpi_asset_classes:'Clases de Activos',kpi_live_models:'Modelos Interactivos'
   },
@@ -11350,7 +11296,7 @@ var I18N_EXTRA={
     rftr_02_title:'Historique',rftr_02_desc:'Chaque position publiée avec entrée, cible et thèse. Gains et pertes — tout en archive.',rftr_02_link:'Voir l\'historique complet →',
     rftr_03_title:'Outils Interactifs',rftr_03_desc:'Black-Scholes, DCF, construction de portefeuille — outils gratuits dans le navigateur.',rftr_03_link:'Ouvrir le toolkit →',
     pc1_tag:'Fonds Simulé · Multi-Actifs',pc1_title:"Fonds d'Allocation<br>Dynamique",pc1_sub:"Portefeuille macro rééquilibrant dynamiquement sur sept classes d'actifs avec dimensionnement par régime.",pc1_cta:'Voir le Fonds →',
-    pc2_tag:'Systématique · Actions & FX',pc2_title:'Stratégies<br>Systématiques',pc2_sub:'Une bibliothèque de 12 stratégies quantitatives : momentum, retour à la moyenne et régimes macro sur actions et FX mondial.',pc2_cta:'Explorer les Stratégies →',
+    pc2_tag:'Systématique · Actions & FX',pc2_title:'Stratégies<br>Systématiques',pc2_sub:'Une bibliothèque de 15 stratégies quantitatives : momentum, retour à la moyenne et régimes macro sur actions et FX mondial.',pc2_cta:'Explorer les Stratégies →',
     pc3_tag:'Interactif · Boîte à Outils',pc3_title:'Outils<br>Quantitatifs',pc3_sub:"Toolkit d'analyste live — DCF, options, Monte Carlo, factor analytics. Tout ce qu'un gérant attend, ouvert à tous.",pc3_cta:'Ouvrir le Toolkit →',
     kpi_inception:'Depuis Création · Simulé',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Perte Maximale',kpi_active_strats:'Stratégies Actives',kpi_asset_classes:"Classes d'Actifs",kpi_live_models:'Modèles Interactifs'
   },
@@ -11367,7 +11313,7 @@ var I18N_EXTRA={
     rftr_02_title:'Track Record',rftr_02_desc:'Jede Position mit Einstieg, Ziel und vollständiger These. Gewinne und Verluste — alles im Protokoll.',rftr_02_link:'Vollständigen Record ansehen →',
     rftr_03_title:'Interaktive Tools',rftr_03_desc:'Black-Scholes, DCF, Portfoliokonstruktion — kostenlose Open-Source-Tools im Browser.',rftr_03_link:'Toolkit öffnen →',
     pc1_tag:'Paper-Fonds · Multi-Asset',pc1_title:'Asset-Allokations-<br>Dynamikfonds',pc1_sub:'Makro-getriebenes Paper-Portfolio, das dynamisch über sieben Anlageklassen umschichtet mit regimebasiertem Sizing.',pc1_cta:'Fonds ansehen →',
-    pc2_tag:'Systematisch · Aktien & FX',pc2_title:'Systematische<br>Strategien',pc2_sub:'Eine Bibliothek von 12 quantitativen Strategien: Momentum, Mean-Reversion und Makro-Regime über US-Aktien und globale FX-Paare.',pc2_cta:'Strategien erkunden →',
+    pc2_tag:'Systematisch · Aktien & FX',pc2_title:'Systematische<br>Strategien',pc2_sub:'Eine Bibliothek von 15 quantitativen Strategien: Momentum, Mean-Reversion und Makro-Regime über US-Aktien und globale FX-Paare.',pc2_cta:'Strategien erkunden →',
     pc3_tag:'Interaktiv · Analysten-Toolkit',pc3_title:'Quant-<br>Tools',pc3_sub:'Live-Analysten-Toolkit — DCF, Optionen, Monte Carlo, Faktor-Analytics. Alles, was ein PM erwartet, offen für alle.',pc3_cta:'Toolkit öffnen →',
     kpi_inception:'Seit Auflage · Simuliert',kpi_sharpe:'Sharpe-Ratio',kpi_drawdown:'Max. Verlust',kpi_active_strats:'Aktive Strategien',kpi_asset_classes:'Anlageklassen',kpi_live_models:'Interaktive Modelle'
   },
@@ -11384,7 +11330,7 @@ var I18N_EXTRA={
     rftr_02_title:'Track Record',rftr_02_desc:'Ogni posizione pubblicata con entrata, obiettivo e tesi completa. Guadagni e perdite — tutto nel registro.',rftr_02_link:'Vedi il record completo →',
     rftr_03_title:'Strumenti Interattivi',rftr_03_desc:'Black-Scholes, DCF, costruzione di portafoglio — strumenti gratuiti open-source nel browser.',rftr_03_link:'Apri toolkit →',
     pc1_tag:'Fondo Simulato · Multi-Asset',pc1_title:'Fondo di Allocazione<br>Dinamica',pc1_sub:"Portafoglio macro che ribilancia dinamicamente su sette classi di attivi con dimensionamento basato sul regime.",pc1_cta:'Vedi il Fondo →',
-    pc2_tag:'Sistematico · Azionario & FX',pc2_title:'Strategie<br>Sistematiche',pc2_sub:'Una libreria di 12 strategie quantitative: momentum, mean-reversion e regimi macro su azioni USA e FX globale.',pc2_cta:'Esplora Strategie →',
+    pc2_tag:'Sistematico · Azionario & FX',pc2_title:'Strategie<br>Sistematiche',pc2_sub:'Una libreria di 15 strategie quantitative: momentum, mean-reversion e regimi macro su azioni USA e FX globale.',pc2_cta:'Esplora Strategie →',
     pc3_tag:'Interattivo · Toolkit Analista',pc3_title:'Strumenti<br>Quantitativi',pc3_sub:'Toolkit analista live — DCF, opzioni, Monte Carlo, factor analytics. Tutto ciò che un PM si aspetta, aperto a tutti.',pc3_cta:'Apri Toolkit →',
     kpi_inception:"Dall'Inizio · Simulato",kpi_sharpe:'Indice di Sharpe',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Strategie Attive',kpi_asset_classes:'Classi di Attivi',kpi_live_models:'Modelli Interattivi'
   },
@@ -11401,7 +11347,7 @@ var I18N_EXTRA={
     rftr_02_title:'业绩记录',rftr_02_desc:'每笔交易均附入场、目标和完整论点，盈亏全部记录在案。',rftr_02_link:'查看完整记录 →',
     rftr_03_title:'交互式工具',rftr_03_desc:'Black-Scholes、DCF、投资组合构建——免费开源浏览器工具。',rftr_03_link:'打开工具箱 →',
     pc1_tag:'模拟基金 · 多资产',pc1_title:'动态资产<br>配置基金',pc1_sub:'宏观驱动的模拟投资组合，在七大资产类别间动态再平衡，根据市场环境调整仓位。',pc1_cta:'查看基金 →',
-    pc2_tag:'系统化 · 股票与外汇',pc2_title:'系统化<br>策略',pc2_sub:'12个专有量化策略：动量、均值回归和宏观机制，覆盖美国股票和全球外汇。',pc2_cta:'探索策略 →',
+    pc2_tag:'系统化 · 股票与外汇',pc2_title:'系统化<br>策略',pc2_sub:'15个专有量化策略：动量、均值回归和宏观机制，覆盖美国股票和全球外汇。',pc2_cta:'探索策略 →',
     pc3_tag:'交互式 · 分析师工具包',pc3_title:'量化<br>工具',pc3_sub:'实时分析师工具包——DCF、期权定价、蒙特卡洛、因子分析等。基金经理所需的一切，向所有人开放。',pc3_cta:'打开工具包 →',
     kpi_inception:'成立以来 · 模拟',kpi_sharpe:'夏普比率',kpi_drawdown:'最大回撤',kpi_active_strats:'活跃策略',kpi_asset_classes:'资产类别',kpi_live_models:'交互式模型'
   }

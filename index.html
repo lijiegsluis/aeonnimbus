@@ -82,7 +82,7 @@
       {
         "@type": "Question",
         "name": "What kind of research does Aeon Nimbus publish?",
-        "acceptedAnswer": { "@type": "Answer", "text": "Aeon Nimbus publishes: (1) Formal equity investment calls with entry, target, stop-loss, and full thesis before the outcome is known. (2) Macro research briefs covering global markets, central bank policy, and geopolitical dynamics. (3) Systematic trading strategies — 12 quantitative models across equity and FX. (4) A dynamic macro model portfolio with +28.4% return since inception. (5) Open-source financial tools: DCF, Black-Scholes, Monte Carlo, and portfolio construction." }
+        "acceptedAnswer": { "@type": "Answer", "text": "Aeon Nimbus publishes: (1) Formal equity investment calls with entry, target, stop-loss, and full thesis before the outcome is known. (2) Macro research briefs covering global markets, central bank policy, and geopolitical dynamics. (3) Systematic trading strategies — 12 quantitative models across equity and FX. (4) A dynamic macro model portfolio with a simulated +28.4% return since inception. (5) Open-source financial tools: DCF, Black-Scholes, Monte Carlo, and portfolio construction." }
       },
       {
         "@type": "Question",
@@ -9153,6 +9153,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">All LR Correlations</div></div>
     <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
   </div>
+  <details class="fx-glossary" style="margin:14px 0 18px;font-family:var(--FM);font-size:10.5px;color:var(--ink2);line-height:1.7">
+    <summary style="cursor:pointer;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;font-size:9px">How to read these metrics</summary>
+    <div style="padding:10px 0 0">
+      <b>LR correlation</b> — correlation between the equity curve and its straight-line (linear regression) fit; 1.0 means perfectly steady growth.<br>
+      <b>Recovery factor</b> — net profit ÷ maximum drawdown; how many times over the strategy earned back its worst drawdown.<br>
+      <b>Profit factor</b> — gross profit ÷ gross loss.<br>
+      <b>Max DD (relative)</b> — largest peak-to-trough fall as a percentage of the equity peak.<br>
+      <b>Tick quality</b> — share of the backtest driven by real historical ticks rather than modelled prices.<br>
+      Sharpe ratios are as reported by the backtest engine. All figures are backtests under the fixed-% risk sizing described below, not live trading results.
+    </div>
+  </details>
 
   <div class="fx-cards">
 
@@ -9168,12 +9179,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">2.13</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.90</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual md">Strong</div>
           </div>
         </div>
       </div>
@@ -9220,12 +9229,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">2.20</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.90</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual md">Strong</div>
           </div>
         </div>
       </div>
@@ -9272,12 +9279,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">2.31</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.97</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
         </div>
       </div>
@@ -9324,12 +9329,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">1.91</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Excellent</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.93</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual md">Strong</div>
           </div>
         </div>
       </div>
@@ -9376,12 +9379,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">1.82</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Excellent</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.96</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
         </div>
       </div>
@@ -9449,12 +9450,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">3.86</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.95</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
         </div>
       </div>
@@ -9501,12 +9500,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">1.88</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Excellent</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.97</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
         </div>
       </div>
@@ -9553,12 +9550,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">3.62</div>
             <div class="fx-hd-klbl">Sharpe Ratio</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.98</div>
             <div class="fx-hd-klbl">LR Correlation</div>
-            <div class="fx-hd-kqual hi">Exceptional</div>
           </div>
         </div>
       </div>
@@ -9633,7 +9628,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="port-card-title" data-i18n-html="pc1_title">Asset Allocation<br>Dynamic Fund</div>
     <div class="port-card-sub" data-i18n="pc1_sub">A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">+28.4%</span><span class="port-kpi-l" data-i18n="kpi_inception">Since Inception</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">+28.4%</span><span class="port-kpi-l" data-i18n="kpi_inception">Since Inception · Simulated</span></div>
       <div class="port-kpi"><span class="port-kpi-v">1.31</span><span class="port-kpi-l" data-i18n="kpi_sharpe">Sharpe Ratio</span></div>
       <div class="port-kpi"><span class="port-kpi-v">−8.2%</span><span class="port-kpi-l" data-i18n="kpi_drawdown">Max Drawdown</span></div>
     </div>
@@ -9658,7 +9653,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="port-card-title" data-i18n-html="pc3_title">Open Source<br>Tools</div>
     <div class="port-card-sub" data-i18n="pc3_sub">Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.</div>
     <div class="port-kpis">
-      <div class="port-kpi"><span class="port-kpi-v">12+</span><span class="port-kpi-l" data-i18n="kpi_live_models">Live Models</span></div>
+      <div class="port-kpi"><span class="port-kpi-v">12+</span><span class="port-kpi-l" data-i18n="kpi_live_models">Interactive Models</span></div>
     </div>
     <div class="port-card-cta" data-i18n="pc3_cta">Open Toolkit →</div>
   </div>
@@ -11323,7 +11318,7 @@ var I18N_EXTRA={
     pc1_tag:'Model Portfolio · Multi-Asset',pc1_title:'Asset Allocation<br>Dynamic Fund',pc1_sub:'A macro-driven paper portfolio rebalancing dynamically across seven asset classes. Equity, fixed income, gold, EM and commodities with regime-aware sizing.',pc1_cta:'View Fund →',
     pc2_tag:'Systematic · Equity & FX',pc2_title:'Systematic<br>Strategies',pc2_sub:'A library of 12 proprietary quantitative strategies spanning momentum, mean-reversion and macro regimes across US equities and global FX pairs.',pc2_cta:'Explore Strategies →',
     pc3_tag:'Interactive · Analyst Toolkit',pc3_title:'Quant<br>Tools',pc3_sub:'Live analyst toolkit — DCF models, options pricing, Monte Carlo, factor analytics and more. Every tool a PM or research desk expects fluency in, open to all.',pc3_cta:'Open Toolkit →',
-    kpi_inception:'Since Inception',kpi_sharpe:'Sharpe Ratio',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Active Strategies',kpi_asset_classes:'Asset Classes',kpi_live_models:'Live Models'
+    kpi_inception:'Since Inception · Simulated',kpi_sharpe:'Sharpe Ratio',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Active Strategies',kpi_asset_classes:'Asset Classes',kpi_live_models:'Interactive Models'
   },
   es:{
     home_tagline:'<strong>Mercados globales. Visión sin cobertura.</strong><br><br>El mundo siempre tiene un precio incorrecto en algún lugar. El capital sigue narrativas. Las narrativas siguen el poder. La mayoría lee el precio. Esto trata de leer lo que lo mueve.',
@@ -11340,7 +11335,7 @@ var I18N_EXTRA={
     pc1_tag:'Fondo Simulado · Multi-Activo',pc1_title:'Fondo de Asignación<br>Dinámica',pc1_sub:'Portafolio macro impulsado que reequilibra dinámicamente entre siete clases de activos con dimensionamiento según régimen.',pc1_cta:'Ver Fondo →',
     pc2_tag:'Sistemático · Renta Variable y FX',pc2_title:'Estrategias<br>Sistemáticas',pc2_sub:'Una biblioteca de 12 estrategias cuantitativas propietarias: momentum, reversión a la media y regímenes macro en acciones y FX global.',pc2_cta:'Explorar Estrategias →',
     pc3_tag:'Interactivo · Toolkit de Analista',pc3_title:'Herramientas<br>Cuantitativas',pc3_sub:'Toolkit de analista en vivo — DCF, opciones, Monte Carlo, factor analytics. Todo lo que un gestor necesita, abierto a todos.',pc3_cta:'Abrir Toolkit →',
-    kpi_inception:'Desde Inicio',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Máx. Caída',kpi_active_strats:'Estrategias Activas',kpi_asset_classes:'Clases de Activos',kpi_live_models:'Modelos en Vivo'
+    kpi_inception:'Desde Inicio · Simulado',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Máx. Caída',kpi_active_strats:'Estrategias Activas',kpi_asset_classes:'Clases de Activos',kpi_live_models:'Modelos Interactivos'
   },
   fr:{
     home_tagline:"<strong>Marchés mondiaux. Vues non couvertes.</strong><br><br>Le monde est toujours mal valorisé quelque part. Le capital suit les récits. Les récits suivent le pouvoir. La plupart lisent le prix. Ceci lit ce qui le fait bouger.",
@@ -11357,7 +11352,7 @@ var I18N_EXTRA={
     pc1_tag:'Fonds Simulé · Multi-Actifs',pc1_title:"Fonds d'Allocation<br>Dynamique",pc1_sub:"Portefeuille macro rééquilibrant dynamiquement sur sept classes d'actifs avec dimensionnement par régime.",pc1_cta:'Voir le Fonds →',
     pc2_tag:'Systématique · Actions & FX',pc2_title:'Stratégies<br>Systématiques',pc2_sub:'Une bibliothèque de 12 stratégies quantitatives : momentum, retour à la moyenne et régimes macro sur actions et FX mondial.',pc2_cta:'Explorer les Stratégies →',
     pc3_tag:'Interactif · Boîte à Outils',pc3_title:'Outils<br>Quantitatifs',pc3_sub:"Toolkit d'analyste live — DCF, options, Monte Carlo, factor analytics. Tout ce qu'un gérant attend, ouvert à tous.",pc3_cta:'Ouvrir le Toolkit →',
-    kpi_inception:'Depuis Inception',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Perte Maximale',kpi_active_strats:'Stratégies Actives',kpi_asset_classes:"Classes d'Actifs",kpi_live_models:'Modèles en Direct'
+    kpi_inception:'Depuis Création · Simulé',kpi_sharpe:'Ratio de Sharpe',kpi_drawdown:'Perte Maximale',kpi_active_strats:'Stratégies Actives',kpi_asset_classes:"Classes d'Actifs",kpi_live_models:'Modèles Interactifs'
   },
   de:{
     home_tagline:'<strong>Globale Märkte. Ungesicherte Ansichten.</strong><br><br>Die Welt ist immer irgendwo falsch bewertet. Kapital folgt Narrativen. Narrative folgen der Macht. Die meisten lesen den Preis. Es geht darum, zu lesen, was ihn bewegt.',
@@ -11374,7 +11369,7 @@ var I18N_EXTRA={
     pc1_tag:'Paper-Fonds · Multi-Asset',pc1_title:'Asset-Allokations-<br>Dynamikfonds',pc1_sub:'Makro-getriebenes Paper-Portfolio, das dynamisch über sieben Anlageklassen umschichtet mit regimebasiertem Sizing.',pc1_cta:'Fonds ansehen →',
     pc2_tag:'Systematisch · Aktien & FX',pc2_title:'Systematische<br>Strategien',pc2_sub:'Eine Bibliothek von 12 quantitativen Strategien: Momentum, Mean-Reversion und Makro-Regime über US-Aktien und globale FX-Paare.',pc2_cta:'Strategien erkunden →',
     pc3_tag:'Interaktiv · Analysten-Toolkit',pc3_title:'Quant-<br>Tools',pc3_sub:'Live-Analysten-Toolkit — DCF, Optionen, Monte Carlo, Faktor-Analytics. Alles, was ein PM erwartet, offen für alle.',pc3_cta:'Toolkit öffnen →',
-    kpi_inception:'Seit Auflage',kpi_sharpe:'Sharpe-Ratio',kpi_drawdown:'Max. Verlust',kpi_active_strats:'Aktive Strategien',kpi_asset_classes:'Anlageklassen',kpi_live_models:'Live-Modelle'
+    kpi_inception:'Seit Auflage · Simuliert',kpi_sharpe:'Sharpe-Ratio',kpi_drawdown:'Max. Verlust',kpi_active_strats:'Aktive Strategien',kpi_asset_classes:'Anlageklassen',kpi_live_models:'Interaktive Modelle'
   },
   it:{
     home_tagline:'<strong>Mercati globali. Visioni senza copertura.</strong><br><br>Il mondo è sempre valutato male da qualche parte. Il capitale segue le narrazioni. Le narrazioni seguono il potere. La maggior parte legge il prezzo. Questo riguarda leggere ciò che lo muove.',
@@ -11391,7 +11386,7 @@ var I18N_EXTRA={
     pc1_tag:'Fondo Simulato · Multi-Asset',pc1_title:'Fondo di Allocazione<br>Dinamica',pc1_sub:"Portafoglio macro che ribilancia dinamicamente su sette classi di attivi con dimensionamento basato sul regime.",pc1_cta:'Vedi il Fondo →',
     pc2_tag:'Sistematico · Azionario & FX',pc2_title:'Strategie<br>Sistematiche',pc2_sub:'Una libreria di 12 strategie quantitative: momentum, mean-reversion e regimi macro su azioni USA e FX globale.',pc2_cta:'Esplora Strategie →',
     pc3_tag:'Interattivo · Toolkit Analista',pc3_title:'Strumenti<br>Quantitativi',pc3_sub:'Toolkit analista live — DCF, opzioni, Monte Carlo, factor analytics. Tutto ciò che un PM si aspetta, aperto a tutti.',pc3_cta:'Apri Toolkit →',
-    kpi_inception:"Dall'Inizio",kpi_sharpe:'Indice di Sharpe',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Strategie Attive',kpi_asset_classes:'Classi di Attivi',kpi_live_models:'Modelli Live'
+    kpi_inception:"Dall'Inizio · Simulato",kpi_sharpe:'Indice di Sharpe',kpi_drawdown:'Max Drawdown',kpi_active_strats:'Strategie Attive',kpi_asset_classes:'Classi di Attivi',kpi_live_models:'Modelli Interattivi'
   },
   cn:{
     home_tagline:'<strong>全球市场。无对冲观点。</strong><br><br>世界某处永远存在错误定价。资本追随叙事，叙事追随权力。大多数人读取价格，而这里关于读懂推动价格的力量。',
@@ -11408,7 +11403,7 @@ var I18N_EXTRA={
     pc1_tag:'模拟基金 · 多资产',pc1_title:'动态资产<br>配置基金',pc1_sub:'宏观驱动的模拟投资组合，在七大资产类别间动态再平衡，根据市场环境调整仓位。',pc1_cta:'查看基金 →',
     pc2_tag:'系统化 · 股票与外汇',pc2_title:'系统化<br>策略',pc2_sub:'12个专有量化策略：动量、均值回归和宏观机制，覆盖美国股票和全球外汇。',pc2_cta:'探索策略 →',
     pc3_tag:'交互式 · 分析师工具包',pc3_title:'量化<br>工具',pc3_sub:'实时分析师工具包——DCF、期权定价、蒙特卡洛、因子分析等。基金经理所需的一切，向所有人开放。',pc3_cta:'打开工具包 →',
-    kpi_inception:'成立以来',kpi_sharpe:'夏普比率',kpi_drawdown:'最大回撤',kpi_active_strats:'活跃策略',kpi_asset_classes:'资产类别',kpi_live_models:'实时模型'
+    kpi_inception:'成立以来 · 模拟',kpi_sharpe:'夏普比率',kpi_drawdown:'最大回撤',kpi_active_strats:'活跃策略',kpi_asset_classes:'资产类别',kpi_live_models:'交互式模型'
   }
 };
 // Merge extra keys into main I18N object
@@ -16960,6 +16955,18 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
     {tk:'ASTS',ret:28.8,period:'Jul–Aug 2026',alloc:3},
     {tk:'ADEA',ret:4.8, period:'May–Aug 2026',alloc:2}
   ];
+  /* Prefer the live registry rows (chronological by exit date, published size) so new closes appear automatically */
+  (function(){
+    var mo=function(d){ return new Date(d).toLocaleDateString('en-GB',{month:'short',timeZone:'UTC'}); };
+    var live=Array.prototype.slice.call(document.querySelectorAll('table.tr tbody tr')).map(function(r){
+      var ret=parseFloat((r.querySelector('.tr-ret')||{}).textContent), size=parseFloat((r.querySelector('td[data-label="Size"]')||{}).textContent);
+      if(!r.dataset.exitDate||isNaN(ret)) return null;
+      var pub=r.dataset.callPubdate, ex=r.dataset.exitDate, y=new Date(ex).getUTCFullYear();
+      return {tk:(r.dataset.sym||'').replace(/^\$/,''),ret:ret,alloc:isNaN(size)?3:size,exit:ex,
+        period:(mo(pub)===mo(ex)?mo(ex):mo(pub)+'–'+mo(ex))+' '+y};
+    }).filter(Boolean).sort(function(a,b){ return a.exit<b.exit?-1:1; });
+    if(live.length) calls=live;
+  })();
   /* build allocation inputs */
   var allocRow=qs('#hv3-alloc-row');
   if(allocRow){ calls.forEach(function(c,i){ var el=document.createElement('div'); el.className='hv3-sim-alloc-item'; el.innerHTML='<div class="hv3-sim-alloc-tk"><b>'+c.tk+'</b><br>+'+c.ret+'%</div><input class="hv3-sim-alloc-input" type="number" value="'+c.alloc+'" min="0.5" max="100" step="0.5" data-i="'+i+'">'; allocRow.appendChild(el); }); allocRow.addEventListener('input',function(e){ if(e.target.dataset.i!=null){ calls[+e.target.dataset.i].alloc=parseFloat(e.target.value)||0; recalc(); } }); }

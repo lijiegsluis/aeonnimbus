@@ -7933,15 +7933,15 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div id="rrev" style="margin-top:12px;padding:13px 16px;background:rgba(196,154,42,.05);border:1px solid var(--line);font-family:var(--FS);font-size:13px;color:var(--white3);line-height:1.7;font-style:italic">Run valuation to see reverse DCF analysis — what the current price implies the market is assuming.</div>
   <div class="sec3">
-    <div class="sc sc-b"><div class="sclbl">Bear case (20%)</div><div class="scpx" id="sb">—</div><div class="scud" id="sbud">—</div><div class="scprob">WACC +2%, terminal growth −1%</div></div>
+    <div class="sc sc-b"><div class="sclbl">Bear case (20%)</div><div class="scpx" id="sb">—</div><div class="scud" id="sbud">—</div><div class="scprob">WACC +2%, exit multiple −1x</div></div>
     <div class="sc sc-m"><div class="sclbl">Base case (60%)</div><div class="scpx" id="sm">—</div><div class="scud" id="smud">—</div><div class="scprob">Your model assumptions</div></div>
-    <div class="sc sc-l"><div class="sclbl">Bull case (20%)</div><div class="scpx" id="sl">—</div><div class="scud" id="slud">—</div><div class="scprob">WACC −1%, terminal growth +0.5%</div></div>
+    <div class="sc sc-l"><div class="sclbl">Bull case (20%)</div><div class="scpx" id="sl">—</div><div class="scud" id="slud">—</div><div class="scprob">WACC −1%, exit multiple +1x</div></div>
   </div>
   <div class="evline"><span class="evl">Expected value (probability-weighted: Bear 20% / Base 60% / Bull 20%)</span><span class="evv" id="revc">—</span></div>
 </div>
 <!-- SENSITIVITY -->
 <div class="tvpanel" id="dcf-s">
-  <p style="font-family:var(--FS);font-size:13px;color:var(--white3);font-style:italic;margin-bottom:12px">Each cell shows the implied share price under that WACC and terminal growth combination. Base case highlighted in gold. Green = material upside. Amber = near current. Red = downside.</p>
+  <p style="font-family:var(--FS);font-size:13px;color:var(--white3);font-style:italic;margin-bottom:12px">Each cell shows the implied share price under that WACC and exit EV/EBITDA multiple combination. Base case highlighted in gold. Green = material upside. Amber = near current. Red = downside.</p>
   <div style="overflow-x:auto" id="sensbox"><p style="color:var(--g2);font-family:var(--FM);font-size:11px;padding:16px">Run valuation in Inputs tab to generate sensitivity tables.</p></div>
 </div>
 <!-- PEERS -->
@@ -10291,6 +10291,7 @@ document.querySelectorAll('.fb').forEach(b=>{b.addEventListener('click',function
 
 // ═══ UTILITIES ═══════════════════════════════════════
 const gv=id=>parseFloat(document.getElementById(id)?.value)||0;
+const escHTML=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const gs=id=>document.getElementById(id)?.value||'';
 const set=(id,v)=>{const e=document.getElementById(id);if(e)e.textContent=v};
 const fM=n=>{const a=Math.abs(n);return(n<0?'-':'')+( a>=1e9?'$'+(a/1e9).toFixed(2)+'B':a>=1e6?'$'+(a/1e6).toFixed(1)+'M':'$'+Math.round(a) )};
@@ -10299,10 +10300,10 @@ const pct=n=>(n>=0?'+':'')+n.toFixed(1)+'%';
 const med=arr=>{const s=[...arr].sort((a,b)=>a-b);const m=Math.floor(s.length/2);return s.length%2?s[m]:(s[m-1]+s[m])/2};
 
 // ═══ DCF ENGINE ═══════════════════════════════════════
-function calcDCF(inp,wacc,tgOv){
-  const tg=tgOv!==undefined?tgOv:inp.tg;
+function calcDCF(inp,wacc,exitOv){
+  const exit=exitOv!==undefined?exitOv:inp.exit;
   const revs=[inp.r];
-  for(let i=0;i<5;i++) revs.push(revs[i]*(1+(inp.g[i]||8)/100));
+  for(let i=0;i<5;i++) revs.push(revs[i]*(1+(inp.g[i]??8)/100));
   const em0=inp.em,em5=inp.em5;
   const rows=[];
   for(let i=0;i<5;i++){
@@ -10318,15 +10319,17 @@ function calcDCF(inp,wacc,tgOv){
     rows.push({rev,em,ebitda,da,nopat,cx,ufcf,pv});
   }
   const pvFCF=rows.reduce((a,r)=>a+r.pv,0);
-  const tv=rows[4].ebitda*inp.exit;
+  const tv=rows[4].ebitda*exit;
   const pvTV=tv/Math.pow(1+wacc/100,5);
   const ev=pvFCF+pvTV;
   const eq=ev-inp.nd;
   const px=eq/inp.sh;
-  return{rows,pvFCF,tv,pvTV,ev,eq,px,lastEBITDA:rows[4].ebitda,lastRev:rows[4].rev};
+  const tvG=wacc>inp.tg?rows[4].ufcf*(1+inp.tg/100)/((wacc-inp.tg)/100):NaN;
+  const pxG=(pvFCF+tvG/Math.pow(1+wacc/100,5)-inp.nd)/inp.sh;
+  return{rows,pvFCF,tv,pvTV,ev,eq,px,pxG,lastEBITDA:rows[4].ebitda,lastRev:rows[4].rev};
 }
 
-function runDCF(){
+function readDCFInputs(){
   const inp={
     name:gs('dn'),ticker:gs('dt'),
     p:gv('dp'),sh:gv('dsh'),nd:gv('dnd'),mc:gv('dmc'),
@@ -10337,12 +10340,15 @@ function runDCF(){
     rf:gv('wrf'),erp:gv('werp'),beta:gv('wb'),
     crp:gv('wcrp'),cod:gv('wcd'),dw:gv('wdw')
   };
-
-  // WACC / CAPM
   const ke=inp.rf+inp.beta*inp.erp+inp.crp;
   const kdAt=inp.cod*(1-inp.tax/100);
   const ew=1-inp.dw/100;
   const wacc=ke*ew+kdAt*(inp.dw/100);
+  return {inp,ke,kdAt,ew,wacc};
+}
+
+function runDCF(){
+  const {inp,ke,kdAt,ew,wacc}=readDCFInputs();
   set('rrf',inp.rf.toFixed(2)+'%');
   set('rberp',(inp.beta*inp.erp).toFixed(2)+'%');
   set('rcrp',inp.crp.toFixed(2)+'%');
@@ -10382,28 +10388,27 @@ function runDCF(){
   // Reverse DCF
   const implEV=inp.p*inp.sh+inp.nd;
   const implExit=(implEV-res.pvFCF)/res.lastEBITDA;
-  document.getElementById('rrev').innerHTML=`<strong style="color:var(--white)">Reverse DCF:</strong> For the market price of <strong style="color:var(--gold)">$${inp.p}</strong> to be fair value, the implied exit EV/EBITDA is <strong style="color:var(--gold)">${implExit.toFixed(1)}x</strong> vs your base case exit of ${inp.exit}x. ${implExit<inp.exit?'The market is implying a discount to your exit multiple — either the market is wrong, or your model is too optimistic.':'The market is pricing a premium to your exit — either the stock is expensive, or the market is more bullish than your model.'}`;
+  document.getElementById('rrev').innerHTML=`<strong style="color:var(--white)">Reverse DCF:</strong> For the market price of <strong style="color:var(--gold)">$${inp.p}</strong> to be fair value, the implied exit EV/EBITDA is <strong style="color:var(--gold)">${implExit.toFixed(1)}x</strong> vs your base case exit of ${inp.exit}x. ${implExit<inp.exit?'The market is implying a discount to your exit multiple — either the market is wrong, or your model is too optimistic.':'The market is pricing a premium to your exit — either the stock is expensive, or the market is more bullish than your model.'} Gordon-growth cross-check at ${inp.tg}% terminal growth: <strong style="color:var(--gold)">${isFinite(res.pxG)?fP(res.pxG):'n/a (WACC ≤ growth)'}</strong> per share.`;
 
   // Scenarios
-  const bear=calcDCF(inp,wacc+2);
-  const bull=calcDCF(inp,wacc-1,inp.tg+0.5);
+  const bear=calcDCF(inp,wacc+2,Math.max(inp.exit-1,0));
+  const bull=calcDCF(inp,wacc-1,inp.exit+1);
   const evc=bear.px*.2+res.px*.6+bull.px*.2;
   set('sb',fP(bear.px));set('sbud',pct((bear.px-inp.p)/inp.p*100));
   set('sm',fP(res.px));set('smud',pct(ud));
   set('sl',fP(bull.px));set('slud',pct((bull.px-inp.p)/inp.p*100));
   set('revc',fP(evc)+' ('+pct((evc-inp.p)/inp.p*100)+')');
 
-  // Sensitivity table (WACC × terminal growth)
   const wR=[wacc-2,wacc-1.5,wacc-1,wacc-.5,wacc,wacc+.5,wacc+1,wacc+1.5,wacc+2];
-  const tR=[inp.tg-2,inp.tg-1,inp.tg-.5,inp.tg,inp.tg+.5,inp.tg+1];
-  let sh=`<table class="stbl"><thead><tr><th>WACC \\ TG</th>`;
-  tR.forEach(t=>sh+=`<th>${t.toFixed(1)}%</th>`);sh+=`</tr></thead><tbody>`;
+  const xR=[inp.exit-3,inp.exit-2,inp.exit-1,inp.exit,inp.exit+1,inp.exit+2].filter(x=>x>0);
+  let sh=`<table class="stbl"><thead><tr><th>WACC \\ Exit EV/EBITDA</th>`;
+  xR.forEach(x=>sh+=`<th>${x.toFixed(1)}x</th>`);sh+=`</tr></thead><tbody>`;
   wR.forEach(w=>{
     sh+=`<tr><td>${w.toFixed(1)}%</td>`;
-    tR.forEach(t=>{
-      const r2=calcDCF(inp,w,t);
+    xR.forEach(x=>{
+      const r2=calcDCF(inp,w,x);
       const d=(r2.px-inp.p)/inp.p*100;
-      const base=Math.abs(w-wacc)<.05&&Math.abs(t-inp.tg)<.05;
+      const base=Math.abs(w-wacc)<.05&&Math.abs(x-inp.exit)<.05;
       sh+=`<td class="${base?'sb':d>20?'sh':d>-5?'sm':'sl'}">$${r2.px.toFixed(0)}</td>`;
     });
     sh+=`</tr>`;
@@ -10686,14 +10691,14 @@ function scoreIdea(){
     <div style="display:flex;gap:16px;margin-bottom:14px;align-items:flex-start;flex-wrap:wrap">
       <div style="padding:14px 20px;background:rgba(255,255,255,.03);border:2px solid ${rcolor};text-align:center;min-width:110px">
         <div style="font-family:var(--FM);font-size:8px;color:var(--g2);letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px">Score</div>
-        <div style="font-family:var(--FD);font-size:38px;font-weight:700;color:${rcolor};line-height:1">${score}</div>
+        <div id="ideaScore" style="font-family:var(--FD);font-size:38px;font-weight:700;color:${rcolor};line-height:1">${score}</div>
         <div style="font-family:var(--FM);font-size:8.5px;color:var(--g2)">/100</div>
       </div>
       <div style="flex:1;min-width:200px">
-        <div style="font-family:var(--FD);font-size:15px;font-weight:600;color:${rcolor};margin-bottom:8px">${rating}</div>
-        <div style="font-family:var(--FM);font-size:10px;color:var(--gold);letter-spacing:.08em;margin-bottom:5px">${dir.toUpperCase()} ${tick}</div>
-        <div style="font-family:var(--FS);font-size:13px;color:var(--white3);font-style:italic;line-height:1.5;margin-bottom:4px">Catalyst: ${cat||'—'}</div>
-        <div style="font-family:var(--FS);font-size:12px;color:var(--g1);font-style:italic">Invalidation: ${inv||'—'}</div>
+        <div id="ideaVerdict" style="font-family:var(--FD);font-size:15px;font-weight:600;color:${rcolor};margin-bottom:8px">${rating}</div>
+        <div style="font-family:var(--FM);font-size:10px;color:var(--gold);letter-spacing:.08em;margin-bottom:5px">${escHTML(dir.toUpperCase())} ${escHTML(tick)}</div>
+        <div style="font-family:var(--FS);font-size:13px;color:var(--white3);font-style:italic;line-height:1.5;margin-bottom:4px">Catalyst: ${escHTML(cat)||'—'}</div>
+        <div style="font-family:var(--FS);font-size:12px;color:var(--g1);font-style:italic">Invalidation: ${escHTML(inv)||'—'}</div>
       </div>
     </div>
     ${strengths.length?`<div style="margin-bottom:10px">${strengths.map(s=>`<div class="idflag ok">✓ ${s}</div>`).join('')}</div>`:''}
@@ -11611,12 +11616,13 @@ function qImpliedVol(mktPrice,S,K,T,r,type){
 // ─────────────────────────────────────────────────────────────────────────
 // RUN BLACK-SCHOLES
 // ─────────────────────────────────────────────────────────────────────────
+const numOr=(id,d)=>{const v=parseFloat(document.getElementById(id)?.value);return isNaN(v)?d:v;};
 function runQBS(){
   const S   = +document.getElementById('qbs_S').value   || 100;
   const K   = +document.getElementById('qbs_K').value   || 100;
   const T   = +document.getElementById('qbs_T').value   || 0.5;
   const sig = (+document.getElementById('qbs_sig').value || 20)/100;
-  const r   = (+document.getElementById('qbs_r').value  || 5)/100;
+  const r   = numOr('qbs_r',5)/100;
   const type= document.getElementById('qbs_type').value || 'call';
 
   const price = qBSM(S,K,T,r,sig,type);
@@ -11719,7 +11725,7 @@ function runQIV(){
 // ─────────────────────────────────────────────────────────────────────────
 function runQMC(){
   const S0  = +document.getElementById('qmc_S').value    || 100;
-  const mu  = (+document.getElementById('qmc_mu').value  || 8)/100;
+  const mu  = numOr('qmc_mu',8)/100;
   const sig = (+document.getElementById('qmc_sig').value || 20)/100;
   const N   = +document.getElementById('qmc_N').value    || 500;
   const days= +document.getElementById('qmc_days').value || 252;
@@ -11846,9 +11852,9 @@ function runQMC(){
 // ─────────────────────────────────────────────────────────────────────────
 function runQBond(){
   const face = +document.getElementById('qbd_face').value || 1000;
-  const cpnR = (+document.getElementById('qbd_cpn').value || 5)/100;
+  const cpnR = numOr('qbd_cpn',5)/100;
   const freq  = +document.getElementById('qbd_freq').value || 2;
-  const ytm   = (+document.getElementById('qbd_ytm').value || 4.5)/100;
+  const ytm   = numOr('qbd_ytm',4.5)/100;
   const mat   = +document.getElementById('qbd_mat').value  || 10;
   const accDays=+document.getElementById('qbd_acc').value  || 0;
 
@@ -12497,22 +12503,20 @@ function exportBSExcel(){
 // ── 2. MONTE CARLO EXPORT ─────────────────────────────────────────────────
 function exportMCExcel(){
   if(typeof XLSX === 'undefined'){ alert('SheetJS not loaded.'); return; }
-  const mcCheck = document.querySelector('#quant-mc2 .q-result-val')?.textContent || '—';
+  const mcCheck = document.getElementById('qmc_mean')?.textContent || '—';
   if(mcCheck === '—'){ alert('Please run the calculation first.'); return; }
-  const S0  = parseFloat(document.getElementById('qmc_S0')?.value  || 100);
+  const S0  = parseFloat(document.getElementById('qmc_S')?.value   || 100);
   const mu  = parseFloat(document.getElementById('qmc_mu')?.value  || 8) / 100;
   const sig = parseFloat(document.getElementById('qmc_sig')?.value || 20) / 100;
-  const T   = parseFloat(document.getElementById('qmc_T')?.value   || 1);
+  const T   = +(parseFloat(document.getElementById('qmc_days')?.value || 252) / 252).toFixed(4);
   const N   = parseInt(document.getElementById('qmc_N')?.value     || 1000);
-  const typ = document.getElementById('qmc_type')?.value           || 'gbm';
+  const typ = 'gbm';
 
   // Read displayed statistics
   const statsRows = [];
-  document.querySelectorAll('#quant-mc2 .q-result-box').forEach(box => {
-    const lbl = box.querySelector('.q-result-lbl')?.textContent || '';
-    const val = box.querySelector('.q-result-val')?.textContent || '';
-    const sub = box.querySelector('.q-result-sub')?.textContent || '';
-    if(lbl) statsRows.push([lbl, val, sub]);
+  document.querySelectorAll('#qmc_stats tbody tr').forEach(tr => {
+    const [lbl, val] = [...tr.cells].map(td => td.textContent);
+    if(lbl) statsRows.push([lbl, val, '']);
   });
 
   // Percentile table using GBM formula (closed-form percentiles)
@@ -12564,11 +12568,11 @@ function exportMCExcel(){
 // ── 3. BOND ANALYTICS EXPORT ──────────────────────────────────────────────
 function exportBondExcel(){
   if(typeof XLSX === 'undefined'){ alert('SheetJS not loaded.'); return; }
-  const fv     = parseFloat(document.getElementById('qb_fv')?.value    || 1000);
-  const coupon = parseFloat(document.getElementById('qb_cpn')?.value   || 5) / 100;
-  const freq   = parseInt(document.getElementById('qb_freq')?.value    || 2);
-  const T      = parseFloat(document.getElementById('qb_T')?.value     || 10);
-  const ytm    = parseFloat(document.getElementById('qb_ytm')?.value   || 5) / 100;
+  const fv     = parseFloat(document.getElementById('qbd_face')?.value || 1000);
+  const coupon = parseFloat(document.getElementById('qbd_cpn')?.value  || 5) / 100;
+  const freq   = parseInt(document.getElementById('qbd_freq')?.value   || 2);
+  const T      = parseFloat(document.getElementById('qbd_mat')?.value  || 10);
+  const ytm    = parseFloat(document.getElementById('qbd_ytm')?.value  || 4.5) / 100;
 
   // Recompute cash flows
   const periods     = T * freq;
@@ -12649,58 +12653,17 @@ function exportDCFExcel(){
   const dcfCheck = document.getElementById('rpvf')?.textContent || '—';
   if(dcfCheck === '—'){ alert('Please run the calculation first.'); return; }
 
-  // Pull all DCF inputs
-  const g = id => parseFloat(document.getElementById(id)?.value || 0);
-  const t = id => document.getElementById(id)?.textContent || '—';
+  const {inp, wacc} = readDCFInputs();
+  const res = calcDCF(inp, wacc);
+  const f2 = v => isFinite(v) ? +v.toFixed(2) : 'n/a';
 
-  const rev0  = g('rev0');
-  const gr    = [g('g1'),g('g2'),g('g3'),g('g4'),g('g5')];
-  const em    = [g('em1'),g('em2'),g('em3'),g('em4'),g('em5')];
-  const da    = [g('da1'),g('da2'),g('da3'),g('da4'),g('da5')];
-  const capex = [g('cx1'),g('cx2'),g('cx3'),g('cx4'),g('cx5')];
-  const nwc   = [g('nw1'),g('nw2'),g('nw3'),g('nw4'),g('nw5')];
-  const tax   = g('tax');
-  const wacc  = g('wacc');
-  const tgr   = g('tgr');
-  const net_debt  = g('netdebt');
-  const diluted_sh = g('dilsh');
+  const projRows = res.rows.map((r, i) => [`Year ${i+1}`, f2(r.rev), f2(r.ebitda), f2(r.da),
+    f2(r.nopat), f2(r.cx), f2(r.ufcf), f2(r.pv)]);
 
-  // Recompute projections
-  const projRows = [];
-  let revPrev = rev0;
-  const pvFCFs = [];
-  for(let i = 0; i < 5; i++){
-    const yr    = `Year ${i+1}`;
-    const rev   = revPrev * (1 + gr[i]/100);
-    const ebit  = rev * em[i]/100;
-    const nopat = ebit * (1 - tax/100);
-    const daAmt = rev * da[i]/100;
-    const cxAmt = rev * capex[i]/100;
-    const nwcAmt = rev * nwc[i]/100;
-    const fcf   = nopat + daAmt - cxAmt - nwcAmt;
-    const pv    = fcf / Math.pow(1 + wacc/100, i+1);
-    pvFCFs.push(pv);
-    projRows.push([yr, rev.toFixed(2), ebit.toFixed(2), nopat.toFixed(2), daAmt.toFixed(2),
-                   cxAmt.toFixed(2), nwcAmt.toFixed(2), fcf.toFixed(2), pv.toFixed(2)]);
-    revPrev = rev;
-  }
-  const sumPV  = pvFCFs.reduce((a,b) => a+b, 0);
-  const tv     = pvFCFs[4] * (1 + tgr/100) / ((wacc - tgr)/100) / Math.pow(1+wacc/100, 5);
-  const ev     = sumPV + tv;
-  const eq     = ev - net_debt;
-  const price  = diluted_sh > 0 ? eq / diluted_sh : 0;
-
-  // WACC sensitivity table
   const waccRange = [wacc-2, wacc-1, wacc, wacc+1, wacc+2];
-  const tgrRange  = [tgr-1, tgr-0.5, tgr, tgr+0.5, tgr+1];
-  const sensHeader = ['WACC \\ TGR', ...tgrRange.map(t => t.toFixed(1)+'%')];
-  const sensRows2 = waccRange.map(w => {
-    return [w.toFixed(1)+'%', ...tgrRange.map(t => {
-      const tv_ = pvFCFs[4] * (1+t/100) / ((w-t)/100) / Math.pow(1+w/100, 5);
-      const eq_ = sumPV + tv_ - net_debt;
-      return diluted_sh > 0 ? (eq_/diluted_sh).toFixed(2) : (sumPV+tv_).toFixed(2);
-    })];
-  });
+  const exitRange = [inp.exit-2, inp.exit-1, inp.exit, inp.exit+1, inp.exit+2].filter(x => x > 0);
+  const sensHeader = ['WACC \\ Exit EV/EBITDA', ...exitRange.map(x => x.toFixed(1)+'x')];
+  const sensRows2 = waccRange.map(w => [w.toFixed(1)+'%', ...exitRange.map(x => f2(calcDCF(inp, w, x).px))]);
 
   const wb = XLSX.utils.book_new();
   wb.Props = { Title: 'DCF Valuation', Author: 'LiJie Guo — Aeon Nimbus Research' };
@@ -12708,39 +12671,47 @@ function exportDCFExcel(){
   xlsStyle(wb, 'Valuation Summary', [
     ['AEON NIMBUS RESEARCH — DCF VALUATION ENGINE', '', ''],
     ['Generated', new Date().toLocaleString(), ''],
+    ['Company', (inp.name || '—') + (inp.ticker ? ' (' + inp.ticker + ')' : ''), ''],
     ['', '', ''],
     ['── KEY ASSUMPTIONS ─────────────────────', '', ''],
-    ['Base Revenue', rev0, ''],
-    ['WACC', wacc+'%', ''],
-    ['Terminal Growth Rate', tgr+'%', ''],
-    ['Tax Rate', tax+'%', ''],
-    ['Net Debt / (Cash)', net_debt, ''],
-    ['Diluted Shares', diluted_sh, ''],
+    ['Base Revenue ($M)', inp.r, ''],
+    ['Revenue Growth Y1–Y5', inp.g.map(x => x + '%').join(' / '), ''],
+    ['EBITDA Margin (now → Y5)', inp.em + '% → ' + inp.em5 + '%', ''],
+    ['WACC', wacc.toFixed(2) + '%', ''],
+    ['Exit EV/EBITDA', inp.exit + 'x', ''],
+    ['Terminal Growth (cross-check)', inp.tg + '%', ''],
+    ['Tax Rate', inp.tax + '%', ''],
+    ['Net Debt / (Cash) ($M)', inp.nd, ''],
+    ['Diluted Shares (M)', inp.sh, ''],
+    ['Current Price', inp.p, ''],
     ['', '', ''],
     ['── VALUATION OUTPUT ────────────────────', '', ''],
-    ['PV of FCFs (Yr 1-5)', sumPV.toFixed(2), ''],
-    ['Terminal Value (PV)', tv.toFixed(2), ''],
-    ['Enterprise Value', ev.toFixed(2), ''],
-    ['Equity Value', eq.toFixed(2), ''],
-    ['Implied Price / Share', price.toFixed(2), ''],
-  ], [36, 18, 20]);
+    ['PV of FCFs (Yr 1-5)', f2(res.pvFCF), ''],
+    ['Terminal Value (exit multiple)', f2(res.tv), ''],
+    ['Terminal Value (PV)', f2(res.pvTV), ''],
+    ['Enterprise Value', f2(res.ev), ''],
+    ['Equity Value', f2(res.eq), ''],
+    ['Implied Price / Share', f2(res.px), ''],
+    ['Upside vs Current', f2((res.px - inp.p) / inp.p * 100) + '%', ''],
+    ['Gordon-Growth Price (cross-check)', f2(res.pxG), ''],
+  ], [36, 22, 20]);
 
   xlsStyle(wb, 'Projections', [
-    ['Year', 'Revenue', 'EBIT', 'NOPAT', 'D&A', 'Capex', 'ΔNWC', 'FCF', 'PV of FCF'],
+    ['Year', 'Revenue', 'EBITDA', 'D&A', 'NOPAT', 'Capex', 'UFCF', 'PV of UFCF'],
     ...projRows,
-    ['', '', '', '', '', '', '', 'Sum PV FCF', sumPV.toFixed(2)],
-    ['', '', '', '', '', '', '', 'Terminal Value', tv.toFixed(2)],
-    ['', '', '', '', '', '', '', 'Enterprise Value', ev.toFixed(2)],
-  ], [8, 14, 12, 12, 10, 10, 10, 12, 14]);
+    ['', '', '', '', '', '', 'Sum PV UFCF', f2(res.pvFCF)],
+    ['', '', '', '', '', '', 'PV Terminal Value', f2(res.pvTV)],
+    ['', '', '', '', '', '', 'Enterprise Value', f2(res.ev)],
+  ], [8, 14, 12, 10, 12, 10, 14, 14]);
 
-  xlsStyle(wb, 'WACC x TGR Sensitivity', [
+  xlsStyle(wb, 'WACC x Exit Sensitivity', [
     ['Implied Share Price Sensitivity Table', '', '', '', '', ''],
     ['', '', '', '', '', ''],
     sensHeader,
     ...sensRows2,
-  ], [14, ...Array(5).fill(12)]);
+  ], [22, ...Array(exitRange.length).fill(12)]);
 
-  xlsDownload(wb, `AeonNimbus_DCF_WACC${wacc}_TGR${tgr}.xlsx`);
+  xlsDownload(wb, `AeonNimbus_DCF_${inp.ticker || 'model'}.xlsx`);
 }
 
 // ── Show export buttons after successful calculation ──────────────────────
@@ -12948,7 +12919,7 @@ function exportSizeExcel(){
   const k_cap  = parseFloat(document.getElementById('kcap')?.value || 100000);
   const k_max  = parseFloat(document.getElementById('kmax')?.value || 10);
   const kellyRes = document.getElementById('kellyRes')?.textContent || '—';
-  const fixedRes = document.getElementById('fixedRes')?.textContent || '—';
+  const fixedRes = document.getElementById('frRes')?.textContent || '—';
   const convRes  = document.getElementById('convRes')?.textContent || '—';
   const wb = XLSX.utils.book_new();
   wb.Props = { Title: 'Position Sizing', Author: 'LiJie Guo — Aeon Nimbus Research' };
@@ -13596,6 +13567,8 @@ function exportPortExcel(){
     /* ── Render items list into the page ─────────────── */
     function renderItems(items){
       if(!items||!items.length) return;
+      // Safari can't parse "YYYY-MM-DD HH:MM:SS"; rss2json/snapshot dates are UTC in that form
+      items.forEach(it=>{ if(/^\d{4}-\d{2}-\d{2} \d{2}:\d{2}(:\d{2})?$/.test(it.pubDate||'')) it.pubDate=it.pubDate.replace(' ','T')+'Z'; });
       const tbody = document.querySelector('#rl-body');
       if(!tbody) return;
       tbody.innerHTML='';
@@ -17727,26 +17700,29 @@ window.aaAnalyse = async function(){
   try{
     var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:1024}})});
     var d=await r.json();
+    if(!r.ok||d.error) throw new Error((d.error&&d.error.message)||('HTTP '+r.status));
     var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
     txt=txt.replace(/```json?/g,'').replace(/```/g,'').trim();
     var m=txt.match(/\{[\s\S]*\}/); txt=m?m[0]:txt;
     var j=JSON.parse(txt);
     loading.classList.remove('on');
-    var sigCls=j.contrarian.signal==='BULLISH_CONTRARIAN'?'aa-signal-bull':j.contrarian.signal==='BEARISH_CONTRARIAN'?'aa-signal-bear':'aa-signal-conf';
-    var sigTxt=j.contrarian.signal.replace(/_/g,' ');
-    result.innerHTML='<div class="aa-signal '+sigCls+'">'+sigTxt+'</div>'+
+    var E=escHTML, N=function(v){var n=Number(v);return isFinite(n)?n:0;};
+    var sig=String(j.contrarian.signal||'');
+    var sigCls=sig==='BULLISH_CONTRARIAN'?'aa-signal-bull':sig==='BEARISH_CONTRARIAN'?'aa-signal-bear':'aa-signal-conf';
+    var up=N(j.consensus.implied_upside_pct);
+    result.innerHTML='<div class="aa-signal '+sigCls+'">'+E(sig.replace(/_/g,' '))+'</div>'+
       '<div class="aa-metrics">'+
-        '<div class="aa-metric"><div class="aa-ml">Buy / Hold / Sell</div><div class="aa-mv">'+j.consensus.buy_pct+'% / '+j.consensus.hold_pct+'% / '+j.consensus.sell_pct+'%</div></div>'+
-        '<div class="aa-metric"><div class="aa-ml">Avg Price Target</div><div class="aa-mv">$'+j.consensus.avg_pt+'</div></div>'+
-        '<div class="aa-metric"><div class="aa-ml">Implied Upside</div><div class="aa-mv" style="color:'+((j.consensus.implied_upside_pct||0)>=0?'#4ade80':'#f87171')+'">+'+(j.consensus.implied_upside_pct||0)+'%</div></div>'+
-        '<div class="aa-metric"><div class="aa-ml">Analyst Accuracy</div><div class="aa-mv">'+j.accuracy.overall_pct+'%</div></div>'+
+        '<div class="aa-metric"><div class="aa-ml">Buy / Hold / Sell</div><div class="aa-mv">'+N(j.consensus.buy_pct)+'% / '+N(j.consensus.hold_pct)+'% / '+N(j.consensus.sell_pct)+'%</div></div>'+
+        '<div class="aa-metric"><div class="aa-ml">Avg Price Target</div><div class="aa-mv">$'+N(j.consensus.avg_pt)+'</div></div>'+
+        '<div class="aa-metric"><div class="aa-ml">Implied Upside</div><div class="aa-mv" style="color:'+(up>=0?'#4ade80':'#f87171')+'">'+(up>=0?'+':'')+up+'%</div></div>'+
+        '<div class="aa-metric"><div class="aa-ml">Analyst Accuracy</div><div class="aa-mv">'+N(j.accuracy.overall_pct)+'%</div></div>'+
       '</div>'+
-      '<div class="aa-thesis-box">'+j.contrarian.thesis+'</div>'+
-      '<div style="font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.5;margin-bottom:8px">'+j.accuracy.notes+' \xb7 Confidence: <b>'+j.contrarian.confidence+'</b></div>'+
-      '<div class="aa-risk-box">⚠ Key risk: '+j.key_risk+'</div>';
+      '<div class="aa-thesis-box">'+E(j.contrarian.thesis)+'</div>'+
+      '<div style="font-family:var(--FM);font-size:9px;color:var(--ink2);opacity:.5;margin-bottom:8px">'+E(j.accuracy.notes)+' \xb7 Confidence: <b>'+E(j.contrarian.confidence)+'</b></div>'+
+      '<div class="aa-risk-box">⚠ Key risk: '+E(j.key_risk)+'</div>';
   }catch(e){
     loading.classList.remove('on');
-    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to fetch analysis — '+e.message+'. Try again.</div>';
+    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to fetch analysis — '+escHTML(e.message)+'. Try again.</div>';
   }
 };
 
@@ -17762,26 +17738,29 @@ window.twClassify = async function(){
   try{
     var r=await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key='+key,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:prompt}]}],generationConfig:{temperature:0.3,maxOutputTokens:1024}})});
     var d=await r.json();
+    if(!r.ok||d.error) throw new Error((d.error&&d.error.message)||('HTTP '+r.status));
     var txt=d.candidates&&d.candidates[0]&&d.candidates[0].content&&d.candidates[0].content.parts&&d.candidates[0].content.parts[0]&&d.candidates[0].content.parts[0].text||'';
     txt=txt.replace(/```json?/g,'').replace(/```/g,'').trim();
     var m=txt.match(/\{[\s\S]*\}/); txt=m?m[0]:txt;
     var j=JSON.parse(txt);
     loading.classList.remove('on');
+    var E=escHTML;
     var cls=j.classification==='TRADE_WAR'?'tw-badge-war':j.classification==='TRADE_PEACE'?'tw-badge-peace':'tw-badge-dom';
-    var lbl=j.classification.replace(/_/g,' ');
-    var geo=j.revenue_geo;
+    var lbl=E(String(j.classification||'').replace(/_/g,' '));
+    var geo={};
+    ['us_pct','europe_pct','china_pct','em_pct','other_pct'].forEach(function(k){var n=Number((j.revenue_geo||{})[k]);geo[k]=isFinite(n)?n:0;});
     var geoColors={'US':'#3b82f6','Europe':'#8b5cf6','China':'#ef4444','EM':'#f59e0b','Other':'#6b7280'};
     var geoBar=['us_pct:US','europe_pct:Europe','china_pct:China','em_pct:EM','other_pct:Other'].map(function(s){
       var parts=s.split(':'),key=parts[0],label=parts[1],pct=geo[key]||0;
       return '<div class="tw-geo-seg" style="width:'+pct+'%;background:'+geoColors[label]+';color:#fff">'+label+'</div>';
     }).join('');
-    var scRows=j.supply_chain.map(function(sc){
+    var scRows=(j.supply_chain||[]).map(function(sc){
       var rc=sc.risk_level==='High'?'tw-risk-badge-h':sc.risk_level==='Medium'?'tw-risk-badge-m':'tw-risk-badge-l';
-      return '<tr><td>'+sc.item+'</td><td>'+sc.country+'</td><td><span class="'+rc+'">'+sc.risk_level+'</span></td></tr>';
+      return '<tr><td>'+E(sc.item)+'</td><td>'+E(sc.country)+'</td><td><span class="'+rc+'">'+E(sc.risk_level)+'</span></td></tr>';
     }).join('');
-    var risks=j.policy_risks.map(function(r){return '<li>'+r+'</li>';}).join('');
-    var score=j.tariff_sensitivity_score||5;
-    result.innerHTML='<div class="tw-badge '+cls+'">'+lbl+' \xb7 '+j.conviction+' Conviction</div>'+
+    var risks=(j.policy_risks||[]).map(function(r){return '<li>'+E(r)+'</li>';}).join('');
+    var score=Math.min(10,Math.max(0,Number(j.tariff_sensitivity_score)||5));
+    result.innerHTML='<div class="tw-badge '+cls+'">'+lbl+' \xb7 '+E(j.conviction)+' Conviction</div>'+
       '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);opacity:.5;margin-bottom:6px">Revenue Geography</div>'+
       '<div class="tw-geo-bar">'+geoBar+'</div>'+
       '<div class="tw-geo-legend">'+['US','Europe','China','EM','Other'].map(function(l,i){var k=['us_pct','europe_pct','china_pct','em_pct','other_pct'][i];return '<span><span class="tw-geo-dot" style="background:'+geoColors[l]+'"></span><span style="font-family:var(--FM);font-size:10px;color:var(--ink2)">'+l+' '+geo[k]+'%</span></span>';}).join('')+'</div>'+
@@ -17789,12 +17768,12 @@ window.twClassify = async function(){
       '<table class="tw-sc-table"><thead><tr><th>Input</th><th>Country</th><th>Risk</th></tr></thead><tbody>'+scRows+'</tbody></table>'+
       '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);opacity:.5;margin-bottom:4px">Tariff Sensitivity '+score+'/10</div>'+
       '<div class="tw-tariff-gauge"><div class="tw-tariff-fill" style="width:'+score*10+'%"></div></div>'+
-      '<div style="font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.5;margin-bottom:16px;margin-top:4px">Outperforms in: <b>'+j.outperforms_in.replace(/_/g,' ')+'</b> environments</div>'+
+      '<div style="font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.5;margin-bottom:16px;margin-top:4px">Outperforms in: <b>'+E(String(j.outperforms_in||'—').replace(/_/g,' '))+'</b> environments</div>'+
       '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Policy Risks</div>'+
       '<ul class="tw-risks-list">'+risks+'</ul>';
   }catch(e){
     loading.classList.remove('on');
-    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to classify — '+e.message+'. Try again.</div>';
+    result.innerHTML='<div style="color:#f87171;font-family:var(--FM);font-size:11px">Unable to classify — '+escHTML(e.message)+'. Try again.</div>';
   }
 };
 

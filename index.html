@@ -1163,6 +1163,42 @@ html.dark .read-time{border-color:rgba(255,255,255,.08)}
 .suite-panel{display:none}
 .suite-panel.on{display:block}
 .suite-panel .fx-section{padding-top:8px}
+/* ── Strategies: annual returns / out-of-sample / costs / correlation ── */
+:root{--dv-pos:#256abf;--dv-neg:#c83f3f;--dv-mid:#383835}
+html.light{--dv-pos:#2a78d6;--dv-neg:#e34948;--dv-mid:#f0efec}
+.rb-wrap{padding:0 52px 32px;display:grid;grid-template-columns:minmax(0,1fr);gap:18px}
+.rb-card{border:1px solid var(--rule);background:var(--bg1);padding:18px 20px}
+.rb-sub{font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:1.7;margin:0 0 12px;max-width:900px}
+.rb-foot{font-family:var(--FM);font-size:9px;color:var(--ink3);line-height:1.7;margin:10px 0 0;max-width:900px}
+.rb-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.rb-hm,.cmx{border-collapse:separate;border-spacing:2px;font-family:var(--FM);font-size:10px}
+.rb-hm th,.cmx th{font-size:8px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);font-weight:500;padding:4px 6px;white-space:nowrap;text-align:center}
+.rb-hm td:first-child,.rb-hm th:first-child{text-align:left;color:var(--ink);font-weight:700;white-space:nowrap;padding-right:12px;position:sticky;left:0;background:var(--bg1);z-index:1}
+td.hm{min-width:46px;padding:7px 4px;text-align:center;color:var(--ink);border-radius:2px;font-variant-numeric:tabular-nums;background:var(--dv-mid)}
+td.hm.pos{background:color-mix(in oklab,var(--dv-pos) var(--k),var(--dv-mid))}
+td.hm.neg{background:color-mix(in oklab,var(--dv-neg) var(--k),var(--dv-mid))}
+td.hm.dk{color:#fff}
+td.hm.na{background:transparent;color:var(--ink3)}
+td.hm-sum{padding-left:10px;color:var(--ink2);white-space:nowrap}
+.rb-oos td b{color:var(--ink);font-weight:600}
+.rb-verdict{font-size:9px;letter-spacing:.06em;white-space:nowrap}
+.rb-verdict.ok{color:var(--ink)}.rb-verdict.bad{color:var(--dv-neg)}
+.rb-costs ul{margin:0;padding-left:18px;font-family:var(--FM);font-size:10.5px;color:var(--ink2);line-height:1.8}
+.rb-costs b{color:var(--ink)}
+.cm-card{margin-top:18px}
+.rb-hm thead tr,.rb-hm tbody tr,.cmx thead tr,.cmx tbody tr{background:transparent}
+.cmx th[scope=row]{text-align:left;color:var(--ink);font-weight:600;letter-spacing:.04em;text-transform:none;font-size:10px;position:sticky;left:0;background:var(--bg1);z-index:1}
+.cmx thead th span{display:inline-block;writing-mode:vertical-rl;transform:rotate(180deg);text-transform:none;letter-spacing:.04em;font-size:10px;color:var(--ink2)}
+.cmx td{width:52px;height:30px}
+.suite-panel table.st td:first-child{white-space:nowrap}
+.cmx td.cm-d{text-align:center;color:var(--ink3);background:var(--bg3);border-radius:2px}
+.cm-dot{display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:2px;vertical-align:0}
+.cm-dot.fx{background:var(--su-fx)}.cm-dot.tk{background:var(--su-tk);transform:rotate(45deg)}
+.cm-legend{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;font-family:var(--FM);font-size:9px;color:var(--ink3)}
+.cm-bar{display:inline-block;width:140px;height:8px;border-radius:2px;background:linear-gradient(90deg,var(--dv-neg),var(--dv-mid),var(--dv-pos))}
+.cm-legend em{font-style:normal;color:var(--ink2);margin-left:8px}
+@media(max-width:700px){.rb-wrap{padding:0 16px 28px}.rb-card{padding:16px 14px}.st-wrap>.rb-foot{padding:0 16px}}
+
 :root{--su-eq:#3987e5;--su-fx:#c98500;--su-tk:#199e70}
 html.light{--su-eq:#2a78d6;--su-fx:#b37400;--su-tk:#1baf7a}
 @media(max-width:700px){.su-wrap{padding:0 20px 8px}.su-kpis{grid-template-columns:repeat(2,1fr)}.su-tab{flex:1 1 100%;text-align:left}}
@@ -8638,20 +8674,39 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="su-kpis">
       <div class="su-kpi"><b>15</b><span>Strategies</span></div>
       <div class="su-kpi"><b>3</b><span>Suites</span></div>
-      <div class="su-kpi"><b>12,913</b><span>Backtested trades · FX &amp; Tenkai</span></div>
+      <div class="su-kpi"><b>15,081</b><span>Backtested trades · FX &amp; Tenkai</span></div>
       <div class="su-kpi"><b>2006–2026</b><span>Longest history · Equity</span></div>
     </div>
     <div class="su-chart-card">
       <div class="su-chart-head">
         <div>
           <div class="st-eyebrow" style="margin:0">Risk vs. risk-adjusted return · all 15 strategies</div>
-          <div class="su-chart-sub">Sharpe ratio against maximum drawdown. Up and to the left is better. Hover a point for details; click to open its suite.</div>
+          <div class="su-chart-sub">Annualised Sharpe (CAGR ÷ volatility, the same calculation for every suite) against maximum drawdown. Up and to the left is better. Hover a point for details; click to open its suite.</div>
         </div>
         <div class="su-legend" id="su-legend"></div>
       </div>
       <div class="su-chart" id="su-chart" role="img" aria-label="Scatter chart of Sharpe ratio versus maximum drawdown for 15 strategies across three suites"></div>
       <div class="su-tip" id="su-tip" hidden></div>
-      <p class="su-note">Backtests only. Suites differ in period (Equity 2006–2026, FX 2013–2025, Tenkai 2020–2026), data source and sizing, so compare within a suite before comparing across suites. A high Sharpe with low CAGR (Tenkai) and high CAGR with deep drawdowns (Typhon, Erebus) are different risk profiles, not better or worse ones.</p>
+      <p class="su-note">Backtests only. Suites differ in period (Equity 2006–2026, FX 2013–2026, Tenkai 2020–2026), data source and sizing, so compare within a suite before comparing across suites. Low drawdown with low CAGR (Tenkai) and high CAGR with deep drawdowns (Typhon, Erebus) are different risk profiles, not better or worse ones. The MT5 reports print a per-trade Sharpe (1.88–3.86) that is not comparable with annualised figures; it is shown in each tooltip and card.</p>
+    </div>
+    <div class="su-chart-card cm-card">
+      <div class="st-eyebrow" style="margin:0 0 6px">How the strategies move together · monthly return correlation</div>
+      <div class="su-chart-sub" style="margin-bottom:12px">Correlation of monthly returns for the eight strategies with published trade data, each pair over the months both were live. Near 0 means the two add diversification; toward +1 means they tend to win and lose together.</div>
+      <div class="rb-scroll"><table class="cmx">
+        <thead><tr><th></th><th scope="col"><span>USD/JPY</span></th><th scope="col"><span>XAU/USD</span></th><th scope="col"><span>EUR/JPY</span></th><th scope="col"><span>GBP/USD</span></th><th scope="col"><span>EUR/USD</span></th><th scope="col"><span>NAS 100</span></th><th scope="col"><span>SP 500</span></th><th scope="col"><span>XAU (Tenkai)</span></th></tr></thead>
+        <tbody>
+<tr><th scope="row"><i class="cm-dot fx"></i>USD/JPY</th><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot fx"></i>XAU/USD</th><td class="hm pos" style="--k:8%" title="XAU/USD vs USD/JPY: +0.08 over 161 months">+0.08</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot fx"></i>EUR/JPY</th><td class="hm pos" style="--k:29%" title="EUR/JPY vs USD/JPY: +0.29 over 161 months">+0.29</td><td class="hm neg" style="--k:6%" title="EUR/JPY vs XAU/USD: -0.06 over 161 months">-0.06</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot fx"></i>GBP/USD</th><td class="hm neg" style="--k:3%" title="GBP/USD vs USD/JPY: -0.03 over 137 months">-0.03</td><td class="hm pos" style="--k:8%" title="GBP/USD vs XAU/USD: +0.08 over 137 months">+0.08</td><td class="hm pos" style="--k:1%" title="GBP/USD vs EUR/JPY: +0.01 over 137 months">+0.01</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot fx"></i>EUR/USD</th><td class="hm pos" style="--k:8%" title="EUR/USD vs USD/JPY: +0.08 over 160 months">+0.08</td><td class="hm pos" style="--k:4%" title="EUR/USD vs XAU/USD: +0.04 over 160 months">+0.04</td><td class="hm pos" style="--k:15%" title="EUR/USD vs EUR/JPY: +0.15 over 160 months">+0.15</td><td class="hm neg" style="--k:5%" title="EUR/USD vs GBP/USD: -0.05 over 136 months">-0.05</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot tk"></i>NAS 100</th><td class="hm neg" style="--k:14%" title="NAS 100 vs USD/JPY: -0.14 over 78 months">-0.14</td><td class="hm neg" style="--k:1%" title="NAS 100 vs XAU/USD: -0.01 over 75 months">-0.01</td><td class="hm neg" style="--k:12%" title="NAS 100 vs EUR/JPY: -0.12 over 75 months">-0.12</td><td class="hm pos" style="--k:2%" title="NAS 100 vs GBP/USD: +0.02 over 75 months">+0.02</td><td class="hm neg" style="--k:3%" title="NAS 100 vs EUR/USD: -0.03 over 75 months">-0.03</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot tk"></i>SP 500</th><td class="hm pos" style="--k:13%" title="SP 500 vs USD/JPY: +0.13 over 79 months">+0.13</td><td class="hm neg" style="--k:3%" title="SP 500 vs XAU/USD: -0.03 over 76 months">-0.03</td><td class="hm pos" style="--k:15%" title="SP 500 vs EUR/JPY: +0.15 over 76 months">+0.15</td><td class="hm pos" style="--k:12%" title="SP 500 vs GBP/USD: +0.12 over 76 months">+0.12</td><td class="hm neg" style="--k:2%" title="SP 500 vs EUR/USD: -0.02 over 76 months">-0.02</td><td class="hm neg" style="--k:19%" title="SP 500 vs NAS 100: -0.19 over 77 months">-0.19</td><td class="cm-d">1</td><td class="cm-e"></td></tr>
+<tr><th scope="row"><i class="cm-dot tk"></i>XAU (Tenkai)</th><td class="hm neg" style="--k:1%" title="XAU (Tenkai) vs USD/JPY: -0.01 over 70 months">-0.01</td><td class="hm pos" style="--k:1%" title="XAU (Tenkai) vs XAU/USD: +0.01 over 70 months">+0.01</td><td class="hm zero" style="--k:0%" title="XAU (Tenkai) vs EUR/JPY: +0.00 over 70 months">+0.00</td><td class="hm neg" style="--k:4%" title="XAU (Tenkai) vs GBP/USD: -0.04 over 70 months">-0.04</td><td class="hm neg" style="--k:6%" title="XAU (Tenkai) vs EUR/USD: -0.06 over 70 months">-0.06</td><td class="hm pos" style="--k:9%" title="XAU (Tenkai) vs NAS 100: +0.09 over 68 months">+0.09</td><td class="hm neg" style="--k:15%" title="XAU (Tenkai) vs SP 500: -0.15 over 69 months">-0.15</td><td class="cm-d">1</td></tr>
+        </tbody>
+      </table></div>
+      <div class="cm-legend"><span>−1</span><i class="cm-bar"></i><span>+1</span><em>Average pair +0.01 · highest EUR/JPY vs USD/JPY +0.29 · FX pairs average +0.06</em></div>
+      <p class="su-note">The Equity suite isn't included because its monthly return series isn't published on this site. FX pairs overlap 2013–2026 (GBP/USD from 2015); Tenkai pairs overlap 2020–2026.</p>
     </div>
     <div class="su-tabs" role="tablist" aria-label="Strategy suites">
       <button class="su-tab on" role="tab" data-suite="suite-eq" onclick="showSuite('suite-eq')">Systematic Equity <em>7</em></button>
@@ -8761,58 +8816,63 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div><!-- /suite-eq -->
 
 <div class="suite-panel" id="suite-fx">
-  <!-- FX comparison table -->
   <div class="st-wrap" style="padding-top:32px">
-    <div class="st-eyebrow">FX &amp; Commodities · Proprietary Systematic · 99–100% Real Tick Data · 2013–2025 · 12,262 Combined Trades</div>
+    <div class="st-eyebrow">FX &amp; Commodities · Proprietary Systematic · 99–100% Real Tick Data · 2013–2026 · 14,430 Combined Trades</div>
     <table class="st">
-      <thead>
-        <tr>
-          <th>Pair</th>
-          <th>Type</th>
-          <th>Sharpe</th>
-          <th>LR Corr</th>
-          <th>Max DD</th>
-          <th>Win Rate</th>
-          <th>Profit Factor</th>
-          <th>Recovery</th>
-          <th>Trades</th>
-          <th>Tick Quality</th>
-        </tr>
-      </thead>
+      <thead><tr><th>Market</th><th>Type</th><th>CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th>Max DD</th><th>Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th>LR Corr</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th><th>Tick Quality</th></tr></thead>
       <tbody>
-        <tr>
-          <td>USD / JPY</td><td>Trend Following</td>
-          <td class="str-sharpe">2.13</td><td>0.90</td>
-          <td class="str-dd">15.83%</td><td>39.6%</td><td>1.29</td><td>9.68×</td><td>3,163</td>
-          <td><span class="str-risk low">99%</span></td>
-        </tr>
-        <tr>
-          <td>XAU / USD</td><td>Mean Reversion</td>
-          <td class="str-sharpe">1.82</td><td>0.96</td>
-          <td class="str-dd">15.54%</td><td>51.2%</td><td>1.22</td><td>5.86×</td><td>2,908</td>
-          <td><span class="str-risk low">99%</span></td>
-        </tr>
-        <tr>
-          <td>EUR / JPY</td><td>Trend Following</td>
-          <td class="str-sharpe">2.20</td><td>0.90</td>
-          <td class="str-dd">16.35%</td><td>48.3%</td><td>1.20</td><td>5.68×</td><td>2,174</td>
-          <td><span class="str-risk low">99%</span></td>
-        </tr>
-        <tr>
-          <td>GBP / USD</td><td>Mean Reversion</td>
-          <td class="str-sharpe">2.31</td><td>0.97</td>
-          <td class="str-dd">23.76%</td><td>49.4%</td><td>1.12</td><td>2.67×</td><td>2,037</td>
-          <td><span class="str-risk low">99%</span></td>
-        </tr>
-        <tr>
-          <td>EUR / USD</td><td>Trend Following</td>
-          <td class="str-sharpe">1.91</td><td>0.93</td>
-          <td class="str-dd">34.52%</td><td>44.6%</td><td>1.18</td><td>4.63×</td><td>1,980</td>
-          <td><span class="str-risk low">100%</span></td>
-        </tr>
+        <tr><td>USD / JPY</td><td>Trend Following</td><td class="str-cagr">17.72%</td><td class="str-sharpe">1.40</td><td class="str-dd">10.94%</td><td>12.68%</td><td>2.22</td><td>0.99</td><td>39.6%</td><td>1.32</td><td>20.09×</td><td>3,334</td><td><span class="str-risk low">99%</span></td></tr>
+        <tr><td>XAU / USD</td><td>Mean Reversion</td><td class="str-cagr">7.51%</td><td class="str-sharpe">1.18</td><td class="str-dd">7.11%</td><td>6.36%</td><td>1.90</td><td>0.98</td><td>51.2%</td><td>1.25</td><td>12.76×</td><td>3,071</td><td><span class="str-risk low">99%</span></td></tr>
+        <tr><td>EUR / JPY</td><td>Trend Following</td><td class="str-cagr">11.28%</td><td class="str-sharpe">1.09</td><td class="str-dd">17.32%</td><td>10.33%</td><td>2.00</td><td>0.95</td><td>45.1%</td><td>1.17</td><td>5.53×</td><td>3,087</td><td><span class="str-risk low">99%</span></td></tr>
+        <tr><td>GBP / USD</td><td>Mean Reversion</td><td class="str-cagr">9.06%</td><td class="str-sharpe">1.07</td><td class="str-dd">9.54%</td><td>8.48%</td><td>2.11</td><td>0.96</td><td>48.6%</td><td>1.16</td><td>6.11×</td><td>2,835</td><td><span class="str-risk low">100%</span></td></tr>
+        <tr><td>EUR / USD</td><td>Trend Following</td><td class="str-cagr">8.21%</td><td class="str-sharpe">0.91</td><td class="str-dd">14.94%</td><td>8.98%</td><td>1.95</td><td>0.95</td><td>44.7%</td><td>1.19</td><td>5.46×</td><td>2,103</td><td><span class="str-risk low">100%</span></td></tr>
       </tbody>
     </table>
-  </div><!-- /fx table -->
+    <p class="rb-foot">CAGR, Sharpe, Max DD and Vol are on the same basis as the Equity table: Sharpe = CAGR ÷ annualised volatility of monthly returns. <b>Sharpe (MT5)</b> is the figure printed in the Strategy Tester report; it is computed per trade and is not comparable with annualised Sharpe ratios.</p>
+  </div><!-- /suite table -->
+
+    <!-- Robustness: annual returns, out-of-sample, costs -->
+  <div class="rb-wrap">
+    <div class="rb-card">
+      <div class="st-eyebrow" style="margin-bottom:6px">Annual returns · FX &amp; Commodities</div>
+      <p class="rb-sub">Calendar-year return of each strategy, compounded from its monthly returns. Blue is a gain, red a loss; the right-hand column counts profitable years.</p>
+      <div class="rb-scroll"><table class="rb-hm">
+        <thead><tr><th>Market</th><th>2013</th><th>2014</th><th>2015</th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026*</th><th>Up yrs</th></tr></thead>
+        <tbody>
+<tr><td>USD / JPY</td><td class="hm pos dk" style="--k:100%" title="USD / JPY 2013: +128.9%">+128.9</td><td class="hm pos dk" style="--k:100%" title="USD / JPY 2014: +49.5%">+49.5</td><td class="hm pos" style="--k:26%" title="USD / JPY 2015: +5.3%">+5.3</td><td class="hm pos" style="--k:37%" title="USD / JPY 2016: +7.4%">+7.4</td><td class="hm pos" style="--k:58%" title="USD / JPY 2017: +11.7%">+11.7</td><td class="hm pos dk" style="--k:79%" title="USD / JPY 2018: +15.8%">+15.8</td><td class="hm pos" style="--k:40%" title="USD / JPY 2019: +8.0%">+8.0</td><td class="hm pos dk" style="--k:71%" title="USD / JPY 2020: +14.1%">+14.1</td><td class="hm pos dk" style="--k:69%" title="USD / JPY 2021: +13.8%">+13.8</td><td class="hm pos dk" style="--k:69%" title="USD / JPY 2022: +13.7%">+13.7</td><td class="hm pos" style="--k:23%" title="USD / JPY 2023: +4.6%">+4.6</td><td class="hm pos" style="--k:19%" title="USD / JPY 2024: +3.7%">+3.7</td><td class="hm pos" style="--k:39%" title="USD / JPY 2025: +7.8%">+7.8</td><td class="hm pos dk" style="--k:61%" title="USD / JPY 2026: +12.3%">+12.3</td><td class="hm-sum">14/14</td></tr>
+<tr><td>XAU / USD</td><td class="hm pos dk" style="--k:66%" title="XAU / USD 2013: +13.2%">+13.2</td><td class="hm pos" style="--k:35%" title="XAU / USD 2014: +6.9%">+6.9</td><td class="hm pos dk" style="--k:73%" title="XAU / USD 2015: +14.6%">+14.6</td><td class="hm pos dk" style="--k:99%" title="XAU / USD 2016: +19.7%">+19.7</td><td class="hm pos" style="--k:3%" title="XAU / USD 2017: +0.6%">+0.6</td><td class="hm pos" style="--k:26%" title="XAU / USD 2018: +5.3%">+5.3</td><td class="hm neg" style="--k:19%" title="XAU / USD 2019: -3.7%">-3.7</td><td class="hm pos" style="--k:59%" title="XAU / USD 2020: +11.7%">+11.7</td><td class="hm pos dk" style="--k:75%" title="XAU / USD 2021: +14.9%">+14.9</td><td class="hm pos" style="--k:17%" title="XAU / USD 2022: +3.5%">+3.5</td><td class="hm neg" style="--k:4%" title="XAU / USD 2023: -0.8%">-0.8</td><td class="hm pos" style="--k:53%" title="XAU / USD 2024: +10.6%">+10.6</td><td class="hm pos" style="--k:7%" title="XAU / USD 2025: +1.4%">+1.4</td><td class="hm pos" style="--k:28%" title="XAU / USD 2026: +5.6%">+5.6</td><td class="hm-sum">12/14</td></tr>
+<tr><td>EUR / JPY</td><td class="hm pos dk" style="--k:100%" title="EUR / JPY 2013: +70.8%">+70.8</td><td class="hm pos dk" style="--k:100%" title="EUR / JPY 2014: +23.2%">+23.2</td><td class="hm pos dk" style="--k:100%" title="EUR / JPY 2015: +23.6%">+23.6</td><td class="hm pos" style="--k:47%" title="EUR / JPY 2016: +9.4%">+9.4</td><td class="hm pos" style="--k:40%" title="EUR / JPY 2017: +8.0%">+8.0</td><td class="hm pos" style="--k:35%" title="EUR / JPY 2018: +7.1%">+7.1</td><td class="hm neg" style="--k:50%" title="EUR / JPY 2019: -10.0%">-10.0</td><td class="hm pos" style="--k:43%" title="EUR / JPY 2020: +8.7%">+8.7</td><td class="hm pos" style="--k:31%" title="EUR / JPY 2021: +6.2%">+6.2</td><td class="hm pos dk" style="--k:62%" title="EUR / JPY 2022: +12.4%">+12.4</td><td class="hm pos" style="--k:20%" title="EUR / JPY 2023: +4.0%">+4.0</td><td class="hm neg" style="--k:5%" title="EUR / JPY 2024: -0.9%">-0.9</td><td class="hm pos" style="--k:48%" title="EUR / JPY 2025: +9.6%">+9.6</td><td class="hm neg" style="--k:17%" title="EUR / JPY 2026: -3.3%">-3.3</td><td class="hm-sum">11/14</td></tr>
+<tr><td>GBP / USD</td><td class="hm na">–</td><td class="hm na">–</td><td class="hm pos dk" style="--k:100%" title="GBP / USD 2015: +37.9%">+37.9</td><td class="hm pos dk" style="--k:74%" title="GBP / USD 2016: +14.8%">+14.8</td><td class="hm pos dk" style="--k:100%" title="GBP / USD 2017: +21.2%">+21.2</td><td class="hm pos" style="--k:2%" title="GBP / USD 2018: +0.3%">+0.3</td><td class="hm pos dk" style="--k:81%" title="GBP / USD 2019: +16.2%">+16.2</td><td class="hm pos" style="--k:24%" title="GBP / USD 2020: +4.8%">+4.8</td><td class="hm neg" style="--k:13%" title="GBP / USD 2021: -2.7%">-2.7</td><td class="hm pos dk" style="--k:66%" title="GBP / USD 2022: +13.1%">+13.1</td><td class="hm pos" style="--k:30%" title="GBP / USD 2023: +6.0%">+6.0</td><td class="hm pos" style="--k:13%" title="GBP / USD 2024: +2.5%">+2.5</td><td class="hm neg" style="--k:21%" title="GBP / USD 2025: -4.1%">-4.1</td><td class="hm pos" style="--k:1%" title="GBP / USD 2026: +0.2%">+0.2</td><td class="hm-sum">10/12</td></tr>
+<tr><td>EUR / USD</td><td class="hm pos" style="--k:45%" title="EUR / USD 2013: +8.9%">+8.9</td><td class="hm pos" style="--k:47%" title="EUR / USD 2014: +9.4%">+9.4</td><td class="hm pos dk" style="--k:100%" title="EUR / USD 2015: +32.7%">+32.7</td><td class="hm pos dk" style="--k:67%" title="EUR / USD 2016: +13.4%">+13.4</td><td class="hm pos dk" style="--k:81%" title="EUR / USD 2017: +16.2%">+16.2</td><td class="hm pos" style="--k:44%" title="EUR / USD 2018: +8.7%">+8.7</td><td class="hm neg" style="--k:53%" title="EUR / USD 2019: -10.5%">-10.5</td><td class="hm pos" style="--k:25%" title="EUR / USD 2020: +5.0%">+5.0</td><td class="hm pos" style="--k:33%" title="EUR / USD 2021: +6.6%">+6.6</td><td class="hm pos" style="--k:12%" title="EUR / USD 2022: +2.4%">+2.4</td><td class="hm pos dk" style="--k:100%" title="EUR / USD 2023: +21.2%">+21.2</td><td class="hm pos" style="--k:3%" title="EUR / USD 2024: +0.5%">+0.5</td><td class="hm pos" style="--k:11%" title="EUR / USD 2025: +2.1%">+2.1</td><td class="hm neg" style="--k:2%" title="EUR / USD 2026: -0.3%">-0.3</td><td class="hm-sum">12/14</td></tr>
+        </tbody>
+      </table></div>
+      <p class="rb-foot">* Partial year (2026 through Aug; 2026 through May). Early years compound on a small starting balance, so their percentages run higher than later years under the same fixed-% risk.</p>
+    </div>
+    <div class="rb-card">
+      <div class="st-eyebrow" style="margin-bottom:6px">Out-of-sample check · 70 / 30 chronological split</div>
+      <p class="rb-sub">Each backtest split by trade order: the first 70% of trades against the last 30%. Profit factor and win rate don't depend on account size, so the two segments compare directly. A strategy fitted to noise usually falls apart in the later segment.</p>
+      <div class="rb-scroll"><table class="st rb-oos">
+        <thead><tr><th>Market</th><th>Trades (first / last)</th><th>Profit Factor</th><th>Win Rate</th><th>Max DD</th><th>Last 30%</th></tr></thead>
+        <tbody>
+<tr><td>USD / JPY</td><td>2,334 / 1,000</td><td>1.35 → <b>1.25</b></td><td>39.5% → <b>39.6%</b></td><td>10.9% → <b>3.3%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>XAU / USD</td><td>2,150 / 921</td><td>1.28 → <b>1.19</b></td><td>51.4% → <b>50.9%</b></td><td>9.0% → <b>5.1%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>EUR / JPY</td><td>2,161 / 926</td><td>1.20 → <b>1.11</b></td><td>45.0% → <b>45.1%</b></td><td>17.0% → <b>6.0%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>GBP / USD</td><td>1,984 / 851</td><td>1.21 → <b>1.04</b></td><td>48.7% → <b>47.9%</b></td><td>9.1% → <b>9.3%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>EUR / USD</td><td>1,472 / 631</td><td>1.19 → <b>1.20</b></td><td>44.0% → <b>46.3%</b></td><td>22.5% → <b>5.4%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="rb-foot">This is a hold-out stability check on the published run, not a walk-forward optimisation: it shows whether the edge persisted into the most recent period, not how the parameters were chosen. 50/50 and 80/20 splits are in each strategy's dashboard.</p>
+    </div>
+    <div class="rb-card rb-costs">
+      <div class="st-eyebrow" style="margin-bottom:6px">Trading costs in these results</div>
+      <ul>
+        <li><b>Spread:</b> paid on every trade. Fills use the real historical bid/ask ticks, so the spread is the one quoted at the time of each trade.</li>
+        <li><b>Commission:</b> €0 in every report (a spread-only account model). On a raw-spread account that charges commission per lot, results would be lower.</li>
+        <li><b>Swap / financing:</b> included as charged. Net over the full test: USD/JPY €+14, XAU/USD €+0, EUR/JPY €-12, GBP/USD €+0, EUR/USD €-3.</li>
+        <li><b>Slippage:</b> no extra slippage is added beyond the tick-by-tick fills.</li>
+      </ul>
+    </div>
+  </div>
 
   <!-- FX detail cards -->
   <!-- /FX cards -->
@@ -8820,13 +8880,13 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="fx-teaser">
   <div class="fx-eyebrow">Proprietary Systematic Research · Independently Developed</div>
   <div class="fx-title">Systematic FX &amp; Commodities Strategies</div>
-  <div class="fx-desc">Five proprietary rule-based strategies, backtested across a full 12-year market cycle (2013–2025) on 99–100% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 12,262 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
+  <div class="fx-desc">Five proprietary rule-based strategies, backtested across a 13-year market cycle (2013–2026) on 99–100% real tick data — the highest fidelity available in institutional-grade simulation. Spanning COVID volatility, the 2022–2023 JPY intervention cycle, and multiple rate regimes. Results presented using proportional position sizing (fixed % risk per trade) — the standard institutional methodology, allowing meaningful comparison across AUM levels. Combined sample: 14,430 trades. No discretionary overlay. Methodology proprietary. Full backtest data, interactive dashboards, and downloadable Strategy Tester reports are published below.</div>
 
   <!-- Combined stats strip -->
   <div class="fx-combined">
-    <div class="fx-cs"><div class="fx-cs-v">12,262</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">≥0.90</div><div class="fx-cs-l">All LR Correlations</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">14,430</div><div class="fx-cs-l">Combined Trades</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.9</div><div class="fx-cs-l">All Sharpe (MT5)</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">≥0.95</div><div class="fx-cs-l">All LR Correlations</div></div>
     <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
   </div>
   <details class="fx-glossary" style="margin:14px 0 18px;font-family:var(--FM);font-size:10.5px;color:var(--ink2);line-height:1.7">
@@ -8837,7 +8897,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <b>Profit factor</b> — gross profit ÷ gross loss.<br>
       <b>Max DD (relative)</b> — largest peak-to-trough fall as a percentage of the equity peak.<br>
       <b>Tick quality</b> — share of the backtest driven by real historical ticks rather than modelled prices.<br>
-      Sharpe ratios are as reported by the backtest engine. All figures are backtests under the fixed-% risk sizing described below, not live trading results.
+      Tables use Sharpe = CAGR ÷ annualised volatility of monthly returns, the same basis as the Equity suite; the cards show the per-trade Sharpe printed in each MT5 report. All figures are backtests under the fixed-% risk sizing described below, not live trading results.
     </div>
   </details>
 
@@ -8853,23 +8913,23 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.13</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kval">2.22</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.90</div>
+            <div class="fx-hd-kval">0.99</div>
             <div class="fx-hd-klbl">LR Correlation</div>
           </div>
         </div>
       </div>
       <div class="fx-body">
         <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.83%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">9.68&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">10.94%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">20.09&times;</div></div>
           <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">39.6%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.20%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.29</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,163</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.07%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.32</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,334</div></div>
         </div>
         <div class="fx-body-r">
           <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -8884,7 +8944,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Statistically robust sample. Stress-tested through COVID volatility (2020) and the 2022–2023 JPY intervention cycle.</div>
+        <div class="fx-note">Trend-following with 1% proportional risk sizing — scalable and AUM-agnostic. Highest CAGR, Sharpe, LR correlation and Recovery Factor of the FX suite. The low win rate is structural in momentum strategies: edge comes from asymmetric payoffs, not frequency. Stress-tested through COVID volatility (2020) and the 2022–2024 JPY intervention cycle.</div>
         <div class="fx-links">
           <a href="reports/usdjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/usdjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -8903,23 +8963,23 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.20</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kval">2.00</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.90</div>
+            <div class="fx-hd-kval">0.95</div>
             <div class="fx-hd-klbl">LR Correlation</div>
           </div>
         </div>
       </div>
       <div class="fx-body">
         <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">16.35%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.68&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">48.3%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">17.32%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.53&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">45.1%</div></div>
           <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.20</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,174</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.17</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,087</div></div>
         </div>
         <div class="fx-body-r">
           <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -8934,7 +8994,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Highest Sharpe of the five-pair suite despite a mid-pack win rate — the payoff asymmetry does the work. Drawdown profile is comparable to USD/JPY on a shared trend-following engine, applied to a structurally higher-carry cross. Sample spans the full 2013–2025 cycle including the JPY intervention regime.</div>
+        <div class="fx-note">Shares the trend-following engine with USD/JPY, applied to a structurally higher-carry cross. Deepest relative drawdown of the FX suite (17.3%), and much of its return came in 2013–2015 — see the annual returns above. Sample spans 2013–2026 including the JPY intervention regime.</div>
         <div class="fx-links">
           <a href="reports/eurjpy-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/eurjpy-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -8953,23 +9013,23 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">2.31</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kval">2.11</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.97</div>
+            <div class="fx-hd-kval">0.96</div>
             <div class="fx-hd-klbl">LR Correlation</div>
           </div>
         </div>
       </div>
       <div class="fx-body">
         <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">23.76%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.67&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">49.4%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">9.54%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">6.11&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">48.6%</div></div>
           <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.03%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.12</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,037</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.16</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,835</div></div>
         </div>
         <div class="fx-body-r">
           <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -8984,7 +9044,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Highest LR Correlation and highest Sharpe of the suite, but the lowest Recovery Factor — the largest relative drawdown takes longer to recoup on a proportional-risk basis. Near coin-flip win rate is typical of a mean-reversion edge on a high-volatility major. Tested through Brexit-era and 2022 gilt-crisis volatility.</div>
+        <div class="fx-note">Mean-reversion on a high-volatility major, with a near coin-flip win rate typical of the style. Shortest history of the five (from 2015) and the thinnest profit factor (1.16), but a contained 9.5% drawdown. Tested through Brexit-era and 2022 gilt-crisis volatility.</div>
         <div class="fx-links">
           <a href="reports/gbpusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/gbpusd-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -9003,23 +9063,23 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.91</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kval">1.95</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.93</div>
+            <div class="fx-hd-kval">0.95</div>
             <div class="fx-hd-klbl">LR Correlation</div>
           </div>
         </div>
       </div>
       <div class="fx-body">
         <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">34.52%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">4.63&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">44.6%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">14.94%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.46&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">44.7%</div></div>
           <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.18</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">1,980</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.19</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,103</div></div>
         </div>
         <div class="fx-body-r">
           <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -9034,7 +9094,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Widest relative drawdown of the suite, offset by a solid Recovery Factor and the highest tick-data fidelity available (100%). Trend-following engine on the world's most liquid pair — capacity and slippage assumptions are the most conservative of any strategy shown. Full 12-year cycle including two major ECB/Fed divergence regimes.</div>
+        <div class="fx-note">Trend-following engine on the world's most liquid pair, on 100% real tick data. The smallest sample of the five and the lowest annualised Sharpe; its 2019 loss was the worst year in the suite. Full cycle including two major ECB/Fed divergence regimes.</div>
         <div class="fx-links">
           <a href="reports/eurusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/eurusd-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -9053,23 +9113,23 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
-            <div class="fx-hd-kval">1.82</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-kval">1.90</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
-            <div class="fx-hd-kval">0.96</div>
+            <div class="fx-hd-kval">0.98</div>
             <div class="fx-hd-klbl">LR Correlation</div>
           </div>
         </div>
       </div>
       <div class="fx-body">
         <div class="fx-body-l">
-          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">15.54%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.86&times;</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">7.11%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">12.76&times;</div></div>
           <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">51.2%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.22</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">2,908</div></div>
+          <div class="fx-m2"><div class="fx-ml2">GHPR / Trade</div><div class="fx-mv2 pos">+0.03%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.25</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">3,071</div></div>
         </div>
         <div class="fx-body-r">
           <svg class="fx-curve2" viewBox="0 0 300 88" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
@@ -9084,7 +9144,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Smoothest equity curve of the five-pair suite — near-linear compounding confirmed by LR Correlation. Max drawdown less than half that of the trend-following pairs, despite identical position sizing. Symmetric win rate profile typical of a mean-reversion edge. Tested across gold's secular bull (2018–2025) and two Fed tightening cycles.</div>
+        <div class="fx-note">Lowest drawdown of the FX suite (7.1%) with near-linear compounding (LR correlation 0.98). Symmetric win-rate profile typical of a mean-reversion edge. Tested across gold's secular bull and two Fed tightening cycles.</div>
         <div class="fx-links">
           <a href="reports/xauusd-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/xauusd-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -9100,16 +9160,56 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div><!-- /suite-fx -->
 
 <div class="suite-panel" id="suite-tk">
-  <div class="st-wrap">
-    <div class="st-eyebrow">Tenkai · Indices &amp; Gold · 99–100% Real Tick Data (Dukascopy) · 2020–2026 · 651 Combined Trades</div>
+  <div class="st-wrap" style="padding-top:32px">
+    <div class="st-eyebrow">Tenkai · Indices &amp; Gold · 100% Real Tick Data (Dukascopy) · 2020–2026 · 651 Combined Trades</div>
     <table class="st">
-      <thead><tr><th>Market</th><th>Type</th><th>Sharpe</th><th>LR Corr</th><th>Max DD</th><th>CAGR</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th></tr></thead>
+      <thead><tr><th>Market</th><th>Type</th><th>CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th>Max DD</th><th>Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th>LR Corr</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th></tr></thead>
       <tbody>
-        <tr><td>NAS 100</td><td>Trend (Tenkai)</td><td class="str-sharpe">3.86</td><td>0.95</td><td class="str-dd">8.44%</td><td class="str-cagr">6.9%</td><td>56.05%</td><td>1.55</td><td>5.27×</td><td>223</td></tr>
-        <tr><td>SP 500</td><td>Trend (Tenkai)</td><td class="str-sharpe">1.88</td><td>0.97</td><td class="str-dd">8.98%</td><td class="str-cagr">3.73%</td><td>55.85%</td><td>1.24</td><td>2.51×</td><td>265</td></tr>
-        <tr><td>XAU / USD (Tenkai)</td><td>Mean Reversion</td><td class="str-sharpe">3.62</td><td>0.98</td><td class="str-dd">4.71%</td><td class="str-cagr">5.95%</td><td>60.12%</td><td>1.62</td><td>6.79×</td><td>163</td></tr>
+        <tr><td>NAS 100</td><td>Trend (Tenkai)</td><td class="str-cagr">6.90%</td><td class="str-sharpe">1.11</td><td class="str-dd">8.44%</td><td>6.20%</td><td>3.86</td><td>0.95</td><td>56.0%</td><td>1.55</td><td>5.27×</td><td>223</td></tr>
+        <tr><td>SP 500</td><td>Trend (Tenkai)</td><td class="str-cagr">3.73%</td><td class="str-sharpe">0.73</td><td class="str-dd">8.98%</td><td>5.08%</td><td>1.88</td><td>0.97</td><td>55.9%</td><td>1.24</td><td>2.51×</td><td>265</td></tr>
+        <tr><td>XAU / USD (Tenkai)</td><td>Mean Reversion</td><td class="str-cagr">5.95%</td><td class="str-sharpe">1.24</td><td class="str-dd">4.71%</td><td>4.81%</td><td>3.62</td><td>0.98</td><td>60.1%</td><td>1.62</td><td>6.79×</td><td>163</td></tr>
       </tbody>
     </table>
+    <p class="rb-foot">CAGR, Sharpe, Max DD and Vol are on the same basis as the Equity table: Sharpe = CAGR ÷ annualised volatility of monthly returns. <b>Sharpe (MT5)</b> is the figure printed in the Strategy Tester report; it is computed per trade and is not comparable with annualised Sharpe ratios.</p>
+  </div><!-- /suite table -->
+
+  <!-- Robustness: annual returns, out-of-sample, costs -->
+  <div class="rb-wrap">
+    <div class="rb-card">
+      <div class="st-eyebrow" style="margin-bottom:6px">Annual returns · Tenkai</div>
+      <p class="rb-sub">Calendar-year return of each strategy, compounded from its monthly returns. Blue is a gain, red a loss; the right-hand column counts profitable years.</p>
+      <div class="rb-scroll"><table class="rb-hm">
+        <thead><tr><th>Market</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026*</th><th>Up yrs</th></tr></thead>
+        <tbody>
+<tr><td>NAS 100</td><td class="hm pos" style="--k:21%" title="NAS 100 2020: +4.3%">+4.3</td><td class="hm pos" style="--k:14%" title="NAS 100 2021: +2.8%">+2.8</td><td class="hm pos dk" style="--k:62%" title="NAS 100 2022: +12.5%">+12.5</td><td class="hm neg" style="--k:8%" title="NAS 100 2023: -1.6%">-1.6</td><td class="hm pos" style="--k:57%" title="NAS 100 2024: +11.5%">+11.5</td><td class="hm pos" style="--k:16%" title="NAS 100 2025: +3.3%">+3.3</td><td class="hm pos dk" style="--k:71%" title="NAS 100 2026: +14.2%">+14.2</td><td class="hm-sum">6/7</td></tr>
+<tr><td>SP 500</td><td class="hm neg" style="--k:15%" title="SP 500 2020: -3.0%">-3.0</td><td class="hm pos" style="--k:11%" title="SP 500 2021: +2.1%">+2.1</td><td class="hm pos dk" style="--k:73%" title="SP 500 2022: +14.7%">+14.7</td><td class="hm pos" style="--k:22%" title="SP 500 2023: +4.3%">+4.3</td><td class="hm neg" style="--k:1%" title="SP 500 2024: -0.2%">-0.2</td><td class="hm pos" style="--k:31%" title="SP 500 2025: +6.3%">+6.3</td><td class="hm pos" style="--k:8%" title="SP 500 2026: +1.6%">+1.6</td><td class="hm-sum">5/7</td></tr>
+<tr><td>XAU / USD (Tenkai)</td><td class="hm pos" style="--k:39%" title="XAU / USD (Tenkai) 2020: +7.8%">+7.8</td><td class="hm pos" style="--k:46%" title="XAU / USD (Tenkai) 2021: +9.2%">+9.2</td><td class="hm pos dk" style="--k:76%" title="XAU / USD (Tenkai) 2022: +15.2%">+15.2</td><td class="hm pos" style="--k:28%" title="XAU / USD (Tenkai) 2023: +5.7%">+5.7</td><td class="hm neg" style="--k:2%" title="XAU / USD (Tenkai) 2024: -0.3%">-0.3</td><td class="hm pos" style="--k:13%" title="XAU / USD (Tenkai) 2025: +2.6%">+2.6</td><td class="hm pos" style="--k:2%" title="XAU / USD (Tenkai) 2026: +0.3%">+0.3</td><td class="hm-sum">6/7</td></tr>
+        </tbody>
+      </table></div>
+      <p class="rb-foot">* Partial year (2026 through Aug; 2026 through Mar). Early years compound on a small starting balance, so their percentages run higher than later years under the same fixed-% risk.</p>
+    </div>
+    <div class="rb-card">
+      <div class="st-eyebrow" style="margin-bottom:6px">Out-of-sample check · 70 / 30 chronological split</div>
+      <p class="rb-sub">Each backtest split by trade order: the first 70% of trades against the last 30%. Profit factor and win rate don't depend on account size, so the two segments compare directly. A strategy fitted to noise usually falls apart in the later segment.</p>
+      <div class="rb-scroll"><table class="st rb-oos">
+        <thead><tr><th>Market</th><th>Trades (first / last)</th><th>Profit Factor</th><th>Win Rate</th><th>Max DD</th><th>Last 30%</th></tr></thead>
+        <tbody>
+<tr><td>NAS 100</td><td>156 / 67</td><td>1.33 → <b>2.16</b></td><td>52.6% → <b>64.2%</b></td><td>7.6% → <b>4.2%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>SP 500</td><td>186 / 79</td><td>1.19 → <b>1.35</b></td><td>54.8% → <b>58.2%</b></td><td>8.9% → <b>4.1%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+<tr><td>XAU / USD (Tenkai)</td><td>114 / 49</td><td>1.78 → <b>1.34</b></td><td>62.3% → <b>55.1%</b></td><td>3.0% → <b>4.0%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
+        </tbody>
+      </table></div>
+      <p class="rb-foot">This is a hold-out stability check on the published run, not a walk-forward optimisation: it shows whether the edge persisted into the most recent period, not how the parameters were chosen. 50/50 and 80/20 splits are in each strategy's dashboard.</p>
+    </div>
+    <div class="rb-card rb-costs">
+      <div class="st-eyebrow" style="margin-bottom:6px">Trading costs in these results</div>
+      <ul>
+        <li><b>Spread:</b> paid on every trade. Fills use the real historical bid/ask ticks, so the spread is the one quoted at the time of each trade.</li>
+        <li><b>Commission:</b> €0 in every report (a spread-only account model). On a raw-spread account that charges commission per lot, results would be lower.</li>
+        <li><b>Swap / financing:</b> included as charged. Net over the full test: NAS 100 €-607, SP 500 €+169, XAU (Tenkai) €-1,098.</li>
+        <li><b>Slippage:</b> no extra slippage is added beyond the tick-by-tick fills.</li>
+      </ul>
+    </div>
   </div>
 <div class="fx-section">
 <div class="fx-teaser">
@@ -9120,7 +9220,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <!-- Combined stats strip -->
   <div class="fx-combined">
     <div class="fx-cs"><div class="fx-cs-v">651</div><div class="fx-cs-l">Combined Trades</div></div>
-    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe Ratios</div></div>
+    <div class="fx-cs"><div class="fx-cs-v">&gt; 1.8</div><div class="fx-cs-l">All Sharpe (MT5)</div></div>
     <div class="fx-cs"><div class="fx-cs-v">≥0.95</div><div class="fx-cs-l">All LR Correlations</div></div>
     <div class="fx-cs"><div class="fx-cs-v">99–100%</div><div class="fx-cs-l">Real Tick Quality</div></div>
   </div>
@@ -9138,7 +9238,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">3.86</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.95</div>
@@ -9150,8 +9250,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-body-l">
           <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.44%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">5.27&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">56.05%</div></div>
-          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">6.9%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">56.0%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">6.90%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.55</div></div>
           <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">223</div></div>
         </div>
@@ -9168,7 +9268,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Highest Sharpe of the Tenkai suite, with a shorter and smaller sample than the FX suite — reflecting the strategy's more selective trade frequency on a single high-beta index. Recovery Factor above 5× indicates drawdowns are recouped quickly relative to strategy tenor.</div>
+        <div class="fx-note">Highest MT5 Sharpe of the Tenkai suite, with a shorter and smaller sample than the FX suite — reflecting the strategy's more selective trade frequency on a single high-beta index. Recovery Factor above 5× indicates drawdowns are recouped quickly relative to strategy tenor.</div>
         <div class="fx-links">
           <a href="reports/nas100-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/nas100-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -9188,7 +9288,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">1.88</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.97</div>
@@ -9200,7 +9300,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-body-l">
           <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">8.98%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">2.51&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">55.85%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">55.9%</div></div>
           <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">3.73%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.24</div></div>
           <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">265</div></div>
@@ -9218,7 +9318,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         </div>
       </div>
       <div class="fx-card-ft">
-        <div class="fx-note">Lowest Recovery Factor of the three, consistent with a lower-beta index and a more gradual compounding profile. Sharpe 1.88 and LR correlation 0.97 across the full 2020–2026 sample.</div>
+        <div class="fx-note">Lowest Recovery Factor of the three, consistent with a lower-beta index and a more gradual compounding profile. MT5 Sharpe 1.88 and LR correlation 0.97 across the full 2020–2026 sample.</div>
         <div class="fx-links">
           <a href="reports/sp500-tenkai-dashboard.html" target="_blank" class="dash">Dashboard →</a>
           <a href="reports/sp500-tenkai-report.pdf" target="_blank" class="pdf">Full Report</a>
@@ -9238,7 +9338,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-hd-kpis">
           <div class="fx-hd-kpi first">
             <div class="fx-hd-kval">3.62</div>
-            <div class="fx-hd-klbl">Sharpe Ratio</div>
+            <div class="fx-hd-klbl">Sharpe (MT5)</div>
           </div>
           <div class="fx-hd-kpi">
             <div class="fx-hd-kval">0.98</div>
@@ -9250,7 +9350,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <div class="fx-body-l">
           <div class="fx-m2"><div class="fx-ml2">Max DD (Relative)</div><div class="fx-mv2 warn">4.71%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Recovery Factor</div><div class="fx-mv2 pos">6.79&times;</div></div>
-          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">60.12%</div></div>
+          <div class="fx-m2"><div class="fx-ml2">Win Rate</div><div class="fx-mv2 neu">60.1%</div></div>
           <div class="fx-m2"><div class="fx-ml2">CAGR</div><div class="fx-mv2 pos">5.95%</div></div>
           <div class="fx-m2"><div class="fx-ml2">Profit Factor</div><div class="fx-mv2 neu">1.62</div></div>
           <div class="fx-m2"><div class="fx-ml2">Total Trades</div><div class="fx-mv2 neu">163</div></div>
@@ -10504,13 +10604,13 @@ function showSuite(id){
     ['KAIROS','suite-eq',1.18,15.02,'CAGR 13.10%'],['KRONOS','suite-eq',1.00,25.43,'CAGR 20.54%'],['AEGIS','suite-eq',1.08,15.61,'CAGR 14.01%'],
     ['BOREAS','suite-eq',1.04,23.55,'CAGR 18.17%'],['PROTEUS','suite-eq',1.07,18.23,'CAGR 16.83%'],['TYPHON','suite-eq',1.12,42.10,'CAGR 44.79%'],
     ['EREBUS','suite-eq',1.14,48.30,'CAGR 54.38%'],
-    ['USD/JPY','suite-fx',2.13,15.83,'3,163 trades'],['XAU/USD','suite-fx',1.82,15.54,'2,908 trades'],['EUR/JPY','suite-fx',2.20,16.35,'2,174 trades'],
-    ['GBP/USD','suite-fx',2.31,23.76,'2,037 trades'],['EUR/USD','suite-fx',1.91,34.52,'1,980 trades'],
-    ['NAS 100','suite-tk',3.86,8.44,'CAGR 6.9%'],['SP 500','suite-tk',1.88,8.98,'CAGR 3.73%'],['XAU (Tenkai)','suite-tk',3.62,4.71,'CAGR 5.95%']
+    ['USD/JPY','suite-fx',1.40,10.94,'CAGR 17.72% · MT5 Sharpe 2.22'],['XAU/USD','suite-fx',1.18,7.11,'CAGR 7.51% · MT5 Sharpe 1.90'],['EUR/JPY','suite-fx',1.09,17.32,'CAGR 11.28% · MT5 Sharpe 2.00'],
+    ['GBP/USD','suite-fx',1.07,9.54,'CAGR 9.06% · MT5 Sharpe 2.11'],['EUR/USD','suite-fx',0.91,14.94,'CAGR 8.21% · MT5 Sharpe 1.95'],
+    ['NAS 100','suite-tk',1.11,8.44,'CAGR 6.90% · MT5 Sharpe 3.86'],['SP 500','suite-tk',0.73,8.98,'CAGR 3.73% · MT5 Sharpe 1.88'],['XAU (Tenkai)','suite-tk',1.24,4.71,'CAGR 5.95% · MT5 Sharpe 3.62']
   ];
   // Drawing width follows the rendered width so 10px text stays 10px on phones
   let W=900,H=380;
-  const L=52,R=20,T=14,B=44,X1=50,Y1=4.2;
+  const L=52,R=20,T=14,B=44,X1=50,Y1=2;
   const x=v=>L+v/X1*(W-L-R), y=v=>H-B-v/Y1*(H-T-B);
   const NS='http://www.w3.org/2000/svg';
   const el=(t,a)=>{const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -10534,7 +10634,7 @@ function showSuite(id){
       svg.appendChild(el('line',{x1:x(v),x2:x(v),y1:T,y2:H-B,stroke:'var(--rule)','stroke-width':1}));
       const t=el('text',{x:x(v),y:H-B+16,'text-anchor':'middle','font-size':10});t.textContent=v+'%';svg.appendChild(t);
     }
-    for(let v=0;v<=4;v++){
+    for(let v=0;v<=Y1;v+=0.5){
       svg.appendChild(el('line',{x1:L,x2:W-R,y1:y(v),y2:y(v),stroke:'var(--rule)','stroke-width':1}));
       const t=el('text',{x:L-10,y:y(v)+3,'text-anchor':'end','font-size':10});t.textContent=v.toFixed(1);svg.appendChild(t);
     }
@@ -14779,11 +14879,11 @@ function exportPortExcel(){
     {id:'PROTEUS', type:'Double Layer',         group:'eq', cagr:16.83, sharpe:1.07, dd:18.23, vol:15.74},
     {id:'TYPHON',  type:'Market Timing + Risk', group:'eq', cagr:44.79, sharpe:1.12, dd:42.10, vol:39.32},
     {id:'EREBUS',  type:'Double Layer + Risk',  group:'eq', cagr:54.38, sharpe:1.14, dd:48.30, vol:48.40},
-    {id:'USD/JPY', type:'Trend Following',      group:'fx', sharpe:2.13, dd:15.83},
-    {id:'XAU/USD', type:'Mean Reversion',       group:'fx', sharpe:1.82, dd:15.54},
-    {id:'EUR/JPY', type:'Trend Following',      group:'fx', sharpe:2.20, dd:16.35},
-    {id:'GBP/USD', type:'Mean Reversion',       group:'fx', sharpe:2.31, dd:23.76},
-    {id:'EUR/USD', type:'Trend Following',      group:'fx', sharpe:1.91, dd:34.52}
+    {id:'USD/JPY', type:'Trend Following',      group:'fx', cagr:17.72, sharpe:1.40, dd:10.94, vol:12.68},
+    {id:'XAU/USD', type:'Mean Reversion',       group:'fx', cagr:7.51, sharpe:1.18, dd:7.11, vol:6.36},
+    {id:'EUR/JPY', type:'Trend Following',      group:'fx', cagr:11.28, sharpe:1.09, dd:17.32, vol:10.33},
+    {id:'GBP/USD', type:'Mean Reversion',       group:'fx', cagr:9.06, sharpe:1.07, dd:9.54, vol:8.48},
+    {id:'EUR/USD', type:'Trend Following',      group:'fx', cagr:8.21, sharpe:0.91, dd:14.94, vol:8.98}
   ];
   const COLORS=['#C8830A','#4ade80','#60a5fa','#f87171','#fbbf24','#a78bfa','#34d399','#fb923c','#38bdf8','#f472b6','#a3e635','#c084fc'];
   const WEEKS=624, YEARS=12, START_YEAR=2013;

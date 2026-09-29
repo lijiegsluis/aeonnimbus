@@ -17338,6 +17338,8 @@ function pitcherAside(secNum){
 }
 
 function pitcherMd(md){
+  // Model output is untrusted; neutralise tags but keep '>' for blockquote syntax
+  md = String(md).replace(/&/g,'&amp;').replace(/</g,'&lt;');
   /* ── Pre-process: extract section 11 content and replace with a placeholder ── */
   var rdcfHtml = '';
   md = md.replace(/(### 11\s*[·\-]\s*REVERSE DCF[\s\S]*?)(?=\n### \d{2}|$)/, function(block){
@@ -17358,7 +17360,7 @@ function pitcherMd(md){
   lines.forEach(function(line){
     // Table rows
     if(/^\|/.test(line)){
-      flush();
+      flushList(); flushBq();
       if(/^[-| :]+$/.test(line.replace(/\|/g,'').trim())) return;
       var cells = line.split('|').slice(1,-1).map(function(c){return c.trim();});
       if(!inTable){ out += '<table>'; inTable=true; tableFirstRow=true; }

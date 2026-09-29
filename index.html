@@ -7248,7 +7248,8 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="pg" id="pg-research">
 <div class="pghd reveal" data-num="02"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
 <div class="fbar">
-  <button class="fb on" data-i18n="fb_all">All</button><button class="fb" data-i18n="fb_equity">Equity</button><button class="fb" data-i18n="fb_macro">Macro</button><button class="fb" data-i18n="fb_geo">Geo / Markets</button><button class="fb" data-i18n="fb_cb">Central Bank</button>
+  <button class="fb on" data-f="all" data-i18n="fb_all">All</button><button class="fb" data-f="equity" data-i18n="fb_equity">Equity</button><button class="fb" data-f="macro" data-i18n="fb_macro">Macro</button><button class="fb" data-f="geo / markets" data-i18n="fb_geo">Geo / Markets</button><button class="fb" data-f="central bank" data-i18n="fb_cb">Central Bank</button>
+  <input id="rl-search" type="search" placeholder="Search title or ticker…" aria-label="Search research" style="margin-left:auto;min-width:180px;background:transparent;border:1px solid var(--rule,rgba(255,255,255,.12));color:var(--ink,#eee);font-family:var(--FM);font-size:10px;padding:6px 10px;border-radius:2px">
 </div>
 <div class="plist">
   <div class="rlwrap">
@@ -7409,6 +7410,17 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </tr>
     </tbody>
   </table>
+</div>
+
+<!-- Per-call alpha breakdown (filled by the S&P benchmark block) -->
+<div id="tr-alpha-wrap" style="display:none">
+  <div class="tr-section-lbl">Alpha by Call — vs S&amp;P 500 over the same holding period</div>
+  <div class="perf-tbl-wrap" style="overflow-x:auto">
+    <table class="perf-tbl" id="tr-alpha-tbl">
+      <thead><tr><th>Call</th><th>Published</th><th>Closed</th><th style="text-align:right">Call return</th><th style="text-align:right">S&amp;P 500</th><th style="text-align:right">Excess</th></tr></thead>
+      <tbody></tbody>
+    </table>
+  </div>
 </div>
 
 <!-- Worst-call callout ─────────────────────────── -->
@@ -7668,7 +7680,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="tdesc">Aeon Nimbus · Black-Scholes · Monte Carlo · Bond Analytics · Volatility Engine</div>
     </div>
   </div>
-  <span class="tbadge">Quant</span><a href="https://github.com/lijiegsluis/aeon-black-scholes" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">Quant</span><a href="https://github.com/lijiegsluis/aeon-black-scholes" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-black-scholes/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-black-scholes/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-quant">
   <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0 4px">
@@ -7856,7 +7868,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tc" id="tc-dcf">
 <div class="tchd" onclick="tog('dcf')">
   <div class="tcleft"><div class="tico">VE</div><div><div class="tname">Complete Valuation Engine</div><div class="tdesc">DCF · WACC/CAPM · 3-way sensitivity · Peer comps · Football field · Reverse DCF</div></div></div>
-  <span class="tbadge">Core</span><a href="https://github.com/lijiegsluis/aeon-dcf-engine" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">Core</span><a href="https://github.com/lijiegsluis/aeon-dcf-engine" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-dcf-engine/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-dcf-engine/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-dcf">
 <div class="tvtabs">
@@ -7982,7 +7994,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tc" id="tc-port">
 <div class="tchd" onclick="tog('port')">
   <div class="tcleft"><div class="tico">PC</div><div><div class="tname">Portfolio Construction</div><div class="tdesc">Build a mock fund · P&L attribution · Long/short exposure · Risk budget discipline</div></div></div>
-  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-portfolio-construction" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-portfolio-construction" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-portfolio-construction/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-portfolio-construction/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-port">
 <div class="tvtabs">
@@ -8055,7 +8067,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tc" id="tc-size">
 <div class="tchd" onclick="tog('size')">
   <div class="tcleft"><div class="tico">PS</div><div><div class="tname">Position Sizing Calculator</div><div class="tdesc">Kelly Criterion · Fixed-risk (1R) · Conviction-weighted — the skill that separates analysts from PMs</div></div></div>
-  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-position-sizing" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-position-sizing" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-position-sizing/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-position-sizing/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-size">
 <p style="font-family:var(--FS);font-size:14px;color:var(--white3);line-height:1.8;margin-bottom:16px"><em>How much capital you allocate to each idea is as important as the idea itself. This tool implements three methods used by professional PMs. Full Kelly maximises theoretical log-wealth; modified Kelly (½ or ¼) controls for estimation error. Fixed-risk anchors size to your stop-loss distance. Conviction-weighted blends both.</em></p>
@@ -8111,7 +8123,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tc" id="tc-corr">
 <div class="tchd" onclick="tog('corr')">
   <div class="tcleft"><div class="tico">CA</div><div><div class="tname">Cross-Asset Correlation & Macro Regime</div><div class="tdesc">Correlation matrix · Regime classifier · Regime-driven allocation framework</div></div></div>
-  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-correlation-matrix" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">PM Skill</span><a href="https://github.com/lijiegsluis/aeon-correlation-matrix" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-correlation-matrix/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-correlation-matrix/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-corr">
 <div class="tvtabs">
@@ -8145,7 +8157,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="tc" id="tc-idea">
 <div class="tchd" onclick="tog('idea')">
   <div class="tcleft"><div class="tico">IS</div><div><div class="tname">Investment Idea Screener</div><div class="tdesc">Thesis quality · Non-consensus signal · Catalyst timing · Publishability score</div></div></div>
-  <span class="tbadge">Analyst Skill</span><a href="https://github.com/lijiegsluis/aeon-idea-screener" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a>
+  <span class="tbadge">Analyst Skill</span><a href="https://github.com/lijiegsluis/aeon-idea-screener" target="_blank" class="gh-chip" title="View on GitHub">&#11041; GitHub</a><a href="https://github.com/lijiegsluis/aeon-idea-screener/actions/workflows/ci.yml" target="_blank" title="Unit tests on Python 3.10–3.13" style="display:inline-flex;align-items:center;margin-left:6px"><img src="https://github.com/lijiegsluis/aeon-idea-screener/actions/workflows/ci.yml/badge.svg" alt="tests" height="16" loading="lazy"></a>
 </div>
 <div class="tbody" id="tb-idea">
 <p style="font-family:var(--FS);font-size:14px;color:var(--white3);line-height:1.8;margin-bottom:16px"><em>Before spending 10 hours building a model, stress-test the idea against the questions every PM will ask. The best analysts filter ruthlessly before committing time. This tool forces the six questions that distinguish a publishable idea from wishful thinking.</em></p>
@@ -8286,7 +8298,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="qp-panel" id="qpp-bs">
     <div class="qp-ph">
       <div><div class="qp-pname">Black-Scholes Option Pricer</div>
-        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#options" target="_blank">Aeon Nimbus · BlackScholesCall / BlackScholesPut ↗</a></div>
+        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#options" target="_blank">Reference: Q-Fin · BlackScholesCall / BlackScholesPut ↗</a></div>
       <button class="qp-close" onclick="closeQP('bs')">✕ Close</button>
     </div>
     <div class="qp-formula">C = S·N(d₁) − K·e^(−rT)·N(d₂) &nbsp;|&nbsp; d₁ = [ln(S/K) + (r + σ²/2)T] / (σ√T) &nbsp;|&nbsp; d₂ = d₁ − σ√T</div>
@@ -8313,7 +8325,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="qp-panel" id="qpp-mc">
     <div class="qp-ph">
       <div><div class="qp-pname">Monte Carlo Exotic Options</div>
-        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#monte-carlo" target="_blank">Aeon Nimbus · MonteCarloCall / Barrier / Asian / Binary ↗</a></div>
+        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#monte-carlo" target="_blank">Reference: Q-Fin · MonteCarloCall / Barrier / Asian / Binary ↗</a></div>
       <button class="qp-close" onclick="closeQP('mc')">✕ Close</button>
     </div>
     <div class="qp-row c3">
@@ -8355,7 +8367,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="qp-panel" id="qpp-gbm">
     <div class="qp-ph">
       <div><div class="qp-pname">GBM Path Simulator</div>
-        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#simulations" target="_blank">Aeon Nimbus · GeometricBrownianMotion ↗</a></div>
+        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#simulations" target="_blank">Reference: Q-Fin · GeometricBrownianMotion ↗</a></div>
       <button class="qp-close" onclick="closeQP('gbm')">✕ Close</button>
     </div>
     <div class="qp-formula">dS = μ·S·dt + σ·S·dW &nbsp;⟹&nbsp; S(t) = S₀ · exp[(μ − σ²/2)t + σ√t · Z] &nbsp;where Z ~ N(0,1)</div>
@@ -8382,7 +8394,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="qp-panel" id="qpp-heston">
     <div class="qp-ph">
       <div><div class="qp-pname">Heston Stochastic Volatility</div>
-        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#simulations" target="_blank">Aeon Nimbus · StochasticVarianceModel ↗</a></div>
+        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#simulations" target="_blank">Reference: Q-Fin · StochasticVarianceModel ↗</a></div>
       <button class="qp-close" onclick="closeQP('heston')">✕ Close</button>
     </div>
     <div class="qp-formula">dS = μS dt + √v·S dW₁ &nbsp;|&nbsp; dv = κ(θ−v)dt + ξ√v dW₂ &nbsp;|&nbsp; corr(dW₁, dW₂) = ρ &nbsp;|&nbsp; Feller: 2κθ &gt; ξ²</div>
@@ -8413,7 +8425,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="qp-panel" id="qpp-abm">
     <div class="qp-ph">
       <div><div class="qp-pname">Bachelier (ABM) Option Model</div>
-        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#stochastics" target="_blank">Aeon Nimbus · ArithmeticBrownianMotion ↗</a></div>
+        <a class="qp-pref" href="https://github.com/romanmichaelpaolucci/Q-Fin#stochastics" target="_blank">Reference: Q-Fin · ArithmeticBrownianMotion ↗</a></div>
       <button class="qp-close" onclick="closeQP('abm')">✕ Close</button>
     </div>
     <div class="qp-formula">dS = μ dt + σ_B dW &nbsp;(additive) &nbsp;|&nbsp; C_Bach = (F−K)·N(d) + σ_B√T·n(d) &nbsp;|&nbsp; d = (F−K)/(σ_B√T)</div>
@@ -13898,20 +13910,26 @@ function exportPortExcel(){
 
     /* ── Filter button logic ────────────────────── */
     function wireFilters(){
+      // Match on data-f, not the button text: the text is translated by setLang()
+      let cat = 'all', q = '';
+      const apply = ()=>{
+        document.querySelectorAll('#rl-body tr').forEach(p=>{
+          const catOk = cat==='all' || (p.dataset.cat||'').toLowerCase()===cat;
+          const qOk = !q || p.textContent.toLowerCase().includes(q);
+          p.style.display = catOk && qOk ? '' : 'none';
+        });
+      };
       document.querySelectorAll('.fb').forEach(btn=>{
         btn.addEventListener('click',function(){
           document.querySelectorAll('.fb').forEach(x=>x.classList.remove('on'));
           this.classList.add('on');
-          const label = this.textContent.trim().toLowerCase();
-          document.querySelectorAll('#rl-body tr').forEach(p=>{
-            if(label==='all'){
-              p.style.display='';
-            } else {
-              p.style.display = (p.dataset.cat||'').toLowerCase()===label ? '' : 'none';
-            }
-          });
+          cat = (this.dataset.f||'all').toLowerCase();
+          apply();
         });
       });
+      const s = document.getElementById('rl-search');
+      if(s) s.addEventListener('input', ()=>{ q = s.value.trim().toLowerCase(); apply(); });
+      window._rlApplyFilters = apply;
     }
     wireFilters();
 
@@ -13966,6 +13984,7 @@ function exportPortExcel(){
         activeBtn.click();
       // Populate featured call on home page
       populateFeaturedCall(items);
+      if(window._rlApplyFilters) window._rlApplyFilters();
       // Populate home research strip with 3 latest posts
       (function(){
         const wrap = document.getElementById('hrs-posts');
@@ -14378,13 +14397,24 @@ function exportPortExcel(){
           for(var i=0;i<hist.length && hist[i].date<=date;i++) hit = hist[i].close;
           return hit;
         };
-        var excess = [], spxRets = [];
+        var excess = [], spxRets = [], perCall = [];
         closed.forEach(function(c){
           var a = closeOn(c.pub), b = closeOn(c.exit);
           if(!a || !b) return;
           var s = (b/a - 1)*100;
           spxRets.push(s); excess.push(c.ret - s);
+          perCall.push({c:c, spx:s, ex:c.ret - s});
         });
+        var tb = document.querySelector('#tr-alpha-tbl tbody');
+        if(tb && perCall.length){
+          var fd = function(d){ return new Date(d+'T00:00:00Z').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'}); };
+          var cell = function(v, strong){ return '<td style="text-align:right;color:'+(v>=0?(strong?'var(--gold)':'#4ade80'):'#f87171')+'">'+pct(v)+'</td>'; };
+          tb.innerHTML = perCall.sort(function(x,y){ return x.c.pub < y.c.pub ? -1 : 1; }).map(function(r){
+            return '<tr><td style="color:var(--gold)">'+r.c.sym+'</td><td>'+fd(r.c.pub)+'</td><td>'+fd(r.c.exit)+'</td>'+
+              cell(r.c.ret)+'<td style="text-align:right;color:var(--ink2)">'+pct(r.spx)+'</td>'+cell(r.ex, true)+'</tr>';
+          }).join('');
+          document.getElementById('tr-alpha-wrap').style.display = '';
+        }
         var first = closeOn(from), last = hist[hist.length-1].close;
         if(first) { setTxt('tr-spx-ret', pct((last/first-1)*100)); setTxt('pts-spy', pct((last/first-1)*100)); }
         if(!excess.length) return;
@@ -17895,7 +17925,19 @@ window.pitcherGenerate = async function(){
   pitcherStartLoad(ticker);
 
   try{
-    var md = await _callGemini(ticker, peers, context);
+    // Ground the report in a live quote when the input looks like a ticker; otherwise the model guesses the price
+    var liveNote = '';
+    if(/^[A-Za-z.]{1,6}$/.test(ticker)){
+      try{
+        var q = await fetch('https://finnhub.io/api/v1/quote?symbol='+encodeURIComponent(ticker.toUpperCase())+'&token=d883b7hr01qmhaki18mgd883b7hr01qmhaki18n0').then(function(r){return r.json();});
+        if(q && q.c > 0){
+          liveNote = 'LIVE MARKET DATA (Finnhub, '+new Date().toISOString().slice(0,10)+'): '+ticker.toUpperCase()+
+            ' last price $'+q.c.toFixed(2)+', day change '+(q.dp>=0?'+':'')+(+q.dp||0).toFixed(2)+'%, previous close $'+(+q.pc||0).toFixed(2)+
+            '. Use this as the current share price for every price-based calculation (entry, upside, multiples); do not substitute a price from training data.';
+        }
+      }catch(e){}
+    }
+    var md = await _callGemini(ticker, peers, liveNote ? (context ? context+'\n\n'+liveNote : liveNote) : context);
     pitcherStopLoad();
     document.getElementById('pitcher-loading').classList.remove('on');
     document.getElementById('pitcher-chat-box').style.opacity = '';
@@ -17903,7 +17945,12 @@ window.pitcherGenerate = async function(){
     _pitcherLoading = false;
 
     var inner = document.getElementById('pitcher-report-inner');
-    inner.innerHTML = pitcherMd(md) +
+    inner.innerHTML =
+      '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;margin-bottom:18px">AI-generated report. ' +
+      (liveNote ? 'Share price from a live Finnhub quote; financials and estimates come from the model and may be outdated or wrong.'
+                : 'No live quote was available, so every figure, including the share price, is a model estimate and may be outdated or wrong.') +
+      ' Verify before use.</div>' +
+      pitcherMd(md) +
       '<div style="margin-top:32px;padding-top:20px;border-top:1px solid var(--rule)">' +
       '<p class="pitch-disc">Research generated by Aeon Nimbus AI · Methodology: LiJie Guo / Aeon Nimbus Research · Not investment advice · All data should be independently verified · Live positions are published on aeonnimbus.com</p>' +
       '</div>';
@@ -18552,13 +18599,13 @@ window.mktRenderEarnings=function(){
     return d.week===ecFilter;
   });
   grid.innerHTML=items.map(function(d){
-    var cls=d.beat>=70?'ec-hi':d.beat>=50?'ec-mid':'ec-lo';
+    var cls=d.beat==null?'ec-mid':d.beat>=70?'ec-hi':d.beat>=50?'ec-mid':'ec-lo';
     return '<div class="mkt-ec-card '+cls+'">'+
       '<div class="mkt-ec-tk">'+d.tk+'</div><div class="mkt-ec-co">'+d.co+'</div>'+
-      '<div class="mkt-ec-date">'+d.date+' 2026</div>'+
-      '<div class="mkt-ec-stats"><div class="mkt-ec-stat"><b>'+d.eps+'</b> EPS</div>'+
-      '<div class="mkt-ec-stat"><b>±'+d.move+'%</b> impl.</div>'+
-      '<div class="mkt-ec-stat"><b>'+d.beat+'%</b> beat</div></div>'+
+      '<div class="mkt-ec-date">'+d.date+' '+(d.year||2026)+'</div>'+
+      '<div class="mkt-ec-stats"><div class="mkt-ec-stat"><b>'+d.eps+'</b> EPS'+(d.live?' est.':'')+'</div>'+
+      (d.move==null?'':'<div class="mkt-ec-stat"><b>±'+d.move+'%</b> impl.</div>')+
+      (d.beat==null?'':'<div class="mkt-ec-stat"><b>'+d.beat+'%</b> beat</div>')+'</div>'+
       '<div class="mkt-ec-time">'+d.time+'</div></div>';
   }).join('');
 };
@@ -18615,6 +18662,72 @@ window.mktRenderIPO=function(){
   }).join('');
   el._loaded=true;
 };
+
+/* ── Live calendars (Finnhub free tier). The sample arrays above stay as a
+   labelled fallback if the request fails or returns nothing. ── */
+(function(){
+  var TOKEN='d883b7hr01qmhaki18mgd883b7hr01qmhaki18n0';
+  var DAY=864e5, now=new Date();
+  var iso=function(d){return d.toISOString().slice(0,10);};
+  var mon=function(s){return new Date(s+'T00:00:00Z').toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:'UTC'});};
+  var money=function(v){v=+v;if(!v)return '—';return v>=1e9?'$'+(v/1e9).toFixed(1)+'B':'$'+Math.round(v/1e6)+'M';};
+  var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+  var markLive=function(panelId,text){
+    var n=document.querySelector('#'+panelId+' .mkt-sample-note');
+    if(n){n.textContent=text;n.style.color='var(--g2)';}
+  };
+  var get=function(path,from,to){
+    return fetch('https://finnhub.io/api/v1/calendar/'+path+'?from='+from+'&to='+to+'&token='+TOKEN).then(function(r){return r.json();});
+  };
+
+  var ecFetched=false, baseEC=window.mktRenderEarnings;
+  window.mktRenderEarnings=function(){
+    baseEC();
+    if(ecFetched)return; ecFetched=true;
+    var from=iso(now), to=iso(new Date(now.getTime()+20*DAY));
+    get('earnings',from,to).then(function(d){
+      var list=((d&&d.earningsCalendar)||[]).filter(function(e){return e.symbol&&e.date&&e.revenueEstimate;})
+        .sort(function(a,b){return b.revenueEstimate-a.revenueEstimate;}).slice(0,24)
+        .sort(function(a,b){return a.date<b.date?-1:1;});
+      if(!list.length)return;
+      var t0=new Date(from+'T00:00:00Z').getTime();
+      EC_DATA=list.map(function(e){
+        var wk=Math.min(3,Math.floor((new Date(e.date+'T00:00:00Z').getTime()-t0)/(7*DAY))+1);
+        return {tk:esc(e.symbol),co:'Revenue est. '+money(e.revenueEstimate),date:mon(e.date),year:e.date.slice(0,4),week:'week'+wk,live:true,
+          eps:e.epsEstimate!=null?'$'+(+e.epsEstimate).toFixed(2):'—',move:null,beat:null,
+          time:e.hour==='bmo'?'Pre-market':e.hour==='amc'?'After-hours':'During market'};
+      });
+      var labels={week1:'This week',week2:'Next week',week3:'Week 3'};
+      document.querySelectorAll('.mkt-ec-btn').forEach(function(b){
+        var m=(b.getAttribute('onclick')||'').match(/mktEcFilter\('(\w+)'/); if(!m)return;
+        if(labels[m[1]]) b.textContent=labels[m[1]];
+        else if(m[1]!=='all') b.style.display='none';
+      });
+      markLive('mkt-earnings','Live · Finnhub earnings calendar · 24 largest reporters by revenue estimate over the next 3 weeks.');
+      baseEC();
+    }).catch(function(){});
+  };
+
+  var ipoFetched=false, baseIPO=window.mktRenderIPO;
+  window.mktRenderIPO=function(){
+    baseIPO();
+    if(ipoFetched)return; ipoFetched=true;
+    get('ipo',iso(new Date(now.getTime()-30*DAY)),iso(new Date(now.getTime()+60*DAY))).then(function(d){
+      var list=((d&&d.ipoCalendar)||[]).filter(function(e){return e.name&&e.date;})
+        .sort(function(a,b){return (+b.totalSharesValue||0)-(+a.totalSharesValue||0);}).slice(0,20)
+        .sort(function(a,b){return a.date<b.date?1:-1;});
+      if(!list.length)return;
+      IPO_DATA=list.map(function(e){
+        return {name:esc(e.name),ticker:esc(e.symbol||'—'),sector:'IPO',exchange:esc(e.exchange||'—'),date:esc(mon(e.date)+', '+e.date.slice(0,4)),
+          status:String(e.status||'filed').toLowerCase(),raise:money(e.totalSharesValue),price:esc(e.price?'$'+e.price:'TBD'),
+          valuation:'—',desc:''};
+      });
+      var el=document.getElementById('mkt-ipo-list'); if(el) el._loaded=false;
+      markLive('mkt-ipo','Live · Finnhub IPO calendar · largest 20 deals from the last 30 days and next 60 days.');
+      baseIPO();
+    }).catch(function(){});
+  };
+})();
 
 /* ── Congress ── */
 var CT_DATA=[

@@ -6338,9 +6338,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="hv3-right">
       <div class="hv3-position">Independent Macro &amp; Equity Research · London</div>
       <div class="hv3-proof">
-        <strong>6 for 6.</strong>
-        Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known — and closed profitable.
-        <span class="hv3-sub">Average return per closed call: +34.5% · Hit rate: 100% · All eight permanently on the record.</span>
+        <strong id="hv3-proof-head">8 for 8.</strong>
+        <span id="hv3-proof-body">Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known — and closed profitable.</span>
+        <span class="hv3-sub" id="hv3-proof-sub">Average return per closed call: +34.5% · Hit rate: 100% · All eight permanently on the record.</span>
       </div>
       <div class="hv3-demo-pitcher" id="hv3-demo-pitcher">
         <div class="hv3-demo-label">Try AI Pitcher</div>
@@ -14381,6 +14381,11 @@ function exportPortExcel(){
     stripNum('hv3-closed', closed.length, 0);
     stripNum('hv3-open', openCount, 0);
     setTxt('hv3-closed-lbl', wins===closed.length ? 'Closed Calls · All Profitable' : 'Closed Calls · '+wins+' Profitable');
+    var allWon = wins===closed.length;
+    setTxt('hv3-proof-head', allWon ? wins+' for '+closed.length+'.' : wins+' of '+closed.length+'.');
+    setTxt('hv3-proof-body', 'Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known'+
+      (allWon ? ' — and closed profitable.' : ' — '+wins+' of '+closed.length+' closed calls profitable, losses included.'));
+    setTxt('hv3-proof-sub', 'Average return per closed call: '+pct(avg)+' · Hit rate: '+Math.round(wins/closed.length*100)+'% · All '+closed.length+' permanently on the record.');
 
     var from = closed.concat(rows.map(function(r){ return {pub:day(r.dataset.callPubdate)}; }))
       .map(function(c){ return c.pub; }).filter(Boolean).sort()[0];

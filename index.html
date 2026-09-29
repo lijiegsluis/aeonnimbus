@@ -6456,19 +6456,19 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- NUMBERS STRIP -->
 <div class="hv3-strip" id="hv3-strip">
   <div class="hv3-sitem">
-    <div class="hv3-snum g" data-hv3t="34.5" data-hv3p="+" data-hv3s="%" data-hv3d="1">+0%</div>
+    <div class="hv3-snum g" id="hv3-avg" data-hv3t="34.5" data-hv3p="+" data-hv3s="%" data-hv3d="1">+0%</div>
     <div class="hv3-slbl">Avg. Return · Closed Calls</div>
   </div>
   <div class="hv3-sitem">
-    <div class="hv3-snum g" data-hv3t="27.5" data-hv3p="+" data-hv3s="%" data-hv3d="1">+0%</div>
-    <div class="hv3-slbl">Alpha vs. S&amp;P 500 · Since Inception</div>
+    <div class="hv3-snum g" id="hv3-alpha">—</div>
+    <div class="hv3-slbl">Avg. Alpha vs. S&amp;P 500 · Per Call</div>
   </div>
   <div class="hv3-sitem">
-    <div class="hv3-snum" data-hv3t="8" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
-    <div class="hv3-slbl">Closed Calls · All Profitable</div>
+    <div class="hv3-snum" id="hv3-closed" data-hv3t="8" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
+    <div class="hv3-slbl" id="hv3-closed-lbl">Closed Calls · All Profitable</div>
   </div>
   <div class="hv3-sitem">
-    <div class="hv3-snum" data-hv3t="9" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
+    <div class="hv3-snum" id="hv3-open" data-hv3t="9" data-hv3p="" data-hv3s="" data-hv3d="0">0</div>
     <div class="hv3-slbl">Open Positions · Live</div>
   </div>
 </div>
@@ -7320,10 +7320,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tr-mb tr-mb-hero tr-mb-alpha">
     <div class="tr-mb-lbl">Alpha vs. S&amp;P 500<span id="tr-spx-pending" style="color:#f0a020;text-transform:none;letter-spacing:normal;display:none"> · unverified</span></div>
     <div class="tr-mb-val" id="tr-vs-spx">—</div>
-    <div class="tr-mb-sub">Since first call · S&amp;P: <span id="tr-spx-ret">—</span></div>
+    <div class="tr-mb-sub">Avg. per closed call vs S&amp;P over the same holding period · S&amp;P since first call: <span id="tr-spx-ret">—</span></div>
   </div>
 </div>
-<div class="tr-mbar-note">Live prices · S&amp;P 500 from 08 Apr 2026 · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology ↓</a></div>
+<div class="tr-mbar-note">Live prices · alpha = call return − S&amp;P 500 return between each call's publish and exit dates · <a href="#tr-methodology" style="color:inherit;text-decoration:underline;text-underline-offset:2px">methodology ↓</a></div>
 <!-- hidden element keeps tr-openret wired for JS -->
 <span id="tr-openret" style="display:none"></span>
 <div id="tr-sparkline-wrap" style="display:none">
@@ -7357,33 +7357,38 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <tr><td colspan="3" class="pt-cat">Return</td></tr>
       <tr>
         <td class="pt-label">Closed calls — hit rate<sup class="perf-fn">2</sup></td>
-        <td class="perf-tbl-col-an pt-gold">100%</td>
+        <td class="perf-tbl-col-an pt-gold" id="pts-hit">100%</td>
         <td class="pt-dim">n/a</td>
       </tr>
       <tr>
         <td class="pt-label">Average return per closed call<sup class="perf-fn">3</sup></td>
-        <td class="perf-tbl-col-an pt-gold">+34.5%</td>
-        <td class="pt-dim">n/a</td>
+        <td class="perf-tbl-col-an pt-gold" id="pts-avg">+34.5%</td>
+        <td class="pt-dim" id="pts-avg-spx">—</td>
+      </tr>
+      <tr>
+        <td class="pt-label">Average excess return vs S&amp;P (alpha)<sup class="perf-fn">3</sup></td>
+        <td class="perf-tbl-col-an pt-gold" id="pts-alpha">—</td>
+        <td class="pt-dim">—</td>
       </tr>
       <tr>
         <td class="pt-label">Portfolio-weighted return<sup class="perf-fn">4</sup></td>
         <td class="perf-tbl-col-an pt-green" id="pts-wret">—</td>
-        <td class="pt-dim">+<span id="pts-spy">~18</span>%<sup class="perf-fn">5</sup></td>
+        <td class="pt-dim"><span id="pts-spy">—</span><sup class="perf-fn">5</sup></td>
       </tr>
       <tr><td colspan="3" class="pt-cat">Risk</td></tr>
       <tr>
         <td class="pt-label">Best closed call</td>
-        <td class="perf-tbl-col-an pt-green">+74.3% (ORCL)</td>
+        <td class="perf-tbl-col-an pt-green" id="pts-best">+74.3% (ORCL)</td>
         <td class="pt-dim">—</td>
       </tr>
       <tr>
         <td class="pt-label">Worst closed call<sup class="perf-fn">6</sup></td>
-        <td class="perf-tbl-col-an pt-gold">+4.8% (ADEA)</td>
+        <td class="perf-tbl-col-an pt-gold" id="pts-worst">+4.8% (ADEA)</td>
         <td class="pt-dim">—</td>
       </tr>
       <tr>
         <td class="pt-label">Losing trades</td>
-        <td class="perf-tbl-col-an" style="color:var(--ink2)">0 of 8</td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)" id="pts-losing">0 of 8</td>
         <td class="pt-dim">—</td>
       </tr>
       <tr>
@@ -7422,11 +7427,11 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="perf-defs">
   <strong style="color:var(--ink);font-size:9.5px">Footnotes</strong>
   <ol>
-    <li><sup>1</sup> S&amp;P 500 (SPY ETF, total return) from 8 April 2026, the date of the first Aeon Nimbus call. Approximate figure — exact benchmark return varies by calculation date.</li>
-    <li><sup>2</sup> Hit rate = closed positions with a positive return ÷ total closed positions. 8 of 8 = 100%.</li>
-    <li><sup>3</sup> Simple (unweighted) average of individual call returns. Not a TWRR or portfolio-level return.</li>
+    <li><sup>1</sup> S&amp;P 500 index (^GSPC) daily closes, price return (dividends excluded). For each closed call the benchmark is measured over that call's own window: close on or before the publish date to close on or before the exit date.</li>
+    <li><sup>2</sup> Hit rate = closed positions with a positive return ÷ total closed positions.</li>
+    <li><sup>3</sup> Simple (unweighted) averages across closed calls. Alpha = average of (call return − S&amp;P 500 return over the same holding period). Not a TWRR or portfolio-level return.</li>
     <li><sup>4</sup> Weighted by published position size: each call's return × its published size as % of AUM, summed across all closed calls. Simulated on a hypothetical AUM — not a live fund.</li>
-    <li><sup>5</sup> Estimated S&amp;P 500 total return Apr 2026 – Sep 2026. Displayed for context only; investors' actual benchmark returns depend on their portfolio.</li>
+    <li><sup>5</sup> S&amp;P 500 price return from the first call's publish date to the latest close. Displayed for context only; not comparable to per-call returns.</li>
     <li><sup>6</sup> Worst closed call by return. The floor is a gain, not a loss. The track record includes no losing closed positions as of September 2026.</li>
     <li><sup>7</sup> Approximate average time from publication date to exit date across 8 closed calls. Ranges from 7 days (RDDT) to ~3 months (ADEA).</li>
     <li><sup>8</sup> All calls published on Substack with full thesis, entry price, stop-loss, position size, and horizon before the position is exited. Timestamped and permanently on record.</li>
@@ -10280,6 +10285,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="mkt-ec-btn" onclick="mktEcFilter('high',this)">Implied &gt;5%</button>
     <input class="mkt-ec-search" id="mkt-ec-search" type="text" placeholder="Search ticker…" oninput="mktEcSearch(this.value)">
   </div>
+  <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Check dates and estimates with your broker or the company before relying on them.</div>
   <div class="mkt-ec-grid" id="mkt-ec-grid"></div>
 </div>
 
@@ -10298,6 +10304,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="mkt-econ-btn" onclick="mktEconFilter('inflation',this)">Inflation</button>
     <button class="mkt-econ-btn" onclick="mktEconFilter('jobs',this)">Labour</button>
   </div>
+  <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Confirm release dates and consensus with an official calendar.</div>
   <div id="mkt-econ-list"></div>
 </div>
 
@@ -10309,6 +10316,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="mkt-tool-desc">Q4 2026 — upcoming listings, valuations, and deal status</div>
     </div>
   </div>
+  <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Deal terms and dates are examples, not verified filings.</div>
   <div id="mkt-ipo-list"></div>
 </div>
 
@@ -10331,6 +10339,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="mkt-ct-btn ct-party-btn" onclick="mktCtParty('R',this)">Republicans</button>
   </div>
   <div style="overflow-x:auto">
+    <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Trades shown are examples, not verified disclosures. See the official House/Senate periodic transaction reports.</div>
     <table class="mkt-ct-tbl"><thead><tr><th>Politician</th><th>Party</th><th>Ticker</th><th>Action</th><th>Amount</th><th>Trade Date</th><th>Delay</th><th>Sector</th></tr></thead>
     <tbody id="mkt-ct-tbody"></tbody></table>
   </div>
@@ -10358,6 +10367,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="mkt-flow-btn flow-bull-btn" onclick="mktFlowBull('bearish',this)">Bearish</button>
   </div>
   <div style="overflow-x:auto">
+    <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Prints shown are examples, not real options activity.</div>
     <table class="mkt-flow-tbl"><thead><tr><th>Ticker</th><th>Type</th><th>Strike</th><th>Expiry</th><th>Premium</th><th>Vol/OI</th><th>Bias</th><th>Time</th></tr></thead>
     <tbody id="mkt-flow-tbody"></tbody></table>
   </div>
@@ -14313,38 +14323,81 @@ function exportPortExcel(){
   runSimulator();
   window._trRunSimulator = runSimulator;
 
-  /* ── SPX benchmark since first call ────────────────────
-     Start price: SPX close on 08 Apr 2026 (first published call).
-     Verified by LiJie directly — 6,800. */
-  var SPX_START = 6800;
-  var SPX_START_VERIFIED = true;
-  fetch('https://financialmodelingprep.com/stable/quote?symbol=%5EGSPC&apikey=VkvNMOEziKpuUPoctmEDOYjN4v19VGB6')
-    .then(function(r){return r.json();})
-    .then(function(arr){
-      var q = arr && arr[0];
-      if(!q || !q.price) return;
-      var spxNow = q.price;
-      var spxRet = (spxNow - SPX_START) / SPX_START * 100;
-      var pendingEl = document.getElementById('tr-spx-pending');
-      if(pendingEl) pendingEl.style.display = SPX_START_VERIFIED ? 'none' : '';
-      var spxSign = spxRet >= 0 ? '+' : '';
-      var spxEl = document.getElementById('tr-spx-ret');
-      if(spxEl) spxEl.textContent = spxSign + spxRet.toFixed(1) + '%';
-      /* vs-SPX: the primary stat — closed avg return minus SPX, i.e. alpha */
-      var avgRetEl = document.getElementById('tr-avgret');
-      var vsEl = document.getElementById('tr-vs-spx');
-      if(avgRetEl && vsEl){
-        var avgRet2 = parseFloat(avgRetEl.textContent);
-        if(!isNaN(avgRet2)){
-          var diff = avgRet2 - spxRet;
-          var dSign = diff >= 0 ? '+' : '';
-          vsEl.textContent = dSign + diff.toFixed(1) + '%';
-          vsEl.style.color = diff >= 0 ? 'var(--gold)' : '#f87171';
-          var qvAlpha = document.getElementById('tr-qv-alpha');
-          if(qvAlpha){ qvAlpha.textContent = dSign + diff.toFixed(1) + '%'; qvAlpha.style.color = diff >= 0 ? 'var(--gold)' : '#f87171'; }
-        }
-      }
-    }).catch(function(){});
+  /* ── Board stats + S&P 500 benchmark ──────────────────────
+     Alpha = mean over closed calls of (call return − S&P 500 return over that
+     call's own publish→exit window), from daily ^GSPC closes. Comparing an
+     average per-call return with the index's since-inception return mixes
+     different holding periods, so it is not used. */
+  (function(){
+    var pct = function(v){ return (v>=0?'+':'')+v.toFixed(1)+'%'; };
+    var setTxt = function(id, txt, color){ var e=document.getElementById(id); if(e){ e.textContent=txt; if(color) e.style.color=color; } };
+    var day = function(iso){ return String(iso||'').slice(0,10); };
+
+    var rows = Array.prototype.slice.call(document.querySelectorAll('table.tr tbody tr'));
+    var closed = [], openCount = 0;
+    rows.forEach(function(row){
+      var ret = parseFloat((row.querySelector('.tr-ret')||{}).textContent);
+      var sym = (row.dataset.sym||'').replace(/^\$/,'');
+      if(row.dataset.exitDate && !isNaN(ret)) closed.push({sym:sym, ret:ret, pub:day(row.dataset.callPubdate), exit:day(row.dataset.exitDate)});
+      else if(row.querySelector('.bdg.bo')) openCount++;
+    });
+    if(!closed.length) return;
+
+    var wins = closed.filter(function(c){ return c.ret > 0; }).length;
+    var avg = closed.reduce(function(a,c){ return a+c.ret; },0)/closed.length;
+    var byRet = closed.slice().sort(function(a,b){ return b.ret-a.ret; });
+    setTxt('pts-hit', Math.round(wins/closed.length*100)+'%');
+    setTxt('pts-avg', pct(avg));
+    setTxt('pts-best', pct(byRet[0].ret)+' ('+byRet[0].sym+')');
+    setTxt('pts-worst', pct(byRet[byRet.length-1].ret)+' ('+byRet[byRet.length-1].sym+')');
+    setTxt('pts-losing', (closed.length-wins)+' of '+closed.length);
+
+    var stripNum = function(id, v, dec){
+      var e=document.getElementById(id); if(!e) return;
+      e.dataset.hv3t = String(Math.abs(v)); e.dataset.hv3d = String(dec);
+      if(e.dataset.hv3p !== undefined) e.dataset.hv3p = v<0 ? '-' : (e.dataset.hv3p||'');
+    };
+    stripNum('hv3-avg', avg, 1);
+    stripNum('hv3-closed', closed.length, 0);
+    stripNum('hv3-open', openCount, 0);
+    setTxt('hv3-closed-lbl', wins===closed.length ? 'Closed Calls · All Profitable' : 'Closed Calls · '+wins+' Profitable');
+
+    var from = closed.concat(rows.map(function(r){ return {pub:day(r.dataset.callPubdate)}; }))
+      .map(function(c){ return c.pub; }).filter(Boolean).sort()[0];
+    fetch('https://financialmodelingprep.com/stable/historical-price-eod/light?symbol=%5EGSPC&from='+from+'&apikey=VkvNMOEziKpuUPoctmEDOYjN4v19VGB6')
+      .then(function(r){ return r.json(); })
+      .then(function(d){
+        var hist = (Array.isArray(d) ? d : (d && d.historical) || [])
+          .map(function(x){ return {date:day(x.date), close:+(x.price!=null ? x.price : x.close)}; })
+          .filter(function(x){ return x.date && x.close > 0; })
+          .sort(function(a,b){ return a.date < b.date ? -1 : 1; });
+        if(hist.length < 2) return;
+        var closeOn = function(date){
+          var hit = null;
+          for(var i=0;i<hist.length && hist[i].date<=date;i++) hit = hist[i].close;
+          return hit;
+        };
+        var excess = [], spxRets = [];
+        closed.forEach(function(c){
+          var a = closeOn(c.pub), b = closeOn(c.exit);
+          if(!a || !b) return;
+          var s = (b/a - 1)*100;
+          spxRets.push(s); excess.push(c.ret - s);
+        });
+        var first = closeOn(from), last = hist[hist.length-1].close;
+        if(first) { setTxt('tr-spx-ret', pct((last/first-1)*100)); setTxt('pts-spy', pct((last/first-1)*100)); }
+        if(!excess.length) return;
+        var alpha = excess.reduce(function(a,v){ return a+v; },0)/excess.length;
+        var spxAvg = spxRets.reduce(function(a,v){ return a+v; },0)/spxRets.length;
+        var col = alpha >= 0 ? 'var(--gold)' : '#f87171';
+        setTxt('tr-vs-spx', pct(alpha), col);
+        setTxt('tr-qv-alpha', pct(alpha), col);
+        setTxt('pts-alpha', pct(alpha), col);
+        setTxt('pts-avg-spx', pct(spxAvg));
+        setTxt('hv3-alpha', pct(alpha));
+      })
+      .catch(function(){});
+  })();
   /* Note: live Return/ROI for open positions is handled by the Finnhub-powered
      "LAST PRICE & ROI COLUMNS" block below — avoids a duplicate data source. */
 })();
@@ -17885,7 +17938,9 @@ window.pitcherPaywallSubmit = function(){
   var sub = document.getElementById('pitcher-pw-sub');
   if(!email || !email.includes('@')){ sub.textContent = 'Please enter a valid email.'; return; }
   try{ localStorage.setItem('an_pitcher_email', email); }catch(e){}
-  sub.textContent = 'You\'re on the list. We\'ll be in touch.';
+  // The site has no backend, so hand the address to Substack's own subscribe flow
+  window.open('https://aeonnimbus.substack.com/subscribe?email='+encodeURIComponent(email), '_blank', 'noopener');
+  sub.textContent = 'Almost there — confirm your subscription in the Substack tab that just opened.';
   document.getElementById('pitcher-pw-email').style.display='none';
   document.querySelector('#pitcher-pw-inline .pitcher-pw-cta').style.display='none';
 };

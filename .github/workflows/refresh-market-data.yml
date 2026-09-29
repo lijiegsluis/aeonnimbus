@@ -1,0 +1,50 @@
+name: Refresh market data
+
+on:
+  schedule:
+    # Weekdays after the US close, plus a midday run
+    - cron: '41 21 * * 1-5'
+    - cron: '41 16 * * 1-5'
+  workflow_dispatch:
+  # Dry run on PRs that touch the pipeline: build and print, never commit
+  pull_request:
+    paths:
+      - '.github/scripts/refresh_market_data.py'
+      - '.github/workflows/refresh-market-data.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: refresh-market-data
+  cancel-in-progress: false
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install --quiet yfinance pypdf requests
+
+      - name: Build market-data.json
+        run: python .github/scripts/refresh_market_data.py
+
+      - name: Commit if changed
+        if: github.event_name != 'pull_request'
+        run: |
+          if git diff --quiet -- market-data.json && git ls-files --error-unmatch market-data.json >/dev/null 2>&1; then
+            echo "Market data unchanged."
+            exit 0
+          fi
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add market-data.json
+          git commit -m "chore: refresh market data snapshot"
+          git pull --rebase --autostash origin main
+          git push

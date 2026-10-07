@@ -6568,7 +6568,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
   <!-- canvas -->
   <div style="position:relative;margin-top:28px">
-    <canvas id="hv3-pnl-canvas" style="width:100%;height:260px;display:block"></canvas>
+    <canvas id="hv3-pnl-canvas" style="width:100%;height:340px;display:block"></canvas>
     <div class="hv3-pnl-tip" id="hv3-pnl-tip">
       <span class="hv3-pnl-tip-ret" id="hv3-tip-ret">—</span>
       <span class="hv3-pnl-tip-tk" id="hv3-tip-tk">—</span>
@@ -9621,11 +9621,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- Fund Lab intro + ETP notice -->
 <div style="padding:0 52px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap">
   <p style="font-family:var(--FS);font-size:13px;color:var(--ink2);line-height:1.75;max-width:560px;margin:0">Research Lab is the research and product layer of Aeon Nimbus — housing a live paper portfolio, systematic equity strategies, and the portfolio construction toolkit. Each vehicle is built on the same quantitative framework: regime-aware, disciplined, and fully transparent.</p>
-  <div style="flex-shrink:0;border:1px solid rgba(200,131,10,.3);background:rgba(200,131,10,.05);padding:16px 22px;border-radius:2px;max-width:320px">
-    <div style="font-family:var(--FM);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Coming Soon</div>
-    <div style="font-family:var(--FS);font-size:13px;color:var(--ink);font-weight:500;margin-bottom:6px">Exchange-Traded Products</div>
-    <p style="font-family:var(--FS);font-size:11.5px;color:var(--ink3);line-height:1.6;margin:0">ETPs tracking our systematic strategies are in development. Stay tuned — subscribe to Research for updates.</p>
-  </div>
+  <div class="etp-notice-card"><span class="etp-tag">Coming Soon</span> Exchange-Traded Products — in development. Subscribe for updates.</div>
 </div>
 
 <!-- Grid view: 3 product cards -->
@@ -10168,6 +10164,20 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <a href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="font-family:var(--FM);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.08em;opacity:.8">Subscribe to Aeon Nimbus ↗</a>
   </div>
 </div>
+
+  <!-- Sample output preview — shown when no report is active -->
+  <div class="pitcher-sample-preview" id="pitcher-sample-preview">
+    <div class="pitcher-sample-preview-title">Marvell Technology — MRVL · NASDAQ</div>
+    <div class="pitcher-sample-preview-meta">Equity Deep Dive · Published 09 Jun 2026 · Entry $57.82 · Target $82.00 · Stop $46.00 · Size 10%</div>
+    <div class="pitcher-sample-preview-row">
+      <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">+31.9%</span><span class="pitcher-sample-kpi-lbl">Return (closed)</span></div>
+      <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">$74.30</span><span class="pitcher-sample-kpi-lbl">Exit Price</span></div>
+      <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">+30.4%</span><span class="pitcher-sample-kpi-lbl">Alpha vs S&amp;P 500</span></div>
+    </div>
+    <div class="pitcher-sample-preview-body">
+      <strong>Thesis:</strong> Market pricing Marvell as a legacy networking play, missing the custom silicon inflection — ASIC revenue to reach 40% of total by FY2027 as hyperscaler concentration (AWS, Google) locks in multi-year design wins invisible to consensus estimates. The semiconductor sector rotation creates an entry below replacement cost of the design pipeline.
+    </div>
+  </div>
 
 </div><!-- /pitcher-wrap -->
 </div><!-- /pg-pitcher -->
@@ -16422,6 +16432,146 @@ table.ct-tbl td{padding:8px 10px;border-bottom:1px solid rgba(196,164,74,.04);co
 .flow-bull { background:var(--mkt-bull-dim); color:var(--mkt-bull); border:1px solid rgba(0,232,122,.2); font-family:var(--FM); font-size:9px; padding:2px 7px; border-radius:2px; }
 .flow-bear { background:var(--mkt-bear-dim); color:var(--mkt-bear); border:1px solid rgba(255,68,85,.2); font-family:var(--FM); font-size:9px; padding:2px 7px; border-radius:2px; }
 .flow-neu  { background:rgba(196,164,74,.09); color:var(--gold); border:1px solid rgba(196,164,74,.18); font-family:var(--FM); font-size:9px; padding:2px 7px; border-radius:2px; }
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN AUDIT FIXES — Oct 2026
+   ══════════════════════════════════════════════════════════ */
+
+/* 1. MARKETS TABS — no wrap, horizontal scroll on overflow */
+.mkt-tabs {
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  padding-bottom: 14px;
+  gap: 4px !important;
+}
+.mkt-tabs::-webkit-scrollbar { display: none; }
+.mkt-tab { white-space: nowrap; flex-shrink: 0; }
+
+/* 2. TRACK RECORD — cumulative P&L chart taller */
+#hv3-pnl-canvas { height: 340px !important; }
+
+/* 3. ALPHA BY CALL TABLE — call return column gold + bigger */
+#tr-alpha-tbl td:nth-child(4),
+#tr-alpha-tbl th:nth-child(4) {
+  color: var(--gold) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums;
+}
+#tr-alpha-tbl td:nth-child(6),
+#tr-alpha-tbl th:nth-child(6) {
+  color: #4ade80 !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+}
+
+/* 4. CAPITAL SIMULATION BARS — dollar labels gold */
+.sim-bar-dollar { color: var(--gold) !important; }
+
+/* 5. HERO — reduce top padding, let content breathe at fold */
+.hv3-hero { padding-top: 60px !important; }
+
+/* 6. INVESTMENT PHILOSOPHY PILLARS — add separator lines */
+.hf-step { border-bottom: 1px solid var(--rule); padding-bottom: 32px; margin-bottom: 32px; }
+.hf-step:last-child { border-bottom: none; margin-bottom: 0; }
+
+/* 7. STAT BOX (track record overview) — equal-width columns */
+.hf-stats { grid-template-columns: repeat(4, 1fr) !important; }
+
+/* 8. TAG BADGES — color-coded by category */
+/* Tool thumbnail badges */
+.tgt-badge { background: rgba(200,131,10,.12); color: var(--gold); border-color: rgba(200,131,10,.22); }
+.tg-thumb[id="tgt-quant"] .tgt-badge,
+.tg-thumb[id*="quant"] .tgt-badge { background: rgba(91,156,246,.12); color: #5b9cf6; border-color: rgba(91,156,246,.22); }
+.tg-thumb[id="tgt-dcf"] .tgt-badge,
+.tg-thumb[id="tgt-sotp"] .tgt-badge { background: rgba(200,131,10,.14); color: var(--gold); border-color: rgba(200,131,10,.3); }
+.tg-thumb[id="tgt-port"] .tgt-badge,
+.tg-thumb[id="tgt-size"] .tgt-badge,
+.tg-thumb[id="tgt-corr"] .tgt-badge { background: rgba(167,139,250,.12); color: #a78bfa; border-color: rgba(167,139,250,.22); }
+.tg-thumb[id="tgt-idea"] .tgt-badge { background: rgba(251,191,36,.12); color: #fbbf24; border-color: rgba(251,191,36,.22); }
+.tg-thumb[id="tgt-earnings"] .tgt-badge,
+.tg-thumb[id="tgt-congress"] .tgt-badge,
+.tg-thumb[id="tgt-heatmap"] .tgt-badge { background: rgba(52,211,153,.1); color: #34d399; border-color: rgba(52,211,153,.22); }
+
+/* 9. COMING SOON ETP — slim notice instead of full card */
+.etp-notice-card {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 16px; border: 1px solid rgba(200,131,10,.2);
+  background: rgba(200,131,10,.04); border-radius: 2px;
+  font-family: var(--FM); font-size: 10px; letter-spacing: .08em;
+  color: var(--ink3); white-space: nowrap;
+}
+.etp-notice-card .etp-tag {
+  color: var(--gold); letter-spacing: .14em; text-transform: uppercase; font-size: 9px;
+}
+
+/* 10. ABOUT TIMELINE — tighten gap between roles */
+.abt-tl-item { padding-bottom: 28px !important; }
+
+/* 11. MARKETS INDEX TILES — border + gap */
+.mkt-idx-card { border: 1px solid rgba(200,131,10,.1) !important; }
+
+/* 12. AI PITCHER — sample preview placeholder below form */
+.pitcher-sample-preview {
+  margin-top: 40px;
+  border: 1px solid var(--rule);
+  border-left: 3px solid rgba(200,131,10,.35);
+  border-radius: 0 6px 6px 0;
+  background: var(--bg2);
+  padding: 24px 28px;
+  opacity: .72;
+  pointer-events: none;
+  user-select: none;
+}
+.pitcher-sample-preview::before {
+  content: 'SAMPLE OUTPUT';
+  display: block;
+  font-family: var(--FM); font-size: 7.5px; letter-spacing: .2em;
+  color: var(--gold); opacity: .55; margin-bottom: 14px;
+}
+.pitcher-sample-preview-title {
+  font-family: var(--FS); font-size: 16px; font-weight: 600;
+  color: var(--ink); margin-bottom: 8px;
+}
+.pitcher-sample-preview-meta {
+  font-family: var(--FM); font-size: 9.5px; letter-spacing: .06em;
+  color: var(--ink3); margin-bottom: 16px;
+}
+.pitcher-sample-preview-body {
+  font-family: var(--FS); font-size: 12.5px; color: var(--ink2);
+  line-height: 1.7;
+}
+.pitcher-sample-preview-row {
+  display: flex; gap: 24px; margin-bottom: 14px; flex-wrap: wrap;
+}
+.pitcher-sample-kpi {
+  display: flex; flex-direction: column; gap: 2px;
+}
+.pitcher-sample-kpi-val {
+  font-family: var(--FM); font-size: 18px; font-weight: 700;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+}
+.pitcher-sample-kpi-lbl {
+  font-family: var(--FM); font-size: 8.5px; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--ink3);
+}
+
+/* 13. RESEARCH — filter pill active contrast */
+.am-filter-btn.on, .tr-filter-btn.on, .research-filter.active,
+button.filter-btn.active, button.filter-pill.on {
+  background: var(--gold) !important;
+  color: #0a0802 !important;
+  border-color: var(--gold) !important;
+}
+
+/* 14. HERO STAT CALLOUT — make the 32.7% / 100% / 9 summary more prominent */
+.hv3-mbar { font-size: 13px !important; letter-spacing: .01em !important; }
+.hv3-mb-num { font-size: 22px !important; font-weight: 700 !important; color: var(--gold) !important; }
+
+/* 15. RESEARCH LIVE BADGE — vertical alignment fix */
+.research-live-badge, .live-pill { vertical-align: middle !important; }
 </style>
 
 <script>
@@ -18042,6 +18192,7 @@ window.pitcherGenerate = async function(){
   document.getElementById('pitcher-chat-box').style.opacity = '0.4';
   document.getElementById('pitcher-loading').classList.add('on');
   document.getElementById('pitcher-report').classList.remove('on');
+  var _ps = document.getElementById('pitcher-sample-preview'); if(_ps) _ps.style.display='none';
   pitcherStartLoad(ticker);
 
   try{

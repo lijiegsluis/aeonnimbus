@@ -10,6 +10,7 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="author" content="LiJie Guo">
 <meta name="theme-color" content="#07070A">
+<meta name="color-scheme" content="dark">
 <link rel="canonical" href="https://aeonnimbus.com/">
 <link rel="sitemap" type="application/xml" href="/sitemap.xml">
 <link rel="alternate" hreflang="en" href="https://aeonnimbus.com/">
@@ -531,7 +532,7 @@ table.tr td{padding:11px 12px;color:var(--white2);vertical-align:middle}
   table.tr td:nth-child(9){grid-column:1/3}
   /* ROI prominent */
   table.tr td.tr-roi{font-size:14px;font-weight:700}
-  table.tr td.tr-ret{font-weight:600}
+  table.tr td.tr-ret{font-weight:700;font-size:22px;color:var(--gold);font-variant-numeric:tabular-nums}
 }
 .tdtk{font-weight:700;color:var(--gold)}.tdl{color:#4ade80}.tds{color:#f87171}
 .bdg{padding:3px 9px;font-size:8px;letter-spacing:.09em;text-transform:uppercase}
@@ -6319,6 +6320,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
 </head>
 <body>
+<a class="skip-to-main" href="#main-content" style="position:absolute;top:-40px;left:0;background:var(--gold);color:#0a0802;padding:8px 16px;font-size:13px;font-weight:600;z-index:9999;border-radius:0 0 4px 0;transition:top .1s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
 <!-- GRAIN -->
 <div class="an-grain" aria-hidden="true"></div>
 <!-- PAGE LOADER -->
@@ -6344,7 +6346,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="nbtn" onclick="sp('pitcher')" style="position:relative">AI Pitcher<span style="position:absolute;top:-3px;right:-6px;background:var(--gold);color:#0e0c09;font-size:7px;font-family:var(--FM);font-weight:700;padding:1px 4px;border-radius:3px;letter-spacing:.06em;line-height:1.5">β</span></button>
     <button class="nbtn" onclick="sp('markets')">Markets</button>
     <div class="nav-drop-wrap">
-      <button class="nbtn" onclick="sp('portfolios')"><span data-i18n="nav_fundlab">Research Lab</span> ▾</button>
+      <button class="nbtn" onclick="sp('portfolios')" aria-haspopup="true" aria-expanded="false" aria-label="Research Lab menu"><span data-i18n="nav_fundlab">Research Lab</span> ▾</button>
       <div class="nav-dropdown">
         <button class="nav-drop-item" onclick="sp('portfolios');setTimeout(showPortFund,150)">
           <span class="nav-drop-tag" data-i18n="drop_paper_tag">Model Portfolio</span>
@@ -6395,6 +6397,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 
 <!-- ═══════════════ HOME ═══════════════════════════ -->
+<div id="main-content"></div>
 <div class="pg on" id="pg-home">
 <!-- ══ HERO ════════════════════════════════════════════════ -->
 <!-- HERO -->
@@ -6450,12 +6453,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <thead>
       <tr>
         <th style="width:52px">#</th>
-        <th>Instrument</th>
-        <th>Thesis</th>
-        <th>vs. Street</th>
-        <th>Published</th>
-        <th>Period</th>
-        <th>Return</th>
+        <th scope="col">Instrument</th>
+        <th scope="col">Thesis</th>
+        <th scope="col">vs. Street</th>
+        <th scope="col">Published</th>
+        <th scope="col">Period</th>
+        <th scope="col">Return</th>
       </tr>
     </thead>
     <tbody>
@@ -6878,11 +6881,11 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="ml-table-wrap">
         <table class="ml-table">
           <thead><tr>
-            <th>Year</th>
-            <th>Revenue ($B)</th>
-            <th>EBIT Margin</th>
-            <th>Free Cash Flow ($B)</th>
-            <th>PV of FCF ($B)</th>
+            <th scope="col">Year</th>
+            <th scope="col">Revenue ($B)</th>
+            <th scope="col">EBIT Margin</th>
+            <th scope="col">Free Cash Flow ($B)</th>
+            <th scope="col">PV of FCF ($B)</th>
           </tr></thead>
           <tbody id="ml-fcf-body"></tbody>
         </table>
@@ -6912,9 +6915,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <thead><tr>
           <th style="text-align:left">Segment</th>
           <th style="text-align:left">NTM Revenue ($B)</th>
-          <th>Basis</th>
-          <th>Multiple</th>
-          <th>Implied EV ($B)</th>
+          <th scope="col">Basis</th>
+          <th scope="col">Multiple</th>
+          <th scope="col">Implied EV ($B)</th>
         </tr></thead>
         <tbody>
           <tr class="sotp-row">
@@ -6988,7 +6991,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="an-seo-table-wrap">
       <table class="an-seo-table">
         <thead>
-          <tr><th>Ticker</th><th>Company</th><th>Entry</th><th>Exit</th><th>Return</th><th>Period</th><th>Published</th></tr>
+          <tr><th scope="col">Ticker</th><th scope="col">Company</th><th scope="col">Entry</th><th scope="col">Exit</th><th scope="col">Return</th><th scope="col">Period</th><th scope="col">Published</th></tr>
         </thead>
         <tbody>
           <tr><td>ORCL</td><td>Oracle Corporation</td><td>$143.36</td><td>$249.88</td><td class="pos">+74.3%</td><td>Apr – Jun 2026</td><td>8 Apr 2026</td></tr>
@@ -7322,9 +7325,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="rlwrap">
     <table class="rl">
       <thead><tr>
-        <th>Date</th>
-        <th>Category</th>
-        <th>Title</th>
+        <th scope="col">Date</th>
+        <th scope="col">Category</th>
+        <th scope="col">Title</th>
         <th style="text-align:right">Read</th>
       </tr></thead>
       <tbody id="rl-body"></tbody>
@@ -7416,9 +7419,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <table class="perf-tbl">
     <thead>
       <tr>
-        <th>Metric</th>
+        <th scope="col">Metric</th>
         <th class="perf-tbl-col-an">Aeon Nimbus<br><span style="font-weight:400;opacity:.55;letter-spacing:0;text-transform:none">Apr 2026 – present</span></th>
-        <th>S&amp;P 500<sup class="perf-fn">1</sup><br><span style="font-weight:400;opacity:.55;letter-spacing:0;text-transform:none">Same period</span></th>
+        <th scope="col">S&amp;P 500<sup class="perf-fn">1</sup><br><span style="font-weight:400;opacity:.55;letter-spacing:0;text-transform:none">Same period</span></th>
       </tr>
     </thead>
     <tbody>
@@ -7484,7 +7487,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="tr-section-lbl">Alpha by Call — vs S&amp;P 500 over the same holding period</div>
   <div class="perf-tbl-wrap" style="overflow-x:auto">
     <table class="perf-tbl" id="tr-alpha-tbl">
-      <thead><tr><th>Call</th><th>Published</th><th>Closed</th><th style="text-align:right">Call return</th><th style="text-align:right">S&amp;P 500</th><th style="text-align:right">Excess</th></tr></thead>
+      <thead><tr><th scope="col">Call</th><th scope="col">Published</th><th scope="col">Closed</th><th style="text-align:right">Call return</th><th style="text-align:right">S&amp;P 500</th><th style="text-align:right">Excess</th></tr></thead>
       <tbody></tbody>
     </table>
   </div>
@@ -7603,8 +7606,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- ══ FULL RECORD ════════════════════════════════ -->
 <div class="tr-section-lbl">Full Record</div>
 <div class="trwrap">
-  <table class="tr">
-    <thead><tr><th>Date</th><th>Ticker</th><th>Direction</th><th>Entry</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Status</th><th>Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
+  <table class="tr" aria-label="Investment track record">
+    <caption style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap">Investment calls track record — entry date, ticker, direction, entry price, target, stop, position size, horizon, status and return</caption>
+    <thead><tr><th scope="col">Date</th><th scope="col">Ticker</th><th scope="col">Direction</th><th scope="col">Entry</th><th scope="col">Target</th><th scope="col">Stop</th><th scope="col">Size</th><th scope="col">Horizon</th><th scope="col">Status</th><th scope="col">Return</th><th style="min-width:82px">Last Price</th><th style="min-width:64px">ROI</th></tr></thead>
     <tbody></tbody>
   </table>
 </div>
@@ -7839,7 +7843,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
     <div class="q-section">Terminal Distribution Statistics</div>
     <table class="q-stat-table" id="qmc_stats">
-      <thead><tr><th>Metric</th><th style="text-align:right">Value</th></tr></thead>
+      <thead><tr><th scope="col">Metric</th><th style="text-align:right">Value</th></tr></thead>
       <tbody>
         <tr><td>Mean terminal price</td><td id="qmc_mean">—</td></tr>
         <tr><td>Std deviation</td><td id="qmc_std">—</td></tr>
@@ -7892,7 +7896,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="q-section">Cashflow Schedule</div>
     <div style="overflow-x:auto">
       <table class="q-cf-table" id="qbd_cf">
-        <thead><tr><th>Period</th><th>Cashflow</th><th>PV of CF</th><th>Wt (t×PV/P)</th><th>Cumulative Wt</th></tr></thead>
+        <thead><tr><th scope="col">Period</th><th scope="col">Cashflow</th><th scope="col">PV of CF</th><th scope="col">Wt (t×PV/P)</th><th scope="col">Cumulative Wt</th></tr></thead>
         <tbody id="qbd_cfbody"></tbody>
       </table>
     </div>
@@ -8014,7 +8018,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 <!-- DCF MODEL -->
 <div class="tvpanel" id="dcf-d">
-  <div style="overflow-x:auto"><table class="dtbl"><thead><tr><th>Metric ($M)</th><th>Y1</th><th>Y2</th><th>Y3</th><th>Y4</th><th>Y5</th></tr></thead><tbody id="dcfbody"><tr><td colspan="6" style="text-align:center;color:var(--g2);padding:18px">Click Run Complete Valuation in the Inputs tab first.</td></tr></tbody></table></div>
+  <div style="overflow-x:auto"><table class="dtbl"><thead><tr><th scope="col">Metric ($M)</th><th scope="col">Y1</th><th scope="col">Y2</th><th scope="col">Y3</th><th scope="col">Y4</th><th scope="col">Y5</th></tr></thead><tbody id="dcfbody"><tr><td colspan="6" style="text-align:center;color:var(--g2);padding:18px">Click Run Complete Valuation in the Inputs tab first.</td></tr></tbody></table></div>
   <div class="g4g" style="margin-top:12px">
     <div class="rbox"><div class="rl">PV of FCFs (Y1–Y5)</div><div class="rv" id="rpvf">—</div><div class="rs">Discounted at WACC</div></div>
     <div class="rbox"><div class="rl">Terminal value</div><div class="rv" id="rtv">—</div><div class="rs">Exit multiple × Y5 EBITDA</div></div>
@@ -8042,7 +8046,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </div>
 <!-- PEERS -->
 <div class="tvpanel" id="dcf-p">
-  <div style="overflow-x:auto"><table class="ptbl"><thead><tr><th>Company</th><th>EV/EBITDA</th><th>EV/Revenue</th><th>FCF Yield</th><th>Rev Growth</th><th>EBITDA Margin</th><th>Implied Price</th></tr></thead><tbody id="peerbody"><tr><td colspan="7" style="text-align:center;color:var(--g2);padding:18px;font-family:var(--FM);font-size:11px">Run valuation first.</td></tr></tbody></table></div>
+  <div style="overflow-x:auto"><table class="ptbl"><thead><tr><th scope="col">Company</th><th scope="col">EV/EBITDA</th><th scope="col">EV/Revenue</th><th scope="col">FCF Yield</th><th scope="col">Rev Growth</th><th scope="col">EBITDA Margin</th><th scope="col">Implied Price</th></tr></thead><tbody id="peerbody"><tr><td colspan="7" style="text-align:center;color:var(--g2);padding:18px;font-family:var(--FM);font-size:11px">Run valuation first.</td></tr></tbody></table></div>
   <div class="g4g" style="margin-top:10px">
     <div class="rbox"><div class="rl">Peer median EV/EBITDA</div><div class="rv" id="pm1">—</div><div class="rs">→ implied price</div></div>
     <div class="rbox"><div class="rl">Peer median EV/Revenue</div><div class="rv" id="pm2">—</div><div class="rs">→ implied price</div></div>
@@ -8556,7 +8560,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div class="ct-table-wrap">
     <table class="ct-tbl">
-      <thead><tr><th>Politician</th><th>Ticker</th><th>Direction</th><th>Amount</th><th>Trade Date</th><th>Delay</th><th>Sector</th></tr></thead>
+      <thead><tr><th scope="col">Politician</th><th scope="col">Ticker</th><th scope="col">Direction</th><th scope="col">Amount</th><th scope="col">Trade Date</th><th scope="col">Delay</th><th scope="col">Sector</th></tr></thead>
       <tbody id="ct-tbody"></tbody>
     </table>
   </div>
@@ -8588,7 +8592,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div style="font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Factor Exposure Matrix</div>
   <div style="overflow-x:auto">
   <table class="sh-factor-table">
-    <thead><tr><th style="text-align:left">Factor</th><th>Tech</th><th>Comm</th><th>Disc</th><th>Fin</th><th>Ind</th><th>HC</th><th>Energy</th><th>Matl</th><th>Stpl</th><th>RE</th><th>Util</th></tr></thead>
+    <thead><tr><th style="text-align:left">Factor</th><th scope="col">Tech</th><th scope="col">Comm</th><th scope="col">Disc</th><th scope="col">Fin</th><th scope="col">Ind</th><th scope="col">HC</th><th scope="col">Energy</th><th scope="col">Matl</th><th scope="col">Stpl</th><th scope="col">RE</th><th scope="col">Util</th></tr></thead>
     <tbody>
       <tr><td>Growth</td><td><span class="fchip-h">High</span></td><td><span class="fchip-h">High</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-l">Low</span></td></tr>
       <tr><td>Value</td><td><span class="fchip-l">Low</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-h">High</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-h">High</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-h">High</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-h">High</span></td></tr>
@@ -8693,7 +8697,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="st-eyebrow" style="margin:0 0 6px">How the strategies move together · monthly return correlation</div>
       <div class="su-chart-sub" style="margin-bottom:12px">Correlation of monthly returns for the eight strategies with published trade data, each pair over the months both were live. Near 0 means the two add diversification; toward +1 means they tend to win and lose together.</div>
       <div class="rb-scroll"><table class="cmx">
-        <thead><tr><th></th><th scope="col"><span>USD/JPY</span></th><th scope="col"><span>XAU/USD</span></th><th scope="col"><span>EUR/JPY</span></th><th scope="col"><span>GBP/USD</span></th><th scope="col"><span>EUR/USD</span></th><th scope="col"><span>NAS 100</span></th><th scope="col"><span>SP 500</span></th><th scope="col"><span>XAU (Tenkai)</span></th></tr></thead>
+        <thead><tr><th scope="col"></th><th scope="col"><span>USD/JPY</span></th><th scope="col"><span>XAU/USD</span></th><th scope="col"><span>EUR/JPY</span></th><th scope="col"><span>GBP/USD</span></th><th scope="col"><span>EUR/USD</span></th><th scope="col"><span>NAS 100</span></th><th scope="col"><span>SP 500</span></th><th scope="col"><span>XAU (Tenkai)</span></th></tr></thead>
         <tbody>
 <tr><th scope="row"><i class="cm-dot fx"></i>USD/JPY</th><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
 <tr><th scope="row"><i class="cm-dot fx"></i>XAU/USD</th><td class="hm pos" style="--k:8%" title="XAU/USD vs USD/JPY: +0.08 over 161 months">+0.08</td><td class="cm-d">1</td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td><td class="cm-e"></td></tr>
@@ -8722,14 +8726,14 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <table class="st">
       <thead>
         <tr>
-          <th>Strategy</th>
-          <th>Type</th>
-          <th>CAGR</th>
-          <th>Sharpe</th>
-          <th>Max DD</th>
-          <th>Vol</th>
-          <th>Risk</th>
-          <th></th>
+          <th scope="col">Strategy</th>
+          <th scope="col">Type</th>
+          <th scope="col">CAGR</th>
+          <th scope="col">Sharpe</th>
+          <th scope="col">Max DD</th>
+          <th scope="col">Vol</th>
+          <th scope="col">Risk</th>
+          <th scope="col"></th>
         </tr>
       </thead>
       <tbody>
@@ -8819,7 +8823,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="st-wrap" style="padding-top:32px">
     <div class="st-eyebrow">FX &amp; Commodities · Proprietary Systematic · 99–100% Real Tick Data · 2007–2026 · 18,494 Combined Trades</div>
     <table class="st">
-      <thead><tr><th>Market</th><th>Type</th><th>CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th>Max DD</th><th>Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th>LR Corr</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th><th>Tick Quality</th></tr></thead>
+      <thead><tr><th scope="col">Market</th><th scope="col">Type</th><th scope="col">CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th scope="col">Max DD</th><th scope="col">Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th scope="col">LR Corr</th><th scope="col">Win Rate</th><th scope="col">Profit Factor</th><th scope="col">Recovery</th><th scope="col">Trades</th><th scope="col">Tick Quality</th></tr></thead>
       <tbody>
         <tr><td>USD / JPY</td><td>Trend Following</td><td class="str-cagr">17.72%</td><td class="str-sharpe">1.40</td><td class="str-dd">10.94%</td><td>12.68%</td><td>2.22</td><td>0.99</td><td>39.6%</td><td>1.32</td><td>20.09×</td><td>3,334</td><td><span class="str-risk low">99%</span></td></tr>
         <tr><td>XAU / USD</td><td>Mean Reversion</td><td class="str-cagr">7.51%</td><td class="str-sharpe">1.18</td><td class="str-dd">7.11%</td><td>6.36%</td><td>1.90</td><td>0.98</td><td>51.2%</td><td>1.25</td><td>12.76×</td><td>3,071</td><td><span class="str-risk low">99%</span></td></tr>
@@ -8837,7 +8841,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="st-eyebrow" style="margin-bottom:6px">Annual returns · FX &amp; Commodities</div>
       <p class="rb-sub">Calendar-year return of each strategy, compounded from its monthly returns. Blue is a gain, red a loss; the right-hand column counts profitable years.</p>
       <div class="rb-scroll"><table class="rb-hm">
-        <thead><tr><th>Market</th><th>2013</th><th>2014</th><th>2015</th><th>2016</th><th>2017</th><th>2018</th><th>2019</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026*</th><th>Up yrs</th></tr></thead>
+        <thead><tr><th scope="col">Market</th><th scope="col">2013</th><th scope="col">2014</th><th scope="col">2015</th><th scope="col">2016</th><th scope="col">2017</th><th scope="col">2018</th><th scope="col">2019</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026*</th><th scope="col">Up yrs</th></tr></thead>
         <tbody>
 <tr><td>USD / JPY</td><td class="hm pos dk" style="--k:100%" title="USD / JPY 2013: +128.9%">+128.9</td><td class="hm pos dk" style="--k:100%" title="USD / JPY 2014: +49.5%">+49.5</td><td class="hm pos" style="--k:26%" title="USD / JPY 2015: +5.3%">+5.3</td><td class="hm pos" style="--k:37%" title="USD / JPY 2016: +7.4%">+7.4</td><td class="hm pos" style="--k:58%" title="USD / JPY 2017: +11.7%">+11.7</td><td class="hm pos dk" style="--k:79%" title="USD / JPY 2018: +15.8%">+15.8</td><td class="hm pos" style="--k:40%" title="USD / JPY 2019: +8.0%">+8.0</td><td class="hm pos dk" style="--k:71%" title="USD / JPY 2020: +14.1%">+14.1</td><td class="hm pos dk" style="--k:69%" title="USD / JPY 2021: +13.8%">+13.8</td><td class="hm pos dk" style="--k:69%" title="USD / JPY 2022: +13.7%">+13.7</td><td class="hm pos" style="--k:23%" title="USD / JPY 2023: +4.6%">+4.6</td><td class="hm pos" style="--k:19%" title="USD / JPY 2024: +3.7%">+3.7</td><td class="hm pos" style="--k:39%" title="USD / JPY 2025: +7.8%">+7.8</td><td class="hm pos dk" style="--k:61%" title="USD / JPY 2026: +12.3%">+12.3</td><td class="hm-sum">14/14</td></tr>
 <tr><td>XAU / USD</td><td class="hm pos dk" style="--k:66%" title="XAU / USD 2013: +13.2%">+13.2</td><td class="hm pos" style="--k:35%" title="XAU / USD 2014: +6.9%">+6.9</td><td class="hm pos dk" style="--k:73%" title="XAU / USD 2015: +14.6%">+14.6</td><td class="hm pos dk" style="--k:99%" title="XAU / USD 2016: +19.7%">+19.7</td><td class="hm pos" style="--k:3%" title="XAU / USD 2017: +0.6%">+0.6</td><td class="hm pos" style="--k:26%" title="XAU / USD 2018: +5.3%">+5.3</td><td class="hm neg" style="--k:19%" title="XAU / USD 2019: -3.7%">-3.7</td><td class="hm pos" style="--k:59%" title="XAU / USD 2020: +11.7%">+11.7</td><td class="hm pos dk" style="--k:75%" title="XAU / USD 2021: +14.9%">+14.9</td><td class="hm pos" style="--k:17%" title="XAU / USD 2022: +3.5%">+3.5</td><td class="hm neg" style="--k:4%" title="XAU / USD 2023: -0.8%">-0.8</td><td class="hm pos" style="--k:53%" title="XAU / USD 2024: +10.6%">+10.6</td><td class="hm pos" style="--k:7%" title="XAU / USD 2025: +1.4%">+1.4</td><td class="hm pos" style="--k:28%" title="XAU / USD 2026: +5.6%">+5.6</td><td class="hm-sum">12/14</td></tr>
@@ -8852,7 +8856,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="st-eyebrow" style="margin-bottom:6px">Out-of-sample check · 70 / 30 chronological split</div>
       <p class="rb-sub">Each backtest split by trade order: the first 70% of trades against the last 30%. Profit factor and win rate don't depend on account size, so the two segments compare directly. A strategy fitted to noise usually falls apart in the later segment.</p>
       <div class="rb-scroll"><table class="st rb-oos">
-        <thead><tr><th>Market</th><th>Trades (first / last)</th><th>Profit Factor</th><th>Win Rate</th><th>Max DD</th><th>Last 30%</th></tr></thead>
+        <thead><tr><th scope="col">Market</th><th scope="col">Trades (first / last)</th><th scope="col">Profit Factor</th><th scope="col">Win Rate</th><th scope="col">Max DD</th><th scope="col">Last 30%</th></tr></thead>
         <tbody>
 <tr><td>USD / JPY</td><td>2,334 / 1,000</td><td>1.35 → <b>1.25</b></td><td>39.5% → <b>39.6%</b></td><td>10.9% → <b>3.3%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
 <tr><td>XAU / USD</td><td>2,150 / 921</td><td>1.28 → <b>1.19</b></td><td>51.4% → <b>50.9%</b></td><td>9.0% → <b>5.1%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
@@ -9213,7 +9217,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="st-wrap" style="padding-top:32px">
     <div class="st-eyebrow">Tenkai · Indices &amp; Gold · 100% Real Tick Data (Dukascopy) · 2020–2026 · 651 Combined Trades</div>
     <table class="st">
-      <thead><tr><th>Market</th><th>Type</th><th>CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th>Max DD</th><th>Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th>LR Corr</th><th>Win Rate</th><th>Profit Factor</th><th>Recovery</th><th>Trades</th></tr></thead>
+      <thead><tr><th scope="col">Market</th><th scope="col">Type</th><th scope="col">CAGR</th><th title="CAGR ÷ annualised volatility of monthly returns — the same basis as the Equity table">Sharpe</th><th scope="col">Max DD</th><th scope="col">Vol</th><th title="Sharpe ratio as printed in the MetaTrader 5 Strategy Tester report (per-trade basis, not annualised)">Sharpe (MT5)</th><th scope="col">LR Corr</th><th scope="col">Win Rate</th><th scope="col">Profit Factor</th><th scope="col">Recovery</th><th scope="col">Trades</th></tr></thead>
       <tbody>
         <tr><td>NAS 100</td><td>Trend (Tenkai)</td><td class="str-cagr">6.90%</td><td class="str-sharpe">1.11</td><td class="str-dd">8.44%</td><td>6.20%</td><td>3.86</td><td>0.95</td><td>56.0%</td><td>1.55</td><td>5.27×</td><td>223</td></tr>
         <tr><td>SP 500</td><td>Trend (Tenkai)</td><td class="str-cagr">3.73%</td><td class="str-sharpe">0.73</td><td class="str-dd">8.98%</td><td>5.08%</td><td>1.88</td><td>0.97</td><td>55.9%</td><td>1.24</td><td>2.51×</td><td>265</td></tr>
@@ -9229,7 +9233,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="st-eyebrow" style="margin-bottom:6px">Annual returns · Tenkai</div>
       <p class="rb-sub">Calendar-year return of each strategy, compounded from its monthly returns. Blue is a gain, red a loss; the right-hand column counts profitable years.</p>
       <div class="rb-scroll"><table class="rb-hm">
-        <thead><tr><th>Market</th><th>2020</th><th>2021</th><th>2022</th><th>2023</th><th>2024</th><th>2025</th><th>2026*</th><th>Up yrs</th></tr></thead>
+        <thead><tr><th scope="col">Market</th><th scope="col">2020</th><th scope="col">2021</th><th scope="col">2022</th><th scope="col">2023</th><th scope="col">2024</th><th scope="col">2025</th><th scope="col">2026*</th><th scope="col">Up yrs</th></tr></thead>
         <tbody>
 <tr><td>NAS 100</td><td class="hm pos" style="--k:21%" title="NAS 100 2020: +4.3%">+4.3</td><td class="hm pos" style="--k:14%" title="NAS 100 2021: +2.8%">+2.8</td><td class="hm pos dk" style="--k:62%" title="NAS 100 2022: +12.5%">+12.5</td><td class="hm neg" style="--k:8%" title="NAS 100 2023: -1.6%">-1.6</td><td class="hm pos" style="--k:57%" title="NAS 100 2024: +11.5%">+11.5</td><td class="hm pos" style="--k:16%" title="NAS 100 2025: +3.3%">+3.3</td><td class="hm pos dk" style="--k:71%" title="NAS 100 2026: +14.2%">+14.2</td><td class="hm-sum">6/7</td></tr>
 <tr><td>SP 500</td><td class="hm neg" style="--k:15%" title="SP 500 2020: -3.0%">-3.0</td><td class="hm pos" style="--k:11%" title="SP 500 2021: +2.1%">+2.1</td><td class="hm pos dk" style="--k:73%" title="SP 500 2022: +14.7%">+14.7</td><td class="hm pos" style="--k:22%" title="SP 500 2023: +4.3%">+4.3</td><td class="hm neg" style="--k:1%" title="SP 500 2024: -0.2%">-0.2</td><td class="hm pos" style="--k:31%" title="SP 500 2025: +6.3%">+6.3</td><td class="hm pos" style="--k:8%" title="SP 500 2026: +1.6%">+1.6</td><td class="hm-sum">5/7</td></tr>
@@ -9242,7 +9246,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="st-eyebrow" style="margin-bottom:6px">Out-of-sample check · 70 / 30 chronological split</div>
       <p class="rb-sub">Each backtest split by trade order: the first 70% of trades against the last 30%. Profit factor and win rate don't depend on account size, so the two segments compare directly. A strategy fitted to noise usually falls apart in the later segment.</p>
       <div class="rb-scroll"><table class="st rb-oos">
-        <thead><tr><th>Market</th><th>Trades (first / last)</th><th>Profit Factor</th><th>Win Rate</th><th>Max DD</th><th>Last 30%</th></tr></thead>
+        <thead><tr><th scope="col">Market</th><th scope="col">Trades (first / last)</th><th scope="col">Profit Factor</th><th scope="col">Win Rate</th><th scope="col">Max DD</th><th scope="col">Last 30%</th></tr></thead>
         <tbody>
 <tr><td>NAS 100</td><td>156 / 67</td><td>1.33 → <b>2.16</b></td><td>52.6% → <b>64.2%</b></td><td>7.6% → <b>4.2%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
 <tr><td>SP 500</td><td>186 / 79</td><td>1.19 → <b>1.35</b></td><td>54.8% → <b>58.2%</b></td><td>8.9% → <b>4.1%</b></td><td><span class="rb-verdict ok">✓ Profitable</span></td></tr>
@@ -10263,7 +10267,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="mkt-section-hd" style="margin:28px 0 12px">Factor Tilts by Sector</div>
   <div style="overflow-x:auto">
     <table class="mkt-factor-tbl">
-      <thead><tr><th>Sector</th><th>Growth</th><th>Value</th><th>Momentum</th><th>Quality</th><th>Low-Vol</th></tr></thead>
+      <thead><tr><th scope="col">Sector</th><th scope="col">Growth</th><th scope="col">Value</th><th scope="col">Momentum</th><th scope="col">Quality</th><th scope="col">Low-Vol</th></tr></thead>
       <tbody>
         <tr><td>Technology</td><td><span class="fchip-h">High</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-h">High</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-l">Low</span></td></tr>
         <tr><td>Communication</td><td><span class="fchip-h">High</span></td><td><span class="fchip-l">Low</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-m">Med</span></td><td><span class="fchip-l">Low</span></td></tr>
@@ -10353,7 +10357,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div style="overflow-x:auto">
     <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Trades shown are examples, not verified disclosures. See the official House/Senate periodic transaction reports.</div>
-    <table class="mkt-ct-tbl"><thead><tr><th>Politician</th><th>Party</th><th>Ticker</th><th>Action</th><th>Amount</th><th>Trade Date</th><th>Delay</th><th>Sector</th></tr></thead>
+    <table class="mkt-ct-tbl"><thead><tr><th scope="col">Politician</th><th scope="col">Party</th><th scope="col">Ticker</th><th scope="col">Action</th><th scope="col">Amount</th><th scope="col">Trade Date</th><th scope="col">Delay</th><th scope="col">Sector</th></tr></thead>
     <tbody id="mkt-ct-tbody"></tbody></table>
   </div>
   <div class="mkt-cluster-box"><div class="mkt-cluster-title">⚑ Cluster Signals — 3+ politicians, same direction, 30 days</div><div id="mkt-clusters"></div></div>
@@ -10381,7 +10385,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div style="overflow-x:auto">
     <div class="mkt-sample-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Illustrative sample data, not a live feed. Prints shown are examples, not real options activity.</div>
-    <table class="mkt-flow-tbl"><thead><tr><th>Ticker</th><th>Type</th><th>Strike</th><th>Expiry</th><th>Premium</th><th>Vol/OI</th><th>Bias</th><th>Time</th></tr></thead>
+    <table class="mkt-flow-tbl"><thead><tr><th scope="col">Ticker</th><th scope="col">Type</th><th scope="col">Strike</th><th scope="col">Expiry</th><th scope="col">Premium</th><th scope="col">Vol/OI</th><th scope="col">Bias</th><th scope="col">Time</th></tr></thead>
     <tbody id="mkt-flow-tbody"></tbody></table>
   </div>
 </div>
@@ -10889,8 +10893,8 @@ function runDCF(){
 
   const wR=[wacc-2,wacc-1.5,wacc-1,wacc-.5,wacc,wacc+.5,wacc+1,wacc+1.5,wacc+2];
   const xR=[inp.exit-3,inp.exit-2,inp.exit-1,inp.exit,inp.exit+1,inp.exit+2].filter(x=>x>0);
-  let sh=`<table class="stbl"><thead><tr><th>WACC \\ Exit EV/EBITDA</th>`;
-  xR.forEach(x=>sh+=`<th>${x.toFixed(1)}x</th>`);sh+=`</tr></thead><tbody>`;
+  let sh=`<table class="stbl"><thead><tr><th scope="col">WACC \\ Exit EV/EBITDA</th>`;
+  xR.forEach(x=>sh+=`<th scope="col">${x.toFixed(1)}x</th>`);sh+=`</tr></thead><tbody>`;
   wR.forEach(w=>{
     sh+=`<tr><td>${w.toFixed(1)}%</td>`;
     xR.forEach(x=>{
@@ -11075,8 +11079,8 @@ function buildCorr(){
     return'rgba(255,255,255,.03)';
   };
   const getT=v=>v===1?'var(--gold)':v>.5?'#f87171':v<-.5?'#4ade80':'var(--white2)';
-  let h=`<table class="corrtbl"><thead><tr><th></th>`;
-  assets.forEach(a=>h+=`<th>${a}</th>`);h+=`</tr></thead><tbody>`;
+  let h=`<table class="corrtbl"><thead><tr><th scope="col"></th>`;
+  assets.forEach(a=>h+=`<th scope="col">${a}</th>`);h+=`</tr></thead><tbody>`;
   assets.forEach((a,i)=>{
     h+=`<tr><td>${a}</td>`;
     data[i].forEach(v=>{h+=`<td style="background:${getC(v)};color:${getT(v)}">${v.toFixed(2)}</td>`});
@@ -13328,9 +13332,9 @@ function runCapSim(){
   if(tbl){
     tbl.innerHTML = `<table class="q-stat-table" style="min-width:700px">
       <thead><tr>
-        <th>Ticker</th><th>Dir</th><th>Conv</th><th>Alloc %</th><th>$ Amount</th><th>Shares</th>
-        <th>Entry</th><th>Target</th><th>Stop</th>
-        <th style="color:#4caf82">Target P&L</th><th style="color:#e05555">Stop P&L</th><th>R:R</th>
+        <th scope="col">Ticker</th><th scope="col">Dir</th><th scope="col">Conv</th><th scope="col">Alloc %</th><th scope="col">$ Amount</th><th scope="col">Shares</th>
+        <th scope="col">Entry</th><th scope="col">Target</th><th scope="col">Stop</th>
+        <th style="color:#4caf82">Target P&L</th><th style="color:#e05555">Stop P&L</th><th scope="col">R:R</th>
       </tr></thead>
       <tbody>
         ${positions.map(p => `<tr>
@@ -17237,8 +17241,8 @@ function clamp(v,lo,hi){ return Math.max(lo,Math.min(hi,v)); }
     if(sensEl){
       var waccs=[0.075,0.085,0.095,0.105,0.115];
       var tgs=[0.015,0.025,0.035,0.045,0.055];
-      var html='<tr><th>WACC \\ TG</th>';
-      tgs.forEach(function(tg){ html+='<th>'+(tg*100).toFixed(1)+'%</th>'; });
+      var html='<tr><th scope="col">WACC \\ TG</th>';
+      tgs.forEach(function(tg){ html+='<th scope="col">'+(tg*100).toFixed(1)+'%</th>'; });
       html+='</tr>';
       waccs.forEach(function(ww){
         html+='<tr><td>'+(ww*100).toFixed(1)+'%</td>';
@@ -17564,7 +17568,7 @@ function pitcherMd(md){
       var cells = line.split('|').slice(1,-1).map(function(c){return c.trim();});
       if(!inTable){ out += '<table>'; inTable=true; tableFirstRow=true; }
       if(tableFirstRow){
-        out += '<thead><tr>'+cells.map(function(c){return '<th>'+fmt(c)+'</th>';}).join('')+'</tr></thead><tbody>';
+        out += '<thead><tr>'+cells.map(function(c){return '<th scope="col">'+fmt(c)+'</th>';}).join('')+'</tr></thead><tbody>';
         tableFirstRow=false;
       } else {
         out += '<tr>'+cells.map(function(c){
@@ -18359,7 +18363,7 @@ window.twClassify = async function(){
       '<div class="tw-geo-bar">'+geoBar+'</div>'+
       '<div class="tw-geo-legend">'+['US','Europe','China','EM','Other'].map(function(l,i){var k=['us_pct','europe_pct','china_pct','em_pct','other_pct'][i];return '<span><span class="tw-geo-dot" style="background:'+geoColors[l]+'"></span><span style="font-family:var(--FM);font-size:10px;color:var(--ink2)">'+l+' '+geo[k]+'%</span></span>';}).join('')+'</div>'+
       '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);opacity:.5;margin-bottom:6px">Supply Chain Dependencies</div>'+
-      '<table class="tw-sc-table"><thead><tr><th>Input</th><th>Country</th><th>Risk</th></tr></thead><tbody>'+scRows+'</tbody></table>'+
+      '<table class="tw-sc-table"><thead><tr><th scope="col">Input</th><th scope="col">Country</th><th scope="col">Risk</th></tr></thead><tbody>'+scRows+'</tbody></table>'+
       '<div style="font-family:var(--FM);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);opacity:.5;margin-bottom:4px">Tariff Sensitivity '+score+'/10</div>'+
       '<div class="tw-tariff-gauge"><div class="tw-tariff-fill" style="width:'+score*10+'%"></div></div>'+
       '<div style="font-family:var(--FM);font-size:10px;color:var(--ink2);opacity:.5;margin-bottom:16px;margin-top:4px">Outperforms in: <b>'+E(String(j.outperforms_in||'—').replace(/_/g,' '))+'</b> environments</div>'+

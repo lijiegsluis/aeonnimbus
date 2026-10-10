@@ -16641,6 +16641,111 @@ button.filter-btn.active, button.filter-pill.on {
 
 /* 25. RESEARCH PAGE HEADER — position:relative needed for RSS badge */
 #pg-research .pghd { position: relative; }
+
+/* ══════════════════════════════════════════════════════════
+   DESIGN LANGUAGE POLISH — Riven Street / Polaryx parity
+   ══════════════════════════════════════════════════════════ */
+
+/* 26. DOT-GRID TEXTURE — Riven Street's signature texture on hero */
+.hv3-hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(circle, rgba(196,164,74,.045) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+}
+/* Also apply a subtler dot grid to the thesis and platform sections */
+.hv3-thesis {
+  background-image: radial-gradient(circle, rgba(196,164,74,.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* 27. PILL / OUTLINE CTÁS — Polaryx style (no fill, rounded, border only) */
+.hv3-plink {
+  background: transparent !important;
+  border: 1px solid rgba(196,164,74,.38) !important;
+  color: var(--gold) !important;
+  border-radius: 22px !important;
+  padding: 10px 24px !important;
+  font-size: 9px !important;
+  letter-spacing: .14em !important;
+  transition: border-color .2s, background .2s !important;
+  cursor: pointer;
+}
+.hv3-plink:hover {
+  border-color: var(--gold) !important;
+  background: rgba(196,164,74,.07) !important;
+}
+
+/* Main gold CTA — pill shape */
+.hv3-cta {
+  border-radius: 22px !important;
+  padding: 14px 36px !important;
+}
+
+/* Demo pitcher generate button — pill */
+.hv3-demo-btn {
+  border-radius: 20px !important;
+}
+
+/* Pitcher paywall CTA — pill */
+.pitcher-pw-cta {
+  border-radius: 22px !important;
+}
+
+/* 28. MORE BREATHING ROOM — Riven Street and Polaryx use generous vertical rhythm */
+.hv3-thesis { padding-block: 100px !important; }
+.hv3-sitem { padding-block: 60px !important; }
+.hv3-plat-head { padding-top: 96px !important; padding-bottom: 64px !important; }
+.hv3-rec-head { padding-top: 72px !important; }
+.hv3-inner { padding-bottom: 80px !important; }
+
+/* 29. SECTION COUNTER LABELS — Polaryx's bold 001/007 positional labels */
+.hv3-tenet-n {
+  font-size: 8.5px !important;
+  letter-spacing: .18em !important;
+  opacity: .5;
+  margin-bottom: 10px !important;
+}
+
+/* 30. HERO TAGLINE — match Riven Street all-caps spaced label style */
+.hv3-position {
+  font-style: normal !important;
+  text-transform: uppercase !important;
+  font-size: 9px !important;
+  letter-spacing: .24em !important;
+  opacity: .52 !important;
+}
+
+/* 31. FAINT TINTED BAND on stats strip — alternating section depth */
+.hv3-strip {
+  background: rgba(196,164,74,.018) !important;
+}
+
+/* 32. PLATFORM HEAD HEADLINE — more editorial scale */
+.hv3-plat-head h2 {
+  font-size: clamp(44px, 5.8vw, 84px) !important;
+  line-height: .92 !important;
+}
+
+/* 33. TENET ROW hover — subtle Polaryx-style highlight */
+.hv3-tenet {
+  transition: background .18s;
+  border-radius: 2px;
+  padding-inline: 12px;
+  margin-inline: -12px;
+}
+.hv3-tenet:hover { background: rgba(196,164,74,.04); }
+
+/* 34. CALLS TABLE — slightly more row padding for editorial feel */
+.hv3-calls td { padding-block: 28px !important; }
+
+/* 35. PAGE TAG EYEBROWS — match Riven Street's wide-spaced label style */
+.pgtag {
+  font-size: 8px !important;
+  letter-spacing: .28em !important;
+  text-transform: uppercase !important;
+}
 </style>
 
 <script>

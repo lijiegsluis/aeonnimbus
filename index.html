@@ -16777,17 +16777,31 @@ button.filter-btn.active, button.filter-pill.on {
    We show 5 core items — hide secondary nav clutter.
    ══════════════════════════════════════════════════════════ */
 
-/* Hide: Home (redundant — logo does it), Products, Markets,
-   Research Lab dropdown, Services, GitHub link, LinkedIn link */
+/* Home is redundant — logo does it.
+   Products (/products/ href) goes to a separate page — keep accessible via footer.
+   GitHub link: footer-only.
+   Everything else: visible. */
 nav .nlinks > button[onclick*="sp('home')"],
 nav .nlinks > a[href*="products"],
-nav .nlinks > button[onclick*="sp('markets')"],
-nav .nlinks > .nav-drop-wrap,
-nav .nlinks > button[onclick*="sp('services')"],
 nav .nlinks .nav-ext-link { display: none !important; }
 
-/* Reduce gap between remaining items slightly */
-nav .nlinks { gap: 20px !important; }
+/* Restore: Markets, Research Lab ▾ dropdown, Services */
+nav .nlinks > button[onclick*="sp('markets')"],
+nav .nlinks > .nav-drop-wrap,
+nav .nlinks > button[onclick*="sp('services')"] { display: inline-flex !important; }
+
+/* Light/EN toggles — move to right end, shrink visually */
+#dmbtn, .lang-drop-wrap { order: 10; }
+
+/* Tighter gap — 8 items fit at 14px gaps with 11px font */
+nav .nlinks { gap: 16px !important; }
+nav .nbtn { font-size: 11px !important; letter-spacing: .04em !important; }
+
+/* Research Lab dropdown: neutralise gold hover bg */
+.nav-drop-item:hover { background: rgba(255,255,255,.04) !important; }
+.nav-drop-item + .nav-drop-item { border-top-color: var(--rule) !important; }
+.nav-drop-tag { color: var(--ink3) !important; }
+.nav-drop-name { font-size: 12px !important; }
 
 /* Subscribe CTA — pill style matching our button language */
 nav .nav-cta {

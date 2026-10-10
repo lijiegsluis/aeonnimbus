@@ -6407,7 +6407,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="hv3-inner">
     <h1 class="hv3-name">LiJie<em>Guo.</em></h1>
     <div class="hv3-right">
-      <div class="hv3-position">Independent Macro &amp; Equity Research · London</div>
+      <div class="hv3-position">Macro &amp; equity research — published before the outcome.</div>
       <div class="hv3-proof">
         <strong id="hv3-proof-head">9 for 9.</strong>
         <span id="hv3-proof-body">Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known — and closed profitable.</span>
@@ -6446,6 +6446,20 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="hv3-cred-item" style="flex-direction:row;align-items:center;justify-content:flex-end;gap:16px">
     <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:7px;font-family:var(--FM,monospace);font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(196,164,74,.35);padding:9px 16px;border-radius:2px;text-decoration:none;white-space:nowrap;transition:background .15s,border-color .15s">&#8595;&nbsp;Q2 2026 Investor Letter</a>
   </div>
+</div>
+
+<!-- SOCIAL PROOF BAND -->
+<div class="hv3-social-proof">
+  <span class="hv3-sp-label">Read by analysts at</span>
+  <span class="hv3-sp-item">hedge funds</span>
+  <span class="hv3-sp-sep">·</span>
+  <span class="hv3-sp-item">asset managers</span>
+  <span class="hv3-sp-sep">·</span>
+  <span class="hv3-sp-item">family offices</span>
+  <span class="hv3-sp-sep">·</span>
+  <span class="hv3-sp-item">CFA candidates</span>
+  <span class="hv3-sp-sep">·</span>
+  <span class="hv3-sp-item">quant researchers</span>
 </div>
 
 <!-- TRACK RECORD -->
@@ -7317,7 +7331,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
 <!-- ═══════════════ RESEARCH ════════════════════════ -->
 <div class="pg" id="pg-research">
-<div class="pghd reveal" data-num="02"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p></div>
+<div class="pghd reveal" data-num="02" style="position:relative"><div class="pgtag" data-i18n="research_tag">Published research</div><h2 class="pgtitle">Research <em>Notes</em></h2><p class="pgsub">Equity deep dives · Macro briefs · Geo/market wraps · Central bank analysis</p><a href="https://aeonnimbus.substack.com/feed" target="_blank" class="hv3-rss-link" title="Subscribe via RSS" aria-label="RSS feed" style="position:absolute;top:0;right:0">&#9679; RSS</a></div>
 <div class="fbar">
   <button class="fb on" data-f="all" data-i18n="fb_all">All</button><button class="fb" data-f="equity" data-i18n="fb_equity">Equity</button><button class="fb" data-f="macro" data-i18n="fb_macro">Macro</button><button class="fb" data-f="geo / markets" data-i18n="fb_geo">Geo / Markets</button><button class="fb" data-f="central bank" data-i18n="fb_cb">Central Bank</button>
   <input id="rl-search" type="search" placeholder="Search title or ticker…" aria-label="Search research" style="margin-left:auto;min-width:180px;background:transparent;border:1px solid var(--rule,rgba(255,255,255,.12));color:var(--ink,#eee);font-family:var(--FM);font-size:10px;padding:6px 10px;border-radius:2px">
@@ -10155,11 +10169,11 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- Paywall inline -->
 <div class="pitcher-pw-inline" id="pitcher-pw-inline">
   <span class="pitcher-pw-an">AN</span>
-  <h3>You've Used Your Free Credit</h3>
-  <p>Full AI research access is reserved for Aeon Nimbus subscribers and institutional contacts. Join the list to be notified when access opens.</p>
+  <h3>Request Full Access</h3>
+  <p>AI Pitcher is reserved for Aeon Nimbus subscribers and institutional contacts. Leave your email — access is granted by invitation.</p>
   <input class="pitcher-pw-email" type="email" id="pitcher-pw-email" placeholder="your@email.com">
-  <button class="pitcher-pw-cta" onclick="pitcherPaywallSubmit()">Stay in the Loop →</button>
-  <div class="pitcher-pw-sub" id="pitcher-pw-sub">Or subscribe on Substack for free research &amp; early access</div>
+  <button class="pitcher-pw-cta" onclick="pitcherPaywallSubmit()">Request Access →</button>
+  <div class="pitcher-pw-sub" id="pitcher-pw-sub">Or subscribe on Substack — free research, same methodology</div>
   <div style="margin-top:14px">
     <a href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="font-family:var(--FM);font-size:11px;color:var(--gold);text-decoration:none;letter-spacing:.08em;opacity:.8">Subscribe to Aeon Nimbus ↗</a>
   </div>
@@ -16572,6 +16586,61 @@ button.filter-btn.active, button.filter-pill.on {
 
 /* 15. RESEARCH LIVE BADGE — vertical alignment fix */
 .research-live-badge, .live-pill { vertical-align: middle !important; }
+
+/* 16. SOCIAL PROOF BAND */
+.hv3-social-proof {
+  font-family: var(--FM);
+  font-size: 9.5px;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  padding: 14px 48px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+}
+.hv3-sp-label { opacity: .42; margin-right: 2px; }
+.hv3-sp-item { opacity: .62; }
+.hv3-sp-sep { opacity: .28; }
+@media(max-width:760px){ .hv3-social-proof { padding: 12px 20px; } }
+
+/* 17. RSS LINK */
+.hv3-rss-link {
+  font-family: var(--FM); font-size: 9px; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--gold); opacity: .55;
+  text-decoration: none; border: none;
+}
+.hv3-rss-link:hover { opacity: 1; }
+
+/* 18. SECTION EYEBROW LABELS — slightly tighter, better weight */
+.hv3-thesis-eyebrow { letter-spacing: .18em !important; font-size: 9px !important; }
+
+/* 19. TENET TITLES — serif for warmth */
+.hv3-tenet-title { font-family: var(--FS); font-size: 15px !important; font-weight: 600; }
+.hv3-tenet-body { font-size: 12.5px !important; line-height: 1.74 !important; }
+
+/* 20. HERO NAME — tighter kerning */
+.hv3-name { letter-spacing: -.015em; }
+
+/* 21. HERO TAGLINE — medium weight, well spaced */
+.hv3-position {
+  font-size: 13px !important;
+  letter-spacing: .04em !important;
+  opacity: .8 !important;
+  font-style: italic;
+}
+
+/* 22. PAYWALL TITLE — remove punitive weight */
+.pitcher-pw-inline h3 { font-size: 17px; letter-spacing: .01em; font-weight: 600; }
+
+/* 23. PLATFORM CARDS — generous padding */
+.hv3-pcard { padding: 36px 32px !important; }
+
+/* 24. CREDENTIALS STRIP — tighter label */
+.hv3-cred-label { letter-spacing: .14em !important; font-size: 8px !important; opacity: .55 !important; }
+
+/* 25. RESEARCH PAGE HEADER — position:relative needed for RSS badge */
+#pg-research .pghd { position: relative; }
 </style>
 
 <script>

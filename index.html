@@ -16739,14 +16739,62 @@ button.filter-btn.active, button.filter-pill.on {
 }
 .hv3-tenet:hover { background: rgba(196,164,74,.04); }
 
-/* 34. CALLS TABLE — slightly more row padding for editorial feel */
-.hv3-calls td { padding-block: 28px !important; }
+/* 34. HOME TRACK RECORD TABLE
+   Hide thesis column (col 3) and "vs. Street" column (col 4) —
+   full thesis text in every row makes it look like a database dump.
+   Keep: # | Instrument | Published | Period | Return. */
+.hv3-record .hv3-calls th:nth-child(3),
+.hv3-record .hv3-calls td:nth-child(3),
+.hv3-record .hv3-calls th:nth-child(4),
+.hv3-record .hv3-calls td:nth-child(4) { display: none !important; }
+
+/* More breathing room per row now that rows are lean */
+.hv3-calls td { padding-block: 36px !important; }
+
+/* Instrument column: bigger ticker, cleaner company name */
+.hv3-ctk { font-size: 15px !important; letter-spacing: .06em !important; }
+.hv3-cco { font-size: 12px !important; color: var(--ink3) !important; margin-top: 4px !important; }
+
+/* Return column: slightly larger */
+.hv3-cret { font-size: clamp(26px, 3.2vw, 44px) !important; }
+
+/* Period column: lighter */
+.hv3-cperiod { font-size: 11px !important; }
+
+/* Published column: lighter */
+.hv3-cpub { font-size: 11px !important; opacity: .65; }
 
 /* 35. PAGE TAG EYEBROWS — match Riven Street's wide-spaced label style */
 .pgtag {
   font-size: 8px !important;
   letter-spacing: .28em !important;
   text-transform: uppercase !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   NAV SIMPLIFICATION
+   Riven Street: 1 item (MENU). Polaryx: 4 items.
+   We show 5 core items — hide secondary nav clutter.
+   ══════════════════════════════════════════════════════════ */
+
+/* Hide: Home (redundant — logo does it), Products, Markets,
+   Research Lab dropdown, Services, GitHub link, LinkedIn link */
+nav .nlinks > button[onclick*="sp('home')"],
+nav .nlinks > a[href*="products"],
+nav .nlinks > button[onclick*="sp('markets')"],
+nav .nlinks > .nav-drop-wrap,
+nav .nlinks > button[onclick*="sp('services')"],
+nav .nlinks .nav-ext-link { display: none !important; }
+
+/* Reduce gap between remaining items slightly */
+nav .nlinks { gap: 20px !important; }
+
+/* Subscribe CTA — pill style matching our button language */
+nav .nav-cta {
+  border-radius: 20px !important;
+  font-size: 8.5px !important;
+  padding: 8px 18px !important;
+  letter-spacing: .12em !important;
 }
 
 /* ══════════════════════════════════════════════════════════

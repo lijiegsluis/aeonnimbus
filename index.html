@@ -338,6 +338,8 @@ html.dark body::before{
   --FS: 'Newsreader', Georgia, serif;
   --FD: 'Inter', system-ui, sans-serif;
   --FM: 'JetBrains Mono', 'SF Mono', monospace;
+  /* Proportional gutter — scales from 28px at mobile to 88px at 1440px+ */
+  --g: clamp(28px, 5.5vw, 88px);
 }
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--FS);font-size:16px;line-height:1.7;overflow-x:hidden;cursor:default}
@@ -16745,6 +16747,66 @@ button.filter-btn.active, button.filter-pill.on {
   font-size: 8px !important;
   letter-spacing: .28em !important;
   text-transform: uppercase !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   PROPORTIONAL GUTTER SYSTEM
+   Riven Street / Polaryx both use ~5% side margins so the
+   left-edge stays consistent at every viewport width.
+   var(--g) = clamp(28px, 5.5vw, 88px) set in :root above.
+   ══════════════════════════════════════════════════════════ */
+
+/* NAV — align with page content left edge */
+nav { padding-inline: var(--g) !important; }
+
+/* HOME — hero inner, credentials strip, record section */
+.hv3-inner        { padding-inline: var(--g) !important; }
+.hv3-creds        { padding-inline: var(--g) !important; }
+.hv3-rec-head     { padding-inline: var(--g) !important; }
+.hv3-rec-foot     { padding-inline: var(--g) !important; }
+.hv3-calls th     { padding-inline: var(--g) !important; }
+.hv3-calls td     { padding-inline: var(--g) !important; }
+
+/* THESIS / PHILOSOPHY section */
+.hv3-thesis       { padding-inline: var(--g) !important; }
+
+/* NUMBERS STRIP */
+.hv3-sitem        { padding-inline: var(--g) !important; }
+
+/* PLATFORM section */
+.hv3-plat-head    { padding-inline: var(--g) !important; }
+.hv3-pcard        { padding-inline: var(--g) !important; }
+
+/* SOCIAL PROOF BAND */
+.hv3-social-proof { padding-inline: var(--g) !important; }
+
+/* OTHER PAGES — section headers, filter bars, tables */
+.pghd             { padding-inline: var(--g) !important; }
+.masthead-v2      { padding-inline: var(--g) !important; }
+.port-grid        { padding-inline: var(--g) !important; }
+.ts-section,
+.ts-perf-section  { padding-inline: var(--g) !important; }
+.ts-hdr-inner     { padding-inline: var(--g) !important; }
+.cred-strip       { padding-inline: var(--g) !important; }
+.search-wrap      { padding-inline: var(--g) !important; }
+.fbtns            { padding-inline: var(--g) !important; }
+.fbar             { padding-inline: var(--g) !important; }
+.rlwrap           { padding-inline: var(--g) !important; }
+
+/* FOOTER */
+footer            { padding-inline: var(--g) !important; }
+
+/* ABOUT / SERVICE / CONTACT pages — catch-all for .pg > first-child section padding */
+.hdr-strip, .abt-hdr, .svc-hdr, .cta-banner { padding-inline: var(--g) !important; }
+
+/* Reset mobile overrides that hard-code 24px — let clamp handle it */
+@media(max-width:900px) {
+  .hv3-thesis   { padding-inline: var(--g) !important; }
+  .hv3-plat-head{ padding-inline: var(--g) !important; }
+  .hv3-inner    { padding-inline: var(--g) !important; }
+  .hv3-creds    { padding-inline: var(--g) !important; }
+  .hv3-calls th,
+  .hv3-calls td { padding-inline: var(--g) !important; }
 }
 </style>
 

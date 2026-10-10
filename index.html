@@ -16798,6 +16798,94 @@ nav .nav-cta {
 }
 
 /* ══════════════════════════════════════════════════════════
+   DESIGN SYSTEM PARITY — Riven Street + Polaryx
+   Technical audit findings, implemented in priority order.
+   ══════════════════════════════════════════════════════════ */
+
+/* FINDING 1 — BIGGEST SINGLE CHANGE
+   --rule is gold-tinted rgba(200,131,10,.13) throughout.
+   Both references use barely-visible neutral borders:
+   Riven Street: rgba(229,231,235,.5) on white ≈ rgba(255,255,255,.06) on dark.
+   Overriding this variable neutralises every divider line at once. */
+:root { --rule: rgba(255,255,255,.06); }
+
+/* FINDING 2 — NAV HEIGHT
+   Both references: exactly 64px. Aeonnimbus: 54px = feels compressed. */
+nav { height: 64px !important; }
+
+/* FINDING 3 — BODY TEXT SIZE
+   Riven Street: 18px / weight 500. Polaryx: 16px / weight 300.
+   Aeonnimbus: 15.5px — too small, lacks editorial authority. */
+body { font-size: 17px !important; }
+
+/* FINDING 4 — MARKET STATUS BAR
+   Neither reference has a second header band. Make it recede completely. */
+#mkt-bar {
+  background: transparent !important;
+  border-bottom: none !important;
+  opacity: .32 !important;
+  pointer-events: none;
+}
+
+/* FINDING 5 — ACCENT COLOR DISCIPLINE
+   Both references use accent sparingly: Riven (navy) only on links and one dark band;
+   Polaryx (mint) for everything BUT consistently.
+   Aeonnimbus gold is thrown at eyebrows, counters, labels, table headers, badges, nav items.
+   Move all non-critical labels to ink3 (neutral grey). Reserve gold for:
+   returns, logo, CTAs, the em italic in headings. */
+.hv3-tenet-n        { color: var(--ink3) !important; opacity: .55 !important; }
+.hv3-slbl           { color: var(--ink3) !important; opacity: .6  !important; }
+.hv3-cnum           { color: var(--ink3) !important; }
+.hv3-plabel         { color: var(--ink3) !important; letter-spacing: .22em !important; font-size: 7.5px !important; }
+.hv3-thesis-eyebrow { color: var(--ink3) !important; }
+.hv3-sp-label, .hv3-sp-item, .hv3-sp-sep { color: var(--ink3) !important; opacity: 1 !important; }
+.hv3-pitag          { color: var(--ink3) !important; }
+.hv3-piname         { color: var(--ink2) !important; font-size: 12px !important; }
+
+/* FINDING 6 — NEGATIVE LETTER-SPACING ON LARGE DISPLAY HEADINGS
+   Riven Street: -0.028em on 56px heading. Aeonnimbus: -0.015em — not enough.
+   Both references tighten large type aggressively to feel more premium. */
+.hv3-name          { letter-spacing: -.032em !important; }
+.hv3-proof strong  { letter-spacing: -.03em  !important; }
+.hv3-rec-n         { letter-spacing: -.042em !important; }
+.hv3-plat-head h2  { letter-spacing: -.03em  !important; }
+.hv3-thesis-title  { letter-spacing: -.028em !important; }
+.hv3-snum          { letter-spacing: -.028em !important; }
+
+/* FINDING 7 — SECTION VERTICAL RHYTHM
+   Riven Street uses exactly 96px section padding throughout.
+   Aeonnimbus ranges 80-100px — standardise to 96px. */
+.hv3-thesis    { padding-block: 96px !important; }
+.hv3-plat-head { padding-top: 96px !important; padding-bottom: 72px !important; }
+.hv3-sitem     { padding-block: 60px !important; }
+
+/* FINDING 8 — NAV TRANSPARENCY
+   Polaryx uses a transparent nav. Aeonnimbus is rgba(6,5,4,.52) — a bit heavy.
+   Increase blur and reduce opacity to feel more like floating above content. */
+nav {
+  background: rgba(7,7,10,.6) !important;
+  backdrop-filter: blur(28px) saturate(1.8) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(1.8) !important;
+}
+
+/* FINDING 9 — RETURN NUMBERS: the main proof point
+   Make the return figures in the track record table more commanding. */
+.hv3-cret { font-size: clamp(28px, 3.5vw, 48px) !important; letter-spacing: -.02em !important; }
+
+/* FINDING 10 — BODY PARAGRAPH TEXT HIERARCHY
+   Riven Street body text is #747474 (muted grey), not near-white.
+   De-emphasise body paragraphs so headings read as headings. */
+.hv3-thesis-body { color: var(--ink2) !important; font-size: 15.5px !important; }
+.hv3-tenet-body  { color: var(--ink2) !important; font-size: 13px  !important; line-height: 1.76 !important; }
+.hv3-pbody       { color: var(--ink2) !important; }
+
+/* FINDING 11 — DEMO PITCHER BOX
+   Its border is gold/30% which makes it look like a product widget in a brand page.
+   Neutralise to match our new --rule. */
+.hv3-demo-pitcher { border-color: rgba(255,255,255,.1) !important; }
+.hv3-demo-note    { color: var(--ink3) !important; }
+
+/* ══════════════════════════════════════════════════════════
    PROPORTIONAL GUTTER SYSTEM
    Riven Street / Polaryx both use ~5% side margins so the
    left-edge stays consistent at every viewport width.

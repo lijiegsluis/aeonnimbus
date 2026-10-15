@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FN Deep Dive · Aeon Nimbus</title>
+<!--
+  Aeon Nimbus · Equity Deep Dive template (12 A4 pages).
+  This file is the worked example (Fabrinet, Oct 2, 2026). For a new ticker, copy it and
+  replace the content page by page; keep the page set, the classes and the running elements.
+  Build:  node scripts/build.mjs <this file> reports <ticker>-deep-dive --png <preview dir>
+  The builder inlines doc-page.css / doc-page.js at the marker below.
+  Rules: headline = conclusion; every number sourced or labelled "our estimate";
+  min 12pt; one .page per section; fix every page the builder flags as overflow.
+-->
+<!-- DOC-PAGE -->
+</head>
+<body data-company="Fabrinet" data-ticker="FN" data-direction="Long" data-entry="405.33" data-target="580" data-currency="$">
+
+<!-- 1 · COVER (dark) -->
+<section class="page dark cover" data-screen-label="01 Cover" data-section="Equity Deep Dive" data-sources="Prices as of Oct 2, 2026 close (NYSE). Simulated AUM. Not investment advice.">
+  <div class="page-body">
+    <div class="stack" style="gap:5mm">
+      <div class="brand">Aeon Nimbus Research</div>
+      <div class="eyebrow">Equity Deep Dive · October 2, 2026 · Fifteenth position · Long · NYSE: FN</div>
+    </div>
+    <div class="stack" style="gap:6mm">
+      <div class="ticker">FN</div>
+      <h1 class="hl hl-xl">Fabrinet: the foundry the market priced like a supplier</h1>
+      <p class="aside" style="font-size:15pt;max-width:160mm">Revenue grew 36% while its former largest customer fell 20%. Strip Nvidia out and the rest grew 57%. The stock fell 38% from May anyway.</p>
+      <div style="display:flex;align-items:center;gap:8mm;flex-wrap:wrap">
+        <div class="px">$405.33<span class="arrow">to</span>$580.00</div>
+        <span class="rating">Long · +43.1%</span>
+      </div>
+    </div>
+    <div class="stack" style="gap:6mm">
+      <div class="stats" style="--n:4">
+        <div class="stat"><div class="num">$4.64B</div><div class="cap">FY26 revenue, +35.7% YoY</div></div>
+        <div class="stat"><div class="num pos">+57%</div><div class="cap">Revenue growth ex-Nvidia</div></div>
+        <div class="stat"><div class="num">27.8×</div><div class="cap">Run-rate P/E at $463.69</div></div>
+        <div class="stat"><div class="num">2.56:1</div><div class="cap">Payoff, target vs stop</div></div>
+      </div>
+      <table class="tbl">
+        <tr><th>Entry (Sep 28)</th><th>Target</th><th>Stop</th><th>Size</th><th>Horizon</th><th>Last (Oct 2)</th></tr>
+        <tr><td>$405.33</td><td>$580.00</td><td>$337.00</td><td>5%</td><td>12–18 months</td><td>$463.69</td></tr>
+      </table>
+      <p class="disclaimer">Analyst: LiJie Guo. Positions and AUM are simulated. This report is published before the outcome is known and is not investment advice.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 2 · THESIS -->
+<section class="page" data-screen-label="02 Thesis" data-section="Thesis" data-sources="Fabrinet 10-K FY26; Q4 FY26 8-K and call (Aug 17, 2026); price data Yahoo Finance, CNBC; Aeon Nimbus estimates.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">02 · Thesis</div>
+      <h1 class="hl">The market priced one customer's share loss as a verdict on the whole foundry</h1>
+      <hr class="rule">
+    </div>
+    <p class="lead">Fabrinet grew revenue 36% to $4.64 billion in FY26 while Nvidia, its former largest customer, fell about 20%. Data center is 51% of the quarterly mix and Q1 FY27 is guided up 43%. The stock fell 20% the day after that print and closed October 2 at $463.69, 38% below its May high, at 32.9× trailing EPS against 35.2× at its 52-week low a year ago, when growth was half today's rate.</p>
+    <div class="stats" style="--n:3">
+      <div class="stat"><div class="num neg">−38.1%</div><div class="cap">Price, May 14 high to Oct 2</div></div>
+      <div class="stat"><div class="num pos">+11.5%</div><div class="cap">Trailing non-GAAP EPS over the same period</div></div>
+      <div class="stat"><div class="num">59.2× → 32.9×</div><div class="cap">Trailing P/E: the whole fall is multiple</div></div>
+    </div>
+    <div class="cols cols-2">
+      <div class="callout"><div class="h3">What the market believes</div>Nvidia's share loss, a 12% gross margin and a 5.25% ten-year yield make FN a supplier. B. Riley (Neutral, $598) and Needham (Buy, $650) both cite the Nvidia loss.</div>
+      <div class="callout"><div class="h3">Where we differ</div>It is a mix question. Ex-Nvidia revenue grew 57%; operating margin hit a three-year high of 10.9%. Our $580 needs no re-rating: 27.5× FY28E economic EPS of $21.11 against 27.7× today.</div>
+    </div>
+    <div class="callout neg"><div class="h3" style="color:var(--red)">What we concede</div>Our own DCF ($276) and the house blend ($394) both sit below the price. The trade is a twelve-month earnings call, so it is sized at 5% and stopped at $337, on the assumption that the DCF is right.</div>
+    <p class="aside">The question is not whether FN is cheap on cash flows. It is whether a 35% grower should trade below the multiple it held at its trough.</p>
+  </div>
+</section>
+
+<!-- 3 · BUSINESS MODEL -->
+<section class="page" data-screen-label="03 Business" data-section="Business model" data-sources="Fabrinet 10-K FY26 (customers, mix, employees, competition); Q4 FY26 8-K.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">03 · Business model</div>
+      <h1 class="hl">Fabrinet builds what others design, and competes with none of them</h1>
+      <hr class="rule">
+    </div>
+    <p>Cisco, Nvidia, Nokia and Amazon design optical products; Fabrinet builds them. Its product is manufacturing capability: precision optical packaging, fibre alignment, hermetic sealing, burn-in and test, run at volume on three Thai campuses by 21,521 people. Customers pay a per-unit price that passes most of the bill of materials through, so a 12.2% gross margin says little. The economics sit below the gross line: SG&amp;A is 2.0% of revenue and the non-GAAP operating margin reached 10.9% in Q4.</p>
+    <div class="cols cols-3">
+      <div class="card base"><div class="h3">Fabrinet (foundry)</div>No own-brand optics. GM ~12%, operating margin ~11%. Growth gated by qualified floor space, not R&amp;D.</div>
+      <div class="card"><div class="h3">Module makers</div>Innolight, Eoptolink, Lumentum, Coherent. GM 40–46%. Carry pricing and inventory risk.</div>
+      <div class="card"><div class="h3">General EMS</div>Celestica, Jabil. Operating margin 6–8%. Broad, less optical process depth.</div>
+    </div>
+    <div>
+      <div class="h3">FY26 revenue mix ($4,641M)</div>
+      <div class="share"><span class="s1" style="--w:47.9%">Data center 47.9%</span><span class="s2" style="--w:33.3%">Comms infra 33.3%</span><span class="s3" style="--w:18.8%">Other 18.8%</span></div>
+    </div>
+    <table class="tbl">
+      <tr><th>Customer</th><th class="r">FY26 share</th><th class="r">FY26 $M</th><th class="r">FY25 $M</th><th class="r">YoY</th></tr>
+      <tr><td>Cisco</td><td class="r">19.9%</td><td class="r">924</td><td class="r">622</td><td class="r pos">+48%</td></tr>
+      <tr><td>Nvidia</td><td class="r">16.3%</td><td class="r">757</td><td class="r">944</td><td class="r neg">−20%</td></tr>
+      <tr><td>Nokia</td><td class="r">10.7%</td><td class="r">497</td><td class="r">&lt;10%</td><td class="r">n/d</td></tr>
+      <tr><td>Amazon</td><td class="r">10.5%</td><td class="r">487</td><td class="r">&lt;10%</td><td class="r">n/d</td></tr>
+      <tr class="total"><td>Ex-Nvidia</td><td class="r">83.7%</td><td class="r">3,884</td><td class="r">2,475</td><td class="r pos">+57%</td></tr>
+    </table>
+    <div class="callout"><div class="h3">Why the position is hard to dislodge</div>Qualification takes three to six months per product; a "factory within a factory" walls off each customer's IP; and Fabrinet sells no modules of its own. The risk has changed shape, not shrunk: four customers are 57.4% of revenue and purchase orders rarely run past 13 weeks.</div>
+  </div>
+</section>
+
+<!-- 4 · FINANCIALS -->
+<section class="page" data-screen-label="04 Financials" data-section="Financial overview" data-sources="Fabrinet 10-K FY22–FY26 and quarterly 8-Ks; FY27E is Aeon Nimbus.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">04 · Financial overview</div>
+      <h1 class="hl">Earnings rose 39%; working capital, not margin, ate the cash</h1>
+      <hr class="rule">
+    </div>
+    <div class="vbars-wrap">
+      <div class="h3">Revenue, $M, fiscal years ending June (FY27E ours)</div>
+      <div class="vbars" style="height:48mm">
+        <div class="vbar" data-value="2260" data-label="FY22" data-display="2,260"></div>
+        <div class="vbar" data-value="2645" data-label="FY23" data-display="2,645"></div>
+        <div class="vbar" data-value="2883" data-label="FY24" data-display="2,883"></div>
+        <div class="vbar" data-value="3419" data-label="FY25" data-display="3,419"></div>
+        <div class="vbar" data-value="4641" data-label="FY26" data-display="4,641"></div>
+        <div class="vbar gold" data-value="6265" data-label="FY27E" data-display="6,265"></div>
+      </div>
+    </div>
+    <table class="tbl">
+      <tr><th>Metric</th><th class="r">Value</th><th>Context</th></tr>
+      <tr><td>Revenue FY26</td><td class="r">$4,641M</td><td>+35.7% YoY; Q4 record $1,316M</td></tr>
+      <tr><td>Operating income (GAAP)</td><td class="r">$462.9M</td><td>10.0% margin; non-GAAP 10.8%</td></tr>
+      <tr><td>Net income (GAAP)</td><td class="r">$473.0M</td><td>Diluted EPS $13.05</td></tr>
+      <tr><td>Non-GAAP EPS</td><td class="r">$14.09</td><td>+39%; economic EPS $12.51 after Pillar Two</td></tr>
+      <tr><td>EBITDA</td><td class="r">$531.3M</td><td>EV/EBITDA 30.0× at $463.69</td></tr>
+      <tr><td>Operating cash flow</td><td class="r">$256.7M</td><td>Working capital absorbed $331M</td></tr>
+      <tr><td>Capital expenditure</td><td class="r">$252.5M</td><td>3.7× depreciation; Building 10</td></tr>
+      <tr><td>Free cash flow</td><td class="r neg">$4.2M</td><td>$207.3M in FY25</td></tr>
+      <tr><td>Cash and investments</td><td class="r">$875.1M</td><td>No borrowings at June 26</td></tr>
+      <tr><td>Inventory</td><td class="r">$1,021M</td><td>+76% YoY vs revenue +36%</td></tr>
+      <tr><td>Cash conversion cycle</td><td class="r">71.6 days</td><td>+2.1 days; suppliers funded the build</td></tr>
+      <tr><td>ROE</td><td class="r">21.3%</td><td>On average equity of $2.2B</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 5 · WACC AND DCF -->
+<section class="page" data-screen-label="05 WACC DCF" data-section="WACC and DCF" data-sources="US 10Y CNBC Oct 2, 2026; beta: own 60-month regression, Yahoo, Barchart; ERP Damodaran; DCF Aeon Nimbus.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">05 · WACC and DCF</div>
+      <h1 class="hl">At an 11.9% cost of capital, ten years of cash flow are worth $276</h1>
+      <hr class="rule">
+    </div>
+    <div class="cols cols-40">
+      <table class="tbl">
+        <tr><th>Input</th><th class="r">Value</th></tr>
+        <tr><td>Rf, 10Y Oct 2</td><td class="r">5.25%</td></tr>
+        <tr><td>Beta (60M)</td><td class="r">1.21</td></tr>
+        <tr><td>ERP</td><td class="r">5.50%</td></tr>
+        <tr><td>CRP / size</td><td class="r">0.0%</td></tr>
+        <tr><td>Cost of equity</td><td class="r">11.90%</td></tr>
+        <tr><td>Debt / capital</td><td class="r">0%</td></tr>
+        <tr class="total"><td>WACC</td><td class="r">11.90%</td></tr>
+      </table>
+      <div class="stack spread">
+        <p>Ke = 5.25% + 1.21 × 5.50%. FN has no financial debt, so WACC equals the cost of equity. Revenue follows the capacity path to $9.8B by the March quarter: +35% in FY27 and +26% in FY28, fading to 5% by FY36. EBIT margin holds 10.3% to 10.7% with SBC expensed; tax 15%; working capital at 20% of incremental revenue.</p>
+        <div class="stats" style="--n:2">
+          <div class="stat sm"><div class="num">$276</div><div class="cap">DCF per share, Gordon g 4.0%</div></div>
+          <div class="stat sm"><div class="num">64%</div><div class="cap">of EV in the terminal value</div></div>
+        </div>
+      </div>
+    </div>
+    <table class="tbl">
+      <tr><th>$M</th><th class="r">FY27E</th><th class="r">FY28E</th><th class="r">FY29E</th><th class="r">FY30E</th><th class="r">FY31E</th><th class="r">FY36E</th></tr>
+      <tr><td>Revenue</td><td class="r">6,265</td><td class="r">7,895</td><td class="r">9,473</td><td class="r">10,894</td><td class="r">12,202</td><td class="r">17,586</td></tr>
+      <tr><td>Growth</td><td class="r">35.0%</td><td class="r">26.0%</td><td class="r">20.0%</td><td class="r">15.0%</td><td class="r">12.0%</td><td class="r">5.0%</td></tr>
+      <tr><td>NOPAT</td><td class="r">549</td><td class="r">705</td><td class="r">854</td><td class="r">991</td><td class="r">1,110</td><td class="r">1,599</td></tr>
+      <tr><td>+ D&amp;A − capex</td><td class="r">−157</td><td class="r">−190</td><td class="r">−265</td><td class="r">−229</td><td class="r">−183</td><td class="r">−70</td></tr>
+      <tr><td>− ΔNWC</td><td class="r">325</td><td class="r">326</td><td class="r">316</td><td class="r">284</td><td class="r">261</td><td class="r">167</td></tr>
+      <tr class="total"><td>Unlevered FCF</td><td class="r">67</td><td class="r">189</td><td class="r">273</td><td class="r">478</td><td class="r">665</td><td class="r">1,362</td></tr>
+    </table>
+    <table class="tbl">
+      <tr><th>Bridge</th><th class="r">$M</th></tr>
+      <tr><td>PV of explicit UFCF, FY27–FY36</td><td class="r">3,307</td></tr>
+      <tr><td>PV of terminal value (g 4.0%, 7.8× FY36 EBITDA)</td><td class="r">5,817</td></tr>
+      <tr><td>+ cash $875M, + Raytek stake $89M, − Pillar Two payable $57M</td><td class="r">907</td></tr>
+      <tr class="total"><td>Equity value / 36.3M diluted shares</td><td class="r">$276 per share</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 6 · SENSITIVITY AND PEERS -->
+<section class="page" data-screen-label="06 Sensitivity" data-section="Sensitivity and peers" data-sources="Aeon Nimbus DCF; peer prices Oct 2 closes (Digrin, StockAnalysis, Upstox); company guidance.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">06 · Sensitivity and peers</div>
+      <h1 class="hl">No reasonable discount rate reaches the price; the peer multiples do</h1>
+      <hr class="rule">
+    </div>
+    <div>
+      <div class="h3">DCF per share: WACC × exit EV/EBITDA on FY36</div>
+      <table class="tbl sens">
+        <tr><th>WACC</th><th>8×</th><th>10×</th><th>12×</th><th>14×</th><th>16×</th></tr>
+        <tr><td>9.9%</td><td class="dn">$325</td><td class="dn">$375</td><td class="up">$424</td><td class="up">$473</td><td class="up">$523</td></tr>
+        <tr><td>10.9%</td><td class="dn">$302</td><td class="dn">$347</td><td class="dn">$392</td><td class="up">$437</td><td class="up">$483</td></tr>
+        <tr><td><b>11.9% (base)</b></td><td class="dn">$281</td><td class="dn">$322</td><td class="dn">$364</td><td class="base">$405</td><td class="up">$446</td></tr>
+        <tr><td>12.9%</td><td class="dn">$262</td><td class="dn">$300</td><td class="dn">$337</td><td class="dn">$375</td><td class="up">$413</td></tr>
+      </table>
+      <p class="muted" style="margin-top:1.5mm">Outlined cell is nearest our $405.33 entry. Green at or above entry, red below.</p>
+    </div>
+    <div>
+      <div class="h3">Peers on forward / run-rate P/E</div>
+      <table class="tbl">
+        <tr><th>Company</th><th class="r">Price</th><th class="r">P/E</th><th>Growth guided</th><th class="r">Op. margin</th></tr>
+        <tr><td>Lumentum (LITE)</td><td class="r">$1,085</td><td class="r">64.6×</td><td>+130% revenue</td><td class="r">40%</td></tr>
+        <tr><td>Corning (GLW)</td><td class="r">$164</td><td class="r">47.2×</td><td>+17% Q2</td><td class="r">n/a</td></tr>
+        <tr><td>Coherent (COHR)</td><td class="r">$337</td><td class="r">43.2×</td><td>+42% Q4</td><td class="r">n/a</td></tr>
+        <tr><td>Celestica (CLS)</td><td class="r">$387</td><td class="r">34.3×</td><td>+65% 2026</td><td class="r">8.4%</td></tr>
+        <tr><td>Jabil (JBL)</td><td class="r">$304</td><td class="r">17.3×</td><td>+24% FY27</td><td class="r">6.1%</td></tr>
+        <tr><td class="muted">AAOI: excluded, no meaningful EPS</td><td class="r muted">n/m</td><td class="r muted">n/m</td><td></td><td></td></tr>
+        <tr class="row-hl"><td><b>Fabrinet (FN), economic</b></td><td class="r">$464</td><td class="r"><b>30.7×</b></td><td>+43% Q1 FY27</td><td class="r">10.9%</td></tr>
+      </table>
+    </div>
+    <div class="callout">FN sits at a 19% premium to EMS and a 35% discount to optical; the 36.5× midpoint is 16% above it. The comparison that matters is Celestica: FN earns the higher margin (10.9% against 8.4%) and trades 19% lower on run-rate EPS.</div>
+  </div>
+</section>
+
+<!-- 7 · THREE PILLARS -->
+<section class="page" data-screen-label="07 Pillars" data-section="Investment thesis" data-sources="Fabrinet 10-K FY26; Aug 20 Rosenblatt conference; price history Yahoo Finance; Aeon Nimbus estimates.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">07 · Three pillars</div>
+      <h1 class="hl">Diversified demand, cheap capacity and a derating that outran the numbers</h1>
+      <hr class="rule">
+    </div>
+    <div class="pillar">
+      <div class="n">01</div>
+      <h2>Diversification: ex-Nvidia revenue grew 57%</h2>
+      <p>Nvidia went from 27.6% of revenue to 16.3%, about $944M to $757M. Everything else went from $2.48B to $3.88B. Cisco grew 48%. Amazon crossed 10% and ramps as a hyperscaler-direct transceiver customer this quarter, and a second merchant transceiver customer starts in the December quarter.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">02</div>
+      <h2>Capacity converts to profit at about 11 cents per dollar</h2>
+      <p>Each extra $1B of revenue adds about $110M of operating profit, or $2.57 of economic EPS. Capacity rises from $5.8B to about $9.8B by the March quarter; our FY28E revenue of $7.9B uses 81% of it. The CFO guides FY27 capex near $250M, funded from cash and a $75M term loan.</p>
+    </div>
+    <div class="pillar">
+      <div class="n">03</div>
+      <h2>Below 52-week-low multiples with twice the growth</h2>
+      <p>At the October 2025 low FN traded at 3.5× sales and 35.2× trailing EPS while growing 19%. Today: 3.4× and 32.9× while guiding 43%. FN fell 20.3% on August 18 alongside Coherent and AAOI, and 6% when Corning filed a $2B ATM. Neither changed FN's order book.</p>
+    </div>
+    <p class="aside">Against us: FN is not cheap against its five-year median of 26.0× trailing GAAP earnings, and the discount rate has risen and not yet reversed.</p>
+  </div>
+</section>
+
+<!-- 8 · CAPEX COVERAGE AND 2030 / TARGET BRIDGE -->
+<section class="page" data-screen-label="08 CapEx Target" data-section="CapEx coverage and target" data-sources="Q4 FY26 call; Aug 20 Rosenblatt conference; MarketBeat consensus Oct 1; Aeon Nimbus estimates.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">08 · Capacity, funding and the target bridge</div>
+      <h1 class="hl">The plan funds itself, and the $580 target is all earnings growth</h1>
+      <hr class="rule">
+    </div>
+    <table class="tbl">
+      <tr><th>FY27E, $M</th><th class="r">Q1 guide</th><th class="r">Q2E</th><th class="r">Q3E</th><th class="r">Q4E</th><th class="r">FY27E</th></tr>
+      <tr><td>Revenue</td><td class="r">1,400</td><td class="r">1,510</td><td class="r">1,620</td><td class="r">1,735</td><td class="r">6,265</td></tr>
+      <tr><td>Run-rate vs capacity</td><td class="r">97%</td><td class="r">104%*</td><td class="r">66%</td><td class="r">71%</td><td></td></tr>
+      <tr><td>Non-GAAP EPS (ours)</td><td class="r">$4.18</td><td class="r">$4.54</td><td class="r">$4.86</td><td class="r">$5.24</td><td class="r">$18.82</td></tr>
+    </table>
+    <p class="muted">*Of today's $5.8B, before Building 10. Street FY27 EPS ~$17.50 (MarketBeat); we are 7.5% above.</p>
+    <div class="cols cols-3">
+      <div class="stat sm"><div class="num">$875M</div><div class="cap">Cash, no borrowings</div></div>
+      <div class="stat sm"><div class="num">~$250M</div><div class="cap">FY27 capex, CFO guide</div></div>
+      <div class="stat sm"><div class="num">$9.8B</div><div class="cap">Capacity by March quarter (+85%)</div></div>
+    </div>
+    <table class="tbl">
+      <tr><th>Target bridge</th><th>Calculation</th><th class="r">Result</th></tr>
+      <tr><td>Today's multiple</td><td>$463.69 / FY27E economic EPS $16.75</td><td class="r">27.7×</td></tr>
+      <tr><td>FY28E economic EPS</td><td>Revenue $7,895M, 11.2% op. margin, 15% tax</td><td class="r">$21.11</td></tr>
+      <tr><td>Hold the multiple</td><td>$21.11 × 27.7</td><td class="r">$585</td></tr>
+      <tr class="total"><td>Target</td><td>27.5×, 0.2 turn below today</td><td class="r">$580</td></tr>
+    </table>
+    <div class="callout">Cross-checks: the 52-week-low trailing multiple on FY27E gives $590; the scenario mean is $557.50; today's price compounded at the 11.9% cost of equity is $519. Only the DCF ($276) does not support the target.</div>
+  </div>
+</section>
+
+<!-- 9 · VARIANT VIEWS AND REVERSE DCF -->
+<section class="page" data-screen-label="09 Variant" data-section="Variant views" data-sources="B. Riley, Needham, JPMorgan notes (Aug 18, 2026) via Benzinga; MarketBeat Oct 1; Aeon Nimbus reverse DCF.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">09 · Variant views and reverse DCF</div>
+      <h1 class="hl">The price needs a 9% discount rate; we bet on earnings, not on that</h1>
+      <hr class="rule">
+    </div>
+    <table class="tbl">
+      <tr><th style="width:24%">View</th><th>Consensus</th><th>Ours</th><th style="width:24%">Wrong if</th></tr>
+      <tr><td><b>1. Nvidia share loss</b></td><td>B. Riley Neutral $598: Nvidia −21%, datacom languishing</td><td>Absorbed. Ex-Nvidia +57%; Nvidia is 16% of revenue</td><td>Data center falls QoQ in Q1 or Q2</td></tr>
+      <tr><td><b>2. Gross margin</b></td><td>JPMorgan Neutral $695: GM −30bp, FCF negative</td><td>Wrong lens. Op. margin at a 3-year high, above CLS and JBL</td><td>Op. margin &lt;10.0% two quarters</td></tr>
+      <tr><td><b>3. Tax and EPS quality</b></td><td>Needham $650 flags Thai tax; Street uses non-GAAP</td><td>Agree in part: we haircut EPS ~11% for Pillar Two</td><td>Inventory days &gt;95 with slowing sales</td></tr>
+      <tr><td><b>4. FY27 EPS</b></td><td>MarketBeat ~$17.50</td><td>$18.82 (+7.5%): FN beat guide midpoints by 3.3% and 3.6%</td><td>Q2 guide midpoint &lt;$1.47B</td></tr>
+    </table>
+    <div>
+      <div class="h3">Reverse DCF: what $463.69 needs, one condition at a time</div>
+      <table class="tbl">
+        <tr><th>Condition</th><th class="r">Required</th><th class="r">Our base</th><th>Assessment</th></tr>
+        <tr><td>Discount rate</td><td class="r">9.0%</td><td class="r">11.9%</td><td>Implies beta ~0.68 at 5.25% Rf</td></tr>
+        <tr><td>Steady-state EBIT margin</td><td class="r">16.4%</td><td class="r">10.7%</td><td>Never reached; foundries lack the pricing</td></tr>
+        <tr><td>FY36 revenue</td><td class="r">$36.4B</td><td class="r">$17.6B</td><td>2.5× the $14B campus ceiling</td></tr>
+      </table>
+    </div>
+    <div class="callout neg">On cash flow the price already embeds an optimistic discount rate. The position depends on the next twelve months of earnings, not the terminal value, so we size and stop it as if the DCF is right.</div>
+  </div>
+</section>
+
+<!-- 10 · PAYOFF AND OWNERSHIP -->
+<section class="page" data-screen-label="10 Payoff" data-section="Payoff and ownership" data-sources="SEC 13G filings; 2025 proxy (DEF 14A); FINRA short interest; Aeon Nimbus scenarios.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">10 · Payoff and ownership</div>
+      <h1 class="hl">2.56 to 1 at the stop, with the downside drawn at full weight</h1>
+      <hr class="rule">
+    </div>
+    <div class="cols cols-3">
+      <div class="card bear"><div class="h3">Bear · 25%</div><div class="big neg">$320</div><p class="muted">−21.1% · 18.5× FY28E</p><p>2027 capex digestion; margin under 10%; stop triggers first.</p></div>
+      <div class="card base"><div class="h3">Base · 50%</div><div class="big">$580</div><p class="muted">+43.1% · 27.5× FY28E</p><p>+35% then +26% revenue as Building 10 fills.</p></div>
+      <div class="card bull"><div class="h3">Bull · 25%</div><div class="big pos">$750</div><p class="muted">+85.0% · 32× FY28E</p><p>+42% FY27; near-packaged optics in 2027.</p></div>
+    </div>
+    <div class="rangebar" data-stop="337" data-entry="405.33" data-target="580" data-mark="463.69" data-mark-label="Oct 2"></div>
+    <div class="cols cols-2">
+      <table class="tbl">
+        <tr><th>Sizing</th><th class="r"></th></tr>
+        <tr><td>Weighted value</td><td class="r">$557.50</td></tr>
+        <tr><td>Up / down</td><td class="r">+43.1% / −16.9%</td></tr>
+        <tr><td>p(at or above target)</td><td class="r">50%</td></tr>
+        <tr><td>Kelly / half-Kelly</td><td class="r">30.4% / 15.2%</td></tr>
+        <tr class="total"><td>Actual size</td><td class="r">5%</td></tr>
+      </table>
+      <table class="tbl">
+        <tr><th>Holder</th><th class="r">% out.</th></tr>
+        <tr><td>BlackRock</td><td class="r">10.8%</td></tr>
+        <tr><td>Vanguard (2 units)</td><td class="r">11.3%</td></tr>
+        <tr><td>T. Rowe (was 11.3%)</td><td class="r neg">5.4%</td></tr>
+        <tr><td>Insiders</td><td class="r">0.24%</td></tr>
+        <tr><td>Short interest</td><td class="r">4.3%</td></tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- 11 · RISKS AND CATALYSTS -->
+<section class="page" data-screen-label="11 Risks" data-section="Risks and catalysts" data-sources="Fabrinet 10-K risk factors; FCC 26-50; hyperscaler capex guidance; Aeon Nimbus estimates.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">11 · Risks and catalysts</div>
+      <h1 class="hl">The live risk is who funds AI capex, and November 2 is the first test</h1>
+      <hr class="rule">
+    </div>
+    <table class="tbl">
+      <tr><th>Risk</th><th>Prob.</th><th class="r nowrap">Impact</th></tr>
+      <tr><td><b>AI capex digestion</b> in 2027 as Building 10 adds fixed cost</td><td>Medium</td><td class="r neg nowrap">−25% to −35%</td></tr>
+      <tr><td><b>AI capex financing:</b> debt funded 32% of incremental hyperscaler capex</td><td>Medium</td><td class="r neg nowrap">−20% to −35%</td></tr>
+      <tr><td><b>Rates:</b> 10Y at 5.75%+ moves the market to cash-flow valuation</td><td>Medium</td><td class="r neg nowrap">−10% to −20%</td></tr>
+      <tr><td><b>Concentration:</b> top four 57.4%; customers' own factories compete</td><td>Medium</td><td class="r neg nowrap">−10% to −20%</td></tr>
+      <tr><td><b>Further Nvidia loss</b> at 1.6T to Innolight, Eoptolink</td><td>Medium</td><td class="r neg nowrap">−5% to −12%</td></tr>
+      <tr><td><b>Pillar Two:</b> effective tax settles above 15%</td><td>High</td><td class="r neg nowrap">−3% to −8%</td></tr>
+    </table>
+    <table class="tbl">
+      <tr><th style="width:22%">Date</th><th>Catalyst and what moves the stock</th></tr>
+      <tr><td>~Nov 2, 2026</td><td><b>Q1 FY27.</b> Revenue above $1.43B with data center +10% QoQ retraces a third of the August drop; a sequential data center decline invalidates.</td></tr>
+      <tr><td>Dec qtr 2026</td><td><b>Merchant transceiver ramp.</b> Volume shipments confirmed in February de-risk pillar one.</td></tr>
+      <tr><td>Early 2027</td><td><b>Building 10 completion.</b> Gross margin below 11.5% would point to under-absorbed space.</td></tr>
+      <tr><td>Monthly</td><td><b>Ten-year yield.</b> Every 50bp moves our DCF by about $20.</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- 12 · POSITION AND REFERENCES (dark close) -->
+<section class="page dark" data-screen-label="12 Position" data-section="Position and references" data-sources="Simulated AUM. Not investment advice. Every position, including the losses, is on the record.">
+  <div class="page-body spread">
+    <div class="stack">
+      <div class="eyebrow">12 · Position</div>
+      <h1 class="hl">Long FN at $405.33, target $580, stop $337, 5% of the book</h1>
+      <hr class="rule">
+    </div>
+    <p>We took a position in Fabrinet (FN) at an entry price of <b>$405.33</b> on September 28, 2026. Our price target is <b>$580.00</b>, +43.1% from entry, equal to 27.5× FY28E economic EPS of $21.11 against 27.7× today on FY27E. Our DCF ($276) and house blend ($394) sit below it; we publish both. Our stop is <b>$337.00</b>, 5.9% below the 52-week low. The position is sized at <b>5% of portfolio</b>, a third of half-Kelly, because the DCF disagrees with the target. Published before the outcome is known.</p>
+    <table class="tbl">
+      <tr><th>Exit regardless of price if</th></tr>
+      <tr><td>Data center revenue declines sequentially in Q1 or Q2 FY27</td></tr>
+      <tr><td>Non-GAAP operating margin below 10.0% for two consecutive quarters</td></tr>
+      <tr><td>Any equity issuance or at-the-market program; a daily close below $337</td></tr>
+    </table>
+    <div>
+      <div class="h3">Selected references</div>
+      <ol class="tight">
+        <li>Fabrinet, Form 10-K FY ended June 26, 2026; Q4 FY26 8-K, Aug 17, 2026.</li>
+        <li>Q4 FY26 earnings call and Rosenblatt AI conference, Aug 20, 2026.</li>
+        <li>SEC 13G filings (BlackRock, Vanguard, T. Rowe Price), 2026; FINRA short interest.</li>
+        <li>FCC 26-50, 91 FR 57798; FOMC statement, Sep 16, 2026.</li>
+        <li>Sell-side notes: Susquehanna, Northland, Rosenblatt, BNP, Barclays, JPMorgan, Needham, B. Riley.</li>
+      </ol>
+    </div>
+    <p class="disclaimer">Aeon Nimbus Research · LiJie Guo. Simulated AUM. Not investment advice. Positions are published before the outcome is known; every position, including the losses, is on the record.</p>
+  </div>
+</section>
+
+</body>
+</html>

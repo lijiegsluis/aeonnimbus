@@ -1,0 +1,262 @@
+/* Aeon Nimbus · doc-page.css
+   Fixed-size A4 pages for equity deep dives. One <section class="page"> per page.
+   Style language: references/aeon-nimbus-style.md. Minimum text size 12pt (print). */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@1,6..72,400;1,6..72,500&display=block");
+
+:root {
+  --cream: #f6f4f0;
+  --ink: #0a0a0a;
+  --ink-2: #3a3833;
+  --muted: #6b665c;
+  --line: #d9d3c7;
+  --white: #ffffff;
+  --gold: #c9962a;       /* on dark */
+  --gold-deep: #a77c1d;  /* on cream */
+  --red: #c1141a;        /* negative only */
+  --green: #16863f;      /* positive only */
+  --sans: "Inter", "Inter Display", "Helvetica Neue", Arial, sans-serif;
+  --serif: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --min: 12pt;
+  --page-w: 210mm;
+  --page-h: 297mm;
+  --pad-x: 15mm;
+  --pad-top: 11mm;
+  --pad-bot: 10mm;
+}
+
+@page { size: A4; margin: 0; }
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: #2b2a27;
+  font-family: var(--sans);
+  font-size: var(--min);
+  line-height: 1.38;
+  color: var(--ink);
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+  font-feature-settings: "tnum" 1, "cv11" 1;
+}
+@media screen {
+  body { padding: 24px 0; }
+  .page { margin: 0 auto 24px; box-shadow: 0 6px 30px rgba(0,0,0,.35); }
+}
+@media print {
+  body { background: none; }
+  .page { margin: 0; box-shadow: none; }
+}
+
+/* ---------- Page frame ---------- */
+.page {
+  position: relative;
+  width: var(--page-w);
+  height: var(--page-h);
+  background: var(--cream);
+  padding: var(--pad-top) var(--pad-x) var(--pad-bot);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  page-break-after: always;
+  break-after: page;
+}
+.page:last-child { page-break-after: auto; break-after: auto; }
+.page.dark { background: var(--ink); color: #f1ede4; }
+
+.run-head {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-size: var(--min); font-weight: 600; letter-spacing: 0;
+  color: var(--muted);
+  padding-bottom: 2.2mm; border-bottom: 1px solid var(--line);
+  margin-bottom: 5mm; flex: none; gap: 6mm;
+}
+.run-head .rh-l { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.run-head .rh-r { color: var(--gold-deep); white-space: nowrap; font-weight: 700; }
+.dark .run-head { color: #9c968a; border-color: #2e2c28; }
+.dark .run-head .rh-r { color: var(--gold); }
+
+.page-body {
+  flex: 1 1 auto; min-height: 0;
+  display: flex; flex-direction: column; gap: 4.2mm;
+}
+.page-body.spread { justify-content: space-between; }
+
+.run-foot {
+  flex: none; display: flex; justify-content: space-between; align-items: flex-end; gap: 8mm;
+  margin-top: 4mm; padding-top: 2.2mm; border-top: 1px solid var(--line);
+  font-size: var(--min); color: var(--muted); line-height: 1.25;
+}
+.run-foot .src { flex: 1; }
+.run-foot .pg { font-weight: 800; color: var(--ink); white-space: nowrap; }
+.dark .run-foot { border-color: #2e2c28; color: #9c968a; }
+.dark .run-foot .pg { color: #f1ede4; }
+
+/* ---------- Type ---------- */
+.eyebrow {
+  font-size: var(--min); font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  color: var(--gold-deep);
+}
+.dark .eyebrow { color: var(--gold); }
+h1.hl, .hl {
+  font-weight: 800; font-size: 25pt; line-height: 1.06; letter-spacing: -.025em;
+  margin: 0; text-wrap: balance;
+}
+.hl-xl { font-size: 40pt; line-height: 1.0; letter-spacing: -.035em; }
+.rule { border: 0; height: 2px; background: var(--gold-deep); margin: 0; flex: none; }
+.dark .rule { background: var(--gold); }
+h2, .h2 { font-weight: 800; font-size: 14pt; letter-spacing: -.01em; margin: 0; line-height: 1.15; }
+h3, .h3 {
+  font-weight: 700; font-size: var(--min); letter-spacing: .1em; text-transform: uppercase;
+  margin: 0 0 1.5mm; color: var(--ink-2);
+}
+.dark h3, .dark .h3 { color: #c9c3b6; }
+p { margin: 0; }
+p + p { margin-top: 2mm; }
+.lead { font-size: 13.5pt; line-height: 1.35; font-weight: 500; }
+.aside, .serif { font-family: var(--serif); font-style: italic; font-weight: 400; }
+.aside { font-size: 13pt; color: var(--ink-2); line-height: 1.35; }
+.dark .aside { color: #cfc8ba; }
+.muted { color: var(--muted); }
+.pos { color: var(--green); }
+.neg { color: var(--red); }
+.gold { color: var(--gold-deep); }
+.dark .gold { color: var(--gold); }
+b, strong { font-weight: 700; }
+ul.tight, ol.tight { margin: 0; padding-left: 5mm; }
+ul.tight li + li, ol.tight li + li { margin-top: 1.2mm; }
+ul.arrows { list-style: none; margin: 0; padding: 0; }
+ul.arrows li { padding-left: 5mm; position: relative; }
+ul.arrows li::before { content: "→"; position: absolute; left: 0; color: var(--gold-deep); font-weight: 700; }
+ul.arrows li + li { margin-top: 1.4mm; }
+
+/* ---------- Layout ---------- */
+.cols { display: grid; gap: 6mm; }
+.cols-2 { grid-template-columns: 1fr 1fr; }
+.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+.cols-4 { grid-template-columns: repeat(4, 1fr); }
+.cols-60 { grid-template-columns: 3fr 2fr; }
+.cols-40 { grid-template-columns: 2fr 3fr; }
+.grow { flex: 1 1 auto; }
+.stack { display: flex; flex-direction: column; gap: 3mm; }
+.stack.spread { justify-content: space-between; }
+
+/* ---------- Stat blocks ---------- */
+.stats { display: grid; grid-template-columns: repeat(var(--n, 4), 1fr); gap: 5mm; }
+.stat { border-top: 3px solid var(--ink); padding-top: 2.4mm; }
+.dark .stat { border-color: var(--gold); }
+.stat .num { font-weight: 800; font-size: 25pt; letter-spacing: -.03em; line-height: 1.02; }
+.stat .cap { font-size: var(--min); color: var(--muted); margin-top: 1.2mm; line-height: 1.25; }
+.dark .stat .cap { color: #a9a294; }
+.stat.sm .num { font-size: 19pt; }
+
+/* ---------- Callout ---------- */
+.callout {
+  background: var(--white); border-left: 4px solid var(--gold-deep);
+  padding: 3.2mm 4mm; line-height: 1.35;
+}
+.callout .h3 { color: var(--gold-deep); }
+.dark .callout { background: #171614; border-color: var(--gold); }
+.callout.neg { border-color: var(--red); color: inherit; }
+.callout.pos { border-color: var(--green); color: inherit; }
+
+.card { background: var(--white); padding: 3.4mm 4mm; border-top: 3px solid var(--ink); }
+.card.bear { border-color: var(--red); }
+.card.bull { border-color: var(--green); }
+.card.base { border-color: var(--gold-deep); }
+.card .big { font-weight: 800; font-size: 22pt; letter-spacing: -.03em; line-height: 1.05; }
+.dark .card { background: #171614; color: #f1ede4; }
+
+/* ---------- Tables ---------- */
+table.tbl { width: 100%; border-collapse: collapse; font-size: var(--min); line-height: 1.25; }
+table.tbl th {
+  background: var(--ink); color: #f6f4f0; font-weight: 700; text-align: left;
+  padding: 1.6mm 2mm; letter-spacing: .02em;
+}
+table.tbl td { padding: 1.4mm 2mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.tbl tr.total td { font-weight: 800; border-top: 2px solid var(--ink); border-bottom: 0; }
+table.tbl tr.row-hl td { background: #efe6d2; }
+table.tbl .nowrap, .nowrap { white-space: nowrap; }
+table.tbl .r, table.tbl th.r { text-align: right; }
+table.tbl .c, table.tbl th.c { text-align: center; }
+.dark table.tbl th { background: var(--gold); color: var(--ink); }
+.dark table.tbl td { border-color: #2e2c28; }
+
+/* Sensitivity grid: put class "sens" on table; mark the base cell with .base */
+table.sens td, table.sens th { text-align: center; }
+table.sens td:first-child, table.sens th:first-child { text-align: left; }
+table.sens td.base { outline: 2px solid var(--gold-deep); outline-offset: -2px; font-weight: 800; background: #efe6d2; }
+table.sens td.up { color: var(--green); }
+table.sens td.dn { color: var(--red); }
+
+/* ---------- Range bar (stop -> target), built by doc-page.js ---------- */
+.rangebar { position: relative; height: 22mm; margin: 2mm 2mm 0; }
+.rangebar .track { position: absolute; left: 0; right: 0; top: 9mm; height: 3mm; background: linear-gradient(90deg, var(--red) 0 var(--e, 30%), var(--green) var(--e, 30%) 100%); opacity: .85; }
+.rangebar .tick { position: absolute; top: 6mm; width: 2px; height: 9mm; background: var(--ink); transform: translateX(-1px); }
+.rangebar .dot { position: absolute; top: 8.5mm; width: 4mm; height: 4mm; border-radius: 50%; background: var(--gold-deep); border: 2px solid var(--ink); transform: translateX(-50%); }
+.rangebar .lbl { position: absolute; font-size: var(--min); white-space: nowrap; transform: translateX(-50%); line-height: 1.1; }
+.rangebar .lbl.top { top: 0; font-weight: 800; }
+.rangebar .lbl.bot { top: 14mm; color: var(--muted); }
+.rangebar .lbl.l0 { transform: none; }
+.rangebar .lbl.l1 { transform: translateX(-100%); }
+.dark .rangebar .tick { background: #f1ede4; }
+.dark .rangebar .dot { border-color: #f1ede4; }
+
+/* ---------- Bar charts (divs, not images), sized by doc-page.js ---------- */
+/* Horizontal: <div class="hbars" data-max="optional"><div class="hbar" data-value="12.3" data-label="FY26" data-display="$4.6B"></div>... */
+.hbars { display: flex; flex-direction: column; gap: 1.8mm; }
+.hbar { display: grid; grid-template-columns: var(--lw, 30mm) 1fr auto; align-items: center; gap: 3mm; }
+.hbar .bl { font-size: var(--min); }
+.hbar .bt { height: 5mm; background: #e7e1d5; position: relative; }
+.hbar .bf { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+.hbar.gold .bf { background: var(--gold-deep); }
+.hbar.neg .bf { background: var(--red); }
+.hbar.pos .bf { background: var(--green); }
+.hbar .bv { font-weight: 800; font-size: var(--min); min-width: 16mm; text-align: right; }
+.dark .hbar .bt { background: #24221f; }
+.dark .hbar .bf { background: #f1ede4; }
+
+/* Vertical columns: <div class="vbars" style="height:55mm"><div class="vbar" data-value=".." data-label="Q1" data-display=".."></div>... */
+.vbars { display: flex; align-items: flex-end; gap: 3mm; height: 55mm; padding-top: 7mm; border-bottom: 2px solid var(--ink); }
+.vbar { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; height: 100%; position: relative; }
+.vbar .vf { width: 100%; background: var(--ink); }
+.vbar.gold .vf { background: var(--gold-deep); }
+.vbar.pos .vf { background: var(--green); }
+.vbar.neg .vf { background: var(--red); }
+.vbar .vv { font-weight: 800; font-size: var(--min); margin-bottom: 1mm; white-space: nowrap; }
+.vbar .vl { position: absolute; bottom: -6.5mm; font-size: var(--min); color: var(--muted); white-space: nowrap; }
+.vbars-wrap { padding-bottom: 7mm; }
+
+/* Stacked share bar: <div class="share"><span style="--w:47.9%" class="s1">DC 48%</span>... */
+.share { display: flex; height: 9mm; width: 100%; }
+.share span { width: var(--w); display: flex; align-items: center; padding: 0 2mm; font-size: var(--min); font-weight: 700; color: #fff; white-space: nowrap; overflow: hidden; }
+.share .s1 { background: var(--ink); }
+.share .s2 { background: var(--gold-deep); }
+.share .s3 { background: #8a8476; }
+.share .s4 { background: #c9c2b2; color: var(--ink); }
+
+/* ---------- Cover ---------- */
+.cover .page-body { justify-content: space-between; }
+.cover .brand { font-weight: 800; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-size: 13pt; }
+.cover .ticker { font-weight: 800; font-size: 70pt; letter-spacing: -.05em; line-height: .9; }
+.cover .rating {
+  display: inline-block; border: 2px solid var(--gold); color: var(--gold);
+  font-weight: 800; letter-spacing: .14em; text-transform: uppercase; padding: 1.6mm 4mm;
+}
+.cover .px { font-weight: 800; font-size: 30pt; letter-spacing: -.03em; }
+.cover .px .arrow { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--gold); padding: 0 3mm; }
+
+.disclaimer { font-size: var(--min); color: var(--muted); line-height: 1.3; }
+.dark .disclaimer { color: #8f897d; }
+
+/* Thesis scorecard / pillars */
+.pillar { border-top: 3px solid var(--gold-deep); padding-top: 2.6mm; display: flex; flex-direction: column; gap: 2mm; }
+.pillar .n { font-weight: 800; font-size: 30pt; color: var(--gold-deep); line-height: 1; letter-spacing: -.03em; }
+
+/* Overflow marker (screen only) */
+@media screen {
+  .page[data-overflow]::after {
+    content: "OVERFLOW " attr(data-overflow) "px"; position: absolute; top: 2mm; right: 2mm;
+    background: var(--red); color: #fff; font-weight: 800; padding: 1mm 2mm; font-size: 12pt;
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_comment": "Fabrinet (FN) inputs from the Oct 2, 2026 deep dive. Money in $M except per-share values. Every input must be sourced in the research note.",
+  "ticker": "FN",
+  "as_of": "2026-10-02",
+  "currency": "$",
+  "market": { "price": 463.69, "low_52w": 358.28, "high_52w": 748.89 },
+  "position": { "direction": "Long", "entry": 405.33, "entry_date": "2026-09-28", "target": 580.0, "stop": 337.0, "size": 0.05, "p_win": 0.5, "horizon": "12-18 months" },
+  "wacc": { "rf": 0.0525, "beta": 1.21, "erp": 0.055, "crp": 0.0, "size_premium": 0.0, "equity_value": 16800, "debt_value": 0, "kd": 0.0, "tax": 0.15 },
+  "dcf": {
+    "first_year": 2027,
+    "base_revenue": 4641,
+    "growth":      [0.35, 0.26, 0.20, 0.15, 0.12, 0.10, 0.09, 0.08, 0.06, 0.05],
+    "ebit_margin": [0.103, 0.105, 0.106, 0.107, 0.107, 0.107, 0.107, 0.107, 0.107, 0.107],
+    "tax_rate": 0.15,
+    "da_pct":    [0.015, 0.016, 0.017, 0.019, 0.020, 0.021, 0.022, 0.023, 0.024, 0.024],
+    "capex_pct": [0.040, 0.040, 0.045, 0.040, 0.035, 0.032, 0.030, 0.029, 0.028, 0.028],
+    "nwc_pct_of_incr_rev": 0.20,
+    "terminal_growth": 0.04,
+    "exit_multiple": 12,
+    "anchor": "gordon",
+    "net_debt": -907,
+    "diluted_shares": 36.3
+  },
+  "peers": [
+    { "ticker": "LITE", "pe": 64.6, "ev_sales": null, "ev_ebitda": null },
+    { "ticker": "GLW",  "pe": 47.2, "ev_sales": null, "ev_ebitda": null },
+    { "ticker": "COHR", "pe": 43.2, "ev_sales": null, "ev_ebitda": null },
+    { "ticker": "CLS",  "pe": 34.3, "ev_sales": null, "ev_ebitda": null },
+    { "ticker": "JBL",  "pe": 17.3, "ev_sales": null, "ev_ebitda": null },
+    { "ticker": "AAOI", "pe": -1,   "ev_sales": null, "ev_ebitda": null }
+  ],
+  "blend": {
+    "peer_stat": "median",
+    "pre_profit": false,
+    "fwd_ebitda": 739, "fwd_revenue": 6265, "fwd_eps": 15.10,
+    "hist_ev_ebitda": null, "hist_avg_ebitda": 450,
+    "hist_ev_sales": 3.5, "hist_avg_revenue": 4641,
+    "hist_pe": 35.2, "hist_avg_eps": 14.09
+  },
+  "scenarios": [
+    { "name": "Bear", "weight": 0.25, "price": 320, "multiple": "18.5× FY28E EPS" },
+    { "name": "Base", "weight": 0.50, "price": 580, "multiple": "27.5× FY28E EPS" },
+    { "name": "Bull", "weight": 0.25, "price": 750, "multiple": "32× FY28E EPS" }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "_comment": "Aeon Nimbus position ledger used by the equity-deep-dive skill for the position statement ('It joins ...') and the portfolio-fit answer. Update it whenever a call is opened or closed. Closed calls come from aeonnimbus.com (index.html); the open book must be confirmed by LiJie before it is trusted.",
+  "as_of": "2026-10-15",
+  "open_book_confirmed": false,
+  "open": [],
+  "closed": [
+    { "ticker": "ORCL", "name": "Oracle", "published": "2026-04-08", "entry": 143.36, "exit": 249.88, "exit_date": "2026-06-01", "return": 0.743 },
+    { "ticker": "IREN", "name": "IREN Limited", "published": "2026-05-20", "return": 0.364 },
+    { "ticker": "RDDT", "name": "Reddit", "published": "2026-05-27", "entry": 140.88, "return": 0.325 },
+    { "ticker": "MRVL", "name": "Marvell Technology", "published": "2026-06-09", "return": 0.319 },
+    { "ticker": "LMND", "name": "Lemonade", "published": "2026-07-02", "return": 0.347 },
+    { "ticker": "MRVL", "name": "Marvell Technology (#2)", "published": "2026-07-08", "exit": 300.06, "exit_date": "2026-10-06", "return": 0.458 },
+    { "ticker": "SNDK", "name": "SanDisk", "published": "2026-07-19", "return": 0.323 },
+    { "ticker": "FN", "name": "Fabrinet", "published": "2026-09-28", "entry": 405.33, "return": 0.266 },
+    { "ticker": "ASTS", "name": "AST SpaceMobile", "return": 0.288 },
+    { "ticker": "IBM", "name": "IBM", "return": 0.187 },
+    { "ticker": "ADEA", "name": "Adeia", "return": 0.048 }
+  ],
+  "summary": { "closed_calls": 11, "hit_rate": 1.0, "avg_return": 0.333 }
+}

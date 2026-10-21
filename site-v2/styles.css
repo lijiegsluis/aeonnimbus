@@ -74,3 +74,13 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var
  .stat+.stat{padding-left:0}.stat:nth-child(even){padding-left:16px}
 }
 @media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}}
+
+.poster h1{max-width:none;font-size:clamp(48px,11vw,168px);line-height:.95;margin:24px 0 48px}
+.chip{display:inline-flex;align-items:baseline;gap:.25em;background:var(--gold);color:var(--paper);padding:0 .22em;font-size:.62em;line-height:1.15;vertical-align:.08em;border-radius:.12em;font-style:normal}
+.chip b{font:400 .2em "IBM Plex Mono",monospace;letter-spacing:.08em;align-self:center}
+.chip small{font:400 .18em "IBM Plex Mono",monospace;align-self:center;letter-spacing:.08em;opacity:.85}
+.posterrow{display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:end}.posterrow .lede{margin:0}
+.photo{height:clamp(240px,40vw,520px);background:#222 url(/assets/london-office.webp) center/cover;border-bottom:1px solid var(--rule)}
+.stats .fig{font-size:clamp(56px,8vw,120px)}
+@media(max-width:820px){.posterrow{grid-template-columns:1fr;gap:24px}.chip{font-size:.7em}}
+@media(max-width:820px){.list a.row span:last-child{display:none}.list a.row{grid-template-columns:1fr}.chip{font-size:.75em}}

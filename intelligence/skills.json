@@ -1,0 +1,31 @@
+{
+  "agent": "Aeon Intelligence Hermes",
+  "format": "SKILL.md (agentskills)",
+  "skills": [
+    {
+      "name": "anatomy",
+      "description": "Explain a technical concept by building a small interactive simulation instead of writing prose. Use when asked \"how does X work\", for pricing models, algorithms, protocols, or any mechanism with parameters worth playing with.",
+      "path": ".claude/skills/anatomy/SKILL.md"
+    },
+    {
+      "name": "chief-of-staff",
+      "description": "Take one big goal, break it into a plan, and run a team of parallel sub-agents in the background to deliver it. Use when the user gives a large, multi-part objective (e.g. \"produce the weekly FX research pack\") rather than a single task.",
+      "path": ".claude/skills/chief-of-staff/SKILL.md"
+    },
+    {
+      "name": "last-30-days",
+      "description": "Research what people said about a topic in the last 30 days across Reddit, X, YouTube and TikTok and report the consensus, disagreements, and notable posts. Use for sentiment, trends, \"what is the chatter on X\", pre-research for a market note.",
+      "path": ".claude/skills/last-30-days/SKILL.md"
+    },
+    {
+      "name": "marketing-psychology",
+      "description": "Apply behavioral-psychology principles (loss aversion, anchoring, social proof, etc.) to audit or rewrite marketing copy, pricing, and funnels. Use when improving landing pages, newsletters, offers, or pricing.",
+      "path": ".claude/skills/marketing-psychology/SKILL.md"
+    },
+    {
+      "name": "teach",
+      "description": "Act as a personal tutor. Given a topic the user wants to learn, write lessons, a cheat sheet, and exercises, and remember progress between sessions. Use when the user says \"teach me\", \"I want to learn\", or resumes a course.",
+      "path": ".claude/skills/teach/SKILL.md"
+    }
+  ]
+}

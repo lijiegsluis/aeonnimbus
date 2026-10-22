@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Aeon Intelligence Skills</title>
+<style>
+:root{--gold:#8B6914;--ink:#1A1814;--paper:#F5F2EC;--card:#fff;--line:#d9d3c5}
+@media(prefers-color-scheme:dark){:root{--ink:#F5F2EC;--paper:#1A1814;--card:#24211b;--line:#3a352b}}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 'EB Garamond',Georgia,serif}
+main{max-width:900px;margin:0 auto;padding:32px 16px}h1{font-weight:500;margin:0 0 4px}h1+p{margin-top:0;color:var(--gold)}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);padding:16px;border-radius:6px}.card h3{margin:0 0 6px;color:var(--gold);font-family:ui-monospace,monospace;font-size:15px}
+.card p{margin:0 0 8px;font-size:15px}a{color:var(--gold)}code{font-family:ui-monospace,monospace;font-size:13px}
+label{display:block;margin:8px 0;font-size:14px}input[type=range]{width:100%}canvas{width:100%;height:200px;border:1px solid var(--line);background:var(--card)}
+h2{font-weight:500;margin-top:36px}.out{font-family:ui-monospace,monospace;font-size:14px}
+</style></head><body><main>
+<h1>Aeon Intelligence Skills</h1><p>Five skills for the Hermes agent and Claude Code.</p>
+<div class="grid" id="skills"></div>
+<p>Agent manifest: <a href="skills.json"><code>/intelligence/skills.json</code></a>. Each skill is a <code>SKILL.md</code> under <code>.claude/skills/</code> in the repo.</p>
+
+<h2>Anatomy demo: Black-Scholes call</h2>
+<div class="card">
+<label>Spot <span id="vS"></span><input id="S" type="range" min="50" max="150" value="100"></label>
+<label>Volatility <span id="vV"></span><input id="V" type="range" min="5" max="100" value="25"></label>
+<label>Days to expiry <span id="vT"></span><input id="T" type="range" min="1" max="730" value="180"></label>
+<canvas id="c" width="800" height="200"></canvas>
+<p class="out" id="o"></p>
+<p style="font-size:14px">Try: drop days to 1 and watch the curve collapse onto the payoff kink (strike 100, rate 3%); push vol to 100 and see time value swamp intrinsic value.</p>
+</div>
+</main>
+<script>
+fetch('skills.json').then(r=>r.json()).then(m=>{
+  const g=document.getElementById('skills');
+  m.skills.forEach(s=>{const d=document.createElement('div');d.className='card';
+    const h=document.createElement('h3');h.textContent=s.name;
+    const p=document.createElement('p');p.textContent=s.description;
+    const a=document.createElement('a');a.href='https://github.com/lijiegsluis/aeonnimbus/blob/main/'+s.path;a.textContent='SKILL.md';
+    d.append(h,p,a);g.append(d);});
+}).catch(()=>{document.getElementById('skills').textContent='Manifest unavailable.'});
+const K=100,r=.03,$=id=>document.getElementById(id);
+function N(x){const t=1/(1+.2316419*Math.abs(x)),d=.3989423*Math.exp(-x*x/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p}
+function bs(S,v,T){if(T<=0)return Math.max(S-K,0);const d1=(Math.log(S/K)+(r+v*v/2)*T)/(v*Math.sqrt(T)),d2=d1-v*Math.sqrt(T);return S*N(d1)-K*Math.exp(-r*T)*N(d2)}
+function draw(){const S=+$('S').value,v=$('V').value/100,T=$('T').value/365;
+  $('vS').textContent=S;$('vV').textContent=(v*100)+'%';$('vT').textContent=$('T').value;
+  const c=$('c'),x=c.getContext('2d'),W=c.width,H=c.height,cs=getComputedStyle(document.body);x.clearRect(0,0,W,H);
+  const px=s=>(s-50)/100*W,py=y=>H-10-y/60*(H-20);
+  [[0,cs.color],[1,'#8B6914']].forEach(([m,col])=>{x.beginPath();x.strokeStyle=col;x.lineWidth=2;
+    for(let s=50;s<=150;s++){const y=m?bs(s,v,T):Math.max(s-K,0);s==50?x.moveTo(px(s),py(y)):x.lineTo(px(s),py(y))}x.stroke()});
+  x.fillStyle='#8B6914';x.beginPath();x.arc(px(S),py(bs(S,v,T)),5,0,7);x.fill();
+  const c0=bs(S,v,T),iv=Math.max(S-K,0);$('o').textContent=`price ${c0.toFixed(2)} | intrinsic ${iv.toFixed(2)} | time value ${(c0-iv).toFixed(2)}  (gold: model, ink: payoff)`}
+['S','V','T'].forEach(i=>$(i).oninput=draw);draw();
+</script></body></html>

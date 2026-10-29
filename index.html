@@ -13801,13 +13801,11 @@ function exportPortExcel(){
     function blendLots(lots){
       const sizes = lots.map(c => parseFloat((c.size||'0').replace('%','')));
       const totalSize = sizes.reduce((a,b) => a+b, 0);
-      // Equal-dollar blended return: average the percentage returns
-      const retNums = lots.map(c => parseFloat((c.return||'0').replace('%','').replace('+','')));
-      const blendedRet = retNums.reduce((a,b) => a+b, 0) / retNums.length;
       // Weighted-average entry
       const blendedEntry = lots.reduce(function(sum, c, i){ return sum + parseFloat(c.entry) * sizes[i]; }, 0) / totalSize;
       const earliest = lots.slice().sort((a,b) => new Date(a.pubDate)-new Date(b.pubDate))[0];
-      return {
+      const isClosed = lots.every(c => !!c.return);
+      const out = {
         ticker:    lots[0].ticker,
         entry:     blendedEntry.toFixed(2),
         target:    lots[0].target,
@@ -13816,9 +13814,6 @@ function exportPortExcel(){
         horizon:   lots[0].horizon,
         link:      earliest.link,
         pubDate:   earliest.pubDate,
-        exitPrice: lots[0].exitPrice,
-        exitDate:  lots[0].exitDate,
-        return:    (blendedRet >= 0 ? '+' : '') + blendedRet.toFixed(1) + '%',
         company:   lots[0].company,
         thesis:    lots[0].thesis,
         catalyst:  lots[0].catalyst,
@@ -13826,6 +13821,15 @@ function exportPortExcel(){
         sellSide:  lots[0].sellSide,
         lotCount:  lots.length,
       };
+      if(isClosed){
+        // Equal-dollar blend: average the percentage returns
+        const retNums = lots.map(c => parseFloat(c.return.replace('%','').replace('+','')));
+        const blendedRet = retNums.reduce((a,b) => a+b, 0) / retNums.length;
+        out.return    = (blendedRet >= 0 ? '+' : '') + blendedRet.toFixed(1) + '%';
+        out.exitPrice = lots[0].exitPrice;
+        out.exitDate  = lots[0].exitDate;
+      }
+      return out;
     }
 
     function populateKnownCalls(){

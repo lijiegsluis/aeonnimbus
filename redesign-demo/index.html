@@ -1,0 +1,757 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Aeon Nimbus Ledger</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap">
+<style>
+/* Layout: sticky left rail + wide content column. Signature element: the "receipt" (dated call slip with a stop > entry > target range bar). */
+:root{
+  --bg:#EEF1F5; --surface:#FFFFFF; --surface-2:#E6EAF0; --ink:#0F1923; --muted:#566271; --rule:#D3D9E1;
+  --accent:#2437D6; --accent-ink:#FFFFFF; --accent-soft:#E3E7FB;
+  --gain:#0B7A53; --gain-soft:#DDF1E8; --loss:#B8321C; --loss-soft:#F8E2DD; --warn:#8A5A00; --warn-soft:#F6EBCF;
+  --f-ui:'Schibsted Grotesk',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --f-read:'Source Serif 4',Georgia,'Times New Roman',serif;
+  --f-data:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,Consolas,monospace;
+  --rail:236px; --r:6px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0B1117; --surface:#131B24; --surface-2:#1B2531; --ink:#E6ECF2; --muted:#93A1B1; --rule:#26323F;
+  --accent:#93A4FF; --accent-ink:#0B1117; --accent-soft:#1D2548;
+  --gain:#4FD1A0; --gain-soft:#12372B; --loss:#FF8F7A; --loss-soft:#3D1D17; --warn:#F2C260; --warn-soft:#3A2D10; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0B1117; --surface:#131B24; --surface-2:#1B2531; --ink:#E6ECF2; --muted:#93A1B1; --rule:#26323F;
+  --accent:#93A4FF; --accent-ink:#0B1117; --accent-soft:#1D2548;
+  --gain:#4FD1A0; --gain-soft:#12372B; --loss:#FF8F7A; --loss-soft:#3D1D17; --warn:#F2C260; --warn-soft:#3A2D10; color-scheme:dark}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--f-ui);padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+.num,.mono{font-family:var(--f-data);font-variant-numeric:tabular-nums}
+.pos{color:var(--gain)} .neg{color:var(--loss)}
+h1,h2,h3{font-weight:700;letter-spacing:-.02em;line-height:1.1;margin:0;text-wrap:balance}
+p{margin:0}
+.skip{position:absolute;left:-999px;top:8px;background:var(--accent);color:var(--accent-ink);padding:8px 12px;border-radius:var(--r);z-index:100}
+.skip:focus{left:8px}
+
+/* shell */
+.shell{display:grid;grid-template-columns:var(--rail) minmax(0,1fr);gap:0 40px;max-width:1360px;margin:0 auto}
+.rail{position:sticky;top:env(safe-area-inset-top,0px);align-self:start;height:100vh;max-height:100vh;overflow:auto;padding:28px 0 20px;display:flex;flex-direction:column;gap:22px}
+.brand{display:block;text-decoration:none}
+.brand b{display:block;font-size:19px;letter-spacing:-.03em;font-weight:800}
+.brand span{display:block;font:500 11px/1.4 var(--f-data);color:var(--muted);margin-top:4px;letter-spacing:.02em}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav a{display:flex;justify-content:space-between;align-items:center;text-decoration:none;padding:8px 10px;border-radius:var(--r);color:var(--muted);font-weight:500}
+.nav a:hover{background:var(--surface-2);color:var(--ink)}
+.nav a[aria-current="page"]{background:var(--ink);color:var(--bg)}
+.nav a small{font:500 10px var(--f-data);opacity:.75}
+.rail-foot{margin-top:auto;display:flex;flex-direction:column;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--rule);background:var(--surface);padding:8px 12px;border-radius:var(--r);font-weight:600;text-decoration:none;line-height:1.2}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent}
+.btn.sm{padding:5px 9px;font-size:13px}
+kbd{font:500 11px var(--f-data);border:1px solid var(--rule);border-bottom-width:2px;border-radius:4px;padding:1px 5px;background:var(--surface-2);color:var(--muted)}
+.cmdbtn{justify-content:space-between;color:var(--muted);font-weight:500}
+.topbar{display:none}
+main{padding:28px 0 56px;min-width:0}
+section[data-page]{display:none}
+section[data-page].on{display:block}
+
+/* type */
+.eyebrow{font:500 11px var(--f-data);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.h-page{font-size:clamp(30px,4.4vw,52px);margin:10px 0 14px;letter-spacing:-.035em}
+.lede{font:400 19px/1.5 var(--f-read);color:var(--muted);max-width:62ch}
+.h-sec{font-size:22px;margin-bottom:6px}
+.sec{margin-top:52px}
+.sec-head{display:flex;justify-content:space-between;align-items:end;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.sec-head p{color:var(--muted);max-width:60ch}
+.note{font-size:13px;color:var(--muted);max-width:80ch}
+.banner{border:1px solid var(--rule);border-left:3px solid var(--warn);background:var(--warn-soft);padding:10px 14px;border-radius:var(--r);font-size:13.5px;margin-top:18px}
+
+/* panels */
+.panel{background:var(--surface);border:1px solid var(--rule);border-radius:var(--r)}
+.pad{padding:18px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--rule);background:var(--surface);border-radius:var(--r)}
+.stats>div{padding:14px 16px;border-right:1px solid var(--rule);min-width:0}
+.stats>div:last-child{border-right:0}
+.stats .v{font:700 26px/1.1 var(--f-data);letter-spacing:-.03em;margin-top:6px}
+.stats .s{font-size:12px;color:var(--muted);margin-top:4px}
+
+/* chips + controls */
+.bar{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{border:1px solid var(--rule);background:var(--surface);border-radius:99px;padding:5px 12px;font-size:13px;font-weight:500}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.tag{display:inline-block;font:500 11px var(--f-data);padding:2px 7px;border-radius:4px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.tag.gain{background:var(--gain-soft);color:var(--gain)} .tag.loss{background:var(--loss-soft);color:var(--loss)} .tag.acc{background:var(--accent-soft);color:var(--accent)} .tag.warn{background:var(--warn-soft);color:var(--warn)}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font:500 11px var(--f-data);letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+input[type=text],input[type=email],input[type=number],input[type=search],select,textarea{width:100%;border:1px solid var(--rule);background:var(--surface);border-radius:var(--r);padding:9px 11px;min-width:0}
+input:hover,select:hover,textarea:hover{border-color:var(--muted)}
+textarea{min-height:120px;resize:vertical}
+.search{flex:1 1 220px;max-width:360px}
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px}
+
+/* tables */
+.tw{overflow-x:auto;border:1px solid var(--rule);border-radius:var(--r);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--rule);white-space:nowrap}
+th{font:500 11px var(--f-data);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--surface-2);position:sticky;top:0}
+th button{all:unset;cursor:pointer;display:inline-flex;gap:4px;align-items:center}
+th button:focus-visible{outline:2px solid var(--accent)}
+tr:last-child td{border-bottom:0}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover{background:var(--surface-2)}
+td.r,th.r{text-align:right}
+td.wrap{white-space:normal;min-width:220px}
+
+/* receipt: the signature object */
+.receipt{position:relative;background:var(--surface);border:1px solid var(--rule);border-radius:var(--r);padding:16px 18px 18px;display:flex;flex-direction:column;gap:12px;text-align:left;width:100%;min-width:0}
+.receipt::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:6px;background:radial-gradient(circle at 6px 0,transparent 4px,var(--bg) 4.5px) 0 0/12px 6px repeat-x}
+button.receipt{cursor:pointer}
+button.receipt:hover{border-color:var(--ink)}
+.rc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+.rc-tk{font:800 28px/1 var(--f-data);letter-spacing:-.04em}
+.rc-nm{font-size:13px;color:var(--muted);margin-top:3px}
+.rc-ret{font:700 22px/1 var(--f-data);text-align:right}
+.rc-stamp{font:500 10.5px var(--f-data);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);border-top:1px dashed var(--rule);padding-top:9px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.rc-th{font:400 14.5px/1.5 var(--f-read);color:var(--ink)}
+.range{position:relative;height:44px;margin:4px 6px 0}
+.range .track{position:absolute;left:0;right:0;top:20px;height:4px;border-radius:3px;background:linear-gradient(90deg,var(--loss-soft),var(--surface-2) 40%,var(--gain-soft))}
+.range .seg{position:absolute;top:20px;height:4px;border-radius:3px;background:var(--gain)}
+.range .m{position:absolute;top:0;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;font:500 10px var(--f-data);color:var(--muted);white-space:nowrap}
+.range .m i{display:block;width:2px;height:14px;background:var(--muted);margin-top:0}
+.range .m.stop i{background:var(--loss)} .range .m.target i{background:var(--gain)}
+.range .m.entry i{background:var(--ink);height:22px;width:3px}
+.range .m.exit i{background:var(--accent);height:22px;width:3px}
+.range .m.exit{color:var(--accent);font-weight:700}
+.range .m.low{top:auto;bottom:0;flex-direction:column-reverse}
+.range .m.exit.low i{height:16px}
+.rows3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.kv{font-size:12px;color:var(--muted)} .kv b{display:block;font:600 14px var(--f-data);color:var(--ink);margin-top:2px}
+
+/* hero */
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:36px;align-items:center;padding:12px 0 8px}
+.hero h1{font-size:clamp(38px,5.6vw,68px);letter-spacing:-.045em;line-height:1.02}
+.hero .lede{margin-top:18px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.cta .btn{padding:11px 18px}
+
+/* research */
+.post{display:grid;grid-template-columns:110px minmax(0,1fr) auto;gap:16px;padding:18px 0;border-bottom:1px solid var(--rule);align-items:start}
+.post h3{font-size:19px;letter-spacing:-.02em;line-height:1.25}
+.post p{font:400 16px/1.55 var(--f-read);color:var(--muted);margin-top:6px;max-width:68ch}
+.post .meta{display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap}
+.post time{font:500 12px var(--f-data);color:var(--muted);padding-top:5px}
+.post .acts{display:flex;gap:6px}
+
+/* tools */
+.tool{display:flex;flex-direction:column;gap:10px;padding:16px;min-width:0}
+.tool h3{font-size:17px}
+.tool p{font-size:14px;color:var(--muted)}
+.tool .foot{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.out{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:14px}
+.out>div{background:var(--surface-2);border-radius:var(--r);padding:10px 12px;min-width:0}
+.out .k{font:500 10.5px var(--f-data);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.out .v{font:700 18px var(--f-data);margin-top:3px;overflow-wrap:anywhere}
+
+/* chart */
+.chart{width:100%;height:auto;display:block}
+.chart text{font:500 11px var(--f-data);fill:var(--muted)}
+.chart .gl{stroke:var(--rule);stroke-width:1}
+.chart .dot{cursor:pointer}
+.tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font:500 12px/1.4 var(--f-data);padding:6px 9px;border-radius:5px;z-index:60;max-width:240px;opacity:0}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+
+/* dialogs */
+dialog{border:1px solid var(--rule);background:var(--surface);color:var(--ink);border-radius:8px;padding:0;max-width:min(640px,calc(100vw - 24px));width:100%;max-height:calc(100vh - 40px);overflow:auto}
+dialog::backdrop{background:rgba(8,12,18,.55)}
+.dlg-h{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border-bottom:1px solid var(--rule)}
+.dlg-b{padding:18px;display:flex;flex-direction:column;gap:14px}
+#cmd{max-width:min(560px,calc(100vw - 24px));margin-top:12vh}
+#cmd input{border:0;border-bottom:1px solid var(--rule);border-radius:0;padding:14px 18px;font-size:16px}
+#cmd ul{list-style:none;margin:0;padding:6px;max-height:50vh;overflow:auto}
+#cmd li button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;gap:10px;width:100%;padding:8px 12px;border-radius:var(--r);cursor:pointer}
+#cmd li button[aria-selected="true"],#cmd li button:hover{background:var(--accent-soft);color:var(--accent)}
+#cmd li small{font:500 11px var(--f-data);color:var(--muted)}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);background:var(--ink);color:var(--bg);padding:9px 14px;border-radius:99px;font-size:13px;font-weight:600;opacity:0;transition:.2s;pointer-events:none;z-index:70}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+details.faq{border-bottom:1px solid var(--rule);padding:14px 0}
+details.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.faq summary::after{content:"+";font:500 18px var(--f-data);color:var(--muted)}
+details.faq[open] summary::after{content:"–"}
+details.faq p{margin-top:8px;color:var(--muted);max-width:68ch}
+.foot-site{margin-top:64px;padding-top:20px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);display:flex;flex-direction:column;gap:6px;max-width:90ch}
+.pillbar{display:flex;height:10px;border-radius:99px;overflow:hidden;background:var(--surface-2)}
+.pillbar i{display:block;height:100%}
+.empty{padding:28px;text-align:center;color:var(--muted)}
+
+@media (max-width:1100px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{grid-template-columns:1fr}}
+@media (max-width:900px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .rail{display:none;position:static;height:auto;max-height:none;padding:8px 0 14px}
+  .rail.open{display:flex}
+  .topbar{display:flex;justify-content:space-between;align-items:center;padding:14px 0;position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:20;border-bottom:1px solid var(--rule)}
+  .topbar b{font-size:18px;font-weight:800;letter-spacing:-.03em}
+  .g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats>div:nth-child(2){border-right:0}.stats>div:nth-child(-n+2){border-bottom:1px solid var(--rule)}
+  .post{grid-template-columns:minmax(0,1fr)}.post time{padding:0}
+}
+@media (max-width:620px){.g2,.g3,.g4{grid-template-columns:minmax(0,1fr)}.rows3{grid-template-columns:repeat(3,1fr)}.stats .v{font-size:21px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
+</style>
+</head>
+<body>
+
+
+<a class="skip" href="#content" data-skip>Skip to content</a>
+<div class="shell">
+  <header class="topbar">
+    <b>Aeon Nimbus</b>
+    <div style="display:flex;gap:8px"><button class="btn sm" data-cmd aria-label="Search">Search</button><button class="btn sm" id="menuBtn" aria-expanded="false" aria-controls="rail">Menu</button></div>
+  </header>
+  <aside class="rail" id="rail">
+    <a class="brand" href="#home"><b>Aeon Nimbus</b><span>LiJie Guo · independent macro &amp; equity research · London</span></a>
+    <nav class="nav" aria-label="Primary" id="nav"></nav>
+    <div class="rail-foot">
+      <button class="btn cmdbtn" data-cmd><span>Search or jump to</span><kbd>Ctrl K</kbd></button>
+      <a class="btn primary" href="https://aeonnimbus.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free ↗</a>
+      <div style="display:flex;gap:6px">
+        <button class="btn sm ghost" id="themeBtn" style="flex:1">Theme</button>
+        <a class="btn sm ghost" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" rel="noopener" style="flex:1">LinkedIn ↗</a>
+        <a class="btn sm ghost" href="https://github.com/lijiegsluis?tab=repositories" target="_blank" rel="noopener" style="flex:1">GitHub ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <main id="content" tabindex="-1">
+
+<!-- HOME -->
+<section data-page="home" class="on">
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Published before the outcome · every call</div>
+      <h1>Macro and equity research you can check.</h1>
+      <p class="lede">Every call goes public with thesis, entry, stop and position size before the result is known. The record is permanent, including the calls that did not work.</p>
+      <div class="cta">
+        <a class="btn primary" href="#track">Open the record</a>
+        <a class="btn" href="#research">Read the research</a>
+        <a class="btn ghost" href="#tools">Use the tools</a>
+      </div>
+    </div>
+    <div id="heroReceipt"></div>
+  </div>
+  <div class="stats" id="homeStats" style="margin-top:34px"></div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">Latest research</h2><p>Long-form notes, delivered free on Substack.</p></div><a class="btn sm" href="#research">All notes</a></div>
+    <div class="grid g3" id="homePosts"></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">Open calls</h2><p>Positions still running. Click a row for the full slip.</p></div><a class="btn sm" href="#track">Full record</a></div>
+    <div class="tw"><table><thead><tr><th>Ticker</th><th>Published</th><th class="r">Entry</th><th class="r">Stop</th><th class="r">Target</th><th class="r">Size</th><th class="r">Reward : risk</th></tr></thead><tbody id="homeOpen"></tbody></table></div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">How the research is built</h2></div></div>
+    <div class="grid g4">
+      <div class="panel pad"><div class="eyebrow">Edge</div><h3 style="margin:8px 0">Narrative vs. reality</h3><p class="note">Markets price stories. The gap between the story and the unit economics is the opportunity. Sector is irrelevant.</p></div>
+      <div class="panel pad"><div class="eyebrow">Construction</div><h3 style="margin:8px 0">Defined loss</h3><p class="note">Every call enters with a stop. The maximum loss is known before the position opens.</p></div>
+      <div class="panel pad"><div class="eyebrow">Timing</div><h3 style="margin:8px 0">Named catalyst</h3><p class="note">Being early is the same as being wrong. Each thesis names the event that forces a re-price.</p></div>
+      <div class="panel pad"><div class="eyebrow">Accountability</div><h3 style="margin:8px 0">Public first</h3><p class="note">Thesis, entry, stop and size go out before the outcome. Nothing is revised afterwards.</p></div>
+    </div>
+  </div>
+
+  <div class="sec panel pad" style="display:flex;gap:18px;justify-content:space-between;align-items:center;flex-wrap:wrap">
+    <div><h2 class="h-sec">Research in your inbox</h2><p class="note">Macro briefs, equity deep dives and a formal call with each. Free, unsubscribe any time.</p></div>
+    <a class="btn primary" href="https://aeonnimbus.substack.com/subscribe" target="_blank" rel="noopener">Subscribe on Substack ↗</a>
+  </div>
+</section>
+
+<!-- TRACK -->
+<section data-page="track">
+  <div class="eyebrow">Track record</div>
+  <h1 class="h-page">The record</h1>
+  <p class="lede">Each row is a call published with entry, stop, target and size before it played out. Open a row to see the slip.</p>
+  <div class="stats" id="trackStats" style="margin-top:24px"></div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">Cumulative contribution</h2><p>Each closed call's return multiplied by its published size, added in exit order. A simple sum with no compounding and no overlap adjustment.</p></div>
+      <div class="field" style="min-width:150px"><label for="aum">Portfolio size (USD)</label><input id="aum" type="number" min="0" step="1000" value="100000"></div></div>
+    <div class="panel pad"><svg class="chart" id="equity" viewBox="0 0 760 280" role="img" aria-label="Cumulative contribution of closed calls by exit date"></svg>
+    <div class="legend" id="equityNote"></div></div>
+    <div class="banner"><b>Benchmark not shown.</b> The S&amp;P 500 overlay needs a price-history file (see the audit for the one-file fix). Until then this chart makes no relative-performance claim.</div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">All calls</h2></div>
+      <div class="bar" style="margin:0"><div class="chips" id="trackFilter"></div><button class="btn sm" id="csvBtn">Copy as CSV</button></div></div>
+    <div class="tw"><table id="trackTable"><thead><tr id="trackHead"></tr></thead><tbody id="trackBody"></tbody></table></div>
+    <p class="note" style="margin-top:12px">Return is price return on the published entry. Blended calls average the lots. A 100% hit rate on a small sample says little about the future; the worst closed call is shown in the table as it was.</p>
+  </div>
+</section>
+
+<!-- RESEARCH -->
+<section data-page="research">
+  <div class="eyebrow">Research</div>
+  <h1 class="h-page">Notes</h1>
+  <p class="lede">Equity deep dives and macro briefs. Search by company or theme, save what you want to read later.</p>
+  <div class="bar" style="margin-top:22px">
+    <input class="search" id="postQ" type="search" placeholder="Search notes" aria-label="Search notes">
+    <div class="chips" id="postFilter"></div>
+    <select id="postSort" aria-label="Sort notes" style="width:auto"><option value="new">Newest</option><option value="long">Longest read</option><option value="short">Shortest read</option></select>
+  </div>
+  <div id="postList"></div>
+</section>
+
+<!-- TOOLS -->
+<section data-page="tools">
+  <div class="eyebrow">Tools</div>
+  <h1 class="h-page">Open-source analyst tools</h1>
+  <p class="lede">Two run right here. The rest are open-source repositories you can run yourself.</p>
+
+  <div class="grid g2 sec" style="margin-top:28px">
+    <div class="panel pad" id="sizer">
+      <h2 class="h-sec">Position sizing</h2><p class="note">Fixed-risk sizing plus a Kelly estimate. Example numbers, change them.</p>
+      <div class="form-grid" style="margin-top:14px">
+        <div class="field"><label for="ps-acct">Account</label><input id="ps-acct" type="number" value="250000"></div>
+        <div class="field"><label for="ps-risk">Risk per trade %</label><input id="ps-risk" type="number" step="0.1" value="1"></div>
+        <div class="field"><label for="ps-entry">Entry</label><input id="ps-entry" type="number" step="0.01" value="143.36"></div>
+        <div class="field"><label for="ps-stop">Stop</label><input id="ps-stop" type="number" step="0.01" value="118"></div>
+        <div class="field"><label for="ps-p">Win probability %</label><input id="ps-p" type="number" value="55"></div>
+        <div class="field"><label for="ps-b">Payoff ratio (win / loss)</label><input id="ps-b" type="number" step="0.1" value="2"></div>
+      </div>
+      <div class="out" id="ps-out"></div>
+    </div>
+    <div class="panel pad" id="bs">
+      <h2 class="h-sec">Black-Scholes pricer</h2><p class="note">European option price and Greeks. Example inputs.</p>
+      <div class="form-grid" style="margin-top:14px">
+        <div class="field"><label for="bs-s">Spot</label><input id="bs-s" type="number" step="0.01" value="100"></div>
+        <div class="field"><label for="bs-k">Strike</label><input id="bs-k" type="number" step="0.01" value="105"></div>
+        <div class="field"><label for="bs-t">Expiry (years)</label><input id="bs-t" type="number" step="0.01" value="0.5"></div>
+        <div class="field"><label for="bs-v">Volatility %</label><input id="bs-v" type="number" step="0.1" value="28"></div>
+        <div class="field"><label for="bs-r">Rate %</label><input id="bs-r" type="number" step="0.1" value="4.2"></div>
+        <div class="field"><label for="bs-type">Type</label><select id="bs-type"><option value="call">Call</option><option value="put">Put</option></select></div>
+      </div>
+      <div class="out" id="bs-out"></div>
+    </div>
+  </div>
+
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">Directory</h2></div>
+      <div class="bar" style="margin:0"><input class="search" id="toolQ" type="search" placeholder="Search tools" aria-label="Search tools"><div class="chips" id="toolFilter"></div></div></div>
+    <div class="grid g3" id="toolGrid"></div>
+  </div>
+</section>
+
+<!-- STRATEGIES -->
+<section data-page="strategies">
+  <div class="eyebrow">Systematic strategies</div>
+  <h1 class="h-page">Backtested, not open-sourced</h1>
+  <p class="lede">Proprietary equity and FX models. Figures are annualised and come from backtests, not live trading.</p>
+  <div class="banner"><b>Backtests only.</b> Suites differ in period, data source and sizing, so compare within a suite before comparing across suites. Past performance does not guarantee future returns. Not investment advice.</div>
+  <div class="sec">
+    <div class="sec-head"><div><h2 class="h-sec">Risk against return</h2><p>Sharpe on the vertical axis, maximum drawdown on the horizontal. Up and to the left is better. Hover or tap a point.</p></div><div class="chips" id="stratFilter"></div></div>
+    <div class="panel pad"><svg class="chart" id="scatter" viewBox="0 0 760 340" role="img" aria-label="Sharpe ratio against maximum drawdown for twelve strategies"></svg>
+    <div class="legend"><span><i style="background:var(--accent)"></i>Equity (2006–2026)</span><span><i style="background:var(--gain)"></i>FX and gold (2007–2026)</span></div></div>
+  </div>
+  <div class="sec">
+    <div class="tw"><table id="stratTable"><thead><tr id="stratHead"></tr></thead><tbody id="stratBody"></tbody></table></div>
+    <p class="note" style="margin-top:12px">Sharpe here is CAGR divided by annualised volatility of monthly returns. The MetaTrader reports print a per-trade Sharpe that is not comparable. The three Tenkai index and gold strategies are left out of this preview.</p>
+  </div>
+</section>
+
+<!-- MARKETS -->
+<section data-page="markets">
+  <div class="eyebrow">Markets</div>
+  <h1 class="h-page">Flow and disclosures</h1>
+  <p class="lede">Large options prints and congressional trades, refreshed by a scheduled job. The date of the last refresh is always shown.</p>
+  <div class="bar" style="margin-top:22px"><div class="chips" id="mktTabs"></div><span class="tag" id="mktFresh"></span></div>
+  <div id="mktBody"></div>
+</section>
+
+<!-- SERVICES -->
+<section data-page="services">
+  <div class="eyebrow">Work together</div>
+  <h1 class="h-page">Services</h1>
+  <p class="lede">Four ways to work together. Nothing here is investment advice.</p>
+  <div class="grid g2 sec" style="margin-top:28px">
+    <div class="panel pad"><span class="tag gain">Free</span><h2 class="h-sec" style="margin-top:10px">Research access</h2><p class="note" style="margin-top:6px">Pre-outcome calls with full thesis, macro briefs, and a permanent record. Delivered on Substack.</p><div style="margin-top:14px"><a class="btn primary" href="https://aeonnimbus.substack.com/subscribe" target="_blank" rel="noopener">Subscribe free ↗</a></div></div>
+    <div class="panel pad"><span class="tag acc">Scoped project</span><h2 class="h-sec" style="margin-top:10px">Quant consulting</h2><p class="note" style="margin-top:6px">Strategy design, factor models, backtesting frameworks and data pipelines, with deliverables agreed up front.</p><div style="margin-top:14px"><a class="btn" href="#contact">Enquire</a></div></div>
+    <div class="panel pad"><span class="tag acc">One-off</span><h2 class="h-sec" style="margin-top:10px">Strategy consultation</h2><p class="note" style="margin-top:6px">A 90-minute session on strategy validation, factor selection, position sizing or research process. Written summary afterwards.</p><div style="margin-top:14px"><a class="btn" href="#contact">Book a session</a></div></div>
+    <div class="panel pad"><span class="tag acc">Scoped project</span><h2 class="h-sec" style="margin-top:10px">Financial tooling and AI build</h2><p class="note" style="margin-top:6px">Research automation and internal tools for finance teams and fintech products.</p><div style="margin-top:14px"><a class="btn" href="#contact">Enquire</a></div></div>
+  </div>
+  <div class="sec">
+    <h2 class="h-sec">Questions</h2>
+    <details class="faq"><summary>How much does it cost?</summary><p>Research is free. Consulting is quoted per scope. Add prices here once decided; visitors should not need to email to learn the order of magnitude.</p></details>
+    <details class="faq"><summary>Is this investment advice?</summary><p>No. Everything published is educational and informational. Consulting covers software and methodology only.</p></details>
+    <details class="faq"><summary>How fast do you reply?</summary><p>Usually within 24 to 48 hours. LinkedIn is the fastest channel.</p></details>
+    <details class="faq"><summary>Can I see a sample of the research format?</summary><p>The Q2 2026 investor letter is a free PDF sample of format and method.</p></details>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section data-page="about">
+  <div class="eyebrow">About</div>
+  <h1 class="h-page">LiJie Guo</h1>
+  <p class="lede">Spanish-born, ethnically Chinese, based in London. Independent macro and equity research analyst, publishing every investment call before the outcome is known.</p>
+  <div class="grid g3 sec" style="margin-top:28px">
+    <div class="panel pad"><div class="eyebrow">Education</div><p style="margin-top:8px">Triple MSc: emlyon, Politecnico di Milano (quant finance and fintech), Bayes Business School.</p></div>
+    <div class="panel pad"><div class="eyebrow">Designation</div><p style="margin-top:8px">CFA Level I candidate.</p></div>
+    <div class="panel pad"><div class="eyebrow">Background</div><p style="margin-top:8px">L/S equity, quant research and macro strategy. Hamilcar Capital, Jupiter AM, Crandon AM, Santomera Bay, PwC, SpinLab and Antler.</p></div>
+  </div>
+  <blockquote class="sec" style="margin-inline:0;font:italic 400 24px/1.4 var(--f-read);max-width:46ch;border-left:3px solid var(--accent);padding-left:18px">“The world is always mispriced somewhere. Capital follows narratives. Narratives follow power.”</blockquote>
+  <div class="cta"><a class="btn" href="#contact">Get in touch</a><a class="btn ghost" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" rel="noopener">LinkedIn ↗</a></div>
+</section>
+
+<!-- CONTACT -->
+<section data-page="contact">
+  <div class="eyebrow">Contact</div>
+  <h1 class="h-page">Let's talk</h1>
+  <p class="lede">Research, collaborations, consulting or hiring. Replies usually come within 24 to 48 hours.</p>
+  <div class="grid g2 sec" style="margin-top:28px;align-items:start">
+    <form class="panel pad grid" id="cform" novalidate style="gap:14px">
+      <div class="field"><label for="c-name">Name</label><input id="c-name" type="text" autocomplete="name" required></div>
+      <div class="field"><label for="c-email">Email</label><input id="c-email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="c-topic">Topic</label><select id="c-topic"><option>Research</option><option>Consulting</option><option>Collaboration</option><option>Hiring</option><option>Other</option></select></div>
+      <div class="field"><label for="c-msg">Message</label><textarea id="c-msg" required></textarea></div>
+      <div id="cerr" class="neg" style="font-size:13px" role="alert"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn primary" type="submit">Send message</button></div>
+      <p class="note" id="cstatus"></p>
+    </form>
+    <div class="panel pad grid" style="gap:12px">
+      <h2 class="h-sec">Fastest routes</h2>
+      <a class="btn" href="https://www.linkedin.com/in/lijieguo-es/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a class="btn" href="https://aeonnimbus.substack.com" target="_blank" rel="noopener">Substack ↗</a>
+      <a class="btn" href="https://github.com/lijiegsluis" target="_blank" rel="noopener">GitHub ↗</a>
+      <p class="note">Open to research collaborations and institutional enquiries. Selective on advisory roles.</p>
+    </div>
+  </div>
+</section>
+
+<div class="foot-site">
+  <span>© 2026 LiJie Guo · Aeon Nimbus Research · London</span>
+  <span>All content is educational and informational and is not investment advice, a recommendation or an offer. Historical and backtested results do not guarantee future returns. The author may hold positions in securities discussed.</span>
+  <span>Design preview. Figures come from the site's own call registry, market snapshot and Substack feed; nothing on this page is live.</span>
+</div>
+  </main>
+</div>
+
+<dialog id="callDlg" aria-labelledby="callTitle"></dialog>
+<dialog id="cmd" aria-label="Search and jump">
+  <input id="cmdQ" type="text" placeholder="Search pages, calls, notes, tools" autocomplete="off" aria-label="Search">
+  <ul id="cmdList" role="listbox"></ul>
+</dialog>
+<div class="tip" id="tip"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const DATA={"calls": [{"id": "oracle", "tk": "ORCL", "name": "Oracle Corporation", "pub": "2026-04-08", "entry": 143.36, "target": 242.0, "stop": 118.0, "size": 10.0, "hz": "12–18m", "thesis": "$98B cloud backlog invisible to the street — AI demand pulled Oracle's 5-year infrastructure runway into 18 months", "link": "https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market", "exit": 249.88, "exitDate": "2026-06-01", "ret": 74.3}, {"id": "mercadolibre", "tk": "MELI", "name": "MercadoLibre", "pub": "2026-04-13", "entry": 1774.0, "target": 2750.0, "stop": 1420.0, "size": 3.0, "hz": "18–24m", "thesis": "", "link": "https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify"}, {"id": "nu holdings", "tk": "NU", "name": "Nu Holdings", "pub": "2026-05-01", "entry": 14.53, "target": 21.0, "stop": 11.2, "size": 3.0, "hz": "18–24m", "thesis": "", "link": "https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient"}, {"id": "adeia", "tk": "ADEA", "name": "Adeia Inc.", "pub": "2026-05-04", "entry": 30.0, "target": 42.0, "stop": 20.0, "size": 2.0, "hz": "12m", "thesis": "IP licensing toll-booth on the entertainment tech layer — a royalty stream the market was pricing as terminal decline rather than structural recurring revenue", "link": "https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer", "exit": 31.44, "exitDate": "2026-08-04", "ret": 4.8}, {"id": "iren", "tk": "IREN", "name": "IREN Limited", "pub": "2026-05-20", "entry": 47.88, "target": 86.0, "stop": 32.0, "size": 3.0, "hz": "12m", "thesis": "Market priced macro fear, not the moat — proprietary power assets at $47 for a business that compounds on the energy cost curve", "link": "https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat", "exit": 65.3, "exitDate": "2026-06-03", "ret": 36.4}, {"id": "reddit", "tk": "RDDT", "name": "Reddit, Inc.", "pub": "2026-05-27", "entry": 140.88, "target": 182.0, "stop": 122.0, "size": 3.0, "hz": "12–18m", "thesis": "AI's training feedstock, not its victim — Reddit's unique human corpus is the data infrastructure every major lab depends on", "link": "https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock", "exit": 186.68, "exitDate": "2026-06-04", "ret": 32.5}, {"id": "marvell", "tk": "MRVL", "name": "Marvell Technology", "pub": "2026-06-09", "entry": 245.05, "target": 350.0, "stop": 190.0, "size": 10.0, "hz": "6–12m", "thesis": "Custom silicon cycle severely underpriced — hyperscaler ASIC commitments locked in multi-year revenue that consensus hadn't modeled", "link": "", "exit": 323.26, "exitDate": "2026-06-18", "ret": 31.9}, {"id": "lemonade", "tk": "LMND", "name": "Lemonade, Inc.", "pub": "2026-07-02", "entry": 59.56, "target": 85.0, "stop": 47.96, "size": 3.0, "hz": "12–18m", "thesis": "Loss ratio finally cracked below 70% — reinsurance treaty reset cleared the structural overhang on a business priced for failure", "link": "", "exit": 80.23, "exitDate": "2026-07-07", "ret": 34.7}, {"id": "oracle2", "tk": "ORCL", "name": "Oracle", "pub": "2026-07-08", "entry": 138.07, "target": 242.0, "stop": 96.0, "size": 5.0, "hz": "12–18m", "thesis": "", "link": ""}, {"id": "iren2", "tk": "IREN", "name": "IREN Limited", "pub": "2026-07-08", "entry": 41.18, "target": 86.0, "stop": 20.0, "size": 3.0, "hz": "12m", "thesis": "", "link": ""}, {"id": "oracle3", "tk": "ORCL", "name": "Oracle", "pub": "2026-07-19", "entry": 124.65, "target": 242.0, "stop": 96.0, "size": 5.0, "hz": "12–18m", "thesis": "", "link": ""}, {"id": "oracle4", "tk": "ORCL", "name": "Oracle", "pub": "2026-07-24", "entry": 115.5, "target": 242.0, "stop": 96.0, "size": 5.0, "hz": "12–18m", "thesis": "", "link": ""}, {"id": "iren3", "tk": "IREN", "name": "IREN Limited", "pub": "2026-07-19", "entry": 33.22, "target": 86.0, "stop": 20.0, "size": 3.0, "hz": "12m", "thesis": "", "link": ""}, {"id": "ibm", "tk": "IBM", "name": "IBM Corporation", "pub": "2026-07-19", "entry": 211.07, "target": 260.0, "stop": 165.0, "size": 5.0, "hz": "12–18m", "thesis": "HashiCorp acquisition closes a multi-cloud infrastructure gap; mainframe cycle reset and AI consulting pipeline mispriced by market anchored to secular decline narrative", "link": "", "exit": 250.51, "exitDate": "2026-09-15", "ret": 18.7}, {"id": "sndk", "tk": "SNDK", "name": "SandDisk Corporation", "pub": "2026-07-19", "entry": 1370.57, "target": 1800.0, "stop": 1025.0, "size": 5.0, "hz": "12–18m", "thesis": "Storage cycle recovery mispriced — NAND pricing inflection embedded in results before consensus updated forward estimates", "link": "", "exit": 1813.85, "exitDate": "2026-08-17", "ret": 32.3}, {"id": "fabrinet", "tk": "FN", "name": "Fabrinet", "pub": "2026-09-28", "entry": 405.33, "target": 580.0, "stop": 337.0, "size": 5.0, "hz": "12–18m", "thesis": "Contract manufacturer for optical networking chips; supply chain beneficiary of AI infrastructure buildout at a multiple disconnected from earnings power", "link": "", "exit": 513.0, "exitDate": "2026-10-09", "ret": 26.6}, {"id": "netflix", "tk": "NFLX", "name": "Netflix", "pub": "2026-10-01", "entry": 69.25, "target": 96.0, "stop": 55.0, "size": 5.0, "hz": "12–18m", "thesis": "", "link": ""}, {"id": "sndk2", "tk": "SNDK", "name": "SandDisk Corporation", "pub": "2026-10-19", "entry": 1300.3, "target": 1700.0, "stop": 948.0, "size": 10.0, "hz": "12–18m", "thesis": "Storage cycle re-entry — NAND pricing cycle intact, new lot at lower entry improves risk/reward", "link": ""}, {"id": "avgo", "tk": "AVGO", "name": "Broadcom Inc.", "pub": "2026-10-19", "entry": 329.75, "target": 438.0, "stop": 275.5, "size": 10.0, "hz": "12–18m", "thesis": "AI networking silicon and VMware integration thesis — custom ASIC and ethernet switching demand underpriced at current multiple", "link": ""}, {"id": "fabrinet2", "tk": "FN", "name": "Fabrinet", "pub": "2026-10-19", "entry": 364.44, "target": 580.0, "stop": 280.0, "size": 10.0, "hz": "12–18m", "thesis": "Re-entry after prior +26.6% close — optical networking demand from AI infrastructure buildout continues; lower re-entry improves risk/reward to target", "link": ""}, {"id": "asts", "tk": "ASTS", "name": "AST SpaceMobile, Inc.", "pub": "2026-07-19", "entry": 55.75, "target": 95.0, "stop": 42.0, "size": 3.0, "hz": "12–18m", "thesis": "Direct-to-cell satellite broadband at inflection — commercial launch confirmed while market was still pricing execution risk on a technology that had already cleared the hardest engineering gates", "link": "", "exit": 71.79, "exitDate": "2026-08-17", "ret": 28.8}, {"id": "mrvl-blend", "tk": "MRVL", "name": "Marvell Technology (2 lots, blended)", "pub": "2026-07-08", "entry": 195.06, "target": 350.0, "stop": 159.42, "size": 10.0, "hz": "6–12m", "thesis": "Custom silicon cycle re-entry. Two lots (8 Jul at $205.75, 19 Jul at $184.37) closed as one blended position. Exit for prudence, not thesis.", "link": "", "exit": 300.06, "exitDate": "2026-10-06", "ret": 54.3, "lots": "205.75 + 184.37"}], "flow": [{"tk": "META", "type": "put", "strike": "$765", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$40.5M", "premNum": 40468994, "volOI": "4.6×", "vol": 2594, "oi": 558, "bias": "bearish", "side": "bought", "time": "Nov 05 20:23 UTC"}, {"tk": "GOOGL", "type": "put", "strike": "$365", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$32.1M", "premNum": 32074000, "volOI": "7.5×", "vol": 3950, "oi": 526, "bias": "bearish", "side": "bought", "time": "Nov 05 20:30 UTC"}, {"tk": "TSLA", "type": "put", "strike": "$475", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$27.9M", "premNum": 27860815, "volOI": "2063.0×", "vol": 2063, "oi": 1, "bias": "bearish", "side": "bought", "time": "Nov 05 20:32 UTC"}, {"tk": "QQQ", "type": "put", "strike": "$660", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$22.0M", "premNum": 22048750, "volOI": "21.5×", "vol": 28450, "oi": 1326, "bias": "bullish", "side": "sold", "time": "Nov 06 21:14 UTC"}, {"tk": "GOOGL", "type": "put", "strike": "$355", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$21.2M", "premNum": 21156135, "volOI": "3.9×", "vol": 3003, "oi": 774, "bias": "bearish", "side": "bought", "time": "Nov 05 20:33 UTC"}, {"tk": "MSTR", "type": "call", "strike": "$133", "expiry": "Nov 13", "exp": "2026-11-13", "prem": "$17.8M", "premNum": 17781700, "volOI": "328.6×", "vol": 43370, "oi": 132, "bias": "bullish", "side": "bought", "time": "Nov 06 20:59 UTC"}, {"tk": "QQQ", "type": "call", "strike": "$660", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$16.8M", "premNum": 16805700, "volOI": "6.1×", "vol": 37346, "oi": 6104, "bias": "bullish", "side": "bought", "time": "Nov 06 21:14 UTC"}, {"tk": "SPY", "type": "put", "strike": "$735", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$16.5M", "premNum": 16518900, "volOI": "12.3×", "vol": 38868, "oi": 3156, "bias": "bearish", "side": "bought", "time": "Nov 06 21:14 UTC"}, {"tk": "SPY", "type": "put", "strike": "$730", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$16.1M", "premNum": 16070089, "volOI": "17.0×", "vol": 61103, "oi": 3600, "bias": "bearish", "side": "bought", "time": "Nov 06 21:14 UTC"}, {"tk": "QQQ", "type": "put", "strike": "$655", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$15.9M", "premNum": 15856725, "volOI": "13.3×", "vol": 28065, "oi": 2109, "bias": "bearish", "side": "bought", "time": "Nov 06 21:14 UTC"}, {"tk": "SPY", "type": "put", "strike": "$740", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$14.1M", "premNum": 14050533, "volOI": "3.8×", "vol": 21583, "oi": 5702, "bias": "bullish", "side": "sold", "time": "Nov 06 21:14 UTC"}, {"tk": "QQQ", "type": "put", "strike": "$650", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$13.5M", "premNum": 13480400, "volOI": "8.5×", "vol": 33701, "oi": 3988, "bias": "bearish", "side": "bought", "time": "Nov 06 21:14 UTC"}, {"tk": "JPM", "type": "call", "strike": "$160", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$13.2M", "premNum": 13230675, "volOI": "new OI", "vol": 765, "oi": 0, "bias": "bearish", "side": "sold", "time": "Oct 05 19:22 UTC"}, {"tk": "TSLA", "type": "put", "strike": "$360", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$12.3M", "premNum": 12258000, "volOI": "30.9×", "vol": 17025, "oi": 551, "bias": "bearish", "side": "bought", "time": "Nov 06 20:59 UTC"}, {"tk": "NVDA", "type": "put", "strike": "$192.5", "expiry": "Nov 09", "exp": "2026-11-09", "prem": "$12.2M", "premNum": 12210930, "volOI": "7.8×", "vol": 17697, "oi": 2269, "bias": "bearish", "side": "bought", "time": "Nov 06 20:59 UTC"}, {"tk": "TSLA", "type": "put", "strike": "$470", "expiry": "Nov 20", "exp": "2026-11-20", "prem": "$11.6M", "premNum": 11600460, "volOI": "446.0×", "vol": 892, "oi": 2, "bias": "bearish", "side": "bought", "time": "Nov 05 20:32 UTC"}], "flowAsOf": "2026-11-07T01:09:59Z", "cong": [{"pol": "Josh Gottheimer", "party": "D", "state": "NJ", "tk": "AMAT", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 26, 2026", "traded": "2026-10-26", "disclosed": "2026-11-05", "delay": 10, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf"}, {"pol": "Maria Elvira Salazar", "party": "R", "state": "FL", "tk": "CSCO", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Oct 23, 2026", "traded": "2026-10-23", "disclosed": "2026-11-05", "delay": 13, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"}, {"pol": "Maria Elvira Salazar", "party": "R", "state": "FL", "tk": "NVDA", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 23, 2026", "traded": "2026-10-23", "disclosed": "2026-11-05", "delay": 13, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"}, {"pol": "Maria Elvira Salazar", "party": "R", "state": "FL", "tk": "NVDA", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 23, 2026", "traded": "2026-10-23", "disclosed": "2026-11-05", "delay": 13, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"}, {"pol": "Maria Elvira Salazar", "party": "R", "state": "FL", "tk": "PG", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 23, 2026", "traded": "2026-10-23", "disclosed": "2026-11-05", "delay": 13, "sector": "Consumer Defensive", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"}, {"pol": "Maria Elvira Salazar", "party": "R", "state": "FL", "tk": "PG", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 23, 2026", "traded": "2026-10-23", "disclosed": "2026-11-05", "delay": 13, "sector": "Consumer Defensive", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035778.pdf"}, {"pol": "Josh Gottheimer", "party": "D", "state": "NJ", "tk": "TLK", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Oct 15, 2026", "traded": "2026-10-15", "disclosed": "2026-11-05", "delay": 21, "sector": "Communication Services", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf"}, {"pol": "Josh Gottheimer", "party": "D", "state": "NJ", "tk": "BHE", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 12, 2026", "traded": "2026-10-12", "disclosed": "2026-11-05", "delay": 24, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035770.pdf"}, {"pol": "Daniel Meuser", "party": "R", "state": "PA", "tk": "NVDA", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Sep 25, 2026", "traded": "2026-09-25", "disclosed": "2026-11-05", "delay": 41, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035662.pdf"}, {"pol": "Robert E. Latta", "party": "R", "state": "OH", "tk": "FMAO", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 20, 2026", "traded": "2026-10-20", "disclosed": "2026-11-03", "delay": 14, "sector": "Financial Services", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035763.pdf"}, {"pol": "John J Mr McGuire", "party": "R", "state": "VA", "tk": "MU", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Oct 01, 2026", "traded": "2026-10-01", "disclosed": "2026-11-01", "delay": 31, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"}, {"pol": "John J Mr McGuire", "party": "R", "state": "VA", "tk": "MU", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Sep 25, 2026", "traded": "2026-09-25", "disclosed": "2026-11-01", "delay": 37, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"}, {"pol": "John J Mr McGuire", "party": "R", "state": "VA", "tk": "AVGO", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Sep 24, 2026", "traded": "2026-09-24", "disclosed": "2026-11-01", "delay": 38, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"}, {"pol": "John J Mr McGuire", "party": "R", "state": "VA", "tk": "MU", "dir": "BUY", "amt": "$1,001–$15,000", "trdate": "Sep 24, 2026", "traded": "2026-09-24", "disclosed": "2026-11-01", "delay": 38, "sector": "Technology", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035484.pdf"}, {"pol": "Thomas H. Kean", "party": "R", "state": "NJ", "tk": "JNJ", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Sep 30, 2026", "traded": "2026-09-30", "disclosed": "2026-10-30", "delay": 30, "sector": "Healthcare", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"}, {"pol": "Thomas H. Kean", "party": "R", "state": "NJ", "tk": "SYK", "dir": "SELL", "amt": "$1,001–$15,000", "trdate": "Sep 30, 2026", "traded": "2026-09-30", "disclosed": "2026-10-30", "delay": 30, "sector": "Healthcare", "link": "https://disclosures-clerk.house.gov/public_disc/ptr-pdfs/2026/20035591.pdf"}], "congAsOf": "2026-11-07T01:09:59Z", "posts": [{"title": "THE WAR OF WORRY — AND WHAT CONFIRMED IT", "date": "2026-07-03", "link": "https://aeonnimbus.substack.com/p/the-war-of-worry-and-what-confirmed", "desc": "A US-led war killed a supreme leader. Equities melted up to record highs. The largest IPO in history priced into the noise — then wiped $927 billion in three sessions.", "min": 11}, {"title": "MARVELL TECHNOLOGY", "date": "2026-06-11", "link": "https://aeonnimbus.substack.com/p/marvell-technology", "desc": "Jensen Huang calls it the next trillion-dollar company. Wall Street's consensus target sits below the current price.", "min": 10}, {"title": "REDDIT INC - Not AI's victim — its feedstock.", "date": "2026-05-27", "link": "https://aeonnimbus.substack.com/p/reddit-inc-not-ais-victim-its-feedstock", "desc": "The internet's authentic human archive, mispriced as a social network.", "min": 9}, {"title": "IREN LIMITED - The Power Is the Moat.", "date": "2026-05-20", "link": "https://aeonnimbus.substack.com/p/iren-limited-the-power-is-the-moat", "desc": "The Market Is Still Pricing the Miner.", "min": 10}, {"title": "Adeia — The Toll Booth on the Layer Nobody Is Watching", "date": "2026-05-04", "link": "https://aeonnimbus.substack.com/p/adeia-the-toll-booth-on-the-layer", "desc": "The Korean Patent Office flagged it. The market hasn't. A $39M acquisition in 2015 is becoming the royalty stream beneath the entire AI hardware stack.", "min": 15}, {"title": "Nu Holdings — The World's Most Efficient Bank, Priced as a Regional Fintech Story", "date": "2026-05-01", "link": "https://aeonnimbus.substack.com/p/nu-holdings-the-worlds-most-efficient", "desc": "The 19.9% Efficiency Breakthrough: Capturing the Valuation Gap as the Brazil Playbook Scales to Mexico and the US", "min": 16}, {"title": "The Market That Cannot Decide What It Believes", "date": "2026-04-27", "link": "https://aeonnimbus.substack.com/p/the-market-that-cannot-decide-what", "desc": "The Spot-Vol Anomaly: Why Markets Are Hitting All-Time Highs Without Shedding.", "min": 16}, {"title": "MercadoLibre — Amazon, PayPal, eBay, Shopify, FedEx and a Bank. In One Company. In Latin America.", "date": "2026-04-13", "link": "https://aeonnimbus.substack.com/p/mercadolibre-amazon-paypal-ebay-shopify", "desc": "The investment cycle explains the margin. The ecosystem explains the moat.", "min": 16}, {"title": "Oracle — The $553B Backlog the Market Has Decided to Ignore", "date": "2026-04-08", "link": "https://aeonnimbus.substack.com/p/oracle-the-553b-backlog-the-market", "desc": "$553B in contracted demand. $413B market cap. One of them is wrong.", "min": 14}, {"title": "Regime Change, Not Correction", "date": "2026-04-06", "link": "https://aeonnimbus.substack.com/p/regime-change-not-correction", "desc": "Why I'm buying into uncertainty, watching emerging markets, and not waiting for the floor", "min": 15}]};
+const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
+const fmt=(n,d=2)=>Number(n).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+const pct=(n,d=1)=>(n>=0?'+':'')+fmt(n,d)+'%';
+const dshort=s=>new Date(s+'T00:00:00Z').toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',timeZone:'UTC'});
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let toastT; function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),1900)}
+function copy(text,msg){const ok=()=>toast(msg||'Copied');const fb=()=>{const a=document.createElement('textarea');a.value=text;document.body.appendChild(a);a.select();try{document.execCommand('copy');ok()}catch(e){toast('Select and copy manually')}a.remove()};
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(ok,fb)}else fb()}
+
+/* ---------- derived call data ---------- */
+const CALLS=DATA.calls.map(c=>({...c,closed:c.exit!=null,rr:(c.target-c.entry)/(c.entry-c.stop)}));
+const CLOSED=CALLS.filter(c=>c.closed).sort((a,b)=>a.exitDate<b.exitDate?-1:1);
+const OPEN=CALLS.filter(c=>!c.closed);
+const avgRet=CLOSED.reduce((s,c)=>s+c.ret,0)/CLOSED.length;
+const contrib=CLOSED.reduce((s,c)=>s+c.ret*c.size/100,0);
+const hit=CLOSED.filter(c=>c.ret>0).length;
+const worst=CLOSED.reduce((a,c)=>c.ret<a.ret?c:a), best=CLOSED.reduce((a,c)=>c.ret>a.ret?c:a);
+const statsHTML=(extra)=>`
+  <div><div class="eyebrow">Hit rate</div><div class="v">${hit}/${CLOSED.length}</div><div class="s">closed calls with a gain</div></div>
+  <div><div class="eyebrow">Average return</div><div class="v pos">${pct(avgRet)}</div><div class="s">per closed call, unweighted</div></div>
+  <div><div class="eyebrow">Worst closed</div><div class="v pos">${pct(worst.ret)}</div><div class="s">${worst.tk}, kept on the record</div></div>
+  <div><div class="eyebrow">Open lots</div><div class="v">${OPEN.length}</div><div class="s">${new Set(OPEN.map(c=>c.tk)).size} companies</div></div>`;
+
+/* ---------- receipt ---------- */
+function rangeBar(c){
+  const pts=[c.stop,c.entry,c.target].concat(c.closed?[c.exit]:[]);
+  const lo=Math.min(...pts),hi=Math.max(...pts),pad=(hi-lo)*.06,a=lo-pad,b=hi+pad;
+  const x=v=>((v-a)/(b-a)*100).toFixed(2);
+  const m=(cls,v,lab,low)=>`<div class="m ${cls}${low?' low':''}" style="left:${x(v)}%"><span>${lab}</span><i></i></div>`;
+  return `<div class="range" aria-hidden="true"><div class="track"></div><div class="seg" style="left:${x(c.entry)}%;width:${(x(c.closed?c.exit:c.target)-x(c.entry)).toFixed(2)}%;${c.closed&&c.exit<c.entry?'background:var(--loss)':''}"></div>
+  ${m('stop',c.stop,'stop '+fmt(c.stop,c.stop>=100?0:2))}${m('target',c.target,'target '+fmt(c.target,c.target>=100?0:2))}${m('entry',c.entry,'entry '+fmt(c.entry,c.entry>=100?0:2),true)}${c.closed?m('exit',c.exit,'exit '+fmt(c.exit,c.exit>=100?0:2),Math.abs(x(c.exit)-x(c.target))<22):''}</div>`;
+}
+function receipt(c,asButton=true){
+  const tag=asButton?'button':'div';
+  return `<${tag} class="receipt" ${asButton?`data-call="${c.id}" type="button" aria-label="Open ${esc(c.tk)} call"`:''}>
+    <div class="rc-top"><div><div class="rc-tk">${esc(c.tk)}</div><div class="rc-nm">${esc(c.name)}</div></div>
+    <div class="rc-ret ${c.closed?'pos':''}">${c.closed?pct(c.ret):'<span class="tag acc">Open</span>'}</div></div>
+    ${c.thesis?`<div class="rc-th">${esc(c.thesis)}</div>`:''}
+    ${rangeBar(c)}
+    <div class="rc-stamp"><span>Published ${dshort(c.pub)} · before outcome</span><span>Size ${c.size}%</span></div></${tag}>`;
+}
+
+/* ---------- routing ---------- */
+const PAGES=[['home','Home',''],['track','Track record',''],['research','Research',''],['tools','Tools',''],['strategies','Strategies',''],['markets','Markets',''],['services','Services',''],['about','About',''],['contact','Contact','']];
+$('#nav').innerHTML=PAGES.map(p=>`<a href="#${p[0]}" data-nav="${p[0]}">${p[1]}</a>`).join('');
+function route(){
+  let id=(location.hash||'#home').slice(1); if(!PAGES.some(p=>p[0]===id))id='home';
+  $$('section[data-page]').forEach(s=>s.classList.toggle('on',s.dataset.page===id));
+  $$('#nav a').forEach(a=>a.dataset.nav===id?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  $('#rail').classList.remove('open');$('#menuBtn').setAttribute('aria-expanded','false');
+  window.scrollTo(0,0);
+}
+addEventListener('hashchange',route);
+$('#menuBtn').onclick=()=>{const o=$('#rail').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)};
+$$('[data-skip]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();$('#content').focus()}));
+
+/* ---------- theme ---------- */
+function applyTheme(t){if(t)document.documentElement.setAttribute('data-theme',t);else document.documentElement.removeAttribute('data-theme')}
+applyTheme(store.get('an-theme',null));
+$('#themeBtn').onclick=()=>{const cur=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');const n=cur==='dark'?'light':'dark';applyTheme(n);store.set('an-theme',n);drawAll()};
+
+/* ---------- home ---------- */
+$('#heroReceipt').innerHTML=receipt(CALLS.find(c=>c.id==='oracle'));
+$('#homeStats').innerHTML=statsHTML();
+$('#homePosts').innerHTML=DATA.posts.slice(0,3).map(p=>`<a class="panel pad" href="${esc(p.link)}" target="_blank" rel="noopener" style="text-decoration:none;display:flex;flex-direction:column;gap:8px"><span class="eyebrow">${dshort(p.date)} · ${p.min} min</span><h3 style="font-size:18px;line-height:1.25">${esc(p.title)}</h3><p style="font:400 15px/1.5 var(--f-read);color:var(--muted)">${esc(p.desc.slice(0,150))}${p.desc.length>150?'…':''}</p></a>`).join('');
+$('#homeOpen').innerHTML=OPEN.slice().sort((a,b)=>a.pub<b.pub?1:-1).slice(0,6).map(c=>`<tr class="click" data-call="${c.id}"><td><b>${c.tk}</b> ${c.name.split(' ')[0].toUpperCase()===c.tk?'':`<span class="tag">${esc(c.name.split(' ')[0])}</span>`}</td><td>${dshort(c.pub)}</td><td class="r num">${fmt(c.entry)}</td><td class="r num">${fmt(c.stop)}</td><td class="r num">${fmt(c.target)}</td><td class="r num">${c.size}%</td><td class="r num">${fmt(c.rr,1)} : 1</td></tr>`).join('');
+
+/* ---------- call dialog ---------- */
+function openCall(id){
+  const c=CALLS.find(x=>x.id===id); if(!c)return;
+  const dlg=$('#callDlg'), risk=(c.entry-c.stop)/c.entry*100, up=(c.target-c.entry)/c.entry*100;
+  dlg.innerHTML=`<div class="dlg-h"><b id="callTitle">${esc(c.tk)} · ${esc(c.name)}</b><button class="btn sm" data-close>Close</button></div>
+  <div class="dlg-b">${receipt(c,false)}
+    <div class="rows3"><div class="kv">Risk to stop<b class="neg">−${fmt(risk,1)}%</b></div><div class="kv">Upside to target<b class="pos">+${fmt(up,1)}%</b></div><div class="kv">Reward : risk<b>${fmt(c.rr,1)} : 1</b></div>
+    <div class="kv">Horizon<b>${esc(c.hz)}</b></div><div class="kv">Size<b>${c.size}% of portfolio</b></div><div class="kv">${c.closed?'Closed':'Status'}<b>${c.closed?dshort(c.exitDate):'Open'}</b></div></div>
+    ${c.closed?`<div class="kv">Held for<b>${Math.round((new Date(c.exitDate)-new Date(c.pub))/864e5)} days · contributed ${pct(c.ret*c.size/100,2)} to the portfolio</b></div>`:''}
+    ${c.thesis?'':'<p class="note">The call registry has no thesis text for this lot. Add one so the slip stands on its own.</p>'}
+    <div style="display:flex;gap:8px;flex-wrap:wrap">${c.link?`<a class="btn primary" href="${esc(c.link)}" target="_blank" rel="noopener">Read the published note ↗</a>`:''}<button class="btn" id="cpCall">Copy summary</button></div></div>`;
+  $('#cpCall',dlg).onclick=()=>copy(`${c.tk} (${c.name}) published ${c.pub}: entry ${c.entry}, stop ${c.stop}, target ${c.target}, size ${c.size}%`+(c.closed?`, closed ${c.exitDate} at ${c.exit} (${pct(c.ret)})`:', open')+'. Aeon Nimbus Research.','Call summary copied');
+  dlg.showModal();
+}
+document.addEventListener('click',e=>{
+  const call=e.target.closest('[data-call]'); if(call&&!e.target.closest('dialog')){openCall(call.dataset.call);return}
+  if(e.target.closest('[data-close]'))e.target.closest('dialog').close();
+  if(e.target.closest('[data-cmd]'))openCmd();
+  if(e.target instanceof HTMLDialogElement)e.target.close();
+});
+
+/* ---------- track ---------- */
+let tFilter='all', tSort={k:'pub',dir:-1};
+const TCOL=[['tk','Ticker'],['pub','Published'],['entry','Entry','r'],['stop','Stop','r'],['target','Target','r'],['size','Size','r'],['rr','R : R','r'],['ret','Return','r'],['exitDate','Closed','r']];
+function sortBtns(headEl,cols,state,redraw){
+  headEl.innerHTML=cols.map(c=>`<th class="${c[2]||''}" aria-sort="${state.k===c[0]?(state.dir>0?'ascending':'descending'):'none'}"><button data-k="${c[0]}">${c[1]}${state.k===c[0]?(state.dir>0?' ↑':' ↓'):''}</button></th>`).join('');
+  $$('button',headEl).forEach(b=>b.onclick=()=>{const k=b.dataset.k;state.dir=state.k===k?-state.dir:(k==='tk'?1:-1);state.k=k;redraw()});
+}
+function drawTrack(){
+  sortBtns($('#trackHead'),TCOL,tSort,drawTrack);
+  let rows=CALLS.filter(c=>tFilter==='all'||(tFilter==='closed')===c.closed);
+  rows.sort((a,b)=>{const x=a[tSort.k]??(tSort.dir>0?Infinity:-Infinity),y=b[tSort.k]??(tSort.dir>0?Infinity:-Infinity);return (x>y?1:x<y?-1:0)*tSort.dir});
+  $('#trackBody').innerHTML=rows.map(c=>`<tr class="click" data-call="${c.id}" tabindex="0"><td><b>${c.tk}</b></td><td>${dshort(c.pub)}</td><td class="r num">${fmt(c.entry)}</td><td class="r num">${fmt(c.stop)}</td><td class="r num">${fmt(c.target)}</td><td class="r num">${c.size}%</td><td class="r num">${fmt(c.rr,1)}</td><td class="r num ${c.closed?'pos':''}">${c.closed?pct(c.ret):'<span class="tag acc">open</span>'}</td><td class="r num">${c.closed?dshort(c.exitDate):'–'}</td></tr>`).join('');
+}
+$('#trackBody').addEventListener('keydown',e=>{if(e.key==='Enter'){const r=e.target.closest('[data-call]');if(r)openCall(r.dataset.call)}});
+$('#trackFilter').innerHTML=[['all','All ('+CALLS.length+')'],['closed','Closed ('+CLOSED.length+')'],['open','Open ('+OPEN.length+')']].map(f=>`<button class="chip" data-f="${f[0]}" aria-pressed="${f[0]==='all'}">${f[1]}</button>`).join('');
+$$('#trackFilter .chip').forEach(b=>b.onclick=()=>{tFilter=b.dataset.f;$$('#trackFilter .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));drawTrack()});
+$('#trackStats').innerHTML=statsHTML();
+$('#csvBtn').onclick=()=>{const h='ticker,published,entry,stop,target,size_pct,status,exit_date,exit_price,return_pct';copy([h].concat(CALLS.map(c=>[c.tk,c.pub,c.entry,c.stop,c.target,c.size,c.closed?'closed':'open',c.exitDate||'',c.exit||'',c.ret??''].join(','))).join('\n'),'CSV copied')};
+
+function drawEquity(){
+  const svg=$('#equity'),W=760,H=280,L=48,R=16,T=14,B=34,aum=+$('#aum').value||0;
+  let cum=0;const pts=CLOSED.map(c=>{cum+=c.ret*c.size/100;return{d:c.exitDate,v:cum,c}});
+  const t0=new Date(CLOSED[0].pub).getTime(),t1=new Date(CLOSED[CLOSED.length-1].exitDate).getTime();
+  const maxY=Math.ceil(cum/5)*5||5, X=d=>L+(new Date(d).getTime()-t0)/(t1-t0)*(W-L-R), Y=v=>T+(1-v/maxY)*(H-T-B);
+  let g='';
+  for(let v=0;v<=maxY;v+=maxY/5){g+=`<line class="gl" x1="${L}" x2="${W-R}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v.toFixed(0)}%</text>`}
+  const mths=[];for(let d=new Date(t0);d<=t1;d=new Date(Date.UTC(d.getUTCFullYear(),d.getUTCMonth()+1,1))){mths.push(new Date(d))}
+  mths.forEach(d=>{const x=X(d);if(x>=L&&x<=W-R)g+=`<text x="${x}" y="${H-12}" text-anchor="middle">${d.toLocaleDateString('en-GB',{month:'short',timeZone:'UTC'})}</text>`});
+  const path=pts.map((p,i)=>{const x=X(p.d),y=Y(p.v);return (i?`H${x} V${y}`:`M${L} ${Y(0)} H${x} V${y}`)}).join(' ');
+  const area=path+` V${Y(0)} H${L} Z`;
+  g+=`<path d="${area}" fill="var(--accent)" opacity=".10"/><path d="${path}" fill="none" stroke="var(--accent)" stroke-width="2"/>`;
+  g+=pts.map(p=>`<circle class="dot" cx="${X(p.d)}" cy="${Y(p.v)}" r="5" fill="var(--surface)" stroke="var(--accent)" stroke-width="2" data-tip="${esc(p.c.tk)} closed ${dshort(p.d)}: ${pct(p.c.ret)} at ${p.c.size}% size. Running total ${pct(p.v,2)}"/>`).join('');
+  const last=pts[pts.length-1];g+=`<text x="${X(last.d)}" y="${Y(last.v)-12}" text-anchor="end" style="fill:var(--ink);font-weight:700">${pct(last.v,1)}</text>`;
+  svg.innerHTML=g;
+  $('#equityNote').innerHTML=`<span>Total ${pct(cum,1)} of portfolio${aum?` ≈ <b class="num pos">$${fmt(aum*cum/100,0)}</b> on $${fmt(aum,0)}`:''}</span><span>${CLOSED.length} closed calls, in exit order</span>`;
+  tipify(svg);
+}
+$('#aum').oninput=drawEquity;
+
+/* ---------- tooltip ---------- */
+function tipify(root){
+  const tip=$('#tip');
+  $$('[data-tip]',root).forEach(el=>{
+    const show=e=>{tip.textContent=el.dataset.tip;tip.style.opacity=1;const r=el.getBoundingClientRect();tip.style.left=Math.min(innerWidth-250,Math.max(8,r.left-20))+'px';tip.style.top=(r.top-tip.offsetHeight-10)+'px'};
+    el.addEventListener('mouseenter',show);el.addEventListener('click',show);el.addEventListener('mouseleave',()=>tip.style.opacity=0);
+  });
+}
+
+/* ---------- research ---------- */
+const MACRO=/market that cannot|war of worry|regime change/i;
+const POSTS=DATA.posts.map(p=>({...p,cat:MACRO.test(p.title)?'Macro':'Equity'}));
+let saved=new Set(store.get('an-saved',[])), pCat='All';
+$('#postFilter').innerHTML=['All','Equity','Macro','Saved'].map(c=>`<button class="chip" data-c="${c}" aria-pressed="${c==='All'}">${c}</button>`).join('');
+$$('#postFilter .chip').forEach(b=>b.onclick=()=>{pCat=b.dataset.c;$$('#postFilter .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));drawPosts()});
+['postQ','postSort'].forEach(i=>$('#'+i).addEventListener('input',drawPosts));
+function drawPosts(){
+  const q=$('#postQ').value.toLowerCase(),s=$('#postSort').value;
+  let r=POSTS.filter(p=>(pCat==='All'||(pCat==='Saved'?saved.has(p.link):p.cat===pCat))&&(p.title+' '+p.desc).toLowerCase().includes(q));
+  r.sort((a,b)=>s==='new'?(a.date<b.date?1:-1):s==='long'?b.min-a.min:a.min-b.min);
+  $('#postList').innerHTML=r.length?r.map(p=>`<article class="post"><time>${dshort(p.date)}</time><div><h3>${esc(p.title)}</h3><p>${esc(p.desc)}</p><div class="meta"><span class="tag ${p.cat==='Macro'?'warn':'acc'}">${p.cat}</span><span class="tag">${p.min} min read</span></div></div><div class="acts"><button class="btn sm" data-save="${esc(p.link)}" aria-pressed="${saved.has(p.link)}">${saved.has(p.link)?'Saved':'Save'}</button><a class="btn sm primary" href="${esc(p.link)}" target="_blank" rel="noopener">Read ↗</a></div></article>`).join(''):'<div class="empty">No notes match. Clear the search or choose another filter.</div>';
+  $$('[data-save]').forEach(b=>b.onclick=()=>{const k=b.dataset.save;saved.has(k)?saved.delete(k):saved.add(k);store.set('an-saved',[...saved]);toast(saved.has(k)?'Saved for later':'Removed');drawPosts()});
+}
+
+/* ---------- tools ---------- */
+const GH='https://github.com/lijiegsluis/';
+const TOOLS=[
+ ['Quantitative models','Black-Scholes, Monte Carlo, bond analytics and a volatility engine.','Quant',GH+'aeon-black-scholes'],
+ ['Valuation engine','DCF, WACC/CAPM, three-way sensitivity, peer comps and a football field.','Valuation',GH+'aeon-dcf-engine'],
+ ['Portfolio construction','Efficient frontier, Sharpe optimisation and risk attribution.','Portfolio',GH+'aeon-portfolio-construction'],
+ ['Position sizing','Kelly, fixed-fractional, drawdown simulation and R-multiples.','Portfolio',GH+'aeon-position-sizing'],
+ ['Cross-asset correlation','Regime detection and correlation heatmap with risk-on/off scoring.','Macro',GH+'aeon-correlation-matrix'],
+ ['Idea screener','Catalyst scoring, sentiment overlay and a publishability score.','Valuation',GH+'aeon-idea-screener'],
+ ['Sum-of-the-parts builder','Segment multiples, implied price and contribution waterfall.','Valuation',''],
+ ['Earnings radar','Upcoming earnings, beat probability and implied move.','Markets',''],
+ ['Congress tracker','Political disclosures by party, sector and overlap.','Markets','#markets'],
+ ['Sector heatmap','Eleven GICS sectors with factor tilts.','Markets',''],
+ ['Analyst alpha signal','Consensus against price-implied targets with a contrarian read.','Markets',''],
+ ['AI pitcher','Ticker in, house-style research draft out. Invite only.','AI','#contact']
+];
+let toolCat='All';
+$('#toolFilter').innerHTML=['All','Quant','Valuation','Portfolio','Macro','Markets','AI'].map(c=>`<button class="chip" data-c="${c}" aria-pressed="${c==='All'}">${c}</button>`).join('');
+$$('#toolFilter .chip').forEach(b=>b.onclick=()=>{toolCat=b.dataset.c;$$('#toolFilter .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));drawTools()});
+$('#toolQ').addEventListener('input',drawTools);
+function drawTools(){
+  const q=$('#toolQ').value.toLowerCase();
+  const r=TOOLS.filter(t=>(toolCat==='All'||t[2]===toolCat)&&(t[0]+' '+t[1]).toLowerCase().includes(q));
+  $('#toolGrid').innerHTML=r.length?r.map(t=>`<div class="panel tool"><div style="display:flex;justify-content:space-between;gap:8px"><h3>${t[0]}</h3><span class="tag">${t[2]}</span></div><p>${t[1]}</p><div class="foot">${t[3].startsWith('http')?`<a class="btn sm" href="${t[3]}" target="_blank" rel="noopener">Source on GitHub ↗</a>`:t[3]?`<a class="btn sm" href="${t[3]}">${t[0]==='AI pitcher'?'Request access':'Open'}</a>`:'<span class="tag">In-browser only</span>'}</div></div>`).join(''):'<div class="empty" style="grid-column:1/-1">No tools match.</div>';
+}
+function sizer(){
+  const g=id=>parseFloat($('#ps-'+id).value)||0,acct=g('acct'),risk=g('risk'),en=g('entry'),st=g('stop'),p=g('p')/100,b=g('b');
+  const perShare=Math.abs(en-st),riskUsd=acct*risk/100,sh=perShare>0?Math.floor(riskUsd/perShare):0,val=sh*en;
+  const kelly=b>0?p-(1-p)/b:0;
+  $('#ps-out').innerHTML=[['Risk in USD','$'+fmt(riskUsd,0)],['Shares',fmt(sh,0)],['Position value','$'+fmt(val,0)],['Of account',acct?fmt(val/acct*100,1)+'%':'–'],['Full Kelly',(kelly*100).toFixed(1)+'%'],['Half Kelly',(kelly*50).toFixed(1)+'%']].map(o=>`<div><div class="k">${o[0]}</div><div class="v">${o[1]}</div></div>`).join('');
+}
+$$('#sizer input').forEach(i=>i.addEventListener('input',sizer));
+const ncdf=x=>{const t=1/(1+.2316419*Math.abs(x)),d=.3989423*Math.exp(-x*x/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return x>0?1-p:p};
+const npdf=x=>Math.exp(-x*x/2)/Math.sqrt(2*Math.PI);
+function bs(){
+  const g=id=>parseFloat($('#bs-'+id).value)||0,S=g('s'),K=g('k'),T=g('t'),v=g('v')/100,r=g('r')/100,call=$('#bs-type').value==='call';
+  if(S<=0||K<=0||T<=0||v<=0){$('#bs-out').innerHTML='<div style="grid-column:1/-1">Enter positive spot, strike, expiry and volatility.</div>';return}
+  const d1=(Math.log(S/K)+(r+v*v/2)*T)/(v*Math.sqrt(T)),d2=d1-v*Math.sqrt(T),e=Math.exp(-r*T);
+  const price=call?S*ncdf(d1)-K*e*ncdf(d2):K*e*ncdf(-d2)-S*ncdf(-d1);
+  const delta=call?ncdf(d1):ncdf(d1)-1,gamma=npdf(d1)/(S*v*Math.sqrt(T)),vega=S*npdf(d1)*Math.sqrt(T)/100;
+  const theta=(-S*npdf(d1)*v/(2*Math.sqrt(T))+(call?-1:1)*r*K*e*ncdf(call?d2:-d2))/365,rho=(call?1:-1)*K*T*e*ncdf(call?d2:-d2)/100;
+  $('#bs-out').innerHTML=[['Price',fmt(price,3)],['Delta',fmt(delta,3)],['Gamma',fmt(gamma,4)],['Vega /1%',fmt(vega,3)],['Theta /day',fmt(theta,3)],['Rho /1%',fmt(rho,3)]].map(o=>`<div><div class="k">${o[0]}</div><div class="v">${o[1]}</div></div>`).join('');
+}
+$$('#bs input,#bs select').forEach(i=>i.addEventListener('input',bs));
+
+/* ---------- strategies ---------- */
+const STR=[
+ ['KAIROS','Equity','Market-neutral L/S',13.10,1.18,15.02,11.09],['KRONOS','Equity','Dual-momentum rotation',20.54,1.00,25.43,20.57],['AEGIS','Equity','Market timing',14.01,1.08,15.61,12.81],['BOREAS','Equity','Trend following',18.17,1.04,23.55,17.55],
+ ['PROTEUS','Equity','Double layer',16.83,1.07,18.23,15.74],['TYPHON','Equity','Market timing + risk',44.79,1.12,42.10,39.32],['EREBUS','Equity','Double layer + risk',54.38,1.14,48.30,48.40],
+ ['USD/JPY','FX','Trend following',17.72,1.40,10.94,12.68],['XAU/USD','FX','Mean reversion',7.51,1.18,7.11,6.36],['EUR/JPY','FX','Trend following',11.28,1.09,17.32,10.33],['GBP/USD','FX','Mean reversion',9.06,1.07,9.54,8.48],['EUR/USD','FX','Trend following',8.21,0.91,14.94,8.98]
+].map(a=>({n:a[0],suite:a[1],type:a[2],cagr:a[3],sharpe:a[4],dd:a[5],vol:a[6]}));
+const LBLMAP={'XAU/USD':[0,-13,'middle'],'KAIROS':[0,-13,'middle'],'GBP/USD':[-10,4,'end'],'EUR/JPY':[0,-13,'middle'],'AEGIS':[-10,4,'end'],'PROTEUS':[0,21,'middle'],'TYPHON':[-14,4,'end'],'EREBUS':[-14,4,'end']};
+const LBL=s=>LBLMAP[s.n]||[10+s.cagr/12,4,'start'];
+let sSuite='All',sSort={k:'sharpe',dir:-1};
+$('#stratFilter').innerHTML=['All','Equity','FX'].map(c=>`<button class="chip" data-c="${c}" aria-pressed="${c==='All'}">${c}</button>`).join('');
+$$('#stratFilter .chip').forEach(b=>b.onclick=()=>{sSuite=b.dataset.c;$$('#stratFilter .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));drawStrat()});
+const SCOL=[['n','Strategy'],['suite','Suite'],['type','Type'],['cagr','CAGR','r'],['sharpe','Sharpe','r'],['dd','Max DD','r'],['vol','Vol','r']];
+function drawStrat(){
+  sortBtns($('#stratHead'),SCOL,sSort,drawStrat);
+  const rows=STR.filter(s=>sSuite==='All'||s.suite===sSuite).sort((a,b)=>(a[sSort.k]>b[sSort.k]?1:a[sSort.k]<b[sSort.k]?-1:0)*sSort.dir);
+  $('#stratBody').innerHTML=rows.map(s=>`<tr><td><b>${s.n}</b></td><td><span class="tag ${s.suite==='FX'?'gain':'acc'}">${s.suite==='FX'?'FX & gold':'Equity'}</span></td><td>${s.type}</td><td class="r num">${fmt(s.cagr)}%</td><td class="r num">${fmt(s.sharpe)}</td><td class="r num">${fmt(s.dd)}%</td><td class="r num">${fmt(s.vol)}%</td></tr>`).join('');
+  const W=760,H=340,L=48,Rm=20,T=16,B=40,mx=50,my=1.6,mn=.8;
+  const X=v=>L+v/mx*(W-L-Rm),Y=v=>T+(1-(v-mn)/(my-mn))*(H-T-B);
+  let g='';
+  for(let v=.8;v<=1.61;v+=.2)g+=`<line class="gl" x1="${L}" x2="${W-Rm}" y1="${Y(v)}" y2="${Y(v)}"/><text x="${L-8}" y="${Y(v)+4}" text-anchor="end">${v.toFixed(1)}</text>`;
+  for(let v=0;v<=50;v+=10)g+=`<line class="gl" x1="${X(v)}" x2="${X(v)}" y1="${T}" y2="${H-B}"/><text x="${X(v)}" y="${H-B+18}" text-anchor="middle">${v}%</text>`;
+  g+=`<text x="${(L+W-Rm)/2}" y="${H-4}" text-anchor="middle">Maximum drawdown</text><text x="12" y="${(T+H-B)/2}" transform="rotate(-90 12 ${(T+H-B)/2})" text-anchor="middle">Sharpe</text>`;
+  const shown=new Set(rows.map(r=>r.n));
+  g+=STR.map(s=>{const on=shown.has(s.n);return `<g opacity="${on?1:.15}"><circle class="dot" cx="${X(s.dd)}" cy="${Y(s.sharpe)}" r="${5+s.cagr/12}" fill="${s.suite==='FX'?'var(--gain)':'var(--accent)'}" fill-opacity=".75" stroke="var(--surface)" stroke-width="1.5" data-tip="${s.n} · ${s.type}. CAGR ${fmt(s.cagr)}%, Sharpe ${fmt(s.sharpe)}, max drawdown ${fmt(s.dd)}%"/><text x="${X(s.dd)+LBL(s)[0]}" y="${Y(s.sharpe)+LBL(s)[1]}" text-anchor="${LBL(s)[2]}" style="fill:var(--ink)">${s.n}</text></g>`}).join('');
+  $('#scatter').innerHTML=g;tipify($('#scatter'));
+}
+
+/* ---------- markets ---------- */
+let mTab='flow',fType='all',fBias='all',cParty='all';
+const age=iso=>{const d=Math.floor((Date.now()-new Date(iso))/864e5);return d<=0?'today':d===1?'1 day ago':d+' days ago'};
+function drawMkt(){
+  $('#mktTabs').innerHTML=[['flow','Options flow'],['cong','Congress trades']].map(t=>`<button class="chip" data-t="${t[0]}" aria-pressed="${mTab===t[0]}">${t[1]}</button>`).join('');
+  $$('#mktTabs .chip').forEach(b=>b.onclick=()=>{mTab=b.dataset.t;drawMkt()});
+  const asof=mTab==='flow'?DATA.flowAsOf:DATA.congAsOf;
+  $('#mktFresh').textContent='Snapshot '+age(asof);
+  let h='';
+  if(mTab==='flow'){
+    const rows=DATA.flow.filter(f=>(fType==='all'||f.type===fType)&&(fBias==='all'||f.bias===fBias));
+    const bull=rows.filter(f=>f.bias==='bullish').reduce((s,f)=>s+f.premNum,0),bear=rows.filter(f=>f.bias==='bearish').reduce((s,f)=>s+f.premNum,0),tot=bull+bear||1;
+    h=`<div class="bar"><div class="chips">${['all','call','put'].map(v=>`<button class="chip" data-ft="${v}" aria-pressed="${fType===v}">${v==='all'?'All types':v+'s'}</button>`).join('')}</div><div class="chips">${['all','bullish','bearish'].map(v=>`<button class="chip" data-fb="${v}" aria-pressed="${fBias===v}">${v==='all'?'Any bias':v}</button>`).join('')}</div></div>
+    <div class="panel pad" style="margin-bottom:14px"><div style="display:flex;justify-content:space-between;font:500 12px var(--f-data);margin-bottom:8px"><span class="pos">Bullish $${fmt(bull/1e6,1)}M</span><span class="neg">Bearish $${fmt(bear/1e6,1)}M</span></div><div class="pillbar"><i style="width:${bull/tot*100}%;background:var(--gain)"></i><i style="width:${bear/tot*100}%;background:var(--loss)"></i></div></div>
+    <div class="tw"><table><thead><tr><th>Ticker</th><th>Type</th><th class="r">Strike</th><th>Expiry</th><th class="r">Premium</th><th class="r">Vol / OI</th><th>Side</th><th>Bias</th><th>Time</th></tr></thead><tbody>${rows.map(f=>`<tr><td><b>${f.tk}</b></td><td>${f.type}</td><td class="r num">${f.strike}</td><td>${f.expiry}</td><td class="r num">${f.prem}</td><td class="r num">${f.volOI}</td><td>${f.side}</td><td><span class="tag ${f.bias==='bullish'?'gain':'loss'}">${f.bias}</span></td><td class="mono" style="font-size:12px">${f.time}</td></tr>`).join('')||'<tr><td colspan="9" class="empty">No prints match.</td></tr>'}</tbody></table></div>
+    <p class="note" style="margin-top:12px">Bias is inferred from the side of the trade and the option type. A large print can be a hedge, so treat it as context and not as a signal.</p>`;
+  }else{
+    const rows=DATA.cong.filter(c=>cParty==='all'||c.party===cParty);
+    h=`<div class="bar"><div class="chips">${[['all','All parties'],['D','Democrats'],['R','Republicans']].map(v=>`<button class="chip" data-cp="${v[0]}" aria-pressed="${cParty===v[0]}">${v[1]}</button>`).join('')}</div></div>
+    <div class="tw"><table><thead><tr><th>Member</th><th>Party</th><th>Ticker</th><th>Direction</th><th>Amount</th><th>Traded</th><th class="r">Days to disclose</th><th>Sector</th><th>Filing</th></tr></thead><tbody>${rows.map(c=>`<tr><td>${esc(c.pol)} <span class="tag">${c.state}</span></td><td>${c.party}</td><td><b>${c.tk}</b></td><td><span class="tag ${c.dir==='BUY'?'gain':'loss'}">${c.dir}</span></td><td class="num">${esc(c.amt)}</td><td>${esc(c.trdate)}</td><td class="r num ${c.delay>30?'neg':''}">${c.delay}</td><td>${esc(c.sector)}</td><td><a href="${esc(c.link)}" target="_blank" rel="noopener">PDF ↗</a></td></tr>`).join('')}</tbody></table></div>
+    <p class="note" style="margin-top:12px">Source: House Clerk periodic transaction reports. Members must disclose within 45 days; delays past 30 days are marked red.</p>`;
+  }
+  $('#mktBody').innerHTML=h;
+  $$('[data-ft]').forEach(b=>b.onclick=()=>{fType=b.dataset.ft;drawMkt()});$$('[data-fb]').forEach(b=>b.onclick=()=>{fBias=b.dataset.fb;drawMkt()});$$('[data-cp]').forEach(b=>b.onclick=()=>{cParty=b.dataset.cp;drawMkt()});
+}
+
+/* ---------- contact ---------- */
+$('#cform').addEventListener('submit',e=>{
+  e.preventDefault();
+  const n=$('#c-name').value.trim(),m=$('#c-email').value.trim(),msg=$('#c-msg').value.trim(),err=$('#cerr');
+  if(!n||!/^\S+@\S+\.\S+$/.test(m)||msg.length<10){err.textContent='Add your name, a valid email and a message of at least 10 characters.';return}
+  err.textContent='';
+  $('#cstatus').textContent='Preview only: nothing was sent. In production this posts to a form endpoint and shows a real confirmation.';
+  toast('Preview: message not sent');
+});
+
+/* ---------- command palette ---------- */
+let cmdSel=0,cmdItems=[];
+function openCmd(){$('#cmd').showModal();$('#cmdQ').value='';buildCmd('');$('#cmdQ').focus()}
+function buildCmd(q){
+  q=q.toLowerCase();
+  const all=PAGES.map(p=>({t:p[1],s:'Page',go:()=>location.hash=p[0]}))
+   .concat(CALLS.map(c=>({t:`${c.tk} · ${c.name}`,s:c.closed?'Closed call':'Open call',go:()=>openCall(c.id)})))
+   .concat(POSTS.map(p=>({t:p.title,s:'Note',go:()=>{location.hash='research';setTimeout(()=>{$('#postQ').value=p.title.slice(0,24);drawPosts()},50)}})))
+   .concat(TOOLS.map(t=>({t:t[0],s:'Tool',go:()=>{location.hash='tools'}})));
+  cmdItems=all.filter(i=>(i.t+' '+i.s).toLowerCase().includes(q)).slice(0,12);cmdSel=0;renderCmd();
+}
+function renderCmd(){$('#cmdList').innerHTML=cmdItems.length?cmdItems.map((it,i)=>`<li><button role="option" data-i="${i}" aria-selected="${i===cmdSel}"><span>${esc(it.t)}</span><small>${it.s}</small></button></li>`).join(''):'<li class="empty">Nothing matches.</li>';
+  $$('#cmdList button').forEach(b=>b.onclick=()=>runCmd(+b.dataset.i))}
+function runCmd(i){const it=cmdItems[i];if(!it)return;$('#cmd').close();setTimeout(it.go,30)}
+$('#cmdQ').addEventListener('input',e=>buildCmd(e.target.value));
+$('#cmdQ').addEventListener('keydown',e=>{
+  if(e.key==='ArrowDown'){e.preventDefault();cmdSel=Math.min(cmdItems.length-1,cmdSel+1);renderCmd()}
+  if(e.key==='ArrowUp'){e.preventDefault();cmdSel=Math.max(0,cmdSel-1);renderCmd()}
+  if(e.key==='Enter'){e.preventDefault();runCmd(cmdSel)}
+});
+addEventListener('keydown',e=>{
+  const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName);
+  if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();openCmd()}
+  else if(e.key==='/'&&!typing&&!$('dialog[open]')){e.preventDefault();openCmd()}
+});
+
+function drawAll(){drawEquity();drawStrat()}
+drawTrack();drawPosts();drawTools();sizer();bs();drawMkt();drawAll();route();
+</script>
+
+</body>
+</html>

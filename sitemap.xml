@@ -1,56 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-
-  <url>
-    <loc>https://aeonnimbus.com/</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/#analyst</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/#about</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/#track</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/#research</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/#tools</loc>
-    <lastmod>2026-07-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-
-  <url>
-    <loc>https://aeonnimbus.com/assets/Q2-2026-investor-letter.pdf</loc>
-    <lastmod>2026-07-01</lastmod>
-    <changefreq>quarterly</changefreq>
-    <priority>0.6</priority>
-  </url>
-
+<!-- Only real, separately indexable URLs. In-page views (/#track, /#research …) are fragments of / and are not listed. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aeonnimbus.com/</loc><lastmod>2026-11-10</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
+  <url><loc>https://aeonnimbus.com/products/</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://aeonnimbus.com/assets/Q2-2026-investor-letter.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>yearly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/audnzd-aeonsurf-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/audnzd-aeonsurf-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/eurjpy-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/eurjpy-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/eurusd-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/eurusd-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/gbpusd-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/gbpusd-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/nas100-tenkai-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/nas100-tenkai-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/sp500-tenkai-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/sp500-tenkai-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/usdjpy-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/usdjpy-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/xauusd-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/xauusd-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/xauusd-tenkai-dashboard.html</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://aeonnimbus.com/reports/xauusd-tenkai-report.pdf</loc><lastmod>2026-11-10</lastmod><changefreq>monthly</changefreq><priority>0.4</priority></url>
 </urlset>

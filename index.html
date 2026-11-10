@@ -6321,6 +6321,65 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap">
+<!-- ═══ v3 polish layer: routing, a11y, palette, disclosures (loaded last so it wins the cascade) ═══ -->
+<style id="an-v3">
+/* Mobile hero: the base .hv3-inner rule is declared after its own media query and undid the stacking */
+@media (max-width: 900px){
+  .hv3-inner{flex-direction:column!important;align-items:flex-start!important;gap:32px!important}
+  .hv3-name{font-size:clamp(64px,19vw,120px)!important;flex-shrink:1!important}
+  .hv3-right{max-width:100%!important;width:100%}
+  footer > div[style*="grid-template-columns:1fr auto"]{grid-template-columns:1fr!important;padding-inline:24px!important}
+  footer > div[style*="grid-template-columns:1fr auto"] > div{text-align:left!important}
+  footer .flinks{justify-content:flex-start!important;flex-wrap:wrap}
+}
+/* Keyboard focus is visible everywhere */
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:2px}
+.flnk[role="link"]{cursor:pointer}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
+/* Data-status badges */
+.mkt-live-badge.is-sample{color:#f0a020;background:rgba(240,160,32,.08);border-color:rgba(240,160,32,.3)}
+.mkt-live-badge.is-sample .mkt-live-dot{background:#f0a020;box-shadow:none;animation:none}
+.mkt-live-badge.is-delayed .mkt-live-dot{animation:none}
+/* Search button + palette */
+#cmdk-btn{display:inline-flex;align-items:center;gap:7px}
+#cmdk-btn kbd{font:inherit;opacity:.6}
+#cmdk{border:1px solid var(--rule);background:var(--bg,#0b0b0e);color:var(--ink);padding:0;width:min(600px,calc(100vw - 28px));max-height:70vh;margin:14vh auto 0;inset:0;position:fixed;height:fit-content;border-radius:4px;box-shadow:0 30px 80px rgba(0,0,0,.55);overflow:hidden}
+#cmdk::backdrop{background:rgba(4,4,6,.62);backdrop-filter:blur(3px)}
+#cmdk-q{width:100%;box-sizing:border-box;border:0;border-bottom:1px solid var(--rule);background:transparent;color:var(--ink);padding:17px 20px;font-size:16px;font-family:inherit;outline:none}
+#cmdk-list{list-style:none;margin:0;padding:6px;max-height:calc(70vh - 96px);overflow:auto}
+#cmdk-list button{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;gap:14px;width:100%;padding:10px 14px;cursor:pointer;border-radius:3px;font-size:14px;color:var(--ink)}
+#cmdk-list button small{font-family:var(--FM,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+#cmdk-list button[aria-selected="true"],#cmdk-list button:hover{background:rgba(200,131,10,.14);color:var(--gold)}
+#cmdk-empty{padding:22px;text-align:center;color:var(--ink3);font-size:13px}
+#cmdk-foot{display:flex;gap:16px;padding:9px 16px;border-top:1px solid var(--rule);font-family:var(--FM,monospace);font-size:10px;letter-spacing:.06em;color:var(--ink3)}
+/* Disclosures page */
+.lg-wrap{max-width:860px;margin:0 auto;padding:32px 28px 80px}
+.lg-toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 36px}
+.lg-toc a{font-family:var(--FM,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink2);border:1px solid var(--rule);padding:7px 12px;text-decoration:none;border-radius:2px}
+.lg-toc a:hover{color:var(--gold);border-color:var(--gold)}
+.lg-sec{padding:30px 0;border-top:1px solid var(--rule)}
+.lg-sec h3{font-family:Georgia,'Times New Roman',serif;font-weight:400;font-size:26px;letter-spacing:-.01em;color:var(--ink);margin:0 0 14px}
+.lg-sec p,.lg-sec li{font-size:15px;line-height:1.7;color:var(--ink2);max-width:70ch}
+.lg-sec p{margin:0 0 12px}
+.lg-sec ul{margin:0 0 12px;padding-left:20px}
+.lg-sec strong{color:var(--ink);font-weight:600}
+.lg-tbl-wrap{overflow-x:auto;border:1px solid var(--rule);margin:14px 0}
+.lg-tbl{border-collapse:collapse;width:100%;font-size:13.5px}
+.lg-tbl th,.lg-tbl td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--rule);color:var(--ink2);vertical-align:top}
+.lg-tbl th{font-family:var(--FM,monospace);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);white-space:nowrap}
+.lg-tbl tr:last-child td{border-bottom:0}
+.lg-updated{font-family:var(--FM,monospace);font-size:10px;letter-spacing:.08em;color:var(--ink3);margin-top:8px}
+/* Footer legal strip */
+.an-legal-strip{padding:16px 52px 26px;font-size:11.5px;line-height:1.6;color:var(--ink3);max-width:1100px}
+.an-legal-strip a,.an-legal-strip span[role="link"]{color:var(--ink2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+@media (max-width:900px){.an-legal-strip{padding-inline:24px}}
+/* Contact form states */
+.ct-note{font-family:var(--FM,monospace);font-size:10px;letter-spacing:.04em;color:var(--ink3);line-height:1.6}
+.ct-success.is-error{color:#f87171;border-color:rgba(248,113,113,.25);background:rgba(248,113,113,.05)}
+.ct-hp{position:absolute!important;left:-9999px!important;width:1px;height:1px;opacity:0}
+</style>
 </head>
 <body>
 <a class="skip-to-main" href="#main-content" style="position:absolute;top:-40px;left:0;background:var(--gold);color:#0a0802;padding:8px 16px;font-size:13px;font-weight:600;z-index:9999;border-radius:0 0 4px 0;transition:top .1s" onfocus="this.style.top='0'" onblur="this.style.top='-40px'">Skip to main content</a>
@@ -6368,6 +6427,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <button class="nbtn" onclick="sp('services')" data-i18n="nav_services">Services</button>
     <button class="nbtn" onclick="sp('contact')" data-i18n="nav_contact">Contact</button>
 
+    <button id="cmdk-btn" class="dm-btn" type="button" onclick="anSearch()" aria-label="Search the site (Ctrl+K)" aria-keyshortcuts="Control+K">Search <kbd>/</kbd></button>
     <button id="dmbtn" class="dm-btn" onclick="toggleDark()">Light</button>
     <div class="lang-drop-wrap">
       <button class="dm-btn lang-btn" id="langbtn">EN</button>
@@ -6411,7 +6471,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
     <div class="hv3-right">
       <div class="hv3-position">Macro &amp; equity research — published before the outcome.</div>
       <div class="hv3-proof">
-        <strong id="hv3-proof-head">9 for 9.</strong>
+        <strong id="hv3-proof-head">11 for 11.</strong>
         <span id="hv3-proof-body">Every investment call published with full thesis, entry, stop-loss, and position size before the outcome is known — and closed profitable.</span>
         <span class="hv3-sub" id="hv3-proof-sub">Average return per closed call: +34.1% · Hit rate: 100% · All eleven permanently on the record.</span>
       </div>
@@ -6691,7 +6751,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="hv3-plat-cards">
   <div class="hv3-pcard">
     <div class="hv3-plabel">Research Lab</div>
-    <h3 class="hv3-ptitle">12 Systematic Strategies</h3>
+    <h3 class="hv3-ptitle">16 Systematic Strategies</h3>
     <p class="hv3-pbody">A live macro model portfolio built on 12 fully systematic strategies across equity and FX — each backtested to 99% real-tick data. Free access, no paywall, no login.</p>
     <button class="hv3-plink" onclick="sp('portfolios');setTimeout(showPortFund,150)">Model Portfolio →</button>
     <div class="hv3-chips">
@@ -6725,7 +6785,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   </div>
   <div class="hv3-pcard">
     <div class="hv3-plabel">Tools</div>
-    <h3 class="hv3-ptitle">Six Analyst Tools — Free</h3>
+    <h3 class="hv3-ptitle">Twelve Analyst Tools — Free</h3>
     <p class="hv3-pbody">Practitioner-grade financial tools built in the browser. No login, no limits, no paywall. Used by analysts in 40+ countries.</p>
     <button class="hv3-plink" onclick="sp('tools')">Open Tools →</button>
     <div class="hv3-pitems">
@@ -7147,6 +7207,92 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 </footer>
 
 </div><!-- /pg-home -->
+<!-- ═══════════════ DISCLOSURES & METHODOLOGY ═════ -->
+<div class="pg" id="pg-legal">
+<div class="pghd reveal">
+  <div class="pgtag">Disclosures</div>
+  <h2 class="pgtitle">Disclosures &amp; <em>Methodology</em></h2>
+  <p class="pgsub">How the track record is measured, where every number on this site comes from, and what this research is and is not.</p>
+</div>
+<div class="lg-wrap">
+  <div class="lg-toc" role="navigation" aria-label="On this page">
+    <a href="#lg-nature">Nature of the research</a>
+    <a href="#lg-method">Track-record method</a>
+    <a href="#lg-backtests">Backtests</a>
+    <a href="#lg-data">Data sources</a>
+    <a href="#lg-conflicts">Conflicts</a>
+    <a href="#lg-privacy">Privacy</a>
+  </div>
+
+  <section class="lg-sec" id="lg-nature">
+    <h3>Nature of the research</h3>
+    <p>Aeon Nimbus Research is an independent publication written by LiJie Guo. Everything on this site and in the associated newsletter is general research and commentary, published for <strong>informational and educational purposes only</strong>.</p>
+    <ul>
+      <li>It is not personal investment advice, a recommendation tailored to your circumstances, or an offer or solicitation to buy or sell any security.</li>
+      <li>It does not take account of your objectives, financial situation or risk tolerance. Speak to a qualified adviser before acting on anything you read here.</li>
+      <li>Investing involves risk, including the loss of all capital invested. Past performance, whether realised or simulated, is not a reliable guide to future results.</li>
+      <li>The consulting services described on this site cover software, data and methodology. They do not include the management of money or personalised investment advice.</li>
+    </ul>
+  </section>
+
+  <section class="lg-sec" id="lg-method">
+    <h3>How the track record is measured</h3>
+    <p>A <strong>call</strong> is a position published with a thesis, entry price, stop-loss, target and position size before the outcome is known. Calls are not edited or removed after publication.</p>
+    <div class="lg-tbl-wrap"><table class="lg-tbl">
+      <thead><tr><th>Figure</th><th>Definition</th></tr></thead>
+      <tbody>
+        <tr><td>Return</td><td>Price return from the published entry to the exit price. Dividends, trading costs, slippage and tax are excluded.</td></tr>
+        <tr><td>Blended positions</td><td>Where several lots of the same ticker were opened and closed together, they are reported as one position at the average entry.</td></tr>
+        <tr><td>Hit rate</td><td>Closed positions with a positive return divided by all closed positions. Open positions are excluded until closed.</td></tr>
+        <tr><td>Average return</td><td>Simple, unweighted mean of closed-position returns. It ignores position size and holding period.</td></tr>
+        <tr><td>Portfolio contribution</td><td>Each closed return multiplied by its published size, summed in exit order. This is what the cumulative chart shows. It does not compound and does not model cash drag.</td></tr>
+        <tr><td>Alpha vs. S&amp;P 500</td><td>Call return minus the S&amp;P 500 price return over the same publish-to-exit window. Shown only when benchmark data loads; otherwise the field is left blank.</td></tr>
+      </tbody>
+    </table></div>
+    <p><strong>Limits you should weigh.</strong> The sample is small and covers a single market regime. The record is self-reported and has not been audited or verified by a third party. No closed position has yet reached its stop-loss, so the record does not show how losses are handled in practice. A 100% hit rate over a short sample is not evidence of a durable edge.</p>
+  </section>
+
+  <section class="lg-sec" id="lg-backtests">
+    <h3>Backtested and simulated results</h3>
+    <p>The systematic strategies and the Asset Allocation Dynamic Fund show <strong>backtested or simulated performance</strong>. No real capital is represented.</p>
+    <ul>
+      <li>Backtests are built with hindsight and can be fitted to past data. Live results typically differ, often materially.</li>
+      <li>Results depend on assumptions about spreads, commissions, slippage, financing and execution that may not hold in live trading.</li>
+      <li>Suites differ in period, data source and sizing, so figures are comparable within a suite, not across suites.</li>
+      <li>The per-trade Sharpe ratio printed in MetaTrader reports is not comparable with the annualised Sharpe ratios shown in the tables.</li>
+    </ul>
+  </section>
+
+  <section class="lg-sec" id="lg-data">
+    <h3>Data sources and freshness</h3>
+    <div class="lg-tbl-wrap"><table class="lg-tbl">
+      <thead><tr><th>Section</th><th>Source</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Research notes</td><td>Aeon Nimbus Substack feed</td><td>Snapshot refreshed every 6 hours</td></tr>
+        <tr><td>Options flow, Congress trades</td><td>Public options data; U.S. House Clerk periodic transaction reports</td><td>Snapshot refreshed twice each US trading day</td></tr>
+        <tr><td>Open-position prices</td><td>Third-party quote API, requested by your browser</td><td>Delayed; may be unavailable</td></tr>
+        <tr><td>Index overview</td><td>Public delayed quote feed</td><td>Delayed; breadth, volume and sparklines are illustrative</td></tr>
+        <tr><td>Heatmap, IPO pipeline, earnings and economic calendars</td><td>Curated by hand</td><td>Illustrative unless the panel shows a live source</td></tr>
+        <tr><td>AI Pitcher</td><td>Large language model output</td><td>Machine-generated; may contain errors and is not reviewed before display</td></tr>
+      </tbody>
+    </table></div>
+    <p>Panels state their status next to the title. Do not rely on any figure here for trading; confirm prices, dates and estimates with a primary source.</p>
+  </section>
+
+  <section class="lg-sec" id="lg-conflicts">
+    <h3>Conflicts of interest</h3>
+    <p>The author may hold, and may trade, positions in securities discussed, in the direction of the published view or otherwise, and may change those positions without notice.</p>
+  </section>
+
+  <section class="lg-sec" id="lg-privacy">
+    <h3>Privacy</h3>
+    <p>This site sets no advertising or analytics cookies. It keeps a few preferences in your browser's own storage (theme, language, and the email you enter if you request AI Pitcher access). To show prices, feeds and fonts, your browser contacts third-party services directly (quote and market-data providers, Google Fonts, Substack), which will see your IP address. The contact form only transmits what you type when you press send.</p>
+    <p class="lg-updated">Last reviewed: November 2026</p>
+  </section>
+</div>
+<footer><div class="flogo">LiJie Guo · Aeon Nimbus Research</div><div class="flinks"><span class="flnk ul-draw" onclick="sp('home')">Home</span><span class="flnk ul-draw" onclick="sp('research')">Research</span><span class="flnk ul-draw" onclick="sp('track')">Track Record</span><span class="flnk ul-draw" onclick="sp('contact')">Contact</span></div></footer>
+</div><!-- /pg-legal -->
+
 <!-- ═══════════════ ABOUT ══════════════════════════ -->
 <div class="pg" id="pg-about">
 <div class="abt-hero-banner">
@@ -7400,7 +7546,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <!-- ═══════════════ TRACK RECORD ════════════════════ -->
 <div class="pg" id="pg-track">
 <div class="pghd reveal" style="padding-top:28px;padding-bottom:20px">
-  <div class="pgtag" data-i18n="track_tag">Audited performance</div>
+  <div class="pgtag" data-i18n="track_tag">Published record</div>
   <h2 class="pgtitle" style="margin-bottom:8px">Track <em>Record</em></h2>
   <p class="pgsub" data-i18n="track_sub" style="margin-bottom:12px">Every call published publicly before the outcome is known. Losses included. Never deleted.</p>
   <a href="assets/Q2-2026-investor-letter.pdf" target="_blank" download style="display:inline-flex;align-items:center;gap:8px;font-family:var(--FM);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(200,131,10,.35);padding:9px 16px;border-radius:2px;text-decoration:none;transition:border-color .15s,background .15s">&#8595;&nbsp;Q2 2026 Investor Letter (PDF)</a>
@@ -7497,7 +7643,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </tr>
       <tr>
         <td class="pt-label">Losing trades</td>
-        <td class="perf-tbl-col-an" style="color:var(--ink2)" id="pts-losing">0 of 8</td>
+        <td class="perf-tbl-col-an" style="color:var(--ink2)" id="pts-losing">0 of 11</td>
         <td class="pt-dim">—</td>
       </tr>
       <tr>
@@ -7676,7 +7822,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 
 <!-- ═══════════════ TOOLS ════════════════════════════ -->
 <div class="pg" id="pg-tools">
-<div class="pghd reveal"><div class="pgtag" data-i18n="tools_tag">Built &amp; open-sourced by Aeon Nimbus</div><h2 class="pgtitle">Open Source <em>Tools</em></h2><p class="pgsub" data-i18n="tools_sub">Six analyst tools — Black-Scholes to DCF to portfolio construction — built from scratch by Aeon Nimbus, open-sourced on GitHub, and free to use in the browser.</p></div>
+<div class="pghd reveal"><div class="pgtag" data-i18n="tools_tag">Built &amp; open-sourced by Aeon Nimbus</div><h2 class="pgtitle">Open Source <em>Tools</em></h2><p class="pgsub" data-i18n="tools_sub">Twelve analyst tools, from Black-Scholes to DCF to portfolio construction, built from scratch by Aeon Nimbus and free to use in the browser. Six are open-sourced on GitHub.</p></div>
 
 <!-- Tool thumbnail grid -->
 <div class="tool-grid">
@@ -8714,7 +8860,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <!-- Strategy universe: summary, risk/reward map, suite switcher -->
   <div class="su-wrap">
     <div class="su-kpis">
-      <div class="su-kpi"><b>15</b><span>Strategies</span></div>
+      <div class="su-kpi"><b>16</b><span>Strategies</span></div>
       <div class="su-kpi"><b>3</b><span>Suites</span></div>
       <div class="su-kpi"><b>15,081</b><span>Backtested trades · FX &amp; Tenkai</span></div>
       <div class="su-kpi"><b>2006–2026</b><span>Longest history · Equity</span></div>
@@ -9978,7 +10124,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
         <li>✓ Pre-outcome calls with full thesis</li>
         <li>✓ Macro briefs &amp; central bank analysis</li>
         <li>✓ Permanent auditable track record</li>
-        <li>✓ Open model portfolio · 13 strategies</li>
+        <li>✓ Open model portfolio · 16 strategies</li>
       </ul>
       <div class="wr-card-assets">Educational &amp; informational — not investment advice.</div>
       <a class="wr-card-cta" href="https://aeonnimbus.substack.com/subscribe" target="_blank" style="display:inline-block;text-decoration:none">Subscribe Free →</a>
@@ -9989,7 +10135,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="wr-card-pop" style="color:var(--gold);border-color:rgba(200,131,10,.25);background:rgba(200,131,10,.06)">QUANT CONSULTING</div>
       <div class="wr-card-name">SYSTEMATIC MODEL DEVELOPMENT</div>
       <div class="wr-card-strat">For funds, prop desks &amp; fintech teams</div>
-      <div class="wr-card-desc">Fixed-scope engagements covering systematic strategy design, factor model construction, backtesting frameworks, and financial data pipelines. Delivered from the same quantitative process behind the 13 strategies published on this site — regime-aware, walk-forward validated, and production-ready.</div>
+      <div class="wr-card-desc">Fixed-scope engagements covering systematic strategy design, factor model construction, backtesting frameworks, and financial data pipelines. Delivered from the same quantitative process behind the 16 strategies published on this site — regime-aware, walk-forward validated, and production-ready.</div>
       <ul style="font-family:var(--FM);font-size:10px;color:var(--ink2);line-height:2;list-style:none;padding:0;margin:12px 0 20px">
         <li>✓ Strategy design &amp; backtesting</li>
         <li>✓ Factor model construction · Python</li>
@@ -10076,11 +10222,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       </div>
       <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
         <button class="ct-submit" type="submit" data-i18n="contact_submit">Send Message →</button>
-        <span style="font-family:var(--FM);font-size:8px;color:var(--ink3);letter-spacing:.04em">Opens your email client to send</span>
+        <span class="ct-note">Replies usually within 24–48 hours</span>
+        <input class="ct-hp" id="ct-hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
       </div>
-      <div class="ct-success" id="ct-success" style="display:none">
+      <div class="ct-success" id="ct-success" role="status" aria-live="polite" style="display:none">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-        Message composed — your email client is ready to send.
+        <span></span>
       </div>
     </form>
   </div>
@@ -10205,10 +10352,10 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <!-- Sample output preview — shown when no report is active -->
   <div class="pitcher-sample-preview" id="pitcher-sample-preview">
     <div class="pitcher-sample-preview-title">Marvell Technology — MRVL · NASDAQ</div>
-    <div class="pitcher-sample-preview-meta">Equity Deep Dive · Published 09 Jun 2026 · Entry $57.82 · Target $82.00 · Stop $46.00 · Size 10%</div>
+    <div class="pitcher-sample-preview-meta">Equity Deep Dive · Published 09 Jun 2026 · Entry $245.05 · Target $350.00 · Stop $190.00 · Size 10%</div>
     <div class="pitcher-sample-preview-row">
       <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">+31.9%</span><span class="pitcher-sample-kpi-lbl">Return (closed)</span></div>
-      <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">$74.30</span><span class="pitcher-sample-kpi-lbl">Exit Price</span></div>
+      <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">$323.26</span><span class="pitcher-sample-kpi-lbl">Exit Price</span></div>
       <div class="pitcher-sample-kpi"><span class="pitcher-sample-kpi-val">+30.4%</span><span class="pitcher-sample-kpi-lbl">Alpha vs S&amp;P 500</span></div>
     </div>
     <div class="pitcher-sample-preview-body">
@@ -10225,9 +10372,9 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 <div class="pg" id="pg-markets">
 <div class="mkt-inner">
 <div class="pghd reveal" style="text-align:center">
-  <div class="pgtag">Live Market Intelligence</div>
+  <div class="pgtag">Market Intelligence</div>
   <h2 class="pgtitle">Markets <em>Dashboard</em></h2>
-  <p class="pgsub" style="max-width:580px;margin:0 auto">Real-time indices, sector heatmap, earnings calendar, macro events, IPO pipeline, congressional disclosures, and options flow.</p>
+  <p class="pgsub" style="max-width:580px;margin:0 auto">Indices, sector heatmap, earnings calendar, macro events, IPO pipeline, congressional disclosures, and options flow.</p>
 </div>
 
 <div class="mkt-tabs">
@@ -10245,12 +10392,13 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
   <div class="mkt-tool-hd">
     <div>
       <div class="mkt-tool-title">Market Overview</div>
-      <div class="mkt-tool-desc">Live index quotes, market breadth, and Aeon Nimbus macro view</div>
+      <div class="mkt-tool-desc">Delayed index quotes, market breadth, and Aeon Nimbus macro view</div>
     </div>
     <div class="mkt-tool-hd-right">
-      <span class="mkt-live-badge"><span class="mkt-live-dot"></span>LIVE</span>
+      <span class="mkt-live-badge is-delayed" id="mkt-ov-badge"><span class="mkt-live-dot"></span><span id="mkt-ov-badge-t">Loading</span></span>
     </div>
   </div>
+  <div class="mkt-sample-note" id="mkt-ov-note" style="font-family:var(--FM);font-size:9px;letter-spacing:.04em;color:#f0a020;opacity:.85;margin:0 0 10px">Index prices come from a delayed public feed. Volume, sparklines and market breadth are illustrative.</div>
   <div class="mkt-ticker-tape" id="mkt-tape">Loading…</div>
   <div class="mkt-indices-grid" id="mkt-indices"></div>
   <div class="mkt-two-col">
@@ -10285,7 +10433,7 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
       <div class="mkt-tool-desc">Individual stocks sized by market cap · colored by performance</div>
     </div>
     <div class="mkt-tool-hd-right">
-      <span class="mkt-live-badge"><span class="mkt-live-dot"></span>LIVE</span>
+      <span class="mkt-live-badge is-sample"><span class="mkt-live-dot"></span>Sample data</span>
     </div>
   </div>
   <div class="mkt-hm-controls">
@@ -10446,6 +10594,12 @@ html.light .method-section::before { background: rgba(250,248,244,.91); }
 // ═══ SUBSTACK CONFIG ══════════════════════════════════════
 const SUBSTACK_URL = 'https://aeonnimbus.substack.com'; // Substack publication
 const GITHUB_URL    = 'https://github.com/lijiegsluis?tab=repositories'; // ← Your repositories
+// Contact form delivery. Set ONE of these and the form starts delivering:
+//   CONTACT_ENDPOINT — a form backend URL that accepts a JSON POST (Formspree, Basin, a Cloudflare Worker…)
+//   CONTACT_EMAIL    — an address for the visitor's own mail client (fallback, less reliable)
+// With both empty the form copies the message and points to LinkedIn; it never claims a message was sent.
+const CONTACT_ENDPOINT = '';
+const CONTACT_EMAIL    = '';
 // e.g. 'https://aeonimbusresearch.substack.com'
 
 /* ═══════════════════════════════════════════════════
@@ -10687,8 +10841,7 @@ function sp(id){
     if(id==='portfolios' && typeof hidePortFund==='function') hidePortFund();
   },current?120:0);
   document.querySelectorAll('.nbtn').forEach((b,i)=>{
-    const map=[['home'],['about'],['track'],['research'],['pitcher'],['markets'],['portfolios','tools','strats'],['services'],['contact']];
-    b.classList.toggle('on',(map[i]||[]).includes(id));
+    /* active state is set by markNav() in the v3 layer, from each button's own target */
   });
 }
 function showSuite(id){
@@ -10794,15 +10947,30 @@ function showStab(id){
 }
 function submitContact(e){
   e.preventDefault();
-  const name=document.getElementById('ct-name').value.trim();
-  const email=document.getElementById('ct-email').value.trim();
-  const subject=document.getElementById('ct-subject').value.trim()||'Enquiry via aeonnimbus.com';
-  const msg=document.getElementById('ct-msg').value.trim();
+  const $=id=>document.getElementById(id);
+  const name=$('ct-name').value.trim(), email=$('ct-email').value.trim();
+  const subject=$('ct-subject').value.trim()||'Enquiry via aeonnimbus.com';
+  const msg=$('ct-msg').value.trim();
+  const ok=$('ct-success'), btn=e.target.querySelector('.ct-submit');
+  const say=(text,err)=>{ if(!ok) return; ok.classList.toggle('is-error',!!err); ok.lastChild.textContent=' '+text; ok.style.display='flex'; };
+  if($('ct-hp') && $('ct-hp').value) return;                       /* bot trap */
+  if(!name || !/^\S+@\S+\.\S+$/.test(email) || msg.length<10){ say('Add your name, a valid email and a message of at least 10 characters.',true); return; }
   const body=`From: ${name}\nEmail: ${email}\n\n${msg}`;
-  const mailto=`mailto:?subject=${encodeURIComponent(subject+' — '+name)}&body=${encodeURIComponent(body)}`;
-  window.location.href=mailto;
-  const ok=document.getElementById('ct-success');
-  if(ok){ok.style.display='flex';setTimeout(()=>{ok.style.display='none';},6000);}
+  const copy=()=>navigator.clipboard&&navigator.clipboard.writeText?navigator.clipboard.writeText(subject+'\n\n'+body).then(()=>true,()=>false):Promise.resolve(false);
+  if(CONTACT_ENDPOINT){
+    if(btn){btn.disabled=true;btn.style.opacity='.6';}
+    fetch(CONTACT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({name,email,subject,message:msg,_subject:subject+' — '+name})})
+      .then(r=>{ if(!r.ok) throw new Error(r.status); e.target.reset(); say('Message sent. Replies usually arrive within 24–48 hours.'); })
+      .catch(()=>copy().then(c=>say('The message could not be sent. '+(c?'It has been copied to your clipboard — ':'')+'please send it via LinkedIn instead.',true)))
+      .finally(()=>{ if(btn){btn.disabled=false;btn.style.opacity='';} });
+    return;
+  }
+  if(CONTACT_EMAIL){
+    window.location.href=`mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject+' — '+name)}&body=${encodeURIComponent(body)}`;
+    say('Your email app should now be open with the message ready. Nothing is sent until you press send there.');
+    return;
+  }
+  copy().then(c=>say((c?'Message copied to your clipboard. ':'')+'Direct delivery is not set up yet — paste it into a LinkedIn message to reach me.'));
 }
 function oTool(id){
   setTimeout(()=>{
@@ -11293,8 +11461,8 @@ var I18N={
     hcard_05_desc:'DCF, Black-Scholes, Kelly sizing, Monte Carlo, portfolio construction, and factor correlation — live in-browser.',
     hcard_05_cta:'Open toolkit →',
     research_tag:'Published research',
-    track_tag:'Audited performance',track_sub:'Every call published publicly before outcome is known. Losses included. Never deleted.',
-    tools_tag:'Built & open-sourced by Aeon Nimbus',tools_sub:'Six analyst tools — Black-Scholes to DCF to portfolio construction — built from scratch by Aeon Nimbus, open-sourced on GitHub, and free to use in the browser.',
+    track_tag:'Published record',track_sub:'Every call published publicly before outcome is known. Losses included. Never deleted.',
+    tools_tag:'Built & open-sourced by Aeon Nimbus',tools_sub:'Twelve analyst tools, from Black-Scholes to DCF to portfolio construction, built from scratch by Aeon Nimbus and free to use in the browser. Six are open-sourced on GitHub.',
     strats_tag:'Proprietary · Not Open-Sourced',strats_sub:'Sixteen proprietary systematic strategies across equities, FX, commodities and equity indices — built to trade, not open-sourced. Full methodology available to qualified allocators on request.',
     port_tag:'Portfolio & Products',port_sub:'Three vehicles for research, capital allocation and quantitative tooling.',
     contact_tag:'Get In Touch',contact_sub:'Interested in research, quantitative strategies, collaborations, or hiring? I typically respond within 24–48 hours.',
@@ -11322,7 +11490,7 @@ var I18N={
     hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, construcción de carteras y correlación de factores — en el navegador.',
     hcard_05_cta:'Abrir toolkit →',
     research_tag:'Investigación publicada',
-    track_tag:'Desempeño auditado',track_sub:'Cada operación publicada antes del resultado. Pérdidas incluidas. Nunca eliminadas.',
+    track_tag:'Registro publicado',track_sub:'Cada operación publicada antes del resultado. Pérdidas incluidas. Nunca eliminadas.',
     tools_tag:'Kit de herramientas interactivo',tools_sub:'Cada herramienta que un gestor o analista necesita — gratis, en el navegador.',
     strats_tag:'Investigación Sistemática Propia',strats_sub:'Dieciséis estrategias plenamente sistemáticas en renta variable, FX, materias primas e índices.',
     port_tag:'Portafolio y Productos',port_sub:'Tres vehículos para investigación, asignación de capital y herramientas cuantitativas.',
@@ -11351,7 +11519,7 @@ var I18N={
     hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, construction de portefeuille — directement dans le navigateur.',
     hcard_05_cta:'Ouvrir le toolkit →',
     research_tag:'Recherche publiée',
-    track_tag:'Performance auditée',track_sub:'Chaque position publiée avant le résultat. Pertes incluses. Jamais supprimées.',
+    track_tag:'Historique publié',track_sub:'Chaque position publiée avant le résultat. Pertes incluses. Jamais supprimées.',
     tools_tag:'Boîte à outils interactive',tools_sub:"Chaque outil qu'un gérant ou analyste utilise — gratuit, dans le navigateur.",
     strats_tag:'Recherche Systématique Propriétaire',strats_sub:"Seize stratégies entièrement systématiques sur actions, FX, matières premières et indices.",
     port_tag:'Portefeuille & Produits',port_sub:"Trois véhicules pour la recherche, l'allocation de capital et les outils quantitatifs.",
@@ -11380,7 +11548,7 @@ var I18N={
     hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, Portfoliokonstruktion und Faktorkorrelation — direkt im Browser.',
     hcard_05_cta:'Toolkit öffnen →',
     research_tag:'Veröffentlichte Forschung',
-    track_tag:'Geprüfte Performance',track_sub:'Jede Position vor dem Ergebnis veröffentlicht. Verluste inbegriffen. Nie gelöscht.',
+    track_tag:'Veröffentlichte Bilanz',track_sub:'Jede Position vor dem Ergebnis veröffentlicht. Verluste inbegriffen. Nie gelöscht.',
     tools_tag:'Interaktives Analysten-Toolkit',tools_sub:'Jedes Tool, das ein PM oder Analysten-Desk braucht — live, kostenlos, offen für alle.',
     strats_tag:'Proprietäre systematische Forschung',strats_sub:'Sechzehn vollsystematische Strategien für Aktien, FX, Rohstoffe und Indizes.',
     port_tag:'Portfolio & Produkte',port_sub:'Drei Vehikel für Research, Kapitalallokation und quantitative Tools.',
@@ -11409,7 +11577,7 @@ var I18N={
     hcard_05_desc:'DCF, Black-Scholes, Kelly, Monte Carlo, costruzione di portafoglio e correlazione fattoriale — nel browser.',
     hcard_05_cta:'Apri toolkit →',
     research_tag:'Ricerca pubblicata',
-    track_tag:'Performance verificata',track_sub:'Ogni posizione pubblicata prima del risultato. Perdite incluse. Mai cancellate.',
+    track_tag:'Storico pubblicato',track_sub:'Ogni posizione pubblicata prima del risultato. Perdite incluse. Mai cancellate.',
     tools_tag:'Toolkit interattivo per analisti',tools_sub:'Ogni strumento che un PM o analista si aspetta — live, gratuito, aperto a tutti.',
     strats_tag:'Ricerca Sistematica Proprietaria',strats_sub:'Sedici strategie pienamente sistematiche su azioni, FX, materie prime e indici.',
     port_tag:'Portafoglio & Prodotti',port_sub:'Tre veicoli per ricerca, allocazione di capitale e strumenti quantitativi.',
@@ -11438,7 +11606,7 @@ var I18N={
     hcard_05_desc:'DCF、Black-Scholes、Kelly公式、蒙特卡洛、投资组合构建及因子相关性——浏览器内实时运行。',
     hcard_05_cta:'打开工具箱 →',
     research_tag:'已发布研究',
-    track_tag:'经审计的业绩',track_sub:'每笔交易在结果公布前公开发布，包括亏损，从不删除。',
+    track_tag:'公开记录',track_sub:'每笔交易在结果公布前公开发布，包括亏损，从不删除。',
     tools_tag:'交互式分析工具包',tools_sub:'基金经理和分析师所需的每项工具——实时、免费、向所有人开放。',
     strats_tag:'专有系统化研究',strats_sub:'十六个全系统化策略，涵盖股票、外汇、大宗商品和股指。',
     port_tag:'投资组合与产品',port_sub:'三大载体：研究、资本配置和量化工具。',
@@ -12768,9 +12936,9 @@ document.addEventListener('DOMContentLoaded',()=>{
   }
   sessionStorage.setItem('an_visited','1');
   window.addEventListener('load', function(){
-    setTimeout(function(){ ldr.classList.add('done'); }, 850);
+    setTimeout(function(){ ldr.classList.add('done'); }, 120);
   });
-  setTimeout(function(){ ldr && ldr.classList.add('done'); }, 1800);
+  setTimeout(function(){ ldr && ldr.classList.add('done'); }, 900);
 })();
 
 // ── NAV SCROLL STATE ─────────────────────────────
@@ -17361,13 +17529,23 @@ footer            { padding-inline: var(--g) !important; }
       var t = new Date(exitDate).getTime();
       if(isNaN(t)) return;
       var tkEl = row.querySelector('.tdtk');
-      var ticker = tkEl ? tkEl.textContent.trim() : '';
-      closes.push({t: t, ret: parseFloat(m[1]), ticker: ticker, retStr: (parseFloat(m[1])>=0?'+':'')+parseFloat(m[1]).toFixed(1)+'%'});
+      var ticker = tkEl ? tkEl.textContent.trim().split(/\s/)[0].replace(/^\$+/,'') : '';
+      var szEl = row.querySelector('td[data-label="Size"]');
+      var sz = szEl ? parseFloat((szEl.textContent||'').replace('%','')) : NaN;
+      closes.push({t: t, ret: parseFloat(m[1]), size: sz, ticker: ticker, retStr: (parseFloat(m[1])>=0?'+':'')+parseFloat(m[1]).toFixed(1)+'%'});
     });
     if(closes.length < 2) return null;
     closes.sort(function(a,b){ return a.t - b.t; });
+    /* Weight each return by its published position size so the line is a
+       portfolio contribution, not a raw sum of percentages. Falls back to
+       the unweighted sum only if a size is missing. */
+    var weighted = closes.every(function(c){ return isFinite(c.size) && c.size > 0; });
+    var lbl = document.getElementById('tr-sparkline-label');
+    if(lbl) lbl.textContent = weighted
+      ? 'Cumulative portfolio contribution · closed positions (return × published size)'
+      : 'Sum of closed-call returns · unweighted';
     var cum = 0;
-    var pts = closes.map(function(c){ cum += c.ret; return {t: c.t, v: cum, ticker: c.ticker, retStr: c.retStr}; });
+    var pts = closes.map(function(c){ cum += weighted ? c.ret * c.size / 100 : c.ret; return {t: c.t, v: cum, ticker: c.ticker, retStr: c.retStr}; });
     var now = Date.now();
     if(now > pts[pts.length-1].t) pts.push({t: now, v: cum, tail: true});
     return pts;
@@ -17478,7 +17656,7 @@ footer            { padding-inline: var(--g) !important; }
 
     annotPts.forEach(function(p, i){
       var cx = xOf(p), cy = yOf(p.v);
-      var label = '$' + p.ticker + ' ' + p.retStr;
+      var label = p.ticker + ' ' + p.retStr;
       ctx.font = labelFont;
       var tw = ctx.measureText(label).width;
       var bw = tw + labelPad.x * 2, bh = 16;
@@ -19332,10 +19510,18 @@ window.mktLoadOverview=async function(){
   ['mb-adv','mb-dec','mb-unch','mb-hi','mb-lo'].forEach(function(id,i){var el=document.getElementById(id);if(el)el.textContent=['312','184','4','47','12'][i];});
   var vixEl=document.getElementById('mb-vix');if(vixEl)vixEl.textContent='14.82';
   var pcEl=document.getElementById('mb-pc');if(pcEl)pcEl.textContent='0.82';
+  var okQ=0;
   await Promise.allSettled(IDX.map(async function(idx,i){
     var q=await fetchQuote(idx.sym);
-    if(q){IDX[i].fb={price:q.price,chg:q.chg};}
+    if(q){IDX[i].fb={price:q.price,chg:q.chg};okQ++;}
   }));
+  var ovB=document.getElementById('mkt-ov-badge'),ovT=document.getElementById('mkt-ov-badge-t'),ovN=document.getElementById('mkt-ov-note');
+  if(ovB&&ovT){
+    if(okQ===IDX.length){ovT.textContent='Delayed quotes';ovB.className='mkt-live-badge is-delayed';}
+    else if(okQ>0){ovT.textContent='Partial · '+okQ+'/'+IDX.length+' quotes';ovB.className='mkt-live-badge is-sample';}
+    else{ovT.textContent='Sample data · feed unavailable';ovB.className='mkt-live-badge is-sample';
+      if(ovN)ovN.textContent='The quote feed did not respond, so every figure in this panel is an illustrative placeholder, not a market price.';}
+  }
   renderIdxCards(IDX.map(function(i){return{sym:i.sym,name:i.name,price:i.fb.price,chg:i.fb.chg,vol:i.vol,spark:i.spark};}));
   renderTape(IDX.map(function(i){return{sym:i.sym,price:i.fb.price,chg:i.fb.chg};}));
   grid._loaded=true;
@@ -19859,6 +20045,115 @@ document.addEventListener('DOMContentLoaded',function(){
 });
 
 })(); /* end markets IIFE */
+</script>
+<script id="an-v3-js">
+/* ═══ v3: deep links, search palette, footer disclosures, a11y ═══ */
+(function(){
+  var TITLES={home:'LiJie Guo — Independent Macro & Equity Research Analyst | Aeon Nimbus Research',about:'About LiJie Guo',track:'Track Record',research:'Research Notes',tools:'Open Source Tools',strats:'Systematic Strategies',portfolios:'Research Lab',services:'Services & Consulting',contact:'Contact',pitcher:'AI Stock Pitcher',markets:'Markets Dashboard',legal:'Disclosures & Methodology'};
+  var ALIAS={analyst:'about',strategies:'strats',lab:'portfolios','track-record':'track',disclosures:'legal',methodology:'legal'};
+  var GROUP={portfolios:['portfolios','tools','strats']};
+  var _sp=window.sp, quiet=false;   /* quiet: route() is syncing to the URL, so do not push history */
+  function go(id){ quiet=true; try{ window.sp(id); } finally { quiet=false; } }
+  function pageOf(el){ var p=el&&el.closest?el.closest('.pg'):null; return p?p.id.replace(/^pg-/,''):null; }
+  function markNav(id){
+    document.querySelectorAll('nav .nbtn').forEach(function(b){
+      var m=(b.getAttribute('onclick')||'').match(/sp\('([a-z]+)'\)/); if(!m) return;
+      var on=(GROUP[m[1]]||[m[1]]).indexOf(id)>-1;
+      b.classList.toggle('on',on);
+      if(on) b.setAttribute('aria-current','page'); else b.removeAttribute('aria-current');
+    });
+  }
+  window.sp=function(id){
+    if(!document.getElementById('pg-'+id)) return;
+    _sp(id); markNav(id);
+    document.title=id==='home'?TITLES.home:(TITLES[id]||id)+' · Aeon Nimbus Research';
+    if(!quiet){
+      var h=id==='home'?location.pathname+location.search:'#'+id;
+      try{ if(location.hash.replace('#','')!==(id==='home'?'':id)) history.pushState({pg:id},'',h); }catch(e){}
+    }
+  };
+  function route(){
+    var h=decodeURIComponent((location.hash||'').replace(/^#/,''));
+    if(!h){ go('home'); return; }
+    h=ALIAS[h]||h;
+    if(document.getElementById('pg-'+h)){ go(h); return; }
+    var el=document.getElementById(h), pg=pageOf(el);          /* in-page anchor, e.g. #lg-method */
+    if(pg){ go(pg); setTimeout(function(){ el.scrollIntoView({block:'start'}); },220); }
+  }
+  window.addEventListener('popstate',route);
+  window.addEventListener('hashchange',route);
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',route); else route();
+
+  /* Clickable spans/divs become real keyboard targets */
+  function a11y(){
+    document.querySelectorAll('.flnk[onclick],.nlogo[onclick]').forEach(function(el){
+      if(el.tagName==='A'||el.tagName==='BUTTON'||el.hasAttribute('tabindex')) return;
+      el.setAttribute('role','link'); el.setAttribute('tabindex','0');
+      el.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); el.click(); } });
+    });
+    document.querySelectorAll('a[target="_blank"]:not([rel])').forEach(function(a){ a.setAttribute('rel','noopener'); });
+  }
+  /* Every footer gets the disclosures link and the same short disclaimer */
+  function footers(){
+    document.querySelectorAll('footer').forEach(function(f){
+      if(f.querySelector('.an-legal-strip')) return;
+      var links=f.querySelector('.flinks');
+      if(links && !/sp\('legal'\)/.test(links.innerHTML) && pageOf(f)!=='legal'){
+        var s=document.createElement('span'); s.className='flnk ul-draw'; s.textContent='Disclosures';
+        s.setAttribute('onclick',"sp('legal')"); links.appendChild(s);
+      }
+      var host=f.closest('.pg'); if(host && /LEGAL DISCLAIMER/i.test(host.textContent)) return;   /* page already carries the full disclaimer */
+      var d=document.createElement('div'); d.className='an-legal-strip';
+      d.innerHTML='Research is published for information and education only and is not investment advice or an offer to buy or sell any security. Past and simulated performance are not reliable guides to future results. The author may hold positions in securities discussed. <span role="link" tabindex="0" onclick="sp(\'legal\')" onkeydown="if(event.key===\'Enter\')sp(\'legal\')">Disclosures &amp; methodology</span>';
+      f.appendChild(d);
+    });
+  }
+
+  /* Search / jump palette */
+  var dlg,inp,list,items=[],sel=0;
+  function gather(){
+    var out=[];
+    Object.keys(TITLES).forEach(function(k){ out.push({t:k==='home'?'Home':TITLES[k],s:'Page',go:function(){window.sp(k);}}); });
+    document.querySelectorAll('#pg-tools .tg-thumb').forEach(function(el){ var ne=el.querySelector('.tgt-name'), n=ne?ne.textContent.trim():''; if(n) out.push({t:n,s:'Tool',go:function(){window.sp('tools');setTimeout(function(){el.click();},300);}}); });
+    var seen={};
+    document.querySelectorAll('table.tr tbody tr').forEach(function(r){ var tk=r.querySelector('.tdtk'), st=r.querySelector('.bdg'); if(!tk) return; var n=tk.textContent.trim().split(/\s/)[0]; var key=n+(st?st.textContent:''); if(seen[key]) return; seen[key]=1;
+      out.push({t:n.replace(/^\$+/,'')+' call',s:st?st.textContent.trim():'Call',go:function(){window.sp('track');setTimeout(function(){r.scrollIntoView({block:'center'});r.style.outline='1px solid var(--gold)';setTimeout(function(){r.style.outline='';},2200);},260);}}); });
+    document.querySelectorAll('#pg-markets .mkt-tabs button').forEach(function(b){ var n=b.textContent.trim(); if(n) out.push({t:'Markets: '+n,s:'Dashboard',go:function(){window.sp('markets');setTimeout(function(){b.click();},200);}}); });
+    [['Subscribe on Substack','https://aeonnimbus.substack.com/subscribe'],['Q2 2026 investor letter (PDF)','/assets/Q2-2026-investor-letter.pdf'],['GitHub repositories','https://github.com/lijiegsluis?tab=repositories'],['LinkedIn','https://www.linkedin.com/in/lijieguo-es/'],['Aeon product suite','/products/']].forEach(function(x){ out.push({t:x[0],s:'Link',go:function(){ if(x[1].charAt(0)==='/') location.href=x[1]; else window.open(x[1],'_blank','noopener'); }}); });
+    out.push({t:'Switch light / dark theme',s:'Action',go:function(){ if(typeof toggleDark==='function') toggleDark(); }});
+    return out;
+  }
+  function render(){
+    var q=inp.value.trim().toLowerCase();
+    items=gather().filter(function(i){ return !q||(i.t+' '+i.s).toLowerCase().indexOf(q)>-1; }).slice(0,40);
+    if(sel>=items.length) sel=0;
+    list.innerHTML=items.length?items.map(function(i,n){ return '<li><button type="button" role="option" data-i="'+n+'" aria-selected="'+(n===sel)+'"><span></span><small></small></button></li>'; }).join(''):'<li id="cmdk-empty">Nothing matches. Try a page, a ticker or a tool name.</li>';
+    list.querySelectorAll('button').forEach(function(b){ var it=items[+b.dataset.i]; b.firstChild.textContent=it.t; b.lastChild.textContent=it.s; b.onclick=function(){ run(+b.dataset.i); }; });
+    var a=list.querySelector('[aria-selected="true"]'); if(a&&a.scrollIntoView) a.scrollIntoView({block:'nearest'});
+  }
+  function run(i){ var it=items[i]; if(!it) return; dlg.close(); setTimeout(it.go,40); }
+  function openPalette(){ if(!dlg||dlg.open) return; inp.value=''; sel=0; dlg.showModal(); render(); inp.focus(); }
+  window.anSearch=openPalette;
+  function palette(){
+    dlg=document.createElement('dialog'); dlg.id='cmdk'; dlg.setAttribute('aria-label','Search the site');
+    dlg.innerHTML='<input id="cmdk-q" type="text" autocomplete="off" spellcheck="false" placeholder="Search pages, calls, tools…" aria-label="Search" aria-controls="cmdk-list"><ul id="cmdk-list" role="listbox"></ul><div id="cmdk-foot"><span>↑↓ move</span><span>↵ open</span><span>esc close</span></div>';
+    document.body.appendChild(dlg); inp=dlg.querySelector('#cmdk-q'); list=dlg.querySelector('#cmdk-list');
+    inp.addEventListener('input',function(){ sel=0; render(); });
+    inp.addEventListener('keydown',function(e){
+      if(e.key==='ArrowDown'){ e.preventDefault(); sel=Math.min(items.length-1,sel+1); render(); }
+      else if(e.key==='ArrowUp'){ e.preventDefault(); sel=Math.max(0,sel-1); render(); }
+      else if(e.key==='Enter'){ e.preventDefault(); run(sel); }
+    });
+    dlg.addEventListener('click',function(e){ if(e.target===dlg) dlg.close(); });
+    document.addEventListener('keydown',function(e){
+      var typing=/^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement||{}).tagName||'');
+      if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){ e.preventDefault(); openPalette(); }
+      else if(e.key==='/'&&!typing&&!document.querySelector('dialog[open]')){ e.preventDefault(); openPalette(); }
+    });
+  }
+  function init(){ a11y(); footers(); palette(); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();
 </script>
 </body>
 </html>
